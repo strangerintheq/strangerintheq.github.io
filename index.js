@@ -4,5 +4,9 @@ document.addEventListener('scroll', onScroll);
 onScroll();
 
 function onScroll() {
-    header.style.height = Math.max(100, 500 - document.body.scrollTop) + "px";
+    if (document.body.scrollTop > 500){
+        header.classList.add('header-collapsed');
+    } else {
+        header.classList.remove('header-collapsed');
+    }
 }
