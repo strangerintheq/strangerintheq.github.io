@@ -2,6 +2,7 @@ body {
     position: absolute;
     width: 100%;
     height: 8000px;
+    margin: 0;
 }
 
 .header {
@@ -17,5 +18,5 @@ body {
     bottom: 0;
     height: 500px;
     width: 100%;
-    background-color: aquamarine;
+    background-color: #62c3a0;
 }
