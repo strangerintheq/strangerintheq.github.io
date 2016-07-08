@@ -1,0 +1,19 @@
+{
+  "name": "strangeritheq.github.io",
+  "version": "1.0.0",
+  "description": "site",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strangerintheq/strangeritheq.github.io.git"
+  },
+  "author": "stranger in the q",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/strangerintheq/strangeritheq.github.io/issues"
+  },
+  "homepage": "https://github.com/strangerintheq/strangeritheq.github.io#readme"
+}
