@@ -51,7 +51,7 @@ function task(name, funcs) {
     gulp.task(name, function (cb) {
         pump(funcs, cb);
     });
-    // gulp.watch('./src/' + name + '/**', [name]);
+    gulp.watch('./src/' + name + '/**', [name]);
     tasks.push(name);
 }
 
