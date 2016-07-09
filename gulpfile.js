@@ -40,7 +40,7 @@ task('html', [
 
 
 gulp.task('default', tasks, function () {
-    gulp.src('..').pipe(webserver({
+    gulp.src(buildDirectory).pipe(webserver({
         livereload: true,
         port: 80,
         fallback: 'index.html'
@@ -51,11 +51,10 @@ function task(name, funcs) {
     gulp.task(name, function (cb) {
         pump(funcs, cb);
     });
-    gulp.watch(name + '/**', function () {
+    gulp.watch('./src/' + name + '/**', function () {
         gulp.run(name);
     });
     tasks.push(name);
-
 }
 
 
