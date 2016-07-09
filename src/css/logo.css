@@ -1,0 +1,19 @@
+.logo {
+    position: absolute;
+    height: 250px;
+    background-color: white;
+    width: 250px;
+    left: 50%;
+    top: 25px;
+    margin-left: -525px;
+    transition: 300ms;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.logo-collapsed {
+    top: 5px;
+    height: 40px;
+    width: 40px;
+    margin-left: -420px;
+}

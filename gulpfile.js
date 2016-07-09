@@ -25,7 +25,7 @@ task('js', [
 ]);
 
 task('css', [
-    gulp.src('./src/css/*.css'),
+    gulp.src('./src/css/**'),
     concatCss("style.css"),
     // gulp.dest(buildDirectory),
     // rename({ suffix: '.min' }),
@@ -41,7 +41,7 @@ task('html', [
 
 gulp.task('default', tasks, function () {
     gulp.src(buildDirectory).pipe(webserver({
-        livereload: true,
+        // livereload: true,
         port: 80,
         fallback: 'index.html'
     }));
@@ -51,9 +51,7 @@ function task(name, funcs) {
     gulp.task(name, function (cb) {
         pump(funcs, cb);
     });
-    gulp.watch('./src/' + name + '/**', function () {
-        gulp.run(name);
-    });
+    // gulp.watch('./src/' + name + '/**', [name]);
     tasks.push(name);
 }
 

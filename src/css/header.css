@@ -4,7 +4,7 @@
     height: 300px;
     width: 100%;
     background-color: aquamarine;
-    transition: 500ms;
+    transition: 300ms;
 }
 
 .header-collapsed {
