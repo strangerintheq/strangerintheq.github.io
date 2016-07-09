@@ -5,6 +5,10 @@
     width: 100%;
     background-color: aquamarine;
     transition: 300ms;
+
+    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
 }
 
 .header-collapsed {

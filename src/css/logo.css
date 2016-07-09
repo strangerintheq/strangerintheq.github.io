@@ -9,6 +9,10 @@
     transition: 300ms;
     border-radius: 50%;
     overflow: hidden;
+
+    -webkit-box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.75);
 }
 
 .logo-collapsed {
@@ -16,4 +20,8 @@
     height: 40px;
     width: 40px;
     margin-left: -420px;
+
+    -webkit-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.75);
 }

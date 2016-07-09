@@ -4,4 +4,7 @@
     height: 300px;
     width: 100%;
     background-color: #62c3a0;
+    -webkit-box-shadow: inset 10px 110px 15px -110px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 10px 110px 15px -110px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 10px 110px 15px -110px rgba(0, 0, 0, 0.75);
 }

@@ -11,6 +11,9 @@ body {
   height: 300px;
   width: 100%;
   background-color: #62c3a0;
+  -webkit-box-shadow: inset 10px 110px 15px -110px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 10px 110px 15px -110px rgba(0, 0, 0, 0.75);
+  box-shadow: inset 10px 110px 15px -110px rgba(0, 0, 0, 0.75);
 }
 .header {
   position: fixed;
@@ -19,6 +22,9 @@ body {
   width: 100%;
   background-color: aquamarine;
   transition: 300ms;
+  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
 }
 
 .header-collapsed {
@@ -35,6 +41,9 @@ body {
   transition: 300ms;
   border-radius: 50%;
   overflow: hidden;
+  -webkit-box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.75);
 }
 
 .logo-collapsed {
@@ -42,6 +51,9 @@ body {
   height: 40px;
   width: 40px;
   margin-left: -420px;
+  -webkit-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.75);
 }
 .hidden {
   display: none;
