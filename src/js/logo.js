@@ -1,15 +1,26 @@
 var logo = document.querySelector('.logo');
-var leftEye = logo.querySelector('#left-eye');
-var rightEye = logo.querySelector('#right-eye');
+
 module.exports = logo;
 
-logo.addEventListener('mouseover', mouseOver);
-logo.addEventListener('mouseout', mouseOut);
+initEye('left');
+initEye('right');
 
-function mouseOver() {
-    console.log(leftEye);
+function initEye(name) {
+    var eye = logo.querySelector('#' + name + '-eye');
+    var center = logo.querySelector('#' + name + '-eye-center');
+
+    // eye.addEventListener('mouseover', mouseOver);
+    // eye.addEventListener('mouseout', mouseOut);
+    // center.addEventListener('mouseover', mouseOver);
+    // center.addEventListener('mouseout', mouseOut);
+
+
+    function mouseOver() {
+        // center.innerHTML ='<animate attributeName="r" begin="0s" dur="1s" repeatCount="1" from="3" to="4"/>'
+    }
+
+    function mouseOut() {
+        center.innerHTML = "";
+    }
 }
 
-function mouseOut() {
-    console.log(rightEye);
-}

@@ -1,5 +1,6 @@
 var logo = require('./logo');
 var header = document.querySelector('.header');
+var title = document.querySelector('.title');
 
 document.addEventListener('scroll', onScroll);
 onScroll();
@@ -14,4 +15,5 @@ function onScroll() {
     var action = scrolled ? "add" : "remove";
     logo.classList[action]('logo-collapsed');
     header.classList[action]('header-collapsed');
+    title.classList[action]('title-collapsed');
 }

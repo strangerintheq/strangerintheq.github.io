@@ -1,0 +1,16 @@
+.title {
+    position: absolute;
+    font-size: 70px;
+    transition: 300ms;
+    line-height: 300px;
+    width: 400px;
+    margin-left: -200px;
+    left: 50%;
+    overflow: visible;
+}
+
+.title-collapsed {
+    font-size: 30px;
+    line-height: 50px;
+    margin-left: -440px;
+}
