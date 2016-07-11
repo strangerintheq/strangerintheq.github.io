@@ -11,7 +11,8 @@ module.exports = {
 };
 
 function onScroll() {
-    var scrolled = document.body.scrollTop > 100;
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    var scrolled = scrollTop > 100;
     var action = scrolled ? "add" : "remove";
     logo.classList[action]('logo-collapsed');
     header.classList[action]('header-collapsed');
