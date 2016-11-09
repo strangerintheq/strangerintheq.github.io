@@ -1,0 +1,14 @@
+{
+  "name": "strangerintheq-github-io",
+  "version": "0.0.1",
+  "description": "strangerintheq github home",
+  "author": "",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "webpack-stream": "^3.2.0",
+    "gulp-task-builder": "git+https://github.com/strangerintheq/gulp-task-builder.git#1.0.3"
+  }
+}

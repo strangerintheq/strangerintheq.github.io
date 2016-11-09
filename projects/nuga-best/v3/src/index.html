@@ -138,35 +138,7 @@
 							<h2 class="major">Get in touch</h2>
 							<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
 							<form method="post" action="#">
-								
-<div style="height: 100%; width: 100%; overflow: hidden">
-    <div id="myMap" style="height: 500px; width: 100%"></div>
-</div>
-
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-
-<script type="text/javascript">
-    tryToInit();
-
-    function tryToInit() {
-        if (typeof ymaps.Map == "function") {
-            initMap();
-        } else {
-            setTimeout(tryToInit, 100);
-        }
-    }
-
-    function initMap() {
-        var myMap = new ymaps.Map('myMap', {
-            center: [59.83, 30.5],
-            zoom: 12
-        });
-
-        var placemark = new ymaps.Placemark([59.83, 30.5]);
-        myMap.geoObjects.add(placemark);
-        myMap.behaviors.disable('scrollZoom');
-    }
-</script>
+								@@include('../../sections/map.html')
 							</form>
 							<ul class="contact">
 								<li class="fa-home">
@@ -181,7 +153,7 @@
 								<li class="fa-instagram"><a href="#">instagram.com/untitled-tld</a></li>
 							</ul>
 							<ul class="copyright">
-								<li>&copy; <a href="http://strangerintheq.github.io">Stranger in the Q</a> 2016</li>
+								<li>@@include('../../sections/copy.html')</li>
 							</ul>
 						</div>
 					</section>

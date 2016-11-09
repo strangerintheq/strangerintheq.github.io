@@ -1,0 +1,29 @@
+
+<div style="height: 100%; width: 100%; overflow: hidden">
+    <div id="myMap" style="height: 500px; width: 100%"></div>
+</div>
+
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+<script type="text/javascript">
+    tryToInit();
+
+    function tryToInit() {
+        if (typeof ymaps.Map == "function") {
+            initMap();
+        } else {
+            setTimeout(tryToInit, 100);
+        }
+    }
+
+    function initMap() {
+        var myMap = new ymaps.Map('myMap', {
+            center: [59.83, 30.5],
+            zoom: 12
+        });
+
+        var placemark = new ymaps.Placemark([59.83, 30.5]);
+        myMap.geoObjects.add(placemark);
+        myMap.behaviors.disable('scrollZoom');
+    }
+</script>
