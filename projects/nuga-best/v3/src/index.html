@@ -35,8 +35,9 @@
 					<section id="banner">
 						<div class="inner">
 							<div class="logo"><img src="../images/logo.svg"></div>
-							<h2>Нуга Бест</h2>
-							<p>Здоровье в каждый дом</p>
+							<h2>@@include('../../sections/contacts/name.txt')</h2>
+							<p>@@include('../../sections/contacts/slogan.txt')</p>
+							<a class="button scrolly" href="#footer">Контакты</a>
 						</div>
 					</section>
 
@@ -46,11 +47,11 @@
 						<!-- One -->
 							<section id="one" class="wrapper spotlight style1">
 								<div class="inner">
-									<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
+									<a href="#" class="image"><img src="@@include('../../sections/about/1/image.txt')" alt="" /></a>
 									<div class="content">
-										<h2 class="major">Magna arcu feugiat</h2>
-										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
+										<h2 class="major">@@include('../../sections/about/1/title.txt')</h2>
+										<p>@@include('../../sections/about/1/description.txt')</p>
+										<!--<a href="#" class="special">Learn more</a>-->
 									</div>
 								</div>
 							</section>
@@ -58,11 +59,11 @@
 						<!-- Two -->
 							<section id="two" class="wrapper alt spotlight style2">
 								<div class="inner">
-									<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
+									<a href="#" class="image"><img src="@@include('../../sections/about/2/image.txt')" alt="" /></a>
 									<div class="content">
-										<h2 class="major">Tempus adipiscing</h2>
-										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
+										<h2 class="major">@@include('../../sections/about/2/title.txt')</h2>
+										<p>@@include('../../sections/about/2/description.txt')</p>
+										<!--<a href="#" class="special">Learn more</a>-->
 									</div>
 								</div>
 							</section>
@@ -70,11 +71,11 @@
 						<!-- Three -->
 							<section id="three" class="wrapper spotlight style3">
 								<div class="inner">
-									<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
+									<a href="#" class="image"><img src="@@include('../../sections/about/3/image.txt')" alt="" /></a>
 									<div class="content">
-										<h2 class="major">Nullam dignissim</h2>
-										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
+										<h2 class="major">@@include('../../sections/about/3/title.txt')</h2>
+										<p>@@include('../../sections/about/3/description.txt')</p>
+										<!--<a href="#" class="special">Learn more</a>-->
 									</div>
 								</div>
 							</section>
@@ -110,9 +111,9 @@
 											<a href="#" class="special">Learn more</a>
 										</article>
 									</section>
-									<ul class="actions">
-										<li><a href="#" class="button">Browse All</a></li>
-									</ul>
+									<!--<ul class="actions">-->
+										<!--<li><a href="#" class="button">Browse All</a></li>-->
+									<!--</ul>-->
 								</div>
 							</section>
 
@@ -121,22 +122,18 @@
 				<!-- Footer -->
 					<section id="footer">
 						<div class="inner">
-							<h2 class="major">Get in touch</h2>
-							<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+							<h2 class="major">Контакты</h2>
+							<!--<p>.</p>-->
 							<form method="post" action="#">
 								@@include('../../sections/map.html')
 							</form>
 							<ul class="contact">
-								<li class="fa-home">
-									Untitled Inc<br />
-									1234 Somewhere Road Suite #2894<br />
-									Nashville, TN 00000-0000
-								</li>
-								<li class="fa-phone">(000) 000-0000</li>
-								<li class="fa-envelope"><a href="#">information@untitled.tld</a></li>
-								<li class="fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
-								<li class="fa-facebook"><a href="#">facebook.com/untitled-tld</a></li>
-								<li class="fa-instagram"><a href="#">instagram.com/untitled-tld</a></li>
+								<li class="fa-home">@@include('../../sections/contacts/address.txt')</li>
+								<li class="fa-phone">@@include('../../sections/contacts/phone.txt')</li>
+								<li class="fa-envelope"><a href="#">@@include('../../sections/contacts/email.txt')</a></li>
+
+								<li>@@include('../../sections/social.html')</li>
+
 							</ul>
 							<ul class="copyright">
 								<li>@@include('../../sections/copy.html')</li>
