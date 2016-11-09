@@ -1,13 +1,8 @@
-/*
-	Identity by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
 
 /* List */
 
 	ul.icons li a {
-		-ms-behavior: url("assets/js/PIE.htc");
+		-ms-behavior: url("../../../common/js/ie/PIE.htc");
 	}
 
 		ul.icons li a:before {
@@ -18,11 +13,11 @@
 /* Main */
 
 	#main {
-		-ms-behavior: url("assets/js/PIE.htc");
+		-ms-behavior: url("../../../common/js/ie/PIE.htc");
 	}
 
 		#main .avatar img {
-			-ms-behavior: url("assets/js/PIE.htc");
+			-ms-behavior: url("../../../common/js/ie/PIE.htc");
 		}
 
 /* Footer */
