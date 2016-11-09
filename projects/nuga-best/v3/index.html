@@ -29,7 +29,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1><a href="index.html">Nuga Best</a></h1>
+						<h1><a href="index.html"><img src="../images/logo.png" style="margin-top: 10px"></a></h1>
 						<!--<nav>-->
 							<!--<a href="#menu">Menu</a>-->
 						<!--</nav>-->
@@ -114,32 +114,40 @@
 						<!-- Four -->
 							<section id="four" class="wrapper alt style1">
 								<div class="inner">
-									<h2 class="major">Vitae phasellus</h2>
-									<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+									<h2 class="major">Продукция Нуга Бест</h2>
+									<p>Протестировать продукцию Нуга Бест, получить консультации специалиста
+вы можете в наших демонстрационных залах. Пройти сеансы на оборудовании
+можно <b>абсолютно бесплатно</b> в удобное для Вас время и неограниченное количество раз.</p>
 									<section class="features">
 										<article>
-											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-											<h3 class="major">Sed feugiat lorem</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
+											<a href="#" class="image"><img src="../images/items/NM-2500.png" alt="" /></a>
+											<h3>Здоровый сон</h3>
+											<p>Всего лишь 10 процентов людей могут похвастаться отличным иммунитетом. У оставшихся 90 процентов его уровень зависит от условий и образа жизни. Частые стрессы, неправильное питание, недосыпание и вредные привычки окончательно истощают защитные ресурсы организма. </p>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-											<h3 class="major">Nisl placerat</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
+											<a href="#" class="image"><img src="../images/items/NM-55.png" alt="" /></a>
+											<h3>Второе сердце</h3>
+											<p>34 акупунктурных точки из 365, расположенных на всем теле, находятся на ступнях — именно поэтому их называют фундаментом здоровья! Уход за ступнями с помощью массажера «Второе сердце» NM-55 помогает оздоровить организм и восстановить утраченную энергию.</p>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-											<h3 class="major">Ante fermentum</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
+											<a href="#" class="image"><img src="../images/items/MNR-100.png" alt="" /></a>
+											<h3>Тёплая защита от простуды</h3>
+											<p>Многофункциональная  турманиевая накидка MHP-100 – Ваше персональное средство защиты от многих недомоганий. Она разработана для удобного применения на плечах, груди, верхней или нижней части спины, животе, руках и ногах.</p>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
-											<h3 class="major">Fusce consequat</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
+											<a href="#" class="image"><img src="../images/items/NM-300.png" alt="" /></a>
+											<h3>Турманиевый помощник</h3>
+											<p>Кровь может выполнять свои важные функции, только находясь в постоянном движении. Проектор NM-300 с 9-ю плафонами из турманиевой керамики был создан специально для улучшения кровообращения.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="../images/items/Miracle2.png" alt="" /></a>
+											<h3>Красота без диет</h3>
+											<p>85 процентов женщин знают, что такое целлюлит не понаслышке. Конечно, многие из них поначалу пытались избавиться от пресловутой «апельсиновой корки» на бедрах, посещая фитнес-центр. Однако старания были тщетны. Не стоит отчаиваться — избавиться от целлюлита поможет пояс-миостимулятор Miracle II. </p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="../images/items/NM-70.png" alt="" /></a>
+											<h3>Здоровые суставы</h3>
+											<p>По статистике, заболеваниями суставов страдает 40% населения планеты. Для оздоровления коленных, локтевых и плечевых суставов компания Nuga Medical разработала уникальный аппарат – накладки для суставов NM-70. </p>
 										</article>
 									</section>
 									<!--<ul class="actions">-->
@@ -175,12 +183,16 @@
     }
 
     function initMap() {
+
+        var lat = 59.8395;
+        var lon = 30.4945;
+
         var myMap = new ymaps.Map('myMap', {
-            center: [59.83, 30.5],
-            zoom: 12
+            center: [lat, lon],
+            zoom: 16
         });
 
-        var placemark = new ymaps.Placemark([59.83, 30.5]);
+        var placemark = new ymaps.Placemark([lat, lon]);
         myMap.geoObjects.add(placemark);
         myMap.behaviors.disable('scrollZoom');
     }

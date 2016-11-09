@@ -17,12 +17,16 @@
     }
 
     function initMap() {
+
+        var lat = 59.8395;
+        var lon = 30.4945;
+
         var myMap = new ymaps.Map('myMap', {
-            center: [59.83, 30.5],
-            zoom: 12
+            center: [lat, lon],
+            zoom: 16
         });
 
-        var placemark = new ymaps.Placemark([59.83, 30.5]);
+        var placemark = new ymaps.Placemark([lat, lon]);
         myMap.geoObjects.add(placemark);
         myMap.behaviors.disable('scrollZoom');
     }
