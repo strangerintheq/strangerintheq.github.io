@@ -1,4 +1,4 @@
-@import url(../../../../../common/fonts/font-awesome.min.css);
+@import url(../../../../common/fonts/font-awesome.min.css);
 @import url("https://fonts.googleapis.com/css?family=Raleway:200,700|Source+Sans+Pro:300,600,300italic,600italic");
 
 
@@ -3879,7 +3879,7 @@
 
 	#intro {
 		background-attachment: fixed;
-		background-image: url("images/intro.svg");
+		background-image: url("intro.svg");
 		background-position: top right;
 		background-repeat: no-repeat;
 		background-size: 100% 100%;

@@ -24,7 +24,7 @@
 /* Icon */
 
 	.icon.major {
-		-ms-behavior: url("assets/js/ie/PIE.htc");
+		-ms-behavior: url("../../../../common/js/ie/PIE.htc");
 	}
 
 		.icon.major:before {
@@ -36,12 +36,12 @@
 
 	.spotlight .image {
 		position: relative;
-		-ms-behavior: url("assets/js/ie/PIE.htc");
+		-ms-behavior: url("../../../../common/js/ie/PIE.htc");
 	}
 
 		.spotlight .image img {
 			position: relative;
-			-ms-behavior: url("assets/js/ie/PIE.htc");
+			-ms-behavior: url("../../../../common/js/ie/PIE.htc");
 		}
 
 /* Features */

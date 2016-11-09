@@ -7,7 +7,7 @@
 /* Basic */
 
 	body {
-		-ms-behavior: url("assets/js/backgroundsize.min.htc");
+		-ms-behavior: url("../../../../common/js/ie/backgroundsize.min.htc");
 	}
 
 /* Type */
@@ -36,7 +36,7 @@
 	button,
 	.button {
 		position: relative;
-		-ms-behavior: url("assets/js/ie/PIE.htc");
+		-ms-behavior: url("../../../../common/js/ie/PIE.htc");
 		border: solid 2px #ffffff;
 	}
 
@@ -57,7 +57,7 @@
 	select,
 	textarea {
 		position: relative;
-		-ms-behavior: url("assets/js/ie/PIE.htc");
+		-ms-behavior: url("../../../../common/js/ie/PIE.htc");
 		background: transparent;
 		border: solid 2px #ffffff;
 	}
@@ -95,7 +95,7 @@
 /* Features */
 
 	.features article {
-		-ms-behavior: url("assets/js/ie/PIE.htc");
+		-ms-behavior: url("../../../../common/js/ie/PIE.htc");
 		position: relative;
 		width: 44%;
 	}
@@ -133,19 +133,19 @@
 		}
 
 		.wrapper.spotlight .image {
-			-ms-behavior: url("assets/js/ie/PIE.htc");
+			-ms-behavior: url("../../../../common/js/ie/PIE.htc");
 		}
 
 			.wrapper.spotlight .image img {
 				position: relative;
-				-ms-behavior: url("assets/js/ie/PIE.htc");
+				-ms-behavior: url("../../../../common/js/ie/PIE.htc");
 			}
 
 /* Banner */
 
 	#banner .logo .icon {
 		border: solid 2px #ffffff;
-		-ms-behavior: url("assets/js/ie/PIE.htc");
+		-ms-behavior: url("../../../../common/js/ie/PIE.htc");
 	}
 
 	#banner h2 {
