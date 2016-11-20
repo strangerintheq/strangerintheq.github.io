@@ -16,9 +16,14 @@ new Task('nuga-best-3')
     .fileinclude()
     .dest('projects/nuga-best/v3');
 
+new Task('nuga-best-4')
+    .src('projects/nuga-best/v4/src/index.html')
+    .fileinclude()
+    .dest('projects/nuga-best/v4');
+
 new Task('default')
     .depends([
-        'nuga-best-1', 'nuga-best-2', 'nuga-best-3'
+        'nuga-best-1', 'nuga-best-2', 'nuga-best-3', 'nuga-best-4'
     ])
     .src('home/src/*.html')
     .fileinclude()
