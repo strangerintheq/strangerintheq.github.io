@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'Akrobat';
+    src: local('Akrobat Thin'), local('Akrobat-Thin'), url('Akrobatthin.woff2') format('woff2'), url('Akrobatthin.woff') format('woff'), url('Akrobatthin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Akrobat';
+    src: local('Akrobat ExtraLight'), local('Akrobat-ExtraLight'), url('Akrobatextralight.woff2') format('woff2'), url('Akrobatextralight.woff') format('woff'), url('Akrobatextralight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Akrobat';
+    src: local('Akrobat Light'), local('Akrobat-Light'), url('Akrobatlight.woff2') format('woff2'), url('Akrobatlight.woff') format('woff'), url('Akrobatlight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Akrobat';
+    src: local('Akrobat'), local('Akrobat-Regular'), url('Akrobat.woff2') format('woff2'), url('Akrobat.woff') format('woff'), url('Akrobat.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Akrobat';
+    src: local('Akrobat SemiBold'), local('Akrobat-SemiBold'), url('Akrobatsemibold.woff2') format('woff2'), url('Akrobatsemibold.woff') format('woff'), url('Akrobatsemibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Akrobat';
+    src: local('Akrobat Bold'), local('Akrobat-Bold'), url('Akrobatbold.woff2') format('woff2'), url('Akrobatbold.woff') format('woff'), url('Akrobatbold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Akrobat';
+    src: local('Akrobat ExtraBold'), local('Akrobat-ExtraBold'), url('Akrobatextrabold.woff2') format('woff2'), url('Akrobatextrabold.woff') format('woff'), url('Akrobatextrabold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Akrobat';
+    src: local('Akrobat Black'), local('Akrobat-Black'), url('Akrobatblack.woff2') format('woff2'), url('Akrobatblack.woff') format('woff'), url('Akrobatblack.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}

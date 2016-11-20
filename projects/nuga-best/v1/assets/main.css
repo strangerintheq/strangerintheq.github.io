@@ -1634,7 +1634,7 @@
 
 	body, input, select, textarea {
 		color: rgba(255, 255, 255, 0.55);
-		font-family: Arial, Helvetica, sans-serif;
+		font-family: "Akrobat", sans-serif;
 		font-size: 16.5pt;
 		font-weight: normal;
 		line-height: 1.75;
@@ -1803,7 +1803,7 @@
 		background: rgba(255, 255, 255, 0.05);
 		border-radius: 0.25em;
 		border: solid 1px rgba(255, 255, 255, 0.15);
-		font-family: "Courier New", monospace;
+		font-family: "Akrobat", monospace;
 		font-size: 0.9em;
 		margin: 0 0.25em;
 		padding: 0.25em 0.65em;
@@ -1811,7 +1811,7 @@
 
 	pre {
 		-webkit-overflow-scrolling: touch;
-		font-family: "Courier New", monospace;
+		font-family: "Akrobat", monospace;
 		font-size: 0.9em;
 		margin: 0 0 2em 0;
 	}
@@ -3744,7 +3744,7 @@
 			border: 0;
 			color: rgba(255, 255, 255, 0.35);
 			display: block;
-			font-size: 0.6em;
+			font-size: 1em;
 			font-weight: bold;
 			letter-spacing: 0.25em;
 			line-height: 1.75;
@@ -3879,10 +3879,10 @@
 
 	#intro {
 		background-attachment: fixed;
-		background-image: url("intro.svg");
-		background-position: top right;
+		background-image: linear-gradient(to top, rgba(46, 49, 65, 0.7), rgba(46, 49, 65, 0.4)), url("../../images/bg3.jpg");
+		background-position: center;
 		background-repeat: no-repeat;
-		background-size: 100% 100%;
+		background-size: auto 100% ;
 	}
 
 		#intro p {
