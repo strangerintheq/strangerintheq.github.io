@@ -7,6 +7,14 @@
 body {
   margin: 0;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #container {
@@ -20,23 +28,9 @@ body {
   height: 100%;
   background-color: #000;
 }
-#controls {
+#buttons {
   position: absolute;
   margin: 10px;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  pointer-events: none;
-}
-
-#compass {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  bottom: 0;
-  margin-left: -75px;
-  left: 50%;
-  pointer-events: all;
 }
 
 div.button {
@@ -59,6 +53,150 @@ div.button:hover {
   height: 34px;
   line-height: 34px;
   margin: 0;
+}
+
+#compass {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  bottom: 0;
+  margin-left: -75px;
+  left: 50%;
+  pointer-events: all;
+}
+
+#switch-globe {
+  left: 0px;
+}
+
+#settings {
+  left: 50px;
+}
+div.form {
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 5px;
+  position: absolute;
+  box-shadow: 0 0 10px 0 #d3d3d3;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+div.form.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.form-title {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  font-size: 25px;
+  color: #f0e68c;
+  cursor: move;
+  height: 40px;
+  line-height: 40px;
+}
+
+.form-buttons {
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
+  text-align: right;
+}
+
+div.form-button {
+  width: 119px;
+  color: #d3d3d3;
+  display: inline-block;
+  margin: 5px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  cursor: pointer;
+  transition: 100ms;
+  border-radius: 3px;
+  background-color: rgba(0,0,0,0.3);
+  box-shadow: 0 0 5px 0 #d3d3d3;
+}
+
+div.form-button:hover {
+  box-shadow: 0 0 10px 0 #fff;
+  transition: 200ms;
+  background-color: rgba(0,0,0,0.1);
+}
+
+div.form-button.selected {
+  color: #f5deb3;
+  transition: 300ms;
+}
+
+.form-content {
+  position: absolute;
+  top: 40px;
+}
+
+.form-field {
+  line-height: 25px;
+  height: 25px;
+}
+
+.form-field-title {
+  color: #fff;
+  margin-left: 10px;
+  display: inline-block;
+  cursor: default;
+}
+
+.form-field-value {
+  color: #f5deb3;
+  display: inline-block;
+  margin-left: 10px;
+  cursor: default;
+}
+
+div.form-top-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  box-shadow: 0 0 5px 0 #d3d3d3;
+  width: 21px;
+  height: 21px;
+  cursor: pointer;
+  margin: 2px;
+  border-radius: 5px;
+  transition: 300ms;
+}
+
+div.form-top-button:hover {
+  transition: 300ms;
+  box-shadow: 0 0 10px 0 #fff;
+}
+
+div.form-minimized {
+  height: 40px !important;
+  width: 150px !important;
+  border-radius: 0;
+  transition: 300ms;
+  bottom: 30px !important;
+  top: auto !important;
+  margin-top: 0 !important;
+  box-shadow: 0 0 5px 0 #808080;
+}
+
+div.form-minimized div.form-title {
+  cursor: pointer !important;
+}
+
+div.form-minimized:hover {
+  box-shadow: 0 0 10px 0 #d3d3d3;
+  transition: 300ms;
+}
+#form-settings {
+  width: 300px;
+  height: 200px;
+  left: 100px;
+  top: 100px;
 }</style>
 </head>
 
@@ -67,14 +205,20 @@ div.button:hover {
     <canvas id="canvas"></canvas>
 </div>
 
-<div id="controls">
+<div id="buttons">
 
     <div id="switch-globe" class="button">
 
     </div>
 
-    <div id="compass">
-        <svg id='controls-svg' viewBox="-111 -100 222 200">
+    <div id="settings" class="button">
+
+    </div>
+
+</div>
+
+<div id="compass">
+    <svg id='controls-svg' viewBox="-111 -100 222 200">
 
     <style>
         .controls-round {
@@ -243,7 +387,6 @@ g#controls-globe{
     </g>
 
 </svg>
-    </div>
 </div>
     <script>/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -295,6 +438,7 @@ g#controls-globe{
 	__webpack_require__(2);
 	__webpack_require__(92);
 	__webpack_require__(94);
+	__webpack_require__(95);
 
 /***/ },
 /* 1 */
@@ -551,13 +695,10 @@ g#controls-globe{
 
 	var events = __webpack_require__(91);
 
-	events.listen(events.SWITCH_GLOBE, function (event) {
-	    if (event.parameter == "switch-globe") {
-	        earth.globe = [alterGlobe, alterGlobe = earth.globe][0]; // swap globes
-	    }
+	events.listen(events.SWITCH_GLOBE, function () {
+	    earth.globe = [alterGlobe, alterGlobe = earth.globe][0]; // swap globes
 	    earth.redraw();
 	});
-
 
 	var rotationInterval;
 	var directions = ['up', 'down', 'left', 'right'];
@@ -591,6 +732,10 @@ g#controls-globe{
 	            earth.redraw();
 	        }
 	    }
+	});
+
+	events.listen(events.ROTATE_TO, function (state) {
+
 	});
 
 	function navigatorStateChanged(value, parameter) {
@@ -27474,7 +27619,11 @@ g#controls-globe{
 	module.exports = {
 	    CONTROLS_CHANGED: 'controls',
 	    NAVIGATOR_STATE_CHANGED: 'navigator-state-changed',
-	    SWITCH_GLOBE: 'switch-globe'
+	    SWITCH_GLOBE: 'switch-globe',
+	    ROTATE_TO: 'rotate-to',
+	    SHOW_FORM: 'show-form',
+	    HIDE_FORM: 'hide-form',
+	    TOGGLE_FORM: 'toggle-form'
 	};
 
 	module.exports.post = function (name, event) {
@@ -27523,7 +27672,7 @@ g#controls-globe{
 	dom.all('path.arrow').forEach(initArrow);
 
 	dom.select('#controls-globe').click(function() {
-	    events.post('rotate', {heading: 0, tilt: 0})
+	    events.post(events.ROTATE_TO, {heading: 0, tilt: 0})
 	});
 
 	events.listen(events.NAVIGATOR_STATE_CHANGED, function(state) {
@@ -27821,14 +27970,275 @@ g#controls-globe{
 
 	var events = __webpack_require__(91);
 
-	initButton("switch-globe");
+	document.querySelector("#switch-globe").onclick = function() {
+	    events.post(events.SWITCH_GLOBE);
+	};
 
-	function initButton(id) {
-	    document.querySelector("#" + id).onclick = function() {
-	        events.post(events.SWITCH_GLOBE, {
-	            parameter: id
-	        });
+	document.querySelector("#settings").onclick = function() {
+	    events.post(events.TOGGLE_FORM, "form-settings");
+	};
+
+/***/ },
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var form = __webpack_require__(96);
+
+	form("form-settings", "Настройки")
+	    // .addMinimizeButton()
+	    .addCloseButton()
+	    .appendTo(document.body);
+
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var dom = __webpack_require__(93);
+	var field = __webpack_require__(97);
+	var events = __webpack_require__(91);
+
+	module.exports = function(id, title) {
+
+	    var form = dom.div('form');
+
+	    form.oncontextmenu = function(event) {
+	        return false;
 	    };
+
+	    if (typeof title == 'string') {
+	        title = dom.div('form-title').html(title).appendTo(form);
+	    } else if (title) {
+	        form.append(title)
+	    }
+
+	    var fields = {};
+	    form.fields = fields;
+
+	    var content = dom.div('form-content').appendTo(form);
+
+	    form.add = function(element) {
+	        content.append(element);
+	        return form;
+	    };
+
+	    form.addFields = function(configs, namespace) {
+	        namespace = namespace || 'default';
+	        fields[namespace] = [];
+	        configs.forEach(function(config) {
+	            var f = field(config);
+	            form.add(f);
+	            if (config.path) {
+	                fields[namespace].push(f);
+	            }
+	        });
+	        return form;
+	    };
+
+	    form.render = function(data, namespace) {
+	        namespace = namespace || 'default';
+	        if (fields[namespace]) {
+	            fields[namespace].forEach(function(f) {
+	                f.render(data);
+	            });
+	        }
+	        return form;
+	    };
+
+	    form.getField = function(path, namespace) {
+	        namespace = namespace || 'default';
+	        return fields[namespace].filter(function(field) {
+	            return path == field.cfg.path;
+	        })[0];
+	    };
+
+	    form.addMinimizeButton = function(component){
+
+	        var minimize = dom.div('form-top-button').click(function() {
+	            form.classList.add('form-minimized');
+	            minimize.classList.add('hidden');
+	            if (component) {
+	                component.classList.add('hidden');
+	            }
+	        }).appendTo(form).append(createMinimizeSvg());
+
+	        title.click(function() {
+	            form.classList.remove('form-minimized');
+	            minimize.classList.remove('hidden');
+	            if (component) {
+	                component.classList.remove('hidden');
+	            }
+	        });
+
+	        return form;
+	    };
+
+	    form.addCloseButton = function() {
+	        dom.div('form-top-button')
+	            .click(form.hide)
+	            .appendTo(form)
+	            .append(createCloseSvg());
+	        return form;
+	    };
+
+	    form.show = function() {
+	        form.classList.add('visible');
+	        return form;
+	    };
+	    form.hide = function() {
+	        form.classList.remove('visible');
+	        return form;
+	    };
+	    form.toggle = function() {
+	        return form.classList.contains('visible') ? form.hide() : form.show();
+	    };
+
+	    form.clear = function() {
+	        content.innerHTML = "";
+	        return form;
+	    };
+
+	    form.id = id;
+
+	    events.listen(events.SHOW_FORM, function (name) {
+	        if (name == id) form.show();
+	    });
+	    events.listen(events.HIDE_FORM, function (name) {
+	        if (name == id) form.hide();
+	    });
+	    events.listen(events.TOGGLE_FORM, function (name) {
+	        if (name == id) form.toggle();
+	    });
+
+
+	    var initX, initY, mousePressX, mousePressY;
+
+	    form.addEventListener('mousedown', function(event) {
+
+	        initX = this.offsetLeft;
+	        initY = this.offsetTop;
+
+	        mousePressX = event.clientX;
+	        mousePressY = event.clientY;
+
+	        form.addEventListener('mousemove', repositionElement, false);
+
+	        window.addEventListener('mouseup', function() {
+	            form.removeEventListener('mousemove', repositionElement, false);
+	        }, false);
+
+	    }, false);
+
+	    function repositionElement(event) {
+	        form.style.left = initX + event.clientX - mousePressX + 'px';
+	        form.style.top = initY + event.clientY - mousePressY + 'px';
+	    }
+
+	    return form;
+	};
+
+	function createMinimizeSvg() {
+	    return svg().append(path("M5,15 H16"));
+	}
+
+	function createCloseSvg() {
+	    return svg().append(path("M5,5 L16,16 M5,16 L16,5"));
+	}
+
+	function path(d){
+	    return dom.path({
+	        d: d,
+	        stroke: "lightgray",
+	        "stroke-width": 3
+	    });
+	}
+
+	function svg() {
+	    return dom.svg({
+	        width: 21,
+	        height: 21,
+	        viewbox: "0 0 25 25"
+	    });
+	}
+
+/***/ },
+/* 97 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var dom = __webpack_require__(93);
+
+	module.exports = createField;
+	module.exports.cfg = createConfig;
+
+	function createField(cfg) {
+
+	    var field = dom.div('form-field');
+
+	    field.cfg = cfg;
+
+	    dom.div('form-field-title').html(cfg.title + ':').appendTo(field);
+	    var value = dom.div('form-field-value').appendTo(field);
+
+	    field.set = function(text) {
+	        value.html(text);
+	    };
+
+	    field.render = function(data) {
+	        var val = cfg.custom.provider ? cfg.custom.provider(data) : deepValue(data, cfg.path);
+	        if (cfg.custom.renderer) {
+	            cfg.custom.renderer(val, value, data);
+	        } else {
+	            value.innerHTML = null == val ? '-' : val;
+	        }
+	    };
+
+	    if (cfg.custom.style) {
+	        for (var property in cfg.custom.style) {
+	            if (cfg.custom.style.hasOwnProperty(property)) {
+	                field.style[property] = cfg.custom.style[property];
+	            }
+	        }
+	    }
+
+	    return field;
+	}
+
+
+	function deepValue(obj, path) {
+	    try {
+	        path = path.split('.');
+	        for (var i = 0; i < path.length; i++) {
+	            obj = obj[path[i]];
+	        }
+	        return obj;
+	    } catch (e) {
+	        return null;
+	    }
+	}
+
+	function createConfig(title, path, style) {
+
+	    const cfg = {
+	        title: title,
+	        path: path,
+	        custom: {
+	            style: style
+	        }
+	    };
+
+	    cfg.style = createCustom('style');
+	    cfg.provider = createCustom('provider');
+	    cfg.renderer = createCustom('renderer');
+	    cfg.onclick = createCustom('onclick');
+
+	    return cfg;
+
+	    function createCustom(property) {
+	        return function(value) {
+	            cfg.custom[property] = value;
+	            return cfg;
+	        };
+	    }
 	}
 
 
