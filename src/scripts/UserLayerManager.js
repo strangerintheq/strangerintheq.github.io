@@ -1,4 +1,3 @@
-var GeoJsonFactory = require('./factories/GeoJsonObjectsFactory');
 var Cesium = window.Cesium;
 var Events = require('./Events');
 var LAYER_PREFIX = 'layer_';
@@ -15,9 +14,9 @@ Events.listen(Events.HAS_LAYER, function (id) {
 });
 
 Events.listen(Events.CREATE_GEO_JSON_OBJECT, function (geoJson) {
-    GeoJsonFactory.create(geoJson).forEach(function(primitive) {
-        engine.scene.primitives.add(primitive);
-    });
+    Cesium.GeoJsonDataSource.load(geoJson).then(function (datSource) {
+        addGeoJson(datSource, geoJson);
+    }).otherwise(error);
 });
 
 Events.listen(Events.DESTROY_LAYER, function (id) {

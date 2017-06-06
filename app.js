@@ -49,8 +49,8 @@
 	window.engine = __webpack_require__(4);
 
 	__webpack_require__(5);
-	__webpack_require__(9);
-	__webpack_require__(10);
+	__webpack_require__(6);
+	__webpack_require__(7);
 
 
 
@@ -647,7 +647,6 @@
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var GeoJsonFactory = __webpack_require__(6);
 	var Cesium = window.Cesium;
 	var Events = __webpack_require__(1);
 	var LAYER_PREFIX = 'layer_';
@@ -664,9 +663,9 @@
 	});
 
 	Events.listen(Events.CREATE_GEO_JSON_OBJECT, function (geoJson) {
-	    GeoJsonFactory.create(geoJson).forEach(function(primitive) {
-	        engine.scene.primitives.add(primitive);
-	    });
+	    Cesium.GeoJsonDataSource.load(geoJson).then(function (datSource) {
+	        addGeoJson(datSource, geoJson);
+	    }).otherwise(error);
 	});
 
 	Events.listen(Events.DESTROY_LAYER, function (id) {
@@ -714,104 +713,13 @@
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var factories = {
-	    //LineString: require('./LineFactory'),
-	    Polygon: __webpack_require__(7),
-	    //Point: require('./PointFactory'),
-	    //GeometryCollection: require('./GeometryCollectionFactory')
-	};
-
-	module.exports = {
-	    create: createGeoJsonObject
-	};
-
-	function createGeoJsonObject(geoJson) {
-	    var key = geoJson.geometry.type.split("Multiple");
-	    var factory = factories[key.pop()];
-	    return factory ? factory.create(geoJson, !key.length) : null;
-	}
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var ObjectFactory = __webpack_require__(8);
-
-	module.exports = {
-	    create: ObjectFactory(createPolygon, getBoundaries, {})
-	};
-
-	function createPolygon(boundaries, geoJson, index) {
-	    var coords = [];
-	    boundaries[0].pop();
-	    boundaries[0].forEach(function (pt) {
-	        coords.push(pt[0]);
-	        coords.push(pt[1]);
-	    });
-
-
-	    var geometryInstance = new Cesium.GeometryInstance({
-	        geometry: Cesium.PolygonGeometry.fromPositions({
-	            positions: Cesium.Cartesian3.fromDegreesArray(coords),
-	            extrudedHeight: geoJson.properties.altitude || 0,
-	            vertexFormat : Cesium.PerInstanceColorAppearance.VERTEX_FORMAT
-	        }),
-	        attributes: {
-	            color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.ORANGE)
-	        }
-	    });
-
-	    return new Cesium.GroundPrimitive({
-	        geometryInstances : geometryInstance,
-	        appearance: new Cesium.PerInstanceColorAppearance({
-	            closed: true,
-	            translucent: false
-	        })
-	    });
-	}
-
-	function getBoundaries(coordinates, altitude) {
-	    return coordinates
-	}
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-	module.exports = function (createObjectFunction, createPositionsFunction, defaultProperties) {
-	    return function (geoJson, single) {
-	        if (!geoJson.properties) {
-	            geoJson.properties = defaultProperties || {};
-	        }
-	        var objects = [];
-	        if (single) {
-	            add(geoJson.geometry.coordinates);
-	        } else {
-	            geoJson.geometry.coordinates.forEach(add);
-	        }
-	        return objects;
-
-	        function add(coordinates, index) {
-	            var alt = geoJson.properties.altitude || 0;
-	            var positions = createPositionsFunction(coordinates, alt);
-	            var object = createObjectFunction(positions, geoJson, index);
-	            objects.push(object);
-	        }
-	    }
-	};
-
-/***/ }),
-/* 9 */
 /***/ (function(module, exports) {
 
 	var Cesium = window.Cesium;
 
 	var scene = engine.scene;
 	var cameraController = scene.screenSpaceCameraController;
-	cameraController.zoomEventTypes = Cesium.CameraEventType.WHEEL;
+	cameraController.zoomEventTypes = [Cesium.CameraEventType.WHEEL, Cesium.CameraEventType.PINCH];
 	cameraController.tiltEventTypes = Cesium.CameraEventType.RIGHT_DRAG;
 	cameraController.enableLook = false;
 	cameraController.minimumTrackBallHeight = -1;
@@ -833,7 +741,7 @@
 	});
 
 /***/ }),
-/* 10 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Cesium = window.Cesium;
@@ -846,8 +754,6 @@
 	    var cartesian = engine.camera.pickEllipsoid(movement.endPosition, engine.scene.globe.ellipsoid);
 	    if (cartesian) {
 	        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
-	        //var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
-	        //var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
 	    }
 	}
 
@@ -860,6 +766,7 @@
 	    if (cartesian) {
 	        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
 	        Events.post(Events.LOCATION_CLICK, cartographic);
+	        console.log(format(cartographic));
 	    }
 
 	    var pickedObject = engine.scene.pick(click.position);
@@ -868,6 +775,12 @@
 	    }
 	}
 
+
+	function format(cartographic){
+	    var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
+	    var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
+	    return longitudeString + ' ' + latitudeString;
+	}
 
 /***/ })
 /******/ ]);

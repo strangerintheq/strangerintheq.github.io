@@ -8,8 +8,6 @@ function moveHandler(movement) {
     var cartesian = engine.camera.pickEllipsoid(movement.endPosition, engine.scene.globe.ellipsoid);
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
-        //var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
-        //var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
     }
 }
 
@@ -22,10 +20,18 @@ function clickHandler(click) {
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
         Events.post(Events.LOCATION_CLICK, cartographic);
+        console.log(format(cartographic));
     }
 
     var pickedObject = engine.scene.pick(click.position);
     if (Cesium.defined(pickedObject)) {
         Events.post(Events.OBJECT_MOUSE_CLICK, pickedObject.id.id);
     }
+}
+
+
+function format(cartographic){
+    var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
+    var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
+    return longitudeString + ' ' + latitudeString;
 }
