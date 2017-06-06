@@ -6,67 +6,87 @@
     <link rel="stylesheet" href="Widgets/widgets.css"/>
     <link rel="stylesheet" href="app.css"/>
     <script src="Cesium.js"></script>
-    <script type="text/javascript" src="firebug-lite.js"></script>
+    <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
 </head>
-<body>
-    <div id="app"></div>
-    <script src="app.js"></script>
-    <script>
-//        Events.post(Events.CREATE_GEO_JSON_OBJECT, {
-//            id: 123456,
-//            type: "Feature",
-//            properties: {
-//                name: 'Лахта центр',
-//                layer: 'abc'
-//            },
-//            geometry: {
-//                type: "Point",
-//                coordinates: [30.177974, 59.987078, 462]
-//            }
-//        });
-//
-//
-        Events.post(Events.CREATE_GEO_JSON_OBJECT, {
-            id: 1234567,
-            type: "Feature",
-            properties: {
-                name: 'Лахта центр',
-                layer: 'abc'
-            },
-            geometry: {
-                type: "MultiLineString",
-                coordinates: [
-                    [[30.177974, 59.987078, 462], [30.177842, 59.987329, 0]],
-                    [[30.177974, 59.987078, 462], [30.178499, 59.987197, 0]],
-                    [[30.177974, 59.987078, 462], [30.178436, 59.986839, 0]],
-                    [[30.177974, 59.987078, 462], [30.177769, 59.986749, 0]],
-                    [[30.177974, 59.987078, 462], [30.177374, 59.987051, 0]]
-                ]
-            }
-        });
-//
-//        Events.post(Events.CREATE_GEO_JSON_OBJECT, {
-//            type: "Feature",
-//            id: 98443,
-//            geometry: {
-//                type: "Polygon",
-//                coordinates: [
-//                    [
-//                        [86.5531, 27.5917],
-//                        [88.5531, 27.5917],
-//                        [88.5531, 29.5917],
-//                        [86.5531, 29.5917],
-//                        [86.5531, 27.5917]]
-//                ]
-//            },
-//            properties: {
-//                extrude: true,
-//                verticals: true,
-//                altitude: 4000,
-//                tooltip: "everest",
-//                layer: 'polygons'
-//            }
-//        });
-    </script>
+<body onload="addDebugger()">
+<div id="app"></div>
+
+<div id="FirebugLite"></div>
+
+<script src="app.js"></script>
+<script>
+    //        Events.post(Events.CREATE_GEO_JSON_OBJECT, {
+    //            id: 123456,
+    //            type: "Feature",
+    //            properties: {
+    //                name: 'Лахта центр',
+    //                layer: 'abc'
+    //            },
+    //            geometry: {
+    //                type: "Point",
+    //                coordinates: [30.177974, 59.987078, 462]
+    //            }
+    //        });
+    //
+    //
+    Events.post(Events.CREATE_GEO_JSON_OBJECT, {
+        id: 1234567,
+        type: "Feature",
+        properties: {
+            name: 'Лахта центр',
+            layer: 'abc'
+        },
+        geometry: {
+            type: "MultiLineString",
+            coordinates: [
+                [[30.177974, 59.987078, 462], [30.177842, 59.987329, 0]],
+                [[30.177974, 59.987078, 462], [30.178499, 59.987197, 0]],
+                [[30.177974, 59.987078, 462], [30.178436, 59.986839, 0]],
+                [[30.177974, 59.987078, 462], [30.177769, 59.986749, 0]],
+                [[30.177974, 59.987078, 462], [30.177374, 59.987051, 0]]
+            ]
+        }
+    });
+    //
+    //        Events.post(Events.CREATE_GEO_JSON_OBJECT, {
+    //            type: "Feature",
+    //            id: 98443,
+    //            geometry: {
+    //                type: "Polygon",
+    //                coordinates: [
+    //                    [
+    //                        [86.5531, 27.5917],
+    //                        [88.5531, 27.5917],
+    //                        [88.5531, 29.5917],
+    //                        [86.5531, 29.5917],
+    //                        [86.5531, 27.5917]]
+    //                ]
+    //            },
+    //            properties: {
+    //                extrude: true,
+    //                verticals: true,
+    //                altitude: 4000,
+    //                tooltip: "everest",
+    //                layer: 'polygons'
+    //            }
+    //        });
+</script>
+
+<script>
+    function addDebugger(){
+        console.log('debugger added');
+
+        if (!document.getElementById('FirebugLite')) {
+            var E = document['createElement' + 'NS'] && document.documentElement.namespaceURI;
+            E = E ? document['createElement' + 'NS'](E, 'script') : document['createElement']('script');
+            E['setAttribute']('id', 'FirebugLite');
+            E['setAttribute']('src', 'https://getfirebug.com/' + 'firebug-lite.js' + '#startOpened');
+            E['setAttribute']('FirebugLite', '4');
+            (document['getElementsByTagName']('head')[0] || document['getElementsByTagName']('body')[0]).appendChild(E);
+            E = new Image;
+            E['setAttribute']('src', 'https://getfirebug.com/' + '#startOpened');
+        }
+    }
+</script>
 </body>
 </html>
