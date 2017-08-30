@@ -33,24 +33,17 @@ var GL = (function () {
         return shader;
     }
 
-    function createProgram(name) {
+    function createProgram(name, replace, replacement) {
         var program = gl.createProgram();
         var shaderSources = loadShaderSource(name);
-        gl.attachShader(program, createShader(shaderSources.vertex, gl.VERTEX_SHADER));
-        gl.attachShader(program, createShader(shaderSources.fragment, gl.FRAGMENT_SHADER));
+        gl.attachShader(program, createShader(shaderSources.vertex.split(replace).join(replacement), gl.VERTEX_SHADER));
+        gl.attachShader(program, createShader(shaderSources.fragment.split(replace).join(replacement), gl.FRAGMENT_SHADER));
         gl.linkProgram(program);
 
-        program.loadFloatUniform = function (name, value) {
-            gl.uniform1f(uniformLocation(name), value);
-        };
-
-        program.loadVec2Uniform = function (name, value) {
-            gl.uniform2fv(uniformLocation(name), value);
-        };
-
-        program.loadVec3Uniform = function (name, value) {
-            gl.uniform3fv(uniformLocation(name), value);
-        };
+        program.loadFloatUniform = loadUniform('1f');
+        program.loadIntUniform = loadUniform('1i');
+        program.loadVec2Uniform = loadUniform('2fv');
+        program.loadVec3Uniform = loadUniform('3fv');
 
         program.bind = function () {
             currentProgram = program;
@@ -60,8 +53,11 @@ var GL = (function () {
 
         return program;
 
-        function uniformLocation(name) {
-            return gl.getUniformLocation(program, name);
+        function loadUniform(type) {
+            return function (name, value) {
+                var location = gl.getUniformLocation(program, name);
+                gl['uniform' + type](location, value);
+            }
         }
     }
 
@@ -110,4 +106,3 @@ var GL = (function () {
         return [canvas.width, canvas.height];
     }
 })();
-
