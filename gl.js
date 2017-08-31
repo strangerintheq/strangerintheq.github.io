@@ -1,9 +1,7 @@
 var GL = (function () {
-
     var SHADER_SEPARATOR = 'precision';
     var canvas, gl, currentProgram;
-
-    var GL = {
+    return {
         init: init,
         drawTriangleFan: drawTriangleFan,
         program: createProgram,
@@ -11,15 +9,12 @@ var GL = (function () {
         resolution: resolution
     };
 
-    return GL;
-
     function init() {
         canvas = document.createElement('canvas');
         document.body.appendChild(canvas);
         gl = canvas.getContext('webgl');
         window.addEventListener('resize', autoResize);
         autoResize();
-        return GL;
     }
 
     function createShader(source, type) {
@@ -27,7 +22,6 @@ var GL = (function () {
         gl.shaderSource(shader, source);
         gl.compileShader(shader);
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            console.log('shader failure');
             throw new Error(gl.getShaderInfoLog(shader))
         }
         return shader;
@@ -39,18 +33,15 @@ var GL = (function () {
         gl.attachShader(program, createShader(shaderSources.vertex.split(replace).join(replacement), gl.VERTEX_SHADER));
         gl.attachShader(program, createShader(shaderSources.fragment.split(replace).join(replacement), gl.FRAGMENT_SHADER));
         gl.linkProgram(program);
-
         program.loadFloatUniform = loadUniform('1f');
         program.loadIntUniform = loadUniform('1i');
         program.loadVec2Uniform = loadUniform('2fv');
         program.loadVec3Uniform = loadUniform('3fv');
-
         program.bind = function () {
             currentProgram = program;
             gl.useProgram(program);
             return program;
         };
-
         return program;
 
         function loadUniform(type) {
@@ -65,7 +56,6 @@ var GL = (function () {
         var bufferIndex = gl.createBuffer();
         glBindBuffer();
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
-
         return {
             bind: bind
         };

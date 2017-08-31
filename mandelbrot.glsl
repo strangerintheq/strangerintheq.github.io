@@ -24,7 +24,7 @@ vec2 div(vec2 a, vec2 b) {
     );
 }
 
-vec2 product(vec2 a, vec2 b){
+vec2 product(vec2 a, vec2 b) {
     return vec2(a.x*b.x-a.y*b.y, a.x*b.y+a.y*b.x);
 }
 
@@ -44,10 +44,15 @@ vec3 color(int i, vec2 z) {
 
 vec3 fractal(vec2 c) {
     vec2 z = c;
+    vec2 t = vec2(sin(time), cos(time));
     for (int i = 0; i < 1024; i++) {
-    	z=mul(z,z)+c;
-    	if (i == iterations) return vec3(0.0);
-    	if (dot(z, z) > 4.) return color(i, z);
+    	if (i == iterations)
+    	    return vec3(0.0);
+    	if (dot(z, z) > 4.)
+    	    return color(i, z);
+    	// fractal formula
+    	z = mul(z, z) + c;
+    	//
     }
     return vec3(0.);
 }

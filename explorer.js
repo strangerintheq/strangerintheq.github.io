@@ -1,17 +1,28 @@
-var mouse, centerAtDragStart;
-var center = [0, 0];
-var zoom =  2.5;
+var mandelbrot = 'z = mul(z, z) + c;';
 var started = Date.now();
+var info = UI.new('div', 60);
+var iterations = createSlider('iterations', 256, 64);
+var save = createSaveButton();
 
-var iterations = createSlider('iterations', 256, 92);
-createFormula();
-var info = UI.new('div');
 
-var shaderProgram = GL.init().program('mandelbrot.glsl').bind();
+var equation;
+try {
+    var encodedData = document.location.search.substring(1);
+    var jsonString = atob(encodedData);
+    var cfg = JSON.parse(jsonString);
+    equation = atob(cfg.formula);
+    Mouse.init([cfg.x,cfg.y], cfg.z);
+} catch (e) {
+    equation = mandelbrot;
+    Mouse.init();
+}
+
+var formula = createFormula(equation);
+GL.init();
+var shaderProgram = recompileShader(equation);
 GL.buffer([-1, 1, -1, -1, 1, -1, 1, 1]).bind('xy', 2);
-addListeners();
-animate();
 
+animate();
 function animate() {
     drawFrame();
     requestAnimationFrame(animate);
@@ -20,52 +31,45 @@ function animate() {
 function drawFrame() {
     var time = (Date.now()-started)/1000;
     var it = iterations.value;
-
-    shaderProgram.loadFloatUniform("zoom", zoom);
+    shaderProgram.loadFloatUniform("zoom", Mouse.zoom);
     shaderProgram.loadFloatUniform("time", time);
     shaderProgram.loadFloatUniform("smoothing", true);
     shaderProgram.loadIntUniform("iterations", it);
-    shaderProgram.loadVec2Uniform("center", center);
+    shaderProgram.loadVec2Uniform("center", Mouse.center);
     shaderProgram.loadVec2Uniform("resolution", GL.resolution());
     GL.drawTriangleFan(4);
 
     iterations.update(it * 1);
     info.innerHTML = '' +
-        'zoom: ' + zoom + '<br>' +
-        'x: ' + center[0] + '<br>' +
-        'y: ' + center[1];
+        'zoom: ' + Mouse.zoom + '<br>' +
+        'x: ' + Mouse.center[0] + '<br>' +
+        'y: ' + Mouse.center[1];
 }
 
-function wheel(e) {
-    zoom *= e.wheelDelta > 0 ? 0.9 : 1.1;
+function createLink() {
+    return document.location.origin + '?' +
+        btoa(JSON.stringify({
+            x: Mouse.center[0],
+            y: Mouse.center[1],
+            i: iterations.value,
+            z: Mouse.zoom,
+            formula: btoa(formula.value)
+        }));
 }
 
-function down(e) {
-    mouse = e;
-    centerAtDragStart = [center[0], center[1]];
-}
-
-function up() {
-    centerAtDragStart = mouse = null;
-}
-
-function move(e) {
-    if (!mouse || e.target.tagName !== 'CANVAS') return;
-    var r = GL.resolution();
-    var x = 4 * zoom * (mouse.x - e.x) / r[0];
-    var y = 4 * zoom * (mouse.y - e.y) / r[0];
-    center = [centerAtDragStart[0] + x, centerAtDragStart[1] - y];
-}
-
-function addListeners() {
-    window.addEventListener('mousewheel', wheel, false);
-    window.addEventListener('mousedown', down, false);
-    window.addEventListener('mouseup', up, false);
-    window.addEventListener('mousemove', move, false);
+function createSaveButton() {
+    var save = UI.new('input', 25);
+    save.setAttribute('type', 'button');
+    save.setAttribute('value', 'share');
+    save.style.color = 'black';
+    save.onclick = function(){
+        prompt('',createLink());
+    };
+    return save;
 }
 
 function createSlider(name, max, value) {
-    var slider = UI.new('input', name);
+    var slider = UI.new('input', 25, name);
     slider.setAttribute('type', 'range');
     slider.setAttribute('min', '0');
     slider.setAttribute('max', max);
@@ -73,17 +77,27 @@ function createSlider(name, max, value) {
     return slider;
 }
 
-function createFormula(){
-    var formula = UI.new('input');
-    formula.value = 'z = mul(z, z) + c';
+function createFormula(equation) {
+    var formula = UI.new('textarea', 100);
+    formula.value = equation;
+    formula.style.width = '220px';
+    bg(0);
     formula.addEventListener('keyup', function() {
         try {
-            shaderProgram = GL.program('mandelbrot.glsl', 'z=mul(z,z)+c', formula.value).bind();
-            formula.style.backgroundColor = 'white';
+            shaderProgram = recompileShader(formula.value);
+            bg(0);
         } catch (e) {
-            formula.style.backgroundColor = 'red';
+            bg(255);
         }
     });
     return formula;
+
+    function bg(red){
+        formula.style.backgroundColor = 'rgba('+red+',0,0,0.5)';
+    }
+}
+
+function recompileShader(equation){
+    return GL.program('mandelbrot.glsl', mandelbrot, equation || mandelbrot).bind();
 }
 
