@@ -18,9 +18,9 @@ var UI = (function () {
                 ui.appendChild(titleElement);
                 titleElement.textContent = title;
             }
-            element.update = function(value){
+            element.update = function(value, fixed){
                 if (title) {
-                    titleElement.textContent = title + ': ' + value;
+                    titleElement.textContent = title + ': ' + (value/1).toFixed(fixed || 0);
                 }
             };
             return element;
