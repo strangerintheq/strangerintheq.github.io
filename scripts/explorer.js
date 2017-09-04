@@ -15,7 +15,7 @@ var temp = createTextArea();
 
 createButton('pick point', function () {
     var c = Mouse.center;
-    temp.value += 'vec2(' + (c[0]/1).toFixed(6) + ',' + (c[1]/1).toFixed(6) + ');\n'
+    temp.value += 'vec2(' + (c[0]/1).toFixed(6) + ',' + (c[1]/1).toFixed(6) + ')\n'
 });
 
 createButton('share', function() {
@@ -117,7 +117,7 @@ function createFormula(equation) {
 }
 
 function recompileShader(equation){
-    return GL.program('mandelbrot.glsl', mandelbrot, equation || mandelbrot).bind();
+    return GL.program('shaders/mandelbrot.glsl', mandelbrot, equation || mandelbrot).bind();
 }
 
 function init() {
