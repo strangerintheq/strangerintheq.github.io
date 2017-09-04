@@ -12,7 +12,7 @@ var GL = (function () {
     function init() {
         canvas = document.createElement('canvas');
         document.body.appendChild(canvas);
-        gl = canvas.getContext('webgl');
+        gl = canvas.getContext('experimental-webgl');
         window.addEventListener('resize', autoResize);
         autoResize();
     }

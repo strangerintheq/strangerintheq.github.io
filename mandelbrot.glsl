@@ -11,26 +11,29 @@ uniform vec2 resolution;
 uniform vec2 center;
 uniform float time;
 uniform float zoom;
+uniform float a;
+uniform float b;
+uniform float T;
 uniform bool smoothing;
 
-vec2 mul(vec2 a, vec2 b) {
-    return vec2(a.x * b.x - a.y * b.y, 2.0 * a.x * b.y);
+vec2 mul(vec2 A, vec2 B) {
+    return vec2(A.x * B.x - A.y * B.y, 2.0 * A.x * B.y);
 }
 
-vec2 div(vec2 a, vec2 b) {
+vec2 div(vec2 A, vec2 B) {
     return vec2(
-        ((a.x*b.x + a.y*b.y)/(b.x*b.x + b.y*b.y)),
-        ((a.y*b.x - a.x*b.y)/(b.x*b.x + b.y*b.y))
+        ((A.x*B.x + A.y*B.y)/(B.x*B.x + B.y*B.y)),
+        ((A.y*B.x - A.x*B.y)/(B.x*B.x + B.y*B.y))
     );
 }
 
-vec2 product(vec2 a, vec2 b) {
-    return vec2(a.x*b.x-a.y*b.y, a.x*b.y+a.y*b.x);
-}
-
-vec2 conjugate(vec2 a) {
-    return vec2(a.x,-a.y);
-}
+//vec2 product(vec2 a, vec2 b) {
+//    return vec2(a.x*b.x-a.y*b.y, a.x*b.y+a.y*b.x);
+//}
+//
+//vec2 conjugate(vec2 a) {
+//    return vec2(a.x,-a.y);
+//}
 
 vec3 color(int i, vec2 z) {
     float it = float(i);
@@ -44,11 +47,12 @@ vec3 color(int i, vec2 z) {
 
 vec3 fractal(vec2 c) {
     vec2 z = c;
-    vec2 t = vec2(sin(time), cos(time));
+    vec2 t = vec2(sin(time*T), cos(time*T));
+    vec2 ab = vec2(a,b);
     for (int i = 0; i < 1024; i++) {
     	if (i == iterations)
     	    return vec3(0.0);
-    	if (dot(z, z) > 4.)
+    	if (dot(z, z) > 10.)
     	    return color(i, z);
     	// fractal formula
     	z = mul(z, z) + c;
