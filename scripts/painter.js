@@ -2,7 +2,7 @@ var time = 0;
 var theta = 0;
 var phi = 0;
 var mouse = {x: 0, y: 0};
-var radius = 20;
+var radius = 5;
 var eye = [0, 0, radius];
 var started = Date.now();
 var dragStartMousePosition, dragStartPhi, dragStartTheta;

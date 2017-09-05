@@ -17,8 +17,8 @@ uniform vec3 eye;
 
 const int MAX_MARCHING_STEPS = 256;
 const float MIN_DIST = 0.0;
-const float MAX_DIST = 55.0;
-const float EPSILON = 0.01;
+const float MAX_DIST = 50.0;
+const float EPSILON = 0.005;
 const vec2 k = vec2( 0.3183099, 0.3678794 );
 
 vec2 hash(vec2 x ) {
@@ -103,13 +103,52 @@ float cubeSubstractCubes(vec3 p) {
     return max(cube9, -manyCubes);
 }
 
+float fixed_radius2 = 1.5;
+float min_radius2 = 0.1;
+float folding_limit = 1.0;
+float scale =   1.5;
+vec3 mtl = vec3(1.0, 1.3, 1.23)*0.8;
+
+void sphere_fold(inout vec3 z, inout float dz) {
+    float r2 = dot(z, z);
+    if(r2 < min_radius2) {
+        float temp = (fixed_radius2 / min_radius2);
+        z *= temp;
+        dz *= temp;
+    } else if(r2 < fixed_radius2) {
+        float temp = (fixed_radius2 / r2);
+        z *= temp;
+        dz *= temp;
+    }
+}
+
+void box_fold(inout vec3 z, inout float dz) {
+    z = clamp(z, -folding_limit, folding_limit) * 2.0 - z;
+}
+
+float mb(vec3 z) {
+float scale = 4.  + sin(time)*0.5;
+    vec3 offset = z;
+    float dr =  1.;
+    for (int n = 0; n < 20; ++n) {
+        sphere_fold(z   , dr);
+        box_fold(z, dr);
+        z = scale * z + offset;
+        dr = dr * abs(scale) + 1.0;
+        offset = vec3( 0.1 - sin(time) * cos(time) * 0.1) ;
+    }
+    float r = length(z);
+    return r / abs(dr);
+}
+
+
 ///
 
 float MandleBox(vec3 pos){
     const int Iterations = 12;
-    float Scale = 2.5 + sin(time)/2.;
+    float Scale = 1.5 + sin(time)*0.1;
     float FoldingLimit = 100.0;
-    float MinRad2 = 0.3;
+    float MinRad2 = 0.2;
     vec4 scale = vec4(Scale, Scale, Scale, abs(Scale)) / MinRad2;
     float AbsScalem1 = abs(Scale - 1.0);
     float AbsScaleRaisedTo1mIters = pow(abs(Scale), float(1-Iterations));
@@ -118,6 +157,7 @@ float MandleBox(vec3 pos){
 
    for (int i=0; i<Iterations; i++)
    {
+
       p.xyz = clamp(p.xyz, -1.0, 1.0) * 2.0 - p.xyz;
       float r2 = dot(p.xyz, p.xyz);
       p *= clamp(max(MinRad2/r2, MinRad2), 0.0, 1.0);
@@ -164,17 +204,18 @@ float MandelBulb(vec3 pos){
 // union - min
 // substract - max
 float sceneSDF(vec3 p) {
-    return MandleBox(p);
+    return max(mb(p), box(p, vec3(1.2)));
 }
 
 float shortestDistanceToSurface(vec3 eye, vec3 marchingDirection, float start, float end) {
     float depth = start;
     for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
-        float dist = sceneSDF(eye + depth * marchingDirection);
-        if (dist < EPSILON) {
+        vec3 ray = depth * marchingDirection;
+        float dist = sceneSDF(eye + ray);
+        if (dist < 0.0005 * length(ray)) {
 			return depth;
         }
-        depth += dist*0.7;
+        depth += dist;
         if (depth >= end) {
             return end;
         }
