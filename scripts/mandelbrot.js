@@ -1,19 +1,19 @@
 var mandelbrot = 'z = mul(z, z) + c;';
-var info = UI.new('div', 60);
-var I = createSlider('i', 256, 96);
-var A = createSlider('a', 100, 50);
-var B = createSlider('b', 100, 50);
-var T = createSlider('t', 100, 10);
+var info = UI.elem('div', 60);
+var I = UI.slider('i', 256, 96);
+var A = UI.slider('a', 100, 50);
+var B = UI.slider('b', 100, 50);
+var T = UI.slider('t', 100, 10);
 var equation = init();
 var formula = createFormula(equation);
-var temp = createTextArea();
+var temp = UI.text();
 
-createButton('pick point', function () {
+UI.button('pick point', function () {
     var c = Mouse.center;
     temp.value += 'vec2(' + (c[0]/1).toFixed(6) + ',' + (c[1]/1).toFixed(6) + ')\n'
 });
 
-createButton('share', function() {
+UI.button('share', function() {
     prompt('', createLink());
 });
 
@@ -67,35 +67,8 @@ function createLink() {
         }));
 }
 
-function createButton(text, func) {
-    var button = UI.new('input', 25);
-    button.setAttribute('type', 'button');
-    button.setAttribute('value', text);
-    button.style.color = 'black';
-    button.onclick = func;
-    return button;
-}
-
-function createSlider(name, max, value) {
-    var slider = UI.new('input', 25, name);
-    slider.setAttribute('type', 'range');
-    slider.setAttribute('min', '0');
-    slider.setAttribute('max', max);
-    slider.setAttribute('value', value);
-    return slider;
-}
-
-function createTextArea() {
-    var textarea = UI.new('textarea', 110);
-    textarea.style.width = '220px';
-    textarea.style.height = '100px';
-    textarea.style.backgroundColor = 'rgba(0,0,0,0.5)';
-    return textarea;
-}
-
 function createFormula(equation) {
-    var formula = createTextArea();
-    formula.value = equation;
+    var formula = UI.text(equation);
     formula.addEventListener('keyup', function() {
         try {
             shader = recompileShader(formula.value);
