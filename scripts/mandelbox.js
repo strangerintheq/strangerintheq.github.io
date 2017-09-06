@@ -1,7 +1,7 @@
 Mouse3D.init();
 GL.init();
 
-var shader = GL.program('shaders/mandelbulb.glsl').bind();
+var shader = GL.program('shaders/mandelbox.glsl').bind();
 
 GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
 

@@ -1,7 +1,12 @@
 var GL = (function () {
+
+    var started = Date.now();
+    var TWO_TRIANGLES = [-1, +1, -1, -1, +1, -1, +1, +1];
     var SHADER_SEPARATOR = 'precision';
     var canvas, gl, currentProgram;
+
     return {
+        TWO_TRIANGLES: TWO_TRIANGLES,
         init: init,
         drawTriangleFan: drawTriangleFan,
         program: createProgram,
@@ -9,12 +14,19 @@ var GL = (function () {
         resolution: resolution
     };
 
-    function init() {
-        canvas = document.createElement('canvas');
-        document.body.appendChild(canvas);
-        gl = canvas.getContext('experimental-webgl');
-        window.addEventListener('resize', autoResize);
-        autoResize();
+    function init(canv) {
+        if (!canv) {
+            canvas = document.createElement('canvas');
+            document.body.appendChild(canvas);
+            document.body.style.margin = 0;
+            document.body.style.overflow = 'hidden';
+
+            window.addEventListener('resize', autoResize);
+            autoResize();
+        } else {
+            canvas = canv;
+        }
+        gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     }
 
     function createShader(source, type) {
@@ -33,10 +45,16 @@ var GL = (function () {
         gl.attachShader(program, createShader(shaderSources.vertex.split(replace).join(replacement), gl.VERTEX_SHADER));
         gl.attachShader(program, createShader(shaderSources.fragment.split(replace).join(replacement), gl.FRAGMENT_SHADER));
         gl.linkProgram(program);
-        program.loadFloatUniform = loadUniform('1f');
-        program.loadIntUniform = loadUniform('1i');
-        program.loadVec2Uniform = loadUniform('2fv');
-        program.loadVec3Uniform = loadUniform('3fv');
+        program.float = loadUniform('1f');
+        program.int = loadUniform('1i');
+        program.vec2 = loadUniform('2fv');
+        program.vec3 = loadUniform('3fv');
+        program.resolution = function(uniformName) {
+            program.vec2(uniformName || 'resolution', resolution());
+        };
+        program.time = function(uniformName) {
+            program.float(uniformName || 'time', time());
+        };
         program.bind = function () {
             currentProgram = program;
             gl.useProgram(program);
@@ -94,5 +112,9 @@ var GL = (function () {
 
     function resolution() {
         return [canvas.width, canvas.height];
+    }
+
+    function time(divider) {
+        return (Date.now() - started) / (divider || 1000);
     }
 })();

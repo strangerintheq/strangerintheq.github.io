@@ -1,15 +1,10 @@
 var mandelbrot = 'z = mul(z, z) + c;';
-var started = Date.now();
 var info = UI.new('div', 60);
 var I = createSlider('i', 256, 96);
 var A = createSlider('a', 100, 50);
 var B = createSlider('b', 100, 50);
 var T = createSlider('t', 100, 10);
-
-
-
 var equation = init();
-
 var formula = createFormula(equation);
 var temp = createTextArea();
 
@@ -23,8 +18,8 @@ createButton('share', function() {
 });
 
 GL.init();
-var shaderProgram = recompileShader(equation);
-GL.buffer([-1, 1, -1, -1, 1, -1, 1, 1]).bind('xy', 2);
+var shader = recompileShader(equation);
+GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
 
 animate();
 function animate() {
@@ -33,16 +28,15 @@ function animate() {
 }
 
 function drawFrame() {
-    var time = (Date.now()-started)/1000;
-    shaderProgram.loadFloatUniform("zoom", Mouse.zoom);
-    shaderProgram.loadFloatUniform("time", time);
-    shaderProgram.loadFloatUniform("a", A.value / 50 - 1);
-    shaderProgram.loadFloatUniform("b", B.value / 50 - 1);
-    shaderProgram.loadFloatUniform("T", T.value / 100);
-    shaderProgram.loadFloatUniform("smoothing", true);
-    shaderProgram.loadIntUniform("iterations", I.value);
-    shaderProgram.loadVec2Uniform("center", Mouse.center);
-    shaderProgram.loadVec2Uniform("resolution", GL.resolution());
+    shader.time();
+    shader.resolution();
+    shader.float("zoom", Mouse.zoom);
+    shader.float("a", A.value / 50 - 1);
+    shader.float("b", B.value / 50 - 1);
+    shader.float("T", T.value / 100);
+    shader.float("smoothing", true);
+    shader.int("iterations", I.value);
+    shader.vec2("center", Mouse.center);
     GL.drawTriangleFan(4);
 
     I.update(I.value);
@@ -59,7 +53,8 @@ function drawFrame() {
 }
 
 function createLink() {
-    return document.location.origin + '?' +
+    return document.location.origin +
+        document.location.pathname + '?' +
         btoa(JSON.stringify({
             x: Mouse.center[0],
             y: Mouse.center[1],
@@ -103,7 +98,7 @@ function createFormula(equation) {
     formula.value = equation;
     formula.addEventListener('keyup', function() {
         try {
-            shaderProgram = recompileShader(formula.value);
+            shader = recompileShader(formula.value);
             bg(0);
         } catch (e) {
             bg(255);

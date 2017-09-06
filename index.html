@@ -1,25 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Fractal Explorer v0.0.2</title>
+    <title>Stranger in the Q's page</title>
     <script src="scripts/gl.js"></script>
-    <script src="scripts/mouse.js"></script>
-    <script src="scripts/ui.js"></script>
-
-
-    <script type="text/javascript" src="//vk.com/js/api/openapi.js?146"></script>
-    <script type="text/javascript">
-        VK.init({apiId: 6172959, onlyWidgets: true});
-    </script>
-
 </head>
-<body style="margin: 0; overflow: hidden">
-    <script src="scripts/explorer.js"></script>
-    <div id="vk_comments_browse" style="position: absolute; right: 0; top: 0; opacity: 0.7"></div>
-    <div id="vk_comments" style="position: absolute; right: 0; bottom: 0; opacity: 0.7"></div>
-    <script type="text/javascript">
-        VK.Widgets.CommentsBrowse('vk_comments_browse', {width: 150, limit: 20, mini: 1});
-        VK.Widgets.Comments("vk_comments", {limit: 0, width: 150,  mini: 1, attach: "*"});
+<body style="font-size: 30px; background-color: darkgray; font-family: Arial, sans-serif; width: 800px; margin: auto">
+
+    <canvas id="fractal" width="600" height="140" style="position: absolute; margin-left: 200px; margin-top: 30px"></canvas>
+
+    <div class="logo">
+        <svg viewBox="0 0 800 200" width="800" height="200">
+            <polygon color="black" points="35,60 160,60 160,30 170,30 170,170 145,170 145,140 113,140 113,170 88,170 88,140 64,140 64,110 58,110 58,160 35,160"></polygon>
+            <circle stroke="black" stroke-width="3" fill="white" cx="35" cy="90" r="8"></circle>
+            <circle stroke="black" stroke-width="3" fill="white" cx="57" cy="90" r="8"></circle>
+            <circle fill="black" cx="35" cy="90" r="3"></circle>
+            <circle fill="black" cx="57" cy="90" r="3"></circle>
+            <path d="M79,77 H100 V109 H79" stroke="white" stroke-width="6"></path>
+            <!--<text x="220" y="120">Stranger in the Q's page</text>-->
+        </svg>
+    </div>
+
+    <h2>Examples:</h2>
+    <a href="mandelbrot.html">Mandelbrot Explorer</a><br>
+    <a href="mandelbulb.html">Mandelbulb</a><br>
+    <a href="mandelbox.html">Mandelbox</a><br>
+
+    <h2>Raymarching:</h2>
+    <a href="http://www.iquilezles.org/www/articles/raymarchingdf/raymarchingdf.htm">IQ tutorials</a><br>
+    <a href="http://www.iquilezles.org/www/articles/distfunctions/distfunctions.htm">distance functions</a><br>
+    <a href="http://mercury.sexy/hg_sdf/">hg_sdf</a>
+    <a href="http://erleuchtet.org/~cupe/permanent/enhanced_sphere_tracing.pdf">enhanced sphere tracing</a>
+    <a href="https://www.shadertoy.com/view/4tVXRV">shadertoy example</a><br>
+    <a href="https://www.shadertoy.com/view/4dsXWn">raytraced clouds & raymarched water</a><br>
+
+    <h2>Mandelbrot and Julia Sets</h2>
+    <a href="http://www.karlsims.com/julia.html">Understanding Julia and Mandelbrot Sets</a><br>
+    <a href="http://www.iquilezles.org/www/articles/mset_smooth/mset_smooth.htm">IQ Coloring</a>
+
+    <h2>Deferred Rendering:</h2>
+    <a href="http://www.paulallenrenton.com/individual-projects/webgl-deferred-renderer/">webgl deferred renderer</a>
+
+    <h5>Stranger in the Q</h5>
+
+    <script>
+        GL.init(document.querySelector('#fractal'));
+        var shader = GL.program(
+                'shaders/mandelbrot.glsl',
+                'z = mul(z, z) + c;',
+                'z=mix(abs(mul(z,z)),mul(abs(z),abs(z)),t)-vec2(1.93,0.01);'
+        ).bind();
+        GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
+        animate();
+
+        function animate() {
+            drawFrame();
+            requestAnimationFrame(animate);
+        }
+
+        function drawFrame() {
+            shader.time();
+            shader.resolution();
+            shader.float("zoom",.5);
+            shader.float("T", 1);
+            shader.int("iterations", 128);
+            shader.vec2("center", [0, 0]);
+            GL.drawTriangleFan(4);
+        }
     </script>
+
 </body>
 </html>
