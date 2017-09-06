@@ -69,9 +69,7 @@
 
     <script>
         var l = window.location;
-        if (l.search) {
-            l.replace(l.hostname + '/mandelbrot.html' + l.search);
-        }
+        l.search && l.replace(l.hostname + '/mandelbrot.html' + l.search);
     </script>
 
 </body>
