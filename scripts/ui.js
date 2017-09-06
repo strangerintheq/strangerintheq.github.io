@@ -26,7 +26,7 @@ var UI = (function () {
 
     function text(txt) {
         var textarea = elem('textarea', 110);
-        textarea.value = txt;
+        textarea.value = txt || '';
         textarea.style.width = '220px';
         textarea.style.height = '100px';
         textarea.style.backgroundColor = 'rgba(0,0,0,0.5)';
