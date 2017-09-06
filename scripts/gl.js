@@ -20,13 +20,14 @@ var GL = (function () {
             document.body.appendChild(canvas);
             document.body.style.margin = 0;
             document.body.style.overflow = 'hidden';
-
-            window.addEventListener('resize', autoResize);
-            autoResize();
         } else {
             canvas = canv;
         }
         gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+        if (!canv) {
+            window.addEventListener('resize', autoResize);
+            autoResize();
+        }
     }
 
     function createShader(source, type) {
