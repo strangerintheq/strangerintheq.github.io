@@ -4,7 +4,7 @@ vec3 estimateNormal(vec3 p) {
     return normalize(vec3(
         sceneSDF(vec3(p.x + EPSILON, p.y, p.z)) - sceneSDF(vec3(p.x - EPSILON, p.y, p.z)),
         sceneSDF(vec3(p.x, p.y + EPSILON, p.z)) - sceneSDF(vec3(p.x, p.y - EPSILON, p.z)),
-        sceneSDF(vec3(p.x, p.y, p.z  + EPSILON)) - sceneSDF(vec3(p.x, p.y, p.z - EPSILON))
+        sceneSDF(vec3(p.x, p.y, p.z + EPSILON)) - sceneSDF(vec3(p.x, p.y, p.z - EPSILON))
     ));
 }
 
@@ -66,18 +66,14 @@ vec3 phongIllumination(vec3 k_a, vec3 k_d, vec3 k_s, float alpha, vec3 p, vec3 e
 
     vec3 color = ambientLight * k_a;
 
-    vec3 light1Pos = vec3(-20.0,
-                          -20.0,
-                          -20.0);
+    vec3 light1Pos = vec3(-20.0, -20.0, -20.0);
     vec3 light1Intensity = vec3(0.4, 0.4, 0.4);
 
     color += phongContribForLight(k_d, k_s, alpha, p, eye,
                                   light1Pos,
                                   light1Intensity);
 
-    vec3 light2Pos = vec3(20.0,
-                          20.0,
-                          20.0);
+    vec3 light2Pos = vec3(20.0, 20.0, 20.0);
     vec3 light2Intensity = vec3(0.4, 0.4, 0.4);
 
     color += phongContribForLight(k_d, k_s, alpha, p, eye,
