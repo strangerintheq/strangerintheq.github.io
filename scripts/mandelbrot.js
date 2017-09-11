@@ -18,16 +18,20 @@ UI.button('share', function() {
 });
 
 GL.init();
-var shader = recompileShader(equation);
-GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
+recompileShader(equation, function () {
+    GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
+    animate();
+});
 
-animate();
+
+
 function animate() {
     drawFrame();
     requestAnimationFrame(animate);
 }
 
 function drawFrame() {
+    var shader = GL.currentProgram;
     shader.time();
     shader.resolution();
     shader.float("zoom", Mouse.zoom);
@@ -84,8 +88,13 @@ function createFormula(equation) {
     }
 }
 
-function recompileShader(equation){
-    return GL.program('shaders/mandelbrot.glsl', mandelbrot, equation || mandelbrot).bind();
+function recompileShader(equation, callback){
+    GL.program('shaders/mandelbrot.glsl', function (program) {
+        program.replace(mandelbrot, equation || mandelbrot);
+        program.link();
+        program.bind();
+        callback && callback();
+    });
 }
 
 function init() {

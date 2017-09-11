@@ -30,9 +30,9 @@ var Mouse = (function() {
 
     function move(e) {
         if (!dragStartXY || e.target.tagName !== 'CANVAS') return;
-        var r = GL.resolution();
-        var x = 4 * mouse.zoom * (dragStartXY.x - e.x) / r[0];
-        var y = 4 * mouse.zoom * (dragStartXY.y - e.y) / r[0];
+        var c = GL.canvas;
+        var x = 4 * mouse.zoom * (dragStartXY.x - e.x) / c.width;
+        var y = 4 * mouse.zoom * (dragStartXY.y - e.y) / c.height;
         mouse.center = [centerAtDragStart[0] + x, centerAtDragStart[1] - y];
     }
 })();
