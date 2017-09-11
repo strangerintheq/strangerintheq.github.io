@@ -17,7 +17,7 @@ var Syntax = (function () {
         colorize(types, 'cadetblue');
         colorize(syntax, 'coral');
         text = text.split('\n').join("<br>");
-        text = text.replace(/\t+/g, "&nbsp;&nbsp;&nbsp;&nbsp;");
+        // text = text.replace(/\t+/g, "&nbsp;&nbsp;&nbsp;&nbsp;");
         // text = text.split('\t').join("&nbsp;&nbsp;&nbsp;&nbsp;");
         glsl.innerHTML = text;
 

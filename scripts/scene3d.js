@@ -4,6 +4,7 @@ function Scene3D(shaderSource) {
     GL.program(shaderSource, start);
 
     function start(program) {
+        program.link();
         program.bind();
         GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
         animate();

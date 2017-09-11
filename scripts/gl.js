@@ -1,5 +1,6 @@
+// Mini WebGL library
 var GL = (function () {
-    var GL = {
+    return {
         init: init,
         drawTriangleFan: drawTriangleFan,
         program: createProgram,
@@ -10,7 +11,6 @@ var GL = (function () {
         canvas: null,
         gl: null
     };
-    return GL;
 
     function init(canvas) {
         GL.canvas = canvas || document.createElement('canvas');
@@ -39,23 +39,28 @@ var GL = (function () {
         program.int = loadUniform('1i');
         program.vec2 = loadUniform('2fv');
         program.vec3 = loadUniform('3fv');
-        program.resolution = function (uniformName) {
-            program.vec2(uniformName || 'resolution', [GL.canvas.width, GL.canvas.height]);
+        program.resolution = function (name) {
+            program.vec2(name || 'resolution', [GL.canvas.width, GL.canvas.height]);
         };
-        program.time = function (uniformName) {
-            program.float(uniformName || 'time', (Date.now() - GL.started) / 1000);
+        program.time = function (name) {
+            program.float(name || 'time', (Date.now() - GL.started) / 1000);
         };
         program.bind = function () {
-            GL.currentProgram = program;
-            GL.gl.useProgram(program);
+            GL.gl.useProgram(GL.currentProgram = program);
         };
-
+        program.replace = function (from, to) {
+            program.shader = program.shader.split(from).join(to);
+        };
+        program.link = function () {
+            var shaders = program.shader.split('precision');
+            GL.gl.attachShader(program, createShader(shaders[0], GL.gl.VERTEX_SHADER));
+            GL.gl.attachShader(program, createShader('precision' + shaders[1], GL.gl.FRAGMENT_SHADER));
+            GL.gl.linkProgram(program);
+        };
         loadShaderSource(name, onShaderSourceReady);
 
-        function onShaderSourceReady(shaderSources) {
-            GL.gl.attachShader(program, createShader(shaderSources.vertex, GL.gl.VERTEX_SHADER));
-            GL.gl.attachShader(program, createShader(shaderSources.fragment, GL.gl.FRAGMENT_SHADER));
-            GL.gl.linkProgram(program);
+        function onShaderSourceReady(shader) {
+            program.shader = shader;
             onReady(program);
         }
 
@@ -93,14 +98,7 @@ var GL = (function () {
 
     function loadShaderSource(src, onLoad) {
         req(src, function (response) {
-            glueShader(response, function (shader) {
-                console.log(shader);
-                var shaders = shader.split('precision');
-                onLoad({
-                    vertex: shaders[0],
-                    fragment: 'precision' + shaders[1]
-                });
-            });
+            glueShader(response, onLoad);
         });
     }
 
@@ -108,9 +106,9 @@ var GL = (function () {
         var xhr = new XMLHttpRequest();
         xhr.open('get', url, true);
         xhr.onload = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                onLoad(xhr.responseText);
-            }
+            xhr.readyState === 4 &&
+            xhr.status === 200 &&
+            onLoad(xhr.responseText);
         };
         xhr.send();
     }
@@ -122,6 +120,7 @@ var GL = (function () {
     }
 
     function glueShader(source, onReady) {
+        console.log(source);
         var loading = [];
         var TAG = '#pragma import ';
         if (source.indexOf(TAG) > -1) {

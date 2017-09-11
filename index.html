@@ -49,35 +49,29 @@
     <h5>Stranger in the Q</h5>
 
     <script>
+        var mandelbrot = 'z = mul(z, z) + c;';
+        var formula = 'z=mix(abs(mul(z,z)),mul(abs(z),abs(z)),t)-vec2(1.93,0.01);';
         GL.init(document.querySelector('#fractal'));
-        var shader = GL.program(
-                'shaders/mandelbrot.glsl',
-                'z = mul(z, z) + c;',
-                'z=mix(abs(mul(z,z)),mul(abs(z),abs(z)),t)-vec2(1.93,0.01);'
-        ).bind();
-        GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
-        animate();
+        GL.program('shaders/mandelbrot.glsl', start);
+
+        function start(shader) {
+            shader.replace(mandelbrot, formula);
+            shader.link();
+            shader.bind();
+            shader.resolution();
+            shader.float("zoom", .5);
+            shader.float("T", 1);
+            shader.vec2("center", [0, 0]);
+            shader.int("iterations", 128);
+            GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
+            animate();
+        }
 
         function animate() {
-            drawFrame();
+            GL.currentProgram.time();
+            GL.drawTriangleFan(4);
             requestAnimationFrame(animate);
         }
-
-        function drawFrame() {
-            shader.time();
-            shader.resolution();
-            shader.float("zoom",.5);
-            shader.float("T", 1);
-            shader.int("iterations", 128);
-            shader.vec2("center", [0, 0]);
-            GL.drawTriangleFan(4);
-        }
     </script>
-
-    <script>
-        var l = window.location;
-        l.search && l.replace(l.hostname + '/mandelbrot.html' + l.search);
-    </script>
-
 </body>
 </html>
