@@ -1,19 +1,18 @@
 function Scene3D(shaderSource) {
     Mouse3D.init();
     GL.init();
+    GL.program(shaderSource, start);
 
-    var shader = GL.program(shaderSource)
-    .bind();
-
-    GL.buffer(GL.TWO_TRIANGLES)
-      .bind('xy', 2);
-
-    animate();
+    function start(program) {
+        program.bind();
+        GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
+        animate();
+    }
 
     function drawFrame() {
-        shader.resolution();
-        shader.time();
-        shader.vec3("eye", Mouse3D.eye);
+        GL.currentProgram.resolution();
+        GL.currentProgram.time();
+        GL.currentProgram.vec3("eye", Mouse3D.eye);
         GL.drawTriangleFan(4);
     }
 

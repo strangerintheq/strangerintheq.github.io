@@ -7,7 +7,11 @@ uniform float time;
 #pragma import shaders/lib/sdf/mandelbulb.glsl
 
 float sceneSDF(vec3 p) {
-    return MandelBulb(p, 5.);
+    return JuliaBulb(p, 5., vec3(
+        -1.1 + sin(time)*0.2,
+        -1.1 + cos(time)*0.2,
+        -1.1 + cos(time)*sin(time)*0.2
+    ));
 }
 
 //#pragma import shaders/lib/raymarch.glsl

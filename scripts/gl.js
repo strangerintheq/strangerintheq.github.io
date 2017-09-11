@@ -1,121 +1,158 @@
 var GL = (function () {
-
-    var started = Date.now();
-    var TWO_TRIANGLES = [-1, +1, -1, -1, +1, -1, +1, +1];
-    var SHADER_SEPARATOR = 'precision';
-    var canvas, gl, currentProgram;
-
-    return {
-        TWO_TRIANGLES: TWO_TRIANGLES,
+    var GL = {
         init: init,
         drawTriangleFan: drawTriangleFan,
         program: createProgram,
         buffer: createBuffer,
-        resolution: resolution
+        TWO_TRIANGLES: [-1, +1, -1, -1, +1, -1, +1, +1],
+        currentProgram: null,
+        started: Date.now(),
+        canvas: null,
+        gl: null
     };
+    return GL;
 
-    function init(canv) {
-        if (!canv) {
-            canvas = document.createElement('canvas');
-            document.body.appendChild(canvas);
-            document.body.style.margin = 0;
-            document.body.style.overflow = 'hidden';
-        } else {
-            canvas = canv;
-        }
-        gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-        if (!canv) {
-            window.addEventListener('resize', autoResize);
-            autoResize();
-        }
+    function init(canvas) {
+        GL.canvas = canvas || document.createElement('canvas');
+        GL.gl = GL.canvas.getContext("webgl") || GL.canvas.getContext("experimental-webgl");
+        if (canvas) return;
+        document.body.appendChild(GL.canvas);
+        document.body.style.margin = 0;
+        document.body.style.overflow = 'hidden';
+        window.addEventListener('resize', autoResize);
+        autoResize();
     }
 
     function createShader(source, type) {
-        var shader = gl.createShader(type);
-        gl.shaderSource(shader, source);
-        gl.compileShader(shader);
-        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            throw new Error(gl.getShaderInfoLog(shader))
+        var shader = GL.gl.createShader(type);
+        GL.gl.shaderSource(shader, source);
+        GL.gl.compileShader(shader);
+        if (!GL.gl.getShaderParameter(shader, GL.gl.COMPILE_STATUS)) {
+            throw new Error(GL.gl.getShaderInfoLog(shader))
         }
         return shader;
     }
 
-    function createProgram(name, replace, replacement) {
-        var program = gl.createProgram();
-        var shaderSources = loadShaderSource(name);
-        gl.attachShader(program, createShader(shaderSources.vertex.split(replace).join(replacement), gl.VERTEX_SHADER));
-        gl.attachShader(program, createShader(shaderSources.fragment.split(replace).join(replacement), gl.FRAGMENT_SHADER));
-        gl.linkProgram(program);
+    function createProgram(name, onReady) {
+        var program = GL.gl.createProgram();
         program.float = loadUniform('1f');
         program.int = loadUniform('1i');
         program.vec2 = loadUniform('2fv');
         program.vec3 = loadUniform('3fv');
-        program.resolution = function(uniformName) {
-            program.vec2(uniformName || 'resolution', resolution());
+        program.resolution = function (uniformName) {
+            program.vec2(uniformName || 'resolution', [GL.canvas.width, GL.canvas.height]);
         };
-        program.time = function(uniformName) {
-            program.float(uniformName || 'time', time());
+        program.time = function (uniformName) {
+            program.float(uniformName || 'time', (Date.now() - GL.started) / 1000);
         };
         program.bind = function () {
-            currentProgram = program;
-            gl.useProgram(program);
-            return program;
+            GL.currentProgram = program;
+            GL.gl.useProgram(program);
         };
-        return program;
+
+        loadShaderSource(name, onShaderSourceReady);
+
+        function onShaderSourceReady(shaderSources) {
+            GL.gl.attachShader(program, createShader(shaderSources.vertex, GL.gl.VERTEX_SHADER));
+            GL.gl.attachShader(program, createShader(shaderSources.fragment, GL.gl.FRAGMENT_SHADER));
+            GL.gl.linkProgram(program);
+            onReady(program);
+        }
 
         function loadUniform(type) {
             return function (name, value) {
-                var location = gl.getUniformLocation(program, name);
-                gl['uniform' + type](location, value);
+                var location = GL.gl.getUniformLocation(program, name);
+                GL.gl['uniform' + type](location, value);
             }
         }
     }
 
     function createBuffer(data) {
-        var bufferIndex = gl.createBuffer();
+        var bufferIndex = GL.gl.createBuffer();
         glBindBuffer();
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+        GL.gl.bufferData(GL.gl.ARRAY_BUFFER, new Float32Array(data), GL.gl.STATIC_DRAW);
         return {
             bind: bind
         };
 
         function bind(location, floatsPerVertex) {
-            var attributeLocation = gl.getAttribLocation(currentProgram, location);
-            gl.enableVertexAttribArray(attributeLocation);
+            var attributeLocation = GL.gl.getAttribLocation(GL.currentProgram, location);
+            GL.gl.enableVertexAttribArray(attributeLocation);
             glBindBuffer();
-            gl.vertexAttribPointer(attributeLocation, floatsPerVertex, gl.FLOAT, false, 0, 0);
+            GL.gl.vertexAttribPointer(attributeLocation, floatsPerVertex, GL.gl.FLOAT, false, 0, 0);
         }
 
         function glBindBuffer() {
-            gl.bindBuffer(gl.ARRAY_BUFFER, bufferIndex);
+            GL.gl.bindBuffer(GL.gl.ARRAY_BUFFER, bufferIndex);
         }
     }
 
     function drawTriangleFan(count) {
-        gl.drawArrays(gl.TRIANGLE_FAN, 0, count);
+        GL.gl.drawArrays(GL.gl.TRIANGLE_FAN, 0, count);
     }
 
-    function loadShaderSource(src) {
+    function loadShaderSource(src, onLoad) {
+        req(src, function (response) {
+            glueShader(response, function (shader) {
+                console.log(shader);
+                var shaders = shader.split('precision');
+                onLoad({
+                    vertex: shaders[0],
+                    fragment: 'precision' + shaders[1]
+                });
+            });
+        });
+    }
+
+    function req(url, onLoad) {
         var xhr = new XMLHttpRequest();
-        xhr.open('get', src, false);
-        xhr.send();
-        var shaders = xhr.responseText.split(SHADER_SEPARATOR);
-        return {
-            vertex: shaders[0], fragment: SHADER_SEPARATOR + shaders[1]
+        xhr.open('get', url, true);
+        xhr.onload = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                onLoad(xhr.responseText);
+            }
         };
+        xhr.send();
     }
 
     function autoResize() {
-        canvas.width !== window.innerWidth && (canvas.width = window.innerWidth);
-        canvas.height !== window.innerHeight && (canvas.height = window.innerHeight);
-        gl.viewport(0, 0, canvas.width, canvas.height);
+        GL.canvas.width !== window.innerWidth && (GL.canvas.width = window.innerWidth);
+        GL.canvas.height !== window.innerHeight && (GL.canvas.height = window.innerHeight);
+        GL.gl.viewport(0, 0, GL.canvas.width, GL.canvas.height);
     }
 
-    function resolution() {
-        return [canvas.width, canvas.height];
-    }
+    function glueShader(source, onReady) {
+        var loading = [];
+        var TAG = '#pragma import ';
+        if (source.indexOf(TAG) > -1) {
+            source.split('\n').forEach(function (row) {
+                if (row.indexOf(TAG) === 0) {
+                    var partSrc = row.split(TAG).pop();
+                    shaderPartLoader(partSrc);
+                } else {
+                    loading.push({src: row});
+                }
+            });
+        } else onReady(source);
 
-    function time(divider) {
-        return (Date.now() - started) / (divider || 1000);
+        function shaderPartLoader(url) {
+            var loader = {src: null};
+            req(url, function(response) {
+                loader.src = response;
+                finishLoading();
+            });
+            loading.push(loader);
+        }
+
+        function finishLoading() {
+            var ready = true;
+            loading.forEach(function(loader) {
+                ready &= loader.src !== null;
+            });
+            if (!ready) return;
+            onReady(loading.map(function(loader){
+                return loader.src;
+            }).join('\n'));
+        }
     }
 })();

@@ -1,9 +1,4 @@
-attribute vec2 xy;
-
-void main(void) {
-    gl_Position = vec4(xy, 0.0, 1.0);
-}
-
+#pragma import shaders/lib/2triangles.vertex.glsl
 precision highp float;
 
 uniform int iterations;
@@ -27,21 +22,11 @@ vec2 div(vec2 A, vec2 B) {
     );
 }
 
-//vec2 product(vec2 a, vec2 b) {
-//    return vec2(a.x*b.x-a.y*b.y, a.x*b.y+a.y*b.x);
-//}
-//
-//vec2 conjugate(vec2 a) {
-//    return vec2(a.x,-a.y);
-//}
-
 vec3 color(int i, vec2 z) {
     float it = float(i);
-//    if (smoothing) {
-        float sl = it - log2(log2(dot(z,z))) + 4.0;
-        float al = smoothstep(-0.1, 0.0, sin(0.5 * 6.2831));
-        it = mix(it, sl, al);
-//    }
+    float sl = it - log2(log2(dot(z,z))) + 4.0;
+    float al = smoothstep(-0.1, 0.0, sin(0.5 * 6.2831));
+    it = mix(it, sl, al);
     return 0.5 + 0.5 * cos(3.0 + it * 0.05  + vec3(0.0, 0.6, 1.0));
 }
 
