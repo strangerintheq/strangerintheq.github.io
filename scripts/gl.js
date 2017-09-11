@@ -56,6 +56,7 @@ var GL = (function () {
             GL.gl.attachShader(program, createShader(shaders[0], GL.gl.VERTEX_SHADER));
             GL.gl.attachShader(program, createShader('precision' + shaders[1], GL.gl.FRAGMENT_SHADER));
             GL.gl.linkProgram(program);
+            console.log(program.shader);
         };
         loadShaderSource(name, onShaderSourceReady);
 
@@ -77,15 +78,13 @@ var GL = (function () {
         glBindBuffer();
         GL.gl.bufferData(GL.gl.ARRAY_BUFFER, new Float32Array(data), GL.gl.STATIC_DRAW);
         return {
-            bind: bind
+            bind: function (location, floatsPerVertex) {
+                var attributeLocation = GL.gl.getAttribLocation(GL.currentProgram, location);
+                GL.gl.enableVertexAttribArray(attributeLocation);
+                glBindBuffer();
+                GL.gl.vertexAttribPointer(attributeLocation, floatsPerVertex, GL.gl.FLOAT, false, 0, 0);
+            }
         };
-
-        function bind(location, floatsPerVertex) {
-            var attributeLocation = GL.gl.getAttribLocation(GL.currentProgram, location);
-            GL.gl.enableVertexAttribArray(attributeLocation);
-            glBindBuffer();
-            GL.gl.vertexAttribPointer(attributeLocation, floatsPerVertex, GL.gl.FLOAT, false, 0, 0);
-        }
 
         function glBindBuffer() {
             GL.gl.bindBuffer(GL.gl.ARRAY_BUFFER, bufferIndex);
@@ -120,17 +119,13 @@ var GL = (function () {
     }
 
     function glueShader(source, onReady) {
-        console.log(source);
         var loading = [];
         var TAG = '#pragma import ';
         if (source.indexOf(TAG) > -1) {
             source.split('\n').forEach(function (row) {
-                if (row.indexOf(TAG) === 0) {
-                    var partSrc = row.split(TAG).pop();
-                    shaderPartLoader(partSrc);
-                } else {
-                    loading.push({src: row});
-                }
+                row.indexOf(TAG) === 0 ?
+                    shaderPartLoader(row.split(TAG).pop()):
+                        loading.push({src: row});
             });
         } else onReady(source);
 
@@ -138,20 +133,13 @@ var GL = (function () {
             var loader = {src: null};
             req(url, function(response) {
                 loader.src = response;
-                finishLoading();
+                loading.every(function (l) {
+                    return l.src !== null;
+                }) && onReady(loading.map(function(loader) {
+                    return loader.src;
+                }).join('\n'));
             });
             loading.push(loader);
-        }
-
-        function finishLoading() {
-            var ready = true;
-            loading.forEach(function(loader) {
-                ready &= loader.src !== null;
-            });
-            if (!ready) return;
-            onReady(loading.map(function(loader){
-                return loader.src;
-            }).join('\n'));
         }
     }
 })();
