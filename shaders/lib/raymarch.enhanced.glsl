@@ -3,7 +3,7 @@
 
 const float t_min = 0.001;
 const float t_max = 50.0;
-const int MAX_ITERATIONS = 90;
+const int MAX_ITERATIONS = 256;
 const float INFINITY = 1e32;
 
 vec3 trace(vec3 o, vec3 d) {
