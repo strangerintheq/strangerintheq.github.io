@@ -23,8 +23,6 @@ recompileShader(equation, function () {
     animate();
 });
 
-
-
 function animate() {
     drawFrame();
     requestAnimationFrame(animate);

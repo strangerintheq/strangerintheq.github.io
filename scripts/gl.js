@@ -1,15 +1,12 @@
 // Mini WebGL library
 var GL = (function () {
     return {
-        init: init,
-        drawTriangleFan: drawTriangleFan,
-        program: createProgram,
-        buffer: createBuffer,
+        init: init, program: createProgram, buffer: createBuffer,
+        drawTriangleFan: function (count) {
+            GL.gl.drawArrays(GL.gl.TRIANGLE_FAN, 0, count);
+        },
         TWO_TRIANGLES: [-1, +1, -1, -1, +1, -1, +1, +1],
-        currentProgram: null,
-        started: Date.now(),
-        canvas: null,
-        gl: null
+        started: Date.now(), currentProgram: null, canvas: null, gl: null
     };
 
     function init(canvas) {
@@ -27,18 +24,17 @@ var GL = (function () {
         var shader = GL.gl.createShader(type);
         GL.gl.shaderSource(shader, source);
         GL.gl.compileShader(shader);
-        if (!GL.gl.getShaderParameter(shader, GL.gl.COMPILE_STATUS)) {
-            throw new Error(GL.gl.getShaderInfoLog(shader))
-        }
+        if (!GL.gl.getShaderParameter(shader, GL.gl.COMPILE_STATUS))
+            throw new Error(GL.gl.getShaderInfoLog(shader));
         return shader;
     }
 
     function createProgram(name, onReady) {
         var program = GL.gl.createProgram();
-        program.float = loadUniform('1f');
         program.int = loadUniform('1i');
         program.vec2 = loadUniform('2fv');
         program.vec3 = loadUniform('3fv');
+        program.float = loadUniform('1f');
         program.resolution = function (name) {
             program.vec2(name || 'resolution', [GL.canvas.width, GL.canvas.height]);
         };
@@ -58,12 +54,10 @@ var GL = (function () {
             GL.gl.linkProgram(program);
             console.log(program.shader);
         };
-        loadShaderSource(name, onShaderSourceReady);
-
-        function onShaderSourceReady(shader) {
+        loadShaderSource(name, function (shader) {
             program.shader = shader;
             onReady(program);
-        }
+        });
 
         function loadUniform(type) {
             return function (name, value) {
@@ -91,10 +85,6 @@ var GL = (function () {
         }
     }
 
-    function drawTriangleFan(count) {
-        GL.gl.drawArrays(GL.gl.TRIANGLE_FAN, 0, count);
-    }
-
     function loadShaderSource(src, onLoad) {
         req(src, function (response) {
             glueShader(response, onLoad);
@@ -105,9 +95,7 @@ var GL = (function () {
         var xhr = new XMLHttpRequest();
         xhr.open('get', url, true);
         xhr.onload = function () {
-            xhr.readyState === 4 &&
-            xhr.status === 200 &&
-            onLoad(xhr.responseText);
+            xhr.readyState === 4 && xhr.status === 200 && onLoad(xhr.responseText);
         };
         xhr.send();
     }
@@ -119,19 +107,15 @@ var GL = (function () {
     }
 
     function glueShader(source, onReady) {
-        var loading = [];
         var TAG = '#pragma import ';
-        if (source.indexOf(TAG) > -1) {
-            source.split('\n').forEach(function (row) {
-                row.indexOf(TAG) === 0 ?
-                    shaderPartLoader(row.split(TAG).pop()):
-                        loading.push({src: row});
-            });
-        } else onReady(source);
+        if (source.indexOf(TAG) === -1) return onReady(source);
+        var loading = source.split('\n').map(function (row) {
+            return row.indexOf(TAG) === 0 ? shaderPartLoader(row) : {src: row};
+        });
 
-        function shaderPartLoader(url) {
+        function shaderPartLoader(row) {
             var loader = {src: null};
-            req(url, function(response) {
+            req(row.split(TAG).pop(), function(response) {
                 loader.src = response;
                 loading.every(function (l) {
                     return l.src !== null;
@@ -139,7 +123,7 @@ var GL = (function () {
                     return loader.src;
                 }).join('\n'));
             });
-            loading.push(loader);
+            return loader;
         }
     }
 })();

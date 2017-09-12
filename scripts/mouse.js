@@ -1,13 +1,10 @@
 var Mouse = (function() {
     var dragStartXY, centerAtDragStart;
-    var mouse = {
-        init: init
-    };
-    return mouse;
+    return {init: init};
 
     function init(center, zoom) {
-        mouse.zoom = zoom || 1.5;
-        mouse.center = center || [0, 0];
+        Mouse.zoom = zoom || 1.5;
+        Mouse.center = center || [0, 0];
         window.addEventListener('mousewheel', wheel);
         window.addEventListener('mousedown', down);
         window.addEventListener('mouseup', up);
@@ -15,12 +12,12 @@ var Mouse = (function() {
     }
 
     function wheel(e) {
-        mouse.zoom *= e.wheelDelta > 0 ? 0.9 : 1.1;
+        Mouse.zoom *= e.wheelDelta > 0 ? 0.9 : 1.1;
     }
 
     function down(e) {
         if (e.target.tagName !== 'CANVAS') return;
-        centerAtDragStart = [mouse.center[0], mouse.center[1]];
+        centerAtDragStart = [Mouse.center[0], Mouse.center[1]];
         dragStartXY = e;
     }
 
@@ -31,8 +28,8 @@ var Mouse = (function() {
     function move(e) {
         if (!dragStartXY || e.target.tagName !== 'CANVAS') return;
         var c = GL.canvas;
-        var x = 4 * mouse.zoom * (dragStartXY.x - e.x) / c.width;
-        var y = 4 * mouse.zoom * (dragStartXY.y - e.y) / c.height;
-        mouse.center = [centerAtDragStart[0] + x, centerAtDragStart[1] - y];
+        var x = 4 * Mouse.zoom * (dragStartXY.x - e.x) / c.width;
+        var y = 4 * Mouse.zoom * (dragStartXY.y - e.y) / c.height;
+        Mouse.center = [centerAtDragStart[0] + x, centerAtDragStart[1] - y];
     }
 })();
