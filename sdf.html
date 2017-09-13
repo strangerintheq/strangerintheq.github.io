@@ -9,37 +9,38 @@
 <br>
 <h1>Distance Functions</h1>
 <h2>bezier</h2>
-    <div class="glsl" style="background-color: #3e3e3e; color: lightgray">float det( vec2 a, vec2 b ) {
-        &nbsp;&nbsp;&nbsp;&nbsp;return a.x*b.y-b.x*a.y;
+    <div class="glsl" style="background-color: #3e3e3e; color: lightgray">
+        float det( vec2 a, vec2 b ) {
+            return a.x*b.y-b.x*a.y;
         }
 
         vec3 getClosest( vec2 b0, vec2 b1, vec2 b2 ) {
-        &nbsp;&nbsp;&nbsp;&nbsp;float a =     det(b0,b2);
-        &nbsp;&nbsp;&nbsp;&nbsp;float b = 2.0*det(b1,b0);
-        &nbsp;&nbsp;&nbsp;&nbsp;float d = 2.0*det(b2,b1);
-        &nbsp;&nbsp;&nbsp;&nbsp;float f = b*d - a*a;
-        &nbsp;&nbsp;&nbsp;&nbsp;vec2  d21 = b2-b1;
-        &nbsp;&nbsp;&nbsp;&nbsp;vec2  d10 = b1-b0;
-        &nbsp;&nbsp;&nbsp;&nbsp;vec2  d20 = b2-b0;
-        &nbsp;&nbsp;&nbsp;&nbsp;vec2  gf = 2.0*(b*d21+d*d10+a*d20); gf = vec2(gf.y,-gf.x);
-        &nbsp;&nbsp;&nbsp;&nbsp;vec2  pp = -f*gf/dot(gf,gf);
-        &nbsp;&nbsp;&nbsp;&nbsp;vec2  d0p = b0-pp;
-        &nbsp;&nbsp;&nbsp;&nbsp;float ap = det(d0p,d20);
-        &nbsp;&nbsp;&nbsp;&nbsp;float bp = 2.0*det(d10,d0p);
-        &nbsp;&nbsp;&nbsp;&nbsp;float t = clamp( (ap+bp)/(2.0*a+b+d), 0.0 ,1.0 );
-        &nbsp;&nbsp;&nbsp;&nbsp;return vec3( mix(mix(b0,b1,t), mix(b1,b2,t),t), t );
+            float a =     det(b0,b2);
+            float b = 2.0*det(b1,b0);
+            float d = 2.0*det(b2,b1);
+            float f = b*d - a*a;
+            vec2  d21 = b2-b1;
+            vec2  d10 = b1-b0;
+            vec2  d20 = b2-b0;
+            vec2  gf = 2.0*(b*d21+d*d10+a*d20); gf = vec2(gf.y,-gf.x);
+            vec2  pp = -f*gf/dot(gf,gf);
+            vec2  d0p = b0-pp;
+            float ap = det(d0p,d20);
+            float bp = 2.0*det(d10,d0p);
+            float t = clamp( (ap+bp)/(2.0*a+b+d), 0.0 ,1.0 );
+            return vec3( mix(mix(b0,b1,t), mix(b1,b2,t),t), t );
         }
 
         vec2 sdBezier( vec3 a, vec3 b, vec3 c, vec3 p, in float thickness ) {
-        &nbsp;&nbsp;&nbsp;&nbsp;vec3 w = normalize( cross( c-b, a-b ) );
-        &nbsp;&nbsp;&nbsp;&nbsp;vec3 u = normalize( c-b );
-        &nbsp;&nbsp;&nbsp;&nbsp;vec3 v = normalize( cross( w, u ) );
-        &nbsp;&nbsp;&nbsp;&nbsp;vec2 a2 = vec2( dot(a-b,u), dot(a-b,v) );
-        &nbsp;&nbsp;&nbsp;&nbsp;vec2 b2 = vec2( 0.0 );
-        &nbsp;&nbsp;&nbsp;&nbsp;vec2 c2 = vec2( dot(c-b,u), dot(c-b,v) );
-        &nbsp;&nbsp;&nbsp;&nbsp;vec3 p3 = vec3( dot(p-b,u), dot(p-b,v), dot(p-b,w) );
-        &nbsp;&nbsp;&nbsp;&nbsp;vec3 cp = getClosest( a2-p3.xy, b2-p3.xy, c2-p3.xy );
-        &nbsp;&nbsp;&nbsp;&nbsp;return vec2( 0.85*(sqrt(dot(cp.xy,cp.xy)+p3.z*p3.z) - thickness), cp.z );
+            vec3 w = normalize( cross( c-b, a-b ) );
+            vec3 u = normalize( c-b );
+            vec3 v = normalize( cross( w, u ) );
+            vec2 a2 = vec2( dot(a-b,u), dot(a-b,v) );
+            vec2 b2 = vec2( 0.0 );
+            vec2 c2 = vec2( dot(c-b,u), dot(c-b,v) );
+            vec3 p3 = vec3( dot(p-b,u), dot(p-b,v), dot(p-b,w) );
+            vec3 cp = getClosest( a2-p3.xy, b2-p3.xy, c2-p3.xy );
+            return vec2( 0.85*(sqrt(dot(cp.xy,cp.xy)+p3.z*p3.z) - thickness), cp.z );
         }
     </div>
 
@@ -47,19 +48,19 @@
 
 <div class="glsl" style="background-color: #3e3e3e; color: lightgray">
     float mengerSponge(vec3 z0) {
-    &nbsp;&nbsp;&nbsp;&nbsp;vec4 z=vec4(z0, 2.);
-    &nbsp;&nbsp;&nbsp;&nbsp;vec3 offset = vec3(0.785,1.1,0.46);
-    &nbsp;&nbsp;&nbsp;&nbsp;float scale = 2.3;
-    &nbsp;&nbsp;&nbsp;&nbsp;for (int n = 0; n < 4; n++) {
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z = abs(z);
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (z.x < z.y) z.xy = z.yx;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (z.x < z.z) z.xz = z.zx;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (z.y < z.z) z.yz = z.zy;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z = z*scale;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z.xyz -= offset*(scale-1.0);
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(z.z<-0.5*offset.z*(scale-1.0))z.z+=offset.z*(scale-1.0);
-    &nbsp;&nbsp;&nbsp;&nbsp;}
-    &nbsp;&nbsp;&nbsp;&nbsp;return (length(max(abs(z.xyz)-vec3(1.0),0.0))-0.05)/z.w;
+        vec4 z=vec4(z0, 2.);
+        vec3 offset = vec3(0.785,1.1,0.46);
+        float scale = 2.3;
+        for (int n = 0; n < 4; n++) {
+            z = abs(z);
+            if (z.x < z.y) z.xy = z.yx;
+            if (z.x < z.z) z.xz = z.zx;
+            if (z.y < z.z) z.yz = z.zy;
+            z = z*scale;
+            z.xyz -= offset*(scale-1.0);
+            if(z.z<-0.5*offset.z*(scale-1.0))z.z+=offset.z*(scale-1.0);
+        }
+        return (length(max(abs(z.xyz)-vec3(1.0),0.0))-0.05)/z.w;
     }
 
 </div>
