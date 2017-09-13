@@ -1,8 +1,9 @@
 var Syntax = (function () {
-    var types = ['float', 'vec2', 'vec3', 'vec4'];
+    var types = ['float', 'vec2', 'vec3', 'vec4', 'int'];
     var syntax = [
         'return', 'normalize', 'dot', 'clamp',
-        'mix', 'floor', 'fract', 'sqrt', 'cross'
+        'mix', 'floor', 'fract', 'sqrt', 'cross',
+        'for', 'sin', 'max', 'min', 'abs'
     ];
     return {
         glsl: function () {

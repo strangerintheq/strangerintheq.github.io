@@ -42,6 +42,28 @@
         &nbsp;&nbsp;&nbsp;&nbsp;return vec2( 0.85*(sqrt(dot(cp.xy,cp.xy)+p3.z*p3.z) - thickness), cp.z );
         }
     </div>
+
+<h2>menger sponge</h2>
+
+<div class="glsl" style="background-color: #3e3e3e; color: lightgray">
+    float mengerSponge(vec3 z0) {
+    &nbsp;&nbsp;&nbsp;&nbsp;vec4 z=vec4(z0, 2.);
+    &nbsp;&nbsp;&nbsp;&nbsp;vec3 offset = vec3(0.785,1.1,0.46);
+    &nbsp;&nbsp;&nbsp;&nbsp;float scale = 2.3;
+    &nbsp;&nbsp;&nbsp;&nbsp;for (int n = 0; n < 4; n++) {
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z = abs(z);
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (z.x < z.y) z.xy = z.yx;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (z.x < z.z) z.xz = z.zx;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (z.y < z.z) z.yz = z.zy;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z = z*scale;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z.xyz -= offset*(scale-1.0);
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(z.z<-0.5*offset.z*(scale-1.0))z.z+=offset.z*(scale-1.0);
+    &nbsp;&nbsp;&nbsp;&nbsp;}
+    &nbsp;&nbsp;&nbsp;&nbsp;return (length(max(abs(z.xyz)-vec3(1.0),0.0))-0.05)/z.w;
+    }
+
+</div>
+
     <script>Syntax.glsl()</script>
 </body>
 </html>
