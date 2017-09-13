@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>Distance Functions</title>
     <script src="scripts/syntax.js"></script>
+    <style>.glsl{background-color: #3e3e3e; color: lightgray}</style>
 </head>
-<body style="font-family: Consolas; width: 800px; margin: auto; background-color: gray">
+<body style="font-family: 'Courier New'; width: 800px; margin: auto; background-color: gray">
 <br>
 <h1>Distance Functions</h1>
 <h2>bezier</h2>
-    <div class="glsl" style="background-color: #3e3e3e; color: lightgray">
+    <div class="glsl">
         float det( vec2 a, vec2 b ) {
             return a.x*b.y-b.x*a.y;
         }
@@ -46,7 +47,7 @@
 
 <h2>menger sponge</h2>
 
-<div class="glsl" style="background-color: #3e3e3e; color: lightgray">
+<div class="glsl">
     float mengerSponge(vec3 z0) {
         vec4 z=vec4(z0, 2.);
         vec3 offset = vec3(0.785,1.1,0.46);
@@ -62,9 +63,7 @@
         }
         return (length(max(abs(z.xyz)-vec3(1.0),0.0))-0.05)/z.w;
     }
-
 </div>
-
     <script>Syntax.glsl()</script>
 </body>
 </html>
