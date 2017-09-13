@@ -16,9 +16,9 @@
         }
 
         vec3 getClosest( vec2 b0, vec2 b1, vec2 b2 ) {
-            float a =     det(b0,b2);
-            float b = 2.0*det(b1,b0);
-            float d = 2.0*det(b2,b1);
+            float a = det(b0,b2);
+            float b = det(b1,b0)*2.;
+            float d = det(b2,b1)*2.;
             float f = b*d - a*a;
             vec2  d21 = b2-b1;
             vec2  d10 = b1-b0;
@@ -48,7 +48,7 @@
 <h2>menger sponge</h2>
 
 <div class="glsl">
-    float mengerSponge(vec3 z0) {
+    float MengerSponge(vec3 z0) {
         vec4 z=vec4(z0, 2.);
         vec3 offset = vec3(0.785,1.1,0.46);
         float scale = 2.3;
@@ -64,6 +64,75 @@
         return (length(max(abs(z.xyz)-vec3(1.0),0.0))-0.05)/z.w;
     }
 </div>
+
+<h2>mandelbulb</h2>
+
+<div class="glsl">
+    float MandelBulb(vec3 pos, float Power){
+    int Iterations = 12;
+    float Bailout = 8.0;
+    vec3 z = pos;
+    float dr = 2.0;
+    float r = 0.0;
+    for (int i = 0; i < Iterations; i++) {
+    r = length(z);
+    if (r > Bailout) break;
+    float theta = acos(z.z/r);
+    float phi = atan(z.y,z.x);
+    dr = pow(r, Power-1.0)*Power*dr + 1.0;
+    float zr = pow(r,Power);
+    theta = theta*Power;
+    phi = phi*Power;
+    z = zr*vec3(sin(theta)*cos(phi), sin(phi)*sin(theta), cos(theta));
+    z += pos;
+    }
+    return 0.5*log(r)*r/dr;
+    }
+</div>
+
+<h2>mandelbox</h2>
+
+<div class="glsl">
+    float fixed_radius2 = 1.5;
+    float min_radius2 = 0.1;
+    float folding_limit = 1.0;
+    float scale =   1.5;
+    vec3 mtl = vec3(1.0, 1.3, 1.23)*0.8;
+
+    void sphere_fold(inout vec3 z, inout float dz) {
+    float r2 = dot(z, z);
+    if(r2 < min_radius2) {
+    float temp = (fixed_radius2 / min_radius2);
+    z *= temp;
+    dz *= temp;
+    } else if(r2 < fixed_radius2) {
+    float temp = (fixed_radius2 / r2);
+    z *= temp;
+    dz *= temp;
+    }
+    }
+
+    void box_fold(inout vec3 z, inout float dz) {
+    z = clamp(z, -folding_limit, folding_limit) * 2.0 - z;
+    }
+
+    float MandelBox(vec3 z) {
+    float scale = 4.  + sin(time)*0.5;
+    vec3 offset = z;
+    float dr =  1.;
+    for (int n = 0; n < 20; ++n) {
+    sphere_fold(z   , dr);
+    box_fold(z, dr);
+    z = scale * z + offset;
+    dr = dr * abs(scale) + 1.0;
+    offset = vec3( 0.1 - sin(time) * cos(time) * 0.1) ;
+    }
+    float r = length(z);
+    return r / abs(dr);
+    }
+</div>
+
     <script>Syntax.glsl()</script>
+&nbsp;
 </body>
 </html>

@@ -1,9 +1,10 @@
 var Syntax = (function () {
-    var types = ['float', 'vec2', 'vec3', 'vec4', 'int'];
+    var types = ['float', 'vec2', 'vec3', 'vec4', 'int', 'void'];
     var syntax = [
         'return', 'normalize', 'dot', 'clamp',
         'mix', 'floor', 'fract', 'sqrt', 'cross',
-        'for', 'sin', 'max', 'min', 'abs'
+        'for', 'asin','sin', 'atan', 'tan', 'acos',
+        'cos', 'max', 'min', 'abs', 'break', 'if', 'pow'
     ];
     return {
         glsl: function () {
@@ -33,7 +34,6 @@ var Syntax = (function () {
             close && !open && pad--;
             split[i] = getPad(pad) + split[i];
             open && !close && pad++;
-
         }
 
         text = split.join("<br>");
