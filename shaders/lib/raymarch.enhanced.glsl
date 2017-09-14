@@ -1,7 +1,7 @@
 
 // http://erleuchtet.org/~cupe/permanent/enhanced_sphere_tracing.pdf
 
-const float t_min = 0.001;
+const float t_min = 0.0001;
 const float t_max = 50.0;
 const int MAX_ITERATIONS = 256;
 const float INFINITY = 1e32;

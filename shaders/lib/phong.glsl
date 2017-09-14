@@ -1,4 +1,4 @@
-const float EPSILON = 0.005;
+const float EPSILON = 0.0005;
 
 vec3 estimateNormal(vec3 p) {
     return normalize(vec3(

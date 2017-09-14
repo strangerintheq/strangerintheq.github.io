@@ -4,10 +4,10 @@ precision highp float;
 
 uniform float time;
 
-#pragma import shaders/lib/sdf/mandelbulb.glsl
+#pragma import shaders/lib/sdf/menger.glsl
 
 float sceneSDF(vec3 p) {
-    return MandelBulb(p-vec3(0.0,0.0,1.25), 4.);
+    return MengerSponge(p, 2.2 - sin(time)*0.1);
 }
 
 //#pragma import shaders/lib/raymarch.glsl
