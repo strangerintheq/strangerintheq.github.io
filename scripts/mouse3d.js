@@ -3,7 +3,7 @@ var Mouse3D = (function(){
     var theta = 0;
     var phi = 0;
     var mouse = {x: 0, y: 0};
-    var radius = 5;
+    var radius = 7;
     var dragStartMousePosition, dragStartPhi, dragStartTheta;
 
     var mouse3d = {
