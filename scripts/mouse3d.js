@@ -21,6 +21,7 @@ var Mouse3D = (function(){
     }
 
     function mouseMove(event) {
+        if (event.target.tagName !== 'CANVAS') return;
         mouse = event;
         if (dragStartMousePosition) {
             rotate();
@@ -45,12 +46,14 @@ var Mouse3D = (function(){
     }
 
     function mouseDown(event) {
+        if (event.target.tagName !== 'CANVAS') return;
         dragStartPhi = phi;
         dragStartTheta = theta;
         dragStartMousePosition = event;
     }
 
     function mouseUp() {
+        if (event.target.tagName !== 'CANVAS') return;
         rotate();
         dragStartMousePosition = null;
         dragStartPhi = 0;

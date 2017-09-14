@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Mandelbulb</title>
+    <script src="scripts/ui.js"></script>
     <script src="scripts/gl.js"></script>
     <script src="scripts/mouse3d.js"></script>
     <script src="scripts/scene3d.js"></script>
 </head>
 <body>
     <script>
-        Scene3D("shaders/mandelbulb.glsl");
+        Scene3D("shaders/mandelbulb.glsl", [
+            float('x'),
+            float('y'),
+            float('z'),
+            float('P')
+        ]);
+
+        function float(name) {
+            return {name: name, max: 100, k: 0.02}
+        }
     </script>
 </body>
 </html>

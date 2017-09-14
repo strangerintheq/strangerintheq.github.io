@@ -3,11 +3,15 @@
 precision highp float;
 
 uniform float time;
+uniform float x;
+uniform float y;
+uniform float z;
+uniform float P;
 
 #pragma import shaders/lib/sdf/mandelbulb.glsl
 
 float sceneSDF(vec3 p) {
-    return MandelBulb(p-vec3(0.0,0.0,1.25), 4.);
+    return MandelBulb(p-vec3(x-1., y-1., z*1.5-1.), 1.+P*3.);
 }
 
 //#pragma import shaders/lib/raymarch.glsl

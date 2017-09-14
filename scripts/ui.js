@@ -17,6 +17,7 @@ var UI = (function () {
 
     function slider(name, max, value) {
         var slider = elem('input', 25, name);
+        slider.name = name;
         slider.setAttribute('type', 'range');
         slider.setAttribute('min', '0');
         slider.setAttribute('max', max);
