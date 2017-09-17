@@ -3,13 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Mandelbox</title>
+
+    <!-- tiny gui @ https://github.com/strangerintheq/tinygui -->
+    <script src="https://rawgit.com/strangerintheq/tinygui/master/tinygui.js"></script>
+    <link href="https://rawgit.com/strangerintheq/tinygui/master/tinygui.css" rel="stylesheet"/>
+
     <script src="scripts/gl.js"></script>
     <script src="scripts/mouse3d.js"></script>
-    <script src="scripts/scene3d.js"></script>
 </head>
 <body>
 <script>
-    Scene3D("shaders/mandelbox.glsl");
+    var props = {
+        power: 1,     x: 0.0, y: 0.0, z: 0.0,
+        julia: false, a: 0.5, b: 0.5, c: 0.5
+    };
+
+    Mouse3D.init();
+    GL.init();
+
+    TinyGui(props, 'Mandelbox', createDefault(props));
+
+    GL.program('shaders/mandelbox.glsl', start);
+
+    function start(program) {
+        program.link();
+        program.bind();
+        GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
+        animate();
+    }
+
+    function drawFrame() {
+        GL.currentProgram.resolution();
+        GL.currentProgram.time();
+        for (var key in props)
+            GL.currentProgram.float(key, props[key]);
+        GL.currentProgram.vec3("eye", Mouse3D.eye);
+        GL.drawTriangleFan(4);
+    }
+
+    function animate() {
+        drawFrame();
+        requestAnimationFrame(animate);
+    }
+
+    function createDefault(props) {
+        var fields = [];
+        for (var key in props) {
+            if (props.hasOwnProperty(key)){
+                var field = {name: key, title: key};
+                if (typeof props[key] === "number") {
+                    field.min = -1;
+                    field.max = 1;
+                    field.fixed = 2;
+                }
+                fields.push(field);
+            }
+        }
+        return fields;
+    }
 </script>
 </body>
 </html>

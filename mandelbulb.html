@@ -22,8 +22,10 @@
         Mouse3D.init();
         GL.init();
 
-        TinyGui(props, 'Mandelbulb', createDefault(props));
-
+        var gui = TinyGui('Mandelbulb');
+        for (var key in props) {
+            gui.add(props, key);
+        }
         GL.program('shaders/mandelbulb.glsl', start);
 
         function start(program) {
@@ -37,7 +39,7 @@
             GL.currentProgram.resolution();
             GL.currentProgram.time();
             for (var key in props) {
-                props.hasOwnProperty(key) && GL.currentProgram.float(key, props[key]);
+                GL.currentProgram.float(key, props[key]);
             }
             GL.currentProgram.vec3("eye", Mouse3D.eye);
             GL.drawTriangleFan(4);

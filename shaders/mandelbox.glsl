@@ -15,6 +15,15 @@ uniform vec2 mouse;
 uniform vec2 resolution;
 uniform vec3 eye;
 
+
+uniform float x;
+uniform float y;
+uniform float z;
+uniform bool julia;
+uniform float a;
+uniform float b;
+uniform float c;
+
 const int MAX_MARCHING_STEPS = 256;
 const float MIN_DIST = 0.0;
 const float MAX_DIST = 50.0;
@@ -204,7 +213,7 @@ float MandelBulb(vec3 pos){
 // union - min
 // substract - max
 float sceneSDF(vec3 p) {
-    return max(mb(p), box(p, vec3(1.2)));
+    return mb(p);
 }
 
 float shortestDistanceToSurface(vec3 eye, vec3 marchingDirection, float start, float end) {

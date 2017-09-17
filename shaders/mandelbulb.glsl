@@ -6,18 +6,16 @@ uniform float time;
 uniform float x;
 uniform float y;
 uniform float z;
-
 uniform bool julia;
 uniform float a;
 uniform float b;
 uniform float c;
-
 uniform float power;
 
 #pragma import shaders/lib/sdf/mandelbulb.glsl
 
 float sceneSDF(vec3 p) {
-    float pow = 5.0 + power;
+    float pow = 4.0 + power;
     vec3 loc = vec3(x, y, z);
     if (julia)
         return JuliaBulb(p - loc, pow, vec3(a, b, c));
