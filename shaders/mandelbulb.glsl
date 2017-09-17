@@ -6,12 +6,18 @@ uniform float time;
 uniform float x;
 uniform float y;
 uniform float z;
-uniform float P;
+
+uniform bool julia;
+uniform float a;
+uniform float b;
+uniform float c;
+
+uniform float power;
 
 #pragma import shaders/lib/sdf/mandelbulb.glsl
 
 float sceneSDF(vec3 p) {
-    return MandelBulb(p-vec3(x-1., y-1., z*1.5-1.), 1.+P*3.);
+    return JuliaBulb(p-vec3(x, y, z), 5.+power*3., vec3(a,b,c));
 }
 
 //#pragma import shaders/lib/raymarch.glsl
