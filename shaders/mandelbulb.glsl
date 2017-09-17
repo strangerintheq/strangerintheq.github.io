@@ -17,7 +17,12 @@ uniform float power;
 #pragma import shaders/lib/sdf/mandelbulb.glsl
 
 float sceneSDF(vec3 p) {
-    return JuliaBulb(p-vec3(x, y, z), 5.+power*3., vec3(a,b,c));
+    float pow = 5.0 + power;
+    vec3 loc = vec3(x, y, z);
+    if (julia)
+        return JuliaBulb(p - loc, pow, vec3(a, b, c));
+    else
+        return MandelBulb(p - loc, pow);
 }
 
 //#pragma import shaders/lib/raymarch.glsl
