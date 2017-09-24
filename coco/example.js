@@ -98,13 +98,13 @@
 
 	Events.post(Events.CREATE_FORM, {
 	    id: 'settings', title: 'Настройки',
-	    width: 215, height: 315,
+	    width: 217, height: 243,
 	    left: 5, top: 55,
 	    drag: false,
 	    contents: [
-	        {type: 'html', html: txt('Положение')},
-	        {type: 'field', title: 'Широта', path: 'latitude', listen: Events.LOCATION_CHANGED},
-	        {type: 'field', title: 'Долгота', path: 'longitude', listen: Events.LOCATION_CHANGED},
+	        // {type: 'html', html: txt('Положение')},
+	        // {type: 'field', title: 'Широта', path: 'latitude', listen: Events.LOCATION_CHANGED},
+	        // {type: 'field', title: 'Долгота', path: 'longitude', listen: Events.LOCATION_CHANGED},
 
 	        {type: 'html', html: txt('Действия')},
 	        {type: 'button', width: 90, title: 'Навигатор', post: Events.SWITCH_CONTROLS},
@@ -129,43 +129,46 @@
 	    return '<span style="font-size: 15px; width:200px; text-align: center; display: inline-block">' + t + '</span>';
 	}
 
-	if(window.devMode)
-	 Events.post(Events.CREATE_BUTTON, {
+
+	var wizardConfig = {
+	    rules: [ {
+	        type: 2, min: 4,
+	        name: 'Нанесение тип 2',
+	        description: 'Нанесение тип 2 бла бла бла'
+	    }, {
+	        "description": "", text: [
+	            {"key":"formirName", "title":"Формирование", value:"1"},
+	        ],
+	        "max": 1,
+	        "min": 1,
+	        "name": "ТОЧЕЧНЫЙ ЗНАК",
+	        "type": 1
+	    }, {
+	        type: 1, min: 2,
+	        name: 'Нанесение тип 1',
+	        description: 'Нанесение тип 1 бла бла бла'
+	    }, {
+	        "description": "",
+	        text: [
+	            {"key":"formirName", "title":"Формирование"},
+	            {"key":"otherKey", "title":"Еще какая-то ерунда"}
+	        ],
+	        "max": 1,
+	        "min": 1,
+	        "name": "ТОЧЕЧНЫЙ ЗНАК",
+	        "type": 1
+	    }, {
+	        type: 5, min: 1,
+	        name: 'Нанесение тип 5',
+	        description: 'Нанесение тип 5 бла бла бла'
+	    }]
+	};
+
+	window.devMode && Events.post(Events.CREATE_BUTTON, {
 	    title: 'Wizard',
 	    html: SvgIcons.wizard(),
-	    event: Events.SHOW_WIZARD,
-	    data: {
-	        rules: [ {
-	            type: 2, min: 4,
-	            name: 'Нанесение тип 2',
-	            description: 'Нанесение тип 2 бла бла бла'
-	        }, {
-	            "description": "", text: [
-	                {"key":"formirName", "title":"Формирование", value:"1"},
-	            ],
-	            "max": 1,
-	            "min": 1,
-	            "name": "ТОЧЕЧНЫЙ ЗНАК",
-	            "type": 1
-	        }, {
-	            type: 1, min: 2,
-	            name: 'Нанесение тип 1',
-	            description: 'Нанесение тип 1 бла бла бла'
-	        }, {
-	            "description": "",
-	            text: [
-	                {"key":"formirName", "title":"Формирование"},
-	                {"key":"otherKey", "title":"Еще какая-то ерунда"}
-	            ],
-	            "max": 1,
-	            "min": 1,
-	            "name": "ТОЧЕЧНЫЙ ЗНАК",
-	            "type": 1
-	        }, {
-	            type: 5, min: 1,
-	            name: 'Нанесение тип 5',
-	            description: 'Нанесение тип 5 бла бла бла'
-	        }]
+	    click: function () {
+	        Events.post(Events.SHOW_WIZARD, JSON.parse(JSON.stringify(wizardConfig)))
 	    }
 	});
 
