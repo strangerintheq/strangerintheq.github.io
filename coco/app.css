@@ -556,13 +556,12 @@ div.rotate-mode div.anchor-point.center-point:before {
   content: '';
 }
 
-div.anchor-point:hover,
-div.anchor-point-active {
+div.anchor-point:hover {
   background-color: #ff4500;
 }
 
 div.anchor-point.drag {
-  background-color: #dd7a00;
+  background-color: #ff4500;
 }
 
 .editor {

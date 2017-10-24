@@ -55,10 +55,10 @@
 	__webpack_require__(40);
 
 	// ww polygon dependency
-	window.libtess = __webpack_require__(254);
+	window.libtess = __webpack_require__(255);
 
 	// qt integration
-	window.QWebChannel = __webpack_require__(255);
+	window.QWebChannel = __webpack_require__(256);
 
 	// shared event system
 	window.Events = __webpack_require__(5);
@@ -17325,13 +17325,13 @@
 	    this.ctx.font = this.fontWeight + ' ' + this.fontSize + 'px ' + this.fontFamily;
 	    this.ctx.textBaseline = 'middle';
 	    this.ctx.fillStyle = 'black';
-	    this.ctx.textAlign = "center";
 	};
 
 	CharSDF.prototype = Object.create(TinySDF.prototype);
 
 	CharSDF.prototype.draw = function (char) {
 	    this.ctx.clearRect(0, 0, this.size, this.size);
+	    this.ctx.textAlign="center";
 	    this.ctx.fillText(char, this.size/2, this.middle);
 	    return this.sdfAlpha();
 	};
@@ -29234,9 +29234,7 @@
 	                    Logger.logMessage(Logger.LEVEL_SEVERE, "SurfaceShapeTileBuilder", "buildTiles", "missingDc"));
 	            }
 
-	            if (!this.surfaceShapes || this.surfaceShapes.length < 1) {
-	                return;
-	            }
+
 
 	            // Assemble the current visible tiles and update their associated textures if necessary.
 	            this.assembleTiles(dc);
@@ -29807,13 +29805,13 @@
 	    __webpack_require__(136),
 	    __webpack_require__(137),
 	    __webpack_require__(139),
-	    __webpack_require__(199),
 	    __webpack_require__(200),
 	    __webpack_require__(201),
-	    __webpack_require__(235),
-	    __webpack_require__(251),
+	    __webpack_require__(202),
+	    __webpack_require__(236),
 	    __webpack_require__(252),
-	    __webpack_require__(253)
+	    __webpack_require__(253),
+	    __webpack_require__(254)
 	];
 
 	module.exports = function (earth) {
@@ -29952,9 +29950,9 @@
 	var RenderableLayer = __webpack_require__(140);
 	var Color = __webpack_require__(52);
 	var GeoJsonObjectsFactory = __webpack_require__(141);
-	var ModelFactory = __webpack_require__(189);
-	var TextFactory = __webpack_require__(182);
-	var BillboardFactory = __webpack_require__(198);
+	var ModelFactory = __webpack_require__(190);
+	var TextFactory = __webpack_require__(183);
+	var BillboardFactory = __webpack_require__(199);
 	var Events = __webpack_require__(5);
 
 	var found = [];
@@ -30404,9 +30402,9 @@
 
 	var factories = {
 	    LineString: __webpack_require__(142),
-	    Polygon: __webpack_require__(164),
-	    Point: __webpack_require__(182),
-	    GeometryCollection: __webpack_require__(188)
+	    Polygon: __webpack_require__(165),
+	    Point: __webpack_require__(183),
+	    GeometryCollection: __webpack_require__(189)
 	};
 
 	module.exports = {
@@ -30433,9 +30431,10 @@
 
 	var AttributesFactory = __webpack_require__(143);
 	var Path = __webpack_require__(145);
-	var PatternedPath = __webpack_require__(156);
-	var ObjectFactory = __webpack_require__(162);
-	var LegacyPath = __webpack_require__(163);
+	var PatternedPath = __webpack_require__(157);
+	var ObjectFactory = __webpack_require__(163);
+	var LegacyPath = __webpack_require__(164);
+	var SurfacePolyline = __webpack_require__(149);
 	var ScreenSpacePath = __webpack_require__(150);
 	var Utils = __webpack_require__(144);
 
@@ -30456,13 +30455,25 @@
 	    if (cocoImpl && geoJson.properties.pen) {
 	        return PatternedPath.create(positions, geoJson.properties.pen).map(newPath);
 	    }
+
 	    var nicImpl = geoJson && geoJson.properties && geoJson.properties.api === 'nic';
 	    if (nicImpl) {
-	        var color = geoJson.geometry.properties.color || geoJson.properties.color;
-	        var screenSpacePath = new ScreenSpacePath(positions, color, 5);
+	        var color = geoJson.geometry.properties && geoJson.geometry.properties.color || geoJson.properties.color;
+	        var screenSpacePath = new ScreenSpacePath(positions, color, geoJson.properties.width || 5);
+	        screenSpacePath.depth = geoJson.properties.depth;
+	        screenSpacePath.simplify = geoJson.properties.simplify;
 	        screenSpacePath.source = geoJson;
 	        return screenSpacePath;
 	    }
+
+	    var wwSurfaceImpl = geoJson && geoJson.properties && geoJson.properties.api === 'surface';
+	    if (wwSurfaceImpl) {
+	        //var col = geoJson.geometry.properties.color || geoJson.properties.color;
+	        var surfacePolyline = new SurfacePolyline(positions, null);
+	        surfacePolyline.source = geoJson;
+	        return surfacePolyline;
+	    }
+
 	    return cocoImpl ? newPath(positions, geoJson.geometry.properties || {}) : legacyPath(positions);
 
 	    function newPath(points, props) {
@@ -30600,8 +30611,8 @@
 	var SurfacePolyline = __webpack_require__(149);
 	var ShapeAttributes = __webpack_require__(132);
 	var ScreenSpacePath = __webpack_require__(150);
-	var PrimitiveUtils = __webpack_require__(154);
-	var WebGL = __webpack_require__(155);
+	var PrimitiveUtils = __webpack_require__(155);
+	var WebGL = __webpack_require__(156);
 	// var ExtrudePolyline = require('extrude-polyline');
 	//var SimplifyLine = require('simplify-js');
 	var Utils = __webpack_require__(144);
@@ -31600,8 +31611,8 @@
 	var Matrix = __webpack_require__(63);
 	var ScreenSpaceLineProgram = __webpack_require__(151);
 	var PrimitivesMath = __webpack_require__(152);
-
-	var CocoMath = __webpack_require__(153);
+	var SimplifyLine = __webpack_require__(153);
+	var CocoMath = __webpack_require__(154);
 	var Events = __webpack_require__(5);
 
 	var pixelPerSegment = 8;
@@ -31614,20 +31625,22 @@
 
 	window.addEventListener('resize', adjust);
 
-	engine._redrawCallbacks.push(function(earth, type) {
-	    if (type === WorldWind.BEFORE_REDRAW) {
-	        //overlaySvg.innerHTML = '';
-	        accumulatedSegments = {};
-	    } else if (type === WorldWind.AFTER_REDRAW) {
-	        drawAccumulatedSegments(earth.drawContext);
-	    }
-	});
+	//engine._redrawCallbacks.push(function(earth, type) {
+	//    if (type === WorldWind.BEFORE_REDRAW) {
+	//        //overlaySvg.innerHTML = '';
+	//        accumulatedSegments = {};
+	//    } else if (type === WorldWind.AFTER_REDRAW) {
+	//        drawAccumulatedSegments(earth.drawContext);
+	//    }
+	//});
 
 	var ScreenSpacePath = function (points, color, width, lineJoin, miterLimit) {
 	    Renderable.call(this);
 	    this.enabled = true;
-	    this.positions = points;
-	    this.expirationPeriod = 2000;
+	    this.points = points;
+	    this.simplify = false;
+	    this.depth = false;
+	    this.expirationPeriod = (1 + Math.random()) * 150;
 	    this.tessellated = null;
 	    this.timestamp = null;
 	    this.properties = {
@@ -31685,12 +31698,32 @@
 	    }
 	};
 
+	ScreenSpacePath.prototype.simplifyBoundaries = function (dc) {
+	    if (!this.simplify){
+	        this.positions = this.points.slice(0);
+	        return;
+	    }
+	    var pts = this.points.map(function(pt) {
+	        return {x: pt.latitude, y: pt.longitude, z: pt.altitude}
+	    });
+	    var p1 = blh2xyz(dc, this.points[0], [0,0,0]);
+	    var p2 = blh2xyz(dc, this.points[Math.floor(this.points.length/2)], [0,0,0]);
+	    var d1 = dc.navigatorState.eyePoint.distanceTo(p1);
+	    var d2 = dc.navigatorState.eyePoint.distanceTo(p2);
+	    var tolerance = Math.min(d1, d2)/5e7;
+	    var result = SimplifyLine(pts, tolerance);
+	    this.positions = result.map(function(pt) {
+	        return new Position(pt.x, pt.y, pt.z);
+	    });
+	};
+
 	ScreenSpacePath.prototype.render = function (dc) {
-	    var pts = this.positions;
+	    var pts = this.points;
 	    if (!this.enabled || this.opacity <= 0 || dc.pickingMode || !Array.isArray(pts) || pts.length < 2) {
 	        return;
 	    }
 	    if (!this.tessellated || Date.now() - this.timestamp > this.expirationPeriod) {
+	        this.simplifyBoundaries(dc);
 	        this.makeTessellatedPositionsIfNeeded(dc);
 	    }
 	    var segments = [];
@@ -31699,8 +31732,14 @@
 	        addPoint(this.tessellated[i]);
 	    }
 	    pushSegment();
-	    accumulateSegments(segments, this.properties);
-
+	    //accumulateSegments(segments, this.properties);
+	    this.drawBucketGL(dc, {
+	        segments: segments,
+	        width: this.properties.width,
+	        lineJoin: this.properties.lineJoin,
+	        miterLimit: this.properties.miterLimit,
+	        color: this.properties.color
+	    });
 	    function addPoint(point) {
 	        var pos = getScreenSpacePointPosition(dc, point);
 	        if (pos) {
@@ -31796,61 +31835,35 @@
 	    overlaySvg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
 	}
 
-	/////// svg
-
-	function drawBucket(dc, bucket) {
-	    var d = '';
-
-	    bucket.segments.forEach(function (segment) {
-	        for (var x = 0; x < segment.length; x++) {
-	            d += pt2svgCmd(x === 0, segment[x]);
-	        }
-	    });
-
-	    if (d.length) {
-	        overlaySvg.innerHTML += '<path fill="none" ' +
-	            'stroke-width="' + bucket.width + '" ' +
-	            'stroke="#' + bucket.color + '" ' +
-	            'd="' + d + '"/>';
-	    }
-	}
-
-	function pt2svgCmd(move, pt) {
-	    var cmd = move ? ' M' : ' L';
-	    var X = pt[0].toFixed(2);
-	    var Y = (overlayHeight - pt[1]).toFixed(2);
-	    return cmd + X + ',' + Y;
-	}
-
-	/////// webgl
-
 	var scratchMatrix = Matrix.fromIdentity();
 
-	function drawBucketGL(dc, bucket){
-	    beginDrawing(dc);
+	ScreenSpacePath.prototype.drawBucketGL = function(dc, bucket){
+	    this.beginDrawing(dc);
 	    try {
 	        renderBucket(dc, bucket);
 	    } finally {
-	        endDrawing(dc);
+	        this.endDrawing(dc);
 	    }
-	}
+	};
 
-	function beginDrawing(dc) {
+	ScreenSpacePath.prototype.beginDrawing = function (dc) {
 	    var gl = dc.currentGlContext;
 	    dc.findAndBindProgram(ScreenSpaceLineProgram);
 	    var program = dc.currentProgram;
 	    gl.bindBuffer(gl.ARRAY_BUFFER, dc.unitQuadBuffer());
 	    gl.enableVertexAttribArray(program.vertexPointLocation);
-
-	    gl.enable(gl.BLEND);
+	    gl.disable(gl.CULL_FACE);
 	    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-	}
+	    this.depth && gl.depthMask(false);
+	};
 
-	function endDrawing(dc) {
+	ScreenSpacePath.prototype.endDrawing = function (dc) {
 	    var gl = dc.currentGlContext;
 	    gl.disableVertexAttribArray(dc.currentProgram.vertexPointLocation);
 	    gl.bindBuffer(gl.ARRAY_BUFFER, null);
-	}
+	    gl.enable(gl.CULL_FACE);
+	    this.depth && gl.depthMask(true);
+	};
 
 	function renderBucket(dc, bucket) {
 	    var gl = dc.currentGlContext;
@@ -31874,7 +31887,7 @@
 	    program.loadColor(gl, bucket.color);
 	    program.loadOpacity(gl, bucket.opacity);
 	    program.loadAspectRatio(gl, w/h);
-
+	    program.loadWidth(gl, bucket.width/w/2);
 	    gl.drawArrays(gl.TRIANGLES, 0, vertexCount);
 
 	    // debug
@@ -32047,7 +32060,7 @@
 	    'uniform float aspectRatio;\n' +
 	    //'varying float distance;\n' +
 	    'varying float join;\n' +
-	    'const float width = 0.002;\n' +
+	    'uniform float width;\n' +
 	    'void main() {\n' +
 	    '   vec4 p = vertexPoint;\n' +
 	    '   float angle = p.z / 180.0 * 3.1416;\n' +
@@ -32086,6 +32099,7 @@
 	    this.colorLocation = this.uniformLocation(gl, "color");
 	    this.opacityLocation = this.uniformLocation(gl, "opacity");
 	    this.aspectRatioLocation = this.uniformLocation(gl, "aspectRatio");
+	    this.widthLocation = this.uniformLocation(gl, "width");
 	};
 
 	ScreenSpaceLineProgram.prototype = Object.create(GpuProgram.prototype);
@@ -32108,6 +32122,9 @@
 	    gl.uniform1f(this.aspectRatioLocation, aspectRatio);
 	};
 
+	ScreenSpaceLineProgram.prototype.loadWidth = function (gl, width) {
+	    gl.uniform1f(this.widthLocation, width);
+	};
 	module.exports = ScreenSpaceLineProgram;
 
 /***/ }),
@@ -32177,6 +32194,143 @@
 
 /***/ }),
 /* 153 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*
+	 (c) 2013, Vladimir Agafonkin
+	 Simplify.js, a high-performance JS polyline simplification library
+	 mourner.github.io/simplify-js
+	*/
+
+	(function () { 'use strict';
+
+	// to suit your point format, run search/replace for '.x' and '.y';
+	// for 3D version, see 3d branch (configurability would draw significant performance overhead)
+
+	// square distance between 2 points
+	function getSqDist(p1, p2) {
+
+	    var dx = p1.x - p2.x,
+	        dy = p1.y - p2.y;
+
+	    return dx * dx + dy * dy;
+	}
+
+	// square distance from a point to a segment
+	function getSqSegDist(p, p1, p2) {
+
+	    var x = p1.x,
+	        y = p1.y,
+	        dx = p2.x - x,
+	        dy = p2.y - y;
+
+	    if (dx !== 0 || dy !== 0) {
+
+	        var t = ((p.x - x) * dx + (p.y - y) * dy) / (dx * dx + dy * dy);
+
+	        if (t > 1) {
+	            x = p2.x;
+	            y = p2.y;
+
+	        } else if (t > 0) {
+	            x += dx * t;
+	            y += dy * t;
+	        }
+	    }
+
+	    dx = p.x - x;
+	    dy = p.y - y;
+
+	    return dx * dx + dy * dy;
+	}
+	// rest of the code doesn't care about point format
+
+	// basic distance-based simplification
+	function simplifyRadialDist(points, sqTolerance) {
+
+	    var prevPoint = points[0],
+	        newPoints = [prevPoint],
+	        point;
+
+	    for (var i = 1, len = points.length; i < len; i++) {
+	        point = points[i];
+
+	        if (getSqDist(point, prevPoint) > sqTolerance) {
+	            newPoints.push(point);
+	            prevPoint = point;
+	        }
+	    }
+
+	    if (prevPoint !== point) newPoints.push(point);
+
+	    return newPoints;
+	}
+
+	// simplification using optimized Douglas-Peucker algorithm with recursion elimination
+	function simplifyDouglasPeucker(points, sqTolerance) {
+
+	    var len = points.length,
+	        MarkerArray = typeof Uint8Array !== 'undefined' ? Uint8Array : Array,
+	        markers = new MarkerArray(len),
+	        first = 0,
+	        last = len - 1,
+	        stack = [],
+	        newPoints = [],
+	        i, maxSqDist, sqDist, index;
+
+	    markers[first] = markers[last] = 1;
+
+	    while (last) {
+
+	        maxSqDist = 0;
+
+	        for (i = first + 1; i < last; i++) {
+	            sqDist = getSqSegDist(points[i], points[first], points[last]);
+
+	            if (sqDist > maxSqDist) {
+	                index = i;
+	                maxSqDist = sqDist;
+	            }
+	        }
+
+	        if (maxSqDist > sqTolerance) {
+	            markers[index] = 1;
+	            stack.push(first, index, index, last);
+	        }
+
+	        last = stack.pop();
+	        first = stack.pop();
+	    }
+
+	    for (i = 0; i < len; i++) {
+	        if (markers[i]) newPoints.push(points[i]);
+	    }
+
+	    return newPoints;
+	}
+
+	// both algorithms combined for awesome performance
+	function simplify(points, tolerance, highestQuality) {
+
+	    var sqTolerance = tolerance !== undefined ? tolerance * tolerance : 1;
+
+	    points = highestQuality ? points : simplifyRadialDist(points, sqTolerance);
+	    points = simplifyDouglasPeucker(points, sqTolerance);
+
+	    return points;
+	}
+
+	// export as AMD module / Node module / browser or worker variable
+	if (true) !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return simplify; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	else if (typeof module !== 'undefined') module.exports = simplify;
+	else if (typeof self !== 'undefined') self.simplify = simplify;
+	else window.simplify = simplify;
+
+	})();
+
+
+/***/ }),
+/* 154 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -32227,7 +32381,7 @@
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Position = __webpack_require__(47);
@@ -32262,7 +32416,7 @@
 	}
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -32344,17 +32498,17 @@
 	}
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var GeoUtils = __webpack_require__(157);
+	var GeoUtils = __webpack_require__(158);
 
 	// шаблоны сегментов
 	var penHandlers = {
-	    comb: __webpack_require__(158), // расческа
-	    dash: __webpack_require__(159), // пунктир
-	    cross: __webpack_require__(160), // пунктир
-	    space: __webpack_require__(161) // пробел
+	    comb: __webpack_require__(159), // расческа
+	    dash: __webpack_require__(160), // пунктир
+	    cross: __webpack_require__(161), // пунктир
+	    space: __webpack_require__(162) // пробел
 	};
 
 	// разбивает линию на сегменты
@@ -32424,7 +32578,7 @@
 
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Location = __webpack_require__(28);
@@ -32460,10 +32614,10 @@
 
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var GeoUtils = __webpack_require__(157);
+	var GeoUtils = __webpack_require__(158);
 
 	module.exports = {
 	    handle: handleCombPattern
@@ -32480,7 +32634,7 @@
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports) {
 
 	
@@ -32497,10 +32651,10 @@
 	}
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var GeoUtils = __webpack_require__(157);
+	var GeoUtils = __webpack_require__(158);
 
 	module.exports = {
 	    handle: handleCrossPattern
@@ -32538,7 +32692,7 @@
 
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -32550,7 +32704,7 @@
 	}
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports) {
 
 	
@@ -32584,7 +32738,7 @@
 	};
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -33225,13 +33379,16 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AttributesFactory = __webpack_require__(143);
-	var ObjectFactory = __webpack_require__(162);
-	var LegacyPolygon = __webpack_require__(165);
-	var Polygon = __webpack_require__(168);
+	var ObjectFactory = __webpack_require__(163);
+	var LegacyPolygon = __webpack_require__(166);
+	var SurfacePolyline = __webpack_require__(149);
+	var Path = __webpack_require__(164);
+	var Polygon = __webpack_require__(169);
+	var ScreenSpacePath = __webpack_require__(150);
 	var Utils = __webpack_require__(144);
 
 	var defaultProperties = {
@@ -33242,12 +33399,21 @@
 	    altitude: 3000
 	};
 
-
 	module.exports = {
 	    create: ObjectFactory(createPolygon, getBoundaries, defaultProperties)
 	};
 
 	function createPolygon(boundaries, geoJson, index) {
+	    var wwSurfaceImpl = geoJson && geoJson.properties && geoJson.properties.api === 'nic';
+	    if (wwSurfaceImpl) {
+	        //var col = geoJson.geometry.properties.color || geoJson.properties.color;
+	        var line = new ScreenSpacePath(boundaries[0], 'ffffff', geoJson.properties.width, 'bevel');
+	        line.depth = geoJson.properties.depth;
+	        line.simplify = geoJson.properties.simplify;
+	        line.source = geoJson;
+	        return line;
+	    }
+
 	    var newImpl = geoJson && geoJson.properties && geoJson.properties.api === 'coco';
 	    var polygon = newImpl ? new Polygon(boundaries) : new LegacyPolygon(boundaries, null);
 	    polygon.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
@@ -33273,7 +33439,7 @@
 	}
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -33297,10 +33463,10 @@
 	        __webpack_require__(87),
 	        __webpack_require__(47),
 	        __webpack_require__(132),
-	        __webpack_require__(166),
+	        __webpack_require__(167),
 	        __webpack_require__(46),
 	        __webpack_require__(35),
-	        __webpack_require__(167)
+	        __webpack_require__(168)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (AbstractShape,
 	              ArgumentError,
 	              BasicTextureProgram,
@@ -34186,7 +34352,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -34319,7 +34485,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -39597,7 +39763,7 @@
 
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AbstractPrimitive = __webpack_require__(146);
@@ -39605,13 +39771,13 @@
 	var Location = __webpack_require__(28);
 	var PickedObject = __webpack_require__(87);
 	var Position = __webpack_require__(47);
-	var SurfacePolygon = __webpack_require__(166);
+	var SurfacePolygon = __webpack_require__(167);
 	var Vec3 = __webpack_require__(35);
 	var WWMath = __webpack_require__(36);
-	var cdt2d = __webpack_require__(169);
-	var PrimitiveUtils = __webpack_require__(154);
+	var cdt2d = __webpack_require__(170);
+	var PrimitiveUtils = __webpack_require__(155);
 	var Utils = __webpack_require__(144);
-	var WebGL = __webpack_require__(155);
+	var WebGL = __webpack_require__(156);
 	// var TriangleNormal = require('triangle-normal');
 	// var cleanPslg = require('clean-pslg');
 	// var pslg2poly = require('pslg-to-poly');
@@ -40214,15 +40380,15 @@
 	module.exports = Polygon;
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 
-	var monotoneTriangulate = __webpack_require__(170)
-	var makeIndex = __webpack_require__(178)
-	var delaunayFlip = __webpack_require__(179)
-	var filterTriangulation = __webpack_require__(181)
+	var monotoneTriangulate = __webpack_require__(171)
+	var makeIndex = __webpack_require__(179)
+	var delaunayFlip = __webpack_require__(180)
+	var filterTriangulation = __webpack_require__(182)
 
 	module.exports = cdt2d
 
@@ -40302,13 +40468,13 @@
 
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 
-	var bsearch = __webpack_require__(171)
-	var orient = __webpack_require__(172)[3]
+	var bsearch = __webpack_require__(172)
+	var orient = __webpack_require__(173)[3]
 
 	var EVENT_POINT = 0
 	var EVENT_END   = 1
@@ -40495,7 +40661,7 @@
 
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -40553,15 +40719,15 @@
 
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 
-	var twoProduct = __webpack_require__(173)
-	var robustSum = __webpack_require__(174)
-	var robustScale = __webpack_require__(175)
-	var robustSubtract = __webpack_require__(177)
+	var twoProduct = __webpack_require__(174)
+	var robustSum = __webpack_require__(175)
+	var robustScale = __webpack_require__(176)
+	var robustSubtract = __webpack_require__(178)
 
 	var NUM_EXPAND = 5
 
@@ -40748,7 +40914,7 @@
 	generateOrientationProc()
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -40786,7 +40952,7 @@
 	}
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -40947,13 +41113,13 @@
 	}
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 
-	var twoProduct = __webpack_require__(173)
-	var twoSum = __webpack_require__(176)
+	var twoProduct = __webpack_require__(174)
+	var twoSum = __webpack_require__(177)
 
 	module.exports = scaleLinearExpansion
 
@@ -41002,7 +41168,7 @@
 	}
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -41024,7 +41190,7 @@
 	}
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports) {
 
 	"use strict"
@@ -41185,12 +41351,12 @@
 	}
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 
-	var bsearch = __webpack_require__(171)
+	var bsearch = __webpack_require__(172)
 
 	module.exports = createTriangulation
 
@@ -41295,13 +41461,13 @@
 
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 
-	var inCircle = __webpack_require__(180)[4]
-	var bsearch = __webpack_require__(171)
+	var inCircle = __webpack_require__(181)[4]
+	var bsearch = __webpack_require__(172)
 
 	module.exports = delaunayRefine
 
@@ -41416,15 +41582,15 @@
 
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict"
 
-	var twoProduct = __webpack_require__(173)
-	var robustSum = __webpack_require__(174)
-	var robustDiff = __webpack_require__(177)
-	var robustScale = __webpack_require__(175)
+	var twoProduct = __webpack_require__(174)
+	var robustSum = __webpack_require__(175)
+	var robustDiff = __webpack_require__(178)
+	var robustScale = __webpack_require__(176)
 
 	var NUM_EXPAND = 6
 
@@ -41588,12 +41754,12 @@
 	generateInSphereTest()
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict'
 
-	var bsearch = __webpack_require__(171)
+	var bsearch = __webpack_require__(172)
 
 	module.exports = classifyFaces
 
@@ -41774,13 +41940,13 @@
 
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var PlacemarkAttributes = __webpack_require__(183);
-	var TextAttributes = __webpack_require__(184);
-	var GeographicText = __webpack_require__(185);
-	var Placemark = __webpack_require__(187);
+	var PlacemarkAttributes = __webpack_require__(184);
+	var TextAttributes = __webpack_require__(185);
+	var GeographicText = __webpack_require__(186);
+	var Placemark = __webpack_require__(188);
 	var Color = __webpack_require__(52);
 	var Font = __webpack_require__(128);
 	var SurfaceSymbol = __webpack_require__(85);
@@ -41842,7 +42008,7 @@
 	}
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -41858,7 +42024,7 @@
 	        __webpack_require__(128),
 	        __webpack_require__(45),
 	        __webpack_require__(132),
-	        __webpack_require__(184)
+	        __webpack_require__(185)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (Color,
 	              Font,
 	              Offset,
@@ -42087,7 +42253,7 @@
 	;
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -42257,7 +42423,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -42271,7 +42437,7 @@
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(30),
 	        __webpack_require__(32),
-	        __webpack_require__(186),
+	        __webpack_require__(187),
 	        __webpack_require__(35)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (ArgumentError,
 	              Logger,
@@ -42376,7 +42542,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -42396,7 +42562,7 @@
 	        __webpack_require__(63),
 	        __webpack_require__(87),
 	        __webpack_require__(130),
-	        __webpack_require__(184),
+	        __webpack_require__(185),
 	        __webpack_require__(66),
 	        __webpack_require__(46),
 	        __webpack_require__(35),
@@ -42951,7 +43117,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -42970,7 +43136,7 @@
 	        __webpack_require__(32),
 	        __webpack_require__(63),
 	        __webpack_require__(87),
-	        __webpack_require__(183),
+	        __webpack_require__(184),
 	        __webpack_require__(130),
 	        __webpack_require__(46),
 	        __webpack_require__(35),
@@ -43748,7 +43914,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Events = __webpack_require__(5);
@@ -43770,11 +43936,11 @@
 
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var ColladaLodaer = __webpack_require__(190);
-	var ColladaScene = __webpack_require__(197);
+	var ColladaLodaer = __webpack_require__(191);
+	var ColladaScene = __webpack_require__(198);
 	var Utils = __webpack_require__(144);
 	var Generalization = __webpack_require__(148);
 	module.exports = {
@@ -43831,7 +43997,7 @@
 
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -43844,13 +44010,13 @@
 
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(30),
-	        __webpack_require__(191),
 	        __webpack_require__(192),
-	        __webpack_require__(194),
+	        __webpack_require__(193),
 	        __webpack_require__(195),
 	        __webpack_require__(196),
 	        __webpack_require__(197),
-	        __webpack_require__(193),
+	        __webpack_require__(198),
+	        __webpack_require__(194),
 	        __webpack_require__(32)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (ArgumentError,
 	              ColladaAsset,
@@ -44045,7 +44211,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -44118,7 +44284,7 @@
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -44129,7 +44295,7 @@
 	 * @exports ColladaImage
 	 */
 
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(193)], __WEBPACK_AMD_DEFINE_RESULT__ = function(ColladaUtils){
+	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(194)], __WEBPACK_AMD_DEFINE_RESULT__ = function(ColladaUtils){
 	    "use strict";
 
 	    /**
@@ -44184,7 +44350,7 @@
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -44397,7 +44563,7 @@
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -44408,7 +44574,7 @@
 	 * @exports ColladaMaterial
 	 */
 
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(193)], __WEBPACK_AMD_DEFINE_RESULT__ = function (ColladaUtils) {
+	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(194)], __WEBPACK_AMD_DEFINE_RESULT__ = function (ColladaUtils) {
 	    "use strict";
 
 	    /**
@@ -44640,7 +44806,7 @@
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -44651,7 +44817,7 @@
 	 * @exports ColladaMesh
 	 */
 
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(193)], __WEBPACK_AMD_DEFINE_RESULT__ = function (ColladaUtils) {
+	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(194)], __WEBPACK_AMD_DEFINE_RESULT__ = function (ColladaUtils) {
 	    "use strict";
 
 	    /**
@@ -44972,7 +45138,7 @@
 
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -44983,7 +45149,7 @@
 	 * @exports ColladaNode
 	 */
 
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(193), __webpack_require__(63), __webpack_require__(35)], __WEBPACK_AMD_DEFINE_RESULT__ = function (ColladaUtils, Matrix, Vec3) {
+	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(194), __webpack_require__(63), __webpack_require__(35)], __WEBPACK_AMD_DEFINE_RESULT__ = function (ColladaUtils, Matrix, Vec3) {
 	    "use strict";
 
 	    /**
@@ -45175,7 +45341,7 @@
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 197 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -45689,7 +45855,7 @@
 
 	            dc.findAndBindProgram(BasicTextureProgram);
 
-	            gl.disable(gl.CULL_FACE);
+	            gl.enable(gl.CULL_FACE);
 	            gl.enable(gl.DEPTH_TEST);
 	        };
 
@@ -46057,12 +46223,12 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 198 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var PlacemarkAttributes = __webpack_require__(183);
+	var PlacemarkAttributes = __webpack_require__(184);
 	var ImageSource = __webpack_require__(51);
-	var Placemark = __webpack_require__(187);
+	var Placemark = __webpack_require__(188);
 	var Offset = __webpack_require__(45);
 	var Events = __webpack_require__(5);
 	var Utils = __webpack_require__(144);
@@ -46191,7 +46357,7 @@
 
 
 /***/ }),
-/* 199 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Events = __webpack_require__(5);
@@ -46245,7 +46411,7 @@
 
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Events = __webpack_require__(5);
@@ -46305,17 +46471,17 @@
 
 
 /***/ }),
-/* 201 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Events = __webpack_require__(5);
-	var HttpTiledImageLayer = __webpack_require__(202);
-	var SingleImageLayer = __webpack_require__(206);
-	var WmtsLayer = __webpack_require__(207);
-	var WmtsCapabilities = __webpack_require__(209);
+	var HttpTiledImageLayer = __webpack_require__(203);
+	var SingleImageLayer = __webpack_require__(207);
+	var WmtsLayer = __webpack_require__(208);
+	var WmtsCapabilities = __webpack_require__(210);
 
-	var WmsLayer = __webpack_require__(218);
-	var WmsCapabilities = __webpack_require__(215);
+	var WmsLayer = __webpack_require__(219);
+	var WmsCapabilities = __webpack_require__(216);
 
 
 	var ElevationModel = __webpack_require__(97);
@@ -46324,15 +46490,15 @@
 	var Globe = __webpack_require__(113);
 	var ZeroElevationModel = __webpack_require__(119);
 	var EarthElevationModel = __webpack_require__(110);
-	var WcsEarthElevationModel = __webpack_require__(220);
-	var EarthRestElevationModel = __webpack_require__(222);
+	var WcsEarthElevationModel = __webpack_require__(221);
+	var EarthRestElevationModel = __webpack_require__(223);
 
-	var CustomEarthElevationModel = __webpack_require__(224);
+	var CustomEarthElevationModel = __webpack_require__(225);
 
-	var GeoTiffReader = __webpack_require__(225);
+	var GeoTiffReader = __webpack_require__(226);
 
-	var WmtsImageLayer = __webpack_require__(233);
-	var WmsImageLayer  = __webpack_require__(234);
+	var WmtsImageLayer = __webpack_require__(234);
+	var WmsImageLayer  = __webpack_require__(235);
 	/***
 	 *
 	 * @param name
@@ -46837,10 +47003,10 @@
 	};
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var MercatorTiledImageLayer = __webpack_require__(203);
+	var MercatorTiledImageLayer = __webpack_require__(204);
 	var Color = __webpack_require__(52);
 	var Location = __webpack_require__(28);
 	var Sector = __webpack_require__(75);
@@ -47124,7 +47290,7 @@
 
 
 /***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -47138,7 +47304,7 @@
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(52),
 	        __webpack_require__(75),
-	        __webpack_require__(204),
+	        __webpack_require__(205),
 	        __webpack_require__(46),
 	        __webpack_require__(36)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (Color,
@@ -47299,7 +47465,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -47312,7 +47478,7 @@
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(50),
 	        __webpack_require__(30),
-	        __webpack_require__(205),
+	        __webpack_require__(206),
 	        __webpack_require__(126),
 	        __webpack_require__(100),
 	        __webpack_require__(32),
@@ -47817,7 +47983,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -47954,7 +48120,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var RenderableLayer = __webpack_require__(140);
@@ -47975,7 +48141,7 @@
 	module.exports = SingleImageLayer;
 
 /***/ }),
-/* 207 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -47994,7 +48160,7 @@
 	        __webpack_require__(53),
 	        __webpack_require__(54),
 	        __webpack_require__(111),
-	        __webpack_require__(208),
+	        __webpack_require__(209),
 	        __webpack_require__(36),
 	        __webpack_require__(83)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (AbsentResourceList,
@@ -48585,7 +48751,7 @@
 
 
 /***/ }),
-/* 208 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -48807,7 +48973,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 209 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -48820,12 +48986,12 @@
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(30),
 	        __webpack_require__(32),
-	        __webpack_require__(210),
 	        __webpack_require__(211),
-	        __webpack_require__(213),
+	        __webpack_require__(212),
 	        __webpack_require__(214),
 	        __webpack_require__(215),
-	        __webpack_require__(217)
+	        __webpack_require__(216),
+	        __webpack_require__(218)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (ArgumentError,
 	              Logger,
 	              OwsLanguageString,
@@ -49016,7 +49182,7 @@
 	;
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -49062,7 +49228,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 211 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -49075,7 +49241,7 @@
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(30),
 	        __webpack_require__(32),
-	        __webpack_require__(212)
+	        __webpack_require__(213)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (ArgumentError,
 	              Logger,
 	              OwsConstraint) {
@@ -49184,7 +49350,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -49246,7 +49412,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -49312,7 +49478,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 214 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -49363,7 +49529,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 215 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -49377,7 +49543,7 @@
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(30),
 	        __webpack_require__(32),
-	        __webpack_require__(216)
+	        __webpack_require__(217)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (ArgumentError,
 	              Logger,
 	              WmsLayerCapabilities) {
@@ -49640,7 +49806,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 216 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -50508,7 +50674,7 @@
 	;
 
 /***/ }),
-/* 217 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -50521,8 +50687,8 @@
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(30),
 	        __webpack_require__(32),
-	        __webpack_require__(210),
-	        __webpack_require__(215)
+	        __webpack_require__(211),
+	        __webpack_require__(216)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (ArgumentError,
 	              Logger,
 	              OwsLanguageString,
@@ -50873,7 +51039,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 218 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -50888,9 +51054,9 @@
 	        __webpack_require__(30),
 	        __webpack_require__(28),
 	        __webpack_require__(32),
-	        __webpack_require__(219),
+	        __webpack_require__(220),
 	        __webpack_require__(75),
-	        __webpack_require__(204),
+	        __webpack_require__(205),
 	        __webpack_require__(111)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (ArgumentError,
 	              Location,
@@ -51072,7 +51238,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 219 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -51387,7 +51553,7 @@
 	;
 
 /***/ }),
-/* 220 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -51401,7 +51567,7 @@
 	        __webpack_require__(28),
 	        __webpack_require__(75),
 	        __webpack_require__(97),
-	        __webpack_require__(221)
+	        __webpack_require__(222)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (Location,
 	              Sector,
 	              ElevationModel,
@@ -51434,7 +51600,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 221 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -51573,7 +51739,7 @@
 
 
 /***/ }),
-/* 222 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -51588,7 +51754,7 @@
 	        __webpack_require__(28),
 	        __webpack_require__(75),
 	        __webpack_require__(97),
-	        __webpack_require__(223)
+	        __webpack_require__(224)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (Location,
 	              Sector,
 	              ElevationModel,
@@ -51625,7 +51791,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 223 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -51720,15 +51886,15 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 224 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var ElevationModel = __webpack_require__(97);
 	var Sector = __webpack_require__(75);
 	var Location = __webpack_require__(28);
-	var WcsTileUrlBuilder = __webpack_require__(221);
+	var WcsTileUrlBuilder = __webpack_require__(222);
 	var WmsUrlBuilder = __webpack_require__(111);
-	var LevelRowColumnUrlBuilder = __webpack_require__(223);
+	var LevelRowColumnUrlBuilder = __webpack_require__(224);
 
 	var CustomEarthElevationModel = function (parameters) {
 	    var self = this;
@@ -51760,7 +51926,7 @@
 	module.exports = CustomEarthElevationModel;
 
 /***/ }),
-/* 225 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -51773,16 +51939,16 @@
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(31),
 	        __webpack_require__(30),
-	        __webpack_require__(226),
 	        __webpack_require__(227),
 	        __webpack_require__(228),
 	        __webpack_require__(229),
+	        __webpack_require__(230),
 	        __webpack_require__(28),
 	        __webpack_require__(75),
 	        __webpack_require__(32),
-	        __webpack_require__(231),
-	        __webpack_require__(230),
 	        __webpack_require__(232),
+	        __webpack_require__(231),
+	        __webpack_require__(233),
 	        __webpack_require__(83)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (AbstractError,
 	              ArgumentError,
@@ -52812,7 +52978,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 226 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -52916,7 +53082,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 227 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -52929,7 +53095,7 @@
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(31),
 	        __webpack_require__(30),
-	        __webpack_require__(226),
+	        __webpack_require__(227),
 	        __webpack_require__(32)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (AbstractError,
 	              ArgumentError,
@@ -53075,7 +53241,7 @@
 
 
 /***/ }),
-/* 228 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -53862,7 +54028,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 229 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -53875,7 +54041,7 @@
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(30),
 	        __webpack_require__(32),
-	        __webpack_require__(230)
+	        __webpack_require__(231)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (ArgumentError,
 	              Logger,
 	              TiffConstants) {
@@ -54022,7 +54188,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 230 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -54230,7 +54396,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 231 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var require;var require;!function(e){if(true)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.proj4=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return require(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
@@ -59693,7 +59859,7 @@
 	});
 
 /***/ }),
-/* 232 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -59706,9 +59872,9 @@
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(31),
 	        __webpack_require__(30),
-	        __webpack_require__(229),
+	        __webpack_require__(230),
 	        __webpack_require__(32),
-	        __webpack_require__(230)
+	        __webpack_require__(231)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (AbstractError,
 	              ArgumentError,
 	              GeoTiffUtil,
@@ -59948,11 +60114,11 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 233 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Events = __webpack_require__(5);
-	var WmtsLayer = __webpack_require__(207);
+	var WmtsLayer = __webpack_require__(208);
 
 
 	var WmtsImageLayer = function (layerCaps, styleIdentifier, timeString) {
@@ -59976,12 +60142,12 @@
 
 
 /***/ }),
-/* 234 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Events = __webpack_require__(5);
-	var WmsLayer = __webpack_require__(218);
-	var TiledImageLayer = __webpack_require__(204);
+	var WmsLayer = __webpack_require__(219);
+	var TiledImageLayer = __webpack_require__(205);
 
 	var WmsImageLayer = function (layerCaps, styleIdentifier, timeString) {
 
@@ -60035,14 +60201,14 @@
 
 
 /***/ }),
-/* 235 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Events = __webpack_require__(5);
-	var StarFieldLayer = __webpack_require__(236);
-	var SkyboxLayer = __webpack_require__(240);
-	var Atmosphere = __webpack_require__(242);
-	var CompassLayer = __webpack_require__(248);
+	var StarFieldLayer = __webpack_require__(237);
+	var SkyboxLayer = __webpack_require__(241);
+	var Atmosphere = __webpack_require__(243);
+	var CompassLayer = __webpack_require__(249);
 
 	var time = new Date('2017-04-11T20:20:30Z');
 
@@ -60104,10 +60270,10 @@
 
 
 /***/ }),
-/* 236 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var StarFieldLayer = __webpack_require__(237);
+	var StarFieldLayer = __webpack_require__(238);
 	var Events = __webpack_require__(5);
 
 	module.exports = function (time) {
@@ -60126,7 +60292,7 @@
 
 
 /***/ }),
-/* 237 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -60140,8 +60306,8 @@
 	        __webpack_require__(126),
 	        __webpack_require__(32),
 	        __webpack_require__(63),
-	        __webpack_require__(238),
-	        __webpack_require__(239)
+	        __webpack_require__(239),
+	        __webpack_require__(240)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (Layer,
 	              Logger,
 	              Matrix,
@@ -60554,7 +60720,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 238 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -60790,7 +60956,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 239 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -60967,12 +61133,12 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 240 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Layer = __webpack_require__(126);
 	var Matrix = __webpack_require__(63);
-	var SkyboxProgram = __webpack_require__(241);
+	var SkyboxProgram = __webpack_require__(242);
 
 	var SkyboxLayer = function (path, wwd) {
 
@@ -61154,7 +61320,7 @@
 
 
 /***/ }),
-/* 241 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var ArgumentError = __webpack_require__(30);
@@ -61231,14 +61397,14 @@
 
 
 /***/ }),
-/* 242 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Events = __webpack_require__(5);
-	var AtmosphereLayer = __webpack_require__(243);
+	var AtmosphereLayer = __webpack_require__(244);
 	var WWMath = __webpack_require__(36);
 	var Position = __webpack_require__(47);
-	var SunPosition = __webpack_require__(239);
+	var SunPosition = __webpack_require__(240);
 
 	module.exports = function (time, engine) {
 
@@ -61332,7 +61498,7 @@
 	};
 
 /***/ }),
-/* 243 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -61344,13 +61510,13 @@
 	 */
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	        __webpack_require__(30),
-	        __webpack_require__(245),
+	        __webpack_require__(246),
 	        __webpack_require__(126),
 	        __webpack_require__(32),
 	        __webpack_require__(63),
-	        __webpack_require__(244),
+	        __webpack_require__(245),
 	        __webpack_require__(75),
-	        __webpack_require__(247),
+	        __webpack_require__(248),
 	        __webpack_require__(35),
 	        __webpack_require__(83)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (ArgumentError,
@@ -61669,7 +61835,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 244 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -61894,7 +62060,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 245 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -61905,7 +62071,7 @@
 	 * @exports GroundProgram
 	 */
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(246)
+	        __webpack_require__(247)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (AtmosphereProgram) {
 	        "use strict";
 
@@ -62085,7 +62251,7 @@
 
 
 /***/ }),
-/* 246 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -62403,7 +62569,7 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ }),
-/* 247 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -62414,7 +62580,7 @@
 	 * @exports SkyProgram
 	 */
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(246)
+	        __webpack_require__(247)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (AtmosphereProgram) {
 	        "use strict";
 
@@ -62599,13 +62765,13 @@
 
 
 /***/ }),
-/* 248 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var RenderableLayer = __webpack_require__(140);
-	var Compass = __webpack_require__(249);
+	var Compass = __webpack_require__(250);
 	var Offset = __webpack_require__(45);
-	var ScreenImage = __webpack_require__(250);
+	var ScreenImage = __webpack_require__(251);
 	var Events = __webpack_require__(5);
 
 	module.exports = function (img1, img2) {
@@ -62666,7 +62832,7 @@
 	};
 
 /***/ }),
-/* 249 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -62681,7 +62847,7 @@
 	        __webpack_require__(30),
 	        __webpack_require__(32),
 	        __webpack_require__(45),
-	        __webpack_require__(250)
+	        __webpack_require__(251)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function (ArgumentError,
 	              Logger,
 	              Offset,
@@ -62748,7 +62914,7 @@
 	;
 
 /***/ }),
-/* 250 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -63130,7 +63296,7 @@
 	;
 
 /***/ }),
-/* 251 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Events = __webpack_require__(5);
@@ -63153,25 +63319,25 @@
 
 
 /***/ }),
-/* 252 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Events = __webpack_require__(5);
 	var RenderableLayer = __webpack_require__(140);
-	var Placemark = __webpack_require__(187);
-	var PlacemarkAttributes = __webpack_require__(183);
+	var Placemark = __webpack_require__(188);
+	var PlacemarkAttributes = __webpack_require__(184);
 	var ShapeAttributes = __webpack_require__(132);
 	var Color = __webpack_require__(52);
-	var SurfacePolygon = __webpack_require__(166);
+	var SurfacePolygon = __webpack_require__(167);
 	var ScreenSpacePath = __webpack_require__(150);
 	//var SurfacePolyline = require("../../../../node_modules/web-world-wind/src/shapes/SurfacePolyline");
 	var Position = __webpack_require__(47);
 	var Location = __webpack_require__(28);
-	var CoCoMath = __webpack_require__(153);
+	var CoCoMath = __webpack_require__(154);
 	var Dom = __webpack_require__(4);
 
 	var editorColorString = 'ffa500';
-	var helperColorString = 'dd7a00';
+	var helperColorString = 'ff4500';
 	var EDITOR_SHAPE_ATTRIBUTES = newShapeAttributes(editorColorString); // orange
 	var ARC_RADIUS_MULTIPLIER = 30;
 
@@ -63292,28 +63458,15 @@
 	    editorMode && endDrawing(true);
 	    source = newPrimitive;
 	    editorMode = source.geometry.type.toLowerCase();
-
 	    window.addEventListener('mousemove', onMouseMove);
 	    window.addEventListener('mousedown', mouseDown);
 	    window.addEventListener('mouseup', mouseUp);
-
 	    window.addEventListener('touchmove', onMouseMove);
 	    window.addEventListener('touchstart', mouseDown);
 	    window.addEventListener('touchend', mouseUp);
-	    // window.addEventListener('keydown', keyDown);
-	    // window.addEventListener('keyup', keyUp);
-
 	    Events.post(Events.BLOCK_NAVIGATION, true);
 	    engine.canvas.classList.add('edit-mode');
 	}
-
-	// function keyDown(e) {
-	//     switchRotateMode(e.ctrlKey);
-	// }
-	//
-	// function keyUp() {
-	//     switchRotateMode(false);
-	// }
 
 	function updateSourceGeoJson() {
 	    var points = anchorPoints.map(function (point) {
@@ -63379,13 +63532,14 @@
 	}
 
 	function fixEvent(e) {
-	    e.x = e.x || e.touches[0].clientX;
-	    e.y = e.y || e.touches[0].clientY;
-	    e.isLeft = e.button === 0 || e.touches && e.touches[0];
+	    var touch = e.changedTouches && e.changedTouches[0];
+	    e.x = e.x || touch && touch.clientX || 0;
+	    e.y = e.y || touch && touch.clientY || 0;
+	    e.isLeft = e.button === 0 || touch != null;
 	}
 
 	function mouseDown(e) {
-	    isLeftButton = e.button === 0;
+	    isLeftButton = e.button === 0 || e.changedTouches && e.changedTouches.length > 0;
 	    if (e.handled || !navigationBlocked)
 	        return;
 	    fixEvent(e);
@@ -63403,18 +63557,27 @@
 	}
 
 	function mouseUp(e) {
+	    fixEvent(e);
 	    if (draggedPoint) {
 	        draggedPoint.classList.remove('drag');
 	        draggedPoint = null;
 	        dragStartLocation = null;
 	        helperLayer.removeAllRenderables();
 	        engine.redraw();
-	    } else if (x === e.x && y === e.y) {
-	        if (e.button === 0 && e.target === engine.canvas)
+	    } else {
+	        if (!isNearOfMouseDown(e, 15))
+	            return;
+	        if (e.isLeft && e.target === engine.canvas)
 	            processDraw(e);
-	        if (e.button === 2)
+	        if (!e.isLeft)
 	            showEndEditContextMenu(e);
 	    }
+	}
+
+	function isNearOfMouseDown(e, buffer) {
+	    var dx = x - e.x;
+	    var dy = y - e.y;
+	    return Math.sqrt(dx*dx + dy*dy) < (buffer || 1);
 	}
 
 	function updateRotationHelper() {
@@ -63426,35 +63589,27 @@
 	}
 
 	function helperPolyline(points) {
-	    helperLayer.addRenderable(new ScreenSpacePath(points, helperColorString, 2));
+	    helperLayer.addRenderable(new ScreenSpacePath(points, helperColorString, 5));
 	}
 
-	function computeArc(offset, center, from, to, mode) {
-	    var distance = Location.greatCircleDistance(center, from);
-	    var angleTo = Location.greatCircleAzimuth(center, to);
-	    var angleFrom = Location.greatCircleAzimuth(center, from);
-	    var delta = normalizeAngle(angleTo - angleFrom);
-	    if (mode === 'minimum' && delta > 180 || mode === 'exclude') delta -= 360;
-	    var positions = [computeArcPoint(offset, center, from)];
-	    var step = 12;
-	    for (var i = 0; i < Math.abs(delta) / step; i++) {
-	        var alpha = normalizeAngle(angleFrom + i * step * Math.sign(delta));
-	        var p = Location.greatCircleLocation(center, alpha, distance, new Position(0, 0, 0));
-	        positions.push(computeArcPoint(offset, center, p));
+	function computeArc(radius,center,from,to) {
+	    if (radius == 0)
+	        return null;
+	    var heading = Location.greatCircleAzimuth(center, from);
+	    var totalAngle = Location.greatCircleAzimuth(center, to) - heading;
+	    var numLocations= Math.abs(totalAngle* 180 / Math.PI)/10;
+	    var da = Math.abs(totalAngle) / (numLocations - 1);
+	    var globeRadius = engine.globe.radiusAt(center.latitude, center.longitude);
+	    var locations = [];
+	    for (var i = 0; i < numLocations; i++){
+	        var angle = i * da;
+	        var xLength = radius * Math.cos(angle);
+	        var yLength = radius * Math.sin(angle);
+	        var distance = Math.sqrt(xLength * xLength + yLength * yLength);
+	        var azimuth =  heading + Math.acos(xLength / distance) * (yLength > 0 ? 1 : -1);
+	        locations[i] = Location.greatCircleLocation(center, azimuth, distance / globeRadius, new Position(0,0,0));
 	    }
-	    positions.push(computeArcPoint(offset, center, to));
-	    return positions;
-	}
-
-	function normalizeAngle(a) {
-	    return a < 0 ? a + 360 : a;
-	}
-
-	function computeArcPoint(offset, center, position){
-	    var r = engine.globe.radiusAt(center.latitude, center.longitude);
-	    var distanceInRadians = offset / r;
-	    var azimuth = Location.greatCircleAzimuth(center, position);
-	    return Location.greatCircleLocation(center, azimuth, distanceInRadians, new Position(0, 0, 0));
+	    return locations;
 	}
 
 	function onMouseMove(e) {
@@ -63542,21 +63697,6 @@
 	    centerPoint.position = new Position(clat, clon, calt);
 	}
 
-	function updateEditorLine(p) {
-	    var previousPosition = p[0];
-	    for (var i = 1; i < p.length - 1; i++) {
-	        var pointMode = anchorPoints[i].mode;
-	        if (pointMode) { // точка включена или исключена
-	            var arcRadius = computeArcRadiusDistance(p[i]);
-	            var arcPositions = computeArc(arcRadius, p[i], p[i - 1], p[i + 1], pointMode);
-	            addEditorPolyline(arcPositions);
-	        }
-	        addEditorPolyline([pointMode ? arcPositions[0] : p[i], previousPosition], i);
-	        previousPosition = pointMode ? arcPositions[arcPositions.length - 1] : p[i];
-	    }
-	    addEditorPolyline([previousPosition, p[p.length - 1]], p.length - 1);
-	}
-
 	function updateEditorLine2(p) {
 	    var positions = [p[0]];
 	    for (var i = 1; i < p.length - 1; i++) {
@@ -63570,15 +63710,12 @@
 	        }
 	    }
 	    positions.push(p[p.length - 1]);
-
 	    addEditorPolyline(positions);
-
-
 	}
 
 	function addEditorPolyline(positions, i) {
 	   // var editorLine = new SurfacePolyline(positions, EDITOR_COLOR);
-	    var editorLine = new ScreenSpacePath(positions, editorColorString, 2, null);
+	    var editorLine = new ScreenSpacePath(positions, editorColorString, 5, null);
 	    editorLine.source = {id: '_editor', index: i};
 	    newPrimitiveLayer.addRenderable(editorLine);
 	}
@@ -63679,10 +63816,7 @@
 	function newEditorPoint(e) {
 	    var position = pickPosition(e);
 	    if (position) {
-	        draggedPoint = createAnchorPoint('anchor-point-active', x = e.x, y = e.y);
-	        draggedPoint.addEventListener('mousemove', function (e) {
-	            e.target.classList.remove('anchor-point-active');
-	        }, false);
+	        draggedPoint = createAnchorPoint('', x = e.x, y = e.y);
 	        draggedPoint.position = position;
 	        actualizeDragStartLocation();
 	        anchorPoints.push(draggedPoint);
@@ -63693,7 +63827,6 @@
 
 	function removePoint(pt) {
 	    anchorPoints.splice(anchorPoints.indexOf(pt), 1); // remove from collection
-
 	    editorElement.removeChild(pt);
 	    hideContextMenu();
 	    updateEditorState();
@@ -63745,11 +63878,12 @@
 	}
 
 	function pointRightClick(pt, e) {
-	    if (x !== e.x || y !== e.y)
+	    if (!isNearOfMouseDown(e, 5))
 	        return;
 	    if (pt === centerPoint)
 	        showCenterPointMenu(e);
-	    showAnchorPointMenu(pt, e);
+	    else
+	        showAnchorPointMenu(pt, e);
 	}
 
 	function createAnchorPoint(className, x, y) {
@@ -63804,7 +63938,7 @@
 
 
 /***/ }),
-/* 253 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Events = __webpack_require__(5);
@@ -63876,7 +64010,7 @@
 	};
 
 /***/ }),
-/* 254 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -63940,7 +64074,7 @@
 
 
 /***/ }),
-/* 255 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/****************************************************************************
