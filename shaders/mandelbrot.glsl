@@ -12,6 +12,14 @@ uniform float b;
 uniform float T;
 uniform bool smoothing;
 
+vec2 cadd( vec2 a, float s ) { return vec2( a.x+s, a.y ); }
+vec2 cmul( vec2 a, vec2 b )  { return vec2( a.x*b.x - a.y*b.y, a.x*b.y + a.y*b.x ); }
+vec2 cdiv( vec2 a, vec2 b )  { float d = dot(b,b); return vec2( dot(a,b), a.y*b.x - a.x*b.y ) / d; }
+vec2 cmulj( vec2 z ) { return vec2(-z.y,z.x); }
+vec3 cexp( vec2 z ) { return vec3( exp(z.x), vec2( cos(z.y), sin(z.y) ) ); }
+vec3 cexpj( vec2 z ) { return vec3( exp(-z.y), vec2( cos(z.x), sin(z.x) ) ); }
+
+
 vec2 mul(vec2 A, vec2 B) {
     return vec2(A.x * B.x - A.y * B.y, 2.0 * A.x * B.y);
 }
@@ -30,6 +38,8 @@ vec3 color(int i, vec2 z) {
     it = mix(it, sl, al);
     return 0.5 + 0.5 * cos(3.0 + it * 0.05  + vec3(0.0, 0.6, 1.0));
 }
+
+
 
 vec3 fractal(vec2 c) {
     vec2 z = c;
