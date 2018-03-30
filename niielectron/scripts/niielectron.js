@@ -37,10 +37,10 @@ function init() {
         var onError = function ( xhr ) {};
 
         var loader = new THREE.ColladaLoader(  );
-        loader.load( 'resources/models/building-2/1_floor.dae', addFloor(0), onProgress, onError );
-        loader.load( 'resources/models/building-2/2_floor.dae', addFloor(1), onProgress, onError );
-        loader.load( 'resources/models/building-2/3_floor.dae', addFloor(2), onProgress, onError );
-        loader.load( 'resources/models/building-2/roof.dae', addFloor(3), onProgress, onError );
+        loader.load( 'resources/models/building-2/1_floor1.dae', addFloor(0), onProgress, onError );
+        loader.load( 'resources/models/building-2/2_floor1.dae', addFloor(1), onProgress, onError );
+        loader.load( 'resources/models/building-2/3_floor1.dae', addFloor(2), onProgress, onError );
+        loader.load( 'resources/models/building-2/roof1.dae', addFloor(3), onProgress, onError );
         world.add(building);
         resize();
 
