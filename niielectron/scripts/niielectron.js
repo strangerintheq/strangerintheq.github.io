@@ -17,7 +17,7 @@ function init() {
     setupScene();
     initListeners();
     map = initMap();
-    createSlider(4);
+    createSlider(5);
     niiElectron();
 
     function niiElectron() {
@@ -37,17 +37,26 @@ function init() {
         var onError = function ( xhr ) {};
 
         var loader = new THREE.ColladaLoader(  );
-        loader.load( 'resources/models/building-2/1_floor1.dae', addFloor(0), onProgress, onError );
-        loader.load( 'resources/models/building-2/2_floor1.dae', addFloor(1), onProgress, onError );
-        loader.load( 'resources/models/building-2/3_floor1.dae', addFloor(2), onProgress, onError );
-        loader.load( 'resources/models/building-2/roof1.dae', addFloor(3), onProgress, onError );
+        loader.load( 'resources/models/building-2/pipe_0.dae', addFloor(0), onProgress, onError );
+        // loader.load( 'resources/models/building-2/1_floor1.dae', addFloor(0), onProgress, onError );
+
+        loader.load( 'resources/models/building-2/pipe_1.dae', addFloor(1), onProgress, onError );
+        loader.load( 'resources/models/building-2/1_floor1.dae', addFloor(1), onProgress, onError );
+
+        loader.load( 'resources/models/building-2/pipe_2.dae', addFloor(2), onProgress, onError );
+        loader.load( 'resources/models/building-2/2_floor1.dae', addFloor(2), onProgress, onError );
+
+        loader.load( 'resources/models/building-2/pipe_3.dae', addFloor(3), onProgress, onError );
+        loader.load( 'resources/models/building-2/3_floor1.dae', addFloor(3), onProgress, onError );
+
+        loader.load( 'resources/models/building-2/roof1.dae', addFloor(4), onProgress, onError );
         world.add(building);
         resize();
 
 
         function addFloor(i) {
             return function (collada) {
-                building.add(collada.scene);
+
                 collada.scene.traverse(function (obj) {
                     if (!obj.material)
                         return;
@@ -63,7 +72,11 @@ function init() {
                 building.scale.set(z, z, z);
                 building.rotation.set(Math.PI / 2, -bear / 180 * Math.PI, 0);
                 building.position.copy(applyMercatorProjection([lon, lat]));
-                floors[i]= collada.scene;
+                if (!floors[i]) {
+                    floors[i] = new THREE.Group();
+                    building.add(floors[i]);
+                }
+                floors[i].add(collada.scene);
             }
         }
 

@@ -46,13 +46,13 @@ vec3 render(in vec2 fragCoord) {
 
     float d = 0.0;
     float f = 0.0;
-    vec2 dz = vec2(1.0,0.0);
+
     for( int i=0; i<255; i++ ) {
-        vec3 k = cexpj( pi*z );
+        vec3 k = cexpj( z );
 
         // f(n) = n/2 if n even
         // f(n) = an+b if n odd
-        z = ( cadd((2.0*a+1.0)*z,2.0*b) - k.x*cmul(k.yz,cadd((2.0*a-1.0)*z,2.0*b)) )/4.0;
+        z = ( cadd((2.0*a+1.0)*z,2.0*b) - k.x*cmul(k.yz,cadd((2.0*a-1.0)*z,2.0*b)) );
 
         float r = length(z);
         if( r>th ) { d=1.0; break; }
