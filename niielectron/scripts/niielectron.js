@@ -37,16 +37,16 @@ function init() {
         var onError = function ( xhr ) {};
 
         var loader = new THREE.ColladaLoader(  );
-        loader.load( 'resources/models/building-2/pipe_0.dae', addFloor(0), onProgress, onError );
+        loader.load( 'resources/models/building-2/pipe_0.dae', addFloor(0, 'pipe'), onProgress, onError );
         // loader.load( 'resources/models/building-2/1_floor1.dae', addFloor(0), onProgress, onError );
 
-        loader.load( 'resources/models/building-2/pipe_1.dae', addFloor(1), onProgress, onError );
+        loader.load( 'resources/models/building-2/pipe_1.dae', addFloor(1, 'pipe'), onProgress, onError );
         loader.load( 'resources/models/building-2/1_floor1.dae', addFloor(1), onProgress, onError );
 
-        loader.load( 'resources/models/building-2/pipe_2.dae', addFloor(2), onProgress, onError );
+        loader.load( 'resources/models/building-2/pipe_2.dae', addFloor(2, 'pipe'), onProgress, onError );
         loader.load( 'resources/models/building-2/2_floor1.dae', addFloor(2), onProgress, onError );
 
-        loader.load( 'resources/models/building-2/pipe_3.dae', addFloor(3), onProgress, onError );
+        loader.load( 'resources/models/building-2/pipe_3.dae', addFloor(3, 'pipe'), onProgress, onError );
         loader.load( 'resources/models/building-2/3_floor1.dae', addFloor(3), onProgress, onError );
 
         loader.load( 'resources/models/building-2/roof1.dae', addFloor(4), onProgress, onError );
@@ -54,18 +54,14 @@ function init() {
         resize();
 
 
-        function addFloor(i) {
+        function addFloor(i, type) {
             return function (collada) {
 
                 collada.scene.traverse(function (obj) {
-                    if (!obj.material)
-                        return;
-                    // obj.castShadow = true; //default is false
-                    // obj.receiveShadow = true; //default
-                    // obj.material = new THREE.MeshPhongMaterial()
-                    // obj.material.opacity = 0.5;
-                    obj.material.transparent = true;
+                    obj.layerType  = type;
                 });
+
+
                 var bear = 142;
                 var zoom = 15.35;
                 var z = 1 / Math.pow(2, zoom);
@@ -134,17 +130,31 @@ function init() {
         slider.noUiSlider.on('update', function() {
             currentFloor = +slider.noUiSlider.get();
             floors.forEach(function (floor, i) {
+
+
                 floor.traverse(function (obj) {
+                    if (obj.layerType)
+                        return;
+
                     if (obj.material) {
-                        obj.material.opacity = clamp(currentFloor - i, 0, 1);
-                        obj.visible = obj.material.opacity !== 0;
+                        var opacity = clamp(currentFloor - i, 0, 1);
+                        if (Array.isArray(obj.material)) {
+                            obj.material.forEach(function (m) {
+                                m.transparent = true;
+                                m.opacity  = opacity;
+                            })
+                        } else {
+                            obj.material.opacity  = opacity;
+                            obj.material.transparent = true;
+                        }
+                        obj.visible = opacity !== 0;
                     }
                 });
-                if (currentFloor-i-1 < 0) {
-                    floor.position.y = Math.abs(currentFloor-i-1)*20;
-                } else {
-                    floor.position.y = 0;
-                }
+                // if (currentFloor-i-1 < 0) {
+                //     floor.position.y = Math.abs(currentFloor-i-1)*20;
+                // } else {
+                //     floor.position.y = 0;
+                // }
             });
 
             sync();
