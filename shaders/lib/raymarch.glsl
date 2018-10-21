@@ -2,18 +2,22 @@
 
 const int MAX_MARCHING_STEPS = 256;
 
-float shortestDistanceToSurface(vec3 eye, vec3 marchingDirection, float start, float end) {
-    float depth = start;
+vec3 trace(vec3 eye, vec3 marchingDirection) {
+    vec3 result = vec3(0., 0., 0.);
     for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
-        vec3 ray = depth * marchingDirection;
-        float dist = sceneSDF(eye + ray);
-        if (dist < 0.0005 * length(ray)) {
-			return depth;
+        vec3 ray = result.x * marchingDirection;
+        vec2 dist = sceneSDF(eye + ray);
+        if (dist.x < 0.0005 * length(ray)) {
+			return result;
         }
-        depth += dist;
-        if (depth >= end) {
-            return end;
+
+        result.x += dist.x;
+        result.y += 1.0;
+        result.z = dist.y;
+
+        if (result.x >= 50.) {
+            return result;
         }
     }
-    return end;
+    return result;
 }

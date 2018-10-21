@@ -14,11 +14,11 @@ vec3 trace(vec3 o, vec3 d) {
     float previousRadius = 0.;
     float stepLength = 0.;
     float pixelRadius = 0.001;
-    float functionSign = sceneSDF(o) < 0. ? -1. : 1.;
+    float functionSign = sceneSDF(o).x < 0. ? -1. : 1.;
     vec3 mp;
 
     for (int i = 0; i < MAX_ITERATIONS; ++i) {
-        mp = vec3(sceneSDF(d * t + o),0.,1.);
+        mp = vec3(sceneSDF(d * t + o).x,0.,1.);
         float signedRadius = functionSign * mp.x;
         float radius = abs(signedRadius);
         bool sorFail = omega > 1. &&
