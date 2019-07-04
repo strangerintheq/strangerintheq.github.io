@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        iframe {
+            width: 300px;
+            height: 200px;
+            border: 1px solid;
+            margin-right : 5px;
+
+        }
+    </style>
+</head>
+<body>
+Hello there, i'm <b>Stranger in the Q</b> and here is collection of my code snippets
+<br>
+    <script>
+        var examples = [
+            "one",
+            "two",
+        ];
+
+        examples.forEach(function (example) {
+            var frame = document.createElement('iframe');
+            document.body.append(frame);
+            var data = {};
+            load(example, 'index.html');
+            load(example, 'readme.md');
+            load(example, 'style.css');
+            load(example, 'example.js');
+
+            function load(name, page) {
+                return fetch('examples/' + example + '/' + page).then(function (response) {
+                    return response.text();
+                }).then(function (response) {
+                    write(data[page.split('.').pop()] = response);
+                }).catch(function (reason) {
+                    data[page.split('.').pop()] = "empty";
+                });
+            }
+
+            function write() {
+                if (Object.keys(data).length < 4)
+                    return;
+
+                var d = frame.contentWindow.document;
+                d.open();
+                d.write(`
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Title<\/title>
+                        <style>
+                            ${data.css}
+                        <\/style>
+                    <\/head>
+                    <body>
+                        ${data.html}
+                        <script>
+                            ${data.js}
+                        <\/script>
+                    <\/body>
+                    <\/html>
+                `);
+                d.close();
+            }
+        })
+    </script>
+</body>
+</html>
