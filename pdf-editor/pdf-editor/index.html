@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Editor Embedding</title>
+</head>
+<body>
+    <script src="pdf-editor.js"></script>
+    <h3>PDF Editor Embedding Example
+        <button onclick="pdfEditor.downloadPdf()">pdf</button>
+        <button onclick="save()">save</button>
+    </h3>
+    <div id="pdf-editor"></div>
+    <style>
+        body {
+            margin:50px;
+            overflow: hidden;
+            background: wheat;
+        }
+        .pdf-editor {
+            max-height: calc(100vh - 160px);
+        }
+    </style>
+    <script>
+        let pdfEditor = new PdfEditor('#pdf-editor');
+        let id = new URLSearchParams(location.search).get('id');
+
+        let data = JSON.parse(localStorage.getItem(id));
+        pdfEditor.loadDocument(data.content);
+
+        function save() {
+            data.content = pdfEditor.getDocument();
+            localStorage.setItem(id, JSON.stringify(data))
+        }
+    </script>
+</body>
+</html>
