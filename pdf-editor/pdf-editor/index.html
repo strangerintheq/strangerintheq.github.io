@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>PDF Editor Embedding</title>
+    <link href="backgrounds.css" rel="stylesheet">
 </head>
 <body>
     <script src="pdf-editor.js"></script>
-    <h3>PDF Editor Embedding Example
+    <h3 style="color:orange">PDF Editor
         <button onclick="pdfEditor.downloadPdf()">pdf</button>
         <button onclick="save()">save</button>
+        <button onclick="view()">view</button>
     </h3>
     <div id="pdf-editor"></div>
     <style>
         body {
-            margin:50px;
             overflow: hidden;
-            background: wheat;
+            background: #222;
         }
         .pdf-editor {
-            max-height: calc(100vh - 160px);
+            max-height: calc(100vh - 60px);
         }
     </style>
     <script>
@@ -31,6 +32,13 @@
         function save() {
             data.content = pdfEditor.getDocument();
             localStorage.setItem(id, JSON.stringify(data))
+        }
+
+        function view() {
+            pdfEditor.viewPdf().outputPdf().then((result) => {
+                localStorage.setItem('pdf-viewer-data', btoa(result));
+                window.open("../pdf-viewer/index.html");
+            })
         }
     </script>
 </body>
