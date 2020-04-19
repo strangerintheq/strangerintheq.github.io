@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="pdf-editor 0.0.3">
+    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="pdf-editor 0.0.4-snapshot">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,6 +70,7 @@
       <workItem from="1586800166144" duration="1241000" />
       <workItem from="1586885297760" duration="63000" />
       <workItem from="1586969385702" duration="599000" />
+      <workItem from="1587230328465" duration="521000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -106,7 +107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586885336218</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="pdf-editor 0.0.4-snapshot">
+      <created>1587230407933</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1587230407933</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,16 +138,17 @@
     <MESSAGE value="ios svg" />
     <MESSAGE value="pdf-editor" />
     <MESSAGE value="pdf-editor 0.0.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="pdf-editor 0.0.3" />
+    <MESSAGE value="pdf-editor 0.0.4-snapshot" />
+    <option name="LAST_COMMIT_MESSAGE" value="pdf-editor 0.0.4-snapshot" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1586885337452">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1587230408932">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586885337452" />
-    <state x="769" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586800171399">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587230408932" />
+    <state x="769" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587230352193">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586800171399" />
+    <state x="769" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587230352193" />
   </component>
 </project>
