@@ -44,10 +44,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pdf-editor/pdf-editor" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pdf-editor/manage-application" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\strangerintheq.github.io\pdf-editor\manage-application" />
       <recent name="C:\dev\strangerintheq.github.io\pdf-editor\pdf-editor" />
       <recent name="C:\dev\strangerintheq.github.io\pdf-editor" />
       <recent name="D:\dev\strangerintheq.github.io" />
@@ -71,6 +72,7 @@
       <workItem from="1586885297760" duration="63000" />
       <workItem from="1586969385702" duration="599000" />
       <workItem from="1587230328465" duration="521000" />
+      <workItem from="1587285509358" duration="745000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -114,7 +116,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587230407933</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="pdf-editor 0.0.4-snapshot">
+      <created>1587285791837</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1587285791837</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,10 +151,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="pdf-editor 0.0.4-snapshot" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1587230408932">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1587285793680">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587230408932" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587285793680" />
     <state x="769" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587230352193">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

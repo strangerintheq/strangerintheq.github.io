@@ -10,7 +10,8 @@
     <h3 style="color:orange">PDF Editor
         <button onclick="pdfEditor.downloadPdf()">pdf</button>
         <button onclick="save()">save</button>
-        <button onclick="view()">view</button>
+        <button onclick="itext()">itext</button>
+        <button onclick="itextHtmlPreview()">itextHtmlPreview</button>
     </h3>
     <div id="pdf-editor"></div>
     <style>
@@ -23,10 +24,26 @@
         }
     </style>
     <script>
-        let pdfEditor = new PdfEditor('#pdf-editor');
+
+        let pdfEditor = new PdfEditor({
+            target: '#pdf-editor',
+            blockProperties: {
+                block_name: true,
+                block_descr: true,
+                block_no_edit: true,
+                block_no_move: true,
+                block_no_copy: true,
+                block_attach_button: true
+            },
+            floatingBlockName: true,
+            propertiesPage: true,
+            buttonsSize: 20
+        });
+
         let id = new URLSearchParams(location.search).get('id');
 
         let data = JSON.parse(localStorage.getItem(id));
+
         pdfEditor.loadDocument(data.content);
 
         function save() {
@@ -34,11 +51,17 @@
             localStorage.setItem(id, JSON.stringify(data))
         }
 
-        function view() {
-            pdfEditor.viewPdf().outputPdf().then((result) => {
-                localStorage.setItem('pdf-viewer-data', btoa(result));
-                window.open("../pdf-viewer/index.html");
-            })
+        function itextHtmlPreview() {
+            window.open().document.write(pdfEditor.forItext());
+        }
+
+        function itext() {
+            let html = pdfEditor.forItext();
+            console.log(html)
+            fetch('http://localhost:8080/html2pdf', {
+                method: 'POST',
+                body: html,
+            }).then(r => r.blob()).then(b => window.open(URL.createObjectURL(b)));
         }
     </script>
 </body>
