@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="pdf-editor 0.0.4-snapshot">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="pdf-editor" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,13 +42,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pdf-editor/manage-application" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pdf-editor" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\strangerintheq.github.io\pdf-editor" />
       <recent name="C:\dev\strangerintheq.github.io\pdf-editor\manage-application" />
       <recent name="C:\dev\strangerintheq.github.io\pdf-editor\pdf-editor" />
-      <recent name="C:\dev\strangerintheq.github.io\pdf-editor" />
       <recent name="D:\dev\strangerintheq.github.io" />
       <recent name="D:\dev\strangerintheq.github.io\pdf-editor" />
     </key>
@@ -73,6 +71,7 @@
       <workItem from="1586969385702" duration="599000" />
       <workItem from="1587230328465" duration="521000" />
       <workItem from="1587285509358" duration="745000" />
+      <workItem from="1588699876327" duration="61000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -123,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587285791837</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="pdf-editor">
+      <created>1588699910326</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1588699910326</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,16 +151,16 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="ios svg" />
-    <MESSAGE value="pdf-editor" />
     <MESSAGE value="pdf-editor 0.0.3" />
     <MESSAGE value="pdf-editor 0.0.4-snapshot" />
-    <option name="LAST_COMMIT_MESSAGE" value="pdf-editor 0.0.4-snapshot" />
+    <MESSAGE value="pdf-editor" />
+    <option name="LAST_COMMIT_MESSAGE" value="pdf-editor" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1587285793680">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1588699911797">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587285793680" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588699911797" />
     <state x="769" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587230352193">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
