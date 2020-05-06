@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Stranger in the Q's page</title>
+    <script src="scripts/gl.js"></script>
+</head>
+<body style="font-size: 30px; background-color: darkgray; font-family: Arial, sans-serif; width: 900px; margin: auto">
+
+    <canvas id="fractal" width="700" height="140" style="position: absolute; margin-left: 200px; margin-top: 30px"></canvas>
+
+    <div class="logo">
+        <svg viewBox="0 0 800 200" width="800" height="200">
+            <polygon color="black" points="35,60 160,60 160,30 170,30 170,170 145,170 145,140 113,140 113,170 88,170 88,140 64,140 64,110 58,110 58,160 35,160"></polygon>
+            <circle stroke="black" stroke-width="3" fill="white" cx="35" cy="90" r="8"></circle>
+            <circle stroke="black" stroke-width="3" fill="white" cx="57" cy="90" r="8"></circle>
+            <circle fill="black" cx="35" cy="90" r="3"></circle>
+            <circle fill="black" cx="57" cy="90" r="3"></circle>
+            <path d="M79,77 H100 V109 H79" stroke="white" stroke-width="6"></path>
+        </svg>
+    </div>
+
+
+
+    <h2>WebGL Examples:</h2>
+    <a href="mandelbrot.html">Mandelbrot Explorer</a><br>
+    <a href="collatz.html">Collatz Fractal</a><br>
+    <a href="mandelbulb.html">Mandelbulb</a><br>
+    <a href="mandelbulb-julia.html">Mandelbulb Julia</a><br>
+    <a href="mandelbox.html">Mandelbox Julia</a><br>
+    <a href="menger.html">Menger Sponge</a><br>
+
+    <h2>Raymarching:</h2>
+    <a href="sdf.html">Distance functions</a><br>
+    <a href="http://www.iquilezles.org/www/articles/raymarchingdf/raymarchingdf.htm">IQ's tutorials</a><br>
+    <a href="http://www.iquilezles.org/www/articles/distfunctions/distfunctions.htm">distance functions</a><br>
+    <a href="https://www.shadertoy.com/view/4slSWf">IQ's Bender</a><br>
+    <a href="http://mercury.sexy/hg_sdf/">hg sdf</a><br>
+    <a href="http://erleuchtet.org/~cupe/permanent/enhanced_sphere_tracing.pdf">enhanced sphere tracing</a>
+    <a href="https://www.shadertoy.com/view/4tVXRV">shadertoy example</a><br>
+    <a href="https://www.shadertoy.com/view/4dsXWn">raytraced clouds & raymarched water</a><br>
+    <a href="http://raymarching.com/">http://raymarching.com/</a><br>
+    <a href="http://blog.hvidtfeldts.net/index.php/2011/08/distance-estimated-3d-fractals-ii-lighting-and-coloring/">3d fractal coloring</a><br>
+
+    <h2>Mandelbrot and Julia Sets</h2>
+    <a href="http://www.karlsims.com/julia.html">Understanding Julia and Mandelbrot Sets</a><br>
+    <a href="http://www.iquilezles.org/www/articles/mset_smooth/mset_smooth.htm">IQ's smooth Coloring</a><br>
+
+    <h2>Deferred Rendering:</h2>
+    <a href="http://www.paulallenrenton.com/individual-projects/webgl-deferred-renderer/">webgl deferred renderer</a>
+
+    <h2>WebGL:</h2>
+    <a href="https://webglfundamentals.org/webgl/lessons/webgl-anti-patterns.html">WebGL anti-patterns</a>
+
+    <h2>JOGL:</h2>
+    <a href="https://github.com/perses-games/jogl-render-to-texture/blob/master/src/com/persesgames/jogl/Renderer.java">render to texture</a>
+
+    <h2>glsl</h2>
+    <a href="http://masandilov.ru/glsl/">glsl tutorial on russian</a><br>
+    <br>
+    <h5>Stranger in the Q</h5>
+
+    <script>
+        var mandelbrot = 'z = mul(z, z) + c;';
+        var formula = 'z=mix(abs(mul(z,z)),mul(abs(z),abs(z)),t)-vec2(1.93,0.01);';
+        GL.init(document.querySelector('#fractal'));
+        GL.program('shaders/mandelbrot.glsl', start);
+
+        function start(shader) {
+            shader.replace(mandelbrot, formula);
+            shader.link();
+            shader.bind();
+            shader.resolution();
+            shader.float("zoom", .5);
+            shader.float("T", 1);
+            shader.vec2("center", [0, 0]);
+            shader.int("iterations", 128);
+            GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
+            animate();
+        }
+
+        function animate() {
+            GL.currentProgram.time();
+            GL.drawTriangleFan(4);
+            requestAnimationFrame(animate);
+        }
+    </script>
+</body>
+</html>
