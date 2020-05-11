@@ -48,15 +48,16 @@
 
         function save() {
             data.content = pdfEditor.getDocument();
+            console.log(data.content)
             localStorage.setItem(id, JSON.stringify(data))
         }
 
         function itextHtmlPreview() {
-            window.open().document.write(pdfEditor.forItext());
+            window.open().document.write(pdfEditor.forItext(pdfEditor.getDocument()));
         }
 
         function itext() {
-            let html = pdfEditor.forItext();
+            let html = pdfEditor.forItext(pdfEditor.getDocument());
             console.log(html)
             fetch('http://localhost:8080/html2pdf', {
                 method: 'POST',
