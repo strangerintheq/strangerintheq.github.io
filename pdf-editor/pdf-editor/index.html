@@ -12,6 +12,7 @@
         <button onclick="save()">save</button>
         <button onclick="itext()">itext</button>
         <button onclick="itextHtmlPreview()">itextHtmlPreview</button>
+        <button onclick="isModified()">isModified</button>
     </h3>
     <div id="pdf-editor"></div>
     <style>
@@ -63,6 +64,10 @@
                 method: 'POST',
                 body: html,
             }).then(r => r.blob()).then(b => window.open(URL.createObjectURL(b)));
+        }
+
+        function isModified() {
+            console.log(pdfEditor.isModified())
         }
     </script>
 </body>
