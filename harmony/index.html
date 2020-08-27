@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head></head>
+	<body>
+		<script>
+			let repo = 'https://raw.githack.com/strangerintheq/harmony/';
+
+			fetch(repo + 'master/package.json').then(res => res.json())
+					.then(packageJson => fetchPageData(packageJson.release))
+
+			function fetchPageData(tag){
+				let srcUrl = repo + tag + '/src/';
+				fetch(srcUrl + 'index.html').then(r => r.text()).then(r => {
+					r = r.replace('<link href="', '<link href="' + srcUrl);
+					let tmp = document.createElement('p');
+					tmp.innerHTML = r;
+					tmp.querySelectorAll('*').forEach(el => {
+						let target = !el.outerHTML.indexOf('<script') ? document.body : document.head;
+						if (el.nodeName === "SCRIPT") {
+							let script = document.createElement('script');
+							script.src = srcUrl + el.getAttribute('src');
+							el = script;
+						}
+						target.append(el);
+					});
+				});
+			}
+		</script>
+	</body>
+</html>
