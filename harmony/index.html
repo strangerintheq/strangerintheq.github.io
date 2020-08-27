@@ -3,28 +3,41 @@
 	<head></head>
 	<body>
 		<script>
-			let repo = 'https://raw.githack.com/strangerintheq/harmony/';
 
-			fetch(repo + 'master/package.json').then(res => res.json())
-					.then(packageJson => fetchPageData(packageJson.release))
+			let srcUrl, repo = 'https://raw.githack.com/strangerintheq/harmony/';
 
-			function fetchPageData(tag){
-				let srcUrl = repo + tag + '/src/';
-				fetch(srcUrl + 'index.html').then(r => r.text()).then(r => {
-					r = r.replace('<link href="', '<link href="' + srcUrl);
+			fetch(repo + 'master/package.json')
+					.then(r => r.json())
+					.then(r => fetchPageData(r.release))
+
+			function fetchPageData(tag) {
+
+				srcUrl = repo + tag + '/src/';
+
+				fetch(srcUrl + 'index.html')
+						.then(r => r.text())
+						.then(r => {
 					let tmp = document.createElement('p');
 					tmp.innerHTML = r;
-					tmp.querySelectorAll('*').forEach(el => {
-						let target = !el.outerHTML.indexOf('<script') ? document.body : document.head;
-						if (el.nodeName === "SCRIPT") {
-							let script = document.createElement('script');
-							script.src = srcUrl + el.getAttribute('src');
-							el = script;
-						}
-						target.append(el);
-					});
+					tmp.querySelectorAll('*').forEach(appendElement);
 				});
 			}
+
+			function appendElement(el) {
+
+				if (el.nodeName === "SCRIPT") {
+					let script = document.createElement('script');
+					script.src = srcUrl + el.getAttribute('src');
+					document.head.append(script);
+					return
+				}
+
+				if (el.nodeName === "LINK")
+					el.setAttribute('href', srcUrl + el.getAttribute('href'));
+
+				document.head.append(el);
+			}
+
 		</script>
 	</body>
 </html>
