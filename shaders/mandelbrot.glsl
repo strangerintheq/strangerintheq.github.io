@@ -9,8 +9,11 @@ uniform float time;
 uniform float zoom;
 uniform float a;
 uniform float b;
+uniform float m;
+uniform float n;
 uniform float T;
 uniform bool smoothing;
+uniform vec3 color;
 
 vec2 cadd( vec2 a, float s ) { return vec2( a.x+s, a.y ); }
 vec2 cmul( vec2 a, vec2 b )  { return vec2( a.x*b.x - a.y*b.y, a.x*b.y + a.y*b.x ); }
@@ -31,15 +34,13 @@ vec2 div(vec2 A, vec2 B) {
     );
 }
 
-vec3 color(int i, vec2 z) {
+vec3 calcColor(int i, vec2 z) {
     float it = float(i);
     float sl = it - log2(log2(dot(z,z))) + 4.0;
     float al = smoothstep(-0.1, 0.0, sin(0.5 * 6.2831));
     it = mix(it, sl, al);
-    return 0.5 + 0.5 * cos(3.0 + it * 0.05  + vec3(0.0, 0.6, 1.0));
+    return 0.5 + 0.5 * cos(3.0 + it * 0.05  + color);
 }
-
-
 
 vec3 fractal(vec2 c) {
     vec2 z = c;
@@ -48,10 +49,10 @@ vec3 fractal(vec2 c) {
     for (int i = 0; i < 1024; i++) {
     	if (i == iterations)
     	    return vec3(0.0);
-    	if (dot(z, z) > 10.)
-    	    return color(i, z);
+    	if (length(z) > 4.0)
+    	    return calcColor(i, z);
     	// fractal formula
-    	z = mul(z, z) + c;
+        z = mul(z, z) + c + t * 0.1;
     	//
     }
     return vec3(0.);

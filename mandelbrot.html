@@ -1,12 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Mandelbrot Explorer v0.0.3</title>
-    <script src="scripts/gl.js"></script>
-    <script src="scripts/mouse.js"></script>
-    <script src="scripts/ui.js"></script>
+    <title>complexlorer 0</title>
 </head>
 <body>
-    <script src="scripts/mandelbrot.js"></script>
+    <style>
+        .ui {
+            color: white;
+            position: fixed;
+            font-family: monospace, monospace;
+            min-width: 500px;
+            user-select: none;
+        }
+        .content {
+            padding: 5px;
+            background: #7777;
+            /*opacity: 0.2;*/
+            transition: 300ms;
+        }
+        .ui:hover .content {
+            opacity:1
+        }
+        .header {
+            padding: 4px;
+            background: #fff4;
+            cursor: move;
+            font-size: 25px;
+        }
+        .col {
+            display: inline-block;
+            vertical-align: top;
+        }
+        .col1 {
+            width: 59%;
+        }
+        .col2 {
+            width: 41%;
+        }
+    </style>
+
+    <div class="ui">
+        <div class="header">complexlorer 0</div>
+        <div class="content">
+            <div>
+                <div class="col1 col"></div><div class="col2 col"></div>
+            </div>
+            <div class="bottom1"></div>
+            <div class="bottom2"></div>
+        </div>
+    </div>
+
+    <script id="gl">
+        // Mini WebGL library
+        var GL = (function () {
+            return {
+                init: init, program: createProgram, buffer: createBuffer,
+                drawTriangleFan: function (count) {
+                    GL.gl.drawArrays(GL.gl.TRIANGLE_FAN, 0, count);
+                },
+                TWO_TRIANGLES: [-1, +1, -1, -1, +1, -1, +1, +1],
+                started: Date.now(), currentProgram: null, canvas: null, gl: null
+            };
+
+            function init(canvas) {
+                GL.canvas = canvas || document.createElement('canvas');
+                GL.gl = GL.canvas.getContext("webgl") || GL.canvas.getContext("experimental-webgl");
+                if (canvas) return;
+                document.body.appendChild(GL.canvas);
+                document.body.style.margin = 0;
+                document.body.style.overflow = 'hidden';
+                window.addEventListener('resize', autoResize);
+                autoResize();
+            }
+
+            function createShader(source, type) {
+                var shader = GL.gl.createShader(type);
+                GL.gl.shaderSource(shader, source);
+                GL.gl.compileShader(shader);
+                if (!GL.gl.getShaderParameter(shader, GL.gl.COMPILE_STATUS))
+                    throw new Error(GL.gl.getShaderInfoLog(shader));
+                return shader;
+            }
+
+            function createProgram(name, onReady) {
+                var program = GL.gl.createProgram();
+                program.int = loadUniform('1i');
+                program.vec2 = loadUniform('2fv');
+                program.vec3 = loadUniform('3fv');
+                program.float = loadUniform('1f');
+                program.resolution = function (name) {
+                    program.vec2(name || 'resolution', [GL.canvas.width, GL.canvas.height]);
+                };
+                program.time = function (name) {
+                    program.float(name || 'time', (Date.now() - GL.started) / 1000);
+                };
+                program.bind = function () {
+                    GL.gl.useProgram(GL.currentProgram = program);
+                };
+                program.replace = function (from, to) {
+                    program.shader = program.shader.split(from).join(to);
+                };
+                program.link = function () {
+                    var shaders = program.shader.split('precision');
+                    GL.gl.attachShader(program, createShader(shaders[0], GL.gl.VERTEX_SHADER));
+                    GL.gl.attachShader(program, createShader('precision' + shaders[1], GL.gl.FRAGMENT_SHADER));
+                    GL.gl.linkProgram(program);
+                    console.log(program.shader);
+                };
+                loadShaderSource(name, function (shader) {
+                    program.shader = shader;
+                    onReady(program);
+                });
+
+                function loadUniform(type) {
+                    return function (name, value) {
+                        var location = GL.gl.getUniformLocation(program, name);
+                        GL.gl['uniform' + type](location, value);
+                    }
+                }
+            }
+
+            function createBuffer(data) {
+                var bufferIndex = GL.gl.createBuffer();
+                glBindBuffer();
+                GL.gl.bufferData(GL.gl.ARRAY_BUFFER, new Float32Array(data), GL.gl.STATIC_DRAW);
+                return {
+                    bind: function (location, floatsPerVertex) {
+                        var attributeLocation = GL.gl.getAttribLocation(GL.currentProgram, location);
+                        GL.gl.enableVertexAttribArray(attributeLocation);
+                        glBindBuffer();
+                        GL.gl.vertexAttribPointer(attributeLocation, floatsPerVertex, GL.gl.FLOAT, false, 0, 0);
+                    }
+                };
+
+                function glBindBuffer() {
+                    GL.gl.bindBuffer(GL.gl.ARRAY_BUFFER, bufferIndex);
+                }
+            }
+
+            function loadShaderSource(src, onLoad) {
+                req(src, function (response) {
+                    glueShader(response, onLoad);
+                });
+            }
+
+            function req(url, onLoad) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('get', url, true);
+                xhr.onload = function () {
+                    xhr.readyState === 4 && xhr.status === 200 && onLoad(xhr.responseText);
+                };
+                xhr.send();
+            }
+
+            function autoResize() {
+                GL.canvas.width !== window.innerWidth && (GL.canvas.width = window.innerWidth);
+                GL.canvas.height !== window.innerHeight && (GL.canvas.height = window.innerHeight);
+                GL.gl.viewport(0, 0, GL.canvas.width, GL.canvas.height);
+            }
+
+            function glueShader(source, onReady) {
+                var TAG = '#pragma import ';
+                if (source.indexOf(TAG) === -1) return onReady(source);
+                var loading = source.split('\n').map(function (row) {
+                    return row.indexOf(TAG) === 0 ? shaderPartLoader(row) : {src: row};
+                });
+
+                function shaderPartLoader(row) {
+                    var loader = {src: null};
+                    req(row.split(TAG).pop(), function(response) {
+                        loader.src = response;
+                        loading.every(function (l) {
+                            return l.src !== null;
+                        }) && onReady(loading.map(function(loader) {
+                            return loader.src;
+                        }).join('\n'));
+                    });
+                    return loader;
+                }
+            }
+        })();
+    </script>
+
+    <script id="mouse">
+        var Mouse = (function() {
+            var dragStartXY, centerAtDragStart;
+            return {init: init};
+
+            function init(center, zoom) {
+                Mouse.zoom = zoom || 1.5;
+                Mouse.center = center || [0, 0];
+                window.addEventListener('mousewheel', wheel);
+                window.addEventListener('mousedown', down);
+                window.addEventListener('mouseup', up);
+                window.addEventListener('mousemove', move);
+            }
+
+            function wheel(e) {
+                Mouse.zoom *= e.wheelDelta > 0 ? 0.9 : 1.1;
+            }
+
+            function down(e) {
+                if (e.target.tagName !== 'CANVAS') return;
+                centerAtDragStart = [Mouse.center[0], Mouse.center[1]];
+                dragStartXY = e;
+            }
+
+            function up() {
+                centerAtDragStart = dragStartXY = null;
+            }
+
+            function move(e) {
+                if (!dragStartXY || e.target.tagName !== 'CANVAS') return;
+                var c = GL.canvas;
+                var x = 4 * Mouse.zoom * (dragStartXY.x - e.x) / c.width;
+                var y = 4 * Mouse.zoom * (dragStartXY.y - e.y) / c.height;
+                Mouse.center = [centerAtDragStart[0] + x, centerAtDragStart[1] - y];
+            }
+        })();
+    </script>
+
+    <script id="ui">
+        var UI = (function () {
+
+            var ui = document.querySelector('.ui');
+            var header = ui.querySelector('.header');
+            dragElement(ui, header);
+
+            return {
+                elem,
+                button,
+                slider,
+                text,
+                color,
+                check
+            };
+
+            function check(target, lbl, value) {
+                var col = elem(target,'input',lbl);
+                col.setAttribute('type', 'checkbox');
+                col.setAttribute('value', value);
+                return col;
+            }
+
+
+            function color(target, value) {
+                var col = elem(target,'input');
+                col.setAttribute('type', 'color');
+                col.setAttribute('value', value);
+                return col;
+            }
+
+            function button(target,text, func) {
+                var btn = elem(target,'input', '', true);
+                btn.setAttribute('type', 'button');
+                btn.setAttribute('value', text);
+                btn.style.color = 'black';
+                btn.onclick = func;
+                return btn;
+            }
+
+            function slider(target, name, max, value) {
+                var sldr = elem(target,'input', name);
+                sldr.name = name;
+                sldr.setAttribute('type', 'range');
+                sldr.setAttribute('min', '0');
+                sldr.setAttribute('max', max);
+                sldr.setAttribute('value', value);
+                sldr.setAttribute('step', '0.0001');
+                return sldr;
+            }
+
+            function text(target, txt) {
+                var textarea = elem(target, 'textarea');
+                textarea.value = txt || '';
+                textarea.style.width = '500px';
+                textarea.style.minWidth = '500px';
+                textarea.style.maxWidth = '500px';
+                textarea.style.height = '100px';
+                textarea.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                return textarea;
+            }
+
+            function elem(target,tagName, title, inline) {
+
+                var element = document.createElement(tagName);
+                element.style.display = 'inline-block';
+                element.style.color = 'white';
+
+                var wrapper = document.createElement('div');
+                ui.querySelector(target).appendChild(wrapper);
+                if (inline)
+                    wrapper.style.display = 'inline-block'
+                wrapper.appendChild(element);
+
+                if (title) {
+                    var titleElement = document.createElement('label');
+                    wrapper.appendChild(titleElement);
+                    titleElement.textContent = title;
+                    element.update = function(value, fixed){
+                        titleElement.textContent = title + ': ' + (value/1).toFixed(fixed || 0);
+                    }
+                }
+
+                return element;
+            }
+
+            function dragElement(elmnt, header) {
+                var x = 0, y = 0;
+                (header||elmnt).addEventListener('mousedown', start);
+                var xy = localStorage.getItem('xy')
+                xy && reloacte(...xy.split(';'))
+
+                function start(e) {
+                    e.preventDefault()
+                    x = e.clientX;
+                    y = e.clientY;
+                    addEventListener('mouseup', end);
+                    addEventListener('mousemove' , drag);
+                }
+
+                function drag(e) {
+                    e.preventDefault()
+                    reloacte(elmnt.offsetLeft - x + e.clientX, elmnt.offsetTop - y + e.clientY)
+                    x = e.clientX;
+                    y = e.clientY;
+                }
+
+                function end() {
+                    localStorage.setItem('xy', elmnt.offsetLeft + ';' + elmnt.offsetTop)
+                    removeEventListener('mouseup', end);
+                    removeEventListener('mousemove' , drag);
+                }
+
+                function reloacte(x, y){
+                    elmnt.style.left = x + "px";
+                    elmnt.style.top = y + "px";
+                }
+            }
+
+        })();
+    </script>
+
+    <script id="main">
+
+        var defaultFormula = 'z = mul(z, z) + c + t * 0.1;';
+
+        var info = UI.elem('.col2', 'div');
+        var Color = UI.color('.col2', 'rgb(0,0,0)');
+        var AA = UI.check('.col2', 'antialias 4x', true);
+
+        var Iterations = UI.slider('.col1', 'iterations', 256, 96);
+        var T = UI.slider('.col1','t', 100, 10);
+        var A = UI.slider('.col1','a', 100, 50);
+        var B = UI.slider('.col1','b', 100, 50);
+        var M = UI.slider('.col1','m', 100, 50);
+        var N = UI.slider('.col1','n', 100, 50);
+
+        var equation = init();
+        var formula = createFormula('.bottom1', equation);
+        var temp = UI.text('.bottom1');
+
+        UI.button('.bottom2', 'pick point', function () {
+            var c = Mouse.center;
+            temp.value += 'vec2(' + (c[0]/1).toFixed(7) + ',' + (c[1]/1).toFixed(7) + ')\n'
+        });
+        UI.button('.bottom2', 'save', function() {
+            GL.canvas.toBlob((blob) => {
+                const a = document.createElement('a');
+                a.href = window.URL.createObjectURL(blob);
+                a.download = 'fractal_' + new Date().toUTCString()
+                    .replace(',','').split(' ').join('_') + '.png';
+                a.click();
+            });
+        });
+        UI.button('.bottom2', 'share', function() {
+            prompt('', createLink());
+        });
+        GL.init();
+        recompileShader(equation, function () {
+            GL.buffer(GL.TWO_TRIANGLES).bind('xy', 2);
+            animate();
+        });
+
+
+        function animate() {
+            drawFrame();
+            requestAnimationFrame(animate);
+        }
+
+        function getColor(el){
+            el = el.value.substring(1).split('')
+            let r = parseInt(el[0] + el[1], 16)/255;
+            let g = parseInt(el[2] + el[3], 16)/255;
+            let b = parseInt(el[4] + el[5], 16)/255;
+            return[r,g,b]
+        }
+
+        function drawFrame() {
+            var shader = GL.currentProgram;
+            shader.time();
+            shader.resolution();
+            shader.float("zoom", Mouse.zoom);
+            shader.float("a", A.value / 50 - 1);
+            shader.float("b", B.value / 50 - 1);
+            shader.float("m", M.value / 50 - 1);
+            shader.float("n", N.value / 50 - 1);
+            shader.float("T", T.value / 100);
+            shader.float("smoothing", AA.checked ? 1 : 0);
+            shader.int("iterations", Iterations.value);
+            shader.vec2("center", Mouse.center);
+            shader.vec3("color", getColor(Color));
+            GL.drawTriangleFan(4);
+
+            Iterations.update(Iterations.value);
+            A.update(A.value / 50 - 1, 2);
+            B.update(B.value / 50 - 1, 2);
+            M.update(M.value / 50 - 1, 2);
+            N.update(N.value / 50 - 1, 2);
+            T.update(T.value / 100, 2);
+
+            var html = '' +
+                'zoom: ' + Mouse.zoom + '<br>' +
+                'x: ' + Mouse.center[0] + '<br>' +
+                'y: ' + Mouse.center[1];
+
+            info.innerHTML !== html && (info.innerHTML = html);
+        }
+
+        function createLink() {
+            return document.location.origin +
+                document.location.pathname + '?' +
+                btoa(JSON.stringify({
+                    color: getColor(Color),
+                    x: Mouse.center[0],
+                    y: Mouse.center[1],
+                    i: Iterations.value,
+                    a: A.value,
+                    b: B.value,
+                    m: A.value,
+                    n: N.value,
+                    t: T.value,
+                    z: Mouse.zoom,
+                    formula: btoa(formula.value)
+                }));
+        }
+
+        function createFormula(target, equation) {
+            var formula = UI.text(target, equation);
+            formula.addEventListener('keyup', function() {
+                try {
+                    shader = recompileShader(formula.value);
+                    bg(0);
+                } catch (e) {
+                    bg(255);
+                }
+            });
+            return formula;
+
+            function bg(red) {
+                formula.style.backgroundColor = 'rgba(' + red + ',0,0,0.5)';
+            }
+        }
+
+        function recompileShader(equation, callback){
+            GL.program('shaders/mandelbrot.glsl', function (program) {
+                program.replace(defaultFormula, equation || defaultFormula);
+                program.link();
+                program.bind();
+                callback && callback();
+            });
+        }
+
+        function init() {
+            try {
+                var encodedData = document.location.search.substring(1);
+                var cfg = JSON.parse(atob(encodedData));
+                equation = atob(cfg.formula);
+                Mouse.init([cfg.x || 0, cfg.y || 0], cfg.z || 1.5);
+                Iterations.value = cfg.i || 128;
+                A.value = cfg.a || 0;
+                B.value = cfg.b || 0;
+                M.value = cfg.m || 0;
+                N.value = cfg.n || 0;
+                T.value = cfg.t || 0;
+            } catch (e) {
+                equation = defaultFormula;
+                Mouse.init();
+            }
+            return equation;
+        }
+
+    </script>
 </body>
 </html>
