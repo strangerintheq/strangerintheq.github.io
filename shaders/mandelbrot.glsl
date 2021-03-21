@@ -12,7 +12,7 @@ uniform float b;
 uniform float m;
 uniform float n;
 uniform float T;
-uniform bool smoothing;
+uniform float smoothing;
 uniform vec3 color;
 
 vec2 cadd( vec2 a, float s ) { return vec2( a.x+s, a.y ); }
@@ -43,16 +43,20 @@ vec3 calcColor(int i, vec2 z) {
 }
 
 vec3 fractal(vec2 c) {
+    c = -resolution + 2.0 * c;
+    c *= zoom/resolution.y;
+    c += center;
     vec2 z = c;
     vec2 t = vec2(sin(time*T), cos(time*T));
     vec2 ab = vec2(a,b);
+    vec2 mn = vec2(m,n);
     for (int i = 0; i < 1024; i++) {
     	if (i == iterations)
     	    return vec3(0.0);
     	if (length(z) > 4.0)
     	    return calcColor(i, z);
     	// fractal formula
-        z = mul(z, z) + c + t * 0.1;
+        z = mul(z, z) + c*m*0.1 + t*n*0.1 + ab*0.5 - 0.5;
     	//
     }
     return vec3(0.);
@@ -60,8 +64,16 @@ vec3 fractal(vec2 c) {
 
 void main(void) {
     vec2 c = gl_FragCoord.xy;
-	c = -resolution + 2.0 * c;
-    c *= zoom/resolution.y;
-    c += center;
-	gl_FragColor = vec4(fractal(c), 1.0);
+    if (smoothing > 0.0) {
+        float k = 0.25;
+        gl_FragColor = vec4(
+            fractal(c+vec2(-1.,-1.)*k)/4.+
+            fractal(c+vec2(-1., 1.)*k)/4.+
+            fractal(c+vec2( 1., 1.)*k)/4.+
+            fractal(c+vec2( 1.,-1.)*k)/4.,
+            1.0
+        );
+    } else {
+        gl_FragColor = vec4(fractal(c), 1.0);
+    }
 }

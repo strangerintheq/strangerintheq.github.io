@@ -64,7 +64,7 @@
 
             function init(canvas) {
                 GL.canvas = canvas || document.createElement('canvas');
-                GL.gl = GL.canvas.getContext("webgl") || GL.canvas.getContext("experimental-webgl");
+                GL.gl = GL.canvas.getContext("webgl",{preserveDrawingBuffer: true});
                 if (canvas) return;
                 document.body.appendChild(GL.canvas);
                 document.body.style.margin = 0;
@@ -256,6 +256,7 @@
                 btn.setAttribute('type', 'button');
                 btn.setAttribute('value', text);
                 btn.style.color = 'black';
+                btn.style.marginRight='5px'
                 btn.onclick = func;
                 return btn;
             }
@@ -344,13 +345,13 @@
 
     <script id="main">
 
-        var defaultFormula = 'z = mul(z, z) + c + t * 0.1;';
+        var defaultFormula = 'z = mul(z, z) + c*m*0.1 + t*n*0.1 + ab*0.5 - 0.5;';
 
         var info = UI.elem('.col2', 'div');
-        var Color = UI.color('.col2', 'rgb(0,0,0)');
+        var Color = UI.color('.col2', '#0077ff');
         var AA = UI.check('.col2', 'antialias 4x', true);
 
-        var Iterations = UI.slider('.col1', 'iterations', 256, 96);
+        var Iterations = UI.slider('.col1', 'iterations', 256, 128);
         var T = UI.slider('.col1','t', 100, 10);
         var A = UI.slider('.col1','a', 100, 50);
         var B = UI.slider('.col1','b', 100, 50);
@@ -432,7 +433,8 @@
             return document.location.origin +
                 document.location.pathname + '?' +
                 btoa(JSON.stringify({
-                    color: getColor(Color),
+                    color: Color.value,
+                    aa: AA.checked,
                     x: Mouse.center[0],
                     y: Mouse.center[1],
                     i: Iterations.value,
@@ -484,7 +486,13 @@
                 M.value = cfg.m || 0;
                 N.value = cfg.n || 0;
                 T.value = cfg.t || 0;
+                Color.value = cfg.color || '#2848cb';
+                AA.checked = cfg.aa ;
             } catch (e) {
+                A.value = Math.random()*100;
+                B.value = Math.random()*100;
+                M.value = Math.random()*100;
+                N.value = Math.random()*100;
                 equation = defaultFormula;
                 Mouse.init();
             }
