@@ -21,8 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="pdf-edit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mandelbrot.html" beforeDir="false" afterPath="$PROJECT_DIR$/mandelbrot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shaders/mandelbrot.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/shaders/mandelbrot.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,16 +57,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pdf-editor" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\strangerintheq.github.io" />
       <recent name="C:\dev\strangerintheq.github.io\pdf-editor" />
       <recent name="C:\dev\strangerintheq.github.io\pdf-editor\manage-application" />
       <recent name="C:\dev\strangerintheq.github.io\pdf-editor\pdf-editor" />
       <recent name="D:\dev\strangerintheq.github.io" />
-      <recent name="D:\dev\strangerintheq.github.io\pdf-editor" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -95,6 +94,7 @@
       <workItem from="1588783299266" duration="607000" />
       <workItem from="1589210757935" duration="1694000" />
       <workItem from="1616332384151" duration="3258000" />
+      <workItem from="1616360121566" duration="1086000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -180,7 +180,28 @@
       <option name="project" value="LOCAL" />
       <updated>1589212589715</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="app name">
+      <created>1616336159698</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1616336159698</updated>
+    </task>
+    <task id="LOCAL-00014" summary="hare">
+      <created>1616360317911</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1616360317911</updated>
+    </task>
+    <task id="LOCAL-00015" summary="hare">
+      <created>1616361139879</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1616361139879</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,16 +228,9 @@
     <MESSAGE value="pdf-editor" />
     <MESSAGE value="my portfolio" />
     <MESSAGE value="pdf-edit" />
-    <option name="LAST_COMMIT_MESSAGE" value="pdf-edit" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1589212591152">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1589212591152" />
-    <state x="769" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587230352193">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="769" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587230352193" />
+    <MESSAGE value="complexplorer" />
+    <MESSAGE value="app name" />
+    <MESSAGE value="hare" />
+    <option name="LAST_COMMIT_MESSAGE" value="hare" />
   </component>
 </project>
