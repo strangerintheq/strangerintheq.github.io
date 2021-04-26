@@ -6,42 +6,126 @@ uniform float time;
 uniform vec2 resolution;
 uniform sampler2D audio;
 
+const float an = 1.3810;
+const float t = 0.3;
+
+#define kCopies 1.0
+#define kSpirals 1.0
+#define kDrosteScale 0.32408
+#define kTwoPi 6.2831853
+
+#define transformT 1.
+#define zoom 6.7
+#define rot -0.195
+
 float channel(vec2 p, float t) {
   float a = atan(p.x, -p.y);
   float u = abs(a)/4.88;
   float fr = texture2D(audio, vec2(u, 0.5)).r;
   
   float w = sin(a*8.0 + t*2.0)*sin(t+a) ;  
-  
-  float d = length(p) 
-    - w*0.013 
-    + fr*0.1;
+  float d = length(p) /2. - w*0.013  + fr*0.1 ;
   d = abs(d - 0.25);
+  
   return smoothstep(0.005, 0.0005, d);
 }
 
-void main() {
-  vec2 p = gl_FragCoord.xy/resolution-0.5;
-  p.x *= resolution.x/resolution.y;
-  gl_FragColor = vec4(
-    channel(p, time),
-    channel(p, time+0.2),
-    channel(p, time+0.4),
-    1.0);
+vec2 cmul(in vec2 a, in vec2 b) {
+    return vec2(
+        a.x * b.x - a.y * b.y,
+        a.x * b.y + a.y * b.x
+    );
 }
+
+vec2 exp_i_th(in float th) {
+    return vec2(cos(th), sin(th));
+}
+
+vec2 cpow(in vec2 a, in vec2 b) {
+    float r = length(a);
+    float th = atan(a.y, a.x);
+    return cmul(
+        pow(r, b.x) * exp_i_th(th * b.x),
+        exp(- th * b.y) * exp_i_th(b.y * log(r))
+    );
+}
+
+vec2 transform(in vec2 uv) {
+    vec2 one = vec2(1., 0.);
+    vec2 I = vec2(0., 1.);
+    vec2 magic = (one * kCopies + transformT * I * kSpirals * log(kDrosteScale) / kTwoPi);
+    return cpow(uv, magic);
+}
+
+bool isInside(in vec2 uv) {
+  return length(uv) < 0.35545;
+}
+
+vec2 drosteUV(in vec2 uv) {
+    uv = transform(uv);
+    float scale = 1.;
+    for (int i = 0; i < 10; i++) {
+        if (isInside(uv)) {
+            uv /= kDrosteScale;
+        } else if (length(uv) > 1.) {
+        //uv *=  kDrosteScale;
+        } else {
+            break;
+        }
+    }
+    vec2 nextUV = uv;
+    if (isInside(uv)) {
+      nextUV /= kDrosteScale;
+    } else if (length(uv) > 1.) {
+    //  nextUV *=  kDrosteScale;
+    }
+    uv = mix(uv, nextUV, mod(10., 1.0));
+
+    return uv;
+}
+
+vec2 spiralUV(vec2 uv) {
+  float tt = fract(time*t);
+  uv *= pow(0.85, tt*zoom);
+  float a = rot*t, sn = sin(a), cs = cos(a);
+  uv = uv * mat2(cs, -sn, sn, cs);
+  uv = drosteUV(uv);
+  return uv;
+}
+
+void main() {
+    vec2 uv = (gl_FragCoord.xy - 0.5 * resolution) / resolution.x;
+
+    float sn=sin(an), cs=cos(an);
+    uv *= mat2(cs,-sn,sn,cs);
+    uv = spiralUV(uv);
+
+
+  
+    
+      gl_FragColor = vec4(
+        channel(uv, time*0.90),
+        channel(uv, time*0.94+0.2),
+        channel(uv, time*0.98+0.4),
+        1.0);
+    
+
+    
+}
+
+
+
 
 `;
 
 function createAudioTexture(srcUrl, fft) {
     const audio = document.createElement("audio");
     audio.src = srcUrl;
-   // audio.volume = 0.01
-    audio.autoplay = true;
     const context = new AudioContext();
     const src = context.createMediaElementSource(audio);
     const analyser = context.createAnalyser();
     src.connect(analyser);
-    analyser.connect(context.destination);
+    // analyser.connect(context.destination);
     analyser.fftSize = Math.pow(2, fft|0);
 
     const size = analyser.frequencyBinCount;
