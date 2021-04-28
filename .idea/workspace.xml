@@ -20,10 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/hen/mirroring.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/first-person/build.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/first-person/code.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/first-person/frag.glsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hen/octopus.svg" beforeDir="false" afterPath="$PROJECT_DIR$/hen/octopus.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hic-et-nunc/1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/hic-et-nunc/1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hen/mirroring.svg" beforeDir="false" afterPath="$PROJECT_DIR$/hen/mirroring.svg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +36,7 @@
       <list>
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="GLSL Shader" />
       </list>
     </option>
   </component>
@@ -68,17 +70,29 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen/audio-vis" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.15.3" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.43" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen/first-person" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\strangerintheq.github.io\hen\first-person" />
       <recent name="C:\dev\strangerintheq.github.io\hen\audio-vis" />
       <recent name="D:\strangerintheq.github.io" />
       <recent name="C:\dev\strangerintheq.github.io\pdf-editor" />
       <recent name="C:\dev\strangerintheq.github.io\pdf-editor\manage-application" />
-      <recent name="C:\dev\strangerintheq.github.io\pdf-editor\pdf-editor" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="build.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/first-person/build.js" working-dir="$PROJECT_DIR$/hen/first-person">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.build.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -112,7 +126,8 @@
       <workItem from="1618584812405" duration="14848000" />
       <workItem from="1618650716669" duration="3856000" />
       <workItem from="1619431098379" duration="3160000" />
-      <workItem from="1619449624012" duration="7186000" />
+      <workItem from="1619449624012" duration="7657000" />
+      <workItem from="1619592008245" duration="845000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -247,7 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619433172656</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="hen">
+      <created>1619456939638</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1619456939638</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

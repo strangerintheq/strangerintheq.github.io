@@ -44,7 +44,7 @@
 
                     uv -= i*0.1 + random.w*0.1;
                 }
-                uv *= 10. + 30.*random.x;
+                uv *= 5. + 25.*random.x;
                 vec2 index = floor(uv);
 
                 float t = time + random.y*100.;
