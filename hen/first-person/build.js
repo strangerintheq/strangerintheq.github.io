@@ -9,7 +9,14 @@ fs.writeFileSync('fp.svg', `
     </foreignObject>
     <script type="text/javascript">
     <![CDATA[
-        window.fragmentShader = \`${fs.readFileSync('frag.glsl')}\`;  
+    
+        ${fs.readFileSync('controls.js')}
+    
+        const shaders = {
+         fragment: \`${fs.readFileSync('frag1.glsl')}\`,
+         vertex: \`${fs.readFileSync('vert.glsl')}\`  
+        }
+        
         ${fs.readFileSync('code.js')}
     ]]>
     </script>

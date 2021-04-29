@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<body style="margin:0; overflow: hidden">
+<script type="module">
+    import {
+        Scene, WebGLRenderer, PerspectiveCamera, MeshNormalMaterial, Mesh, BoxGeometry
+    } from 'https://unpkg.com/three@0.121.1/build/three.module.js';
+
+    import {
+        OrbitControls
+    } from 'https://unpkg.com/three@0.121.1/examples/jsm/controls/OrbitControls.js';
+
+    const scene = new Scene();
+    const animations = []
+    for (let i = 0; i<50; i++) {
+        const mesh = new Mesh(new BoxGeometry(), new MeshNormalMaterial());
+        mesh.position.set(Math.random()*20-10,Math.random()*20-10,Math.random()*20-10)
+        mesh.rotation.set(Math.random()*7,Math.random()*7,Math.random()*7)
+        scene.add(mesh);
+        const s = Math.random()*2;
+        const dt = Math.random()*2;
+        animations.push(t => mesh.scale.setScalar(s - Math.pow((dt+t)%2 - 1, 6)))
+    }
+
+    const renderer = new WebGLRenderer({antialias: true});
+    document.body.appendChild(renderer.domElement);
+
+    const camera = new PerspectiveCamera();
+    camera.position.setScalar(14);
+
+    new OrbitControls(camera, renderer.domElement);
+
+    addEventListener('resize', resize)
+
+    resize();
+
+    requestAnimationFrame(function render(t) {
+        t /= 1000;
+        animations.forEach(a => a(t))
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+    });
+
+    function resize() {
+        renderer.setSize(innerWidth, innerHeight);
+        camera.aspect = innerWidth / innerHeight;
+        camera.updateProjectionMatrix();
+    }
+</script>
+</body>
+</html>

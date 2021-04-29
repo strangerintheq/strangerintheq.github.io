@@ -1,56 +1,49 @@
 
-
 precision highp float;
+
 uniform float time;
 uniform vec2 resolution;
 uniform vec4 random;
 
-vec2 mirror(vec2 uv) {
-    float count = 2.0 + floor(random.w*3.);
-    float a = 3.1415/count/2.;
-    float cs = cos(a), sn = sin(a);
-    mat2 rot = mat2(cs, -sn, sn, cs);
-    for (float i = 0.0; i<10.; i++) {
-        if (i > count)
-        break;
-        uv = abs(uv*rot) - 0.01;
+float rand(vec2 xy) {
+    return fract(sin(133.+xy.x*13.+xy.y*45.) * 43758.5453123);
+}
+
+float dist(float d) {
+    float size = 0.01;
+    vec2 s = vec2(0.5 + size, 0.5 - size);
+    return 1. - min( smoothstep(d, s.x, s.y), smoothstep(d, s.y, s.x) );
+}
+
+float ring(vec2 uv) {
+    return dist(length(uv));
+}
+
+
+float truchet(vec2 uv, float seed) {
+    float cellRand = rand(floor(uv) + seed*100.0);
+    vec2 cellUv = fract(uv) - 0.5;
+    if (cellRand < 0.9) {
+        float a = floor(cellRand*4.)*1.57075;
+        vec2 sc = vec2(sin(a), cos(a));
+        cellUv = mat2(sc.y, -sc.x, sc.x, sc.y) * cellUv;
+        float shift = random.x*0.15 + 0.05;
+        return
+            ring(cellUv - 0.5 - shift) +
+            ring(cellUv - 0.5 + shift) +
+            ring(cellUv + 0.5 - shift) +
+            ring(cellUv + 0.5 + shift);
     }
-    return uv;
+    return min(1., dist(cellUv.x + 0.5) + dist(cellUv.y + 0.5));
 }
 
 void main() {
-    vec2 uv = gl_FragCoord.xy/resolution-0.5;
+    vec2 uv = gl_FragCoord.xy/resolution - 0.5;
     uv.x *= resolution.x/resolution.y;
-    float a = time*0.03 + random.x*1000.;
-    float cs = cos(a);
-    float sn = sin(a);
-    uv *= mat2(cs, -sn, sn, cs);
-    for (float i=1.; i<31.; i++) {
-        if (i>10.+random.z*20.)
-        break;
-        uv = mirror(uv);
+    float c;
 
-        uv -= i*0.1 + random.w*0.1;
-    }
-    uv *= 5. + 25.*random.x;
-    vec2 index = floor(uv);
+    c += truchet(uv * 3.+floor(random.w*7.), random.w);
+    c += truchet(uv * 3.+floor(random.z*7.), random.z);
 
-    float t = time + random.y*100.;
-    uv = fract(uv);
-
-    vec4 r = (random-0.5)*0.1;
-    float f = fract(uv.x+t*0.2)-0.5;
-
-    float y = smoothstep(0.15, 0.2, abs(sin(uv.y+time/2.)));
-
-
-
-    vec3 c = vec3(
-
-        smoothstep(0.1, 0.05, abs(f+r.x))*y,
-        smoothstep(0.1, 0.05, abs(f+r.y))*y,
-        smoothstep(0.1, 0.05, abs(f+r.z))*y
-
-    );
     gl_FragColor = vec4(vec3(c), 1.0);
 }
