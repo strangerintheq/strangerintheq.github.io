@@ -20,14 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/hen/first-person/controls.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/first-person/frag1.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/first-person/vert.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/three.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/multi-scale-truchet/build.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/multi-scale-truchet/code.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/multi-scale-truchet/code2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hen/first-person/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/first-person/build.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hen/first-person/code.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/first-person/code.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hen/first-person/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/hen/first-person/frag.glsl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,9 +33,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="GLSL Shader" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -75,27 +71,31 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.15.3" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.14.43" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen/first-person" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen/multi-scale-truchet" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\strangerintheq.github.io\hen\multi-scale-truchet" />
+      <recent name="C:\dev\strangerintheq.github.io\hen" />
       <recent name="C:\dev\strangerintheq.github.io\hen\first-person" />
       <recent name="C:\dev\strangerintheq.github.io\hen\audio-vis" />
       <recent name="D:\strangerintheq.github.io" />
-      <recent name="C:\dev\strangerintheq.github.io\pdf-editor" />
-      <recent name="C:\dev\strangerintheq.github.io\pdf-editor\manage-application" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\dev\strangerintheq.github.io\hen" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Node.js.build.js (1)">
+    <configuration name="build.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/multi-scale-truchet/build.js" working-dir="$PROJECT_DIR$/hen/multi-scale-truchet">
+      <method v="2" />
+    </configuration>
     <configuration name="build.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/first-person/build.js" working-dir="$PROJECT_DIR$/hen/first-person">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.build.js (1)" />
         <item itemvalue="Node.js.build.js" />
       </list>
     </recent_temporary>
@@ -135,6 +135,9 @@
       <workItem from="1619449624012" duration="7657000" />
       <workItem from="1619592008245" duration="8227000" />
       <workItem from="1619640505337" duration="2638000" />
+      <workItem from="1619675606086" duration="21000" />
+      <workItem from="1620416365876" duration="347000" />
+      <workItem from="1620490690987" duration="14698000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -283,7 +286,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619593105685</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="hen template">
+      <created>1619675617013</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1619675617013</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
