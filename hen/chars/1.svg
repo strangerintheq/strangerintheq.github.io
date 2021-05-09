@@ -1,0 +1,87 @@
+
+<!--
+    ancient letter
+    by https://t.me/strangerintheq
+-->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="-500,-500,1000,1000" fill="none" stroke="black"
+     stroke-linecap="round" stroke-linejoin="round">
+    <script type="text/javascript">
+        <![CDATA[
+        const svg = document.querySelector('svg');
+const primes = [3, 5, 7, 11, 13, 17]
+
+let left, k;
+
+addEventListener('pointerdown', update)
+
+update();
+
+function update() {
+    svg.innerHTML = ''
+    k = Math.random()-0.5
+    row(-400, 1)
+    row(0, 5)
+    row(400, 1)
+}
+
+function row(y, size) {
+    svg.innerHTML = '<g></g>' + svg.innerHTML
+    left = -500
+    while (left < 500)
+        char(y, size)
+    document.querySelector('svg g g').remove();
+    alignLastRow();
+}
+
+function char(dy, size) {
+    const w = 4
+    const count = 2 + (Math.random() * 3 | 0)
+    const d = ['m', [0, 0], ...[...Array(count)].map(() => arc(size)).flat()].join('');
+    const arcs = `<g><path d="${d}" stroke-width="${w * size}"></path></g>"`
+    const g = document.querySelector('svg g');
+    g.innerHTML = arcs + g.innerHTML;
+    let align = alignLastChar(dy, size)
+    tryToAppendDotsGroup(size, align);
+}
+
+function tryToAppendDotsGroup(size, align){
+    const w = 4
+    const el = document.querySelector('svg g g')
+    const box = el.getBBox();
+    if (box.height > 25*size)
+        return
+    const y = align ? 25 : -25
+    el.innerHTML += `<circle r="${size*4*Math.random()}" cy="${y*size}" stroke-width="${w * size}"></circle>`
+
+}
+
+function alignLastChar(dy, size) {
+    const el = document.querySelector('svg g g')
+    const box = el.getBBox();
+    const x = left - box.x;
+    let align = Math.random() > 0.5;
+    const y = align ? box.y + 25 * size : box.y + box.height - 25 * size
+    el.setAttribute('transform', `translate(${x}, ${-y - dy})`);
+    left += box.width + 10 * size;
+    if (Math.random()>0.8)
+        left += 50*size
+    return align
+}
+
+function alignLastRow() {
+    const g = document.querySelector('svg g');
+    const r = g.getBBox()
+    const x = (1000 - r.width) / 2;
+    g.setAttribute('transform', `translate(${x},0)`)
+}
+
+function arc(size) {
+    const r = 3*size * ((1 + Math.random() * 7)|0);
+    const dir = Math.sign(Math.random() - 0.5);
+    return ['a', [r*(1+Math.random()*0.1), r*(1+Math.random()*k), 0, 0, 0, 0, dir * r * 2]]
+}
+    ]]>
+    </script>
+</svg>
+
+

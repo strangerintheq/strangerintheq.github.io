@@ -20,9 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/hen/multi-scale-truchet/build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/multi-scale-truchet/code.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/multi-scale-truchet/code2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/chars/1.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/chars/ancientletter.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/chars/build.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/chars/code.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/chars/code1.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,23 +73,26 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.15.3" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.14.43" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen/multi-scale-truchet" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen/chars" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\strangerintheq.github.io\hen\chars" />
       <recent name="C:\dev\strangerintheq.github.io\hen\multi-scale-truchet" />
       <recent name="C:\dev\strangerintheq.github.io\hen" />
       <recent name="C:\dev\strangerintheq.github.io\hen\first-person" />
       <recent name="C:\dev\strangerintheq.github.io\hen\audio-vis" />
-      <recent name="D:\strangerintheq.github.io" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\dev\strangerintheq.github.io\hen" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.build.js (1)">
+  <component name="RunManager" selected="Node.js.build.js (2)">
     <configuration name="build.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/multi-scale-truchet/build.js" working-dir="$PROJECT_DIR$/hen/multi-scale-truchet">
+      <method v="2" />
+    </configuration>
+    <configuration name="build.js (2)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/chars/build.js" working-dir="$PROJECT_DIR$/hen/chars">
       <method v="2" />
     </configuration>
     <configuration name="build.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/first-person/build.js" working-dir="$PROJECT_DIR$/hen/first-person">
@@ -95,6 +100,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.build.js (2)" />
         <item itemvalue="Node.js.build.js (1)" />
         <item itemvalue="Node.js.build.js" />
       </list>
@@ -137,7 +143,9 @@
       <workItem from="1619640505337" duration="2638000" />
       <workItem from="1619675606086" duration="21000" />
       <workItem from="1620416365876" duration="347000" />
-      <workItem from="1620490690987" duration="14698000" />
+      <workItem from="1620490690987" duration="15327000" />
+      <workItem from="1620545642572" duration="2279000" />
+      <workItem from="1620575558028" duration="9838000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -293,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619675617013</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="multi scale truchet">
+      <created>1620512552494</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1620512552494</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,7 +341,8 @@
     <MESSAGE value="complexplorer fix" />
     <MESSAGE value="hen" />
     <MESSAGE value="hen template" />
-    <option name="LAST_COMMIT_MESSAGE" value="hen template" />
+    <MESSAGE value="multi scale truchet" />
+    <option name="LAST_COMMIT_MESSAGE" value="multi scale truchet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
