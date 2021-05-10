@@ -20,11 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/hen/chars/1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/chars/ancientletter.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/chars/build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/chars/code.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/chars/code1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/brush/buildCanvas2d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/brush/canvas2d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/brush/code.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,8 +34,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="GLSL Shader" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -73,22 +71,26 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.15.3" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.14.43" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen/chars" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\strangerintheq.github.io\hen" />
       <recent name="C:\dev\strangerintheq.github.io\hen\chars" />
       <recent name="C:\dev\strangerintheq.github.io\hen\multi-scale-truchet" />
-      <recent name="C:\dev\strangerintheq.github.io\hen" />
       <recent name="C:\dev\strangerintheq.github.io\hen\first-person" />
       <recent name="C:\dev\strangerintheq.github.io\hen\audio-vis" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\dev\strangerintheq.github.io\hen\brush" />
       <recent name="C:\dev\strangerintheq.github.io\hen" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.build.js (2)">
+  <component name="RunManager" selected="Node.js.buildCanvas2d.js">
+    <configuration name="buildCanvas2d.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/brush/buildCanvas2d.js" working-dir="$PROJECT_DIR$/hen/brush">
+      <method v="2" />
+    </configuration>
     <configuration name="build.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/multi-scale-truchet/build.js" working-dir="$PROJECT_DIR$/hen/multi-scale-truchet">
       <method v="2" />
     </configuration>
@@ -100,6 +102,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.buildCanvas2d.js" />
         <item itemvalue="Node.js.build.js (2)" />
         <item itemvalue="Node.js.build.js (1)" />
         <item itemvalue="Node.js.build.js" />
@@ -145,7 +148,8 @@
       <workItem from="1620416365876" duration="347000" />
       <workItem from="1620490690987" duration="15327000" />
       <workItem from="1620545642572" duration="2279000" />
-      <workItem from="1620575558028" duration="9838000" />
+      <workItem from="1620575558028" duration="11809000" />
+      <workItem from="1620632718139" duration="12559000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -308,7 +312,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620512552494</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="ancient letter">
+      <created>1620595303186</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1620595303186</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,7 +353,8 @@
     <MESSAGE value="hen" />
     <MESSAGE value="hen template" />
     <MESSAGE value="multi scale truchet" />
-    <option name="LAST_COMMIT_MESSAGE" value="multi scale truchet" />
+    <MESSAGE value="ancient letter" />
+    <option name="LAST_COMMIT_MESSAGE" value="ancient letter" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
