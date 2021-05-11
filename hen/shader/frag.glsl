@@ -36,7 +36,8 @@ vec3 fractal(vec2 c) {
 
         z = mul(z,z);
         z -= mn;
-        z /= dot(z, z) + ab*0.01;
+        z /= dot(-z, z) + ab*0.01;
+
 
     }
     return vec3(0.);
@@ -46,12 +47,13 @@ void main() {
     vec2 c = gl_FragCoord.xy;
     float k = 0.25;
     gl_FragColor = vec4(
-        vec3(
-            fractal(c+vec2(-1.,-1.)*k)/4. +
-            fractal(c+vec2(-1., 1.)*k)/4. +
-            fractal(c+vec2( 1., 1.)*k)/4. +
-            fractal(c+vec2( 1.,-1.)*k)/4.
-        ),
+
+        pow(fractal(c+vec2(-1.,-1.)*k)/4. +
+        fractal(c+vec2(-1., 1.)*k)/4. +
+        fractal(c+vec2( 1., 1.)*k)/4. +
+        fractal(c+vec2( 1.,-1.)*k)/4., vec3(0.5))
+
+        ,
         1.0
     );
 
