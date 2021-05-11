@@ -13,7 +13,7 @@ fs.writeFileSync(name + '.svg', `<!-- ${info}  -->
         regenerate()
         addEventListener('pointerdown', regenerate)
         function regenerate() {
-            ${fs.readFileSync('code.js')}
+            ${fs.readFileSync('main.js')}
         }
         console.log('${info}')
     ]]>

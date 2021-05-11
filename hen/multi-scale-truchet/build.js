@@ -11,7 +11,7 @@ fs.writeFileSync('mst.svg', `
     </foreignObject>
     <script type="text/javascript">
     <![CDATA[
-        ${fs.readFileSync('code.js')}
+        ${fs.readFileSync('main.js')}
     ]]>
     </script>
 </svg>

@@ -17,7 +17,7 @@ fs.writeFileSync('fp.svg', `
          vertex: \`${fs.readFileSync('vert.glsl')}\`  
         }
         
-        ${fs.readFileSync('code.js')}
+        ${fs.readFileSync('main.js')}
     ]]>
     </script>
 </svg>

@@ -20,8 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/hen/shader/build.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/shader/frag.glsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/shader/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/shader/shader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/shader/vert.glsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hen/brush/code.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/brush/code.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hen/brush/buildCanvas2d.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/brush/buildCanvas2d.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hen/chars/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/chars/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hen/first-person/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/first-person/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hen/multi-scale-truchet/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/multi-scale-truchet/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hic-et-nunc/1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/hen/hic-et-nunc/1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hic-et-nunc/2.html" beforeDir="false" afterPath="$PROJECT_DIR$/hen/hic-et-nunc/2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hic-et-nunc/2.svg" beforeDir="false" afterPath="$PROJECT_DIR$/hen/hic-et-nunc/2.svg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +42,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="GLSL Shader" />
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="GLSL Shader" />
       </list>
     </option>
   </component>
@@ -67,25 +78,26 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="14.15.3" />
-    <property name="javascript.nodejs.core.library.typings.version" value="14.14.43" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.18.3" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.20.12" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen/shader" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\strangerintheq.github.io\hen\shader" />
       <recent name="C:\dev\strangerintheq.github.io\hen" />
       <recent name="C:\dev\strangerintheq.github.io\hen\chars" />
       <recent name="C:\dev\strangerintheq.github.io\hen\multi-scale-truchet" />
       <recent name="C:\dev\strangerintheq.github.io\hen\first-person" />
-      <recent name="C:\dev\strangerintheq.github.io\hen\audio-vis" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\strangerintheq.github.io\hen" />
       <recent name="C:\dev\strangerintheq.github.io\hen\brush" />
       <recent name="C:\dev\strangerintheq.github.io\hen" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.buildCanvas2d.js">
+  <component name="RunManager" selected="Node.js.build.js (3)">
     <configuration name="buildCanvas2d.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/brush/buildCanvas2d.js" working-dir="$PROJECT_DIR$/hen/brush">
       <method v="2" />
     </configuration>
@@ -95,11 +107,15 @@
     <configuration name="build.js (2)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/chars/build.js" working-dir="$PROJECT_DIR$/hen/chars">
       <method v="2" />
     </configuration>
+    <configuration name="build.js (3)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/shader/build.js" working-dir="$PROJECT_DIR$/hen/shader">
+      <method v="2" />
+    </configuration>
     <configuration name="build.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/first-person/build.js" working-dir="$PROJECT_DIR$/hen/first-person">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.build.js (3)" />
         <item itemvalue="Node.js.buildCanvas2d.js" />
         <item itemvalue="Node.js.build.js (2)" />
         <item itemvalue="Node.js.build.js (1)" />
@@ -148,6 +164,7 @@
       <workItem from="1620545642572" duration="2279000" />
       <workItem from="1620575558028" duration="11809000" />
       <workItem from="1620632718139" duration="15817000" />
+      <workItem from="1620724797845" duration="1027000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -361,6 +378,40 @@
     <MESSAGE value="ancient letter" />
     <MESSAGE value="brush" />
     <option name="LAST_COMMIT_MESSAGE" value="brush" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="610" y="280" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1620724776717">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="610" y="280" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1620724776717" />
+    <state x="449" y="0" key="CommitChangelistDialog2" timestamp="1620723257630">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="449" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1620723257630" />
+    <state width="1887" height="250" key="GridCell.Tab.0.bottom" timestamp="1620725809166">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1887" height="250" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620725809166" />
+    <state width="1887" height="250" key="GridCell.Tab.0.center" timestamp="1620725809166">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1887" height="250" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620725809166" />
+    <state width="1887" height="250" key="GridCell.Tab.0.left" timestamp="1620725809166">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1887" height="250" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620725809166" />
+    <state width="1887" height="250" key="GridCell.Tab.0.right" timestamp="1620725809166">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1887" height="250" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620725809166" />
+    <state x="529" y="74" key="RollbackChangesDialog" timestamp="1620723251518">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="529" y="74" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620723251518" />
+    <state x="688" y="394" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620723259558">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="688" y="394" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1620723259558" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
