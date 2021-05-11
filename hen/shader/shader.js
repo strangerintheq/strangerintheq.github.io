@@ -30,3 +30,25 @@ function shader(src,a) {
         throw new Error(gl.getShaderInfoLog(s));
     gl.attachShader(p,s)
 }
+
+const uniformsLocations = {};
+
+function ensureUniform(name) {
+    if (!uniformsLocations[name])
+        uniformsLocations[name] = gl.getUniformLocation(p, name)
+}
+
+function uf3(name, a, b, c) {
+    ensureUniform(name);
+    gl.uniform3f(uniformsLocations[name], a, b, c)
+}
+
+function uf2(name, a, b) {
+    ensureUniform(name);
+    gl.uniform2f(uniformsLocations[name], a, b)
+}
+
+function uf1(name, a){
+    ensureUniform(name);
+    gl.uniform1f(uniformsLocations[name], a);
+}
