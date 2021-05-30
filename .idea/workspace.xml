@@ -19,10 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
+    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="hare">
+      <change afterPath="$PROJECT_DIR$/hen/alien face/build.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/alien face/frag.glsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/alien face/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/alien face/shader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/alien face/vert.glsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hen/shader/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/hen/shader/frag.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hen/shader/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/shader/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hen/shader/shader.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/shader/shader.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +37,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="JavaScript File" />
-        <option value="GLSL Shader" />
       </list>
     </option>
   </component>
@@ -45,14 +47,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
   </component>
   <component name="ProjectId" id="1TRQPsnmoUIsSHPmw9Rtxp47tKh" />
   <component name="ProjectLevelVcsManager">
@@ -68,47 +62,24 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.18.3" />
-    <property name="javascript.nodejs.core.library.typings.version" value="12.20.12" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen/shader" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen/alien face" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\strangerintheq.github.io\hen\shader" />
-      <recent name="C:\dev\strangerintheq.github.io\hen" />
-      <recent name="C:\dev\strangerintheq.github.io\hen\chars" />
-      <recent name="C:\dev\strangerintheq.github.io\hen\multi-scale-truchet" />
-      <recent name="C:\dev\strangerintheq.github.io\hen\first-person" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\strangerintheq.github.io\hen" />
-      <recent name="C:\dev\strangerintheq.github.io\hen\brush" />
-      <recent name="C:\dev\strangerintheq.github.io\hen" />
+      <recent name="D:\strangerintheq.github.io\hen\alien face" />
+      <recent name="D:\strangerintheq.github.io" />
+      <recent name="C:\dev\strangerintheq.github.io\pdf-editor" />
+      <recent name="C:\dev\strangerintheq.github.io\pdf-editor\manage-application" />
+      <recent name="C:\dev\strangerintheq.github.io\pdf-editor\pdf-editor" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.build.js (3)">
-    <configuration name="buildCanvas2d.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/brush/buildCanvas2d.js" working-dir="$PROJECT_DIR$/hen/brush">
-      <method v="2" />
-    </configuration>
-    <configuration name="build.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/multi-scale-truchet/build.js" working-dir="$PROJECT_DIR$/hen/multi-scale-truchet">
-      <method v="2" />
-    </configuration>
-    <configuration name="build.js (2)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/chars/build.js" working-dir="$PROJECT_DIR$/hen/chars">
-      <method v="2" />
-    </configuration>
-    <configuration name="build.js (3)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/shader/build.js" working-dir="$PROJECT_DIR$/hen/shader">
-      <method v="2" />
-    </configuration>
-    <configuration name="build.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/first-person/build.js" working-dir="$PROJECT_DIR$/hen/first-person">
+  <component name="RunManager">
+    <configuration name="build.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/alien face/build.js" working-dir="$PROJECT_DIR$/hen/alien face">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.build.js (3)" />
-        <item itemvalue="Node.js.buildCanvas2d.js" />
-        <item itemvalue="Node.js.build.js (2)" />
-        <item itemvalue="Node.js.build.js (1)" />
         <item itemvalue="Node.js.build.js" />
       </list>
     </recent_temporary>
@@ -141,20 +112,6 @@
       <workItem from="1616360121566" duration="1086000" />
       <workItem from="1616440804756" duration="59000" />
       <workItem from="1616441056071" duration="1370000" />
-      <workItem from="1617031353853" duration="4206000" />
-      <workItem from="1618584812405" duration="14848000" />
-      <workItem from="1618650716669" duration="3856000" />
-      <workItem from="1619431098379" duration="3160000" />
-      <workItem from="1619449624012" duration="7657000" />
-      <workItem from="1619592008245" duration="8227000" />
-      <workItem from="1619640505337" duration="2638000" />
-      <workItem from="1619675606086" duration="21000" />
-      <workItem from="1620416365876" duration="347000" />
-      <workItem from="1620490690987" duration="15327000" />
-      <workItem from="1620545642572" duration="2279000" />
-      <workItem from="1620575558028" duration="11809000" />
-      <workItem from="1620632718139" duration="15817000" />
-      <workItem from="1620724797845" duration="4457000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -275,77 +232,7 @@
       <option name="project" value="LOCAL" />
       <updated>1616441515568</updated>
     </task>
-    <task id="LOCAL-00018" summary="hen">
-      <created>1618609192303</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1618609192303</updated>
-    </task>
-    <task id="LOCAL-00019" summary="hen">
-      <created>1619433172656</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1619433172656</updated>
-    </task>
-    <task id="LOCAL-00020" summary="hen">
-      <created>1619456939638</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1619456939638</updated>
-    </task>
-    <task id="LOCAL-00021" summary="hen template">
-      <created>1619593105685</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1619593105685</updated>
-    </task>
-    <task id="LOCAL-00022" summary="hen template">
-      <created>1619675617013</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1619675617013</updated>
-    </task>
-    <task id="LOCAL-00023" summary="multi scale truchet">
-      <created>1620512552494</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1620512552494</updated>
-    </task>
-    <task id="LOCAL-00024" summary="ancient letter">
-      <created>1620595303186</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1620595303186</updated>
-    </task>
-    <task id="LOCAL-00025" summary="brush">
-      <created>1620650859467</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1620650859467</updated>
-    </task>
-    <task id="LOCAL-00026" summary="hen shader template">
-      <created>1620725895172</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1620725895172</updated>
-    </task>
-    <task id="LOCAL-00027" summary="hen fractal">
-      <created>1620727341988</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1620727341988</updated>
-    </task>
-    <option name="localTasksCounter" value="28" />
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -376,110 +263,6 @@
     <MESSAGE value="app name" />
     <MESSAGE value="hare" />
     <MESSAGE value="complexplorer fix" />
-    <MESSAGE value="hen" />
-    <MESSAGE value="hen template" />
-    <MESSAGE value="multi scale truchet" />
-    <MESSAGE value="ancient letter" />
-    <MESSAGE value="brush" />
-    <MESSAGE value="hen shader template" />
-    <MESSAGE value="hen fractal" />
-    <option name="LAST_COMMIT_MESSAGE" value="hen fractal" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="610" y="280" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1620724776717">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="610" y="280" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1620724776717" />
-    <state x="449" y="0" key="CommitChangelistDialog2" timestamp="1620727341564">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="449" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1620727341564" />
-    <state width="1887" height="312" key="GridCell.Tab.0.bottom" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.0.center" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.0.left" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.0.right" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.1.bottom" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.1.center" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.1.left" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.1.right" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.2.bottom" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.2.center" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.2.left" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.2.right" timestamp="1620729288778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288778" />
-    <state width="1887" height="312" key="GridCell.Tab.3.bottom" timestamp="1620729288779">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288779" />
-    <state width="1887" height="312" key="GridCell.Tab.3.center" timestamp="1620729288779">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288779" />
-    <state width="1887" height="312" key="GridCell.Tab.3.left" timestamp="1620729288779">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288779" />
-    <state width="1887" height="312" key="GridCell.Tab.3.right" timestamp="1620729288779">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1887" height="312" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620729288779" />
-    <state x="529" y="74" key="RollbackChangesDialog" timestamp="1620723251518">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="529" y="74" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620723251518" />
-    <state x="352" y="121" key="Vcs.Push.Dialog.v2" timestamp="1620727342846">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="352" y="121" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1620727342846" />
-    <state x="688" y="394" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620723259558">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="688" y="394" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1620723259558" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/hen/audio-vis/audio2.js</url>
-          <line>1</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <option name="LAST_COMMIT_MESSAGE" value="complexplorer fix" />
   </component>
 </project>
