@@ -1,3 +1,4 @@
+const fo = document.querySelector('foreignObject')
 const uniformsLocations = {};
 const c = document.querySelector('canvas'),
     gl = c.getContext('webgl'),
@@ -16,8 +17,6 @@ gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,3,-1,-1,3,-1]), gl.STATIC_DR
 gl.vertexAttribPointer(vertex, 2, gl.FLOAT, false, 0, 0)
 gl.enableVertexAttribArray(vertex)
 
-
-
 function shader(src,a) {
     let s = gl.createShader(a)
     gl.shaderSource(s,src)
@@ -28,8 +27,9 @@ function shader(src,a) {
 }
 
 function ensureUniform(name) {
-    if (!uniformsLocations[name])
-        uniformsLocations[name] = gl.getUniformLocation(p, name)
+    if (uniformsLocations[name])
+        return
+    uniformsLocations[name] = gl.getUniformLocation(p, name);
 }
 
 function uf3(name, a, b, c) {
@@ -45,4 +45,14 @@ function uf2(name, a, b) {
 function uf1(name, a){
     ensureUniform(name);
     gl.uniform1f(uniformsLocations[name], a);
+}
+
+function resize(w,h) {
+    c.width = w;
+    c.height = h;
+    gl.viewport(0, 0, w, h)
+    uf2('resolution', w, h)
+    fo.setAttribute('width', w)
+    fo.setAttribute('height', h)
+    fo.parentNode.setAttribute('viewBox', [0, 0, w, h])
 }

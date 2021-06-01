@@ -1,5 +1,5 @@
 const fs = require('fs');
-const name = 'alien_face';
+const name = 'spiritual_body';
 const info = `${name}  by https://t.me/strangerintheq`;
 
 fs.writeFileSync(name + '.svg', `<!-- ${info}  -->
@@ -9,12 +9,12 @@ fs.writeFileSync(name + '.svg', `<!-- ${info}  -->
     </foreignObject>
     <script type="text/javascript">
     <![CDATA[
-        window.vertexShader = \`${fs.readFileSync('vert.glsl')}\`;
-        window.fragmentShader = \`${fs.readFileSync('frag.glsl')}\`;
+        window.vertexShader = \`${fs.readFileSync('src/vert.glsl')}\`;
+        window.fragmentShader = \`${fs.readFileSync('src/frag.glsl')}\`;
         ${fs.readFileSync('shader.js')}
         regenerate()
         addEventListener('pointerdown', regenerate)
-        function regenerate() {${fs.readFileSync('main.js')}}
+        function regenerate() {${fs.readFileSync('src/main.js')}}
         console.log('${info}')
     ]]>
     </script>

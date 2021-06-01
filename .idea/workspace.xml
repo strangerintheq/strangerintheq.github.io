@@ -20,13 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="hare">
-      <change afterPath="$PROJECT_DIR$/hen/alien face/build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/alien face/frag.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/alien face/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/alien face/shader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/alien face/vert.glsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/fractal/build.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/fractal/shader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/fractal/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/spiritual_body/src/frag.glsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/spiritual_body/src/vert.glsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hen/shader/shader.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/shader/shader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hen/alien face/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/spiritual_body/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hen/alien face/frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/hen/fractal/src/frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hen/alien face/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/spiritual_body/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hen/alien face/shader.js" beforeDir="false" afterPath="$PROJECT_DIR$/hen/spiritual_body/shader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hen/alien face/vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/hen/fractal/src/vert.glsl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,24 +66,31 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen/alien face" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\strangerintheq.github.io\hen" />
       <recent name="D:\strangerintheq.github.io\hen\alien face" />
       <recent name="D:\strangerintheq.github.io" />
       <recent name="C:\dev\strangerintheq.github.io\pdf-editor" />
       <recent name="C:\dev\strangerintheq.github.io\pdf-editor\manage-application" />
-      <recent name="C:\dev\strangerintheq.github.io\pdf-editor\pdf-editor" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\strangerintheq.github.io\hen\spiritual_body\src" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="build.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/alien face/build.js" working-dir="$PROJECT_DIR$/hen/alien face">
+  <component name="RunManager" selected="Node.js.build.js (1)">
+    <configuration name="build.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/fractal/build.js" working-dir="$PROJECT_DIR$/hen/fractal">
+      <method v="2" />
+    </configuration>
+    <configuration name="build.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/spiritual_body/build.js" working-dir="$PROJECT_DIR$/hen/spiritual_body">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.build.js (1)" />
         <item itemvalue="Node.js.build.js" />
       </list>
     </recent_temporary>
@@ -112,6 +123,9 @@
       <workItem from="1616360121566" duration="1086000" />
       <workItem from="1616440804756" duration="59000" />
       <workItem from="1616441056071" duration="1370000" />
+      <workItem from="1622446213297" duration="15136000" />
+      <workItem from="1622496751652" duration="739000" />
+      <workItem from="1622525900697" duration="547000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
