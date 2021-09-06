@@ -20,11 +20,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="hare">
-      <change afterPath="$PROJECT_DIR$/hen/escape2/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/colors.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/shader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/escape/build.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/escape/frag.glsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/escape/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/escape/shader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/escape/vert.glsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/gen01/build.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/gen01/frag.glsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/gen01/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/gen01/shader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/gen01/vert.glsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/henosy/build.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/henosy/frag.glsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/henosy/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/henosy/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/henosy/shader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hen/henosy/vert.glsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hen/escape/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/hen/escape/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hen/escape/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hen/escape/style.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +50,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -45,6 +63,14 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1TRQPsnmoUIsSHPmw9Rtxp47tKh" />
   <component name="ProjectLevelVcsManager">
@@ -60,23 +86,33 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hen" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gen" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\dev\strangerintheq.github.io\hen" />
-      <recent name="D:\strangerintheq.github.io\hen" />
-      <recent name="D:\strangerintheq.github.io\hen\alien face" />
-      <recent name="D:\strangerintheq.github.io" />
-      <recent name="C:\dev\strangerintheq.github.io\pdf-editor" />
+      <recent name="$PROJECT_DIR$/gen" />
+      <recent name="$PROJECT_DIR$/hen/gen01" />
+      <recent name="$PROJECT_DIR$/hen/henosy" />
+      <recent name="$PROJECT_DIR$/hen/escape" />
+      <recent name="$PROJECT_DIR$/hen/escape2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\strangerintheq.github.io\hen\spiritual_body\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.build.js (1)">
+  <component name="RunManager" selected="Node.js.build.js (4)">
     <configuration name="build.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/fractal/build.js" working-dir="$PROJECT_DIR$/hen/fractal">
+      <method v="2" />
+    </configuration>
+    <configuration name="build.js (2)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/escape/build.js" working-dir="$PROJECT_DIR$/hen/escape">
+      <method v="2" />
+    </configuration>
+    <configuration name="build.js (3)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/henosy/build.js" working-dir="$PROJECT_DIR$/hen/henosy">
+      <method v="2" />
+    </configuration>
+    <configuration name="build.js (4)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/gen01/build.js" working-dir="$PROJECT_DIR$/hen/gen01">
       <method v="2" />
     </configuration>
     <configuration name="build.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/spiritual_body/build.js" working-dir="$PROJECT_DIR$/hen/spiritual_body">
@@ -84,6 +120,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.build.js (4)" />
+        <item itemvalue="Node.js.build.js (3)" />
+        <item itemvalue="Node.js.build.js (2)" />
         <item itemvalue="Node.js.build.js (1)" />
         <item itemvalue="Node.js.build.js" />
       </list>
@@ -120,7 +159,11 @@
       <workItem from="1622446213297" duration="15136000" />
       <workItem from="1622496751652" duration="739000" />
       <workItem from="1622525900697" duration="547000" />
-      <workItem from="1623764732384" duration="303000" />
+      <workItem from="1630662182770" duration="5263000" />
+      <workItem from="1630674903717" duration="2826000" />
+      <workItem from="1630685336220" duration="2000" />
+      <workItem from="1630685341460" duration="13495000" />
+      <workItem from="1630834314865" duration="7898000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -241,7 +284,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616441515568</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="hic">
+      <created>1630044511708</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1630044511708</updated>
+    </task>
+    <task id="LOCAL-00019" summary="нфт">
+      <created>1630233767463</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1630233767463</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,6 +329,8 @@
     <MESSAGE value="app name" />
     <MESSAGE value="hare" />
     <MESSAGE value="complexplorer fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="complexplorer fix" />
+    <MESSAGE value="hic" />
+    <MESSAGE value="нфт" />
+    <option name="LAST_COMMIT_MESSAGE" value="нфт" />
   </component>
 </project>
