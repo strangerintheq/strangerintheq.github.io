@@ -49,14 +49,13 @@
             }
 
             float id = p.x+p.y+ l* ${1 + rnd(7)};
-            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.1)
-                id++;
-            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.2)
-                id++;
-            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.3)
-                id++;
-            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.4)
-                id++;
+            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.1) id++;
+            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.2) id++;
+            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.3) id++;
+            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.4) id++;
+
+            uv *= ${rotate2d(rnd(7))};
+            if (abs(uv.y) > ${rnd(0.5)}) id ++;
 
             vec3 color1 = getColor(id);
             vec3 color2 = getColor(id + 1.0);
