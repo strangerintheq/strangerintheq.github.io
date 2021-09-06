@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NETGRA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="thumbnail.gif" />
+</head>
+<body>
+<script src="lib.js"></script>
+<script>
+    let prog
+    function newArt() {
+        prog = program(recreateCanvas(), `
+
+        ${glslVignetteFunction()}
+
+        ${glslGetColorFunction()}
+
+vec3 netgra(vec2 uv) {
+
+
+    float id = ${1 + rnd(7)};
+    uv -= 0.5;
+
+    uv.x *= resolution.x/resolution.y;
+    if (length(uv+0.2 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.1) id++;
+    if (length(uv+0.2 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.2) id++;
+    if (length(uv+0.2 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.3) id++;
+    if (length(uv+0.2 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.4) id++;
+
+    uv *= ${rotate2d(rnd(7))};
+    if (abs(uv.y) > ${rnd(0.5)}) id ++;
+
+    vec3 color1 = getColor(id);
+    vec3 color2 = getColor(id + 1.0);
+    vec3 color3 = getColor(id - 1.0);
+    vec3 color = mix(color1, color2, clamp(0.0, 1.0, sin(uv.x*${rnd(5)}+id)));
+    color = mix(color, color3, clamp(0.0, 1.0, sin(uv.y*${rnd(5)}+id)));
+
+    return color;
+}
+
+void main() {
+    vec2 uv = gl_FragCoord.xy/resolution;
+    vec3 color;
+    color += netgra(uv + vec2(-0.2, -0.2)/resolution);
+    color += netgra(uv + vec2(+0.5, -0.2)/resolution);
+    color += netgra(uv + vec2(-0.2, +0.2)/resolution);
+    color += netgra(uv + vec2(+0.2, +0.2)/resolution);
+    color /= 4.;
+    // color *= vignette(${0.2 + rnd(0.2)});
+    gl_FragColor = vec4(color, 1.0);
+}
+
+        `);
+        prog.draw();
+
+    }
+
+    addEventListener('pointerdown', e => (!e || e.button === 0) && newArt());
+    addEventListener('resize', e => prog.draw());
+    newArt();
+</script>
+</body>
+</html>

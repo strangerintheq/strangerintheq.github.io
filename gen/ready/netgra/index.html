@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>negtra</title>
+    <title>NETGRA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="thumbnail.gif" />
 </head>
 <body>
 <script src="lib.js"></script>
 <script>
+    let prog
     function newArt() {
-        program(recreateCanvas(), `
+        prog = program(recreateCanvas(), `
 
         ${glslVignetteFunction()}
 
@@ -55,10 +58,13 @@
             color *= vignette(${0.2 + rnd(0.2)});
             gl_FragColor = vec4(color, 1.0);
         }
-    `).draw();
+    `);
+        prog.draw();
+
     }
 
     addEventListener('pointerdown', e => (!e || e.button === 0) && newArt());
+    addEventListener('resize', e => prog.draw());
     newArt();
 </script>
 </body>
