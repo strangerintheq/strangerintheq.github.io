@@ -249,4 +249,25 @@ function recreateCanvas(){
     return canvas
 }
 
+(function (){
+    const style = document.createElement('style');
+    style.innerHTML = `
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
 
+    * {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+`;
+    document.body.append(style)
+})();
