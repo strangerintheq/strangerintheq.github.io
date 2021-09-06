@@ -19,28 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="hare">
-      <change afterPath="$PROJECT_DIR$/gen/colors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/shader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/escape/build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/escape/frag.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/escape/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/escape/shader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/escape/vert.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/gen01/build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/gen01/frag.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/gen01/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/gen01/shader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/gen01/vert.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/henosy/build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/henosy/frag.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/henosy/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/henosy/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/henosy/shader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hen/henosy/vert.glsl" afterDir="false" />
+    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/gen/negtra-01.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/colors.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/gen/negtra.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/shader.js" beforeDir="false" afterPath="$PROJECT_DIR$/gen/lib.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +148,8 @@
       <workItem from="1630674903717" duration="2826000" />
       <workItem from="1630685336220" duration="2000" />
       <workItem from="1630685341460" duration="13495000" />
-      <workItem from="1630834314865" duration="7898000" />
+      <workItem from="1630834314865" duration="14410000" />
+      <workItem from="1630921964291" duration="3324000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -298,7 +284,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630233767463</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="gen">
+      <created>1630913971942</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1630913971942</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -331,6 +324,7 @@
     <MESSAGE value="complexplorer fix" />
     <MESSAGE value="hic" />
     <MESSAGE value="нфт" />
-    <option name="LAST_COMMIT_MESSAGE" value="нфт" />
+    <MESSAGE value="gen" />
+    <option name="LAST_COMMIT_MESSAGE" value="gen" />
   </component>
 </project>

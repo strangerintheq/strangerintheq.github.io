@@ -1,9 +1,4 @@
-function hexToRgb(hex) {
-    const i = parseInt(hex.substring(1), 16);
-    return [i >> 16, i >> 8, i].map(x => x & 255);
-}
-
-window.colors = [
+const colors = [
     ["#69d2e7", "#a7dbd8", "#e0e4cc", "#f38630", "#fa6900"],
     ["#fe4365", "#fc9d9a", "#f9cdad", "#c8c8a9", "#83af9b"],
     ["#ecd078", "#d95b43", "#c02942", "#542437", "#53777a"],
@@ -105,5 +100,153 @@ window.colors = [
     ["#73c8a9", "#dee1b6", "#e1b866", "#bd5532", "#373b44"],
     ["#805841", "#dcf7f3", "#fffcdd", "#ffd8d8", "#f5a2a2"]
 ];
+
+function program(canvas, fragmentShader) {
+
+    const gl = canvas.getContext('webgl');
+
+    const pid = gl.createProgram();
+
+    shader(`
+
+    attribute vec2 vertex;
+    
+    void main() {
+        gl_Position = vec4(vertex, 0.0, 1.0);
+    }
+
+`, gl.VERTEX_SHADER);
+
+    const head = 'precision highp float;\n\nuniform vec2 resolution;';
+    console.log(head + fragmentShader);
+    shader(head + fragmentShader, gl.FRAGMENT_SHADER);
+
+    gl.linkProgram(pid)
+    gl.useProgram(pid)
+
+    const vertex = gl.getAttribLocation(pid, "vertex");
+    const resolution = gl.getUniformLocation(pid, 'resolution')
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, 3, -1, -1, 3, -1]), gl.STATIC_DRAW)
+    gl.vertexAttribPointer(vertex, 2, gl.FLOAT, false, 0, 0)
+    gl.enableVertexAttribArray(vertex)
+
+    function shader(src,a) {
+        let s = gl.createShader(a)
+        gl.shaderSource(s,src)
+        gl.compileShader(s)
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
+            throw new Error(gl.getShaderInfoLog(s));
+        gl.attachShader(pid,s)
+    }
+
+    const uniformsLocations = {};
+
+    function ensureUniform(name) {
+        if (!uniformsLocations[name])
+            uniformsLocations[name] = gl.getUniformLocation(pid, name)
+    }
+
+    function uf3(name, a, b, c) {
+        ensureUniform(name);
+        gl.uniform3f(uniformsLocations[name], a, b, c)
+    }
+
+    function uf2(name, a, b) {
+        ensureUniform(name);
+        gl.uniform2f(uniformsLocations[name], a, b)
+    }
+
+    function uf1(name, a){
+        ensureUniform(name);
+        gl.uniform1f(uniformsLocations[name], a);
+    }
+
+    let w, h;
+    function resize(){
+        if (innerWidth === w && innerHeight === h)
+            return
+        w = canvas.width = innerWidth;
+        h = canvas.height = innerHeight;
+        gl.viewport(0, 0, w, h);
+        gl.uniform2f(resolution, w, h);
+    }
+
+    function draw(){
+        resize();
+        gl.drawArrays(gl.TRIANGLES,0,3)
+    }
+
+    return {uf1, uf2, uf3, resize, draw}
+}
+
+function hexToRgbArray(hex) {
+    const i = parseInt(hex.substring(1), 16);
+    return [i >> 16, i >> 8, i].map(x => x & 255);
+}
+
+function randomPalette() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function normalizeColorArray(c) {
+    return c.map(i => (i / 255).toFixed(8));
+}
+
+function colorArrayAsVec3(c) {
+    return `vec3( ${c[0]}, ${c[1]}, ${c[2]} )`;
+}
+
+function glslVignetteFunction(){
+    return `
+float vignette(float power) {
+    vec2 uv = gl_FragCoord.xy / resolution;
+    uv *= 1.0 - uv.yx;
+    float vig = uv.x*uv.y * 15.0;
+    return pow(vig, power );
+}
+`;
+}
+
+function glslGetColorFunction(){
+    const cols = randomPalette()
+        .map(hexToRgbArray)
+        .map(normalizeColorArray)
+        .map(colorArrayAsVec3);
+    return `
+    
+vec3 getColor(float i) {
+    i = abs(mod(i, 5.0));
+    if (i < 1.0 ) return ${cols[0]};
+    if (i < 2.0 ) return ${cols[1]};
+    if (i < 3.0 ) return ${cols[2]};
+    if (i < 4.0 ) return ${cols[3]};
+    return ${cols[4]};
+}
+
+    `
+
+}
+
+function rnd(x) {
+    return Math.random() * x;
+}
+
+function rndInt(x) {
+    return Math.floor( rnd(x) );
+}
+
+function rotate2d(x){
+    return `mat2(cos(${x}),sin(${x}),-sin(${x}),cos(${x}))`
+}
+
+function recreateCanvas(){
+    const old = document.querySelector('canvas');
+    old && old.remove();
+    const canvas = document.createElement('canvas');
+    document.body.append(canvas);
+    return canvas
+}
 
 
