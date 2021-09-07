@@ -20,8 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/gen/ready/netgra/thumbnail.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/steam-cells.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/steam-cells1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/negtra-01.html" beforeDir="false" afterPath="$PROJECT_DIR$/gen/negtra-01.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/lib.js" beforeDir="false" afterPath="$PROJECT_DIR$/gen/lib.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/gen/template.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,12 +78,13 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/gen" />
+      <recent name="$PROJECT_DIR$/gen/ready/netgra" />
+      <recent name="$PROJECT_DIR$/gen/ready" />
       <recent name="$PROJECT_DIR$/hen/gen01" />
       <recent name="$PROJECT_DIR$/hen/henosy" />
-      <recent name="$PROJECT_DIR$/hen/escape" />
-      <recent name="$PROJECT_DIR$/hen/escape2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gen/ready/netgra" />
       <recent name="D:\strangerintheq.github.io\hen\spiritual_body\src" />
     </key>
   </component>
@@ -145,7 +150,7 @@
       <workItem from="1630685336220" duration="2000" />
       <workItem from="1630685341460" duration="13495000" />
       <workItem from="1630834314865" duration="14410000" />
-      <workItem from="1630921964291" duration="3873000" />
+      <workItem from="1630921964291" duration="19713000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -294,7 +299,28 @@
       <option name="project" value="LOCAL" />
       <updated>1630925530533</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="gen">
+      <created>1630926134891</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1630926134891</updated>
+    </task>
+    <task id="LOCAL-00023" summary="gen">
+      <created>1630926380300</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1630926380300</updated>
+    </task>
+    <task id="LOCAL-00024" summary="gen">
+      <created>1630937067491</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1630937067491</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
