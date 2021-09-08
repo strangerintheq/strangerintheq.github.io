@@ -7,11 +7,12 @@
     <meta property="og:image" content="thumbnail.gif" />
 </head>
 <body>
+<script src="100.js"></script>
 <script src="lib.js"></script>
 <script>
     let prog
     function newArt() {
-        let d = rnd(5)
+        let d = rnd(3)
         prog = program(recreateCanvas(), `
 
         ${glslVignetteFunction()}
