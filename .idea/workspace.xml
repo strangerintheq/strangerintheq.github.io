@@ -20,12 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/gen/ready/netgra/thumbnail.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/steam-cells.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/steam-cells1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/ready/steam-cells/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/ready/steam-cells/lib.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/ready/steam-cells/thumbnail.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/trip.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/trip1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gen/lib.js" beforeDir="false" afterPath="$PROJECT_DIR$/gen/lib.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/gen/template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/steam-cells1.html" beforeDir="false" afterPath="$PROJECT_DIR$/gen/steam-cells1.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,17 +80,18 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/gen" />
-      <recent name="$PROJECT_DIR$/gen/ready/netgra" />
       <recent name="$PROJECT_DIR$/gen/ready" />
+      <recent name="$PROJECT_DIR$/gen/ready/steam-cells" />
+      <recent name="$PROJECT_DIR$/gen/ready/netgra" />
       <recent name="$PROJECT_DIR$/hen/gen01" />
-      <recent name="$PROJECT_DIR$/hen/henosy" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gen" />
       <recent name="$PROJECT_DIR$/gen/ready/netgra" />
       <recent name="D:\strangerintheq.github.io\hen\spiritual_body\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.build.js (4)">
+  <component name="RunManager" selected="Node.js.build.js (5)">
     <configuration name="build.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/fractal/build.js" working-dir="$PROJECT_DIR$/hen/fractal">
       <method v="2" />
     </configuration>
@@ -101,16 +104,16 @@
     <configuration name="build.js (4)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/gen01/build.js" working-dir="$PROJECT_DIR$/hen/gen01">
       <method v="2" />
     </configuration>
-    <configuration name="build.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/spiritual_body/build.js" working-dir="$PROJECT_DIR$/hen/spiritual_body">
+    <configuration name="build.js (5)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/shader/build.js" working-dir="$PROJECT_DIR$/hen/shader">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.build.js (5)" />
         <item itemvalue="Node.js.build.js (4)" />
         <item itemvalue="Node.js.build.js (3)" />
         <item itemvalue="Node.js.build.js (2)" />
         <item itemvalue="Node.js.build.js (1)" />
-        <item itemvalue="Node.js.build.js" />
       </list>
     </recent_temporary>
   </component>
@@ -150,7 +153,7 @@
       <workItem from="1630685336220" duration="2000" />
       <workItem from="1630685341460" duration="13495000" />
       <workItem from="1630834314865" duration="14410000" />
-      <workItem from="1630921964291" duration="19713000" />
+      <workItem from="1630921964291" duration="40121000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -320,7 +323,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630937067491</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="gen">
+      <created>1631001346323</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1631001346323</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

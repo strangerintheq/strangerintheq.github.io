@@ -100,7 +100,7 @@ const colors = [
     ["#73c8a9", "#dee1b6", "#e1b866", "#bd5532", "#373b44"],
     ["#805841", "#dcf7f3", "#fffcdd", "#ffd8d8", "#f5a2a2"]
 ];
-let log;
+
 function program(canvas, fragmentShader) {
 
     const gl = canvas.getContext('webgl');
@@ -118,7 +118,7 @@ function program(canvas, fragmentShader) {
 `, gl.VERTEX_SHADER);
 
     const head = 'precision highp float;\n\nuniform vec2 resolution;';
-    console.log(head + fragmentShader);
+    // console.log(head + fragmentShader);
     shader(head + fragmentShader, gl.FRAGMENT_SHADER);
 
     gl.linkProgram(pid)
@@ -136,26 +136,11 @@ function program(canvas, fragmentShader) {
         let s = gl.createShader(a)
         gl.shaderSource(s,src)
         gl.compileShader(s)
-        let message = gl.getShaderInfoLog(s);
-        if (message)
-            src.split('\n').map((line,i) => print(line, i, message))
-        if (message)
-            throw message;
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
+            throw new Error(gl.getShaderInfoLog(s));
         gl.attachShader(pid,s)
     }
-    function print(str, i, message) {
-        if (!log) {
-            log = document.createElement('div');
-            log.style.fontFamily = 'Courier New, monospace';
-            document.body.append(log);
-            canvas.remove();
-        }
-        let line = 1 + i;
-        let currentLine = line === +message.split(':')[2];
-        let msg = ("" + line).padStart(4, "0") + ': ' + str.split(' ').join('&nbsp;');
-        if (currentLine) msg = '<br>' + message + '<br>' + msg + '<br><br>';
-        log.innerHTML += `<div ${currentLine && 'style="background:#900;color:#fff"'}>${msg}</div>`
-    }
+
     const uniformsLocations = {};
 
     function ensureUniform(name) {
@@ -309,6 +294,7 @@ function recreateCanvas(){
         padding: 0;
         width: 100%;
         height: 100%;
+        overflow: hidden;
     }
 
     * {
