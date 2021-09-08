@@ -47,7 +47,7 @@ vec3 trip(vec2 uv) {
         vec3 color3 =  getColor(f+2.) ;
 
         float v = fract(uv.y*${2+rnd(14)}) + noise2d(p*${rnd(400)+200}) ;
-        float v1 = fract(uv.x*${2+rnd(14)})  + noise2d(p*${rnd(400)+200}) ;
+        float v1 = length(p) ;
         vec3 col =  mix(color1, color2, clamp(0.,1.,v));
         col = mix(col, color3, clamp(0.,1.,v1));
         return col;
