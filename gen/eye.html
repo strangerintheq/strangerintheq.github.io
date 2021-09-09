@@ -41,19 +41,75 @@ float fbm4( vec2 p ){
     return f/0.9375;
 }
 
+
+vec3 hash33(vec3 p) {
+        float n = sin(dot(p, vec3(7, 157, 113)));
+        return fract(vec3(2097152, 262144, 32768)*n);
+    }
+
+    float voronoi(vec3 p) {
+        vec3 b, r, g = floor(p);
+        p = fract(p);
+        float d = 1.;
+        for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < 3; i++) {
+                for (int k = 0; k < 3; k++) {
+                    b = vec3(i, j, k) - 1.0;
+                    r = b - p + hash33(g + b);
+                    d = min(d, dot(r,r));
+                }
+            }
+        }
+        return d;
+    }
+
+
+    float channel(vec2 uv, float j){
+        float k = 1.0-length(uv);
+        vec3 p = normalize(vec3(uv, k));
+        vec3 t;
+        float tot = 0.0, amp = 1.0;
+
+        for (float i = 0.0; i < 5.0; i++) {
+            amp *= ${0.3+rnd(0.2)};
+            p *= ${2+rnd(1)};
+            vec3 dp = vec3(
+                j+${rnd(0.3)}*cos(i)*i*k,
+                j+${rnd(0.3)}*sin(i)*i*k,
+                ${rnd(0.3)}*time
+            );
+            tot += voronoi(p+t+dp) * amp;
+        }
+        return tot;
+    }
+
+
 void main() {
 
     vec2 uv = gl_FragCoord.xy/resolution-0.5;
     uv.x *= resolution.x/resolution.y;
+
+    vec3 c;
+
+    gl_FragColor.r = channel(uv, 0.0);
+    gl_FragColor.g = channel(uv, 0.1);
+    gl_FragColor.b = channel(uv, 0.2);
+    gl_FragColor.rgb *= getColor(4.)*2.;
+    gl_FragColor.rgb *=noise2d(uv/2.+${rnd(33)});
+    // gl_FragColor.rgb = pow(gl_FragColor.rgb, vec3(0.8));
+
+
+
+
     uv *= mat2(0.9848, 0.1736, -0.1736, 0.9848); // 10 deg
 
     float d = length(uv);
 
-    // bg
-    vec3 c = vec3(
-         smoothstep(0.49, 0.2, d)
-       * smoothstep(0.25, 0.26, d)
-    ) * getColor(1.);
+    // // bg
+    // vec3 c = vec3(
+    //      smoothstep(0.49, 0.2, d)
+    //    * smoothstep(0.25, 0.26, d)
+    // ) * getColor(1.);
 
     float a = atan(uv.y, uv.x);
     float d1 = d + noise(uv*4.+ time*0.5)*0.02;
@@ -66,13 +122,13 @@ void main() {
       + ${0.05+rnd(0.1)};
     v *= smoothstep(dr, dr+0.01, d1);
 
-    float mixk = noise2d(
-      -time*0.3 + vec2(atan(uv.x,uv.y)*${rnd(11)+4},
-      atan(uv.x, uv.y) + length(uv)*${rnd(11)})
-    ) + sin(length(uv)*11.);
-    vec3 col = mix(getColor(2.), getColor(3.), mixk/length(uv)*2.);
+    // float mixk = noise2d(
+    //   -time*0.3 + vec2(atan(uv.x,uv.y)*${rnd(11)+4},
+    //   atan(uv.x, uv.y) + length(uv)*${rnd(11)})
+    // ) + sin(length(uv)*11.);
+    // vec3 col = mix(getColor(2.), getColor(3.), clamp(0.,1.,mixk/length(uv)*2.));
 
-    c += col*1.5*v;
+    c += getColor(2.)*1.5*v;
 
     // contour
     c += vec3(
@@ -84,17 +140,31 @@ void main() {
     // flare
     c += smoothstep(0.4, 0.0, pow((length(uv+${rndVec2(.2,.2,-.1)})),0.4));
 
-    // top eyelid
-    float t = smoothstep(0.0, 0.5, abs(fract(time*0.4)-0.5)*10.0)*2.0 - 1.0;
-    float r = 0.5 / abs(t);
-    float y = r * sign(t) - t*0.28+0.05;
-    c *= smoothstep(r, r-0.01* sign(t), length(uv+vec2(0., y)));
+    // // top eyelid
+    // float t = smoothstep(0.0, 0.5, abs(fract(time*0.4)-0.5)*10.0)*2.0 - 1.0;
+    // float r = 0.5 / abs(t);
+    // float y = r * sign(t) - t*0.28+0.05;
+    // c *= smoothstep(r, r-0.01* sign(t), length(uv+vec2(0., y)));
+    //
+    // // bottom eyelid
+    // c *= smoothstep(0.6, 0.59, length(uv+vec2(0.0,-${0.3+rnd(0.1)})));
 
-    // bottom eyelid
-    c *= smoothstep(0.6, 0.59, length(uv+vec2(0.0,-${0.3+rnd(0.1)})));
-
-    gl_FragColor = vec4(c, 1.0);
+    gl_FragColor += vec4(c, 1.0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         `);
 
