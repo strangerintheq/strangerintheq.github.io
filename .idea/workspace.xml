@@ -20,14 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/gen/ready/steam-cells/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ready/steam-cells/lib.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/ready/steam-cells/thumbnail.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/trip.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gen/trip1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/ready/simplicity/100.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/ready/simplicity/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/ready/simplicity/lib.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/ready/simplicity/thumbnail.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/circles.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/gen/lib.js" beforeDir="false" afterPath="$PROJECT_DIR$/gen/lib.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/steam-cells1.html" beforeDir="false" afterPath="$PROJECT_DIR$/gen/steam-cells1.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,19 +72,20 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gen" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gen/ready/simplicity" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gen/ready/simplicity" />
       <recent name="$PROJECT_DIR$/gen" />
       <recent name="$PROJECT_DIR$/gen/ready" />
       <recent name="$PROJECT_DIR$/gen/ready/steam-cells" />
       <recent name="$PROJECT_DIR$/gen/ready/netgra" />
-      <recent name="$PROJECT_DIR$/hen/gen01" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gen/ready/simplicity" />
       <recent name="$PROJECT_DIR$/gen" />
       <recent name="$PROJECT_DIR$/gen/ready/netgra" />
       <recent name="D:\strangerintheq.github.io\hen\spiritual_body\src" />
@@ -153,7 +153,8 @@
       <workItem from="1630685336220" duration="2000" />
       <workItem from="1630685341460" duration="13495000" />
       <workItem from="1630834314865" duration="14410000" />
-      <workItem from="1630921964291" duration="40121000" />
+      <workItem from="1630921964291" duration="52963000" />
+      <workItem from="1631100925019" duration="17247000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -330,7 +331,28 @@
       <option name="project" value="LOCAL" />
       <updated>1631001346323</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="gen">
+      <created>1631082128642</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1631082128642</updated>
+    </task>
+    <task id="LOCAL-00027" summary="gen">
+      <created>1631094819919</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1631094819919</updated>
+    </task>
+    <task id="LOCAL-00028" summary="gen">
+      <created>1631098807514</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1631098807514</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

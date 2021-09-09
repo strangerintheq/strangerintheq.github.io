@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simplicity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="thumbnail.gif" />
+</head>
+<body>
+<script src="100.js"></script>
+<script src="lib.js"></script>
+<script>
+
+    let prog
+
+    function newArt() {
+        prog = program(recreateCanvas(), `
+
+        ${glslNoise2dFunction()}
+        ${glslGetColorFunction()}
+
+vec3 netgra(vec2 uv) {
+
+    vec2 p;
+    float id = ${1 + rnd(117)};
+
+
+    uv *= ${rotate2d(rnd(7))};
+    p = ${rndVec2(0.5,0.5,0.5)}*uv + ${rndVec2(.4,.4,-.2)};
+    if (length(p) < ${0.05+rnd(0.2)})
+         id +=  sign(${rnd(1)-0.5});
+
+
+    uv *= ${rotate2d(rnd(7))};
+    p = ${rndVec2(0.5,0.5,0.5)} * uv
+        + ${rndVec2(.4,.4,-.2)};
+    if (length(p) < ${0.1+rnd(0.3)})
+         id +=  sign(${rnd(1)-0.5});
+
+
+    uv *= ${rotate2d(rnd(7))};
+    p = ${rndVec2(0.5,0.5,0.5)} * uv
+        + ${rndVec2(.4,.4,-.2)}
+        ;
+    if (length(p) < ${0.2+rnd(0.4)})
+            id +=  sign(${rnd(1)-0.5});
+
+
+    uv *= ${rotate2d(rnd(7))};
+    p = uv
+      + noise2d(uv*${rndVec2(5,5,1)})
+      * noise2d(uv*${rndVec2(11,11,3)})
+      + ${rndVec2(.8,.8,0.4)}
+        //* sin(uv.y+uv.x)
+      ;
+    if (length(p) < ${0.1+rnd(0.2)})
+        id +=  sign(${rnd(1)-0.5});
+
+    uv *= ${rotate2d(rnd(7))};
+    p = uv
+      + noise2d(uv*${1+rnd(2)} + id)
+      + ${rndVec2(.4,.4,-0.2)}
+      ;
+    if (length(p) < ${0.1+rnd(0.2)})
+         id +=  sign(${rnd(1)-0.5});
+
+
+    uv *= ${rotate2d(rnd(7))};
+    uv += ${rndVec2(0.2,0.2,-0.1)};
+    if (abs(uv.y+uv.x) < ${rnd(0.5)})
+        id += length(uv)*atan(uv.y,uv.x)*sin(length(uv)*${rnd(2)});
+
+
+    vec3 color1 = getColor(id);
+    vec3 color2 = getColor(id + 1.);
+    vec3 color3 = getColor(id - 1.5);
+
+    float len = length(uv+ ${rndVec2(.4,.4,-.2)});
+    len = max(0.2, len);
+
+    float v1 = sin(uv.x*${rnd(5)} + id) + len
+        + noise2d(uv*${145+rnd(145)}*mod(id, 3.));
+    v1 = clamp(0.0, 1.0, v1);
+
+    float v2 = sin(uv.y*${rnd(5)} + id)
+        + noise2d(uv*${100+rnd(555)});
+    v2 = clamp(0.0, 1.0, v2);
+
+    return mix (color3, mix(color1, color2, v1), v2);
+}
+
+void main() {
+
+    vec2 uv = gl_FragCoord.xy/resolution;
+    uv -= 0.5;
+    uv.x *= resolution.x/resolution.y;
+
+
+    vec3 color;
+    float l = sqrt(length(uv))*${1+rnd(2)};
+
+
+    color += netgra(uv + vec2(-l, -l)/resolution);
+    color += netgra(uv + vec2(+l, -l)/resolution);
+    color += netgra(uv + vec2(-l, +l)/resolution);
+    color += netgra(uv + vec2(+l, +l)/resolution);
+
+    color /= 4.;
+    gl_FragColor = vec4(color, 1.0);
+}
+
+        `);
+        prog.draw();
+
+    }
+
+    addEventListener('pointerdown', e => (!e || e.button === 0) && newArt());
+    addEventListener('resize', e => prog.draw());
+    newArt();
+</script>
+</body>
+</html>
