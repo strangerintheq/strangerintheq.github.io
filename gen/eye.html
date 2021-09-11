@@ -10,40 +10,42 @@
 <script src="100.js"></script>
 <script src="lib.js"></script>
 <script>
-  let prog
+  let prog;
+
   function newArt() {
+    const eyeRadius = rnd(0.3) + 0.1;
     prog = program(recreateCanvas(), `
 
-        ${glslGetColorFunction()}
-        ${glslNoise2dFunction()}
+${glslGetColorFunction()}
+${glslNoise2dFunction()}
+
 
 uniform float time;
-
-const mat2 m = mat2( 0.8,  0.6, -0.6,  0.8 );
 
 float hash( float n ){
     return fract(sin(n)*43758.5453);
 }
 
+vec3 hash33(vec3 p) {
+    float n = sin(dot(p, vec3(7, 157, 113)));
+    return fract(vec3(2097152, 262144, 32768)*n);
+}
+
 float noise( in vec2 x ) {
     vec2 p = floor(x), f = smoothstep(0.0, 1.0, fract(x));
     float k = 13.0, n = p.x + p.y*k;
-    return mix(mix(hash(n),   hash(n+1.0),    f.x),
+    return mix(mix(hash(n),   hash(n+1.0),   f.x),
                mix(hash(n+k), hash(n+k+1.0), f.x), f.y);
 }
 
 float fbm4( vec2 p ){
+    const mat2 m = mat2( 0.8,  0.6, -0.6,  0.8 );
     float f = 0.0;
     f += 0.5000*noise( p ); p = m*p*2.02;
     f += 0.2500*noise( p ); p = m*p*2.03;
     f += 0.1250*noise( p ); p = m*p*2.01;
     f += 0.0625*noise( p );
     return f/0.9375;
-}
-
-vec3 hash33(vec3 p) {
-    float n = sin(dot(p, vec3(7, 157, 113)));
-    return fract(vec3(2097152, 262144, 32768)*n);
 }
 
 float voronoi(vec3 p) {
@@ -63,7 +65,10 @@ float voronoi(vec3 p) {
 }
 
 
-float channel(vec2 uv, float j){
+//////
+
+
+float nebulaChannel(vec2 uv, float j){
     float k = 1.0 - length(uv);
     vec3 p = normalize(vec3(uv, k));
     vec3 t;
@@ -82,76 +87,95 @@ float channel(vec2 uv, float j){
     return tot;
 }
 
+vec3 nebula(vec2 uv) {
+    vec3 c;
+    c.r += nebulaChannel(uv, 0.0);
+    c.g += nebulaChannel(uv, 0.15);
+    c.b += nebulaChannel(uv, 0.3);
 
-void main() {
+    c.rgb *= mix(
+      getColor(1.1),
+      mix(getColor(2.1), getColor(3.1), gl_FragCoord.y/resolution.y),
+      gl_FragCoord.x/resolution.x
+    ) *2.;
+    c.rgb = pow(c.rgb, vec3(0.5));
+    c.rgb *= noise2d(uv / 2.0 + ${rnd(33)});
 
-    vec2 uv = gl_FragCoord.xy/resolution-0.5;
-    uv.x *= resolution.x/resolution.y;
+    return c;
+}
+
+float star(vec2 uv, vec2 pos, float size){
+  return smoothstep(0.4, 0.0, pow((length(uv+pos)), size));
+}
 
 
+vec3 stars(vec2 uv) {
+    vec3 c;
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, sin(time)*0.1+${0.1+rnd(0.1)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.25)})*getColor(${rnd(111)});
+    ${rnd(1)>0.?`c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.02))}, ${0.25+rnd(0.25)})*vec3(1.);`:''}
+    return c;
+}
+
+const float eyeRadius = ${eyeRadius};
+
+
+vec3 eye (vec2 uv){
+    uv *= ${rotate2d(rnd(7))};
 
     vec3 c;
-
-    // gl_FragColor.rgb += 0.5+0.5*sign(
-    //   noise2d(uv/2.)*noise2d(uv*444.)
-    // );
-
-    gl_FragColor.r += channel(uv, 0.0);
-    gl_FragColor.g += channel(uv, 0.1);
-    gl_FragColor.b += channel(uv, 0.2);
-    gl_FragColor.a = 1.0;
-    gl_FragColor.rgb *= getColor(4.)*2.;
-
-    gl_FragColor.rgb *= sign(length(uv)-0.25)*0.5+0.5;
-    gl_FragColor.rgb = pow(gl_FragColor.rgb, vec3(0.5));
-
-   gl_FragColor.rgb *=noise2d(uv/2.+${rnd(33)});
-
-
-    // some stars
-    gl_FragColor.rgb += smoothstep(0.4, 0.0, pow((length(uv+${rndVec2(.88,.88,-.44)})),0.5));
-    gl_FragColor.rgb += smoothstep(0.4, 0.0, pow((length(uv+${rndVec2(.88,.88,-.44)})),0.2));
-    gl_FragColor.rgb += smoothstep(0.4, 0.0, pow((length(uv+${rndVec2(.88,.88,-.44)})),0.2));
-    gl_FragColor.rgb += smoothstep(0.4, 0.0, pow((length(uv+${rndVec2(.88,.88,-.44)})),0.2));
-    gl_FragColor.rgb += smoothstep(0.4, 0.0, pow((length(uv+${rndVec2(.88,.88,-.44)})),0.2));
-
-
-    uv *= mat2(0.9848, 0.1736, -0.1736, 0.9848); // 10 deg
-
     float d = length(uv);
-
-
-    // eye
     float a = atan(uv.y, uv.x);
     float d1 = d + noise(uv*4.+ time*0.5)*0.02;
-    float a1 = fbm4(vec2(${rnd(5)+11}*a, d*22.-time))*7.;
+    float a1 = fbm4(vec2(${rnd(5)+11}*a, d*0.22-time))*7.;
     float d2 = d1 + sin(a1+d1*${rnd(111)+44})*0.003;
-    float v = smoothstep(0.3, 0.05, d2);
+    float v = smoothstep(eyeRadius, 0.05, d2);
     float dr = sin(time)*${0.01+rnd(0.003)}
         + cos(time*2.)*${0.01+rnd(0.003)}
       + noise(uv*${11+rnd(4)}+ time)*${0.005+rnd(0.003)}
-      + ${0.05+rnd(0.1)};
+      + ${eyeRadius/2};
     v *= smoothstep(dr, dr+${rnd(0.1)+0.02}, d1);
 
 
+    vec3 eyeColor = getColor(2.);
+    ${rnd(1)>0. ? `
 
-    // float mixk = noise2d(
-    //   -time*0.3 + vec2(atan(uv.x,uv.y)*${rnd(11)+4},
-    //   atan(uv.x, uv.y) + length(uv)*${rnd(11)})
-    // ) + sin(length(uv)*11.);
-    // vec3 col = mix(getColor(2.), getColor(3.), clamp(0.,1.,mixk/length(uv)*2.));
+     float mixk = noise2d(
+       sign(${rnd(1)-0.5})*time*0.1 +
+       vec2(atan(uv.x,uv.y) +${(1+rndInt(3))*6.283},
+        length(uv)*${(1+rndInt(3))*6.283})
+     ) + sin(length(uv)*11.);
 
-    c += getColor(2.)*1.5*v;
+    eyeColor = mix(eyeColor, getColor(0.)*2., mixk);
+
+      if (uv.y<0.)
+     eyeColor *= smoothstep( 0., .1,
+        abs(uv.x)-${rnd(0.01)}
+     )
+     ;
+
+    ` : ''}
+
+
+
+    c += eyeColor*1.5*v;
 
     // contour
     c += vec3(
-        smoothstep(0.005+sin(time)*0.002, 0.0, abs(d-0.254)),
-        smoothstep(0.005, 0.0, abs(d-0.252)),
-        smoothstep(0.005+cos(time)*0.002, 0.0, abs(d-0.250))
+        smoothstep(0.005+sin(time)*0.002, 0.0, abs(d-eyeRadius+0.004)),
+        smoothstep(0.005, 0.0, abs(d-eyeRadius + 0.002)),
+        smoothstep(0.005+cos(time)*0.002, 0.0, abs(d-eyeRadius))
     )*0.15;
 
     // flare
-    c += smoothstep(0.4, 0.0, pow((length(uv+${rndVec2(.44,.44,-.22)})),0.4));
+     c += smoothstep(0.4, 0.0, pow((length(uv+${rndVec2fromPolar(eyeRadius - rnd(eyeRadius/4)-eyeRadius/8)})),${rnd(0.3)+0.1}));
 
 
     // // top eyelid
@@ -162,11 +186,20 @@ void main() {
     //
     // // bottom eyelid
     // c *= smoothstep(0.6, 0.59, length(uv+vec2(0.0,-${0.3+rnd(0.1)})));
-
-    gl_FragColor += vec4(c, 1.0);
+    return c;
 }
 
-        `);
+void main() {
+    vec2 uv = gl_FragCoord.xy/resolution-0.5;
+    uv.x *= resolution.x/resolution.y;
+    gl_FragColor.a = 1.0;
+    gl_FragColor.rgb += nebula(uv);
+    gl_FragColor.rgb += stars(uv);
+    gl_FragColor.rgb *= sign(length(uv)-eyeRadius)*0.5+0.5;
+    gl_FragColor.rgb += eye(uv);
+}
+
+`);
   }
 
   requestAnimationFrame(function draw(t){

@@ -20,8 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/gen/ready/eye/100.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/ready/eye/eye.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/ready/eye/lib.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gen/eye.html" beforeDir="false" afterPath="$PROJECT_DIR$/gen/eye.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/lib.js" beforeDir="false" afterPath="$PROJECT_DIR$/gen/lib.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,17 +71,17 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gen/ready/simplicity" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gen/ready/eye" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gen/ready/eye" />
       <recent name="$PROJECT_DIR$/gen/ready/simplicity" />
       <recent name="$PROJECT_DIR$/gen" />
       <recent name="$PROJECT_DIR$/gen/ready" />
       <recent name="$PROJECT_DIR$/gen/ready/steam-cells" />
-      <recent name="$PROJECT_DIR$/gen/ready/netgra" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/gen" />
@@ -149,7 +153,7 @@
       <workItem from="1630685341460" duration="13495000" />
       <workItem from="1630834314865" duration="14410000" />
       <workItem from="1630921964291" duration="52963000" />
-      <workItem from="1631100925019" duration="32970000" />
+      <workItem from="1631100925019" duration="51873000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -368,7 +372,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631224313884</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="gen">
+      <created>1631256135933</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1631256135933</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,17 +414,5 @@
     <MESSAGE value="нфт" />
     <MESSAGE value="gen" />
     <option name="LAST_COMMIT_MESSAGE" value="gen" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/gen/eye.html</url>
-          <line>105</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
