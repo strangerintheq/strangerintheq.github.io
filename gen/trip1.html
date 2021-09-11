@@ -7,6 +7,7 @@
     <meta property="og:image" content="thumbnail.gif" />
 </head>
 <body>
+<script src="100.js"></script>
 <script src="lib.js"></script>
 <script>
     let prog
@@ -27,29 +28,33 @@ mat2 rot(float a) {
 
 vec3 trip(vec2 uv) {
         vec2 p = uv - vec2(${rnd(1)-0.5},${rnd(1)-0.5});
-         uv -= vec2(${rnd(2)-1},${rnd(2)-1});
-         // uv /= ${rnd(3)+1};
-        for (float i=0.;i<${2+rnd(5)}; i++) {
-            uv = abs(uv) - i*0.02 ;
-                    uv-= i*${rnd(0.1)}
-                    //+ floor(p.x*${rnd(4)}+time)*0.01
-                        // +atan(uv.y,uv.x)*${rnd(0.1)}
-                    ;
+          uv -= vec2(${rnd(0.2)-.1},${rnd(0.2)-.1});
+          uv *= rot(${rnd(11)});
+        for (float i=0.;i<${2+rnd(13)}; i++) {
+            uv = abs(uv) -0.3;
+            uv -= i*${rnd(0.1)}
+                // + floor(p.x*${rnd(4)}+time)*0.01
+                 +atan(uv.y,uv.x)*${rnd(0.1)}
+                ;
             uv *= rot(i*0.1);
         }
 
         float f = uv.x - uv.y + p.x*${rnd(8)-4} - p.y*${rnd(8)-4}*sin(uv.x)
-            // + atan(p.y,p.x)/${1+rnd(3)}
-            + length(p)*${rnd(4)}
+            + atan(p.y,p.x)/${1+rnd(3)}
+            + length(p+time*0.1)*${rnd(4)}
             ;
-        vec3 color1 =  getColor(f) ;
-        vec3 color2 =  getColor(f+1.) ;
-        vec3 color3 =  getColor(f+2.) ;
 
-        float v = fract(uv.y*${2+rnd(14)}) + noise2d(p*${rnd(400)+200}) ;
-        float v1 = length(p) ;
+        float seed = uv.y*${2+rnd(14)};
+        float v = fract(seed) + noise2d(p*${rnd(400)+200}+time) ;
+
+        vec3 color1 =  getColor(f+floor(seed)) ;
+        vec3 color2 =  getColor(f+1.+floor(seed)) ;
+        vec3 color3 =  getColor(f+2.+floor(seed)) ;
+
+
+        float v1 = sin(time+uv.y)*0.5+0.5 ;
         vec3 col =  mix(color1, color2, clamp(0.,1.,v));
-        col = mix(col, color3, clamp(0.,1.,v1));
+        col = mix(col, color3, clamp(0.,1., v1));
         return col;
 }
 
@@ -79,8 +84,11 @@ void main() {
     })
 
 
-    addEventListener('pointerdown', e => (!e || e.button === 0) && newArt());
-    addEventListener('resize', e => prog.draw());
+    addEventListener('pointerdown', ev => (!ev || ev.button === 0) && newArt());
+    addEventListener('resize', ev => prog.draw());
+    addEventListener('keyup', ev => {
+
+    })
     newArt();
 </script>
 </body>
