@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>negtra</title>
+</head>
+<body>
+    <style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    * {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+</style>
+    <script src="lib.js"></script>
+    <script>
+
+        function newArt() {
+
+            const old = document.querySelector('canvas');
+            old && old.remove();
+            const canvas = document.createElement('canvas');
+            document.body.append(canvas);
+
+            const webglProgram = program(canvas, `
+
+        ${glslGetColorFunction()}
+
+        void main() {
+            vec2 uv = gl_FragCoord.xy/resolution;
+            vec2 p = uv - 0.5;
+            p.x *= resolution.x/resolution.y;
+            p *= ${rotate2d(rnd(7))};
+            float l = length(p);
+
+            p += vec2(${rnd(1)},${rnd(1)});
+            p *= ${rnd(2)};
+
+
+            for (int i = 0; i < ${3 + 2*rndInt(3)}; i++ ){
+                p = abs(p)/dot(p,p);
+                p -= float(i) * ${rnd(0.5)};
+            }
+
+
+            float id = p.x+p.y+ l* ${1+rnd(7)};
+            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.1)
+                id++;
+            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.2)
+                id++;
+            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.3)
+                id++;
+            if (length(uv-0.3 - vec2(${rnd(0.4)},${rnd(0.4)}))<0.4)
+                id++;
+
+              vec3 color1 = getColor(id);
+            vec3 color2 = getColor(id + 1.0);
+            vec3 color = mix(color1, color2, clamp(0.0, 1.0, fract(uv.x*10.+id)));
+
+
+            uv *= 1.0 - uv.yx;
+            float vig = uv.x*uv.y * 15.0;
+            vig = pow(vig, 0.2 + ${rnd(0.2)});
+
+
+            gl_FragColor = vec4(vig*color, 1.0);
+        }
+    `);
+
+            webglProgram.draw();
+        }
+
+        addEventListener('pointerdown', e => {
+            (!e || e.button === 0) && newArt()
+        });
+
+        newArt();
+
+    </script>
+</body>
+</html>

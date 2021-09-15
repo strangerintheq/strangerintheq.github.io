@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EYE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:image" content="thumbnail.gif" />
+</head>
+<body>
+<script src="100.js"></script>
+<script src="lib.js"></script>
+<script>
+  let prog;
+
+  function newArt() {
+    const eyeRadius = rnd(0.3) + 0.1;
+    prog = program(recreateCanvas(), `
+
+${glslGetColorFunction()}
+${glslNoise2dFunction()}
+
+
+uniform float time;
+
+float hash( float n ){
+    return fract(sin(n)*43758.5453);
+}
+
+vec3 hash33(vec3 p) {
+    float n = sin(dot(p, vec3(7, 157, 113)));
+    return fract(vec3(2097152, 262144, 32768)*n);
+}
+
+float noise( in vec2 x ) {
+    vec2 p = floor(x), f = smoothstep(0.0, 1.0, fract(x));
+    float k = 13.0, n = p.x + p.y*k;
+    return mix(mix(hash(n),   hash(n+1.0),   f.x),
+               mix(hash(n+k), hash(n+k+1.0), f.x), f.y);
+}
+
+float fbm4( vec2 p ){
+    const mat2 m = mat2( 0.8,  0.6, -0.6,  0.8 );
+    float f = 0.0;
+    f += 0.5000*noise( p ); p = m*p*2.02;
+    f += 0.2500*noise( p ); p = m*p*2.03;
+    f += 0.1250*noise( p ); p = m*p*2.01;
+    f += 0.0625*noise( p );
+    return f/0.9375;
+}
+
+float voronoi(vec3 p) {
+    vec3 b, r, g = floor(p);
+    p = fract(p);
+    float d = 1.;
+    for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 3; i++) {
+            for (int k = 0; k < 3; k++) {
+                b = vec3(i, j, k) - 1.0;
+                r = b - p + hash33(g + b);
+                d = min(d, dot(r,r));
+            }
+        }
+    }
+    return d;
+}
+
+
+//////
+
+
+float nebulaChannel(vec2 uv, float j){
+    float k = 1.0 - length(uv);
+    vec3 p = normalize(vec3(uv, k));
+    vec3 t;
+    float tot = 0.0, amp = 1.0;
+
+    for (float i = 0.0; i < 5.0; i++) {
+        amp *= ${0.3+rnd(0.2)};
+        p *= ${2+rnd(1)};
+        vec3 dp = vec3(
+            j+${rnd(0.3)}*cos(i)*i*k,
+            j+${rnd(0.3)}*sin(i)*i*k,
+            ${rnd(0.3)}*time
+        );
+        tot += voronoi(p+t+dp) * amp;
+    }
+    return tot;
+}
+
+vec3 nebula(vec2 uv) {
+    vec3 c;
+    c.r += nebulaChannel(uv, 0.0);
+    c.g += nebulaChannel(uv, 0.15);
+    c.b += nebulaChannel(uv, 0.3);
+
+    c.rgb *= mix(
+      getColor(1.1),
+      mix(getColor(2.1), getColor(3.1), gl_FragCoord.y/resolution.y),
+      gl_FragCoord.x/resolution.x
+    ) *2.;
+    c.rgb = pow(c.rgb, vec3(0.5));
+    c.rgb *= noise2d(uv / 2.0 + ${rnd(33)});
+
+    return c;
+}
+
+float star(vec2 uv, vec2 pos, float size){
+  return smoothstep(0.4, 0.0, pow((length(uv+pos)), size));
+}
+
+
+vec3 stars(vec2 uv) {
+    vec3 c;
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, sin(time)*0.1+${0.1+rnd(0.1)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.15)})*getColor(${rnd(111)});
+    c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.5-eyeRadius))}, ${0.1+rnd(0.25)})*getColor(${rnd(111)});
+    ${rnd(1)>0.?`c.rgb += star(uv, ${rndVec2fromPolar(eyeRadius + rnd(0.02))}, ${0.25+rnd(0.25)})*vec3(1.);`:''}
+    return c;
+}
+
+const float eyeRadius = ${eyeRadius};
+
+
+vec3 eye (vec2 uv){
+    uv *= ${rotate2d(rnd(7))};
+
+    vec3 c;
+    float d = length(uv);
+    float a = atan(uv.y, uv.x);
+    float d1 = d + noise(uv*4.+ time*0.5)*0.02;
+    float a1 = fbm4(vec2(${rnd(5)+11}*a, d*0.22-time))*7.;
+    float d2 = d1 + sin(a1+d1*${rnd(111)+44})*0.003;
+    float v = smoothstep(eyeRadius, 0.05, d2);
+    float dr = sin(time)*${0.01+rnd(0.003)}
+        + cos(time*2.)*${0.01+rnd(0.003)}
+      + noise(uv*${11+rnd(4)}+ time)*${0.005+rnd(0.003)}
+      + ${eyeRadius/2};
+    v *= smoothstep(dr, dr+${rnd(0.1)+0.02}, d1);
+
+
+    vec3 eyeColor = getColor(2.);
+    ${rnd(1)>0. ? `
+
+     float mixk = noise2d(
+       sign(${rnd(1)-0.5})*time*0.1 +
+       vec2(atan(uv.x,uv.y) +${(1+rndInt(3))*6.283},
+        length(uv)*${(1+rndInt(3))*6.283})
+     ) + sin(length(uv)*11.);
+
+    eyeColor = mix(eyeColor, getColor(0.)*2., mixk);
+
+      if (uv.y<0.)
+     eyeColor *= smoothstep( 0., .1,
+        abs(uv.x)-${rnd(0.01)}
+     )
+     ;
+
+    ` : ''}
+
+
+
+    c += eyeColor*1.5*v;
+
+    // contour
+    c += vec3(
+        smoothstep(0.005+sin(time)*0.002, 0.0, abs(d-eyeRadius+0.004)),
+        smoothstep(0.005, 0.0, abs(d-eyeRadius + 0.002)),
+        smoothstep(0.005+cos(time)*0.002, 0.0, abs(d-eyeRadius))
+    )*0.15;
+
+    // flare
+     c += smoothstep(0.4, 0.0, pow((length(uv+${rndVec2fromPolar(eyeRadius - rnd(eyeRadius/4)-eyeRadius/8)})),${rnd(0.3)+0.1}));
+
+
+    // // top eyelid
+    // float t = smoothstep(0.0, 0.5, abs(fract(time*0.4)-0.5)*10.0)*2.0 - 1.0;
+    // float r = 0.5 / abs(t);
+    // float y = r * sign(t) - t*0.28+0.05;
+    // c *= smoothstep(r, r-0.01* sign(t), length(uv+vec2(0., y)));
+    //
+    // // bottom eyelid
+    // c *= smoothstep(0.6, 0.59, length(uv+vec2(0.0,-${0.3+rnd(0.1)})));
+    return c;
+}
+
+void main() {
+    vec2 uv = gl_FragCoord.xy/resolution-0.5;
+    uv.x *= resolution.x/resolution.y;
+    gl_FragColor.a = 1.0;
+    gl_FragColor.rgb += nebula(uv);
+    gl_FragColor.rgb += stars(uv);
+    gl_FragColor.rgb *= sign(length(uv)-eyeRadius)*0.5+0.5;
+    gl_FragColor.rgb += eye(uv);
+}
+
+`);
+  }
+
+  requestAnimationFrame(function draw(t){
+    prog && prog.uf1('time', t/1000)
+    prog && prog.draw();
+    requestAnimationFrame(draw)
+  })
+
+  addEventListener('pointerdown', e => (!e || e.button === 0) && newArt());
+  addEventListener('resize', e => prog.draw());
+  newArt();
+</script>
+</body>
+</html>

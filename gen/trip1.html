@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>trip</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="thumbnail.gif" />
+</head>
+<body>
+<script src="100.js"></script>
+<script src="lib.js"></script>
+<script>
+    let prog
+    function newArt() {
+        prog = program(recreateCanvas(), `
+
+uniform float time;
+
+${glslVignetteFunction()}
+${glslNoise2dFunction()}
+${glslGetColorFunction()}
+
+mat2 rot(float a) {
+    float cs = cos(a);
+    float sn = sin(a);
+    return mat2(cs,sn,-sn,cs);
+}
+
+vec3 trip(vec2 uv) {
+        vec2 p = uv - vec2(${rnd(1)-0.5},${rnd(1)-0.5});
+          uv -= vec2(${rnd(0.2)-.1},${rnd(0.2)-.1});
+          uv *= rot(${rnd(11)});
+        for (float i=0.;i<${2+rnd(13)}; i++) {
+            uv = abs(uv) -0.3;
+            uv -= i*${rnd(0.1)}
+                // + floor(p.x*${rnd(4)}+time)*0.01
+                 +atan(uv.y,uv.x)*${rnd(0.1)}
+                ;
+            uv *= rot(i*0.1);
+        }
+
+        float f = uv.x - uv.y + p.x*${rnd(8)-4} - p.y*${rnd(8)-4}*sin(uv.x)
+            + atan(p.y,p.x)/${1+rnd(3)}
+            + length(p+time*0.1)*${rnd(4)}
+            ;
+
+        float seed = uv.y*${2+rnd(14)};
+        float v = fract(seed) + noise2d(p*${rnd(400)+200}+time) ;
+
+        vec3 color1 =  getColor(f+floor(seed)) ;
+        vec3 color2 =  getColor(f+1.+floor(seed)) ;
+        vec3 color3 =  getColor(f+2.+floor(seed)) ;
+
+
+        float v1 = sin(time+uv.y)*0.5+0.5 ;
+        vec3 col =  mix(color1, color2, clamp(0.,1.,v));
+        col = mix(col, color3, clamp(0.,1., v1));
+        return col;
+}
+
+void main() {
+    vec2 uv = gl_FragCoord.xy/resolution - 0.5;
+    uv.x *= resolution.x/resolution.y;
+    vec3 color;
+    color += trip(uv + vec2(-0.2, -0.2)/resolution);
+    color += trip(uv + vec2(+0.5, -0.2)/resolution);
+    color += trip(uv + vec2(-0.2, +0.2)/resolution);
+    color += trip(uv + vec2(+0.2, +0.2)/resolution);
+    color /= 4.;
+    // color *= vignette(${0.2 + rnd(0.2)});
+    gl_FragColor = vec4(color, 1.0);
+}
+
+        `);
+
+
+    }
+
+
+    requestAnimationFrame(function animate(t){
+        prog &&prog.uf1('time', t/1000)
+        prog &&prog.draw();
+        requestAnimationFrame(animate)
+    })
+
+
+    addEventListener('pointerdown', ev => (!ev || ev.button === 0) && newArt());
+    addEventListener('resize', ev => prog.draw());
+    addEventListener('keyup', ev => {
+
+    })
+    newArt();
+</script>
+</body>
+</html>

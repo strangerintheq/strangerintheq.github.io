@@ -43,9 +43,9 @@
     regenerate();
 
     function resize ()  {
-        w = canvas.width = innerWidth*devicePixelRatio;
-        h = canvas.height = innerHeight*devicePixelRatio;
-        s = Math.min(w,h)
+        w = canvas.width = innerWidth;
+        h = canvas.height = innerHeight;
+        s = Math.min(w,h)*devicePixelRatio
     }
 
     function regenerate() {
@@ -54,27 +54,29 @@
         col2 = `hsla(${rnd(360)},${rnd(100)}%,75%,0.1)`
         dir = rnd(6.283)
         ctx.strokeStyle = `hsla(${rnd(360)},${rnd(100)}%,55%,0.02)`
+        ctx.lineWidth = devicePixelRatio
         bg(4e4);
+        ctx.strokeStyle = `hsla(${rnd(360)},${rnd(100)}%,55%,0.02)`
         bg(4e4);
         ctx.fillStyle='#fff3'
         triangles(33);
-        ctx.lineWidth = 5
+        ctx.lineWidth = 5*devicePixelRatio
         planet(11111);
         frame(11);
-        ctx.lineWidth = 0.2
+        ctx.lineWidth = 0.2*devicePixelRatio
         ctx.strokeStyle = "#0002"
         ctx.fillStyle = `#fff`
-        things(1e3, w/2,h/2,s/3,5);
+        things(111, w/2,h/2,s/3,5);
     }
 
     function things(n, x, y, r, level) {
         shape = rnd(3)
-        if (Math.random() > 0.7 && r < 10) {
+        if (Math.random() > 0.7 && r < 40) {
             for (let i = 0; i < n; i++) {
                 thing(
-                    rnd(10)+x,
-                    rnd(10)+y,
-                    rnd(2)+r,
+                    rnd(20)+x,
+                    rnd(20)+y,
+                    rnd(10)+r,
                     i
                 );
             }
@@ -104,20 +106,20 @@
         const shift =  rnd(6.283)
 
         ctx.moveTo(
-            x + cos(dir)*rnd(111),
-            y + sin(dir)*rnd(111)
+            x + cos(dir)*rnd(300),
+            y + sin(dir)*rnd(300)
         );
 
         for (let i = 0; i < pts; i++) {
             const a = 6.283 * i/pts +shift
-            const ri = r + sin(a*shape)*r/denom
+            const ri = r + sin(a*shape)*10
             ctx.lineTo(
                 x + cos(a)*ri,
                 y + sin(a)*ri
             )
         }
 
-        if (!(i%20)) {
+        if (!i) {
             ctx.closePath()
             ctx.fill()
         } else {
