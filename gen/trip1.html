@@ -7,7 +7,7 @@
     <meta property="og:image" content="thumbnail.gif" />
 </head>
 <body>
-<script src="100.js"></script>
+<script src="1000.js"></script>
 <script src="lib.js"></script>
 <script>
     let prog
@@ -28,28 +28,32 @@ mat2 rot(float a) {
 
 vec3 trip(vec2 uv) {
         vec2 p = uv - vec2(${rnd(1)-0.5},${rnd(1)-0.5});
-          uv -= vec2(${rnd(0.2)-.1},${rnd(0.2)-.1});
-          uv *= rot(${rnd(11)});
-        for (float i=0.;i<${2+rnd(13)}; i++) {
-            uv = abs(uv) -0.3;
+          // uv -= vec2(${rnd(0.2)-.1},${rnd(0.2)-.1});
+        uv *= rot(${rnd(11)}+time*0.01);
+        for (float i=0.;i<${5+rnd(11)}; i++) {
+
+            uv = abs(uv) - ${0.1+rnd(0.5)};
             uv -= i*${rnd(0.1)}
                 // + floor(p.x*${rnd(4)}+time)*0.01
                  +atan(uv.y,uv.x)*${rnd(0.1)}
                 ;
-            uv *= rot(i*0.1);
+            uv *= rot(i*${rnd(0.1)}+time*0.01);
         }
 
-        float f = uv.x - uv.y + p.x*${rnd(8)-4} - p.y*${rnd(8)-4}*sin(uv.x)
-            + atan(p.y,p.x)/${1+rnd(3)}
-            + length(p+time*0.1)*${rnd(4)}
+        float f = uv.x  + p.x*${rnd(8)-4} - p.y*${rnd(8)-4}*sin(uv.x)
+            // + lenght(p.y,p.x)/${1+rnd(3)}
+            + length(uv+time*0.1)*${rnd(4)}
             ;
 
-        float seed = uv.y*${2+rnd(14)};
-        float v = fract(seed) + noise2d(p*${rnd(400)+200}+time) ;
+        float seed = uv.y*${2+rnd(14)}+uv.x;
+        float v = fract(seed+p.x+time*0.2);
 
-        vec3 color1 =  getColor(f+floor(seed)) ;
-        vec3 color2 =  getColor(f+1.+floor(seed)) ;
-        vec3 color3 =  getColor(f+2.+floor(seed)) ;
+              + noise2d(p*${rnd(400)+200})
+         ;
+
+        vec3 color1 =  getColor(f+sin(seed+f)) ;
+        vec3 color2 =  getColor(f+1.+cos(seed+f) + noise2d(p*1000.)*5.) ;
+        vec3 color3 =  getColor(f+2.+sin(seed+f)) ;
 
 
         float v1 = sin(time+uv.y)*0.5+0.5 ;
@@ -63,7 +67,7 @@ void main() {
     uv.x *= resolution.x/resolution.y;
     vec3 color;
     color += trip(uv + vec2(-0.2, -0.2)/resolution);
-    color += trip(uv + vec2(+0.5, -0.2)/resolution);
+    color += trip(uv + vec2(+0.2, -0.2)/resolution);
     color += trip(uv + vec2(-0.2, +0.2)/resolution);
     color += trip(uv + vec2(+0.2, +0.2)/resolution);
     color /= 4.;
@@ -75,10 +79,14 @@ void main() {
 
 
     }
-
+    let time = 0, playing = true, t0 = 0;
 
     requestAnimationFrame(function animate(t){
-        prog &&prog.uf1('time', t/1000)
+        let dt = t - t0;
+        t0 = t;
+        if (playing)
+            time += dt/1000;
+        prog &&prog.uf1('time', time)
         prog &&prog.draw();
         requestAnimationFrame(animate)
     })
@@ -87,7 +95,7 @@ void main() {
     addEventListener('pointerdown', ev => (!ev || ev.button === 0) && newArt());
     addEventListener('resize', ev => prog.draw());
     addEventListener('keyup', ev => {
-
+        playing = !playing;
     })
     newArt();
 </script>

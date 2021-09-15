@@ -20,6 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/gen/fract.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gen/fract1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gen/trip1.html" beforeDir="false" afterPath="$PROJECT_DIR$/gen/trip1.html" afterDir="false" />
     </list>
@@ -67,16 +69,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gen/ready/eye" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gen" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/gen/ready/eye" />
-      <recent name="$PROJECT_DIR$/gen/ready/simplicity" />
       <recent name="$PROJECT_DIR$/gen" />
       <recent name="$PROJECT_DIR$/gen/ready" />
+      <recent name="$PROJECT_DIR$/gen/ready/eye" />
+      <recent name="$PROJECT_DIR$/gen/ready/simplicity" />
       <recent name="$PROJECT_DIR$/gen/ready/steam-cells" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -150,7 +152,8 @@
       <workItem from="1630834314865" duration="14410000" />
       <workItem from="1630921964291" duration="52963000" />
       <workItem from="1631100925019" duration="51887000" />
-      <workItem from="1631365817657" duration="1535000" />
+      <workItem from="1631365817657" duration="4033000" />
+      <workItem from="1631441540664" duration="15145000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -383,7 +386,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631351610020</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="gen">
+      <created>1631367474558</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1631367474558</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

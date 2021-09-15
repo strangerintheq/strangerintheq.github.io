@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fract</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="thumbnail.gif" />
+</head>
+<body>
+<script src="100.js"></script>
+<script src="lib.js"></script>
+<script>
+    let prog
+    function newArt() {
+        prog = program(recreateCanvas(), `
+
+uniform float time;
+
+${glslNoise2dFunction()}
+${glslGetColorFunction()}
+
+void main() {
+    vec2 uv = gl_FragCoord.xy/resolution - 0.5;
+    uv.x *= resolution.x/resolution.y;
+    vec2 UV = uv;
+    uv *= ${rotate2d(rnd(111))};
+    uv *= vec2(${rnd(7)+5},${rnd(7)+5})/sin(length(uv)+0.2 +
+        (3.1415+atan(uv.x,uv.y))*${rnd(0.1)+0.05});
+    uv += sign(sin(uv.x*${rnd(55)}))*${rnd(0.1)}*uv;
+    vec2 p = floor(uv)+0.5;
+    uv = fract(uv) - 1.5;
+
+    for (float i=0.;i<${5+rnd(12)*2}; i++) {
+
+        p = abs(p) - ${0.3+rnd(0.3)};
+        p = p / dot(p,p);
+        p *= ${rotate2d(rnd(111))};
+    }
+
+
+    vec3 color1 = getColor(p.x+atan(p.y,p.x)*114.+UV.x*${rnd(5)});
+    vec3 color2 = getColor(p.y+atan(p.y,p.x)/4.+length(UV)*3.-time*0.2+UV.y);
+    vec3 color3 = getColor(p.y+p.x+length(UV)*4.+time*0.3+atan(uv.x,uv.y));
+    vec3 color = mix(color1, color2, fract(noise2d(p+time/10.)+uv.x)+noise2d(uv*1000.));
+    color = mix(color, color3, fract(noise2d(p+1000.+time/10.)+uv.y));
+    uv = uv*mat2(cos(p.x),sin(p.x),-sin(p.x),cos(p.x));
+    color /= length(uv-p.y);
+    gl_FragColor = vec4(color, 1.0);
+}
+
+        `);
+
+
+    }
+    let time = 0, playing = true, t0 = 0;
+
+    requestAnimationFrame(function animate(t){
+        let dt = t - t0;
+        t0 = t;
+        if (playing)
+            time += dt/1000;
+        prog &&prog.uf1('time', time)
+        prog &&prog.draw();
+        requestAnimationFrame(animate)
+    })
+
+
+    addEventListener('pointerdown', ev => (!ev || ev.button === 0) && newArt());
+    addEventListener('resize', ev => prog.draw());
+    addEventListener('keyup', ev => {
+        playing = !playing;
+    })
+    newArt();
+</script>
+</body>
+</html>
