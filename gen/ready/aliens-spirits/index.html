@@ -37,11 +37,11 @@ float superformula(float phi, float m, float n1, float n2, float n3, float a, fl
 
 float map(in vec3 p) {
 
-    float m = 18.*noise(p.y);
+    float m = ${rnd(15)+3}*noise(p.y);
     float n1 = 1.17;
-    float n2 = sin(p.y)*noise(cos(time))*3.;
+    float n2 = sin(p.y)*noise(${rnd(1111)}+p.x+p.y+p.z)*3.;
     float n3 = 1.87*noise(p.y+31.)+noise(sin(p.y));
-    float a = sin(p.y)*noise(cos(time*.3))*3.;
+    float a = sin(p.y)*noise(${rnd(1111)}+p.x+p.y+p.z)*3.;
     float b = 1.3;
     float phi = abs(atan(p.z, p.x))+noise2d(p.xz*${rnd(1)+1}+${rnd(111)+11})*(0.03*(p.y - ro.y)+0.1);
 
@@ -55,7 +55,7 @@ void main() {
 
 
 
-	vec3 rd = normalize(vec3(uv.y-vp, resolution.y, uv.x));
+	vec3 rd = normalize(vec3(uv.y+vp, resolution.y, uv.x));
 
     for( float i=0.0; i<512.0; i++ ) {
         gl_FragColor = .999 * gl_FragColor;
@@ -63,9 +63,9 @@ void main() {
         float c = map(p);
         float l = length(p);
         gl_FragColor.rgb += vec3(
-            pow(c, 1.0001 + sin(l-time)),
+            pow(c, 1.0001 + sin(${rnd(1111111)}-l)),
             c,
-            pow(c, 1.0001 + cos(time+l))
+            pow(c, 1.0001 + cos(${rnd(1111111)}+l))
         ) * 0.03;
 
     }
