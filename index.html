@@ -123,17 +123,18 @@
     ];
 
     let links = [
-        ["hicetnunc.svg","Hic Et Nunc","https://www.hicetnunc.xyz/Stranger_in_the_Q"],
-        ["opensea.svg","Opensea","https://opensea.io/Stranger_in_the_q"],
-        ["instagram.svg","Instagram","https://www.instagram.com/stranger_in_the_q/"],
-        ["objkt.png","Objkt.com","https://objkt.com/profile/tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A"],
-        ["twitter.svg","Twitter","https://twitter.com/stranger_intheq"],
-        ["kalamint.svg","Kalamint","https://kalamint.io/user/strangerintheq"],
-        ["foundation.svg","Foundation","https://foundation.app/@Stranger_in_the_Q"],
+        ["hicetnunc.svg", "Hic Et Nunc", "https://www.hicetnunc.xyz/Stranger_in_the_Q"],
+        ["opensea.svg", "Opensea", "https://opensea.io/Stranger_in_the_q"],
+        ["insta.svg", "Instagram", "https://www.instagram.com/stranger_in_the_q/"],
+        ["objkt.png", "Objkt.com", "https://objkt.com/profile/tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A"],
+        ["twitter.svg", "Twitter", "https://twitter.com/stranger_intheq"],
+        ["kalamint.svg", "Kalamint", "https://kalamint.io/user/strangerintheq"],
+        ["foundation.svg", "Foundation", "https://foundation.app/@Stranger_in_the_Q"],
     ]
 
     document.querySelector('.projects').innerHTML = projects.map(project => {
-        return `<a onclick="setProject(this, '${project[1]}')">${project[0]}</a>`
+        return `<a data-project="${project[0]}"
+                    onclick="setProject(this, '${project[1]}')">${project[0]}</a>`
     }).join('');
 
     document.querySelector('.links').innerHTML = links.map(project => {
@@ -146,14 +147,23 @@
         let selected = document.querySelector('.selected');
         selected && selected.classList.remove('selected')
         link.classList.add('selected')
-        document.querySelector('iframe').src = prefix + '/site/loading.html';
-        setTimeout(() => {
+        // document.querySelector('iframe').src = prefix + '/site/loading.html';
+        // setTimeout(() => {
             document.querySelector('iframe').src = url;
-        }, 100)
+        // }, 100);
+        history.pushState({}, url, prefix+'/?project='+link.dataset.project)
     }
 
-    [...document.querySelectorAll('.projects a')]
-        .sort(() => Math.random() - 0.5)[0].click()
+    if (document.location.search) {
+        const proj = new URL(location.href).searchParams.get('project');
+        document.querySelector(`a[data-project="${proj}"]`).click()
+    } else {
+        [...document.querySelectorAll('.projects a')]
+            .sort(() => Math.random() - 0.5)[0].click()
+    }
+    // window.onpopstate = (s) => {
+    //     console.log(s)
+    // }
 </script>
 </body>
 </html>
