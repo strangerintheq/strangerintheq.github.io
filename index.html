@@ -7,50 +7,145 @@
 <style>
     body {
         background: #bdbdbd;
-        margin: 15px;
-        font-family: Arial, monospace
+        font-family: Arial, monospace;
+        user-select: none;
+        margin: 0;
+        overflow: hidden;
+    }
+    .root {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 100%;
+    }
+    .root > div {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        height: 100%;
+    }
+    .root > div > div{
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
     }
     a {
+        pointer-events: all;
+        cursor: pointer;
         display: block;
-        font-size: 40px;
+        font-size: 26px;
         border-radius: 5px;
         border: 2px solid #b1b1b1;
         background: white;
         color: black;
         text-decoration: none;
         margin-top: 5px;
-        width: 400px;
+        width: 300px;
         padding: 5px 0;
         transition: 300ms;
     }
-    a:hover{background: #f4f4f4
+    a:hover {
+        background: #f4f4f4;
     }
     .avatar {
+        margin: 30px 0;
         width: 200px;
         height: 200px;
-        border-radius: 50%
+        border-radius: 50%;
+        margin-left: 50px;
     }
     .about-me {
         font-size: 20px;
-        padding: 30px;
+        padding: 20px;
+        background: white;
+    }
+    .projects, .links, input {
+        display: none;
+        text-align: center;
+    }
+    input:checked ~ .projects,
+    input:checked ~ .controls > .links-link,
+    input:not(:checked) ~ .links,
+    input:not(:checked) ~ .controls > .projects-link {
+        display: block;
+    }
+    iframe {
+        border: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+    label {
+        display: inline-block;
+        width: 100px;
+        pointer-events: all;
+    }
+    .selected {
+        border-color: #565656;
+        background: #7c7c7c !important;
+        color: white;
     }
 </style>
-<center>
-<img class="avatar" src="https://ipfs.io/ipfs/QmSXvKtft31NtGavFhasPne1GSuDGGMg89SzVaikKbjCDq">
-<section class="about-me">
-    Hello! I'm Stranger in the Q and i creating art with code.
-</section>
-<section class="projects">
-    <a href="site/silicon-dream/about.html">Silicon Dream</a>
-    <a href="https://ipfs.io/ipfs/QmY2YPbLz9DvSscxqJeW3o8fxhTMsGYmEs9q91Lsedbx3C/">The Nest</a>
-    <a href="https://ipfs.io/ipfs/QmRpZzFrUnD5AGz9vPfkRMC4iCsVbyJPQKCj3v5HMxoLri/">Mozaic Perception</a>
-    <a href="https://ipfs.io/ipfs/QmXPu9MuBUXpC1Hod52MeqMamsVsdUjsFc4389A9deeSFb/">Dancing Souls</a>
-    <a href="https://ipfs.io/ipfs/QmT1V4q8TJ7Sr6HnFAW1MGubUZRkBTiSYTHwQB6TeaTzRg/">Nucle</a>
-    <a href="https://ipfs.io/ipfs/QmcNfc8dmrFyycdk2Bcj8Vs3mnKEz1rqi312wGjiwPqt2G/">Inner Sight</a>
-    <a href="https://ipfs.io/ipfs/QmbS2uRqz7iuFzAykhqBk4Ug6u8ibR31seLW7fV49yNJJ2/">Steam Cells</a>
-    <a href="https://ipfs.io/ipfs/QmdcXKbPKQmdFPudWHq38cVd8dbUiCYjPtmDkEZBN9eUji/">Escape</a>
+<div class="root">
+    <div>
+        <iframe></iframe>
+    </div>
+    <div style="z-index: 1; pointer-events: none">
+        <div style="width: 310px;margin-left: calc(100vw - 310px)">
+            <img class="avatar" src="https://ipfs.io/ipfs/QmSXvKtft31NtGavFhasPne1GSuDGGMg89SzVaikKbjCDq">
+            <section class="about-me">
+                @Stranger in the Q
+                <br><br>
+                making art with code
+            </section>
+            <input id="page-control" type="checkbox" checked>
+            <section class="controls">
+                <label for="page-control" class="projects-link">Projects</label>
+                <label for="page-control" class="links-link">Links</label>
+            </section>
+            <section class="projects"></section>
+            <section class="links"></section>
+        </div>
+    </div>
+</div>
+<script>
 
-</section>
-</center>
+    let projects = [
+        ["The Nest", "https://ipfs.io/ipfs/QmY2YPbLz9DvSscxqJeW3o8fxhTMsGYmEs9q91Lsedbx3C/"],
+        ["Mozaic Perception", "https://ipfs.io/ipfs/QmRpZzFrUnD5AGz9vPfkRMC4iCsVbyJPQKCj3v5HMxoLri/"],
+        ["Dancing Souls", "https://ipfs.io/ipfs/QmXPu9MuBUXpC1Hod52MeqMamsVsdUjsFc4389A9deeSFb/"],
+        ["Nucle", "https://ipfs.io/ipfs/QmT1V4q8TJ7Sr6HnFAW1MGubUZRkBTiSYTHwQB6TeaTzRg/"],
+        ["Inner Sight", "https://ipfs.io/ipfs/QmcNfc8dmrFyycdk2Bcj8Vs3mnKEz1rqi312wGjiwPqt2G/"],
+        ["Steam Cells", "https://ipfs.io/ipfs/QmbS2uRqz7iuFzAykhqBk4Ug6u8ibR31seLW7fV49yNJJ2/"],
+        ["Escape", "https://ipfs.io/ipfs/QmdcXKbPKQmdFPudWHq38cVd8dbUiCYjPtmDkEZBN9eUji/"],
+    ];
+
+    let links = [
+        ["Hic Et Nunc","https://www.hicetnunc.xyz/Stranger_in_the_Q"],
+        ["Opensea","https://opensea.io/Stranger_in_the_q"],
+        ["Foundation","https://foundation.app/@Stranger_in_the_Q"],
+        ["Kalamint","https://kalamint.io/user/strangerintheq"],
+        ["Twitter","https://twitter.com/stranger_intheq"],
+    ]
+
+    document.querySelector('.projects').innerHTML = projects.map(project => {
+        return `<a onclick="setProject(this, '${project[1]}')">${project[0]}</a>`
+    }).join('');
+
+    document.querySelector('.links').innerHTML = links.map(project => {
+        return `<a href="${project[1]}" target="_blank">${project[0]}</a>`
+    }).join('');
+
+    function setProject(link, url) {
+        let selected = document.querySelector('.selected');
+        selected && selected.classList.remove('selected')
+        link.classList.add('selected')
+        document.querySelector('iframe').src = url;
+    }
+
+    [...document.querySelectorAll('.projects a')]
+        .sort(() => Math.random() - 0.5)
+        [0].click()
+</script>
 </body>
 </html>
