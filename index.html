@@ -6,7 +6,7 @@
 <body>
 <style>
     body {
-        background: #bdbdbd;
+        background: #000;
         font-family: Arial, monospace;
         user-select: none;
         margin: 0;
@@ -32,6 +32,9 @@
     }
     a {
         pointer-events: all;
+    }
+    .projects a {
+        text-align: center;
         cursor: pointer;
         display: block;
         font-size: 26px;
@@ -45,7 +48,7 @@
         padding: 5px 0;
         transition: 300ms;
     }
-    a:hover {
+    .projects a:hover {
         background: #f4f4f4;
     }
     .avatar {
@@ -59,16 +62,6 @@
         font-size: 20px;
         padding: 20px;
         background: white;
-    }
-    .projects, .links, input {
-        display: none;
-        text-align: center;
-    }
-    input:checked ~ .projects,
-    input:checked ~ .controls > .links-link,
-    input:not(:checked) ~ .links,
-    input:not(:checked) ~ .controls > .projects-link {
-        display: block;
     }
     iframe {
         border: 0;
@@ -85,6 +78,14 @@
         background: #7c7c7c !important;
         color: white;
     }
+    a img {
+        height: 40px;
+        width: 40px;
+    }
+    .links a {
+        font-size: 0;
+        padding-right: 10px;
+    }
 </style>
 <div class="root">
     <div>
@@ -97,18 +98,18 @@
                 @Stranger in the Q
                 <br><br>
                 making art with code
+                <br><br>
+                <section class="links"></section>
             </section>
-            <input id="page-control" type="checkbox" checked>
-            <section class="controls">
-                <label for="page-control" class="projects-link">Projects</label>
-                <label for="page-control" class="links-link">Links</label>
-            </section>
+
             <section class="projects"></section>
-            <section class="links"></section>
         </div>
     </div>
 </div>
 <script>
+    let prefix = '';
+    if (document.location.href.indexOf("localhost") > -1)
+        prefix = '/strangerintheq.github.io'
 
     let projects = [
         ["The Nest", "https://ipfs.io/ipfs/QmY2YPbLz9DvSscxqJeW3o8fxhTMsGYmEs9q91Lsedbx3C/"],
@@ -117,15 +118,16 @@
         ["Nucle", "https://ipfs.io/ipfs/QmT1V4q8TJ7Sr6HnFAW1MGubUZRkBTiSYTHwQB6TeaTzRg/"],
         ["Inner Sight", "https://ipfs.io/ipfs/QmcNfc8dmrFyycdk2Bcj8Vs3mnKEz1rqi312wGjiwPqt2G/"],
         ["Steam Cells", "https://ipfs.io/ipfs/QmbS2uRqz7iuFzAykhqBk4Ug6u8ibR31seLW7fV49yNJJ2/"],
-        ["Escape", "https://ipfs.io/ipfs/QmdcXKbPKQmdFPudWHq38cVd8dbUiCYjPtmDkEZBN9eUji/"],
+        ["NETGRA", "https://ipfs.io/ipfs/QmbMGC42M11ZSdCTua6rK8TgT3VpzTQuGWQYBjxzqs6UzC?objkt=270003&creator=tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A&viewer=tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A/"],
+        // ["Escape", "https://ipfs.io/ipfs/QmdcXKbPKQmdFPudWHq38cVd8dbUiCYjPtmDkEZBN9eUji/"],
     ];
 
     let links = [
-        ["Hic Et Nunc","https://www.hicetnunc.xyz/Stranger_in_the_Q"],
-        ["Opensea","https://opensea.io/Stranger_in_the_q"],
-        ["Foundation","https://foundation.app/@Stranger_in_the_Q"],
-        ["Kalamint","https://kalamint.io/user/strangerintheq"],
-        ["Twitter","https://twitter.com/stranger_intheq"],
+        ["hicetnunc.svg","Hic Et Nunc","https://www.hicetnunc.xyz/Stranger_in_the_Q"],
+        ["opensea.svg","Opensea","https://opensea.io/Stranger_in_the_q"],
+        ["foundation.svg","Foundation","https://foundation.app/@Stranger_in_the_Q"],
+        ["kalamint.svg","Kalamint","https://kalamint.io/user/strangerintheq"],
+        ["twitter.svg","Twitter","https://twitter.com/stranger_intheq"],
     ]
 
     document.querySelector('.projects').innerHTML = projects.map(project => {
@@ -133,19 +135,23 @@
     }).join('');
 
     document.querySelector('.links').innerHTML = links.map(project => {
-        return `<a href="${project[1]}" target="_blank">${project[0]}</a>`
+        return `<a href="${project[2]}" target="_blank">
+            <img src="${prefix + '/site/links/'+project[0]}" title="${project[1]}">
+        </a>`;
     }).join('');
 
     function setProject(link, url) {
         let selected = document.querySelector('.selected');
         selected && selected.classList.remove('selected')
         link.classList.add('selected')
-        document.querySelector('iframe').src = url;
+        document.querySelector('iframe').src = prefix + '/site/loading.html';
+        setTimeout(() => {
+            document.querySelector('iframe').src = url;
+        }, 100)
     }
 
     [...document.querySelectorAll('.projects a')]
-        .sort(() => Math.random() - 0.5)
-        [0].click()
+        .sort(() => Math.random() - 0.5)[0].click()
 </script>
 </body>
 </html>

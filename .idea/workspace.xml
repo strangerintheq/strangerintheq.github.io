@@ -19,9 +19,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
+    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="§">
+      <change afterPath="$PROJECT_DIR$/site/links/foundation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/site/links/hicetnunc.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/site/links/kalamint.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/site/links/opensea.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/site/links/twitter.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/site/loading.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/aliens.html" beforeDir="false" afterPath="$PROJECT_DIR$/gen/aliens.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/silicon-dream/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/projects/silicon-dream/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/silicon-dream/img.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/site/projects/silicon-dream/img.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/silicon-dream/preview.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/site/projects/silicon-dream/preview.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/silicon-dream/rgba.js" beforeDir="false" afterPath="$PROJECT_DIR$/site/projects/silicon-dream/rgba.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/silicon-dream/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/site/projects/silicon-dream/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,23 +78,24 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gen" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/site/silicon-dream" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/gen" />
+      <recent name="$PROJECT_DIR$/site/silicon-dream" />
+      <recent name="$PROJECT_DIR$/gen/ready/inner-sight" />
       <recent name="$PROJECT_DIR$/gen/ready" />
-      <recent name="$PROJECT_DIR$/gen/ready/eye" />
-      <recent name="$PROJECT_DIR$/gen/ready/simplicity" />
-      <recent name="$PROJECT_DIR$/gen/ready/steam-cells" />
+      <recent name="$PROJECT_DIR$/gen/ready/fraction-2" />
+      <recent name="$PROJECT_DIR$/gen/ready/fraction" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/site/projects" />
       <recent name="$PROJECT_DIR$/gen" />
+      <recent name="$PROJECT_DIR$/gen/ready/aliens-spirits" />
       <recent name="$PROJECT_DIR$/gen/ready/simplicity" />
       <recent name="$PROJECT_DIR$/gen/ready/netgra" />
-      <recent name="D:\strangerintheq.github.io\hen\spiritual_body\src" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.build.js (5)">
@@ -99,7 +111,7 @@
     <configuration name="build.js (4)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/gen01/build.js" working-dir="$PROJECT_DIR$/hen/gen01">
       <method v="2" />
     </configuration>
-    <configuration name="build.js (5)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/shader/build.js" working-dir="$PROJECT_DIR$/hen/shader">
+    <configuration name="build.js (5)" type="NodeJSConfigurationType" temporary="true" path-to-js-file="$PROJECT_DIR$/hen/shader/build.js" working-dir="$PROJECT_DIR$/hen/shader">
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -151,7 +163,8 @@
       <workItem from="1630921964291" duration="52963000" />
       <workItem from="1631100925019" duration="51887000" />
       <workItem from="1631365817657" duration="4033000" />
-      <workItem from="1631441540664" duration="17860000" />
+      <workItem from="1631441540664" duration="36563000" />
+      <workItem from="1633881989775" duration="14585000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -412,7 +425,49 @@
       <option name="project" value="LOCAL" />
       <updated>1631772967758</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="gen">
+      <created>1631773619530</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1631773619530</updated>
+    </task>
+    <task id="LOCAL-00039" summary="gen">
+      <created>1631822751473</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1631822751473</updated>
+    </task>
+    <task id="LOCAL-00040" summary="gen">
+      <created>1631980681769</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1631980681769</updated>
+    </task>
+    <task id="LOCAL-00041" summary="§">
+      <created>1633882293219</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1633882293219</updated>
+    </task>
+    <task id="LOCAL-00042" summary="site">
+      <created>1633888888772</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1633888888772</updated>
+    </task>
+    <task id="LOCAL-00043" summary="site">
+      <created>1633895420776</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1633895420776</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,6 +501,8 @@
     <MESSAGE value="hic" />
     <MESSAGE value="нфт" />
     <MESSAGE value="gen" />
-    <option name="LAST_COMMIT_MESSAGE" value="gen" />
+    <MESSAGE value="§" />
+    <MESSAGE value="site" />
+    <option name="LAST_COMMIT_MESSAGE" value="site" />
   </component>
 </project>
