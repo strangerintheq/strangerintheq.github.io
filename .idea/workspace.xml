@@ -19,20 +19,378 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="§">
-      <change afterPath="$PROJECT_DIR$/site/links/foundation.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/links/hicetnunc.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/links/kalamint.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/links/opensea.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/links/twitter.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/loading.html" afterDir="false" />
+    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/silicon-dream/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/projects/silicon-dream/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/silicon-dream/img.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/site/projects/silicon-dream/img.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/silicon-dream/preview.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/site/projects/silicon-dream/preview.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/silicon-dream/rgba.js" beforeDir="false" afterPath="$PROJECT_DIR$/site/projects/silicon-dream/rgba.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/silicon-dream/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/site/projects/silicon-dream/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/MMCoordinatesConverterTest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/PrimitivesMathTest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/ScreenSpacePathTest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/data/KML_Samples.kml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/data/esa_logo_min.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/0/0_0.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/0/0_1.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/0/0_2.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/0/0_3.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/0/0_4.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/0/0_5.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/1/1_0.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/1/1_1.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/1/1_2.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/1/1_3.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/1/1_4.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/1/1_5.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/2/2_0.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/2/2_1.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/2/2_2.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/2/2_3.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/2/2_4.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/elevation/DTED0/0/2/2_5.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/example.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/example.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/compass-middle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/compass-small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/compass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/compassArrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/compassBackground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/day.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/ground/night.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/ground/sat.2048x1024.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/ground/vesat.2048x1024.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/ground/worldmap.2048x1024.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/layers/bingAerial.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/layers/bmap-64x64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/layers/elevationLocal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/layers/googleHyb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/layers/map-64x64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/layers/map-ico.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/layers/openStreetMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/layers/twoGisMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/layers/wmap-64x64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/layers/worldMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/night.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/placemark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/point.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/00999100100101060001010000010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/00999100100201060001000000010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/00999100100301060001000000010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/00999100100401060001000000010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/00999100100601000001000101010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/00999100100601000001000102010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/0099910010180106010100000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/0099910010370106000100000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/11102100100601070103000001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/12104100101401070100000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/121062006010010601040001000002.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/2120110030070106010205010101.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/2120120040010106010201010102.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/23.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/312633005013010701010000000200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/312633005024010701000000000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/312633005026010701000000000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/31264300201501070102000001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/31264300201901070100000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/signs/91.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/one/negx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/one/negy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/one/negz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/one/posx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/one/posy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/one/posz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/two/negx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/two/negy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/two/negz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/two/posx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/two/posy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/skybox/two/posz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/sunTexture.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/transparentPixel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/images/worldmap.2048x1024.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/map-menu-config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/models/collada/T-90/Gun.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/models/collada/T-90/Main Body 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/models/collada/T-90/Main Body.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/models/collada/T-90/T-90.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/models/collada/T-90/Turret.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/models/collada/air/air.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/models/collada/duck/duck.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/models/collada/duck/duck1.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/models/collada/duck/duckCM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/settings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/stars.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/subjects.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/0/0_0.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/0/0_1.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/0/0_2.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/0/0_3.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/0/0_4.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/0/0_5.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/1/1_0.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/1/1_1.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/1/1_2.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/1/1_3.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/1/1_4.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/1/1_5.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/2/2_0.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/2/2_1.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/2/2_2.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/2/2_3.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/2/2_4.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/elevation/DTED0/0/2/2_5.bil" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/example.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/example.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/compass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/ground/night.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/ground/sat.2048x1024.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/ground/vesat.2048x1024.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/ground/worldmap.2048x1024.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/layers/bingAerial.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/layers/bmap-64x64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/layers/elevationLocal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/layers/googleHyb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/layers/map-64x64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/layers/map-ico.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/layers/openStreetMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/layers/twoGisMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/layers/wmap-64x64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/layers/worldMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/placemark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/point.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/00999100100101060001010000010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/00999100100201060001000000010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/00999100100301060001000000010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/00999100100401060001000000010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/00999100100601000001000101010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/00999100100601000001000102010001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/0099910010180106010100000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/0099910010370106000100000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/11102100100601070103000001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/12104100101401070100000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/121062006010010601040001000002.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/2120110030070106010205010101.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/2120120040010106010201010102.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/23.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/312633005013010701010000000200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/312633005024010701000000000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/312633005026010701000000000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/31264300201501070102000001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/31264300201901070100000000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/signs/91.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/one/negx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/one/negy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/one/negz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/one/posx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/one/posy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/one/posz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/two/negx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/two/negy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/two/negz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/two/posx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/two/posy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/skybox/two/posz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/sunTexture.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/images/transparentPixel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/map-menu-config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/stars.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z0/0/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z1/0/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z1/0/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z1/1/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z1/1/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/0/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/0/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/0/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/0/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/1/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/1/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/1/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/1/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/2/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/2/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/2/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/2/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/3/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/3/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/3/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/tiles/worldmap/z2/3/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z0/0/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z1/0/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z1/0/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z1/1/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z1/1/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/0/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/0/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/0/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/0/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/1/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/1/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/1/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/1/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/2/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/2/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/2/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/2/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/3/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/3/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/3/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/tiles/worldmap/z2/3/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/coco/trajectories/trident-01.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/collatz.html" beforeDir="false" afterPath="$PROJECT_DIR$/old/collatz.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/bootstrap-4.0.0/js/bootstrap.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hare-old.html" beforeDir="false" afterPath="$PROJECT_DIR$/old/hare-old.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index-site.html" beforeDir="false" afterPath="$PROJECT_DIR$/old/index-site.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios-logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/old/ios-logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios.svg" beforeDir="false" afterPath="$PROJECT_DIR$/old/ios.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mandelbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/old/mandelbox.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mandelbulb-julia.html" beforeDir="false" afterPath="$PROJECT_DIR$/old/mandelbulb-julia.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mandelbulb.html" beforeDir="false" afterPath="$PROJECT_DIR$/old/mandelbulb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menger.html" beforeDir="false" afterPath="$PROJECT_DIR$/old/menger.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/model/editor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/old/model/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/d3.js/API.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/d3.js/CHANGES.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/d3.js/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/d3.js/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/d3.js/d3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/d3.js/d3.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/mapbox-gl-0.44.1/mapbox-gl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/mapbox-gl-0.44.1/mapbox-gl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/nouislider-11.0.3/nouislider.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/nouislider-11.0.3/nouislider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/nouislider-11.0.3/nouislider.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/nouislider-11.0.3/nouislider.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/pace/pace.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/pace/themes/blue/pace-theme-center-atom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/pace/themes/blue/pace-theme-minimal.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/threejs/ColladaLoader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/threejs/OBJLoader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/threejs/OBJLoader2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/threejs/OrbitControls.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/threejs/three.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/dependencies/threejs/three.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/resources/images/elevator.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/resources/models/building-2/1_floor1.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/resources/models/building-2/2_floor1.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/resources/models/building-2/3_floor1.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/resources/models/building-2/pipe_0.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/resources/models/building-2/pipe_1.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/resources/models/building-2/pipe_2.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/resources/models/building-2/pipe_3.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/resources/models/building-2/roof1.dae" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/resources/style-bright-v9-cdn.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/scripts/mapbox-threejs-sync.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/scripts/niielectron.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/niielectron/styles/viewer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf-editor/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf-editor/manage-application/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf-editor/manage-application/manager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf-editor/pdf-editor/backgrounds.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf-editor/pdf-editor/bgLeft.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf-editor/pdf-editor/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf-editor/pdf-editor/pdf-editor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/collatz.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/scripts/collatz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/gl.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/scripts/gl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mandelbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/scripts/mandelbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mandelbrot.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/scripts/mandelbrot.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mandelbulb.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/scripts/mandelbulb.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mouse.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/scripts/mouse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mouse3d.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/scripts/mouse3d.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/scene3d.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/scripts/scene3d.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/syntax.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/scripts/syntax.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/scripts/ui.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/old/sdf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/collatz.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/collatz.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/doublebrot.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/doublebrot.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/juliabulb.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/juliabulb.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/2triangles.vertex.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/2triangles.vertex.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/common.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/common.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/complex.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/complex.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/noise3d.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/noise3d.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/phong.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/phong.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/raymarch.enhanced.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/raymarch.enhanced.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/raymarch.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/raymarch.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/sdf/mandelbox.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/sdf/mandelbox.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/sdf/mandelbox2.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/sdf/mandelbox2.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/sdf/mandelbulb.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/sdf/mandelbulb.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/sdf/mandelbulb2.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/sdf/mandelbulb2.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/lib/sdf/menger.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/lib/sdf/menger.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/mandelbox.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/mandelbox.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/mandelbrot.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/mandelbrot.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/mandelbulb.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/mandelbulb.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/menger.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/menger.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/loading.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/svg-object-embed/example.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/svg-object-embed/example.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/old/test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,24 +436,23 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/site/silicon-dream" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gen" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/site/silicon-dream" />
-      <recent name="$PROJECT_DIR$/gen/ready/inner-sight" />
+      <recent name="$PROJECT_DIR$/gen" />
       <recent name="$PROJECT_DIR$/gen/ready" />
-      <recent name="$PROJECT_DIR$/gen/ready/fraction-2" />
-      <recent name="$PROJECT_DIR$/gen/ready/fraction" />
+      <recent name="$PROJECT_DIR$/gen/ready/eye" />
+      <recent name="$PROJECT_DIR$/gen/ready/simplicity" />
+      <recent name="$PROJECT_DIR$/gen/ready/steam-cells" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/site/projects" />
       <recent name="$PROJECT_DIR$/gen" />
-      <recent name="$PROJECT_DIR$/gen/ready/aliens-spirits" />
       <recent name="$PROJECT_DIR$/gen/ready/simplicity" />
       <recent name="$PROJECT_DIR$/gen/ready/netgra" />
+      <recent name="D:\strangerintheq.github.io\hen\spiritual_body\src" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.build.js (5)">
@@ -111,7 +468,7 @@
     <configuration name="build.js (4)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/gen01/build.js" working-dir="$PROJECT_DIR$/hen/gen01">
       <method v="2" />
     </configuration>
-    <configuration name="build.js (5)" type="NodeJSConfigurationType" temporary="true" path-to-js-file="$PROJECT_DIR$/hen/shader/build.js" working-dir="$PROJECT_DIR$/hen/shader">
+    <configuration name="build.js (5)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hen/shader/build.js" working-dir="$PROJECT_DIR$/hen/shader">
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -163,8 +520,7 @@
       <workItem from="1630921964291" duration="52963000" />
       <workItem from="1631100925019" duration="51887000" />
       <workItem from="1631365817657" duration="4033000" />
-      <workItem from="1631441540664" duration="36563000" />
-      <workItem from="1633881989775" duration="14585000" />
+      <workItem from="1631441540664" duration="17860000" />
     </task>
     <task id="LOCAL-00001" summary="ios svg">
       <created>1541400526735</created>
@@ -425,49 +781,7 @@
       <option name="project" value="LOCAL" />
       <updated>1631772967758</updated>
     </task>
-    <task id="LOCAL-00038" summary="gen">
-      <created>1631773619530</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1631773619530</updated>
-    </task>
-    <task id="LOCAL-00039" summary="gen">
-      <created>1631822751473</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1631822751473</updated>
-    </task>
-    <task id="LOCAL-00040" summary="gen">
-      <created>1631980681769</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1631980681769</updated>
-    </task>
-    <task id="LOCAL-00041" summary="§">
-      <created>1633882293219</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1633882293219</updated>
-    </task>
-    <task id="LOCAL-00042" summary="site">
-      <created>1633888888772</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1633888888772</updated>
-    </task>
-    <task id="LOCAL-00043" summary="site">
-      <created>1633895420776</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1633895420776</updated>
-    </task>
-    <option name="localTasksCounter" value="44" />
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -501,8 +815,6 @@
     <MESSAGE value="hic" />
     <MESSAGE value="нфт" />
     <MESSAGE value="gen" />
-    <MESSAGE value="§" />
-    <MESSAGE value="site" />
-    <option name="LAST_COMMIT_MESSAGE" value="site" />
+    <option name="LAST_COMMIT_MESSAGE" value="gen" />
   </component>
 </project>
