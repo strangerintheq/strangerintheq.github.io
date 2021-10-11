@@ -20,13 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/avatar.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/harmony/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mandelbrot.html" beforeDir="false" afterPath="$PROJECT_DIR$/mandelbrot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old/shaders/mandelbrot.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/old/shaders/mandelbrot.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,10 +31,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="TypeScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -74,18 +68,18 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gen" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/generative/dancing-souls" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2021.1.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/gen" />
-      <recent name="$PROJECT_DIR$/gen/ready" />
-      <recent name="$PROJECT_DIR$/gen/ready/eye" />
-      <recent name="$PROJECT_DIR$/gen/ready/simplicity" />
-      <recent name="$PROJECT_DIR$/gen/ready/steam-cells" />
+      <recent name="C:\dev\strangerintheq.github.io\generative\dancing-souls" />
+      <recent name="C:\dev\strangerintheq.github.io\generative\the-nest" />
+      <recent name="C:\dev\strangerintheq.github.io\generative\inner-sight" />
+      <recent name="C:\dev\strangerintheq.github.io\generative\mozaic-perception" />
+      <recent name="C:\dev\strangerintheq.github.io\generative\nucle" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\dev\strangerintheq.github.io\resources" />

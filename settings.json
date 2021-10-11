@@ -1,7 +1,9 @@
 {
   "avatar": "resources/avatar.jpg",
+  "upcoming": [
+    ["Silicon Dream", "/generative/silicon-dream"]
+  ],
   "projects": [
-    ["Silicon Dream", "/generative/silicon-dream"],
     ["The Nest", "/generative/the-nest"],
     ["Mozaic Perception", "/generative/mozaic-perception"],
     ["Dancing Souls", "/generative/dancing-souls"],
