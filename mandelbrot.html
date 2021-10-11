@@ -466,7 +466,7 @@
         }
 
         function recompileShader(equation, callback){
-            GL.program('shaders/mandelbrot.glsl', function (program) {
+            GL.program('old/shaders/mandelbrot.glsl', function (program) {
                 program.replace(defaultFormula, equation || defaultFormula);
                 program.link();
                 program.bind();
