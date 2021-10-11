@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dancing Souls</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="thumbnail.png" />
+    <style>
+        body {
+            margin:0;
+            overflow: hidden;
+            background: black;
+
+        }
+        canvas {
+            --s: min(100vw, 100vh);
+            width: var(--s);
+            height: var(--s);
+            margin: calc(50vh - calc(0.5 * var(--s))) auto;
+            display: block;
+        }
+    </style>
+</head>
+<body style="">
+<canvas id=c ></canvas>
+<script src="prng.js"></script>
+<script src="palette.js"></script>
+<script src="brush.js"></script>
+<script src="3d-view.js"></script>
+<script src="canvas-2d.js"></script>
+<script src="noise.js"></script>
+<script src="name.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

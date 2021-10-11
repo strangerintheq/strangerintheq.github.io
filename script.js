@@ -12,7 +12,7 @@ async function load(){
 
     document.querySelector('.projects').innerHTML = settings.projects.map(project => {
         return `<a data-project="${project[0]}"
-                    onclick="setProject(this, '${project[1]}')">${project[0]}</a>`
+                    onclick="setProject(this, '${prefix + project[1]}')">${project[0]}</a>`
     }).join('');
 
     document.querySelector('.links').innerHTML = settings.links.map(project => {
@@ -29,7 +29,7 @@ function setProject(link, url) {
     let selected = document.querySelector('.selected');
     selected && selected.classList.remove('selected')
     link.classList.add('selected')
-    document.querySelector('iframe').src = url;
+    document.querySelector('iframe').src = url ;
     history.pushState({}, url, prefix+'/?project='+link.dataset.project)
 }
 
