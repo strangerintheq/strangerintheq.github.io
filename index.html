@@ -2,96 +2,14 @@
 <html lang="en">
 <head>
     <title>Stranger in the Q</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
-<style>
-    body {
-        background: #000;
-        font-family: Arial, monospace;
-        user-select: none;
-        margin: 0;
-        overflow: hidden;
-    }
-    .root {
-        width: 100%;
-        height: 100%;
-        display: grid;
-        grid-template-columns: 100%;
-        grid-template-rows: 100%;
-    }
-    .root > div {
-        grid-column: 1;
-        grid-row: 1;
-        width: 100%;
-        height: 100%;
-    }
-    .root > div > div{
-        width: 100%;
-        height: 100%;
-        overflow-y: auto;
-    }
-    a {
-        pointer-events: all;
-    }
-    .projects a {
-        text-align: center;
-        cursor: pointer;
-        display: block;
-        font-size: 26px;
-        border-radius: 5px;
-        border: 2px solid #b1b1b1;
-        background: white;
-        color: black;
-        text-decoration: none;
-        margin-top: 5px;
-        width: 300px;
-        padding: 5px 0;
-        transition: 300ms;
-    }
-    .projects a:hover {
-        background: #f4f4f4;
-    }
-    .avatar {
-        margin: 30px 0;
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        margin-left: 50px;
-    }
-    .about-me {
-        font-size: 20px;
-        padding: 20px;
-        background: white;
-    }
-    iframe {
-        border: 0;
-        width: 100vw;
-        height: 100vh;
-    }
-    label {
-        display: inline-block;
-        width: 100px;
-        pointer-events: all;
-    }
-    .selected {
-        border-color: #565656;
-        background: #7c7c7c !important;
-        color: white;
-    }
-    a img {
-        height: 30px;
-        width: 30px;
-    }
-    .links a {
-        font-size: 0;
-        padding-right: 8px;
-    }
-</style>
 <div class="root">
-    <div>
+    <div class="iframe-wrapper">
         <iframe></iframe>
     </div>
-    <div style="z-index: 1; pointer-events: none">
+    <div class="panel-wrapper" style="z-index: 1; pointer-events: none">
         <div style="width: 310px;margin-left: calc(100vw - 310px)">
             <img class="avatar" src="https://ipfs.io/ipfs/QmSXvKtft31NtGavFhasPne1GSuDGGMg89SzVaikKbjCDq">
             <section class="about-me">
@@ -101,69 +19,10 @@
                 <br><br>
                 <section class="links"></section>
             </section>
-
             <section class="projects"></section>
         </div>
     </div>
 </div>
-<script>
-    let prefix = '';
-    if (document.location.href.indexOf("localhost") > -1)
-        prefix = '/strangerintheq.github.io'
-
-    let projects = [
-        ["The Nest", "https://ipfs.io/ipfs/QmY2YPbLz9DvSscxqJeW3o8fxhTMsGYmEs9q91Lsedbx3C/"],
-        ["Mozaic Perception", "https://ipfs.io/ipfs/QmRpZzFrUnD5AGz9vPfkRMC4iCsVbyJPQKCj3v5HMxoLri/"],
-        ["Dancing Souls", "https://ipfs.io/ipfs/QmXPu9MuBUXpC1Hod52MeqMamsVsdUjsFc4389A9deeSFb/"],
-        ["Nucle", "https://ipfs.io/ipfs/QmT1V4q8TJ7Sr6HnFAW1MGubUZRkBTiSYTHwQB6TeaTzRg/"],
-        ["Inner Sight", "https://ipfs.io/ipfs/QmcNfc8dmrFyycdk2Bcj8Vs3mnKEz1rqi312wGjiwPqt2G/"],
-        ["Steam Cells", "https://ipfs.io/ipfs/QmbS2uRqz7iuFzAykhqBk4Ug6u8ibR31seLW7fV49yNJJ2/"],
-        ["NETGRA", "https://ipfs.io/ipfs/QmbMGC42M11ZSdCTua6rK8TgT3VpzTQuGWQYBjxzqs6UzC?objkt=270003&creator=tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A&viewer=tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A/"],
-        // ["Escape", "https://ipfs.io/ipfs/QmdcXKbPKQmdFPudWHq38cVd8dbUiCYjPtmDkEZBN9eUji/"],
-    ];
-
-    let links = [
-        ["hicetnunc.svg", "Hic Et Nunc", "https://www.hicetnunc.xyz/Stranger_in_the_Q"],
-        ["opensea.svg", "Opensea", "https://opensea.io/Stranger_in_the_q"],
-        ["insta.svg", "Instagram", "https://www.instagram.com/stranger_in_the_q/"],
-        ["objkt.png", "Objkt.com", "https://objkt.com/profile/tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A"],
-        ["twitter.svg", "Twitter", "https://twitter.com/stranger_intheq"],
-        ["kalamint.svg", "Kalamint", "https://kalamint.io/user/strangerintheq"],
-        ["foundation.svg", "Foundation", "https://foundation.app/@Stranger_in_the_Q"],
-    ]
-
-    document.querySelector('.projects').innerHTML = projects.map(project => {
-        return `<a data-project="${project[0]}"
-                    onclick="setProject(this, '${project[1]}')">${project[0]}</a>`
-    }).join('');
-
-    document.querySelector('.links').innerHTML = links.map(project => {
-        return `<a href="${project[2]}" target="_blank">
-            <img src="${prefix + '/site/links/'+project[0]}" title="${project[1]}">
-        </a>`;
-    }).join('');
-
-    function setProject(link, url) {
-        let selected = document.querySelector('.selected');
-        selected && selected.classList.remove('selected')
-        link.classList.add('selected')
-        // document.querySelector('iframe').src = prefix + '/site/loading.html';
-        // setTimeout(() => {
-            document.querySelector('iframe').src = url;
-        // }, 100);
-        history.pushState({}, url, prefix+'/?project='+link.dataset.project)
-    }
-
-    if (document.location.search) {
-        const proj = new URL(location.href).searchParams.get('project');
-        document.querySelector(`a[data-project="${proj}"]`).click()
-    } else {
-        [...document.querySelectorAll('.projects a')]
-            .sort(() => Math.random() - 0.5)[0].click()
-    }
-    // window.onpopstate = (s) => {
-    //     console.log(s)
-    // }
-</script>
+<script src="script.js"></script>
 </body>
 </html>
