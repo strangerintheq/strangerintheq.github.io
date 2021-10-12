@@ -1,9 +1,10 @@
-let prefix = '';
+let settings, prefix = '';
 if (document.location.href.indexOf("localhost") > -1)
     prefix = '/strangerintheq.github.io'
 
+
 async function load(){
-    const settings = await (await fetch(prefix + '/settings.json')).json();
+    settings = await (await fetch(prefix + '/settings.json')).json();
 
     document.querySelector('.avatar')
         .setAttribute('src', prefix + '/' + settings.avatar);
@@ -22,7 +23,7 @@ load();
 
 function asProject(project) {
     return `<a data-project="${project[0]}"
-        onclick="setProject(this, '${prefix + project[1]}')">${project[0]}</a>`
+        onclick="setProject(this, '${prefix + project[2]}')">${project[1]}</a>`
 }
 
 function asLink(link){
@@ -36,13 +37,16 @@ function setProject(link, url) {
     selected && selected.classList.remove('selected')
     link.classList.add('selected')
     document.querySelector('iframe').src = url ;
-    history.pushState({}, url, prefix+'/?project='+link.dataset.project)
+    history.pushState({}, url, prefix+'/?p='+link.dataset.project)
 }
 
 function init() {
     if (document.location.search) {
-        const proj = new URL(location.href).searchParams.get('project');
-        document.querySelector(`a[data-project="${proj}"]`).click()
+        const proj = new URL(location.href).searchParams.get('p');
+        let url = [...settings.projects, ...settings.upcoming]
+            .find(p => p[0] === proj)[2];
+        document.querySelector('iframe').src = url;
+        // document.querySelector(`a[data-project="${proj}"]`).click()
     } else {
         [...document.querySelectorAll('.projects a')]
             .sort(() => Math.random() - 0.5)[0].click()
