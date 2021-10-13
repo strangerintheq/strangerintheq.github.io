@@ -112,3 +112,9 @@ a img {
 @-moz-keyframes rr {
     to{transform:rotate(var(--rot))}
 }
+
+
+.about-project {
+    z-index: 5;
+    background: white;
+}
