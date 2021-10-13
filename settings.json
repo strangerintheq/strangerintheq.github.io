@@ -14,11 +14,12 @@
   ],
   "links": [
     ["hicetnunc.svg", "Hic Et Nunc", "https://www.hicetnunc.xyz/Stranger_in_the_Q"],
-    ["opensea.svg", "Opensea", "https://opensea.io/Stranger_in_the_q"],
-    ["insta.svg", "Instagram", "https://www.instagram.com/stranger_in_the_q/"],
     ["objkt.png", "Objkt.com", "https://objkt.com/profile/tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A"],
-    ["twitter.svg", "Twitter", "https://twitter.com/stranger_intheq"],
+    ["opensea.svg", "Opensea", "https://opensea.io/Stranger_in_the_q"],
+    ["foundation.svg", "Foundation", "https://foundation.app/@Stranger_in_the_Q"],
     ["kalamint.svg", "Kalamint", "https://kalamint.io/user/strangerintheq"],
-    ["foundation.svg", "Foundation", "https://foundation.app/@Stranger_in_the_Q"]
+    ["twitter.svg", "Twitter", "https://twitter.com/stranger_intheq"],
+    ["insta.svg", "Instagram", "https://www.instagram.com/stranger_in_the_q/"],
+    ["discord.svg", "Discord", "https://discord.gg/S92neTmQ3v"]
   ]
 }

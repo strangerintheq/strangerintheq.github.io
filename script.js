@@ -4,7 +4,7 @@ if (document.location.href.indexOf("localhost") > -1)
 
 
 async function load(){
-    settings = await (await fetch(prefix + '/settings.json')).json();
+    settings = await (await fetch(prefix + '/settings.json?'+Date.now())).json();
 
     document.querySelector('.avatar')
         .setAttribute('src', prefix + '/' + settings.avatar);
