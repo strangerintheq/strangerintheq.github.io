@@ -30,7 +30,7 @@ a {
     text-align: center;
     cursor: pointer;
     display: block;
-    font-size: 26px;
+    font-size: 22px;
     border-radius: 5px;
     border: 2px solid #b1b1b1;
     background: white;
@@ -43,6 +43,11 @@ a {
 }
 .projects a:hover {
     background: #f4f4f4;
+}
+.projects a.selected {
+    border-color: #565656;
+    background: #7c7c7c !important;
+    color: white;
 }
 .avatar {
     width: 150px;
@@ -67,26 +72,43 @@ iframe {
     border: 0;
     width: 100vw;
     height: 100vh;
+    background: black;
 }
 label {
     display: inline-block;
     width: 100px;
     pointer-events: all;
 }
-.selected {
-    border-color: #565656;
-    background: #7c7c7c !important;
-    color: white;
-}
+
 a img {
-    height: 30px;
-    width: 30px;
+    height: 28px;
+    width: 28px;
+}
+.links-nft, .links-social {
+    padding-top: 5px;
 }
 .links-nft a, .links-social a {
     font-size: 0;
-    padding-right: 8px;
+    padding-right: 5px;
+    padding-top: 5px;
 }
-.links-nft {
-    /*padding-left: 100px;*/
-    width: 200px;
+.links-nft a:hover, .links-social a:hover {
+    transform: scale(1.1);
+}
+.backdrop {
+    z-index: 1;
+    pointer-events: none;
+    background: black;
+    transition: 300ms;
+}
+.loaded .backdrop {
+    opacity: 0;
+}
+
+
+@keyframes rr {
+    to{transform:rotate(var(--rot))}
+}
+@-moz-keyframes rr {
+    to{transform:rotate(var(--rot))}
 }

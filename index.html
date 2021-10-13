@@ -3,21 +3,28 @@
 <head>
     <title>Stranger in the Q</title>
     <link href="style.css" rel="stylesheet">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 </head>
-<body>
+<body c>
 <div class="root">
     <div class="iframe-wrapper">
         <iframe></iframe>
     </div>
-    <div class="panel-wrapper" style="z-index: 1; pointer-events: none">
+    <div class="backdrop">
+        <svg viewBox="-50 -50 100 100" width="100vw" height="100vh">
+            <g></g>
+        </svg>
+    </div>
+    <div class="panel-wrapper" style="z-index: 2; pointer-events: none">
         <div style="width: 310px;margin-left: calc(100vw - 310px)">
             <img class="avatar">
             <div class="about-me">
-                <div class="links-social"></div>
                 <div class="my-name">@Stranger in the Q</div>
                 <div class="brief">making art with code</div>
-
-                <div class="links-nft"></div>
+                <div class="links-social" style="display: inline-block"></div>
+                <div class="links-nft" style="display: inline-block""></div>
             </div>
             <section class="projects"></section>
         </div>
