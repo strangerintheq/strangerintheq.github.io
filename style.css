@@ -121,6 +121,11 @@ a img {
 .about-project iframe {
     pointer-events: all;
     border: none;
+    margin-left: -300px;
+    transition: 300ms;
+}
+.about-project iframe.visible {
+    margin-left: 0;
 }
 
 .panel-wrapper {

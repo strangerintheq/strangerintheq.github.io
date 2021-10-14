@@ -2,6 +2,15 @@ let settings, prefix = '';
 if (document.location.href.indexOf("localhost") > -1)
     prefix = '/strangerintheq.github.io'
 
+let aboutProjectFrame = document.querySelector('.about-project iframe');
+aboutProjectFrame.onload = () => {
+    setTimeout(() =>{
+        aboutProjectFrame.classList.add('visible')
+    }, 1000)
+}
+
+let previewFrame = document.querySelector('.preview-wrapper iframe');
+
 load();
 
 async function load(){
@@ -35,17 +44,19 @@ function setProject(key) {
 
     const item = document.querySelector(`a[data-project="${key}"]`);
     item && item.classList.add('selected');
-
+    aboutProjectFrame.classList.remove('visible')
     showLoader();
     
     setTimeout(() => {
         let previewUrl = prefix + '/generative/' +  key+ '/index.html';
         let aboutUrl = prefix + '/generative/' +  key + '/about.html';
-        
-        document.querySelector('.preview-wrapper iframe').contentDocument.body.innerHTML = '';
-        document.querySelector('.preview-wrapper iframe').src = previewUrl;
-        document.querySelector('.about-project iframe').src = aboutUrl;
-        
+
+
+        previewFrame.contentDocument.body.innerHTML = '';
+        previewFrame.src = previewUrl;
+
+        aboutProjectFrame.src = aboutUrl;
+
         history.pushState({}, previewUrl, prefix + '/?p=' + key)
         loaded();
     }, 300);
