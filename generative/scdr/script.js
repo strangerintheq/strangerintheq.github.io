@@ -76,7 +76,7 @@ RGBA(`
                 </filter>
                 <circle r="5000" filter="url(#n)"></circle>
             </svg>`,
-        `img.jpg`,
+        `img-min.jpg`,
     ]
 })
 
