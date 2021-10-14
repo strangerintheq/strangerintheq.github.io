@@ -19,11 +19,42 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="discord link">
-      <change afterPath="$PROJECT_DIR$/generative/the-nest/about.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ym.js" afterDir="false" />
+    <list default="true" id="e2f85414-7d67-41db-9da3-7065d047544a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/generative/dncs/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generative/inst/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generative/mzpc/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generative/ntgr/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generative/nucl/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generative/stcl/about.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/dancing-souls/3d-view.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/dncs/3d-view.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/dancing-souls/brush.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/dncs/brush.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/dancing-souls/canvas-2d.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/dncs/canvas-2d.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/dancing-souls/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/generative/dncs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/dancing-souls/name.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/dncs/name.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/dancing-souls/noise.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/dncs/noise.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/dancing-souls/palette.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/dncs/palette.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/dancing-souls/prng.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/dncs/prng.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/dancing-souls/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/dncs/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/dancing-souls/script2.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/dncs/script2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/dancing-souls/script3.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/dncs/script3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/inner-sight/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/generative/inst/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/mozaic-perception/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/generative/mzpc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/netgra/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/generative/ntgr/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/nucle/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/generative/nucl/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/silicon-dream/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/generative/scdr/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/silicon-dream/img.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/generative/scdr/img.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/silicon-dream/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/generative/scdr/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/silicon-dream/preview.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/generative/scdr/preview.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/silicon-dream/rgba.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/scdr/rgba.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/silicon-dream/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/scdr/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/steam-cells/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/generative/stcl/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/the-nest/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/generative/nest/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/the-nest/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/generative/nest/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generative/the-nest/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/generative/nest/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +75,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -71,7 +102,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/generative/dancing-souls" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/generative/stcl" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2021.1.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
@@ -79,11 +110,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\dev\strangerintheq.github.io\generative\dancing-souls" />
-      <recent name="C:\dev\strangerintheq.github.io\generative\the-nest" />
-      <recent name="C:\dev\strangerintheq.github.io\generative\inner-sight" />
-      <recent name="C:\dev\strangerintheq.github.io\generative\mozaic-perception" />
-      <recent name="C:\dev\strangerintheq.github.io\generative\nucle" />
+      <recent name="C:\dev\strangerintheq.github.io\generative\stcl" />
+      <recent name="C:\dev\strangerintheq.github.io\generative\nucl" />
+      <recent name="C:\dev\strangerintheq.github.io\generative\ntgr" />
+      <recent name="C:\dev\strangerintheq.github.io\generative\dncs" />
+      <recent name="C:\dev\strangerintheq.github.io\generative\inst" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\dev\strangerintheq.github.io\resources" />
@@ -458,6 +489,7 @@
     <MESSAGE value="discord link" />
     <MESSAGE value="updates" />
     <MESSAGE value="yandex-metrika" />
-    <option name="LAST_COMMIT_MESSAGE" value="yandex-metrika" />
+    <MESSAGE value="about" />
+    <option name="LAST_COMMIT_MESSAGE" value="about" />
   </component>
 </project>

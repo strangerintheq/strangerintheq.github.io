@@ -1,19 +1,14 @@
 {
   "avatar": "resources/avatar.jpg",
-  "projects": {
-    "upcoming": [
-      ["SCDR", "Silicon Dream", "/generative/silicon-dream"]
-    ],
-    "released": [
-      ["NEST", "The Nest", "/generative/the-nest"],
-      ["MZPC", "Mozaic Perception", "/generative/mozaic-perception"],
-      ["DCSL", "Dancing Souls", "/generative/dancing-souls"],
-      ["NUCL", "Nucle", "/generative/nucle"],
-      ["INST", "Inner Sight", "/generative/inner-sight"],
-      ["STCL", "Steam Cells", "/generative/steam-cells"],
-      ["NTGR", "NETGRA", "/generative/netgra"]
-    ]
-  },
+  "projects":  [
+      ["NEST", "The Nest"],
+      ["MZPC", "Mozaic Perception"],
+      ["DNCS", "Dancing Souls"],
+      ["NUCL", "Nucle"],
+      ["INST", "Inner Sight"],
+      ["STCL", "Steam Cells"],
+      ["NTGR", "NETGRA"]
+  ],
   "links": {
     "nft": [
       ["hicetnunc.svg", "Hic Et Nunc", "https://www.hicetnunc.xyz/Stranger_in_the_Q"],

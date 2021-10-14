@@ -2,13 +2,14 @@ let settings, prefix = '';
 if (document.location.href.indexOf("localhost") > -1)
     prefix = '/strangerintheq.github.io'
 
+load();
 
 async function load(){
     showLoader()
     settings = await (await fetch(prefix + '/settings.json?'+Date.now())).json();
     document.querySelector('.avatar')
         .setAttribute('src', prefix + '/' + settings.avatar);
-    fill('.projects', settings.projects.released, asProject)
+    fill('.projects', settings.projects, asProject)
     fill('.links-nft', settings.links.nft, asLink)
     fill('.links-social', settings.links.social, asLink)
     init();
@@ -19,55 +20,58 @@ function fill(selector, array, mapFn) {
         = array.map(mapFn).join('');
 }
 
-load();
-
-function asProject(project) {
-    return `<a data-project="${project[0]}"
-        onclick="setProject(this, '${prefix + project[2]}')">${project[1]}</a>`
+function asProject(p) {
+    return `<a data-project="${p[0]}" onclick="setProject(this.dataset.project)">${p[1]}</a>`
 }
 
 function asLink(link){
-    return `<a href="${link[2]}" target="_blank"><img src="${prefix + '/resources/'+link[0]}" title="${link[1]}"></a>`;
+    return `<a href="${link[2]}" target="_blank"><img 
+        src="${prefix + '/resources/'+ link[0]}" title="${link[1]}"></a>`;
 }
 
-function setProject(link, url) {
-    let selected = document.querySelector('.selected');
-    selected && selected.classList.remove('selected')
-    link.classList.add('selected');
-    showLoader()
+function setProject(key) {
+    const selected = document.querySelector('.selected');
+    selected && selected.classList.remove('selected');
+
+    const item = document.querySelector(`a[data-project="${key}"]`);
+    item && item.classList.add('selected');
+
+    showLoader();
+    
     setTimeout(() => {
-        document.querySelector('iframe').src = url ;
-        history.pushState({}, url, prefix+'/?p='+link.dataset.project)
-        loaded()
-    }, 300)
+        let previewUrl = prefix + '/generative/' +  key+ '/index.html';
+        let aboutUrl = prefix + '/generative/' +  key + '/about.html';
+        
+        document.querySelector('.preview-wrapper iframe').contentDocument.body.innerHTML = '';
+        document.querySelector('.preview-wrapper iframe').src = previewUrl;
+        document.querySelector('.about-project iframe').src = aboutUrl;
+        
+        history.pushState({}, previewUrl, prefix + '/?p=' + key)
+        loaded();
+    }, 300);
 }
 
-function loaded(){
-    setTimeout(() => {
-        document.body.classList.add('loaded')
-    }, 100)
+function loaded() {
+    setTimeout(() => document.body.classList.add('loaded'), 100);
 }
 
 function init() {
     loaded()
     if (document.location.search) {
-        const proj = new URL(location.href).searchParams.get('p');
-        let url = [...settings.projects.released, ...settings.projects.upcoming]
-            .find(p => p[0] === proj)[2];
-        document.querySelector('iframe').src = url;
-        let item = document.querySelector(`a[data-project="${proj}"]`);
-        item && item.classList.add('selected')
+        setProject(new URL(location.href).searchParams.get('p'))
     } else {
         [...document.querySelectorAll('.projects a')]
-            .sort(() => Math.random() - 0.5)[0].click()
+            .sort(() => Math.random() - 0.5)
+            .pop()
+            .click()
     }
 }
 
-function showLoader(){
+function showLoader() {
     document.body.classList.remove('loaded')
     const rnd = i => Math.floor(Math.random()*i);
     let loader = '';
-    let count = 3+rnd(7)|0;
+    let count = 3+rnd(7) | 0;
     for (let r =0,i=0; i< count; i++, r = 20-i*2) {
         const dir = Math.random() > 0.5 ? 360 : -360;
         const period = 300 + rnd(900);

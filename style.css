@@ -68,11 +68,10 @@ a {
     text-align: right;
     padding: 5px 0  ;
 }
-iframe {
+.preview-wrapper iframe {
     border: 0;
     width: 100vw;
     height: 100vh;
-    background: black;
 }
 label {
     display: inline-block;
@@ -116,5 +115,21 @@ a img {
 
 .about-project {
     z-index: 5;
-    background: white;
+    background: transparent;
+    pointer-events: none;
+}
+.about-project iframe {
+    pointer-events: all;
+    border: none;
+}
+
+.panel-wrapper {
+    z-index: 2;
+    pointer-events: none
+}
+
+.panel-wrapper > div {
+    --panel-size: 310px;
+    width: var(--panel-size);
+    margin-left: calc(100vw - var(--panel-size));
 }
