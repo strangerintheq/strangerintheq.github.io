@@ -115,14 +115,18 @@ a img {
 
 .about-project {
     z-index: 5;
+    margin-left: 5px;
     background: transparent;
     pointer-events: none;
 }
 .about-project iframe {
     pointer-events: all;
     border: none;
-    margin-left: -300px;
+    margin-left: -400px;
     transition: 300ms;
+    margin-top: 184px;
+    height: 440px;
+    width: 350px;
 }
 .about-project iframe.visible {
     margin-left: 0;
@@ -135,6 +139,6 @@ a img {
 
 .panel-wrapper > div {
     --panel-size: 310px;
-    width: var(--panel-size);
-    margin-left: calc(100vw - var(--panel-size));
+    width: var(--panel-size)!important;
+    margin-left: calc(100vw - var(--panel-size))!important;
 }
