@@ -1,4 +1,4 @@
-const maxDeltaPos = 0.35;
+const maxDeltaPos = 0.25;
 const rndPos = () => Math.random()*maxDeltaPos - maxDeltaPos/2;
 const rndAngle = () => Math.random()*Math.PI*2;
 let nextSlideRequested;
@@ -13,11 +13,11 @@ let xy = [0.5, 0.5];
 RGBA(`
 
         vec3 sample(vec2 uv, float rotation, vec2 translate) {
-
+            
             float sn = sin(rotation);
             float cs = cos(rotation);
             uv *= mat2(cs,sn,-sn,cs);
-            uv *= 0.25;
+            uv *= 0.35;
             uv += 0.5 + translate;
 
             vec4 noise = texture2D(tex[0], uv);
@@ -48,6 +48,7 @@ RGBA(`
             if (abs(val) < 0.01 + 0.02*noise.r) {
                 return noise.rgb;
             } else {
+                uv = abs(uv) ;
                 vec3 slide1 = sample(uv, rotation1, translate1);
                 vec3 slide2 = sample(uv, rotation2, translate2);
                 return mix(slide1, slide2, sign(val)/2.0 + 0.5);
@@ -72,11 +73,11 @@ RGBA(`
     textures: [
         `<svg width="${2048}px" height="${2048}px">
                 <filter id="n">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.005" numOctaves="5" />
+                    <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="5" />
                 </filter>
                 <circle r="5000" filter="url(#n)"></circle>
             </svg>`,
-        `img-min.jpg`,
+        `img.jpg`,
     ]
 })
 
