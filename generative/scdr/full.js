@@ -1,21 +1,27 @@
-let a = null, r = [Math.random()*7];
+let dragStartRotation = null,
+    prevTicksRotations = [0, 0],
+    inertia = 0,
+    lastMoveTimestamp = 0,
+    rotation = [Math.random()*7];
 
 RGBA(`
         void main() {
-            vec2 c = vec2(0.5, 0.505);
+            vec2 c = vec2(0.5, 0.506);
             vec2 uv = gl_FragCoord.xy/resolution - c;
             uv.x *= resolution.x/resolution.y;
-            // if (length(uv) < 0.48)
-            vec2 UV = uv * mat2(cos(r), sin(r), -sin(r), cos(r));
-            float edge = 0.48; 
-            float st = 0.0001;
+            float d = length(uv);
+            vec4 color1 = texture2D(tex[0], uv + c);
+            float r = rotation;
+            uv *= mat2(cos(r), sin(r), -sin(r), cos(r));
+            vec4 color2 = texture2D(tex[0], uv + c);
+            float edge = 0.479; 
+            float st = 0.003;
             float value = smoothstep(edge+st, edge-st, length(uv));
-            uv = mix(uv, UV, value);
-            gl_FragColor = texture2D(tex[0], uv + c);
+            gl_FragColor = mix(color1, color2, value);
         }
 `, {
     uniforms: {
-        r: () => r,
+        rotation: () => rotation,
     },
     textures: [
         `img.jpg`,
@@ -23,15 +29,32 @@ RGBA(`
 })
 
 addEventListener('pointerdown', (e) => {
-    a = Math.atan2(e.clientY - innerHeight/2, e.clientX - innerWidth/2) + r[0]
+    const atan = Math.atan2(
+        e.clientY - innerHeight/2,
+        e.clientX - innerWidth/2
+    );
+    dragStartRotation = atan + rotation[0]
 })
 
-addEventListener('pointerup', () => a = null)
+addEventListener('pointerup', () => {
+    if (Date.now() - lastMoveTimestamp < 100)
+        inertia = prevTicksRotations[0] - prevTicksRotations[1];
+    dragStartRotation = null;
+})
 
 addEventListener('pointermove', (e) => {
-    if (a === null)
+    if (dragStartRotation === null)
         return
-    let b = Math.atan2(e.clientY - innerHeight/2, e.clientX - innerWidth/2);
-    r[0] = a-b;
+    let dragEndRotation = Math.atan2(e.clientY - innerHeight/2, e.clientX - innerWidth/2);
+    prevTicksRotations.push(dragEndRotation)
+    prevTicksRotations.shift();
+    rotation[0] = dragStartRotation - dragEndRotation;
+    lastMoveTimestamp = Date.now();
+})
+
+requestAnimationFrame(function handleInertia() {
+    rotation[0] += inertia;
+    inertia = inertia*0.9;
+    requestAnimationFrame(handleInertia)
 })
 
