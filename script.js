@@ -68,8 +68,9 @@ function loaded() {
 
 function init() {
     loaded()
-    if (document.location.search) {
-        setProject(new URL(location.href).searchParams.get('p'))
+    let p = new URL(location.href).searchParams.get('p');
+    if (p) {
+        setProject(p)
     } else {
         [...document.querySelectorAll('.projects a')]
             .sort(() => Math.random() - 0.5)

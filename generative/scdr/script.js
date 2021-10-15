@@ -70,7 +70,7 @@ RGBA(`
         transitionValue: () => transitionValue
     },
     textures: [
-        `<svg width="${4096}px" height="${4096}px">
+        `<svg width="${2048}px" height="${2048}px">
                 <filter id="n">
                     <feTurbulence type="fractalNoise" baseFrequency="0.005" numOctaves="5" />
                 </filter>
