@@ -6,7 +6,7 @@ let dragStartRotation = null,
 
 RGBA(`
         void main() {
-            vec2 c = vec2(0.5, 0.506);
+            vec2 c = vec2(0.5003, 0.504);
             vec2 uv = gl_FragCoord.xy/resolution - c;
             uv.x *= resolution.x/resolution.y;
             float d = length(uv);
@@ -14,10 +14,11 @@ RGBA(`
             float r = rotation;
             uv *= mat2(cos(r), sin(r), -sin(r), cos(r));
             vec4 color2 = texture2D(tex[0], uv + c);
-            float edge = 0.479; 
-            float st = 0.003;
+            float edge = 0.48; 
+            float st = 0.005;
             float value = smoothstep(edge+st, edge-st, length(uv));
             gl_FragColor = mix(color1, color2, value);
+            //gl_FragColor = color1 - smoothstep(0.0, st, abs(d-edge));
         }
 `, {
     uniforms: {
