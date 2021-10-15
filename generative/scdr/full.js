@@ -21,6 +21,7 @@ RGBA(`
             //gl_FragColor = color1 - smoothstep(0.0, st, abs(d-edge));
         }
 `, {
+    target: document.querySelector('canvas'),
     uniforms: {
         rotation: () => rotation,
     },
