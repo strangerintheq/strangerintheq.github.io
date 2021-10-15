@@ -48,8 +48,8 @@ function setProject(key) {
     showLoader();
     
     setTimeout(() => {
-        let previewUrl = prefix + '/generative/' +  key+ '/index.html';
-        let aboutUrl = prefix + '/generative/' +  key + '/about.html';
+        let previewUrl = prefix + '/generative/' +  key.toLowerCase()+ '/index.html';
+        let aboutUrl = prefix + '/generative/' +  key.toLowerCase() + '/about.html';
 
 
         previewFrame.contentDocument.body.innerHTML = '';
