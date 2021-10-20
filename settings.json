@@ -1,6 +1,7 @@
 {
   "avatar": "resources/avatar.jpg",
   "projects":  [
+      ["NRIF", "Neural Interface"],
       ["NEST", "The Nest"],
       ["MZPC", "Mozaic Perception"],
       ["DNCS", "Dancing Souls"],
