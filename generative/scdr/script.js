@@ -1,12 +1,15 @@
 const maxDeltaPos = 0.25;
 const rndPos = () => Math.random()*maxDeltaPos - maxDeltaPos/2;
 const rndAngle = () => Math.random()*Math.PI*2;
+const rndInt = (n) => (Math.random() * n) | 0;
 let nextSlideRequested;
-let maxShift = [0.02]
+let maxShift = [0.05]
 let rotation1 = [rndAngle()];
 let rotation2 = [rndAngle()];
 let translate1 = [rndPos(), rndPos()];
 let translate2 = [rndPos(), rndPos()];
+let absX = [rndInt(2)];
+let absY = [rndInt(2)];
 let transitionValue = [0]
 let xy = [0.5, 0.5];
 
@@ -48,7 +51,10 @@ RGBA(`
             if (abs(val) < 0.01 + 0.02*noise.r) {
                 return noise.rgb;
             } else {
-                uv = abs(uv) ;
+                if (absX > 0.0)
+                    uv.x = abs(uv.x);
+                if (absY > 0.0)
+                    uv.y = abs(uv.y);  
                 vec3 slide1 = sample(uv, rotation1, translate1);
                 vec3 slide2 = sample(uv, rotation2, translate2);
                 return mix(slide1, slide2, sign(val)/2.0 + 0.5);
@@ -67,6 +73,8 @@ RGBA(`
         rotation2: () => rotation2,
         translate1: () => translate1,
         translate2: () => translate2,
+        absX: () => absX,
+        absY: () => absY,
         maxShift: () => maxShift,
         transitionValue: () => transitionValue
     },
@@ -103,7 +111,9 @@ requestAnimationFrame(function upd(t) {
             translate1[1] = translate2[1];
             translate2[0] = rndPos();
             translate2[1] = rndPos();
-            maxShift[0] = Math.random()*0.01 + 0.01;
+            absX = [rndInt(2)];
+            absY = [rndInt(2)];
+            maxShift[0] = Math.random()*0.05 + 0.02;
         }
     }
     requestAnimationFrame(upd)
