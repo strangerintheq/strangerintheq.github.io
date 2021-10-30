@@ -1,6 +1,8 @@
 {
   "avatar": "resources/avatar.jpg",
   "projects":  [
+      ["WARP", "Warp Engine"],
+      ["HDSQ", "Hidden Square"],
       ["NRIF", "Neural Interface"],
       ["NEST", "The Nest"],
       ["MZPC", "Mozaic Perception"],
