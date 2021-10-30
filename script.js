@@ -1,4 +1,4 @@
-let settings, prefix = '';
+let prefix = '';
 if (document.location.href.indexOf("localhost") > -1)
     prefix = '/strangerintheq.github.io'
 
@@ -15,9 +15,6 @@ load();
 
 async function load(){
     showLoader()
-    settings = await (await fetch(prefix + '/settings.json?'+Date.now())).json();
-    document.querySelector('.avatar')
-        .setAttribute('src', prefix + '/' + settings.avatar);
     fill('.projects', settings.projects, asProject)
     fill('.links-nft', settings.links.nft, asLink)
     fill('.links-social', settings.links.social, asLink)

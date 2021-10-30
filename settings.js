@@ -1,5 +1,4 @@
-{
-  "avatar": "resources/avatar.jpg",
+window.settings = {
   "projects":  [
       ["WARP", "Warp Engine"],
       ["HDSQ", "Hidden Square"],
