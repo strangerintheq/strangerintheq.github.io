@@ -1,5 +1,6 @@
 window.settings = {
   "projects":  [
+      ["GRVC", "Gravicappa"],
       ["NDLW", "Needlework"],
       ["WARP", "Warp Engine"],
       ["HDSQ", "Hidden Square"],
