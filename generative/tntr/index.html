@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tentura</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+         <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <script>
+    (() => {
+        
+        const ropsten = {};
+        ([["59","0xc06aeb32d71d1ead2c3f8fe9b5f6e9941f8253909082d04e85c02d7cc66c4d63"],["58","0x6eae1cacf3557f9d6e4d462cd7b2d575374b76b41ba7b8ed7637745765264047"],["57","0x03c799f94ac1d73ee65484705b2fc75dc6bf690774cbf3bde503628209bcb4fb"],["56","0x682f373cbeee7a89b0d6a52a0bdbccc057b4096019a9dce34d58ca8e029c1c7a"],["55","0x1c5569e0d7e55709430c08c01c062c20c79fc8e26b159fa03f454fed71b3bc15"],["54","0x6d87865f8576b135c1dcc8babcd3e470a92a75f9f065de5a9726b08d960f5c08"],["53","0xd47f7ef2c1cfe02093932f74b3ca0799c0c01f99cddfd0008a925eece981c087"],["52","0x60d93c948fbe87ff42cbbf5a021dbe90c9a8063cd9f0a03a37763aaf4f04b704"],["51","0x265252ceb93c0306ccc1b411f635c6121e8c148635ac13048cd0495a41ce3d0f"],["50","0xe9b597c1852f91583c23a1a7fa65a996afa9d54219ca70d9f97e6b6f3e80606f"],["49","0xb168b55048eeee1c66a982903a7ab2e0af9fe4ac5dbb1ea6aa9ed1f979bb9b7c"],["48","0x909a1df52d8794e7a57dfd0bb7efc18f20454a7eec6d31a9f328be5faecc6a40"],["47","0x6fc59e6588f2529c5c9cee1a70fb21914342a2bc00fc3e0ba1a74f538537d9ac"],["46","0x392d7575cd35b8411279a13720aef8cc882d1fccff4c4008588185c2c61e6a74"],["45","0x7ac55155a699c26e3db2b42909544f79c8ba5c1e01c5e9d0975a8c01442a6ee1"],["44","0xd84a5c4ea8ac512658fb7eba5eab214056c1e934f0132c9ab24c2a25a862aec1"],["43","0xcb1a0f8592fbbd0b3184cfe7f86733bb317383452b71f95ff6ba18cdb812c982"],["42","0x65974aa01110adf0346ed15f39829964f964aeed453dc694b21b3eb45366cd70"],["41","0x42e0e940d4e00e5199c17a602cbe223f6fcd5fccd72a10e88c3677923114ca98"],["40","0x228e1c13ed60502bbcaac1ec4b6807486259630c49c6996ae8b303b0a85be4f1"],["39","0x7f7461433543d7529837d7d6259c14ebf87506e751be26c6821113272361384a"],["38","0xe23b54024aa197d4e8bf6a5f14fe6ee91efe693d0a6b7dccef537a0de9c08305"],["37","0xf747b3640bd7e4020f402272ad453844d5f21663f865bf0bb85b31064a85e10f"],["36","0x40ad306e0c1372e54b7320bbcfd7fd9e7d0bf4e71c6da61b0ac13dbeeec45892"],["35","0x6d16658278e3a3bcc2068dcf54ebd536f4f01f1fdcf9ad6c598cfddc532b14d7"],["34","0xb3d1121225159d36254e0781d8522961e3b9ab88175e3052d5fae29f3e2d4e19"],["33","0x931a532d3045e1a784810315af4fbf81a46353bdefea9b4d336bc277276eaed2"],["32","0x5bcaaa18d73fa2dc879fa432c14e485e4ed96555367d33d2ad89e095cc884791"],["31","0x41fc34b40642b5572738d637aef06ef21dc59f7c5f64c46205ff49ee96b3e208"],["30","0x2f6cd9eeb5b0a85ab80b79807197c58e2598921b58aef588cadb8a6820c17795"],["29","0x3729c932a74efb9b69e77e7ab115869a912e52d833f6703b887a5cf8b1d793c7"],["28","0x761c379839f971742b157e02e63aaa6f1031c66aabbfee031a8800348489bb5a"],["27","0x545c7791ee767cdb205557ccff8b5bdf2c46ef17c4064898bb97e927f1ad5ec0"],["26","0x3d274b16672e489da3a76599c42debe23649c3fb19269d7d798e194588a17dbe"],["25","0x9aa8862fbe88542fb31b69476dc32730176cd6205332fee511c221d3f6e6738f"],["24","0x19ad6173dc91e42d47cfa4b3824a912a12dfd0b90f0e9bbdc6006fbbfdf8bb7c"],["23","0x4863624f7349235cf499049cdc534c02e6529446b72bfec1d06d281402e5b1ed"],["22","0x0d3c74dd5b7f3ef4a2c7175182a72dbae9b0f632780aaea58d0c70b4ad0e3e85"],["21","0x85309c2259ad035347aec10f8461a1925fb960523855777d00338a048b6ee31e"],["20","0xfa7f8e3c20d0e369fc6679584fac289c82d61bc4c8a043cf17a007caa95bac82"],["19","0x6ee66ece645ea1229a1968795ec08c7935655da463a8171800c926bd7492be38"],["18","0x1d3ee472928377ed2c6b430a34e1d6665377e2352807f736736c1a59c059ba44"],["17","0x134935ff79da516d3e316262c33a9e70c596b10fd6bb1db2b59877fa764c4468"],["16","0x7cfd2b11b1b246d98b5735d018ad8e93169548800659894d2216724aa179de08"],["15","0xfa5b2b512d48f3a9a552c09fd313b79f102012a5385bfa56ea34c624f665e68d"],["14","0xb7c4f613967bede72bf1c1e05ba3fa73eb7015ceb6565e618b19e43f3fd5d780"],["13","0x87ccef9cb32f4dfa9de87f4fea9516c933f48fe4b868b6f1dc091936a6549ce2"],["12","0x94f2da61fa63fbded3e9a9a41e26683ab3f7cc8bc008747c38b042397221e698"],["11","0xecbae2b7acd499ec1ecb8bdd5c6826fc355451cc160f8ca5ea734b317ed50c5c"],["10","0x456a3368278b7389b2c3dedace5ee3c929be59ae3c1561fcd4b90c5e9e506742"],["9","0xf18a5abfb65b1f7be868a10213adb94dd4d6a57dbfefe1e196e65cb87e93c87d"],["8","0xceb8502a811df58f9b359f5300bcfa8e70e13d5f79cf8220a3fb56a0155a0b43"],["7","0x6b9790f641b85e020b35be868d2f81f8c0b1f6f5ea525a1bcdfa61ab1379f886"],["6","0x4c479fe3db69cd26c901b583afe34059e6fdd8fe90388ce8e5c38fc3c6e4fa82"],["5","0x1d1ebfec0275bdca5fcd4bc1b7efa055330fe4626e5cf29d0644447beea06841"],["4","0x25a3815bddf0607534acf6624f144d4afe98cdaa917a8ff6ffcfc026b2854ad0"],["3","0x7947d0c24e2bce464a867c35c43eb7f8152b8f535fe7e615bbd3ac3d2e5ae578"],["2","0x9e8085e44907022c8140cadfa46904c4b4147597942091c74a7b7c2675c99fa2"],["1","0x801c5f8d1dd6b985a738dd32a3b75f9d8066c078b9cca28f0c9d2a4465c427df"],["0","0xe211c0be468107bde37eeb46d98a95b2fb406ff88f795ee3e600944c4a42cffb"]]).forEach(e => {
+            ropsten[e[0]] = e[1]
+        });
+        
+        const newArtBlocksToken = (forceHash) => {
+            const tokenId = (333 * 1000000 + Math.floor(Math.random() * 1000)).toString();
+            let hash = '0x' + [...Array(64)].map(_ => ((Math.random() * 16)|0).toString(16)).join('');
+            if (forceHash)
+                hash = forceHash
+            localStorage.setItem('ab-token', JSON.stringify({ hash, tokenId }))
+        }
+        
+        window.tokenData = (() => {
+            if (!localStorage.getItem('ab-token')) 
+                newArtBlocksToken()
+            const parse = JSON.parse(localStorage.getItem('ab-token'));
+            return parse;
+        })();
+        
+        (() => {
+            
+            let gui;
+            
+            function ensureGui() {
+                if (gui) return
+                gui = document.createElement('div')
+                gui.style.padding = '5px'
+                gui.style.top = '5px'
+                gui.style.left = '915px'
+                gui.style.position = 'fixed'
+                document.body.append(gui)
+            }
+            
+            function el(type, content){
+                ensureGui()
+                const elem = document.createElement(type)
+                elem.innerHTML = content
+                elem.style.display = 'block'
+                elem.style.marginBottom = '5px'
+                gui.append(elem)
+                return elem
+            }
+            
+            function guiBtn(name, fn) {
+                el('button', name).onclick = e => {
+                    e.stopPropagation()
+                    fn()
+                }
+            }
+            
+            function features(tokenData) {
+                let features = {"No Features": true}
+                try {
+                  features = window.calculateFeatures(tokenData)
+                } catch (e) { }
+                // Object.assign(features, tokenData)
+                Object.entries(features)
+                    .forEach(feature => el('div', '<span style="display:inline-block;width:200px">'+feature[0]+'</span>'+'<span>'+feature[1]+'</span>'))
+            }
+            
+            setTimeout(() => {
+                let hashIndex = localStorage.getItem('hashIndex');
+                hashIndex && el('div', 'ropsten ' + hashIndex);
+                el('div', localStorage.getItem('ab-token'));
+                
+                guiBtn('reload with new random tokenData', () => {
+                    newArtBlocksToken()
+                    localStorage.removeItem('hashIndex')
+                    document.location.reload()
+                });
+                
+                guiBtn('reload with same tokenData', () => {
+                    document.location.reload()
+                })
+                
+                guiBtn('prev ropsten hash', () => {
+                    let hashIndex = localStorage.getItem('hashIndex')
+                    if (hashIndex === null) {
+                        hashIndex = 0
+                    } else {
+                        hashIndex = (+hashIndex) - 1;
+                        if (hashIndex == -1)
+                            hashIndex = 59
+                    }
+                    localStorage.setItem('hashIndex', hashIndex)
+                    newArtBlocksToken(ropsten[hashIndex])
+                    document.location.reload()
+                })
+                
+                
+                
+                guiBtn('next ropsten hash', () => {
+                    let hashIndex = localStorage.getItem('hashIndex')
+                    if (hashIndex === null) {
+                        hashIndex = 0
+                    } else {
+                        hashIndex = (+hashIndex) + 1;
+                        if (hashIndex == 60)
+                            hashIndex = 0
+                    }
+                    localStorage.setItem('hashIndex', hashIndex)
+                    newArtBlocksToken(ropsten[hashIndex])
+                    document.location.reload()
+                })
+                
+                features(JSON.parse(localStorage.getItem('ab-token')));
+            
+            }, 100)
+            
+        })();
+
+    })();    
+    </script>
+    <script src="features.js"></script>
+    </head>
+    <body style='margin:0;overflow:hidden'>
+        <script>(()=>{var We=Math.pow;var B=Math,N=B.PI,G=N/2,U=2*N,O=e=>B.abs(e),k=e=>B.sin(e),P=e=>B.cos(e);var _e=(e,r)=>B.min(e,r),Z=(e,r)=>B.atan2(e,r),fe=e=>B.sign(e);var M=(...e)=>B.hypot(...e);var De,Be=e=>De=e;var o=(e=1,r=0)=>De()*e+r,h=(e=2,r=0)=>r+o(e|0)|0,f=(e=.5)=>o()>e,g=(e=1)=>o(e)-e/2,Ie=e=>h(4)*N/2,I=e=>o(N*2);var p=(e,r)=>[...Array(e|0)].map((n,a)=>r(a)),z=(e,r)=>p(e,n=>{try{return r(n)}catch(a){}});var ze=(e,r,n)=>e*.29+r*.58+n*.11;var Ae=e=>{let r=e.canvas,n=r.width,a=r.height,i=e.getImageData(0,0,n,a);p(n,m=>p(a,l=>{if(m<n*.05||m>n*.95||l<n*.05||l>n*.95){let d=(l*n+m)*4,v=i.data;v[d]=v[d+1]=v[d+2]=ze(v[d],v[d+1],v[d+2])}})),e.putImageData(i,0,0)};var He=(e,r,n)=>p(e,a=>p(r,i=>n(a/e,i/r)));var ce=(e,r,n)=>e[r|0][n|0],Re=(e,r)=>{let n;return(a,i,m)=>{if(!n){n=[a,i];return}let l=Z(i-n[1],a-n[0]);p(m+m,d=>p(m+m,v=>{let C=a-m+d|0,w=i-m+v|0;M(C-a,w-i)<m&&(e[C][w]=r?r(l):l)})),n=[a,i]}};var Me=(e,r,n)=>parseInt(e.substr(r,n),16);var Ee=e=>(S=new Uint32Array([4,1,s=t=2,3].map(r=>Me(e,r*8,8))),r=>(t=S[3],S[3]=S[2],S[2]=S[1],S[1]=s=S[0],t^=t<<11,S[0]^=t^t>>>8^s>>>19,S[0]/We(2,32)));var Le=19,qe="d95b43c02942ecd07853777a542437f1d4afece5cee08e79c5e0dc774f38bd1550e97f02f8ca008a9b0f490a3dcc333feb6841f1d4afedc9516a4a3cd5ded999b2b7d9ceb2948c757a6a53f0b49ef7e4beb3818473626e413e4ae1f5c4ede574f9d423fc913ac03e40ff847ce84a5f99b898fecea82a363bbf4d28e6ac27f6f7bd80bca3655643f1efa5d3ce3d60b99af77825554236fad089ff9c5bf5634aed303c60382ef8b195f67280c06c846c5b7b355c7dfcebb6f0a83078c0a8f078185e412fe2f7cee8bf56e4844a91204d452632eee6abc5bc8e69675845484b36393bf2d694f0d8a8fa2a0086b8b13d1c00fff7bdf2f26fff823af041558b3619f4ebc3f0e2a4bca297c5ceaeab526bf8edd1c5cfc69d9d93d88a8a474843";Be(Ee(tokenData.hash));var Ne=f(.8),Ge=f(.8),T=f(.8),Ue=f(T?.5:.3),Oe=h(Le),pe=f(.95),je=h(2),de=f(.9),Wt=o(),ue=Wt*100+150,Je=0,$e=o(1/200,1/200),Ke=o(1/1e3,1/1e3),ee=h(2),_t=o(),te=1+_t|0,Qe=o(.03,.03),Ve=f(),Dt=o(),Xe=Dt/2,Ye=o(1/1e3,1/1e3),Bt=o(),E=(Bt*1e3+2e3)/(T?1:7),L=o(50,50),Ze=h(3),et=o(.8,.01),tt=o(G,.01),A=f(.3)?1:0,It=f(.8),j=It?[[0,0]]:p(A,e=>[g(.7),g(.7)]),zt=o(),re=A||f()?0:zt*.5+.2,rt=!T&&f(.2),W=1e3,F=W/2,nt=e=>te=e;var ne,J=(e,r)=>(ne||(ne=new p5,ne.noiseSeed(o()*1e6)),ne.noise(e,r));var ot=(e,r)=>1/P(2/e*Math.asin(k(e/2*r)));var at=o(150,150),D=h(3),At=f(),st=I(),Ht=h(4,3),it=D>0?99:o(22,66),mt=e=>F+(f(.3)?0:g(F*.8)),oe=mt(),ae=mt(),q=(e,r,n)=>{let a=Re(e,i=>[i,0,1]);z(r,i=>a(...n(i)))},lt=(e,r)=>[P(e+st)*r+oe,k(e+st)*r+ae,L],ft=[e=>{let r=50;At?((D==1||D==2)&&q(e,18,n=>[n*r+r+oe-F,n*r+r+ae-F,L]),(D==0||D==2)&&q(e,18,n=>[n*r+r+oe-F,W-n*r-r+ae-F,L])):((D==1||D==2)&&q(e,18,n=>[n*r+r,oe,L]),(D==0||D==2)&&q(e,18,n=>[ae,n*r+r,L]))},e=>q(e,it,r=>lt(r/99*U,at)),e=>q(e,it,r=>{let n=r/99*U;return lt(n,ot(Ht,n)*at)})];var $=e=>(r,n)=>r[e]=n,be=$("globalCompositeOperation"),se=$("strokeStyle"),he=$("lineWidth"),H=$("filter"),ge=$("fillStyle"),ct=document,pt=e=>{let r=ct.createElement("canvas");return r.width=r.height=e,setTimeout(n=>ct.body.prepend(r)),r.style.height=e/2+"px",r.getContext("2d")};var dt=(e,r,n,a,i,m=i)=>e.ellipse(r,n,i,m,a,0,U);var Rt=f(),Mt=f(),Et=fe(g()),Lt=fe(g()),ut=e=>{let r=He(W,W,(n,a)=>{n-=.5,a-=.5;let i=Je;if(re){let d=Mt?n:a;i+=d<-.2?Et*re:d>.2?Lt*re:0}A&&(i+=Z(a-j[0][1],n-j[0][0]));let m=et,l=tt;return A?l*=M(n-j[0][0],a-j[0][1]):Rt&&(l+=2.1),i+=J(n*m,a*m)*l,[i,0,0]});return ft[Ze](r),r};var c=_e(innerWidth,innerHeight)*2,R=c/2;var ie,bt=o(70,370),ht=o(30,420),qt=o(50,200),Nt=ht-bt,gt=(e,r)=>{let n=(J(r/100,10001)-.5)*201;return e=O(e)+n,e>bt?f((ht-e)/Nt):f()&&e>qt},Gt=e=>{ie||(ie=ee?p(ee,r=>{let n=I();return[F+P(n)*W/4,F+k(n)*W/4,o(.1,.05)*W]}):[])},Ut=(e,r,n)=>{let[a,i,m]=e,l=M(r+F-a,n+F-i);return l<m*1.2&&f()||l<m*.8},Ot=(e,r)=>{if(!ee)return!1;Gt();for(let n=0;n<ie.length;n++)if(Ut(ie[n],e,r))return!0;return!1},Ft=o(.001,.001),jt=(e,r)=>{let n=J(e*Ft+1111,r*Ft+1121),a=O(n-.5);return a<.1&&f(.9)||a<.01},xt=(e,r)=>!T&&(gt(e,r)||gt(r,e))||T&&jt(e,r)||Ot(e,r);var vt=(e,r,n,a)=>r.forEach(i=>{he(e,a||i.w+n),Jt(e,i.s)}),Jt=(e,r)=>e.stroke(new Path2D("M"+r.join(" L "))),me=(e,r)=>{let n,a,i,m=0,l=1e3,d=l/2,v=o(c*$e,c*Ke),C,w;f(.8)&&te&&(v=c*Qe,nt(te-1));let y=[],xe=o(l/200,l/200),ve=Xe+(A?.1:.2),Ce=o(ve)?Ie():0,St=o(ve),we=h(ue/2,ue/2),ye=(u,b,_)=>{b+=d,_+=d,u.p.push([b,_]),u.s.push([b/l*c,_/l*c])},Se=u=>{let b={s:[],p:[],w:u};ye(b,C,w),y.push(b)},Y,le,ke=u=>{if(n=u===1,m=0,le=0,Y=0,T)C=g(l),w=g(l);else{let b=I(),_=o(F/1.4);C=P(b)*_,w=k(b)*_}Se(v),p(u,Te)},Pe=u=>f()?G:-G,kt=Pe(),Pt=[Pe,u=>kt][je],Te=u=>{try{let b=ce(e,C+d,w+d);if(a||(a=r(b[2]),i=r(2)),Y&&O(Y-b[0])>.4){if(le)return n=0;le=1}if(Y=b[0],m++,m>we&&(n=0),f(1-St)&&f(b[1])&&(Ce+=Pt()),Ve&&f(.9)&&Se(o(v)),Ue&&xt(C,w))return;let _=b[0]+Ce;C+=P(_)*xe,w+=k(_)*xe,ye(y[y.length-1],C,w)}catch(b){n=0}},Tt=u=>{m<5||(se(u,i),vt(u,y,c*Ye),se(u,a),vt(u,y,0))};return ke(we),{c(){if(!n)try{y[0].s.shift(),y[0].p.shift(),y[0].p.length||y.shift()}catch(u){ke(1)}},w:Te,p:Tt}};var Ct=(e,r,n,a)=>{let i=z(n,m=>me(r,a)).filter(m=>m);return m=>{i.forEach(l=>l.w()),i.forEach(l=>l.c()),i.forEach(l=>l.p(e))}};var wt=(e,r)=>{if(ge(e,pe?"#000":"#fff"),e.fillRect(0,0,1e6,1e6),!pe){let n=m=>{e.translate(R,R),e.rotate(m),e.translate(-R,-R)},a=I();n(a);let i=(m,l)=>{let d=r()+30;ge(e,d),p(m,v=>{e.beginPath(),dt(e,o(c),l(),0,o(R),o(R)),e.fill()})};be(e,"xor"),H(e,"blur(55px)"),i(55,m=>o(c)),i(22,m=>c+g(c*.1)),i(22,m=>g(c*.1)),n(-a),H(e,"none"),be(e,"source-over")}};var K=(e,r,n,a,i=0)=>{i&&rt&&H(e,`blur(${i|0}px)`),z(n,l=>me(r,a)).forEach(l=>l&&l.p(e))};var Q=(e=h(5))=>"#"+qe.substr((Oe*5+e)*6,6);var Fe="tx i_dianov piter shvembldr jeffgdavis",x=pt(c);x.lineJoin=de?"round":"miter";x.lineCap=de?"round":"square";wt(x,Q);Ge&&p(o(9e4,1e4),()=>{x.fillStyle=Q(),x.fillRect(o(c),o(c),c/2e3,c/2e3)});var V=e=>e==2?Q(4):Q(e?h(2):h(3,2)),X=ut();K(x,X,E/5,V,c*.01);K(x,X,E/5,V,c*.005);K(x,X,E/5,V,c*.002);H(x,"none");K(x,X,E,V);Ne&&Ae(x);var $t=Ct(x,X,E/(T?100:20),V),Kt=requestAnimationFrame,Qt=x.getImageData(0,0,c,c),yt=e=>{(Fe||!e)&&(x.putImageData(Qt,0,0),$t()),Kt(yt)};yt(0);onpointerdown=e=>!e.button&&(Fe=!Fe);})();
+</script>
+    </body>
+</html>
