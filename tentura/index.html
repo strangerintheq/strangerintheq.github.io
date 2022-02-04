@@ -6,7 +6,39 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+        margin: 0;
+        text-align: center;
+    }
+    .long-text {
+        margin: 0 10vw;
+        text-align: justify;
+    }
+    .img {
+        width: 100vw;
+        height: 25vw;
+        background-size: cover;
+    }
+    .header-img {
+        background: linear-gradient(0deg, #ffffffff, #ffffff00),
+        url("1-min.png") no-repeat bottom center;
+    }
+    .footer-img {
+        background: linear-gradient(180deg, #ffffffff, #ffffff00),
+        url("1-min.png") no-repeat top center;
+    }
+    .splitter {
+        height: calc(100vw * 0.025);
+    }
+    .slider {
+        font-size: 0;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+</style>
 <div class="header-img img"></div>
 <div class="splitter"></div>
 <div data-size="6">TENTURA</div>
@@ -98,6 +130,44 @@ This is the work of Tentura, with the amendment that the object of its control i
 </div>
 <div class="splitter"></div>
 <div class="footer-img img"></div>
-<script src="index.js"></script>
+<script>
+    (function installSizes(){
+        document.querySelectorAll('[data-size]').forEach(el => {
+            el.style.fontSize = `calc(1vw * ${el.dataset.size})`
+        })
+    })();
+
+
+    (function imagesSlider() {
+        let slider = document.querySelector('.slider div');
+        let size = 384;
+        let count = 60;
+        slider.innerHTML = [...Array(count)].map((_, i) => {
+            i = i < 10 ? ('0'+ i) : i;
+            let url1 = `https://artist-staging.artblocks.io/_next/image?url=`;
+            let url2 = `https%3A%2F%2Fartblocks-artists-staging.s3.amazonaws.com%2F`;
+            let img = `1310000${i}.png&amp;w=${size}&amp;q=75`;
+            return `<img src="${url1 + url2 + img}">`;
+        }).join('');
+
+
+        let scrollAmount = 0;
+
+        slider.style.minWidth = count*size + 'px';
+        slider.parentNode.addEventListener('mousewheel', e => {
+            e.preventDefault()
+            scrollAmount -= e.wheelDelta;
+        })
+
+        requestAnimationFrame(function animateScroll(){
+            slider.parentNode.scrollLeft += scrollAmount*0.14;
+            scrollAmount -= scrollAmount*0.14;
+            if (Math.abs(scrollAmount) < 0.1)
+                scrollAmount = 0;
+
+            requestAnimationFrame(animateScroll)
+        })
+    })()
+</script>
 </body>
 </html>
