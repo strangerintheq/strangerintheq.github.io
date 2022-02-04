@@ -28,6 +28,8 @@ body {
 .splitter {
     height: calc(100vw * 0.025);
 }
-.ropsten {
+.slider {
     font-size: 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
