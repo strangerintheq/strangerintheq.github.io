@@ -1,3 +1,10 @@
+(function installSizes(){
+    document.querySelectorAll('[data-size]').forEach(el => {
+        el.style.fontSize = `calc(1vw * ${el.dataset.size})`
+    })
+})();
+
+
 (function imagesSlider() {
     let slider = document.querySelector('.slider div');
     let size = 384;

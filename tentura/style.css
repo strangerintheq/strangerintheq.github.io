@@ -2,28 +2,24 @@ body {
     font-family: Arial, sans-serif;
     overflow-x: hidden;
     margin: 0;
+    text-align: center;
 }
-.title {
-    font-size: calc(100vw * 0.03)
-}
-.header-img {
-    width: 100vw;
-    height: 25vw;
-    background: linear-gradient(0deg, #ffffffff, #ffffff00),
-    url("1-min.png") no-repeat bottom center;
-    background-size: cover;
-}
-.footer-img {
-    width: 100vw;
-    height: 25vw;
-    background: linear-gradient(180deg, #ffffffff, #ffffff00),
-    url("1-min.png") no-repeat top center;
-    background-size: cover;
-}
-.text {
+.long-text {
     margin: 0 10vw;
     text-align: justify;
-    font-size: calc(100vw * 0.025);
+}
+.img {
+    width: 100vw;
+    height: 25vw;
+    background-size: cover;
+}
+.header-img {
+    background: linear-gradient(0deg, #ffffffff, #ffffff00),
+        url("1-min.png") no-repeat bottom center;
+}
+.footer-img {
+    background: linear-gradient(180deg, #ffffffff, #ffffff00),
+        url("1-min.png") no-repeat top center;
 }
 .splitter {
     height: calc(100vw * 0.025);
