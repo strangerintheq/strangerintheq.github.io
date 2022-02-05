@@ -3,32 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Tentura by Stranger in the Q</title>
-    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
 <body>
 <style>
     body {
-        font-family: Arial, sans-serif;
-        overflow-x: hidden;
+        font-family: "Inter", sans-serif;
+        overscroll-behavior: none;
         margin: 0;
         text-align: center;
+        overflow-x: hidden;
     }
     .long-text {
         margin: 0 10vw;
         text-align: justify;
     }
-    .img {
+    @keyframes rotate {
+        0%   {transform: rotate(-30deg)}
+        50%  {transform: rotate(-8deg)}
+        100% {transform: rotate(-30deg)}
+    }
+    .header-img-wrapper {
         width: 100vw;
-        height: 25vw;
-        background-size: cover;
+        height: 30vw;
+        overflow: hidden;
+        margin-bottom: -10vw;
+        z-index: -1000;
     }
     .header-img {
-        background: linear-gradient(0deg, #ffffffff, #ffffff00),
-        url("1-min.png") no-repeat bottom center;
+        animation: rotate 200s infinite;
+
+        width: 100vw;
+        height: 100vw;
+        margin-top: -75vw;
+        background: url("1.png") no-repeat bottom center;
+        background-size: 100% 100%;
     }
     .footer-img {
-        background: linear-gradient(180deg, #ffffffff, #ffffff00),
-        url("1-min.png") no-repeat top center;
+        width: 100vw;
+        height: 100vw;
+        background-size: contain;
+        background: linear-gradient(180deg, #ffffffff, #ffffff00 25%),
+                    url("1.png") no-repeat 50% 50%;
+        background-size: 100% 100%;
+    }
+    .footer-img-wrapper {
+        margin-top: -10vw;
+        width: 100vw;
+        height: 30vw;
+        overflow: hidden;
     }
     .splitter {
         height: calc(100vw * 0.025);
@@ -38,12 +61,22 @@
         overflow-x: scroll;
         overflow-y: hidden;
     }
+    .ico-6 {
+        max-width: calc(1vw * 6)
+    }
+    .ico-4 {
+        max-width: calc(1vw * 4)
+    }
 </style>
-<div class="header-img img"></div>
+
+<div class="header-img-wrapper">
+<div class="header-img"></div>
+</div>
+<!---->
 <div class="splitter"></div>
 <div data-size="6">TENTURA</div>
 <div data-size="2">by Stranger in the Q</div>
-<img src="https://www.artblocks.io/squigWhiteCircle.png" style="max-width:calc(1vw * 6)">
+<img src="https://www.artblocks.io/squigWhiteCircle.png" class="ico-6">
 <div data-size="2">
     Long-form generative artwork released by
     <a href="https://artblocks.io" target="_blank">artblocks.io</a> <br>
@@ -54,6 +87,8 @@
 <div class="splitter"></div>
 <div class="splitter"></div>
 <hr>
+
+<!---->
 <div class="splitter"></div>
 <div data-size="3">Tentura is the fundamental device of time and being.</div>
 <div class="splitter"></div>
@@ -64,7 +99,6 @@ between the body and soul of every living being under its influence.
 The subject becomes bound to a global variable, which is calculated
 and controlled by the Tentura itself.
 </div>
-
 <div class="splitter"></div>
 <div data-size="2" class="long-text">
 To understand this, you can use the metaphor of virtual reality.
@@ -91,45 +125,57 @@ This is the work of Tentura, with the amendment that the object of its control i
 </div>
 <div class="splitter"></div>
 <hr>
+<!---->
+
 <div class="splitter"></div>
 <div data-size="3">Creation process</div>
 <div class="splitter"></div>
 ...coming soon...
 <div class="splitter"></div>
 <hr>
+
+<!---->
 <!--<div class="splitter"></div>-->
 <!--<div data-size="2">Test mints:</div>-->
 <div class="splitter"></div>
-<div class="slider">
-    <div></div>
-</div>
+<div class="slider"><div></div></div>
 <div class="splitter"></div>
 <hr>
+<!---->
+
 <div class="splitter"></div>
 <div data-size="3">About me</div>
 <div class="splitter"></div>
 <div data-size="2" class="long-text">
-    My name is Konstantin, i'm newbie in generative art,
-    but i'm working as software developer for 17+ years,
+    My name is Konstantin, i'm working as software developer,
     my passion is math and computer graphics,
     i'm working with various techniques,
     such as WebGL, SVG or pure canvas 2d api.
     <div class="splitter"></div>
-    You can explore some of my art at
-    <a href="https://strangerintheq.github.io" target="_blank">strangerintheq.ginhub.io</a>
-    <div class="splitter"></div>
-    Twitter:
-    <a href="https://twitter.com/stranger_intheq" target="_blank">@stranger_intheq</a>
-    <br>
-    Telegram:
-    <a href="https://t.me/strangerintheq" target="_blank">@strangerintheq</a>
-    <a href="https://t.me/mathimages" target="_blank">@mathimages</a>
-    <br>
-    Codepen:
-    <a href="https://codepen.io/strangerintheq" target="_blank">@strangerintheq</a>
 </div>
+<div data-size="3">🎨&nbsp;<a href="https://strangerintheq.github.io" target="_blank">strangerintheq.ginhub.io</a>&nbsp;🖼️</div>
 <div class="splitter"></div>
-<div class="footer-img img"></div>
+
+<div style="font-size: 0">
+    <a title="Twitter" href="https://twitter.com/stranger_intheq" target="_blank">
+        <img src="../resources/twitter.svg" class="ico-4">
+    </a>
+    <a style="margin-left: 0.0vw" title="Discord" href="https://discord.gg/S92neTmQ3v" target="_blank">
+        <img src="../resources/discord.svg" class="ico-4">
+    </a>
+    <a style="margin-left: 0.1vw" title="Instagram" href="https://www.instagram.com/stranger_in_the_q/" target="_blank">
+        <img src="../resources/insta.svg" class="ico-4">
+    </a>
+    <a style="margin-left: 0.1vw" title="Telegram" href="https://t.me/strangerintheq" target="_blank">
+        <img src="../resources/telegram.svg" class="ico-4">
+    </a>
+</div>
+
+<div class="splitter"></div>
+<div class="footer-img-wrapper">
+    <div class="footer-img"></div>
+</div>
+<!---->
 <script>
     (function installSizes(){
         document.querySelectorAll('[data-size]').forEach(el => {
