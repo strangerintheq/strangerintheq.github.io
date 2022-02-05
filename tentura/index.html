@@ -7,18 +7,13 @@
 </head>
 <body>
 
-<script>
-    function images(folder, list) {
-        document.write(list.map(img => img ? `
-            <div style="display: inline-block">
-                <img src="img/${folder}/${img}.png" style="max-width: 20vw; border: 1px solid gray">
-                <div data-size="2">${img}</div>
-            </div>
-    ` : '<br>').join(''));
-    }
-</script>
-
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-weight: unset;
+    }
+
     body {
         font-family: "Inter", sans-serif;
         overscroll-behavior: none;
@@ -27,9 +22,19 @@
         overflow-x: hidden;
     }
 
-    .long-text {
-        margin: 0 10vw;
+    h1 {font-size: 6vw;}
+    h2 {font-size: 3vw;}
+    h3 {font-size: 2vw;}
+    h4 {font-size: 1.5vw;}
+
+    .text {
+        margin: calc(100vw * 0.025) 10vw;
         text-align: justify;
+        font-size: 2vw;
+    }
+
+    section {
+        margin: calc(100vw * 0.025) 0;
     }
 
     @keyframes rotate {
@@ -54,7 +59,6 @@
 
     .header-img {
         animation: rotate 200s infinite;
-
         width: 100vw;
         height: 100vw;
         margin-top: -75vw;
@@ -66,8 +70,8 @@
         width: 100vw;
         height: 100vw;
         background-size: contain;
-        background: /*linear-gradient(180deg, #ffffffff, #ffffff00 25%),*/ radial-gradient(circle at 50% -170%, #ffffffff 65%, #ffffff00 72%),
-        url("img/bg.png") no-repeat 50% 50%;
+        background: radial-gradient(circle at 50% -170%, #ffffffff 65%, #ffffff00 72%),
+                    url("img/bg.png") no-repeat 50% 50%;
         background-size: 100% 100%;
     }
 
@@ -78,7 +82,7 @@
         overflow: hidden;
     }
 
-    .splitter {
+    .separator {
         height: calc(100vw * 0.025);
         width: calc(100vw * 0.025);
     }
@@ -96,7 +100,29 @@
     .ico-4 {
         max-width: calc(1vw * 4)
     }
+
+    .dark {
+        background: linear-gradient(0,
+            #fff 0vw,
+            #eee 3vw,
+            #fff 20vw,
+            #fff calc(100% - 20vw),
+            #eee calc(100% - 3vw),
+            #fff 100%
+        );
+    }
 </style>
+
+<script>
+    function images(folder, list) {
+        document.write(list.map(img => img ? `
+            <div style="display: inline-block">
+                <img src="img/${folder}/${img}.png" style="max-width: 20vw; border: 1px solid gray">
+                <h4>${img}</h4>
+            </div>
+    ` : '<div class="separator"></div>').join(''));
+    }
+</script>
 
 <!-- header image -->
 <div class="header-img-wrapper">
@@ -104,38 +130,33 @@
 </div>
 
 <!-- preface -->
-<div>
-    <div class="splitter"></div>
-    <div data-size="6">TENTURA</div>
-    <div data-size="2">by Stranger in the Q</div>
+<section>
+    <h1>TENTURA</h1>
+    <h3>by Stranger in the Q</h3>
     <img src="https://www.artblocks.io/squigWhiteCircle.png" class="ico-6">
-    <div data-size="2">
+    <h3>
         Long-form generative artwork released by
-        <a href="https://artblocks.io" target="_blank">artblocks.io</a> <br>
+        <a href="https://artblocks.io" target="_blank">artblocks.io</a><br>
         and hosted immutably on Ethereum blockchain
-    </div>
-    <div class="splitter"></div>
-    <div data-size="1.5">Release date: February 22rd 2022, 22:22 GMT</div>
-    <div class="splitter"></div>
-    <div class="splitter"></div>
-</div>
-
-<hr>
+    </h3>
+    <div class="separator"></div>
+    <h3>Release date: February 22rd 2022, 22:22 GMT</h3>
+    <div class="separator"></div>
+</section>
 
 <!-- description -->
-<div>
-    <div class="splitter"></div>
-    <div data-size="3">Tentura is the fundamental device of time and being</div>
-    <div class="splitter"></div>
-    <div data-size="2" class="long-text">
+<section class="dark">
+    <div class="separator"></div>
+    <h2>Tentura is the fundamental device of time and being</h2>
+    <div class="text">
         The essence of the Tentura's work is that it breaks the connection
         between the body and soul of every living being under its influence.
 
         The subject becomes bound to a global variable, which is calculated
         and controlled by the Tentura itself.
-    </div>
-    <div class="splitter"></div>
-    <div data-size="2" class="long-text">
+
+        <div class="separator"></div>
+
         To understand this, you can use the metaphor of virtual reality.
 
         A person starts a computer game and takes control of a character.
@@ -147,9 +168,9 @@
         (the image on the screen).
 
         The set of rules of the game symbolize the material world with its rigidly defined laws.
-    </div>
-    <div class="splitter"></div>
-    <div data-size="2" class="long-text">
+
+        <div class="separator"></div>
+
         Imagine that at some point a third-party program turns off the player's
         input means and begins to control the character itself, calculating his
         next actions according to some internal algorithms.
@@ -160,86 +181,83 @@
 
         This is the work of Tentura, with the amendment that the object of its control is reality.
     </div>
-    <div class="splitter"></div>
-</div>
-
-<hr>
+    <div class="separator"></div>
+</section>
 
 <!-- ropsten mints -->
-<div>
-    <div class="splitter"></div>
-    <div data-size="3">Test mints</div>
-    <div class="splitter"></div>
+<section>
+    <h2>Test mints</h2>
+    <div class="separator"></div>
     <div class="slider"><div></div></div>
-    <div class="splitter"></div>
-</div>
-
-<hr>
+    <div class="separator"></div>
+</section>
 
 <!-- creation process -->
-<div>
-    <div class="splitter"></div>
-    <div data-size="3">Creation process</div>
-    <div class="splitter"></div>
-    <div class="long-text" data-size="2">
+<section class="dark">
+    <div class="separator"></div>
+    <h2>Creation process</h2>
+    <div class="separator"></div>
+    <div class="text">
         This artwork is based on a noised vector field (also known as flow field),
         which can be 2 variations and 2 modifications:
     </div>
-    <div class="splitter"></div>
+    <div class="separator"></div>
     <script>
         images('ff', ['straight', 'radial', '', 'straight-bent', 'radial-centered']);
     </script>
-    <div class="splitter"></div>
-    <div class="long-text" data-size="2">
+    <div class="separator"></div>
+    <div class="text">
         After that, on top of this vector field drawn the one of 6
         shapes with the "brush" effect (where field direction is changed
         with direction of brush moved):
     </div>
-    <div class="splitter"></div>
+    <div class="separator"></div>
     <script>
         images('shape', ['lines', 'ring', 'triangle', '', 'square', 'pentagon', 'hexagon']);
     </script>
-    <div class="splitter"></div>
-    <div class="long-text" data-size="2">
+    <div class="separator"></div>
+    <div class="text">
         These shapes also has variations, at first it can be shifted from center.
         Also it can be rotated or deformed. Sometimes shapes can be partial or spiral:
     </div>
-    <div class="splitter"></div>
+    <div class="separator"></div>
     <script>
         images('shape-variations', ['spiral', 'partial']);
     </script>
-    <div class="splitter"></div>
-    <div class="long-text" data-size="2">
+    <div class="separator"></div>
+    <div class="text">
         This two zones on vector field is used to control the behaviour of wires,
         zones is providing not only directions but also color choose rules,
         turn chance and chance of stop.
-        <div class="splitter"></div>
+        <div class="separator"></div>
         Wires distribution also different and can be one of this 6 types:
     </div>
-    <div class="splitter"></div>
+    <div class="separator"></div>
     <script>
         images('distribution', ['full', 'line', 'circle', '', 'triangle', 'square', 'pentagon']);
     </script>
-    <div class="splitter"></div>
-    <div class="long-text" data-size="2">
+    <div class="separator"></div>
+    <div class="text">
         Distributions, except full, also has variations, it can be rotated, shifted, with hole,
         noised, and with any combination of this modifications:
+        <div class="separator"></div>
     </div>
-    <div class="splitter"></div>
+
     <script>
         images('distribution-variations', ['hole', 'shift', 'noise']);
     </script>
-    <div class="splitter"></div>
-    <div class="long-text" data-size="2">
+
+    <div class="text">
+        <div class="separator"></div>
         Fully distributed wires can be with "cracks" made by several octaves of noise,
         other distributions can be "cut by edges" to prevent wires from crossing the edges.
 
-        <div class="splitter"></div>
+        <div class="separator"></div>
 
         All code written on typescript, and bundled to single javascript file with
         total size approximately 6 kilobytes.
 
-        <div class="splitter"></div>
+        <div class="separator"></div>
 
         Special thanks to
         <script>
@@ -248,27 +266,23 @@
         </script>.
         They supported me and sometimes pushed me in right direction
         while creating this work.
+        <div class="separator"></div>
     </div>
-    <div class="splitter"></div>
-</div>
 
-<hr>
+</section>
 
 <!-- about me-->
-<div>
-    <div class="splitter"></div>
-    <div data-size="3">About me</div>
-    <div class="splitter"></div>
-    <div data-size="2" class="long-text">
+<section>
+    <h2>About me</h2>
+    <div class="text">
         My name is Konstantin, i'm working as software developer,
         my passion is math and computer graphics,
         i'm using with various techniques,
         such as WebGL/GLSL, SVG or pure Canvas2D API.
     </div>
-    <div class="splitter"></div>
-    <div data-size="3">🎨&nbsp;<a href="https://strangerintheq.github.io" target="_blank">strangerintheq.ginhub.io</a>&nbsp;🖼️
-    </div>
-    <div class="splitter"></div>
+    <div class="separator"></div>
+    <h2>🎨&nbsp;<a href="https://strangerintheq.github.io" target="_blank">strangerintheq.ginhub.io</a>&nbsp;🖼️</h2>
+    <div class="separator"></div>
     <div style="font-size: 0">
         <a title="Twitter" href="https://twitter.com/stranger_intheq" target="_blank">
             <img src="../resources/twitter.svg" class="ico-4">
@@ -284,24 +298,19 @@
             <img src="../resources/telegram.svg" class="ico-4">
         </a>
     </div>
-    <div class="splitter"></div>
-    <div class="footer-img-wrapper">
-        <div class="footer-img"></div>
-    </div>
+
+</section>
+
+
+<div class="footer-img-wrapper">
+    <div class="footer-img"></div>
 </div>
 
 <script>
-    (function installSizes() {
-        document.querySelectorAll('[data-size]').forEach(el => {
-            el.style.fontSize = `calc(1vw * ${el.dataset.size})`
-        })
-    })();
-
-
     (function imagesSlider() {
         let slider = document.querySelector('.slider div');
         let size = 384;
-        let displaySize = size
+        let displaySize = size;
         let count = 60;
         slider.innerHTML = [...Array(count)].map((_, i) => {
             i = i < 10 ? ('0' + i) : i;
@@ -309,7 +318,6 @@
             let url2 = `https://artblocks-artists-staging.s3.amazonaws.com/1310000${i}.png`;
             return `<a href="${url2}" target="_blank"><img src="${url1 + url2}&amp;w=${size}&amp;q=75" width="${displaySize}"><a>`;
         }).join('');
-
 
         let scrollAmount = 0;
 
@@ -325,7 +333,6 @@
             scrollAmount -= scrollAmount * 0.14;
             if (Math.abs(scrollAmount) < 0.1)
                 scrollAmount = 0;
-
             requestAnimationFrame(animateScroll)
         })
     })()
