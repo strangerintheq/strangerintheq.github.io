@@ -220,21 +220,49 @@
         Fully distributed images can be with cracks or not:
     </div>
     <script>
-        document.write(ropstenImage(56, 384, '40vw') + ropstenImage(12, 384, '40vw'))
+        document.write(ropstenImage(56, 128*5, '40vw') + ropstenImage(12, 128*5, '40vw'))
     </script>
     <div class="text">
         Partial distributions has different shapes and can be cut by edges of image (will not leave image)
         or not (can leave image):
     </div>
     <script>
-        document.write(ropstenImage(28, 384, '40vw') + ropstenImage(54, 384, '40vw'))
+        document.write(ropstenImage(28, 128*5, '40vw') + ropstenImage(54, 128*5, '40vw'))
     </script>
     <div class="text">
-        Smaller zone of Tentura is drawn by various types of shapes - lines, circle, polygon, spiral, etc.
-        Line shapes can contain several lines and drawn by 2 or 3 hot spots:
+        Smaller zone of Tentura is drawn by various types of shapes - lines, circle, polygon,
+        partial shape, spiral shape etc.
+        <div class="separator"></div>
+        Line shapes can contain several lines which is drawn by 4 or 9 hot spots:
     </div>
     <script>
-        document.write(ropstenImage(28, 384, '40vw') + ropstenImage(54, 384, '40vw'))
+        document.write(ropstenImage(39, 128*5, '40vw') + ropstenImage(51, 128*5, '40vw'))
+    </script>
+    <div class="text">
+        Other shapes can be circle, triangle, square, pentagon or hexagon and its partial
+        or spiral variations
+    </div>
+    <script>
+        let s = '16.7vw'
+        document.write(
+            ropstenImage(27, 256, s) +
+            ropstenImage(52, 256, s) +
+            ropstenImage(42, 256, s) +
+            ropstenImage(20, 256, s) +
+            ropstenImage(51, 256, s) +
+
+            ropstenImage(59, 256, s) +
+            ropstenImage(52, 256, s) +
+            ropstenImage(23, 256, s) +
+            ropstenImage(20, 256, s) +
+            ropstenImage(51, 256, s) +
+
+            ropstenImage(37, 256, s) +
+            ropstenImage(52, 256, s) +
+            ropstenImage(42, 256, s) +
+            ropstenImage(22, 256, s) +
+            ropstenImage(5, 256, s)
+        )
     </script>
     <div class="text">
         ...
