@@ -4,125 +4,134 @@
     <meta charset="UTF-8">
     <title>Tentura by Stranger in the Q</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
-</head>
-<body>
 
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        font-weight: unset;
-    }
-
-    body {
-        font-family: "Inter", sans-serif;
-        overscroll-behavior: none;
-        margin: 0;
-        text-align: center;
-        overflow-x: hidden;
-    }
-
-    h1 {font-size: 6vw;}
-    h2 {font-size: 3vw;}
-    h3 {font-size: 2vw;}
-    h4 {font-size: 1.5vw;}
-
-    .text {
-        margin: calc(100vw * 0.025) 10vw;
-        text-align: justify;
-        font-size: 2vw;
-    }
-
-    section {
-        margin: calc(100vw * 0.025) 0;
-    }
-
-    @keyframes rotate {
-        0% {
-            transform: rotate(-30deg)
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-weight: unset;
         }
-        50% {
-            transform: rotate(-8deg)
+
+        body {
+            font-family: "Inter", sans-serif;
+            overscroll-behavior: none;
+            margin: 0;
+            text-align: center;
+            overflow-x: hidden;
         }
-        100% {
-            transform: rotate(-30deg)
+
+        h1 {
+            font-size: 6vw;
         }
-    }
 
-    .header-img-wrapper {
-        width: 100vw;
-        height: 30vw;
-        overflow: hidden;
-        margin-bottom: -10vw;
-        z-index: -1000;
-    }
+        h2 {
+            font-size: 3vw;
+        }
 
-    .header-img {
-        animation: rotate 200s infinite;
-        width: 100vw;
-        height: 100vw;
-        margin-top: -75vw;
-        background: url("img/bg.png") no-repeat bottom center;
-        background-size: 100% 100%;
-    }
+        h3 {
+            font-size: 2vw;
+        }
 
-    .footer-img {
-        width: 100vw;
-        height: 100vw;
-        background-size: contain;
-        background: radial-gradient(circle at 50% -170%, #ffffffff 65%, #ffffff00 72%),
-                    url("img/bg.png") no-repeat 50% 50%;
-        background-size: 100% 100%;
-    }
+        h4 {
+            font-size: 1.5vw;
+        }
 
-    .footer-img-wrapper {
-        margin-top: -15vw;
-        width: 100vw;
-        height: 30vw;
-        overflow: hidden;
-    }
+        .text {
+            margin: calc(100vw * 0.025) 10vw;
+            text-align: justify;
+            font-size: 2vw;
+        }
 
-    .separator {
-        height: calc(100vw * 0.025);
-        width: calc(100vw * 0.025);
-    }
+        section {
+            padding-top: calc(100vw * 0.025);
+            padding-bottom: calc(100vw * 0.025);
+        }
 
-    .slider {
-        font-size: 0;
-        overflow-x: scroll;
-        overflow-y: hidden;
-    }
+        @keyframes rotate {
+            0% {
+                transform: rotate(-30deg)
+            }
+            50% {
+                transform: rotate(-8deg)
+            }
+            100% {
+                transform: rotate(-30deg)
+            }
+        }
 
-    .ico-6 {
-        max-width: calc(1vw * 6)
-    }
+        .header-img-wrapper {
+            width: 100vw;
+            height: 30vw;
+            overflow: hidden;
+            margin-bottom: -10vw;
+        }
 
-    .ico-4 {
-        max-width: calc(1vw * 4)
-    }
+        .header-img {
+            animation: rotate 200s infinite;
+            width: 100vw;
+            height: 100vw;
+            margin-top: -75vw;
+            background: url("img/bg.png") no-repeat bottom center;
+            background-size: 100% 100%;
+        }
 
-    .dark {
-        background: linear-gradient(0,
-            #fff 0vw,
-            #eee 3vw,
-            #fff 20vw,
-            #fff calc(100% - 20vw),
-            #eee calc(100% - 3vw),
-            #fff 100%
-        );
-    }
-</style>
+        .footer-img {
+            width: 100vw;
+            height: 100vw;
+            background-size: contain;
+            background: radial-gradient(circle at 50% -170%, #ffffffff 65%, #ffffff00 72%),
+            url("img/bg.png") no-repeat 50% 50%;
+            background-size: 100% 100%;
+        }
 
-<script>
-    function images(folder, list) {
-        document.write(list.map(img => img ? `
+        .footer-img-wrapper {
+            margin-top: -15vw;
+            width: 100vw;
+            height: 30vw;
+            overflow: hidden;
+        }
+
+        .separator {
+            height: calc(100vw * 0.025);
+            width: calc(100vw * 0.025);
+        }
+
+        .slider {
+            font-size: 0;
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+
+        .ico-6 {
+            max-width: calc(1vw * 6)
+        }
+
+        .ico-4 {
+            max-width: calc(1vw * 4)
+        }
+
+        .dark {
+            background: linear-gradient(180deg,
+                #fff 0vw,
+                #f4f4f4 2vw,
+                #fff 15vw
+            );
+        }
+    </style>
+
+    <script>
+        function images(folder, list) {
+            document.write(list.map(img => img ? `
             <div style="display: inline-block">
                 <img src="img/${folder}/${img}.png" style="max-width: 20vw; border: 1px solid gray">
                 <h4>${img}</h4>
             </div>
     ` : '<div class="separator"></div>').join(''));
-    }
-</script>
+        }
+    </script>
+
+</head>
+<body>
 
 <!-- header image -->
 <div class="header-img-wrapper">
@@ -146,7 +155,6 @@
 
 <!-- description -->
 <section class="dark">
-    <div class="separator"></div>
     <h2>Tentura is the fundamental device of time and being</h2>
     <div class="text">
         The essence of the Tentura's work is that it breaks the connection
@@ -184,17 +192,32 @@
     <div class="separator"></div>
 </section>
 
+<!-- about work -->
+<section class="dark">
+    <h2>About artwork</h2>
+    <div class="text">
+        Tentura is divided on two different zones, which controlling behaviour
+        of strings or wires belonging to this zone. When string is leaving zone
+        where it started it retains the color but changes its behaviour.
+        <div class="separator"></div>
+        Starting spots of the strings has two different basic distribution rules -
+        fully or partial distributed on the image, partial distributions has a different shapes.
+
+    </div>
+</section>
+
 <!-- ropsten mints -->
-<section>
+<section class="dark">
     <h2>Test mints</h2>
     <div class="separator"></div>
-    <div class="slider"><div></div></div>
+    <div class="slider">
+        <div></div>
+    </div>
     <div class="separator"></div>
 </section>
 
 <!-- creation process -->
 <section class="dark">
-    <div class="separator"></div>
     <h2>Creation process</h2>
     <div class="text">
         This artwork is based on a noised vector field (also known as flow field),
@@ -225,11 +248,11 @@
     </script>
     <div class="separator"></div>
     <div class="text">
-        This two zones on vector field is used to control the behaviour of wires,
-        zones is providing not only directions but also color choose rules,
-        turn chance and chance of stop.
+        This two zones on vector field is used to control the behaviour of
+        strings or wires, zones is providing not only directions but also
+        color choose rules, turn chance and chance of stop.
         <div class="separator"></div>
-        Wires distribution also different and can be one of this 6 types:
+        Strings or wires distribution also different and can be one of this 6 types:
     </div>
     <div class="separator"></div>
     <script>
@@ -262,7 +285,8 @@
         <script>
             document.write('@i_dianov @piterpasma @shvembldr @jeffgdavis @_sross_'
                 .split(' ').map(s => `<a href="https://twitter.com/${s}">${s}</a>`).join(' '))
-        </script>.
+        </script>
+        .
         They supported me and sometimes pushed me in right direction
         while creating this work.
         <div class="separator"></div>
@@ -271,7 +295,7 @@
 </section>
 
 <!-- about me-->
-<section>
+<section class="dark">
     <h2>About me</h2>
     <div class="text">
         My name is Konstantin, i'm working as software developer,
@@ -300,11 +324,12 @@
 
 </section>
 
-
+<!-- footer image -->
 <div class="footer-img-wrapper">
     <div class="footer-img"></div>
 </div>
 
+<!-- slider -->
 <script>
     (function imagesSlider() {
         let slider = document.querySelector('.slider div');
@@ -315,24 +340,27 @@
             i = i < 10 ? ('0' + i) : i;
             let url1 = `https://artist-staging.artblocks.io/_next/image?url=`;
             let url2 = `https://artblocks-artists-staging.s3.amazonaws.com/1310000${i}.png`;
-            return `<a href="${url2}" target="_blank"><img src="${url1 + url2}&amp;w=${size}&amp;q=75" width="${displaySize}"><a>`;
+            return `<a href="${url2}" target="_blank"><img
+                src="${url1 + url2}&amp;w=${size}&amp;q=75"
+                style="min-width: ${displaySize}px;min-height: ${displaySize}px"><a>`;
         }).join('');
 
         let scrollAmount = 0;
 
         slider.style.minWidth = count * displaySize + 'px';
         slider.parentNode.scrollLeft = count * displaySize / 2;
+
+
         slider.parentNode.addEventListener('mousewheel', e => {
             e.preventDefault()
             scrollAmount -= e.wheelDelta;
         })
 
+
         requestAnimationFrame(function animateScroll() {
-            slider.parentNode.scrollLeft += scrollAmount * 0.14;
-            scrollAmount -= scrollAmount * 0.14;
-            if (Math.abs(scrollAmount) < 0.1)
-                scrollAmount = 0;
-            requestAnimationFrame(animateScroll)
+            slider.parentNode.scrollLeft += scrollAmount * 0.1;
+            scrollAmount -= scrollAmount * 0.1;
+            requestAnimationFrame(animateScroll);
         })
     })()
 </script>
