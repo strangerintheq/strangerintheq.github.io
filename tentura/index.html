@@ -120,16 +120,30 @@
     </style>
 
     <script>
-        function images(folder, list) {
+        function debugImages(folder, list) {
             document.write(list.map(img => img ? `
-            <div style="display: inline-block">
-                <img src="img/${folder}/${img}.png" style="max-width: 20vw; border: 1px solid gray">
-                <h4>${img}</h4>
-            </div>
-    ` : '<div class="separator"></div>').join(''));
+                <div style="display: inline-block">
+                    <img src="img/${folder}/${img}.png" style="max-width: 20vw; border: 1px solid gray">
+                    <h4>${img}</h4>
+                </div>
+            ` : '<div class="separator"></div>'
+            ).join(''));
+        }
+
+        function ropstenImage(i, size, displaySize) {
+            i = i < 10 ? ('0' + i) : i;
+            let url1 = `https://artist-staging.artblocks.io/_next/image?url=`;
+            let url2 = `https://artblocks-artists-staging.s3.amazonaws.com/1310000${i}.png`;
+            return `<a href="${url2}" target="_blank"><img
+                src="${url1 + url2}&amp;w=${size}&amp;q=75"
+                style="
+                    min-width: ${displaySize};
+                    min-height: ${displaySize};
+                    max-width: ${displaySize};
+                    max-height: ${displaySize}
+                "><a>`;
         }
     </script>
-
 </head>
 <body>
 
@@ -201,8 +215,29 @@
         where it started it retains the color but changes its behaviour.
         <div class="separator"></div>
         Starting spots of the strings has two different basic distribution rules -
-        fully or partial distributed on the image, partial distributions has a different shapes.
-
+        fully or partial distributed on the image.
+        <div class="separator"></div>
+        Fully distributed images can be with cracks or not:
+    </div>
+    <script>
+        document.write(ropstenImage(56, 384, '40vw') + ropstenImage(12, 384, '40vw'))
+    </script>
+    <div class="text">
+        Partial distributions has different shapes and can be cut by edges of image (will not leave image)
+        or not (can leave image):
+    </div>
+    <script>
+        document.write(ropstenImage(28, 384, '40vw') + ropstenImage(54, 384, '40vw'))
+    </script>
+    <div class="text">
+        Smaller zone of Tentura is drawn by various types of shapes - lines, circle, polygon, spiral, etc.
+        Line shapes can contain several lines and drawn by 2 or 3 hot spots:
+    </div>
+    <script>
+        document.write(ropstenImage(28, 384, '40vw') + ropstenImage(54, 384, '40vw'))
+    </script>
+    <div class="text">
+        ...
     </div>
 </section>
 
@@ -225,7 +260,7 @@
     </div>
     <div class="separator"></div>
     <script>
-        images('ff', ['straight', 'radial', '', 'straight-bent', 'radial-centered']);
+        debugImages('ff', ['straight', 'radial', '', 'straight-bent', 'radial-centered']);
     </script>
     <div class="separator"></div>
     <div class="text">
@@ -235,7 +270,7 @@
     </div>
     <div class="separator"></div>
     <script>
-        images('shape', ['lines', 'ring', 'triangle', '', 'square', 'pentagon', 'hexagon']);
+        debugImages('shape', ['lines', 'ring', 'triangle', '', 'square', 'pentagon', 'hexagon']);
     </script>
     <div class="separator"></div>
     <div class="text">
@@ -244,7 +279,7 @@
     </div>
     <div class="separator"></div>
     <script>
-        images('shape-variations', ['spiral', 'partial']);
+        debugImages('shape-variations', ['spiral', 'partial']);
     </script>
     <div class="separator"></div>
     <div class="text">
@@ -256,7 +291,7 @@
     </div>
     <div class="separator"></div>
     <script>
-        images('distribution', ['full', 'line', 'circle', '', 'triangle', 'square', 'pentagon']);
+        debugImages('distribution', ['full', 'line', 'circle', '', 'triangle', 'square', 'pentagon']);
     </script>
     <div class="separator"></div>
     <div class="text">
@@ -266,7 +301,7 @@
     </div>
 
     <script>
-        images('distribution-variations', ['hole', 'shift', 'noise']);
+        debugImages('distribution-variations', ['hole', 'shift', 'noise']);
     </script>
 
     <div class="text">
@@ -307,19 +342,18 @@
     <h2>🎨&nbsp;<a href="https://strangerintheq.github.io" target="_blank">strangerintheq.ginhub.io</a>&nbsp;🖼️</h2>
     <div class="separator"></div>
     <div style="font-size: 0">
-        <a title="Twitter" href="https://twitter.com/stranger_intheq" target="_blank">
-            <img src="../resources/twitter.svg" class="ico-4">
-        </a>
-        <a style="margin-left: 0.0vw" title="Discord" href="https://discord.gg/S92neTmQ3v" target="_blank">
-            <img src="../resources/discord.svg" class="ico-4">
-        </a>
-        <a style="margin-left: 0.1vw" title="Instagram" href="https://www.instagram.com/stranger_in_the_q/"
-           target="_blank">
-            <img src="../resources/insta.svg" class="ico-4">
-        </a>
-        <a style="margin-left: 0.1vw" title="Telegram" href="https://t.me/strangerintheq" target="_blank">
-            <img src="../resources/telegram.svg" class="ico-4">
-        </a>
+        <script>
+            document.write([
+                ['twitter.svg','Twitter','https://twitter.com/stranger_intheq'],
+                ['discord.svg','Discord','https://discord.gg/S92neTmQ3v'],
+                ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 0.1],
+                ['telegram.svg','Telegram','https://t.me/strangerintheq',0.1]
+            ].map(([image, text, link, marginLeft]) => `
+                <a style="margin-left: ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" >
+                    <img src="../resources/${image}" class="ico-4">
+                </a>
+            `).join(''))
+        </script>
     </div>
 
 </section>
@@ -336,26 +370,19 @@
         let size = 384;
         let displaySize = size;
         let count = 60;
-        slider.innerHTML = [...Array(count)].map((_, i) => {
-            i = i < 10 ? ('0' + i) : i;
-            let url1 = `https://artist-staging.artblocks.io/_next/image?url=`;
-            let url2 = `https://artblocks-artists-staging.s3.amazonaws.com/1310000${i}.png`;
-            return `<a href="${url2}" target="_blank"><img
-                src="${url1 + url2}&amp;w=${size}&amp;q=75"
-                style="min-width: ${displaySize}px;min-height: ${displaySize}px"><a>`;
-        }).join('');
+        slider.innerHTML = [...Array(count)]
+            .map((_, i) => ropstenImage(i, size, displaySize + 'px'))
+            .join('');
 
         let scrollAmount = 0;
 
         slider.style.minWidth = count * displaySize + 'px';
         slider.parentNode.scrollLeft = count * displaySize / 2;
 
-
         slider.parentNode.addEventListener('mousewheel', e => {
             e.preventDefault()
             scrollAmount -= e.wheelDelta;
         })
-
 
         requestAnimationFrame(function animateScroll() {
             slider.parentNode.scrollLeft += scrollAmount * 0.1;
