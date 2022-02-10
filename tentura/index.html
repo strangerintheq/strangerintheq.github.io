@@ -1,423 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Tentura by Stranger in the Q</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            font-weight: unset;
+    <head>
+        <meta charset="UTF-8">
+        <title>Tentura</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+         <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <script>
+    (() => {
+        
+        const ropsten = {};
+        ([["59","0xc06aeb32d71d1ead2c3f8fe9b5f6e9941f8253909082d04e85c02d7cc66c4d63"],["58","0x6eae1cacf3557f9d6e4d462cd7b2d575374b76b41ba7b8ed7637745765264047"],["57","0x03c799f94ac1d73ee65484705b2fc75dc6bf690774cbf3bde503628209bcb4fb"],["56","0x682f373cbeee7a89b0d6a52a0bdbccc057b4096019a9dce34d58ca8e029c1c7a"],["55","0x1c5569e0d7e55709430c08c01c062c20c79fc8e26b159fa03f454fed71b3bc15"],["54","0x6d87865f8576b135c1dcc8babcd3e470a92a75f9f065de5a9726b08d960f5c08"],["53","0xd47f7ef2c1cfe02093932f74b3ca0799c0c01f99cddfd0008a925eece981c087"],["52","0x60d93c948fbe87ff42cbbf5a021dbe90c9a8063cd9f0a03a37763aaf4f04b704"],["51","0x265252ceb93c0306ccc1b411f635c6121e8c148635ac13048cd0495a41ce3d0f"],["50","0xe9b597c1852f91583c23a1a7fa65a996afa9d54219ca70d9f97e6b6f3e80606f"],["49","0xb168b55048eeee1c66a982903a7ab2e0af9fe4ac5dbb1ea6aa9ed1f979bb9b7c"],["48","0x909a1df52d8794e7a57dfd0bb7efc18f20454a7eec6d31a9f328be5faecc6a40"],["47","0x6fc59e6588f2529c5c9cee1a70fb21914342a2bc00fc3e0ba1a74f538537d9ac"],["46","0x392d7575cd35b8411279a13720aef8cc882d1fccff4c4008588185c2c61e6a74"],["45","0x7ac55155a699c26e3db2b42909544f79c8ba5c1e01c5e9d0975a8c01442a6ee1"],["44","0xd84a5c4ea8ac512658fb7eba5eab214056c1e934f0132c9ab24c2a25a862aec1"],["43","0xcb1a0f8592fbbd0b3184cfe7f86733bb317383452b71f95ff6ba18cdb812c982"],["42","0x65974aa01110adf0346ed15f39829964f964aeed453dc694b21b3eb45366cd70"],["41","0x42e0e940d4e00e5199c17a602cbe223f6fcd5fccd72a10e88c3677923114ca98"],["40","0x228e1c13ed60502bbcaac1ec4b6807486259630c49c6996ae8b303b0a85be4f1"],["39","0x7f7461433543d7529837d7d6259c14ebf87506e751be26c6821113272361384a"],["38","0xe23b54024aa197d4e8bf6a5f14fe6ee91efe693d0a6b7dccef537a0de9c08305"],["37","0xf747b3640bd7e4020f402272ad453844d5f21663f865bf0bb85b31064a85e10f"],["36","0x40ad306e0c1372e54b7320bbcfd7fd9e7d0bf4e71c6da61b0ac13dbeeec45892"],["35","0x6d16658278e3a3bcc2068dcf54ebd536f4f01f1fdcf9ad6c598cfddc532b14d7"],["34","0xb3d1121225159d36254e0781d8522961e3b9ab88175e3052d5fae29f3e2d4e19"],["33","0x931a532d3045e1a784810315af4fbf81a46353bdefea9b4d336bc277276eaed2"],["32","0x5bcaaa18d73fa2dc879fa432c14e485e4ed96555367d33d2ad89e095cc884791"],["31","0x41fc34b40642b5572738d637aef06ef21dc59f7c5f64c46205ff49ee96b3e208"],["30","0x2f6cd9eeb5b0a85ab80b79807197c58e2598921b58aef588cadb8a6820c17795"],["29","0x3729c932a74efb9b69e77e7ab115869a912e52d833f6703b887a5cf8b1d793c7"],["28","0x761c379839f971742b157e02e63aaa6f1031c66aabbfee031a8800348489bb5a"],["27","0x545c7791ee767cdb205557ccff8b5bdf2c46ef17c4064898bb97e927f1ad5ec0"],["26","0x3d274b16672e489da3a76599c42debe23649c3fb19269d7d798e194588a17dbe"],["25","0x9aa8862fbe88542fb31b69476dc32730176cd6205332fee511c221d3f6e6738f"],["24","0x19ad6173dc91e42d47cfa4b3824a912a12dfd0b90f0e9bbdc6006fbbfdf8bb7c"],["23","0x4863624f7349235cf499049cdc534c02e6529446b72bfec1d06d281402e5b1ed"],["22","0x0d3c74dd5b7f3ef4a2c7175182a72dbae9b0f632780aaea58d0c70b4ad0e3e85"],["21","0x85309c2259ad035347aec10f8461a1925fb960523855777d00338a048b6ee31e"],["20","0xfa7f8e3c20d0e369fc6679584fac289c82d61bc4c8a043cf17a007caa95bac82"],["19","0x6ee66ece645ea1229a1968795ec08c7935655da463a8171800c926bd7492be38"],["18","0x1d3ee472928377ed2c6b430a34e1d6665377e2352807f736736c1a59c059ba44"],["17","0x134935ff79da516d3e316262c33a9e70c596b10fd6bb1db2b59877fa764c4468"],["16","0x7cfd2b11b1b246d98b5735d018ad8e93169548800659894d2216724aa179de08"],["15","0xfa5b2b512d48f3a9a552c09fd313b79f102012a5385bfa56ea34c624f665e68d"],["14","0xb7c4f613967bede72bf1c1e05ba3fa73eb7015ceb6565e618b19e43f3fd5d780"],["13","0x87ccef9cb32f4dfa9de87f4fea9516c933f48fe4b868b6f1dc091936a6549ce2"],["12","0x94f2da61fa63fbded3e9a9a41e26683ab3f7cc8bc008747c38b042397221e698"],["11","0xecbae2b7acd499ec1ecb8bdd5c6826fc355451cc160f8ca5ea734b317ed50c5c"],["10","0x456a3368278b7389b2c3dedace5ee3c929be59ae3c1561fcd4b90c5e9e506742"],["9","0xf18a5abfb65b1f7be868a10213adb94dd4d6a57dbfefe1e196e65cb87e93c87d"],["8","0xceb8502a811df58f9b359f5300bcfa8e70e13d5f79cf8220a3fb56a0155a0b43"],["7","0x6b9790f641b85e020b35be868d2f81f8c0b1f6f5ea525a1bcdfa61ab1379f886"],["6","0x4c479fe3db69cd26c901b583afe34059e6fdd8fe90388ce8e5c38fc3c6e4fa82"],["5","0x1d1ebfec0275bdca5fcd4bc1b7efa055330fe4626e5cf29d0644447beea06841"],["4","0x25a3815bddf0607534acf6624f144d4afe98cdaa917a8ff6ffcfc026b2854ad0"],["3","0x7947d0c24e2bce464a867c35c43eb7f8152b8f535fe7e615bbd3ac3d2e5ae578"],["2","0x9e8085e44907022c8140cadfa46904c4b4147597942091c74a7b7c2675c99fa2"],["1","0x801c5f8d1dd6b985a738dd32a3b75f9d8066c078b9cca28f0c9d2a4465c427df"],["0","0xe211c0be468107bde37eeb46d98a95b2fb406ff88f795ee3e600944c4a42cffb"]]).forEach(e => {
+            ropsten[e[0]] = e[1]
+        });
+        
+        const newArtBlocksToken = (forceHash) => {
+            const tokenId = (333 * 1000000 + Math.floor(Math.random() * 1000)).toString();
+            let hash = '0x' + [...Array(64)].map(_ => ((Math.random() * 16)|0).toString(16)).join('');
+            if (forceHash)
+                hash = forceHash
+            localStorage.setItem('ab-token', JSON.stringify({ hash, tokenId }))
         }
-
-        body {
-            font-family: "Inter", sans-serif;
-            overscroll-behavior: none;
-            margin: 0;
-            text-align: center;
-            overflow-x: hidden;
-        }
-
-        h1 {
-            font-size: 6vw;
-        }
-
-        h2 {
-            font-size: 3vw;
-        }
-
-        h3 {
-            font-size: 2vw;
-        }
-
-        h4 {
-            font-size: 1.5vw;
-        }
-
-        .text {
-            margin: calc(100vw * 0.025) 10vw;
-            text-align: justify;
-            font-size: 2vw;
-        }
-
-        section {
-            padding-top: calc(100vw * 0.025);
-            padding-bottom: calc(100vw * 0.025);
-        }
-
-        @keyframes rotate {
-            0% {
-                transform: rotate(-30deg)
+        
+        window.tokenData = (() => {
+            if (!localStorage.getItem('ab-token')) 
+                newArtBlocksToken()
+            const parse = JSON.parse(localStorage.getItem('ab-token'));
+            let params = new URLSearchParams(document.location.search);
+            let hash = params.get("hash"); 
+            if (hash) {
+                parse.hash = hash
             }
-            50% {
-                transform: rotate(-8deg)
+            return parse;
+        })();
+        
+        (() => {
+            
+            let gui;
+            
+            function ensureGui() {
+                if (gui) return
+                gui = document.createElement('div')
+                gui.style.padding = '5px'
+                let s = (Math.min(innerWidth, innerHeight) + 10) + 'px'
+                let vert = innerHeight > innerWidth
+                gui.style.top = vert ? s : '5px'
+                gui.style.left = vert ? '5px' : s
+                gui.style.position = 'fixed'
+                document.body.append(gui)
             }
-            100% {
-                transform: rotate(-30deg)
+            
+            function el(type, content){
+                ensureGui()
+                const elem = document.createElement(type)
+                elem.innerHTML = content
+                elem.style.display = 'block'
+                elem.style.marginBottom = '5px'
+                gui.append(elem)
+                return elem
             }
-        }
+            
+            function guiBtn(name, fn) {
+                el('button', name).onclick = e => {
+                    e.stopPropagation()
+                    fn()
+                }
+            }
+            
+            function features(tokenData) {
+                let features = {"No Features": true}
+                try {
+                  features = window.calculateFeatures(tokenData)
+                } catch (e) { }
+                // Object.assign(features, tokenData)
+                Object.entries(features)
+                    .forEach(feature => el('div', '<span style="display:inline-block;width:200px">'+feature[0]+'</span>'+'<span>'+feature[1]+'</span>'))
+            }
+            
+            setTimeout(() => {
+                let hash = JSON.parse(localStorage.getItem('ab-token')).hash
+                let hashIndex = localStorage.getItem('hashIndex');
+                if(hashIndex)
+                    hash = 'ropsten ' + hashIndex + ' = ' + hash
+                el('div', hash);
+                
+                guiBtn('reload with new random tokenData', () => {
+                    newArtBlocksToken()
+                    localStorage.removeItem('hashIndex')
+                    document.location.reload()
+                });
+                
+                guiBtn('reload with same tokenData', () => {
+                    document.location.reload()
+                })
+                
+                guiBtn('prev ropsten hash', () => {
+                    let hashIndex = localStorage.getItem('hashIndex')
+                    if (hashIndex === null) {
+                        hashIndex = 0
+                    } else {
+                        hashIndex = (+hashIndex) - 1;
+                        if (hashIndex == -1)
+                            hashIndex = 59
+                    }
+                    localStorage.setItem('hashIndex', hashIndex)
+                    newArtBlocksToken(ropsten[hashIndex])
+                    document.location.reload()
+                })
+                
+                
+                
+                guiBtn('next ropsten hash', () => {
+                    let hashIndex = localStorage.getItem('hashIndex')
+                    if (hashIndex === null) {
+                        hashIndex = 0
+                    } else {
+                        hashIndex = (+hashIndex) + 1;
+                        if (hashIndex == 60)
+                            hashIndex = 0
+                    }
+                    localStorage.setItem('hashIndex', hashIndex)
+                    newArtBlocksToken(ropsten[hashIndex])
+                    document.location.reload()
+                })
+                
+                features(JSON.parse(localStorage.getItem('ab-token')));
+            
+            }, 100)
+            
+        })();
 
-        .header-img-wrapper {
-            width: 100vw;
-            height: 30vw;
-            overflow: hidden;
-            margin-bottom: -10vw;
-        }
-
-        .header-img {
-            animation: rotate 200s infinite;
-            width: 100vw;
-            height: 100vw;
-            margin-top: -75vw;
-            background: url("img/bg.png") no-repeat bottom center;
-            background-size: 100% 100%;
-        }
-
-        .footer-img {
-            width: 100vw;
-            height: 100vw;
-            background-size: contain;
-            background: radial-gradient(circle at 50% -170%, #ffffffff 65%, #ffffff00 72%),
-            url("img/bg.png") no-repeat 50% 50%;
-            background-size: 100% 100%;
-        }
-
-        .footer-img-wrapper {
-            margin-top: -15vw;
-            width: 100vw;
-            height: 30vw;
-            overflow: hidden;
-        }
-
-        .separator {
-            height: calc(100vw * 0.025);
-            width: calc(100vw * 0.025);
-        }
-
-        .slider {
-            font-size: 0;
-            overflow-x: scroll;
-            overflow-y: hidden;
-        }
-
-        .ico-6 {
-            max-width: calc(1vw * 6)
-        }
-
-        .ico-4 {
-            max-width: calc(1vw * 4)
-        }
-
-        .dark {
-            background: linear-gradient(180deg,
-                #fff 0vw,
-                #f4f4f4 2vw,
-                #fff 15vw
-            );
-        }
-    </style>
-
-    <script>
-        function debugImages(folder, list) {
-            document.write(list.map(img => img ? `
-                <div style="display: inline-block">
-                    <img src="img/${folder}/${img}.png" style="max-width: 20vw; border: 1px solid gray">
-                    <h4>${img}</h4>
-                </div>
-            ` : '<div class="separator"></div>'
-            ).join(''));
-        }
-
-        function ropstenImage(i, size, displaySize) {
-            i = i < 10 ? ('0' + i) : i;
-            let url1 = `https://artist-staging.artblocks.io/_next/image?url=`;
-            let url2 = `https://artblocks-artists-staging.s3.amazonaws.com/1310000${i}.png`;
-            return `<a href="${url2}" target="_blank"><img
-                src="${url1 + url2}&amp;w=${size}&amp;q=75"
-                style="
-                    min-width: ${displaySize};
-                    min-height: ${displaySize};
-                    max-width: ${displaySize};
-                    max-height: ${displaySize}
-                "><a>`;
-        }
+    })();    
     </script>
-</head>
-<body>
-
-<!-- header image -->
-<div class="header-img-wrapper">
-    <div class="header-img"></div>
-</div>
-
-<!-- preface -->
-<section>
-    <h1>TENTURA</h1>
-    <h3>by Stranger in the Q</h3>
-    <img src="https://www.artblocks.io/squigWhiteCircle.png" class="ico-6">
-    <h3>
-        Long-form generative artwork released by
-        <a href="https://artblocks.io" target="_blank">artblocks.io</a><br>
-        and hosted immutably on Ethereum blockchain
-    </h3>
-    <div class="separator"></div>
-    <h3>Release date: February 22rd 2022, 22:22 GMT</h3>
-    <div class="separator"></div>
-</section>
-
-<!-- description -->
-<section class="dark">
-    <h2>Tentura is the fundamental device of time and being</h2>
-    <div class="text">
-        The essence of the Tentura's work is that it breaks the connection
-        between the body and soul of every living being under its influence.
-
-        The subject becomes bound to a global variable, which is calculated
-        and controlled by the Tentura itself.
-
-        <div class="separator"></div>
-
-        To understand this, you can use the metaphor of virtual reality.
-
-        A person starts a computer game and takes control of a character.
-
-        The character acts under the influence of the player's will.
-
-        In this case, the player personifies the character in its entirety -
-        the soul (various game-mechanical characteristics) and the body
-        (the image on the screen).
-
-        The set of rules of the game symbolize the material world with its rigidly defined laws.
-
-        <div class="separator"></div>
-
-        Imagine that at some point a third-party program turns off the player's
-        input means and begins to control the character itself, calculating his
-        next actions according to some internal algorithms.
-
-        In this case, the events taking place with the character are no longer determined
-        by the will of the player or the rules of the game itself, but by a ready-made plot
-        which was previously written by someone or generated by the third-party program itself.
-
-        This is the work of Tentura, with the amendment that the object of its control is reality.
-    </div>
-    <div class="separator"></div>
-</section>
-
-<!-- about work -->
-<section class="dark">
-    <h2>About artwork</h2>
-    <div class="text">
-        Tentura is divided on two different zones, which controlling behaviour
-        of strings or wires belonging to this zone. When string is leaving zone
-        where it started it retains the color but changes its behaviour.
-        <div class="separator"></div>
-        Starting spots of the strings has two different basic distribution rules -
-        fully or partial distributed on the image.
-        <div class="separator"></div>
-        Fully distributed images can be with cracks or not:
-    </div>
-    <script>
-        document.write(ropstenImage(56, 128*5, '40vw') + ropstenImage(12, 128*5, '40vw'))
-    </script>
-    <div class="text">
-        Partial distributions has different shapes and can be cut by edges of image (will not leave image)
-        or not (can leave image):
-    </div>
-    <script>
-        document.write(ropstenImage(28, 128*5, '40vw') + ropstenImage(54, 128*5, '40vw'))
-    </script>
-    <div class="text">
-        Smaller zone of Tentura is drawn by various types of shapes - lines, circle, polygon,
-        partial shape, spiral shape etc.
-        <div class="separator"></div>
-        Line shapes can contain several lines which is drawn by 4 or 9 hot spots:
-    </div>
-    <script>
-        document.write(ropstenImage(39, 128*5, '40vw') + ropstenImage(51, 128*5, '40vw'))
-    </script>
-    <div class="text">
-        Other shapes can be circle, triangle, square, pentagon or hexagon and its partial
-        or spiral variations
-    </div>
-    <script>
-        let s = '16.7vw'
-        document.write(
-            ropstenImage(27, 256, s) +
-            ropstenImage(52, 256, s) +
-            ropstenImage(42, 256, s) +
-            ropstenImage(20, 256, s) +
-            ropstenImage(51, 256, s) +
-
-            ropstenImage(59, 256, s) +
-            ropstenImage(52, 256, s) +
-            ropstenImage(23, 256, s) +
-            ropstenImage(20, 256, s) +
-            ropstenImage(51, 256, s) +
-
-            ropstenImage(37, 256, s) +
-            ropstenImage(52, 256, s) +
-            ropstenImage(42, 256, s) +
-            ropstenImage(22, 256, s) +
-            ropstenImage(5, 256, s)
-        )
-    </script>
-    <div class="text">
-        ...
-    </div>
-</section>
-
-<!-- ropsten mints -->
-<section class="dark">
-    <h2>Test mints</h2>
-    <div class="separator"></div>
-    <div class="slider">
-        <div></div>
-    </div>
-    <div class="separator"></div>
-</section>
-
-<!-- creation process -->
-<section class="dark">
-    <h2>Creation process</h2>
-    <div class="text">
-        This artwork is based on a noised vector field (also known as flow field),
-        which can be 2 variations and 2 modifications:
-    </div>
-    <div class="separator"></div>
-    <script>
-        debugImages('ff', ['straight', 'radial', '', 'straight-bent', 'radial-centered']);
-    </script>
-    <div class="separator"></div>
-    <div class="text">
-        After that, on top of this vector field drawn the one of 6
-        shapes with the "brush" effect (where field direction is changed
-        with direction of brush moved):
-    </div>
-    <div class="separator"></div>
-    <script>
-        debugImages('shape', ['lines', 'ring', 'triangle', '', 'square', 'pentagon', 'hexagon']);
-    </script>
-    <div class="separator"></div>
-    <div class="text">
-        These shapes also has variations, at first it can be shifted from center.
-        Also it can be rotated or deformed. Sometimes shapes can be partial or spiral:
-    </div>
-    <div class="separator"></div>
-    <script>
-        debugImages('shape-variations', ['spiral', 'partial']);
-    </script>
-    <div class="separator"></div>
-    <div class="text">
-        This two zones on vector field is used to control the behaviour of
-        strings or wires, zones is providing not only directions but also
-        color choose rules, turn chance and chance of stop.
-        <div class="separator"></div>
-        Strings or wires distribution also different and can be one of this 6 types:
-    </div>
-    <div class="separator"></div>
-    <script>
-        debugImages('distribution', ['full', 'line', 'circle', '', 'triangle', 'square', 'pentagon']);
-    </script>
-    <div class="separator"></div>
-    <div class="text">
-        Distributions, except full, also has variations, it can be rotated, shifted, with hole,
-        noised, and with any combination of this modifications:
-        <div class="separator"></div>
-    </div>
-
-    <script>
-        debugImages('distribution-variations', ['hole', 'shift', 'noise']);
-    </script>
-
-    <div class="text">
-        <div class="separator"></div>
-        Fully distributed wires can be with "cracks" made by several octaves of noise,
-        other distributions can be "cut by edges" to prevent wires from crossing the edges.
-
-        <div class="separator"></div>
-
-        All code written on typescript, and bundled to single javascript file with
-        total size approximately 6 kilobytes.
-
-        <div class="separator"></div>
-
-        Special thanks to
-        <script>
-            document.write('@i_dianov @piterpasma @shvembldr @jeffgdavis @_sross_'
-                .split(' ').map(s => `<a href="https://twitter.com/${s}">${s}</a>`).join(' '))
-        </script>
-        .
-        They supported me and sometimes pushed me in right direction
-        while creating this work.
-        <div class="separator"></div>
-    </div>
-
-</section>
-
-<!-- about me-->
-<section class="dark">
-    <h2>About me</h2>
-    <div class="text">
-        My name is Konstantin, i'm working as software developer,
-        my passion is math and computer graphics,
-        i'm using with various techniques,
-        such as WebGL/GLSL, SVG or pure Canvas2D API.
-    </div>
-    <div class="separator"></div>
-    <h2>🎨&nbsp;<a href="https://strangerintheq.github.io" target="_blank">strangerintheq.ginhub.io</a>&nbsp;🖼️</h2>
-    <div class="separator"></div>
-    <div style="font-size: 0">
-        <script>
-            document.write([
-                ['twitter.svg','Twitter','https://twitter.com/stranger_intheq'],
-                ['discord.svg','Discord','https://discord.gg/S92neTmQ3v'],
-                ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 0.1],
-                ['telegram.svg','Telegram','https://t.me/strangerintheq',0.1]
-            ].map(([image, text, link, marginLeft]) => `
-                <a style="margin-left: ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" >
-                    <img src="../resources/${image}" class="ico-4">
-                </a>
-            `).join(''))
-        </script>
-    </div>
-
-</section>
-
-<!-- footer image -->
-<div class="footer-img-wrapper">
-    <div class="footer-img"></div>
-</div>
-
-<!-- slider -->
-<script>
-    (function imagesSlider() {
-        let slider = document.querySelector('.slider div');
-        let size = 384;
-        let displaySize = size;
-        let count = 60;
-        slider.innerHTML = [...Array(count)]
-            .map((_, i) => ropstenImage(i, size, displaySize + 'px'))
-            .join('');
-
-        let scrollAmount = 0;
-
-        slider.style.minWidth = count * displaySize + 'px';
-        slider.parentNode.scrollLeft = count * displaySize / 2;
-
-        slider.parentNode.addEventListener('mousewheel', e => {
-            e.preventDefault()
-            scrollAmount -= e.wheelDelta;
-        })
-
-        requestAnimationFrame(function animateScroll() {
-            slider.parentNode.scrollLeft += scrollAmount * 0.1;
-            scrollAmount -= scrollAmount * 0.1;
-            requestAnimationFrame(animateScroll);
-        })
-    })()
-</script>
-</body>
+    <script>function calculateFeatures(tokenData) {
+    var U=Math,p=U.PI,k=p/2,K=2*p;var P=(r,a,f)=>parseInt(r.substr(a,f),16);var N=r=>(S=new Uint32Array([s=t=2,1,3,4].map(a=>P(r,a*8,8))),a=>(t=S[3],S[3]=S[2],S[2]=S[1],S[1]=s=S[0],t^=t<<11,S[0]^=t^t>>>8^s>>>19,S[0]/2**32));var v=N(tokenData.hash);var e=(r=1,a=0)=>v()*r+a,o=(r=2,a=0)=>a+e(r|0)|0,n=(r=.5)=>e()>r,c=(r=1)=>e(r)-r/2;var T=r=>e(p*2);var L=16;var l=1e3,A=l/2,I=n(.8),M=n(.95),F=o(L),h=n(.98),w=n(.8),u=o(6)||33,m=u==1,ce=n()?1:0,H=n(.8)?1:0,le=H*c(A/2),de=H*c(A/2),pe=n()?1:0,g=n(m?.5:.1),ue=o(2),Y=n(.9),_=e(),me=e(1/200,1/400),be=e(1/l,1/l/2),D=e(),Se=e(.03,.03),z=n(),R=e(),he=e(.5,_>.99?1:0),ge=e(.5,_<.01?1:0),xe=e(.3,.1),ye=e(1/l,1/l),Be=e(),d=o(3),Ce=e(.8,.01),ke=e(k,.01),x=n(.8),Pe=x?[0,0]:[c(.7),c(.7)],y=e(),V=d||n()?0:y*.5+.2,Ne=e(33,66),b=d?o(6):o(5,1),Te=e(150,150),B=o(3),Le=T(),W=n(.7)&&!(B<2&&b==1)?1:0,q=n(.2),Ae=n();var G="Smoke,Mangosteen,Wool,Citrus,Sky,Sepia,Dawn,Clay,Fire,Fig,Sunset,Morning,Pitahaya,Pastel,Lichi,Apple",E=G.split(",");var J=u===33?0:u,X=m&&g,Z=!m&&g,j=M?0:I?1:2;return({Palette:E[F],Background:"Black,Dark,Light".split(",")[j],Shape:"Lines,Circle,Triangle,Square,Pentagon,Hexagon".split(",")[b],"Shape deformation":i("Yes,No",W),"Shape mode":b?"Partial,Standard,Spiral".split(",")[B]:"Standard",Layout:d&&x?"Centered":d?"Radial":"Straight",Bent:V?C("Low,Medium,High",y):"None","Huge parts":C("Less,Normal,More",D),Turns:C("Less,Normal,More",R),Join:i("Round,Square",Y),Distribution:"Circle,Filled,Line,Triangle,Square,Pentagon".split(",")[J],"Different thickness":i("Yes,No",z),Cracks:i("Yes,No",X),"Cut edges":i("Yes,No",Z),Framed:i("Yes,No",w&&!h),Blur:i("Yes,No",q),Grayscale:i("Yes,No",h)});function C(r,a){let f=r.split(",");return f[a*f.length|0]}function i(r,a){let f=r.split(",");return a?f[0]:f[1]}
+}</script>
+    </head>
+    <body style='margin:0;overflow:hidden'>
+        <script>tx="i_dianov piterpasma shvembldr jeffgdavis sross",onpointerdown=e=>!e.button&&(tx=!tx);var X,pe,He=(e,t,a)=>.3*e+.6*t+.1*a,T=Math,J=T.PI,z=J/2,G=2*J,M=e=>T.abs(e),N=e=>T.sin(e),L=e=>T.cos(e),Ee=(e,t)=>T.min(e,t),H=(e,t)=>T.atan2(e,t),be=e=>T.sign(e),U=(...e)=>T.hypot(...e),he=(e,t,a)=>e+(t-e)*a,qe=(e,t,a)=>parseInt(e.substr(t,a),16),Ge=a=>(S=new Uint32Array([s=t=2,1,3,4].map(e=>qe(a,8*e,8))),e=>(t=S[3],S[3]=S[2],S[2]=S[1],S[1]=s=S[0],t^=t<<11,S[0]^=t^t>>>8^s>>>19,S[0]/2**32)),Lt=Ge(tokenData.hash),a=(e=1,t=0)=>Lt()*e+t,p=(e=2,t=0)=>t+a(0|e)|0,l=(e=.5)=>a()>e,x=(e=1)=>a(e)-e/2,ie=e=>p(4)*J/2,j=e=>a(2*J),c=(e,a)=>[...Array(0|e)].map((e,t)=>a(t)),K=(e,t)=>c(e,e=>{try{return t(e)}catch(e){}}),m=2*T.min(innerWidth,innerHeight),O=m/2,Q=e=>X=e.getImageData(0,0,m,m),V=e=>e.putImageData(X,0,0),Ue=16,je="eee6abc5bc8e69675845484b36393bd95b43c02942ecd07853777a542437f1d4afece5cee08e79c5e0dc774f38cc333feb6841f1d4afedc9516a4a3c9cc4e4e9f2f93a89c9f26c4f1b325ff0b49ef7e4beb3818473626e413e4aff847ce84a5f99b898fecea82a363bbf4d28e6ac27f6f7bd80bca3655643fad089ff9c5bf5634aed303c60382ee2f7cee8bf56e4844a91204d452632f2d694f0d8a8fa2a0086b8b13d1c00fff7bdf2f26fff823af041558b3619f4ebc3f0e2a4bca297c5ceaeab526bf8edd1c5cfc69d9d93d88a8a474843d1313de5625cf9bf768eb2c561537573c8a9dee1b6e1b866bd5532373b44",b=1e3,F=b/2,Oe=l(.8),ge=l(.95),Xe=p(Ue),xe=l(.98),Ce=l(.8),Se=p(6)||33,k=1==Se,Ye=l()?1:0,Ze=l(.8)?1:0,ae=Ze*x(F/2),se=Ze*x(F/2),Je=l()?1:0,Ke=l(k?.5:.1),Qe=p(2),ye=l(.9),me=a(),Ve=a(.005,.0025),$e=a(1/b,1/b/2),et=a(),tt=a(.03,.03),nt=l(),ot=a(),rt=a(.5,.99<me?1:0),it=a(.5,me<.01?1:0),at=a(.3,.1),st=a(1/b,1/b),mt=a(),E=p(3),ve=a(.8,.01),lt=a(z,.01),le=l(.8),$=le?[0,0]:[x(.7),x(.7)],Ht=a(),fe=E||l()?0:.5*Ht+.2,Fe=a(33,66),Y=E?p(6):p(5,1),ft=a(150,150),ee=p(3),we=j(),Te=!l(.7)||ee<2&&1==Y?0:1,ct=l(.2),pt=l(),Pe=a=>(e,t)=>e[a]=t,ke=Pe("globalCompositeOperation"),ce=Pe("strokeStyle"),_e=Pe("lineWidth"),dt=document,ut=e=>{let t=dt.createElement("canvas");return t.width=t.height=e,setTimeout(e=>dt.body.prepend(t)),t.style.height=e/2+"px",t.style.background="#fff",t.getContext("2d")},te=(e=p(5))=>"#"+je.substr(6*(5*Xe+e),6),bt=(a,r,f)=>c(a,t=>c(r,e=>f(t/a,e/r))),De=(e,t,a)=>e[0|t][0|a],ht=(p,o)=>{let e;return(n,m,b,i,h)=>{if(e){let l=H(m-e[1],n-e[0]);c(b+b,f=>c(b+b,e=>{var t=n-b+f|0,a=m-b+e|0,r=U(t-n,a-m),e=H(a-h,t-i);r<b&&(p[t][a]=o(l,e))})),e=[n,m]}else e=[n,m]}},A=(e,t)=>(pe||(pe=new p5).noiseSeed(1e6*a()),pe.noise(e,t)),gt=a(70,370),xt=a(30,420),Et=a(50,200),Ct=(e,t)=>(t=201*(A(t/100,1e4)-.5),e=M(e)+t,gt<e?l((xt-e)/(xt-gt)):l()&&Et<e),St=a(.001,.001),qt=(e,t)=>(t=A(e*St+1e3,t*St+2e3),(t=M(t-.5))<.1&&l(.9)||t<.01),yt=(e,t)=>!k&&(Ct(e,t+e)||Ct(t,e+t))||k&&qt(e,t),de=(e,t)=>1/L(2/e*T.asin(N(e/2*t))),vt=2==ee?170:1==ee?99:a(33,55),Ft=e=>(2==ee?3:0)*e+150*(A(e/66+ae,se)-.5)*Te+ft,wt=e=>le&&1==Y||l()?x(.8*F):0,Ie=wt(),Be=wt(),We=(e,t,a)=>{let r=ht(ue,(e,t)=>[a?t+z:e,it,1]);K(e,e=>r(...t(e)))},Tt=(e,t,a,r)=>[L(e+we)*t+F+Ie,N(e+we)*t+F+Be,Fe,a,r],Pt=e=>(le?p(3)/2:p(2))*(b-300)+150,Ae=e=>[Pt()+Ie,Pt()+Be],Re=20,ne=Ae(),kt=[e=>c(k?p(2,2):p(4,1),t=>{for(t=Ae();ne[0]==t[0]&&ne[1]==t[1];)t=Ae();We(Re,e=>[he(ne[0],t[0],e/Re),he(ne[1],t[1],e/Re),Fe]),ne=t}),e=>We(vt,e=>Tt(e/99*G,Ft(e),Ie+F,Be+F),1-Te),e=>We(vt,e=>{var t=e/99*G;return Tt(t,de(Y+1,t)*Ft(e))})],Gt=l(),Ut=l(),jt=be(x()),Ot=be(x()),ue=bt(b,b,(e,t)=>{e-=.5,t-=.5;let a=0;var r;fe&&(r=Ut?e:t,a+=r<-.2?jt*fe:.2<r?Ot*fe:0),E&&(a+=H(t-$[1],e-$[0]));let f=lt;return Gt&&(f+=2.1),E&&(f*=U(e-$[0],t-$[1])),a+=A(e*ve,t*ve)*f,[a,rt,0]});kt[Ee(2,Y)]();var Xt=e=>[x(b),x(b)],Yt=(l(.7)?ie:j)(),Zt=a(100,250),Jt=a(100,75),_t=e=>(200*A(e[0]/99+2e4,e[1]/99+2e4)-100)*Je,Kt=e=>{if(k)return 1;var t=de(Se,Yt+H(...e)),a=e[0]+ae+_t(e),e=e[1]+se+_t(e);return(e=U(a,e))<Zt*t&&(!Ye||Jt*t<e)},Dt=e=>{for(;;)if(Kt(e=Xt()))return e},It=100*me+150,Qt=10+20*et|0,Bt=(t,e,a,r)=>e.forEach(e=>t.stroke(new Path2D("M"+e.s.join("L")),_e(t,r||e.w+a))),Wt=e=>{let f,n,i,h,o,s=0,d=l(.8)&&0<Qt--?m*tt:a(m*Ve,m*$e),u=[],v=a(b/200,b/200),t=ot/2+(E?.1:.2),x=a(t)?ie():0,S=a(t),g=p(It/2,It/2),y=(e,t,a)=>e.p.push([t+=F,a+=F])+e.s.push([t/b*m,a/b*m]),T=e=>{e={s:[],p:[],w:e},y(e,f,n),u.push(e)},k,A,r=e=>{i=1==e,s=0,A=0,k=0;var t=Dt();f=t[0],n=t[1],T(d),c(e,H)},w=e=>l()?z:-z,I=w(),O=[w,e=>I][Qe],j=e=>te(2==e?4:(e=pt?!e:e)?p(2):p(3,2)),H=e=>{try{var t,r=De(ue,f+F,n+F);if(h||(h=j(r[2]),o=j(2)),k){if(1<M(k[0]-r[0])){if(A)return i=0;A=1}if(k[2]!=r[2]&&a()>at)return i=0}k=r,s++,s>g&&(i=0),l(1-S)&&l(r[1])&&(x+=O()),nt&&l(.9)&&T(a(d)),Ke&&yt(f,n)||(t=r[0]+x,f+=L(t)*v,n+=N(t)*v,y(u[u.length-1],f,n))}catch(e){i=0}};return r(g),{c(){if(!i)try{u[0].s.shift(),u[0].p.shift(),u[0].p[0]||u.shift()}catch(e){r(1)}},w:H,p:e=>ce(e,o)+Bt(e,u,m*st)+ce(e,h)+Bt(e,u,0)}},ze=(e,r)=>{var t,a,f,l,n,b;Q(e);var i=X.data,h=new Uint8Array(m*m*4),p=r<<2,o=m<<2;let s=e=>b=[0,0,0,0],d=(t,a,r)=>c(4,e=>a[l+e]=(b[e]+=t[l+e])/r|0),u=(t,a)=>c(4,e=>{t[l+e]=b[e]/r|0,b[e]+=a[l+e]-a[n+e]});c(m,e=>{for(s(),f=e*o,t=0;t<r;t++)l=f+(t<<2),d(i,h,t+1);for(;t<m;t++)n=(l=f+(t<<2))-p,u(h,i)}),c(m,e=>{for(s(),f=e<<2,a=0;a<r;a++)l=f+a*o,d(h,i,a+1);for(;a<m;a++)n=(l=f+a*o)-o*r,u(i,h)}),c(m,e=>{for(s(),f=e*o,t=m-1;m-r<=t;t--)l=f+(t<<2),d(i,h,m-t);for(;0<=t;t--)n=(l=f+(t<<2))+p,u(h,i)}),c(m,e=>{for(s(),f=e<<2,a=m-1;m-r<=a;a--)l=f+a*o,d(h,i,m-a);for(;0<=a;a--)n=(l=f+a*o)+o*r,u(i,h)}),V(e)},h=ut(m);if(h.lineJoin=ye?"round":"miter",h.lineCap=ye?"round":"square",h.fillStyle=ge?"#000":"#fff",h.fillRect(0,0,m,m),!ge){let t=e=>h.translate(e,e),e=e=>t(O)+h.rotate(e)+t(-O),r=j();e(r);let f=(e,t)=>(h.fillStyle=te(p(4))+25)+c(e,e=>h.beginPath()+h.ellipse(a(m),t(),a(O),a(O),0,0,G)+h.fill());Oe||ke(h,"xor"),f(55,e=>a(m)),f(22,e=>m+x(.1*m)),f(22,e=>x(.1*m)),e(-r),ke(h,"source-over"),ze(h,55)}var oe=(e,t)=>{let a=K(e,Wt);return a.map(e=>e.p(h)),t&&ct&&ze(h,0|t),e=>a.map(e=>e.w()+e.c()+e.p(h))},re=(mt*b+2e3)/(k?1:5);oe(re/5,.02*m),oe(re/5,.01*m),oe(re/5,.005*m),oe(re);var At=e=>M(e-O)>.45*m;if(Ce||xe){Q(h);let a=X.data;c(m,t=>c(m,e=>{(Ce&&(At(t)||At(e))||xe)&&(e=4*(e*m+t),a[e]=a[1+e]=a[2+e]=He(a[e],a[1+e],a[2+e]))})),V(h)}var Vt=oe(re/(k?100:30));Q(h);var Rt=e=>{!tx&&e||Vt(V(h)),requestAnimationFrame(Rt)};Rt();</script>
+    </body>
 </html>
