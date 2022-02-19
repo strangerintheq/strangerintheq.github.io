@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tentura</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <script>
+    (() => {
+        
+        window.scriptStartTimestamp = Date.now()
+        
+        const ropsten = {};
+        ([["0","0xe211c0be468107bde37eeb46d98a95b2fb406ff88f795ee3e600944c4a42cffb"],["1","0x801c5f8d1dd6b985a738dd32a3b75f9d8066c078b9cca28f0c9d2a4465c427df"],["2","0x9e8085e44907022c8140cadfa46904c4b4147597942091c74a7b7c2675c99fa2"],["3","0x7947d0c24e2bce464a867c35c43eb7f8152b8f535fe7e615bbd3ac3d2e5ae578"],["4","0x25a3815bddf0607534acf6624f144d4afe98cdaa917a8ff6ffcfc026b2854ad0"],["5","0x1d1ebfec0275bdca5fcd4bc1b7efa055330fe4626e5cf29d0644447beea06841"],["6","0x4c479fe3db69cd26c901b583afe34059e6fdd8fe90388ce8e5c38fc3c6e4fa82"],["7","0x6b9790f641b85e020b35be868d2f81f8c0b1f6f5ea525a1bcdfa61ab1379f886"],["8","0xceb8502a811df58f9b359f5300bcfa8e70e13d5f79cf8220a3fb56a0155a0b43"],["9","0xf18a5abfb65b1f7be868a10213adb94dd4d6a57dbfefe1e196e65cb87e93c87d"],["10","0x456a3368278b7389b2c3dedace5ee3c929be59ae3c1561fcd4b90c5e9e506742"],["11","0xecbae2b7acd499ec1ecb8bdd5c6826fc355451cc160f8ca5ea734b317ed50c5c"],["12","0x94f2da61fa63fbded3e9a9a41e26683ab3f7cc8bc008747c38b042397221e698"],["13","0x87ccef9cb32f4dfa9de87f4fea9516c933f48fe4b868b6f1dc091936a6549ce2"],["14","0xb7c4f613967bede72bf1c1e05ba3fa73eb7015ceb6565e618b19e43f3fd5d780"],["15","0xfa5b2b512d48f3a9a552c09fd313b79f102012a5385bfa56ea34c624f665e68d"],["16","0x7cfd2b11b1b246d98b5735d018ad8e93169548800659894d2216724aa179de08"],["17","0x134935ff79da516d3e316262c33a9e70c596b10fd6bb1db2b59877fa764c4468"],["18","0x1d3ee472928377ed2c6b430a34e1d6665377e2352807f736736c1a59c059ba44"],["19","0x6ee66ece645ea1229a1968795ec08c7935655da463a8171800c926bd7492be38"],["20","0xfa7f8e3c20d0e369fc6679584fac289c82d61bc4c8a043cf17a007caa95bac82"],["21","0x85309c2259ad035347aec10f8461a1925fb960523855777d00338a048b6ee31e"],["22","0x0d3c74dd5b7f3ef4a2c7175182a72dbae9b0f632780aaea58d0c70b4ad0e3e85"],["23","0x4863624f7349235cf499049cdc534c02e6529446b72bfec1d06d281402e5b1ed"],["24","0x19ad6173dc91e42d47cfa4b3824a912a12dfd0b90f0e9bbdc6006fbbfdf8bb7c"],["25","0x9aa8862fbe88542fb31b69476dc32730176cd6205332fee511c221d3f6e6738f"],["26","0x3d274b16672e489da3a76599c42debe23649c3fb19269d7d798e194588a17dbe"],["27","0x545c7791ee767cdb205557ccff8b5bdf2c46ef17c4064898bb97e927f1ad5ec0"],["28","0x761c379839f971742b157e02e63aaa6f1031c66aabbfee031a8800348489bb5a"],["29","0x3729c932a74efb9b69e77e7ab115869a912e52d833f6703b887a5cf8b1d793c7"],["30","0x2f6cd9eeb5b0a85ab80b79807197c58e2598921b58aef588cadb8a6820c17795"],["31","0x41fc34b40642b5572738d637aef06ef21dc59f7c5f64c46205ff49ee96b3e208"],["32","0x5bcaaa18d73fa2dc879fa432c14e485e4ed96555367d33d2ad89e095cc884791"],["33","0x931a532d3045e1a784810315af4fbf81a46353bdefea9b4d336bc277276eaed2"],["34","0xb3d1121225159d36254e0781d8522961e3b9ab88175e3052d5fae29f3e2d4e19"],["35","0x6d16658278e3a3bcc2068dcf54ebd536f4f01f1fdcf9ad6c598cfddc532b14d7"],["36","0x40ad306e0c1372e54b7320bbcfd7fd9e7d0bf4e71c6da61b0ac13dbeeec45892"],["37","0xf747b3640bd7e4020f402272ad453844d5f21663f865bf0bb85b31064a85e10f"],["38","0xe23b54024aa197d4e8bf6a5f14fe6ee91efe693d0a6b7dccef537a0de9c08305"],["39","0x7f7461433543d7529837d7d6259c14ebf87506e751be26c6821113272361384a"],["40","0x228e1c13ed60502bbcaac1ec4b6807486259630c49c6996ae8b303b0a85be4f1"],["41","0x42e0e940d4e00e5199c17a602cbe223f6fcd5fccd72a10e88c3677923114ca98"],["42","0x65974aa01110adf0346ed15f39829964f964aeed453dc694b21b3eb45366cd70"],["43","0xcb1a0f8592fbbd0b3184cfe7f86733bb317383452b71f95ff6ba18cdb812c982"],["44","0xd84a5c4ea8ac512658fb7eba5eab214056c1e934f0132c9ab24c2a25a862aec1"],["45","0x7ac55155a699c26e3db2b42909544f79c8ba5c1e01c5e9d0975a8c01442a6ee1"],["46","0x392d7575cd35b8411279a13720aef8cc882d1fccff4c4008588185c2c61e6a74"],["47","0x6fc59e6588f2529c5c9cee1a70fb21914342a2bc00fc3e0ba1a74f538537d9ac"],["48","0x909a1df52d8794e7a57dfd0bb7efc18f20454a7eec6d31a9f328be5faecc6a40"],["49","0xb168b55048eeee1c66a982903a7ab2e0af9fe4ac5dbb1ea6aa9ed1f979bb9b7c"],["50","0xe9b597c1852f91583c23a1a7fa65a996afa9d54219ca70d9f97e6b6f3e80606f"],["51","0x265252ceb93c0306ccc1b411f635c6121e8c148635ac13048cd0495a41ce3d0f"],["52","0x60d93c948fbe87ff42cbbf5a021dbe90c9a8063cd9f0a03a37763aaf4f04b704"],["53","0xd47f7ef2c1cfe02093932f74b3ca0799c0c01f99cddfd0008a925eece981c087"],["54","0x6d87865f8576b135c1dcc8babcd3e470a92a75f9f065de5a9726b08d960f5c08"],["55","0x1c5569e0d7e55709430c08c01c062c20c79fc8e26b159fa03f454fed71b3bc15"],["56","0x682f373cbeee7a89b0d6a52a0bdbccc057b4096019a9dce34d58ca8e029c1c7a"],["57","0x03c799f94ac1d73ee65484705b2fc75dc6bf690774cbf3bde503628209bcb4fb"],["58","0x6eae1cacf3557f9d6e4d462cd7b2d575374b76b41ba7b8ed7637745765264047"],["59","0xc06aeb32d71d1ead2c3f8fe9b5f6e9941f8253909082d04e85c02d7cc66c4d63"]]).forEach(e => {
+            ropsten[e[0]] = e[1]
+        });
+        
+        const newArtBlocksToken = (forceHash) => {
+            const tokenId = (333 * 1000000 + Math.floor(Math.random() * 1000)).toString();
+            let hash = '0x' + [...Array(64)].map(_ => ((Math.random() * 16)|0).toString(16)).join('');
+            if (forceHash)
+                hash = forceHash
+            localStorage.setItem('ab-token', JSON.stringify({ hash, tokenId }))
+        }
+        
+        window.tokenData = (() => {
+            if (!localStorage.getItem('ab-token')) 
+                newArtBlocksToken()
+            const parse = JSON.parse(localStorage.getItem('ab-token'));
+            let params = new URLSearchParams(document.location.search);
+            let hash = params.get("hash"); 
+            if (hash) {
+                parse.hash = hash
+            }
+            return parse;
+        })();
+        
+        (() => {
+            
+            let gui;
+            
+            function ensureGui() {
+                if (gui) return
+                gui = document.createElement('div')
+                gui.style.padding = '5px'
+                let s = (Math.min(innerWidth, innerHeight) + 10) + 'px'
+                let vert = innerHeight > innerWidth
+                gui.style.top = vert ? s : '5px'
+                gui.style.left = vert ? '5px' : s
+                gui.style.position = 'fixed'
+                document.body.append(gui)
+            }
+            
+            function el(type, content){
+                ensureGui()
+                const elem = document.createElement(type)
+                if (content) {
+                    elem.innerHTML = content
+                }
+                elem.style.display = 'block'
+                elem.style.marginBottom = '5px'
+                gui.append(elem)
+                return elem
+            }
+            
+            function guiBtn(name, fn) {
+                el('button', name).onclick = e => {
+                    e.stopPropagation()
+                    fn()
+                }
+            }
+            
+            function features(tokenData) {
+                let features = {"No Features": true}
+                try {
+                  features = window.calculateFeatures(tokenData)
+                } catch (e) { }
+                // Object.assign(features, tokenData)
+                Object.entries(features)
+                    .forEach(feature => el('div', '<span style="display:inline-block;width:200px">'+feature[0]+'</span>'+'<span>'+feature[1]+'</span>'))
+            }
+            
+            setTimeout(() => {
+                let hash = JSON.parse(localStorage.getItem('ab-token')).hash
+                let hashIndex = localStorage.getItem('hashIndex');
+                if(hashIndex)
+                    hash = 'ropsten ' + hashIndex + ' = ' + hash
+                el('div', hash);
+                el('input')
+                document.querySelector('input').value = hashIndex
+                guiBtn('set', () => {
+                    let index =  +document.querySelector('input').value
+                    localStorage.setItem('hashIndex', index)
+                    newArtBlocksToken(ropsten[index])
+                    document.location.reload()
+                })
+                guiBtn('reload with new random tokenData', () => {
+                    newArtBlocksToken()
+                    localStorage.removeItem('hashIndex')
+                    document.location.reload()
+                });
+                
+                guiBtn('reload with same tokenData', () => {
+                    document.location.reload()
+                })
+                
+                guiBtn('prev ropsten hash', () => {
+                    let hashIndex = localStorage.getItem('hashIndex')
+                    if (hashIndex === null) {
+                        hashIndex = 0
+                    } else {
+                        hashIndex = (+hashIndex) - 1;
+                        if (hashIndex == -1)
+                            hashIndex = 59
+                    }
+                    localStorage.setItem('hashIndex', hashIndex)
+                    newArtBlocksToken(ropsten[hashIndex])
+                    document.location.reload()
+                })
+                
+                
+                
+                guiBtn('next ropsten hash', () => {
+                    let hashIndex = localStorage.getItem('hashIndex')
+                    if (hashIndex === null) {
+                        hashIndex = 0
+                    } else {
+                        hashIndex = (+hashIndex) + 1;
+                        if (hashIndex == 60)
+                            hashIndex = 0
+                    }
+                    localStorage.setItem('hashIndex', hashIndex)
+                    newArtBlocksToken(ropsten[hashIndex])
+                    document.location.reload()
+                })
+                
+                features(JSON.parse(localStorage.getItem('ab-token')));
+            
+            }, 100)
+            
+        })();
+
+    })();    
+    </script>
+    <script>function calculateFeatures(tokenData) {
+    var E=Math,u=E.PI,g=u/2,j=2*u;var h=(e,a,i)=>parseInt(e.substr(a,i),16);var x=e=>(S=new Uint32Array([1,s=t=2,3,4].map(a=>h(e,a*8,8))),a=>(t=S[3],S[3]=S[2],S[2]=S[1],S[1]=s=S[0],t^=t<<11,S[0]^=t^t>>>8^s>>>19,S[0]/2**32));var R=x(tokenData.hash);var r=(e=1,a=0)=>R()*e+a,o=(e=2,a=0)=>a+r(e|0)|0,n=(e=.5)=>r()>e,f=(e=1)=>r(e)-e/2;var y=(e,a)=>[...Array(e|0)].map((i,W)=>a(W));var k=15;y(o(99),r);var l=1e3,B=l/2,c=n(.8)?1:o(6)||33,m=c==1,se=o(),P=n(.8)?1:0,ie=P*f(B/2),fe=P*f(B/2),le=o(),de=n(),ce=o()+2,pe=n(.15),C=n(.8),A=n(.99),I=o(k),T=n(.95),F=n(.2),L=n(.85),M=n(m?.5:.1),ue=o(2),me=n(.9),be=r(.2,.8),Se=r(1/400,1/400),ge=r(1/l,1/l),w=r(),he=r(.03,.03),xe=n(),ye=r(),ke=r(1/l,1/l),N=()=>r(.5,r()>.99?1:0),Be=N(),Pe=N(),_=n(.3),p=o(3),Ce=r(.8,.01),Ae=r(g),b=n(.8),Ie=b?[0,0]:[f(.7),f(.7)],q=r(),H=p||n()?0:q*.5+.2,d=o(7),Te=+(d==2||d==1),D=o(3),Fe=n(.7)&&d>1?1:0;var U="Apricot,Mangosteen,Wool,Sky,Sepia,Tulip,Dawn,Fire,Fig,Sunset,Morning,Pitahaya,Pastel,Lichi,Apple",z=U.split(",");var V=c===33?0:c,Y=T?0:C?1:2,Z=A?0:L?1:2,v=M?m?1:2:0,G=p&&b?0:p?1:H?2:3;return({Palette:z[I],Background:"Black,Darken,Lighten".split(",")[Y],Shape:"Ring,Line,Two lines,Triangle,Square,Pentagon,Hexagon".split(",")[d],Mode:"Partial,Standard,Spiral".split(",")[D],Layout:"Centered,Radial,Bent,Straight".split(",")[G],Beams:O("Less,Normal,More",w),Distribution:"Circle,Filled,Line,Triangle,Square,Pentagon".split(",")[V],Mask:"None,Cracks,Edges".split(",")[v],Fog:X("Yes,No",F),Grayscale:"Full,Frame,None".split(",")[Z],ffShadowShape:_});function O(e,a){let i=e.split(",");return i[a*i.length|0]}function X(e,a){let i=e.split(",");return a?i[0]:i[1]}
+}</script>
+    </head>
+    <body style='margin:0;overflow:hidden'>
+        <script>eval('tx="i_dianov piterpasma shvembldr jeffgdavis sross",onpointerdown=e=>!e.button&&(tx=!tx);§e,a=Math,f=a.PI,r=f/2,n=(e,t)=>a.hypot(e,t),i=(e=tokenData.hash,S=new Uint32Array([1,s=t=2,3,4].map(a=>parseInt(e.substr(8*a,8),16))),e=>(t=S[3],S[3]=S[2],S[2]=S[1],S[1]=s=S[0],t^=t<<11,S[0]^=t^t>>>8^s>>>19,S[0]/2**32)),l=(e=1,a=0)=>i()*e+a,d=(e=2,a=0)=>a+l(0|e)|0,o=(e=.5)=>l()>e,b=(e=1)=>l(e)-e/2,c=e=>d(4)*f/2,p=e=>l(2*f),u=(e,t)=>[...Array(0|e)].map((e,a)=>t(a)),h=(e,a)=>{try{@e()}catch(e){a&&a()}},y=2*a.min(innerWidth,innerHeight),m=y/2;u(d(99),l);§$,g,v,x=1e3,w=500,W=o(.8)?1:d(6)||33,D=1==W,A=d(),P=o(.8)?1:0,k=P*b(250),I=P*b(250),O=d(),j=o(),C=d()+2,Q=(o(.15),o(.8)),R=o(.99),q=d(15),B=o(.95),E=o(.2),F=o(.85),G=o(D?.5:.1),M=d(2),U=o(.9),H=l(.2,.8),J=l(.0025,.0025),L=l(1/x,1/x),T=l(),_=l(.03,.03),z=o(),K=l(),N=l(1/x,1/x),V=()=>l(.5,.99<l()?1:0),X=V(),Y=V(),Z=o(.3),ee=d(3),te=l(.8,.01),ae=l(r),fe=o(.8)?[0,0]:[b(.7),b(.7)],re=l(),ne=ee||o()?0:.5*re+.2,se=d(7),ie=d(3),le=o(.7)&&1<se?1:0,de=99,oe=document,be=()=>g=$.getImageData(0,0,y,y),ce=()=>$.putImageData(g,0,0),pe=(e=d(5))=>"#"+"f5e0d3ffd0b3ffb88cde62624d3b3bd95b43c02942ecd07853777a542437f1d4afece5cec5e0dce08e79774f389cc4e4e9f2f9f26c4f3a89c91b325ff0b49ef7e4beb3818473626e413e4aa7c5bde5ddcbeb7b59cf4647524656ff847ce84a5ffecea899b8982a363bfad089ff9c5bf5634aed303c60382ee2f7cee8bf56e4844a91204d452632f2d694f0d8a886b8b1fa2a003d1c00fff7bdf2f26fff823af041558b3619f4ebc3f0e2a4c5ceaebca297ab526bf8edd1c5cfc6d88a8a9d9d934748438eb2c5f9bf76e5625cd1313d61537573c8a9dee1b6e1b866bd5532373b44".substr(6*(5*q+e),6),ue=(e,a)=>(v||(v=new p5).noiseSeed(1e6*l()),v.noise(e,a)),he=l(70,370),ye=l(30,420),Se=l(50,200),me=(e,t)=>{t=201*(ue(t/de,1e4)-.5);@(e=a.abs(e)+t)>he?o((ye-e)/(ye-he)):o()&&Se<e},$e=l(1/x,1/x),ge=(t,r)=>!D&&(me(t,r+t)||me(r,t-r))||D&&(()=>{§e=ue(t*$e+1e3,r*$e+2e3),e=a.abs(e-.5);@e<.1&&o(.9)||e<.01})(),ve=(e,t)=>1/a.cos(2/e*a.asin(a.sin(e/2*t))),xe=2==ie?133:1==ie?de:l(33,55),we=e=>w+(o(.3)?b(x*(1==se?.3:.7)):0),We=x=>{let d=l(150,150),o=p(),s=we(),i=we(),b=l(33,66),y=(m=Ie,(s,i,b,y,c)=>{if(e){let o=a.atan2(i-e[1],s-e[0]);u(2*b,d=>u(2*b,e=>{§t=s-b+d|0,f=i-b+e|0,l=n(t-s,f-i),e=a.atan2(f-c,t-y);l<b&&(m[t][f]=(f=o,e=e,[!se&&1-le?e+r:f,Y,x]))}))}e=[s,i]});§m,e;u(xe,l=>h(e=>{§t=(2==ie?2:0)*l+150*(ue(l/66+k,I)-.5)*le+d,r=l/de*2*f,t=ve(se||de,r)*t;y(a.cos(r+o)*t+s,a.sin(r+o)*t+i,b,s,i)}))},De=2*d(2),Ae=o(),Pe=a.sign(b()),ke=a.sign(b()),Ie=((r,f)=>u(r,t=>u(f,e=>((t,r)=>{let f=0;if(ne){let e=Ae?t:r;f+=e<-.2?Pe*ne:e>.2?ke*ne:0}let e=ae+De;@ee&&(f+=a.atan2(r-fe[1],t-fe[0]),e*=n(t-fe[0],r-fe[1])),f+=ue(t*te,r*te)*e,[f,X,0]})(t/r-.5,e/f-.5))))(x,x);Z&&We(2),We(1);§Oe=(o(.7)?c:p)(),je=l(de,250),Ce=l(de,75),Qe=e=>(200*ue(e[0]/de+2e4,e[1]/de+2e4)-de)*O,Re=e=>{if(D)@1;§t=ve(W,Oe+a.atan2(...e)),r=e[0]+k+Qe(e),e=e[1]+I+Qe(e),e=n(r,e);@e<je*t&&(!A||Ce*t<e)},qe=H*de+150,Be=10+20*T|0,Ee=(a,e,t,r)=>e.forEach(e=>a.stroke(new Path2D("M"+e.s.join("L")),a.lineWidth=r||e.w+t)),Fe=f=>{let n,s,i,p,m,v,$=0,S=0,g=o(.8)&&0<Be--?y*_:l(y*J,y*L),D=[],e=K/2+(ee?.1:.2),W=l(e)?c():0,P=l(e),U=d(qe/2,qe/2),k=o(),A=(e,a,t)=>e.p.push([a+=w,t+=w])+e.s.push([a/x*y,t/x*y]),I=e=>{e={s:[],p:[],w:e};A(e,...n),D.push(e)},t=e=>{s=1==e,S=v=m=0,n=(e=>{for(;;)if(Re(e=[b(x),b(x)]))@e})(),I(g),u(e,R)},H=e=>o()?r:-r,O=H(),Q=[H,e=>O][M],R=e=>h(e=>{§t=((e,a,t,r)=>e[a+t|0][a+r|0])(Ie,w,...n);if(i||(i=pe(2==t[2]?4:(j?!t[2]:t[2])?d(2):d(C,2)),p=pe(2==t[2]&&Z?k?d(2,3):d(3,2):4)),m){if(1<a.abs(m[0]-t[0])){if(v)@s=0;v=1}if(m[2]!=t[2]&&l()>ue(x-n[0]/400+d(1e3),x-n[1]/400+d(1e3))-.5)@s=0}m=t,S++,$++,S>U&&(s=0),(4<f||9<$)&&o(1-P)&&o(t[1])&&(W+=Q($=0)),z&&o(.9)&&I(l(g)),G&&ge(...n)||(t=t[0]+W,n[0]+=a.cos(t)*f,n[1]+=a.sin(t)*f,A(D[D.length-1],...n))},e=>s=0);@t(U),[e=>{e.strokeStyle=p,Ee(e,D,y*N),e.strokeStyle=i,Ee(e,D,0)},R,e=>!s&&h(e=>{D[0].s.shift(),D[0].p.shift(),D[0].p[0]||D.shift()},()=>t(1))]},Ge=(e,a)=>{let r="RGBA".split(""),f=e=>r.map(e).join(";"),t=(e,a,t)=>new Function("S,D,r,s",`let ${r},x,y,o,p,P,d,Q=r<<2,W=s<<2,O=W*r;for(x=0;x<s;x++){R=G=B=A=0;o=x${e};for(y=0;y<r;y++){p=o+(${a});d=y+1;${f((e,a)=>e+`+=S[p+${a}];D[p+${a}]=(${e}/d)|0`)};}for(;y<s;y++){p=o+(${a});P=p+${t};${f((e,a)=>`D[p+${a}]=(${e}/r)|0;${e}+=S[p+${a}]-S[P+${a}]`)}}}`),l=be().data,d=new Uint8Array(y*y*4);t("*W","y<<2","-Q")(l,d,a,y),t("<<2","y*W","-O")(d,l,a,y),t("*W","(s-y-1)<<2","Q")(l,d,a,y),t("<<2","(s-y-1)*W","O")(d,l,a,y),ce()},Me=(e=>{let a=oe.createElement("canvas");@a.width=a.height=e,setTimeout(e=>oe.body.prepend(a)),a.style.height=e/2+"px",a.style.background="#fff",$=a.getContext("2d")})(y);if(Me.lineJoin=U?"round":"miter",Me.lineCap=U?"round":"square",Me~B?"#000":"#fff",Me.fillRect(0,0,y,y),!B){let a=e=>Me.translate(e,e),e=e=>a(m)+Me.rotate(e)+a(-m),t=(e,a)=>(Me~pe(d(4))+25)+u(e,e=>Me.beginPath()+Me.ellipse(l(y),a(),l(m),l(m),0,0,2*f)+Me.fill()),r=e=>Me.globalCompositeOperation=e;Q||r("xor");let o=p();e(o),t(55,e=>l(y)),t(22,e=>y+b(.1*y)),t(22,e=>b(.1*y)),e(-o),r("source-over"),Ge(0,55)}§Ue=(e,a,t)=>{let r=d(6,4),f=u(e,e=>h(e=>Fe(t?l(3,1):r)));@f.map(e=>e[0](Me)),a&&E&&Ge(0,0|a),e=>f.flat().map(e=>e(Me))},He=3*x/(D?1:5);Ue(He/5,.02*y),Ue(He/5,.01*y),Ue(He/5,.005*y),Ue(He,0);§Je=e=>a.abs(e-m)>.45*y;if(F||R){be();let t=g.data;u(y,a=>u(y,e=>{(F&&(Je(a)||Je(e))||R)&&(e=e*y+a<<2,t[e]=t[1+e]=t[2+e]=.3*t[e]+.6*t[1+e]+.1*t[2+e])})),ce()}§Le=l(.5,.5),Te=Ue(He/(D?100:20)*Le,0,1);be();§_e=e=>(!tx&&e||Te(ce()),requestAnimationFrame(_e));_e()'.replaceAll('~','.fillStyle= ').replaceAll('@','return ').replaceAll('§','var '))</script>
+        <script>
+         setTimeout(() => {
+            let time = (Date.now() - window.scriptStartTimestamp)/ 1000 + 'ms'
+            let div = document.createElement('div')
+            div.style.fontSize = '40px'
+            div.innerHTML = time
+            document.querySelector('body > div').append(div)         
+         }, 10)
+        </script>
+    </body>
+</html>
