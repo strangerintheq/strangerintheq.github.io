@@ -78,7 +78,7 @@ F grid(vec2 uv){
 
   gr = fract(id);
   id = floor(id);
-  id += grid(p*${t(1,1)} ${a()?`*(0.7+0.3*noise2d(p+${t(111)}))`:""})*${t(2,1)};
+
   ${a(.9)?"id += grid(op);":""}
 
 
