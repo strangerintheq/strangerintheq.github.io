@@ -131,7 +131,7 @@ if (texture2D(idTexture, p+(0.009-${r}.*0.001)*shift).g == ${e}.)
 F id1 = mod(id, 4.0);
 col = getColor(id1);
 
-F id2 = mod(gradient < 0.5 ? id - 1.0 : id + 1.0, 4.);
+F id2 = mod(gradient < 0.5 ? id + 4. : id + 1.0, 4.);
 col = mix(col, getColor(id2), gradient);
 //col = mix(col, vec3(1), facture(p,1.,id)*noise2d(id+p));
 
