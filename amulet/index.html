@@ -76,8 +76,7 @@ F grid(vec2 uv){
 
 
   ${a(.9)?`id += nz(p, ${t(99)});`:""}
-  id += nz(op, ${t(99)})*${m.asymmetry};
-  id *= ${m.asymmetry}*nz(op*${t(1,.5)}, ${t(100)});
+
   ${a(.9)?`id *= nz(p + ${t(111)}, 6.);`:""}
   gr = fract(id);
   id = floor(id);
