@@ -170,9 +170,9 @@ ${R()}
 ${ae}
 vec3 img(vec2 p) {
     vec3 d = texture2D(idTexture, p).rgb;
-    F id = d.r * 4.0;
-    F cutout = d.g;
-    F gradient = fract(d.b*2.0);
+    F id = clamp(d.r, 0., 1.) * 4.0;
+    F cutout = clamp( d.g, 0., 1.);
+    F gradient = fract(clamp(d.b , 0., 1. )*2.0);
     ${we()};
     vec3 col;
     if (cutout == 1.0) {
