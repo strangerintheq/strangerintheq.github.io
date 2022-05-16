@@ -73,15 +73,9 @@ F grid(vec2 uv){
   
 `;var Q=[`
 
-
-
-
   gr = fract(id);
   id = floor(id);
-
-  ${a(.9)?"id += grid(op);":""}
-
-
+  id += grid(p);
 
    `,a()?`id += p.x * ${t(5,5)} + fract(p.y  *${t(5,1)});`:`id += p.y * ${t(5,5)} + fract(p.x  *${t(5,1)});`];var Z=m.noise?`F z = abs(mod(id,5.));
 if(z<1.15&&z>.85)id+=
