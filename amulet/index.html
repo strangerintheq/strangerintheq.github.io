@@ -32,7 +32,9 @@
         window.tokenData.palette = JSON.parse(atob(p.get('palette')))
     } catch (e){}
 })()</script>
-        <script>var I=Math.pow;var xe=Math,v=xe.PI,Ie=v/2,W=2*v;var H=(e,r,n)=>parseInt(e.substr(r,n),16);var X=(e,r,n,i)=>(r=new Uint32Array([1,3,n=i=2,4].map(f=>H(e,f*8,8))),f=>(i=r[3],r[3]=r[2],r[2]=r[1],r[1]=n=r[0],i^=i<<11,r[0]^=i^i>>>8^n>>>19,r[0]/I(2,32)));var _e=X(tokenData.hash);var t=(e=1,r=0)=>_e()*e+r,x=(e=2,r=0)=>r+t(e|0)|0,a=(e=.5)=>t()>e,g=(e=1)=>t(e)-e/2;var T=e=>t(v*2),M=e=>e[x(e.length)],y=(e,r)=>[...Array(e|0)].map((n,i)=>r(i));var R=e=>"vec3 PM(vec3 x){return mod(((x*34.)+1.)*x,289.);}F noise2d(vec2 v){vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);vec2 i1=(x0.x>x0.y)?vec2(1,0):vec2(0,1);vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod(i,289.);vec3 p=PM(PM(i.y+vec3(0,i1.y,1))+i.x+vec3(0,i1.x,1.0));vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);m=m*m*m*m;vec3 x=2.*fract(p*C.www)-1.;vec3 h=abs(x)-.5;vec3 ox=floor(x+.5);vec3 a0=x-ox;m*=1.79284291400159-.85373472095314*(a0*a0+h*h);vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.*dot(m,g);}";function l(e=1,r=e,n=-e/2,i=n){return`vec2(${t(e)+n},${t(r)+i})`}function w(){return"mat2 rot(F a){F s=sin(a),c=cos(a);return mat2(c,s,-s,c);}"}var d=t(.03,.3),B=t(.15,-.075),S=`vec2(0, ${B})`,$e=`length(oUV + ${S}) > ${d}`,je=`min(length(oUV + ${l(.5)}),length(oUV + ${l(.5)})) > ${d/2}`,ve=`sqrt(length((oUV + ${S})*(oUV + ${S}))) > ${d}`,ge=`abs(oUV.x) > ${d} || abs(oUV.y+${B}) > ${d}`,ye=`abs(oUV.y - ${t(.1,.1)}) < ${d/10}
+        <script>var I=Math.pow;var xe=Math,v=xe.PI,Ie=v/2,W=2*v;var H=(e,r,n)=>parseInt(e.substr(r,n),16);var X=(e,r,n,i)=>(r=new Uint32Array([1,3,n=i=2,4].map(f=>H(e,f*8,8))),f=>(i=r[3],r[3]=r[2],r[2]=r[1],r[1]=n=r[0],i^=i<<11,r[0]^=i^i>>>8^n>>>19,r[0]/I(2,32)));var _e=X(tokenData.hash);var t=(e=1,r=0)=>_e()*e+r,x=(e=2,r=0)=>r+t(e|0)|0,a=(e=.5)=>t()>e,g=(e=1)=>t(e)-e/2;var T=e=>t(v*2),M=e=>e[x(e.length)],y=(e,r)=>[...Array(e|0)].map((n,i)=>r(i));var R=e=>
+            "vec3 PM(vec3 x){return mod(((x*34.)+1.)*x,289.);}" +
+            "F noise2d(vec2 v){vec4 C=vec4(0.2113,0.3660,-0.5773,0.0243);vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);vec2 i1=(x0.x>x0.y)?vec2(1,0):vec2(0,1);vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod(i,289.);vec3 p=PM(PM(i.y+vec3(0,i1.y,1))+i.x+vec3(0,i1.x,1.0));vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);m=m*m*m*m;vec3 x=2.*fract(p*C.www)-1.;vec3 h=abs(x)-.5;vec3 ox=floor(x+.5);vec3 a0=x-ox;m*=1.7928-.8537*(a0*a0+h*h);vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.*dot(m,g);}";function l(e=1,r=e,n=-e/2,i=n){return`vec2(${t(e)+n},${t(r)+i})`}function w(){return"mat2 rot(F a){F s=sin(a),c=cos(a);return mat2(c,s,-s,c);}"}var d=t(.03,.3),B=t(.15,-.075),S=`vec2(0, ${B})`,$e=`length(oUV + ${S}) > ${d}`,je=`min(length(oUV + ${l(.5)}),length(oUV + ${l(.5)})) > ${d/2}`,ve=`sqrt(length((oUV + ${S})*(oUV + ${S}))) > ${d}`,ge=`abs(oUV.x) > ${d} || abs(oUV.y+${B}) > ${d}`,ye=`abs(oUV.y - ${t(.1,.1)}) < ${d/10}
                || abs(oUV.y + ${t(.1,.1)}) < ${d/10} `,Je=M([`abs(oUV.x) > ${d}`,`abs(oUV.y) > ${d}`]),Ke=`abs(oUV.x ${a()?"+":"-"} oUV.y) > ${d*1.7}`,Qe=M([`oUV.y > ${d}`,`oUV.y < ${-d}`,`oUV.x > ${d}`,`oUV.x < ${-d}`]);function z(){return`sin(
         ${t(W)} + ${t(3,2)}*atan(sabs(oUV.x), oUV.y+${B})
     )`}var he=`length(oUV) - 
@@ -58,7 +60,7 @@ F grid(vec2 uv){
     ${G(t(1,1))}
     ${G(t(1,1))}
  
-    return abs(id.r+id.g);
+    return abs(noise2d(id/${t(11)+11}+${t(111)})*5.);
 }
 
 `;var Y=a()?"op":"p",q=[`sin(${t(33,11)}*(length(${Y}-${l(0,.2)}) + noise2d(op)*0.1)) > ${t(.5,.5)}`,`length(${Y}) < 0.1`,`sin(${a()?"p.x":"p.y"}*${t(44,22)}) > 0.`];var j="fe4365fc9d9af9cdadc8c8a983af9becd078d95b43c0294254243753777a5562704ecdc4c7f464ff6b6bc44d58774f38e08e79f1d4afece5cec5e0dce8ddcbcdb38003656403364903163400a0b06a4a3ccc333feb6841edc951d9ceb2948c75d5ded97a6a5399b2b7413e4a73626eb38184f0b49ef7e4beff4e50fc913af9d423ede574e1f5c465564380bca3f6f7bde6ac27bf4d288c23185e8c6a88a65ebfb35af2c45afad089ff9c5bf5634aed303c3b8183f8b195f67280c06c846c5b7b355c7dd1e751ffffff0000004dbce926ade45e412ffcebb678c0a8f07818f0a830eee6abc5bc8e69675845484b36393bf0d8a83d1c0086b8b1f2d694fa2a00b9d7d96682842a28294937367b3b3be8d5b70e2430fc3a51f5b349e8d5b93e4147fffedfdfba695a2e2e2a2c31fc354c29221f13747d0abfbcfcf7c5cc0c39e6781ec8cf02f8fcc11693a7a7c5bde5ddcbeb7b59cf4647524656edebe6d6e1c794c7b6403b33d3643b230f2bf21d41ebebbcbce3c582b3ae0000009f111bb11623292c37ccccccf6f6f6e8e8e8333333990100b905041b325f9cc4e4e9f2f93a89c9f26c4fa1dbb2fee5adfaca66f7a541f45d4c5e9fa3dcd1b4fab87ff87e7bb05574951f2bf5f4d7e0dfb1a5a36c5352338dccad988864fea6a2f9d6acffe9afffefd3fffee4d0ecea9fd6d28b7a5ecfffddb4dec15c5863a85163ff1f4cf8edd1d88a8a4748439d9d93c5cfc6046d8b3092922fb8ac93a42aecbe13f38a8a55443da0cab5cde9caf1edd0a70267f10c49fb6b41f6d86b3391940ca5b04e3f30fefeebf8f4e4a5b3aa4d3b3bde6262ffb88cffd0b3f5e0d3edf6eed1c089b3204d412e28151101d1313de5625cf9bf768eb2c561537573c8a9dee1b6e1b866bd5532373b44",J=43;var m={palette:x(J),mask_shape:x(6),mask_cut:x(3),pattern:x(2),noise:a(.7),asymmetry:a()?.001:t(.2,.1),shadowMode:a()};var K=`
@@ -72,11 +74,20 @@ F grid(vec2 uv){
   p = p*rot(-r);
   
 `;var Q=[`
+  ${a(.9)?`id += nz(p, ${t(99)});`:""}
 
+  id += nz(op, ${t(99)})*${m.asymmetry};
+  id *= ${m.asymmetry}*nz(op*${t(1,.5)}, ${t(100)});
+  ${a(.9)?`id *= nz(p + ${t(111)}, 6.);`:""}
+  // id *= ${t(2,2)};
   gr = fract(id);
   id = floor(id);
-  id += grid(p);
-
+  if (abs(gr - 0.5) > 0.4) {
+     float k = id < 1.0 ? -1.0 : 1.0;
+     id += k;
+  }
+  id += grid(p*${t(1,1)} ${a()?`*(0.7+0.3*noise2d(p+${t(111)}))`:""})*${t(2,1)};
+  ${a(.9)?"id += grid(op);":""}
    `,a()?`id += p.x * ${t(5,5)} + fract(p.y  *${t(5,1)});`:`id += p.y * ${t(5,5)} + fract(p.x  *${t(5,1)});`];var Z=m.noise?`F z = abs(mod(id,5.));
 if(z<1.15&&z>.85)id+=
  nz(${t(99)} + op*0.1,   ${t(99)}) * 0.5
@@ -90,19 +101,22 @@ vec3 getId(vec2 p) {
   vec2 oUV = p;
   vec2 op = p*${t(.5,1)};
   F id, gr;
-
+  ${K}
   ${Q[a(.95)?1:0]}
-
-
-  return vec3(abs(fract(floor(id)/4.)),0,0);
+  ${Z}
+  gr = fract(id);
+  F c = abs(oUV.x) > 0.33 || abs(oUV.y) > 0.45 ? 1.0 : 0.0;
+  if (mod(id, 2.5) > .5 && (${N[m.mask_shape]}))c=1.;
+  if (mod(id, 1.5) < .5 && ${q[m.mask_cut]})c=1.;
+  return vec3(fract(floor(id)/4.),c,gr);
 }
 void main(){vec2 uv=gl_FragCoord.xy/R-.5; uv.x*=R.x/R.y;gl_FragColor=vec4(getId(uv),1);}`;function Fe(e){let r=parseInt(e.substring(1),16);return[r>>16,r>>8,r].map(n=>n&255)}function Ee(e){return e.map(r=>(r/255).toFixed(8))}function Re(e){return`vec3( ${e[0]}, ${e[1]}, ${e[2]} )`}function te(e,r=5){let n=e.map(Fe).map(Ee).map(Re);return`
 vec3 getColor(float i) {
-    i = mod(i, ${r}.);
-    if (i < 0.99999) return ${n[0]};
-    if (i < 1.99999) return ${n[1]};
-    if (i < 2.99999) return ${n[2]};
-    if (i < 3.99999) return ${n[3]};
+    i = abs(mod(i, ${r}.));
+    if (i < 1.) return ${n[0]};
+    if (i < 2.) return ${n[1]};
+    if (i < 3.) return ${n[2]};
+    if (i < 4.) return ${n[3]};
     return ${n[4]};
 }
 `}var re=y(5,e=>"#"+j.substr(m.palette*30+e*6,6));function A(e){return`
@@ -117,11 +131,11 @@ if (texture2D(idTexture, p+(0.009-${r}.*0.001)*shift).g == ${e}.)
     `}var ne=`
 
 F id1 = mod(id, 4.0);
-col = getColor(id);
+col = getColor(id1);
 
-//F id2 = mod(gradient < 0.5 ? id + 3. : id + 1.0, 4.);
-//col = mix(col, getColor(id2), gradient);
-//col = mix(col, vec3(1), facture(p,1.,id)*noise2d(id+p));
+F id2 = mod(gradient < 0.5 ? id - 1.0 : id + 1.0, 4.);
+col = mix(col, getColor(id2), gradient);
+col = mix(col, vec3(1), facture(p,1.,id)*noise2d(id+p));
 
 ${m.shadowMode?"":A(1)}
 
