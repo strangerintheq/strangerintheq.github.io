@@ -5,17 +5,6 @@
     <title>Tentura - Stranger in the Q</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 
-<!--  twitter preview  -->
-
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@strangerintheq.github.io" />
-    <meta name="twitter:creator" content="@strangerintheq" />
-    <meta property="og:url" content="https://strangerintheq.github.io/tentura/" />
-    <meta property="og:title" content="Tentura - Stranger in the Q" />
-    <meta property="og:description" content="Long-form generative artwork released by artblocks.io and hosted immutably on Ethereum blockchain" />
-    <meta property="og:image" content="https://strangerintheq.github.io/tentura/img/bg.png" />
-
-<!--  end of twitter preview  -->
     <style>
         * {
             margin: 0;
@@ -138,6 +127,10 @@
     </style>
 
     <script>
+
+        const oneImage = 'calc(var(--base-size) * 0.8)'
+        const twoImage = 'calc(var(--base-size) * 0.4)'
+
         function debugImages(folder, list) {
             document.write(list.map(img => img ? `
                 <div style="display: inline-block">
@@ -146,6 +139,26 @@
                 </div>
             ` : '<div class="separator"></div>'
             ).join(''));
+        }
+
+        function mainnetImage(i, size, displaySize) {
+
+            if (i<10) {
+                i = '00' + i
+            } else if (i<100) {
+                i = '0' + i
+            }
+            return `
+<a href="https://www.artblocks.io/token/265000${i}" target="_blank">
+    <img src="https://www.artblocks.io/_next/image?url=https%3A%2F%2Fartblocks-mainnet.s3.amazonaws.com%2F265000${i}.png&w=${size}&q=75"
+        style="
+            --sz: ${displaySize};
+            min-width: var(--sz);
+            min-height: var(--sz);
+            max-width: var(--sz);
+            max-height: var(--sz);
+        ">
+</a>`
         }
 
         function ropstenImage(i, size, displaySize) {
@@ -162,7 +175,6 @@
                 "></a>`;
         }
 
-
         function titledRopstenImages(images){
             const s = 'calc(var(--base-size) * 0.26666)'
 
@@ -175,6 +187,7 @@
                 }).join('')
             )
         }
+
     </script>
 </head>
 <body>
@@ -194,9 +207,6 @@
         <a href="https://www.artblocks.io/project/265" target="_blank">artblocks.io</a><br>
         and hosted immutably on Ethereum blockchain
     </h3>
-    <div class="separator"></div>
-        <h3>Release date/time: March 4, 2:00pm CT / 20:00 GMT</h3>
-   </h3>
     <div class="separator"></div>
 </section>
 
@@ -246,16 +256,9 @@
     <div class="content-wrapper">
         <h2>Mint #0</h2>
         <div class="separator"></div>
-        <a href="https://www.artblocks.io/token/265000000"
-           target="_blank"><img
-                src="https://www.artblocks.io/_next/image?url=https%3A%2F%2Fartblocks-mainnet.s3.amazonaws.com%2F265000000.png&w=3840&q=75"
-                style="
-                    --sz: calc(var(--base-size) * 0.8);
-                    min-width: var(--sz);
-                    min-height: var(--sz);
-                    max-width: var(--sz);
-                    max-height: var(--sz);
-                "></a>
+        <script>
+            document.write(mainnetImage(0, 3840, oneImage))
+        </script>
         <div class="separator"></div>
     </div>
 </section>
@@ -281,10 +284,10 @@
             Fully distributed images can include cracks or not:
         </div>
         <script>
-            const largeImage = 'calc(var(--base-size) * 0.4)'
+
             document.write(
-                ropstenImage(51, 128*5, largeImage) +
-                ropstenImage(10, 128*5, largeImage)
+                ropstenImage(51, 128*5, twoImage) +
+                ropstenImage(10, 128*5, twoImage)
             )
         </script>
         <div class="text">
@@ -294,8 +297,8 @@
         </div>
         <script>
             document.write(
-                ropstenImage(59, 128*5, largeImage) +
-                ropstenImage(46, 128*5, largeImage)
+                ropstenImage(59, 128*5, twoImage) +
+                ropstenImage(46, 128*5, twoImage)
             )
         </script>
         <div class="text">
@@ -316,9 +319,9 @@
     </div>
 </section>
 
-<!-- ropsten mints -->
+<!-- mints -->
 <section class="dark">
-    <h2>Test mints</h2>
+    <h2>Mints</h2>
     <div class="separator"></div>
     <div class="slider">
         <div></div>
@@ -331,76 +334,73 @@
     <div class="content-wrapper">
         <h2>Creation process</h2>
         <div class="text">
-            ... Coming soon ...
+            This artwork is based on a noised vector field (also known as a flow field),
+            which include 2 variations and 2 modifications:
         </div>
-<!--        <div class="text">-->
-<!--            This artwork is based on a noised vector field (also known as a flow field),-->
-<!--            which include 2 variations and 2 modifications:-->
-<!--        </div>-->
-<!--        <div class="separator"></div>-->
-<!--        <script>-->
-<!--            debugImages('ff', ['straight', 'radial',  'straight-bent', 'radial-centered']);-->
-<!--        </script>-->
-<!--        <div class="separator"></div>-->
-<!--        <div class="text">-->
-<!--            After that, one of six shapes are drawn on top of the vector field,-->
-<!--            with the "brush" effect (where field direction is changed with direction-->
-<!--            of the brush movement):-->
-<!--        </div>-->
-<!--        <div class="separator"></div>-->
-<!--        <script>-->
-<!--            debugImages('shape', ['lines', 'ring', 'triangle', '', 'square', 'pentagon', 'hexagon']);-->
-<!--        </script>-->
-<!--        <div class="separator"></div>-->
-<!--        <div class="text">-->
-<!--            These shapes also have variations in that, they can be shifted from center,-->
-<!--            rotated or deformed, and can be partial or spiral:-->
-<!--        </div>-->
-<!--        <div class="separator"></div>-->
-<!--        <script>-->
-<!--            debugImages('shape-variations', ['spiral', 'partial']);-->
-<!--        </script>-->
-<!--        <div class="separator"></div>-->
-<!--        <div class="text">-->
-<!--            These three zones on the vector field are used to control the behavior of -->
-<!--            the strings or wires. They provide not only direction, but also-->
-<!--            color choice, and random turns and stops.-->
-<!--            <div class="separator"></div>-->
-<!--            String or wire distributions are also different and can be one of these 6     types:-->
-<!--        </div>-->
-<!--        <div class="separator"></div>-->
-<!--        <script>-->
-<!--            debugImages('distribution', ['full', 'line', 'circle', '', 'triangle', 'square', 'pentagon']);-->
-<!--        </script>-->
-<!--        <div class="separator"></div>-->
-<!--        <div class="text">-->
-<!--            Distributions, can also vary in that they can be rotated, shifted, include a cutout,-->
-<!--            nave noise, and include any combination of these modifications:-->
-<!--            <div class="separator"></div>-->
-<!--        </div>-->
-<!--        <script>-->
-<!--            debugImages('distribution-variations', ['hole', 'shift', 'noise']);-->
-<!--        </script>-->
-<!--        <div class="text">-->
-<!--        <div class="separator"></div>-->
-<!--        Fully distributed wires can include "cracks" made by several octaves of noise,-->
-<!--        Other distributions can be "cut by edges" to prevent most wires from crossing the edges.-->
+        <div class="separator"></div>
+        <script>
+            debugImages('ff', ['straight', 'radial',  'straight-bent', 'radial-centered']);
+        </script>
+        <div class="separator"></div>
+        <div class="text">
+            After that, one of six shapes are drawn on top of the vector field,
+            with the "brush" effect (where field direction is changed with direction
+            of the brush movement):
+        </div>
+        <div class="separator"></div>
+        <script>
+            debugImages('shape', ['lines', 'ring', 'triangle', '', 'square', 'pentagon', 'hexagon']);
+        </script>
+        <div class="separator"></div>
+        <div class="text">
+            These shapes also have variations in that, they can be shifted from center,
+            rotated or deformed, and can be partial or spiral:
+        </div>
+        <div class="separator"></div>
+        <script>
+            debugImages('shape-variations', ['spiral', 'partial']);
+        </script>
+        <div class="separator"></div>
+        <div class="text">
+            These three zones on the vector field are used to control the behavior of
+            the strings or wires. They provide not only direction, but also
+            color choice, and random turns and stops.
+            <div class="separator"></div>
+            String or wire distributions are also different and can be one of these 6     types:
+        </div>
+        <div class="separator"></div>
+        <script>
+            debugImages('distribution', ['full', 'line', 'circle', '', 'triangle', 'square', 'pentagon']);
+        </script>
+        <div class="separator"></div>
+        <div class="text">
+            Distributions, can also vary in that they can be rotated, shifted, include a cutout,
+            nave noise, and include any combination of these modifications:
+            <div class="separator"></div>
+        </div>
+        <script>
+            debugImages('distribution-variations', ['hole', 'shift', 'noise']);
+        </script>
+        <div class="text">
+        <div class="separator"></div>
+        Fully distributed wires can include "cracks" made by several octaves of noise,
+        Other distributions can be "cut by edges" to prevent most wires from crossing the edges.
 
-<!--        <div class="separator"></div>-->
+        <div class="separator"></div>
 
-<!--        All code has been written on typescript, and bundled to a single javascript file with-->
-<!--        a total size of approximately 5.5 kilobytes.-->
-<!--        <div class="separator"></div>-->
-<!--        Special thanks to-->
-<!--        <script>-->
-<!--            document.write('@i_dianov @piterpasma @shvembldr @jeffgdavis @_sross_'-->
-<!--                .split(' ').map(s => `<a href="https://twitter.com/${s}">${s}</a>`).join(' '))-->
-<!--        </script>-->
-<!--        .-->
-<!--        They supported me and sometimes pushed me in the right direction-->
-<!--        while creating this work.-->
-<!--        <div class="separator"></div>-->
-<!--    </div>-->
+        All code has been written on typescript, and bundled to a single javascript file with
+        a total size of approximately 5.5 kilobytes.
+        <div class="separator"></div>
+        Special thanks to
+        <script>
+            document.write('@i_dianov @piterpasma @shvembldr @jeffgdavis @_sross_'
+                .split(' ').map(s => `<a href="https://twitter.com/${s}">${s}</a>`).join(' '))
+        </script>
+        .
+        They supported me and sometimes pushed me in the right direction
+        while creating this work.
+        <div class="separator"></div>
+    </div>
     </div>
 </section>
 
@@ -447,11 +447,17 @@
         let slider = document.querySelector('.slider div');
         let size = 384;
         let displaySize = size;
-        let count = 66;
-        slider.innerHTML = [...Array(count)]
-            .map((_, i) => ropstenImage(i, size, displaySize + 'px'))
-            .join('');
+        let count = 0;
 
+        slider.innerHTML = [...Array(777)]
+            .map((_, i) => {
+                if (Math.random()>0.05)
+                    return ""
+                count++
+                return mainnetImage(i, size, displaySize + 'px');
+            })
+            .join('');
+        console.log('slider ',count)
         let scrollAmount = 0;
 
         slider.style.minWidth = count * displaySize + 'px';
