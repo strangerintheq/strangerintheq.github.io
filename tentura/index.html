@@ -141,48 +141,36 @@
             ).join(''));
         }
 
-        function mainnetImage(i, size, displaySize) {
+        function mainnetImage(i, size, displaySize, title = '') {
 
             if (i<10) {
                 i = '00' + i
             } else if (i<100) {
                 i = '0' + i
             }
-            return `
-<a href="https://www.artblocks.io/token/265000${i}" target="_blank">
-    <img src="https://www.artblocks.io/_next/image?url=https%3A%2F%2Fartblocks-mainnet.s3.amazonaws.com%2F265000${i}.png&w=${size}&q=75"
-        style="
-            --sz: ${displaySize};
-            min-width: var(--sz);
-            min-height: var(--sz);
-            max-width: var(--sz);
-            max-height: var(--sz);
-        ">
-</a>`
+
+            return `<a href="https://www.artblocks.io/token/265000${i}" target="_blank"><div style="display:inline-block">
+        <img src="https://www.artblocks.io/_next/image?url=https%3A%2F%2Fartblocks-mainnet.s3.amazonaws.com%2F265000${i}.png&w=${size}&q=75"
+            style="
+                --sz: ${displaySize};
+                min-width: var(--sz);
+                min-height: var(--sz);
+                max-width: var(--sz);
+                max-height: var(--sz);
+            "><div style="display:flex">
+                <h4 style="margin-right: auto;color: black;background: #fff7;padding-left:10px">#${i}</h4>
+                <h4 style="margin-left: auto;color: black;background: #fff7;padding-right:10px">${title}</h4>
+            </div></div></a>`
         }
 
-        function ropstenImage(i, size, displaySize) {
-            i = i < 10 ? ('0' + i) : i;
-            let url1 = `https://artist-staging.artblocks.io/_next/image?url=`;
-            let url2 = `https://artblocks-artists-staging.s3.amazonaws.com/1310000${i}.png`;
-            return `<a href="${url2}" target="_blank"><img
-                src="${url1 + url2}&amp;w=${size}&amp;q=75"
-                style="
-                    min-width: ${displaySize};
-                    min-height: ${displaySize};
-                    max-width: ${displaySize};
-                    max-height: ${displaySize}
-                "></a>`;
-        }
 
-        function titledRopstenImages(images){
+        function titledImages(images){
             const s = 'calc(var(--base-size) * 0.26666)'
 
             document.write(
                 images.map(img => {
                     return img ? `<div style="display:inline-block">
-                        ${ropstenImage(img[0], 128*5, s )}
-                        <h4>${img[1]}</h4>
+                        ${mainnetImage(img[0], 128*5, s, img[1] )}
                     </div>` :  '<div class="separator"></div>'
                 }).join('')
             )
@@ -268,7 +256,7 @@
     <div class="content-wrapper">
         <h2>About artwork</h2>
         <div class="text">
-            Tentura is divided in three different zones which control the
+            Tentura is divided in two or three different zones which control the
             behavior of the relevant strings or wires there. When the string leaves the zone
             it began in, it retains its color but its behavior changes.
             A string can stop when it changes zones, and if not, its direction shall change.
@@ -284,10 +272,9 @@
             Fully distributed images can include cracks or not:
         </div>
         <script>
-
             document.write(
-                ropstenImage(51, 128*5, twoImage) +
-                ropstenImage(10, 128*5, twoImage)
+                mainnetImage(668, 128*5, twoImage) +
+                mainnetImage(732, 128*5, twoImage)
             )
         </script>
         <div class="text">
@@ -297,8 +284,8 @@
         </div>
         <script>
             document.write(
-                ropstenImage(59, 128*5, twoImage) +
-                ropstenImage(46, 128*5, twoImage)
+                mainnetImage(664, 128*5, twoImage) +
+                mainnetImage(681, 128*5, twoImage)
             )
         </script>
         <div class="text">
@@ -307,10 +294,14 @@
             Here are several of them:
         </div>
         <script>
-            titledRopstenImages([
-                [40, '1 Line'], [35, '2 Lines'], [50, 'Ring'], '',
-                [53, 'Ring spiral'], [41, 'Triangle spiral'],[21, 'Square'],'',
-                [30, 'Square spiral'], [28, 'Pentagon'], [29, 'Hexagon partial'],
+            titledImages([
+                [639, '1 Line'],   [553, '1 Line partial'],   [541, '1 Line spiral'],   '',
+                [739, '2 Lines'],  [303, '2 Lines partial'],  [62,  '2 Lines spiral'],  '',
+                [197, 'Ring'],     [608, 'Ring partial'],     [309, 'Ring spiral'],     '',
+                [472, 'Triangle'], [772, 'Triangle partial'], [120, 'Triangle spiral'], '',
+                [535, 'Square'],   [108, 'Square partial'],   [200, 'Square spiral'],   '',
+                [304, 'Pentagon'], [603, 'Pentagon partial'], [727, 'Pentagon spiral'], '',
+                [51,  'Hexagon'],  [324, 'Hexagon partial'],  [668, 'Hexagon spiral'],
             ])
         </script>
         <div class="text">
@@ -414,10 +405,10 @@
             I use various techniques and tools,
             such as WebGL/GLSL, SVG or pure Canvas2D API.
             <div class="separator"></div>
-            You can see more of my generative artwork by following the link below.
+            You can see more of my generative artworks by following the link below.
         </div>
         <div class="separator"></div>
-        <h2><a href="https://strangerintheq.github.io" target="_blank">strangerintheq.ginhub.io</a></h2>
+        <h2><a href="https://strangerintheq.github.io" target="_blank">strangerintheq.github.io</a></h2>
         <div class="separator"></div>
         <div style="font-size: 0">
             <script>
@@ -425,7 +416,6 @@
                     ['twitter.svg','Twitter','https://twitter.com/stranger_intheq'],
                     ['discord.svg','Discord','https://discord.gg/S92neTmQ3v'],
                     ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 0.1],
-                    ['telegram.svg','Telegram','https://t.me/strangerintheq',0.1]
                 ].map(([image, text, link, marginLeft]) => `
                     <a style="margin-left: ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" >
                         <img src="../resources/${image}" class="ico-4">
@@ -457,7 +447,7 @@
                 return mainnetImage(i, size, displaySize + 'px');
             })
             .join('');
-        console.log('slider ',count)
+
         let scrollAmount = 0;
 
         slider.style.minWidth = count * displaySize + 'px';
