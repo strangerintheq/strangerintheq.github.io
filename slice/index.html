@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>S L / C E - Stranger in the Q</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-weight: unset;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            overscroll-behavior: none;
+            margin: 0;
+            text-align: center;
+            overflow-x: hidden;
+            --base-size: min(1200px, 100vw)
+        }
+
+        .content-wrapper{
+            max-width: var(--base-size);
+            margin-left: calc(50vw - calc(var(--base-size) * 0.5));
+            overflow: visible;
+        }
+
+        h1 {
+            font-size: calc(var(--base-size) * 0.06);
+        }
+
+        h2 {
+            font-size: calc(var(--base-size) * 0.03);
+        }
+
+        h3 {
+            font-size: calc(var(--base-size) * 0.02);
+        }
+
+        h4 {
+            font-size: calc(var(--base-size) * 0.015);
+        }
+
+        .text {
+            margin: calc(var(--base-size) * 0.025) calc(var(--base-size) * 0.1);
+            text-align: justify;
+            font-size:  calc(var(--base-size) * 0.02);
+        }
+
+        section {
+            padding-top: calc(var(--base-size) * 0.025);
+            padding-bottom: calc(var(--base-size) * 0.025);
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(-30deg)
+            }
+            50% {
+                transform: rotate(-8deg)
+            }
+            100% {
+                transform: rotate(-30deg)
+            }
+        }
+
+        .header-img-wrapper {
+            width: 100vw;
+            height: 30vw;
+            overflow: hidden;
+            margin-bottom: -10vw;
+        }
+
+        .header-img {
+            animation: rotate 200s infinite;
+            width: 100vw;
+            height: 100vw;
+            margin-top: -75vw;
+            background: url("img/bg.png") no-repeat bottom center;
+            background-size: 100% 100%;
+        }
+
+        .footer-img {
+            width: 100vw;
+            height: 100vw;
+            background-size: contain;
+            background: radial-gradient(circle at 50% -170%, #ffffffff 65%, #ffffff00 72%),
+            url("img/bg.png") no-repeat 50% 50%;
+            background-size: 100% 100%;
+        }
+
+        .footer-img-wrapper {
+            margin-top: -15vw;
+            width: 100vw;
+            height: 30vw;
+            overflow: hidden;
+        }
+
+        .separator {
+            height: calc(100vw * 0.025);
+            width: calc(100vw * 0.025);
+        }
+
+        .slider {
+            font-size: 0;
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+
+        .ico-6 {
+            max-width: calc(var(--base-size) * 0.06)
+        }
+
+        .ico-4 {
+            max-width: calc(var(--base-size) * 0.04)
+        }
+
+        .dark {
+            background: linear-gradient(180deg,
+                #fff ,
+                #f4f4f4 calc(var(--base-size) * 0.01),
+                #fff calc(var(--base-size) * 0.15)
+            );
+        }
+    </style>
+
+    <script>
+
+        const oneImage = 'calc(var(--base-size) * 0.8)'
+        const twoImage = 'calc(var(--base-size) * 0.4)'
+
+
+        function mainnetImage(i, size, displaySize, title = '') {
+
+            if (i<10) {
+                i = '00' + i
+            } else if (i<100) {
+                i = '0' + i
+            }
+            // let imgUrl = `https://www.artblocks.io/_next/image?url=https%3A%2F%2Fartblocks-mainnet.s3.amazonaws.com%2F265000${i}.png&w=${size}&q=75`
+            let imgUrl = `https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000${i}.png`
+            return `<a href="https://www.artblocks.io/token/265000${i}" target="_blank"><div style="display:inline-block">
+        <img src="${imgUrl}"
+            style="
+                min-width: ${displaySize*0.75};
+                min-height: ${displaySize};
+                max-width: ${displaySize*0.75};
+                max-height: ${displaySize};
+            "><div style="display:flex">
+                <h4 style="margin-right: auto;color: black;background: #fff7;padding-left:10px">#${i}</h4>
+                <h4 style="margin-left: auto;color: black;background: #fff7;padding-right:10px">${title}</h4>
+            </div></div></a>`
+        }
+
+
+        function titledImages(images){
+            const s = 'calc(var(--base-size) * 0.26666)'
+
+            document.write(
+                images.map(img => {
+                    return img ? `<div style="display:inline-block">
+                        ${mainnetImage(img[0], 128*5, s, img[1] )}
+                    </div>` :  '<div class="separator"></div>'
+                }).join('')
+            )
+        }
+
+    </script>
+</head>
+<body>
+
+<!-- header image -->
+<div class="header-img-wrapper">
+    <div class="header-img"></div>
+</div>
+
+<!-- preface -->
+<section>
+    <h1>S L / C E</h1>
+    <h3>by Stranger in the Q</h3>
+    <img src="https://www.artblocks.io/squigWhiteCircle.png" class="ico-6">
+    <h3>
+        Long-form generative artwork released by
+        <a href="https://www.artblocks.io/project/265" target="_blank">artblocks.io</a><br>
+        and hosted immutably on Ethereum blockchain
+    </h3>
+    <div class="separator"></div>
+</section>
+
+<!-- description -->
+<section class="dark">
+    <div class="content-wrapper">
+        <h2>SL/CE (slice) is the exploration splitting</h2>
+        <h2>of primitive shapes into smaller parts</h2>
+        <div class="text">
+
+            So primitive action - division into parts - we can found it everywhere,
+            without parts there is no integrity, it is hard to determine what the
+            whole is until it is divided into parts, sometimes we do not know what is inside
+            - division helps here us to explore the subject, to understand what
+            we are dealing with.
+
+            <div class="separator"></div>
+
+            It is difficult to predict the result
+            of the division of material objects, the division of simple initial
+            forms makes the whole picture more complex,
+            it is question -  what will happen as a result of only 2 actions of random
+            division.
+
+            <div class="separator"></div>
+
+            .
+        </div>
+    </div>
+</section>
+
+<!-- mint 0 -->
+<section class="dark">
+    <div class="content-wrapper">
+        <h2>Mint #0</h2>
+        <div class="separator"></div>
+        <script>
+            document.write(mainnetImage(0, 3840, oneImage))
+        </script>
+        <div class="separator"></div>
+    </div>
+</section>
+
+<!-- about work -->
+<section class="dark">
+    <div class="content-wrapper">
+        <h2>About artwork</h2>
+        <div class="text">
+            Slice is begins with selection of starter shapes.
+            There are rectangles trapezoids or circles available.
+
+
+
+            After the placement of starter shapes the splitting is used to
+            determine final shapes. Sequence of slices is applied to shapes
+            and forms the final composition.
+
+        </div>
+        <script>
+            document.write(
+                mainnetImage(668, 128*5, twoImage) +
+                mainnetImage(732, 128*5, twoImage)
+            )
+        </script>
+        <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <script>
+            document.write(
+                mainnetImage(664, 128*5, twoImage) +
+                mainnetImage(681, 128*5, twoImage)
+            )
+        </script>
+        <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <script>
+            titledImages([
+                [639, '1 Line'],   [553, '1 Line partial'],   [541, '1 Line spiral'],   '',
+                [739, '2 Lines'],  [303, '2 Lines partial'],  [62,  '2 Lines spiral'],  '',
+                [197, 'Ring'],     [608, 'Ring partial'],     [309, 'Ring spiral'],     '',
+                [472, 'Triangle'], [772, 'Triangle partial'], [120, 'Triangle spiral'], '',
+                [535, 'Square'],   [108, 'Square partial'],   [200, 'Square spiral'],   '',
+                [304, 'Pentagon'], [603, 'Pentagon partial'], [727, 'Pentagon spiral'], '',
+                [51,  'Hexagon'],  [324, 'Hexagon partial'],  [668, 'Hexagon spiral'],
+            ])
+        </script>
+
+    </div>
+</section>
+
+<!-- mints -->
+<section class="dark">
+    <h2>Testnet mints</h2>
+    <div class="separator"></div>
+    <div class="slider">
+        <div></div>
+    </div>
+    <div class="separator"></div>
+</section>
+
+<!-- creation process -->
+
+
+<!-- about me-->
+<section class="dark">
+    <div class="content-wrapper">
+        <h2>About me</h2>
+        <div class="text">
+            My name is Konstantin. I'm working as a software developer,
+            and my passions are math and computer graphics.
+            I use various techniques and tools,
+            such as WebGL/GLSL, SVG or pure Canvas2D API.
+            <div class="separator"></div>
+            You can see more of my generative artworks by following the link below.
+        </div>
+        <div class="separator"></div>
+        <h2><a href="https://strangerintheq.github.io" target="_blank">strangerintheq.github.io</a></h2>
+        <div class="separator"></div>
+        <div style="font-size: 0">
+            <script>
+                document.write([
+                    ['twitter.svg','Twitter','https://twitter.com/stranger_intheq'],
+                    ['discord.svg','Discord','https://discord.gg/S92neTmQ3v'],
+                    ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 0.1],
+                ].map(([image, text, link, marginLeft]) => `
+                    <a style="margin-left: ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" >
+                        <img src="../resources/${image}" class="ico-4">
+                    </a>
+                `).join(''))
+            </script>
+        </div>
+    </div>
+</section>
+
+<!-- footer image -->
+<div class="footer-img-wrapper">
+    <div class="footer-img"></div>
+</div>
+
+<!-- slider -->
+<script>
+    (function imagesSlider() {
+        let slider = document.querySelector('.slider div');
+        let size = 384;
+        let displaySize = size;
+        let count = 0;
+
+        slider.innerHTML = [...Array(10)]
+            .map((_, i) => {
+                count++
+                return mainnetImage(i, size, displaySize + 'px');
+            })
+            .join('');
+
+        let scrollAmount = 0;
+
+        slider.style.minWidth = 2+count * displaySize*0.75 + 'px';
+        slider.parentNode.scrollLeft = count * displaySize*0.75 / 2;
+
+        slider.parentNode.addEventListener('mousewheel', e => {
+            e.preventDefault()
+            scrollAmount -= e.wheelDelta;
+        })
+
+        requestAnimationFrame(function animateScroll() {
+            slider.parentNode.scrollLeft += scrollAmount * 0.1;
+            scrollAmount -= scrollAmount * 0.1;
+            requestAnimationFrame(animateScroll);
+        })
+    })()
+</script>
+</body>
+</html>
