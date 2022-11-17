@@ -5,6 +5,7 @@
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __pow = Math.pow;
   var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[Object.keys(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
@@ -25,15 +26,15 @@
       var fulfilled = (value) => {
         try {
           step(generator.next(value));
-        } catch (e) {
-          reject(e);
+        } catch (e2) {
+          reject(e2);
         }
       };
       var rejected = (value) => {
         try {
           step(generator.throw(value));
-        } catch (e) {
-          reject(e);
+        } catch (e2) {
+          reject(e2);
         }
       };
       var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
@@ -271,7 +272,7 @@
               try {
                 testStringCoercion(value);
                 return false;
-              } catch (e) {
+              } catch (e2) {
                 return true;
               }
             }
@@ -467,7 +468,7 @@
             }
             return element;
           };
-          function createElement4(type, config, children) {
+          function createElement5(type, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -1540,7 +1541,7 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element = createElement4.apply(this, arguments);
+            var element = createElement5.apply(this, arguments);
             if (element == null) {
               return element;
             }
@@ -2432,7 +2433,7 @@
               try {
                 testStringCoercion(value);
                 return false;
-              } catch (e) {
+              } catch (e2) {
                 return true;
               }
             }
@@ -3547,7 +3548,7 @@
             }
             try {
               return doc.activeElement || doc.body;
-            } catch (e) {
+            } catch (e2) {
               return doc.body;
             }
           }
@@ -5249,11 +5250,11 @@
               });
               window.addEventListener("test", options, options);
               window.removeEventListener("test", options, options);
-            } catch (e) {
+            } catch (e2) {
               passiveBrowserEventsSupported = false;
             }
           }
-          function invokeGuardedCallbackProd(name, func, context, a, b, c, d, e, f) {
+          function invokeGuardedCallbackProd(name, func, context, a, b, c, d, e2, f) {
             var funcArgs = Array.prototype.slice.call(arguments, 3);
             try {
               func.apply(context, funcArgs);
@@ -5265,7 +5266,7 @@
           {
             if (typeof window !== "undefined" && typeof window.dispatchEvent === "function" && typeof document !== "undefined" && typeof document.createEvent === "function") {
               var fakeNode = document.createElement("react");
-              invokeGuardedCallbackImpl = function invokeGuardedCallbackDev(name, func, context, a, b, c, d, e, f) {
+              invokeGuardedCallbackImpl = function invokeGuardedCallbackDev(name, func, context, a, b, c, d, e2, f) {
                 if (typeof document === "undefined" || document === null) {
                   throw new Error("The `document` global was defined when React was initialized, but is not defined anymore. This can happen in a test environment if a component schedules an update from an asynchronous callback, but the test has already finished running. To solve this, you can either unmount the component at the end of your test (and ensure that any asynchronous operations get canceled in `componentWillUnmount`), or you can change the test itself to be asynchronous.");
                 }
@@ -5340,12 +5341,12 @@
               caughtError = error2;
             }
           };
-          function invokeGuardedCallback(name, func, context, a, b, c, d, e, f) {
+          function invokeGuardedCallback(name, func, context, a, b, c, d, e2, f) {
             hasError = false;
             caughtError = null;
             invokeGuardedCallbackImpl$1.apply(reporter, arguments);
           }
-          function invokeGuardedCallbackAndCatchFirstError(name, func, context, a, b, c, d, e, f) {
+          function invokeGuardedCallbackAndCatchFirstError(name, func, context, a, b, c, d, e2, f) {
             invokeGuardedCallback.apply(this, arguments);
             if (hasError) {
               var error2 = clearCaughtError();
@@ -7913,7 +7914,7 @@
             try {
               anchorNode.nodeType;
               focusNode.nodeType;
-            } catch (e) {
+            } catch (e2) {
               return null;
             }
             return getModernOffsetsFromPoints(outerNode, anchorNode, anchorOffset, focusNode, focusOffset);
@@ -8845,7 +8846,7 @@
               }
             }
           }
-          function createElement4(type, props, rootContainerElement, parentNamespace) {
+          function createElement5(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -9697,7 +9698,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement4(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement5(type, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -15299,9 +15300,9 @@
               } else {
                 console["error"](error2);
               }
-            } catch (e) {
+            } catch (e2) {
               setTimeout(function() {
-                throw e;
+                throw e2;
               });
             }
           }
@@ -21278,7 +21279,7 @@
               var nonExtensibleObject = Object.preventExtensions({});
               new Map([[nonExtensibleObject, null]]);
               new Set([nonExtensibleObject]);
-            } catch (e) {
+            } catch (e2) {
               hasBadMapPolyfill = true;
             }
           }
@@ -22641,18 +22642,18 @@
         exports.hydrateRoot = m.hydrateRoot;
       } else {
         i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-        exports.createRoot = function(c, o) {
+        exports.createRoot = function(c, o2) {
           i.usingClientEntryPoint = true;
           try {
-            return m.createRoot(c, o);
+            return m.createRoot(c, o2);
           } finally {
             i.usingClientEntryPoint = false;
           }
         };
-        exports.hydrateRoot = function(c, h, o) {
+        exports.hydrateRoot = function(c, h, o2) {
           i.usingClientEntryPoint = true;
           try {
-            return m.hydrateRoot(c, h, o);
+            return m.hydrateRoot(c, h, o2);
           } finally {
             i.usingClientEntryPoint = false;
           }
@@ -22948,15 +22949,30 @@
 
   // parts/store.ts
   var storedIsGuiVisible = stored("is-gui-visible");
-  var storedCollapsedHash = stored("collapsed-hash");
+  var storedBookmarks = stored("bookmarks");
   var useStore2 = create((set) => {
-    const contentUrl = "";
+    const contentUrl = "../projects/active/slice/build/";
     getData(contentUrl).then((projectData) => set({ projectData }));
+    addEventListener("keyup", (e2) => {
+    });
     return {
       forcePalette(palette) {
         set({ forcedPalette: palette });
       },
       contentUrl,
+      bookmarks: storedBookmarks.get([]),
+      toggleBookmark() {
+        set((state) => {
+          const bookmarks = [...state.bookmarks];
+          if (bookmarks.includes(state.hash)) {
+            bookmarks.splice(bookmarks.indexOf(state.hash), 1);
+          } else {
+            bookmarks.push(state.hash);
+          }
+          storedBookmarks.set(bookmarks);
+          return { bookmarks };
+        });
+      },
       isGuiVisible: storedIsGuiVisible.get(false),
       toggleGuiVisible() {
         set((state) => {
@@ -22989,11 +23005,8 @@
         localStorage.setItem(key, JSON.stringify(value));
       },
       get(defaultValue) {
-        try {
-          return JSON.parse(localStorage.getItem(key));
-        } catch (e) {
-          return defaultValue;
-        }
+        const restored = localStorage.getItem(key);
+        return !restored ? defaultValue : JSON.parse(restored);
       }
     };
   }
@@ -23052,6 +23065,55 @@
     return [...Array(n | 0)].map((_, i) => fn(i));
   };
 
+  // ../framework/util/parseHex.ts
+  var parseHex = (hex, offset, len) => parseInt(hex.substr(offset, len), 16);
+
+  // ../framework/math/common/math.ts
+  var MATH = Math;
+
+  // ../framework/math/common/const.ts
+  var PI = MATH.PI;
+  var HALF_PI = PI / 2;
+  var TAU = 2 * PI;
+
+  // ../framework/math/algorithms/prng.ts
+  var PiterPasmaArtBlocksPrng = (hash, S, s, t2) => {
+    S = new Uint32Array([1, 3, s = t2 = 2, 4].map((i) => parseHex(hash, i * 8, 8)));
+    return (_) => (t2 = S[3], S[3] = S[2], S[2] = S[1], S[1] = s = S[0], t2 ^= t2 << 11, S[0] ^= t2 ^ t2 >>> 8 ^ s >>> 19, S[0] / __pow(2, 32));
+  };
+  var random = PiterPasmaArtBlocksPrng(tokenData.hash);
+  var rnd = (x = 1, s = 0) => {
+    return random() * x + s;
+  };
+
+  // ../framework/util/colors.ts
+  function hsl2rgb(h, s, l) {
+    var r, g, b;
+    if (s == 0) {
+      r = g = b = l;
+    } else {
+      let hue2rgb = function(p2, q2, t2) {
+        if (t2 < 0)
+          t2 += 1;
+        if (t2 > 1)
+          t2 -= 1;
+        if (t2 < 1 / 6)
+          return p2 + (q2 - p2) * 6 * t2;
+        if (t2 < 1 / 2)
+          return q2;
+        if (t2 < 2 / 3)
+          return p2 + (q2 - p2) * (2 / 3 - t2) * 6;
+        return p2;
+      };
+      var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      var p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1 / 3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1 / 3);
+    }
+    return [r * 255, g * 255, b * 255];
+  }
+
   // parts/palettes.tsx
   function Palettes() {
     const projectData = useStore2((state) => state.projectData);
@@ -23063,6 +23125,7 @@
       style: { margin: 5 }
     }, projectData.palettes.map((palette, i) => /* @__PURE__ */ React.createElement(PaletteWidget, {
       key: i,
+      index: i + 1,
       palette,
       actual: actualPalette === palette.name
     })), /* @__PURE__ */ React.createElement(PaletteSelector, null));
@@ -23077,7 +23140,7 @@
       style: { backgroundColor }
     }, /* @__PURE__ */ React.createElement("div", {
       className: "color-name"
-    }, props.palette.name), props.palette.colors.map((color, i) => /* @__PURE__ */ React.createElement(Color, {
+    }, (props.index || "") + " " + props.palette.name), props.palette.colors.map((color, i) => /* @__PURE__ */ React.createElement(Color, {
       color,
       key: i
     })), props.actual && /* @__PURE__ */ React.createElement(Actual, null));
@@ -23108,8 +23171,8 @@
     const forcePalette = useStore2((state) => state.forcePalette);
     const [palette, setPalette] = (0, import_react2.useState)(randomPalette());
     (0, import_react2.useEffect)(() => {
-      function changePalette(e) {
-        if (e.code !== "Space")
+      function changePalette(e2) {
+        if (e2.code !== "Space")
           return;
         let pal = randomPalette();
         setPalette(pal);
@@ -23132,10 +23195,62 @@
     };
   }
   function randomColor() {
-    return "#" + many(3, () => rndi(239, 16).toString(16)).join("");
+    let h = rnd(), s = rnd(), l = rnd();
+    return "#" + hsl2rgb(h, s, l).map((i) => {
+      let s2 = (i | 0).toString(16);
+      return (s2.length < 2 ? "0" : "") + s2;
+    }).join("");
   }
-  function rndi(x = 2, s = 0) {
-    return s + Math.random() * (x | 0) | 0;
+
+  // ../node_modules/@tabler/icons/icons-react/dist/index.esm.js
+  var e = __toModule(require_react());
+  function t() {
+    return t = Object.assign ? Object.assign.bind() : function(e2) {
+      for (var t2 = 1; t2 < arguments.length; t2++) {
+        var o2 = arguments[t2];
+        for (var r in o2)
+          Object.prototype.hasOwnProperty.call(o2, r) && (e2[r] = o2[r]);
+      }
+      return e2;
+    }, t.apply(this, arguments);
+  }
+  function o(e2, t2) {
+    if (e2 == null)
+      return {};
+    var o2, r, n = function(e3, t3) {
+      if (e3 == null)
+        return {};
+      var o3, r2, n2 = {}, l2 = Object.keys(e3);
+      for (r2 = 0; r2 < l2.length; r2++)
+        o3 = l2[r2], t3.indexOf(o3) >= 0 || (n2[o3] = e3[o3]);
+      return n2;
+    }(e2, t2);
+    if (Object.getOwnPropertySymbols) {
+      var l = Object.getOwnPropertySymbols(e2);
+      for (r = 0; r < l.length; r++)
+        o2 = l[r], t2.indexOf(o2) >= 0 || Object.prototype.propertyIsEnumerable.call(e2, o2) && (n[o2] = e2[o2]);
+    }
+    return n;
+  }
+  var rm = ["size", "color", "stroke"];
+  function nm(r) {
+    var n = r.size, l = n === void 0 ? 24 : n, a = r.color, i = a === void 0 ? "currentColor" : a, c = r.stroke, s = c === void 0 ? 2 : c, h = o(r, rm);
+    return e.createElement("svg", t({ xmlns: "http://www.w3.org/2000/svg", className: "icon icon-tabler icon-tabler-bookmark-off", width: l, height: l, viewBox: "0 0 24 24", strokeWidth: s, stroke: i, fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }, h), e.createElement("path", { stroke: "none", d: "M0 0h24v24H0z", fill: "none" }), e.createElement("line", { x1: 3, y1: 3, x2: 21, y2: 21 }), e.createElement("path", { d: "M17 17v3l-5 -3l-5 3v-13m1.178 -2.818c.252 -.113 .53 -.176 .822 -.176h6a2 2 0 0 1 2 2v7" }));
+  }
+  var lm = ["size", "color", "stroke"];
+  function am(r) {
+    var n = r.size, l = n === void 0 ? 24 : n, a = r.color, i = a === void 0 ? "currentColor" : a, c = r.stroke, s = c === void 0 ? 2 : c, h = o(r, lm);
+    return e.createElement("svg", t({ xmlns: "http://www.w3.org/2000/svg", className: "icon icon-tabler icon-tabler-bookmark", width: l, height: l, viewBox: "0 0 24 24", strokeWidth: s, stroke: i, fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }, h), e.createElement("path", { stroke: "none", d: "M0 0h24v24H0z", fill: "none" }), e.createElement("path", { d: "M9 4h6a2 2 0 0 1 2 2v14l-5 -3l-5 3v-14a2 2 0 0 1 2 -2" }));
+  }
+  var yV = ["size", "color", "stroke"];
+  function CV(r) {
+    var n = r.size, l = n === void 0 ? 24 : n, a = r.color, i = a === void 0 ? "currentColor" : a, c = r.stroke, s = c === void 0 ? 2 : c, h = o(r, yV);
+    return e.createElement("svg", t({ xmlns: "http://www.w3.org/2000/svg", className: "icon icon-tabler icon-tabler-eye", width: l, height: l, viewBox: "0 0 24 24", strokeWidth: s, stroke: i, fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }, h), e.createElement("path", { stroke: "none", d: "M0 0h24v24H0z", fill: "none" }), e.createElement("circle", { cx: 12, cy: 12, r: 2 }), e.createElement("path", { d: "M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" }));
+  }
+  var Yge = ["size", "color", "stroke"];
+  function Zge(r) {
+    var n = r.size, l = n === void 0 ? 24 : n, a = r.color, i = a === void 0 ? "currentColor" : a, c = r.stroke, s = c === void 0 ? 2 : c, h = o(r, Yge);
+    return e.createElement("svg", t({ xmlns: "http://www.w3.org/2000/svg", className: "icon icon-tabler icon-tabler-refresh", width: l, height: l, viewBox: "0 0 24 24", strokeWidth: s, stroke: i, fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }, h), e.createElement("path", { stroke: "none", d: "M0 0h24v24H0z", fill: "none" }), e.createElement("path", { d: "M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" }), e.createElement("path", { d: "M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" }));
   }
 
   // parts/app.tsx
@@ -23146,19 +23261,46 @@
     return /* @__PURE__ */ React2.createElement("div", {
       className: "app"
     }, /* @__PURE__ */ React2.createElement(Preview, null), /* @__PURE__ */ React2.createElement("div", {
-      className: "fullscreen gui"
+      className: "gui-left"
     }, /* @__PURE__ */ React2.createElement("button", {
       onClick: toggleGuiVisible
-    }, "\u{1F441}\uFE0F"), /* @__PURE__ */ React2.createElement("button", {
+    }, /* @__PURE__ */ React2.createElement(CV, null)), /* @__PURE__ */ React2.createElement("button", {
       onClick: newHash2
-    }, "\u{1F504}"), /* @__PURE__ */ React2.createElement("div", {
+    }, /* @__PURE__ */ React2.createElement(Zge, null)), /* @__PURE__ */ React2.createElement(BookmarkButton, null), /* @__PURE__ */ React2.createElement("div", {
       style: { display: isGuiVisible ? "unset" : "none", marginLeft: 5 }
-    }, /* @__PURE__ */ React2.createElement(Palettes, null), /* @__PURE__ */ React2.createElement(Features, null))));
+    }, /* @__PURE__ */ React2.createElement(Palettes, null), /* @__PURE__ */ React2.createElement(Features, null))), /* @__PURE__ */ React2.createElement("div", {
+      className: "gui-right"
+    }, /* @__PURE__ */ React2.createElement(Bookmarks, null)));
+  }
+  function BookmarkButton() {
+    const toggleBookmark = useStore2((state) => state.toggleBookmark);
+    const bookmarks = useStore2((state) => state.bookmarks);
+    const hash = useStore2((state) => state.hash);
+    return /* @__PURE__ */ React2.createElement("button", {
+      onClick: toggleBookmark
+    }, bookmarks.includes(hash) ? /* @__PURE__ */ React2.createElement(nm, null) : /* @__PURE__ */ React2.createElement(am, null));
+  }
+  function Bookmarks() {
+    const bookmarks = useStore2((state) => state.bookmarks);
+    const hash = useStore2((state) => state.hash);
+    const setHash = useStore2((state) => state.setHash);
+    return /* @__PURE__ */ React2.createElement("div", {
+      style: { width: 220 }
+    }, bookmarks.map((bkm, i) => {
+      return /* @__PURE__ */ React2.createElement("div", {
+        className: "bookmark",
+        style: { backgroundColor: bkm === hash ? "wheat" : "unset" },
+        key: i,
+        onClick: () => setHash(bkm)
+      }, bkm);
+    }));
   }
   function Features() {
     const hash = useStore2((state) => state.hash);
     const projectData = useStore2((state) => state.projectData);
-    return /* @__PURE__ */ React2.createElement("pre", null, projectData && JSON.stringify(projectData.calculateFeatures(hash), null, 2));
+    return /* @__PURE__ */ React2.createElement("pre", {
+      className: "features"
+    }, projectData && JSON.stringify(projectData.calculateFeatures(hash), null, 2));
   }
   function Preview() {
     const hash = useStore2((state) => state.hash);
