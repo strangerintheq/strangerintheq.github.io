@@ -22951,7 +22951,7 @@
   var storedIsGuiVisible = stored("is-gui-visible");
   var storedBookmarks = stored("bookmarks");
   var useStore2 = create((set) => {
-    const contentUrl = "../projects/active/slice/build/";
+    const contentUrl = "";
     getData(contentUrl).then((projectData) => set({ projectData }));
     addEventListener("keyup", (e2) => {
     });
