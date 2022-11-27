@@ -22950,12 +22950,20 @@
   // parts/store.ts
   var storedIsGuiVisible = stored("is-gui-visible");
   var storedBookmarks = stored("bookmarks");
+  var storedLockedColors = stored("locked-colors");
   var useStore2 = create((set) => {
-    const contentUrl = "";
+    const contentUrl = "../projects/active/slice/build/";
     getData(contentUrl).then((projectData) => set({ projectData }));
-    addEventListener("keyup", (e2) => {
-    });
     return {
+      lockedColors: storedLockedColors.get(["", "", "", "", ""]),
+      lockColor(index, color) {
+        set((state) => {
+          const lockedColors = [...state.lockedColors];
+          lockedColors[index] = lockedColors[index] ? "" : color;
+          storedLockedColors.set(lockedColors);
+          return { lockedColors };
+        });
+      },
       forcePalette(palette) {
         set({ forcedPalette: palette });
       },
@@ -22986,15 +22994,15 @@
         set({ hash });
       },
       newHash() {
-        set({ hash: newHash() });
+        set({ hash: makeNewHash() });
       }
     };
   });
   function getHash() {
     const hash = new URLSearchParams(document.location.search).get("hash");
-    return hash || newHash();
+    return hash || makeNewHash();
   }
-  function newHash() {
+  function makeNewHash() {
     const hash = "0x" + [...Array(64)].map((_) => (Math.random() * 16 | 0).toString(16)).join("");
     window.history.replaceState(null, null, "?hash=" + hash);
     return hash;
@@ -23074,6 +23082,7 @@
   // ../framework/math/common/const.ts
   var PI = MATH.PI;
   var HALF_PI = PI / 2;
+  var QUARTER_PI = PI / 4;
   var TAU = 2 * PI;
 
   // ../framework/math/algorithms/prng.ts
@@ -23082,9 +23091,6 @@
     return (_) => (t2 = S[3], S[3] = S[2], S[2] = S[1], S[1] = s = S[0], t2 ^= t2 << 11, S[0] ^= t2 ^ t2 >>> 8 ^ s >>> 19, S[0] / __pow(2, 32));
   };
   var random = PiterPasmaArtBlocksPrng(tokenData.hash);
-  var rnd = (x = 1, s = 0) => {
-    return random() * x + s;
-  };
 
   // ../framework/util/colors.ts
   function hsl2rgb(h, s, l) {
@@ -23112,94 +23118,6 @@
       b = hue2rgb(p, q, h - 1 / 3);
     }
     return [r * 255, g * 255, b * 255];
-  }
-
-  // parts/palettes.tsx
-  function Palettes() {
-    const projectData = useStore2((state) => state.projectData);
-    const hash = useStore2((state) => state.hash);
-    if (!projectData)
-      return null;
-    const actualPalette = projectData.calculateFeatures(hash).Palette;
-    return /* @__PURE__ */ React.createElement("div", {
-      style: { margin: 5 }
-    }, projectData.palettes.map((palette, i) => /* @__PURE__ */ React.createElement(PaletteWidget, {
-      key: i,
-      index: i + 1,
-      palette,
-      actual: actualPalette === palette.name
-    })), /* @__PURE__ */ React.createElement(PaletteSelector, null));
-  }
-  function PaletteWidget(props) {
-    const forcePalette = useStore2((state) => state.forcePalette);
-    const forcedPalette = useStore2((state) => state.forcedPalette);
-    const backgroundColor = forcedPalette && forcedPalette.name === props.palette.name ? "wheat" : "transparent";
-    return /* @__PURE__ */ React.createElement("div", {
-      className: "palette",
-      onClick: () => forcePalette(props.palette),
-      style: { backgroundColor }
-    }, /* @__PURE__ */ React.createElement("div", {
-      className: "color-name"
-    }, (props.index || "") + " " + props.palette.name), props.palette.colors.map((color, i) => /* @__PURE__ */ React.createElement(Color, {
-      color,
-      key: i
-    })), props.actual && /* @__PURE__ */ React.createElement(Actual, null));
-  }
-  function Actual() {
-    return /* @__PURE__ */ React.createElement("svg", {
-      width: 25,
-      height: 25
-    }, /* @__PURE__ */ React.createElement("path", {
-      d: "M 15,20 l -7.5 -7.5 l 7.5 -7.5",
-      stroke: "black",
-      fill: "none",
-      strokeWidth: 3
-    }));
-  }
-  function Color(props) {
-    return /* @__PURE__ */ React.createElement("div", {
-      style: {
-        display: "inline-block",
-        height: 25,
-        width: 25,
-        lineHeight: 25,
-        backgroundColor: props.color
-      }
-    });
-  }
-  function PaletteSelector() {
-    const forcePalette = useStore2((state) => state.forcePalette);
-    const [palette, setPalette] = (0, import_react2.useState)(randomPalette());
-    (0, import_react2.useEffect)(() => {
-      function changePalette(e2) {
-        if (e2.code !== "Space")
-          return;
-        let pal = randomPalette();
-        setPalette(pal);
-        forcePalette(pal);
-        console.log(JSON.stringify(pal.colors));
-      }
-      addEventListener("keydown", changePalette);
-      return () => {
-        removeEventListener("keydown", changePalette);
-      };
-    }, []);
-    return /* @__PURE__ */ React.createElement(PaletteWidget, {
-      palette
-    });
-  }
-  function randomPalette() {
-    return {
-      name: "random",
-      colors: many(5, randomColor)
-    };
-  }
-  function randomColor() {
-    let h = rnd(), s = rnd(), l = rnd();
-    return "#" + hsl2rgb(h, s, l).map((i) => {
-      let s2 = (i | 0).toString(16);
-      return (s2.length < 2 ? "0" : "") + s2;
-    }).join("");
   }
 
   // ../node_modules/@tabler/icons/icons-react/dist/index.esm.js
@@ -23247,29 +23165,137 @@
     var n = r.size, l = n === void 0 ? 24 : n, a = r.color, i = a === void 0 ? "currentColor" : a, c = r.stroke, s = c === void 0 ? 2 : c, h = o(r, yV);
     return e.createElement("svg", t({ xmlns: "http://www.w3.org/2000/svg", className: "icon icon-tabler icon-tabler-eye", width: l, height: l, viewBox: "0 0 24 24", strokeWidth: s, stroke: i, fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }, h), e.createElement("path", { stroke: "none", d: "M0 0h24v24H0z", fill: "none" }), e.createElement("circle", { cx: 12, cy: 12, r: 2 }), e.createElement("path", { d: "M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" }));
   }
-  var Yge = ["size", "color", "stroke"];
-  function Zge(r) {
-    var n = r.size, l = n === void 0 ? 24 : n, a = r.color, i = a === void 0 ? "currentColor" : a, c = r.stroke, s = c === void 0 ? 2 : c, h = o(r, Yge);
-    return e.createElement("svg", t({ xmlns: "http://www.w3.org/2000/svg", className: "icon icon-tabler icon-tabler-refresh", width: l, height: l, viewBox: "0 0 24 24", strokeWidth: s, stroke: i, fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }, h), e.createElement("path", { stroke: "none", d: "M0 0h24v24H0z", fill: "none" }), e.createElement("path", { d: "M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" }), e.createElement("path", { d: "M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" }));
+  var Fre = ["size", "color", "stroke"];
+  function Gre(r) {
+    var n = r.size, l = n === void 0 ? 24 : n, a = r.color, i = a === void 0 ? "currentColor" : a, c = r.stroke, s = c === void 0 ? 2 : c, h = o(r, Fre);
+    return e.createElement("svg", t({ xmlns: "http://www.w3.org/2000/svg", className: "icon icon-tabler icon-tabler-lock", width: l, height: l, viewBox: "0 0 24 24", strokeWidth: s, stroke: i, fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }, h), e.createElement("path", { stroke: "none", d: "M0 0h24v24H0z", fill: "none" }), e.createElement("rect", { x: 5, y: 11, width: 14, height: 10, rx: 2 }), e.createElement("circle", { cx: 12, cy: 16, r: 1 }), e.createElement("path", { d: "M8 11v-4a4 4 0 0 1 8 0v4" }));
+  }
+  var WGe = ["size", "color", "stroke"];
+  function qGe(r) {
+    var n = r.size, l = n === void 0 ? 24 : n, a = r.color, i = a === void 0 ? "currentColor" : a, c = r.stroke, s = c === void 0 ? 2 : c, h = o(r, WGe);
+    return e.createElement("svg", t({ xmlns: "http://www.w3.org/2000/svg", className: "icon icon-tabler icon-tabler-wand", width: l, height: l, viewBox: "0 0 24 24", strokeWidth: s, stroke: i, fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }, h), e.createElement("path", { stroke: "none", d: "M0 0h24v24H0z", fill: "none" }), e.createElement("polyline", { points: "6 21 21 6 18 3 3 18 6 21" }), e.createElement("line", { x1: 15, y1: 6, x2: 18, y2: 9 }), e.createElement("path", { d: "M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" }), e.createElement("path", { d: "M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" }));
+  }
+
+  // parts/palettes.tsx
+  function Palettes() {
+    const projectData = useStore2((state) => state.projectData);
+    const hash = useStore2((state) => state.hash);
+    if (!projectData)
+      return null;
+    const actualPalette = projectData.calculateFeatures(hash).Palette;
+    return /* @__PURE__ */ React.createElement("div", {
+      style: { margin: 5 }
+    }, projectData.palettes.map((palette, i) => /* @__PURE__ */ React.createElement(PaletteWidget, {
+      key: i,
+      index: i + 1,
+      palette,
+      actual: actualPalette === palette.name
+    })), /* @__PURE__ */ React.createElement(PaletteSelector, null));
+  }
+  function PaletteWidget(props) {
+    const forcePalette = useStore2((state) => state.forcePalette);
+    const forcedPalette = useStore2((state) => state.forcedPalette);
+    const backgroundColor = forcedPalette && forcedPalette.name === props.palette.name ? "wheat" : "transparent";
+    return /* @__PURE__ */ React.createElement("div", {
+      className: "palette",
+      onClick: () => forcePalette(props.palette),
+      style: { backgroundColor, display: "flex" }
+    }, /* @__PURE__ */ React.createElement("div", {
+      className: "color-name"
+    }, (props.index || "") + " " + props.palette.name), props.palette.colors.map((color, i) => {
+      var _a, _b;
+      return /* @__PURE__ */ React.createElement(Color, {
+        key: i,
+        color: ((_a = props.locked) == null ? void 0 : _a[i]) || color,
+        canBeLocked: !!props.locked,
+        locked: (_b = props.locked) == null ? void 0 : _b[i],
+        index: i
+      });
+    }), props.actual && /* @__PURE__ */ React.createElement(Actual, null));
+  }
+  function Actual() {
+    return /* @__PURE__ */ React.createElement("svg", {
+      width: 25,
+      height: 25
+    }, /* @__PURE__ */ React.createElement("path", {
+      d: "M 15,20 l -7.5 -7.5 l 7.5 -7.5",
+      stroke: "black",
+      fill: "none",
+      strokeWidth: 3
+    }));
+  }
+  function Color(props) {
+    const lockColor = useStore2((state) => state.lockColor);
+    return /* @__PURE__ */ React.createElement("div", {
+      onClick: () => props.canBeLocked && lockColor(props.index, props.color),
+      style: {
+        display: "flex",
+        height: 25,
+        width: 25,
+        lineHeight: 25,
+        backgroundColor: props.color
+      }
+    }, props.locked && /* @__PURE__ */ React.createElement(Gre, {
+      size: 25
+    }));
+  }
+  function PaletteSelector() {
+    const forcePalette = useStore2((state) => state.forcePalette);
+    const lockedColors = useStore2((state) => state.lockedColors);
+    const [palette, setPalette] = (0, import_react2.useState)(randomPalette(lockedColors));
+    (0, import_react2.useEffect)(() => {
+      function changePalette(e2) {
+        if (e2.code !== "Space")
+          return;
+        let pal = randomPalette(lockedColors);
+        setPalette(pal);
+        forcePalette(pal);
+      }
+      addEventListener("keydown", changePalette);
+      return () => {
+        removeEventListener("keydown", changePalette);
+      };
+    }, [lockedColors]);
+    return /* @__PURE__ */ React.createElement(PaletteWidget, {
+      palette,
+      locked: lockedColors
+    });
+  }
+  function randomPalette(lockedColors) {
+    return {
+      name: "random",
+      colors: many(5, (i) => {
+        return lockedColors[i] || randomColor();
+      })
+    };
+  }
+  function randomColor() {
+    let h = Math.random(), s = Math.random(), l = Math.random();
+    return "#" + hsl2rgb(h, s, l).map((i) => {
+      let s2 = (i | 0).toString(16);
+      return (s2.length < 2 ? "0" : "") + s2;
+    }).join("");
   }
 
   // parts/app.tsx
   function App() {
     const toggleGuiVisible = useStore2((state) => state.toggleGuiVisible);
     const isGuiVisible = useStore2((state) => state.isGuiVisible);
-    const newHash2 = useStore2((state) => state.newHash);
+    const newHash = useStore2((state) => state.newHash);
+    let display = isGuiVisible ? "" : "none";
     return /* @__PURE__ */ React2.createElement("div", {
       className: "app"
     }, /* @__PURE__ */ React2.createElement(Preview, null), /* @__PURE__ */ React2.createElement("div", {
       className: "gui-left"
     }, /* @__PURE__ */ React2.createElement("button", {
       onClick: toggleGuiVisible
-    }, /* @__PURE__ */ React2.createElement(CV, null)), /* @__PURE__ */ React2.createElement("button", {
-      onClick: newHash2
-    }, /* @__PURE__ */ React2.createElement(Zge, null)), /* @__PURE__ */ React2.createElement(BookmarkButton, null), /* @__PURE__ */ React2.createElement("div", {
-      style: { display: isGuiVisible ? "unset" : "none", marginLeft: 5 }
+    }, /* @__PURE__ */ React2.createElement(CV, null)), /* @__PURE__ */ React2.createElement(BookmarkButton, null), /* @__PURE__ */ React2.createElement("button", {
+      onClick: newHash
+    }, /* @__PURE__ */ React2.createElement(qGe, null)), /* @__PURE__ */ React2.createElement("div", {
+      style: { display, marginLeft: 5 }
     }, /* @__PURE__ */ React2.createElement(Palettes, null), /* @__PURE__ */ React2.createElement(Features, null))), /* @__PURE__ */ React2.createElement("div", {
-      className: "gui-right"
+      className: "gui-right",
+      style: { display }
     }, /* @__PURE__ */ React2.createElement(Bookmarks, null)));
   }
   function BookmarkButton() {
