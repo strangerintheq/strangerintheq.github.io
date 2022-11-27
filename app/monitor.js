@@ -22952,7 +22952,7 @@
   var storedBookmarks = stored("bookmarks");
   var storedLockedColors = stored("locked-colors");
   var useStore2 = create((set) => {
-    const contentUrl = "../projects/active/slice/build/";
+    const contentUrl = "";
     getData(contentUrl).then((projectData) => set({ projectData }));
     return {
       lockedColors: storedLockedColors.get(["", "", "", "", ""]),
