@@ -54,27 +54,14 @@
             padding-bottom: calc(var(--base-size) * 0.025);
         }
 
-        @keyframes rotate {
-            0% {
-                transform: rotate(-30deg)
-            }
-            50% {
-                transform: rotate(-8deg)
-            }
-            100% {
-                transform: rotate(-30deg)
-            }
-        }
-
         .header-img-wrapper {
             width: 100vw;
             height: 42vw;
             overflow: hidden;
-            margin-bottom: -17vw;
+            margin-bottom: -20vw;
         }
 
         .header-img {
-
             width: 100vw;
             height: 168vw;
             margin-top: -85vw;
@@ -86,15 +73,16 @@
             width: 100vw;
             height: 100vw;
             background-size: contain;
-            background: radial-gradient(circle at 50% -170%, #ffffffff 65%, #ffffff00 72%),
+            background:
+                    /*radial-gradient(circle at 50% -170%, #ffffffff 65%, #ffffff00 72%),*/
             url("bg.jpg") no-repeat 50% 50%;
             background-size: 100% 168%;
         }
 
         .footer-img-wrapper {
-            margin-top: -15vw;
+            margin-top: -13vw;
             width: 100vw;
-            height: 30vw;
+            height: 50vw;
             overflow: hidden;
         }
 
@@ -110,7 +98,7 @@
         }
 
         .ico-6 {
-            max-width: calc(var(--base-size) * 0.06)
+            max-width: calc(var(--base-size) * 0.1)
         }
 
         .ico-4 {
@@ -124,13 +112,31 @@
                 #fff calc(var(--base-size) * 0.15)
             );
         }
+
+        .img-40  {
+            display: inline-block;
+            max-width: 40%;
+        }
+
+        .img-40 img {
+            max-width: 100%;
+            cursor: pointer;
+        }
+        .img-40 div {
+            font-size:  calc(var(--base-size) * 0.015);
+        }
+
+        .img-25 {
+            display: inline-block;
+            max-width: 23%;
+        }
+        .img-25 img {
+            cursor: pointer;
+            max-width: 100%;
+        }
     </style>
 
     <script>
-
-        const oneImage = 'calc(var(--base-size) * 0.8)'
-        const twoImage = 'calc(var(--base-size) * 0.4)'
-
 
         function mainnetImage(i, size, displaySize, title = '') {
 
@@ -141,7 +147,7 @@
             }
             // let imgUrl = `https://www.artblocks.io/_next/image?url=https%3A%2F%2Fartblocks-mainnet.s3.amazonaws.com%2F265000${i}.png&w=${size}&q=75`
             let imgUrl = `https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000${i}.png`
-            return `<a href="https://www.artblocks.io/token/265000${i}" target="_blank"><div style="display:inline-block">
+            return `<a href="https://generator-staging-goerli.artblocks.io/0xda62f67be7194775a75be91cbf9feedcc5776d4b/48000${i}" target="_blank"><div style="display:inline-block">
         <img src="${imgUrl}"
             style="
                 min-width: ${displaySize*0.75};
@@ -149,24 +155,29 @@
                 max-width: ${displaySize*0.75};
                 max-height: ${displaySize};
             "><div style="display:flex">
-                <h4 style="margin-right: auto;color: black;background: #fff7;padding-left:10px">#${i}</h4>
+                <h4 style="margin-right: auto;color: black;background: #fff7;padding-left:10px">#${i}</h4
                 <h4 style="margin-left: auto;color: black;background: #fff7;padding-right:10px">${title}</h4>
             </div></div></a>`
         }
 
+        function imagesBlock( arr,percents) {
+            document.write(`
+                <div style="
 
-        function titledImages(images){
-            const s = 'calc(var(--base-size) * 0.26666)'
-
-            document.write(
-                images.map(img => {
-                    return img ? `<div style="display:inline-block">
-                        ${mainnetImage(img[0], 128*5, s, img[1] )}
-                    </div>` :  '<div class="separator"></div>'
-                }).join('')
-            )
+                    display: grid;
+                    grid-template-columns:  ${arr.map((_,i) => `calc(var(--base-size) * ${
+                        percents ? percents[i]:0.8/arr.length
+            })`).join(' ')}
+                ">
+                    ${arr.map(el => `
+                        <div>
+                            <img style="width: 100%" onclick="document.location.href=this.src" src="${el[0].startsWith("http") ? el[0] : 'img/'+el[0]}">
+                            ${el[1] ? `<div>${el[1]}</div>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            `)
         }
-
     </script>
 </head>
 <body>
@@ -199,99 +210,123 @@
     </div>
 </section>
 
-<!-- description -->
+<!-- SL/CE (slice) -->
 <section class="dark">
     <div class="content-wrapper">
-        <h2>SL / CE (slice) is an exploration of Supermatism</h2>
-        <h2></h2>
+        <h2>SL/CE (slice)</h2>
         <div class="text">
-            The main goal is to achieve composition by cutting simple shapes into pieces and carefully selecting colors.
-            <div class="separator"></div>
-            I tried to achieve the final look not through drawing techniques or imitation painting, but through composition and palette.
-            <div class="separator"></div>
-            I was strongly inspired by the work of early 20th century artists who wanted to convey the essence of art on canvas without resorting to specific images.
-            <div class="separator"></div>
-            Each iteration begins by choosing simple shapes, arranging them on the canvas, and then cutting, shifting, adding gaps, and removing some of them.
-            <div class="separator"></div>
-            After all these actions, the composition is checked against some parameters, and if it is determined to be "bad" - the whole described process is repeated until a "good composition" is obtained.
-
+            This artwork explores Suprematism and generative composition, attempts to fill some gap between generated and constructed artworks. It achieves composition by slicing simple shapes into pieces by some rules and testing them against a "bad composition detector", then carefully selecting colors for shapes.
         </div>
     </div>
 </section>
 
 <!-- mint 0 -->
-<section class="dark">
+<section>
     <div class="content-wrapper">
         <h2>Mint #0</h2>
         <div class="separator"></div>
         <script>
-            document.write(mainnetImage(0, 3840, oneImage))
+            document.write(mainnetImage(0, 3840, 'calc(var(--base-size) * 0.8)'))
         </script>
         <div class="separator"></div>
     </div>
 </section>
 
-<!-- about work -->
-<!--<section class="dark">-->
-<!--    <div class="content-wrapper">-->
-<!--        <h2>About artwork</h2>-->
-<!--        <div class="text">-->
-<!--            Slice is begins with selection of starter shapes.-->
-<!--            There are rectangles trapezoids or circles available.-->
+<!-- suprematism -->
+<section class="dark">
+    <div class="content-wrapper">
+        <h2> SUPREMATISM</h2>
+        <div class="text">
+            Suprematism is an early twentieth-century art movement focused on the fundamentals of geometry (circles, squares, rectangles), painted in a limited range of colors. The term suprematism refers to an abstract art based upon "the supremacy of pure artistic feeling" rather than on visual depiction of objects.
+            <div class="separator"></div>
+        <script>imagesBlock( [[
+            "https://s3-eu-west-1.amazonaws.com/production-static-stedelijk/images/adlib/a-7681-1671854436790.jpg",
+            "Kazimir Malevich<br> \"Suprematist Painting\",  1915"
+        ], [
+           "https://www.artic.edu/iiif/2/12baff03-af57-0410-df53-740c56575732/full/843,/0/default.jpg",
+           "Kazimir Malevich<br> \"Painterly Realism of a Football Player\""
+        ]], [0.395,0.405])</script>
+        </div>
+    </div>
+</section>
 
-<!--            After the placement of starter shapes the splitting is used to-->
-<!--            determine final shapes. Sequence of slices is applied to shapes-->
-<!--            and forms the final composition.-->
+<!-- story -->
+<section class="dark">
+    <div class="content-wrapper">
+        <h2> STORY</h2>
+        <div class="text">
+            This work is special for me; all my previous works were built around some algorithm, which was the main idea behind the work itself. I started to change it in different places in different ways, like "what happens if I do this here instead of that" and so many times and in different places.
+            <div class="separator"></div>
+            As for this work, at first, it was also an attempt to experiment with another algorithm that came to mind, but in the end, it turned into half a year-long research, which consisted more of studying art and making decisions than directly writing code. By the way, the above-mentioned algorithm is an algorithm for slicing the shapes into smaller pieces, which gave the name to the project: Slice.
+            <div class="separator"></div>
+            <script>imagesBlock( [
+                ['00.jpg', "&nbsp;"],
+                ['01.jpg', '&nbsp;'],
+                ['02.jpg', '&nbsp;'],
+                ['03.jpg', '&nbsp;']
+            ])</script>
+            <div class="separator"></div>
+            The first developments were made in mid-summer 2022; at some point, after about a month of periodic viewing of pictures produced by this algorithm - I suddenly realized that I extremely like it - minimalistic abstract combinations of shapes, which it produces are often formed into a recognizable shape, it's an interesting feeling, I wanted to enhance it.
+            <div class="separator"></div>
+            <script>imagesBlock( [
+                ['10.jpg', 'Pipe smoker'],
+                ['11.jpg', 'Elephant'],
+                ['12.jpg', "Cowboy"],
+                ['13.jpg', 'Toucan']
+            ])</script>
+            <div class="separator"></div>
+            I spent a long time looking at the works of the masters of Suprematism from the early 20th century and changing the algorithm, looking at the works again and changing the algorithm again, many many times. I was very attracted to his basic idea of not using specific images to achieve the final goal, In the process of research, I repeatedly added this or that imitation of a physical drawing, whether it was an imitation of watercolor, paper, or pencil, and then abandoned them. I increased the number of elements and decreased them.
+            <div class="separator"></div>
+            <script>imagesBlock( [
+                ['20.jpg', '&nbsp;'],
+                ['21.jpg', '&nbsp;'],
+                ['22.jpg', "&nbsp;"],
+                ['23.jpg', '&nbsp;']
+            ])</script>
+            <script>imagesBlock( [
+                ['30.jpg', '&nbsp;'],
+                ['31.jpg', '&nbsp;'],
+                ['32.jpg', "&nbsp;"],
+                ['33.jpg', '&nbsp;']
+            ])</script>
+            <div class="separator"></div>
+            In the end, I got a clear idea of this work as a representative of what I called for myself "computermatism" - obtaining the overall perception of an abstract image, through composition, color, size, and shape, rather than the imitation of any physical phenomenon.
+            <div class="separator"></div>
+            <script>imagesBlock( [
+                ['40.jpg', 'Hare'],
+                ['41.jpg', 'Cyborg'],
+                ['43.jpg', "Thunder"],
+                ['42.jpg', 'Octopus']
+            ])</script>
+            <div class="separator"></div>
+            It was challenging to overcome the overwhelming desire to change the code every day; it's a trap; you wake up with a new idea, you implement it, at first, you like it - and then it stops, I lost count of how many of these approaches I made, but the git all remembers.
+            <div class="separator"></div>
+            <script>imagesBlock( [
+                ['50.jpg', 'Fish'],
+                ['51.jpg', 'Coffee machine'],
+                ['52.jpg', "Dancer"],
+                ['53.jpg', 'Drum']
+            ],[0.2015,0.2015,0.203,0.194])</script>
+            <div class="separator"></div>
+            Eventually, I finally gave up everything that resembles drawing on canvas and concentrated on composition and palette. At some point, I developed some criteria of compositions that I like and dislike, and I decided to add such an evaluative function to this work. This ended up being expressed in a "bad composition detector", in which I evaluate the areas of the figures, the percentage of their overlap, and the balance of emptiness and fullness.
+        </div>
+        <h2>SCRIPT</h2>
+        <div class="text">
+            Each iteration starts with selecting the simplest figure; then it is placed on the canvas according to specific rules, cut along one or more "cut lines", after which the parts can be shifted or removed. The process is repeated several times for several starting figures, after which the resulting composition is obtained. Then an evaluation function comes into play, and if the composition is considered "bad", the pseudo-random composition process is repeated with partially different inputs until a "good composition" is obtained, according to this evaluation function.
+            <div class="separator"></div>
+            <script>imagesBlock( [
+                ['500.jpg', '&nbsp;'],
+                ['510.jpg', '&nbsp;'],
+                ['520.jpg', "&nbsp;"],
+                ['530.jpg', '&nbsp;']
+            ])</script>
+            <div class="separator"></div>
+            In order not to forget or lose anything, at first, I saved a lot of pictures manually, but eventually, this was automated; after about a month of development, I decided enough and wrote a script, which immediately after rebuilding the typescript saved me in a separate directory 300 images from random hashes and in a separate file code that generated these images, even I'm afraid to imagine how much backlog on my laptop.
+        </div>
+    </div>
+</section>
 
-<!--            Several shapes can be rotated before slicing is applied.-->
-
-<!--        </div>-->
-<!--        <script>-->
-<!--            document.write(-->
-<!--                mainnetImage(668, 128*5, twoImage) +-->
-<!--                mainnetImage(732, 128*5, twoImage)-->
-<!--            )-->
-<!--        </script>-->
-<!--        <div class="text">-->
-<!--            Lorem ipsum dolor sit amet, consectetur adipiscing elit,-->
-<!--            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.-->
-<!--            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris-->
-<!--            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in-->
-<!--            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in-->
-<!--            culpa qui officia deserunt mollit anim id est laborum.-->
-<!--        </div>-->
-<!--        <script>-->
-<!--            document.write(-->
-<!--                mainnetImage(664, 128*5, twoImage) +-->
-<!--                mainnetImage(681, 128*5, twoImage)-->
-<!--            )-->
-<!--        </script>-->
-<!--        <div class="text">-->
-<!--            Lorem ipsum dolor sit amet, consectetur adipiscing elit,-->
-<!--            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.-->
-<!--            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris-->
-<!--            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in-->
-<!--            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in-->
-<!--            culpa qui officia deserunt mollit anim id est laborum.-->
-<!--        </div>-->
-<!--        <script>-->
-<!--            titledImages([-->
-<!--                [639, '1 Line'],   [553, '1 Line partial'],   [541, '1 Line spiral'],   '',-->
-<!--                [739, '2 Lines'],  [303, '2 Lines partial'],  [62,  '2 Lines spiral'],  '',-->
-<!--                [197, 'Ring'],     [608, 'Ring partial'],     [309, 'Ring spiral'],     '',-->
-<!--                [472, 'Triangle'], [772, 'Triangle partial'], [120, 'Triangle spiral'], '',-->
-<!--                [535, 'Square'],   [108, 'Square partial'],   [200, 'Square spiral'],   '',-->
-<!--                [304, 'Pentagon'], [603, 'Pentagon partial'], [727, 'Pentagon spiral'], '',-->
-<!--                [51,  'Hexagon'],  [324, 'Hexagon partial'],  [668, 'Hexagon spiral'],-->
-<!--            ])-->
-<!--        </script>-->
-
-<!--    </div>-->
-<!--</section>-->
-
-<!-- mints -->
+<!-- testnet mints -->
 <section class="dark">
     <h2>Testnet mints</h2>
     <div class="separator"></div>
@@ -301,28 +336,31 @@
     <div class="separator"></div>
 </section>
 
-<!-- creation process -->
-
-<!-- about me-->
+<!-- palettes  -->
 <section class="dark">
     <div class="content-wrapper">
-        <h2>About me</h2>
+        <h2>PALETTES</h2>
         <div class="text">
-            My name is Konstantin. I'm working as a software developer,
-            and my passions are math and computer graphics.
-            I use various techniques and tools,
-            such as WebGL/GLSL, SVG or pure Canvas2D API.
-            <div class="separator"></div>
-            You can see more of my generative artworks by following the link below.
+            The choice of palettes - a very complex matter for me, some palettes, in my opinion, worked well when I used the imitation of hand drawing, and when I gave it up - stopped, others I initially really liked, and then also stopped, in the end, I wrote a special tool for selecting palettes, which immediately when you change one of the colors in the palette applies changes to the image, using this tool were made final steps in choosing palettes.
         </div>
+        <h2>EXTRA</h2>
+        <div class="text">
+            Each iteration is a unique generator with partially fixed parameters; click anywhere in the image to get a new image.
+        </div>
+    </div>
+</section>
+
+<!-- about me-->
+<section >
+    <div class="content-wrapper">
         <div class="separator"></div>
         <h2><a href="https://strangerintheq.github.io" target="_blank">strangerintheq.github.io</a></h2>
         <div class="separator"></div>
         <div style="font-size: 0">
             <script>
                 document.write([
-                    ['twitter.svg','Twitter','https://twitter.com/stranger_intheq'],
-                    ['discord.svg','Discord','https://discord.gg/S92neTmQ3v'],
+                    ['twitter.svg','Twitter','https://twitter.com/stranger_intheq', 0],
+                    ['discord.svg','Discord','https://discord.gg/S92neTmQ3v', 0],
                     ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 0.1],
                 ].map(([image, text, link, marginLeft]) => `
                     <a style="margin-left: ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" >
@@ -346,9 +384,12 @@
         let size = 384;
         let displaySize = size;
         let count = 0;
-
-        slider.innerHTML = [...Array(30)]
-            .map((_, i) => {
+        let all = [...Array(300)].map((_, i) => i);
+        for (let i = 0; i < 250; i++) {
+            all.splice((Math.random()*all.length)|0, 1)
+        }
+        slider.innerHTML = all
+            .map(i => {
                 count++
                 return mainnetImage(i, size, displaySize + 'px');
             })
@@ -356,8 +397,8 @@
 
         let scrollAmount = 0;
 
-        slider.style.minWidth = 4+count * displaySize*0.618 + 'px';
-        slider.parentNode.scrollLeft = count * displaySize*0.618 / 2;
+        slider.style.minWidth = count * displaySize*0.6184 + 'px';
+        slider.parentNode.scrollLeft = count * displaySize*0.6184 / 2;
 
         slider.parentNode.addEventListener('mousewheel', e => {
             e.preventDefault()
