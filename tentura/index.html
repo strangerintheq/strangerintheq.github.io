@@ -150,13 +150,14 @@
             }
 
             return `<a href="https://www.artblocks.io/token/265000${i}" target="_blank"><div style="display:inline-block">
-        <img src="https://www.artblocks.io/_next/image?url=https%3A%2F%2Fartblocks-mainnet.s3.amazonaws.com%2F265000${i}.png&w=${size}&q=75"
+        <img
+        src="https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_1200,q_auto/https://artblocks-mainnet.s3.amazonaws.com/265000${i}.png"
+        src1="https://www.artblocks.io/_next/image?url=https%3A%2F%2Fartblocks-mainnet.s3.amazonaws.com%2F265000${i}.png&w=${size}&q=75"
             style="
-                --sz: ${displaySize};
-                min-width: var(--sz);
-                min-height: var(--sz);
-                max-width: var(--sz);
-                max-height: var(--sz);
+                min-width: ${displaySize};
+                min-height: ${displaySize};
+                max-width: ${displaySize};
+                max-height: ${displaySize};
             "><div style="display:flex">
                 <h4 style="margin-right: auto;color: black;background: #fff7;padding-left:10px">#${i}</h4>
                 <h4 style="margin-left: auto;color: black;background: #fff7;padding-right:10px">${title}</h4>
