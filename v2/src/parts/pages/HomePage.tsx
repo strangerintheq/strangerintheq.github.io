@@ -19,6 +19,7 @@ export function HomePage() {
                 Hello there! <br/>
                 I'm Stranger in the Q and i'm making art with code
             </div>
+
             <div className={"fs02"} style={{gridColumn:'1/4'}}>
                 Art Blocks
             </div>
