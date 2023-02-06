@@ -12,7 +12,6 @@
             --h: calc(var(--s) * 1.618);
             margin: 0;
             font-family: "Inter", sans-serif;
-            text-align: center;
             line-height: 0;
             overflow: scroll;
             -ms-overflow-style: none;  /* IE and Edge */
@@ -39,18 +38,23 @@
             grid-template-rows: repeat(26, var(--h));
         }
         div {
+            overflow: hidden;
             line-height: normal;
         }
+        .separator {height: calc(var(--base-size) * 0.015);}
         .text-large {font-size: calc(var(--base-size) * 0.07);}
-        .text-medium {font-size: calc(var(--base-size) * 0.025);}
-        .text {font-size: calc(var(--base-size) * 0.02);text-align: justify;}
+        .text-medium {
+            font-size: calc(var(--base-size) * 0.025);
+            margin-bottom: calc(var(--base-size) * 0.005);
+        }
+        .text {font-size: calc(var(--base-size) * 0.018);text-align: left;}
         .ico {max-width: calc(var(--base-size) * 0.1)}
         .ico-4 {max-width: calc(var(--base-size) * 0.04)}
         * {
             /*background: #00000007;*/
         }
         section {
-            padding: calc(var(--base-size) * 0.01) calc(var(--base-size) * 0.02);
+            padding: calc(var(--base-size) * 0.015) calc(var(--base-size) * 0.03);
         }
     </style>
 </head>
@@ -258,38 +262,37 @@
         "x198": "0x1bc7499bb7cb9a8da88340b3aae51e739777fd591cec227d18509ce0581e77d0",
         "x199": "0x0bb519fd88e2a30dd70bdaddf0e180b7602aef07ce1c556ab721b7d7ffe55ef5"
     }
+    delete hashes["x196"]
     delete hashes["x197"]
     delete hashes["x198"]
     delete hashes["x199"]
 </script>
 <section style="grid-column: 4/8; grid-row: 2/4;">
-    <div class="text-large">
-        S L / C E
-    </div>
-    <div class="text-medium">
-        by Stranger in the Q
-    </div>
+    <div class="text-large">S L / C E</div>
+    <div class="text-medium">by Stranger in the Q</div>
     <img class="ico" src="https://www.artblocks.io/squigWhiteCircle.png" >
     <div class="text">
-        Long-form generative artwork released by artblocks.io
-        and hosted immutably on Ethereum blockchain
+        Long-form generative artwork released by <a href="">artblocks.io</a>
+        and hosted immutably on Ethereum blockchain.
     </div>
 </section>
 <section style="grid-column: 3/7; grid-row: 5/7;">
+    <div class="text-medium">About</div>
     <div class="text">
-        This artwork explores <b>Suprematism</b> and generative composition, attempts to fill some gap between generated and constructed artworks.
-        <br/><br/>
+        This artwork explores Suprematism and generative composition, attempts to fill some gap between generated and constructed artworks.
+        <div class="separator"></div>
         It achieves composition by slicing simple shapes into pieces by some rules and testing them against a "bad composition detector", then carefully selecting colors for shapes.
-        You can see 200 pseudo-random outputs around;
+        <div class="separator"></div>
+        You can see 200 random outputs here.
     </div>
 </section>
-<section style="grid-column: 5/8; grid-row: 8/11;">
-
+<section style="grid-column: 6/9; grid-row: 8/11;">
     <div class="text-medium">Mint #0</div>
     <img src="https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000000.png"
         style="width: 100%" >
 </section>
 <section style="grid-column: 3/9; grid-row: 12/14;">
+    <div class="text-medium">Algorithm</div>
     <div class="text">
         Each iteration starts with selecting the simplest figure (circle, ring, square, rectangle, trapezoid, triangle).
         then it is placed on the canvas according to specific rules, cut along one or more "slice lines", after which the parts can be shifted or removed.
@@ -298,30 +301,35 @@
     </div>
 </section>
 <section style="grid-column: 5/9; grid-row: 15/17;">
-    <div class="text" style="margin-top: calc(0.02 * var(--base-size))">
-        "Bad composition detector" is a function that takes into account and evaluates the size of the figures individually, the total area occupied by the figures,  distribution of the figures on the canvas, the balance of emptiness and fullness.
+    <div class="text-medium">Bad composition detector</div>
+    <div class="text">
+        Function that takes into account and evaluates the size of the figures individually, the total area occupied by the figures,  distribution of the figures on the canvas, the balance of emptiness and fullness.
+        <div class="separator"></div>
         All of these parameters are used to find those outcomes that seem to me to work poorly. It turns out there is a piece of me in this code.
     </div>
 </section>
-<section style="grid-column: 3/7; grid-row: 18/19;">
+<section style="grid-column: 3/8; grid-row: 18/19;">
+    <div class="text-medium">Result</div>
     <div class="text">
-        Looking at images, you can often see something in them, this effect is close to pareidolia, sometimes images works well as profiles pictures, and I am very pleased that I was able to achieve this in Slice.
+        Looking at images, you can often see something in them, this effect is close to pareidolia, sometimes images works well as profiles pictures, and I am very pleased that I was able to achieve this.
     </div>
 </section>
 <section style="grid-column: 5/9; grid-row: 20/22;">
-    <div class="text" style="margin-top: calc(0.02 * var(--base-size))">
+    <div class="text-medium">Extra</div>
+    <div class="text">
         Each iteration is a unique generator with partially fixed parameters.
-        <br/><br/>
+        <div class="separator"></div>
         Click or tap at the bottom half of image to get a new image.
-        <br/><br/>
+        <div class="separator"></div>
         Click or tap at the top half of image to toggle autoplay mode.
     </div>
+    <div class="separator"></div>
+    <div class="separator"></div>
+    <div class="separator"></div>
     <div class="text-medium">
-        <br/>
         PLEASE ENJOY!
     </div>
 </section>
-
 <section style="grid-column: 3/9; grid-row: 24/25">
     <div class="text-medium" style="margin-bottom: 1vw">
         Stranger in the Q // 2022-2023
@@ -352,17 +360,18 @@
         }
 
         for (let i = 0; i < keys.length; i++) {
+            const container = document.querySelector('#' + keys[i])
             if (isSafari) {
                 const hash = hashes[keys[i]];
                 const iframe = document.createElement('iframe');
                 iframe.style.background = getColorByHash(hash);
-                document.body.append(iframe);
+                container.append(iframe);
                 iframe.src = "slice.html?=" + hash;
             } else {
                 window.tokenData = {hash: hashes[keys[i]]};
                 await setExternalScript("index.js");
                 document.body.onload();
-                document.querySelector('#' + keys[i]).append(document.querySelector('body>canvas'))
+                container.append(document.querySelector('body>canvas'))
             }
         }
     })();
