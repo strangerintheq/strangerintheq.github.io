@@ -345,36 +345,39 @@
         <a href="https://strangerintheq.github.io">strangerintheq.github.io</a>
     </div>
 </section>
+<script src="index.js"></script>
 <script>
-    (async function () {
-        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-        const keys = Object.keys(hashes)
 
-        for (let i = 0; i < keys.length; i++) {
-            const hash = hashes[keys[i]];
-            const container = document.createElement('div');
-            container.style.background = getColorByHash(hash);
-            container.style.pointerEvents = 'none';
-            document.body.append(container);
-            container.id = keys[i];
-        }
+    function image(hash) {
+        let canvas = document.createElement("canvas")
+        let w = canvas.width = 222
+        let h = canvas.height = 1.618 * w | 0
+        let ctx = canvas.getContext("2d")
+        ctx.translate(w / 2, h / 2)
+        ctx.scale(w, w)
+        document.getElementById(hash).append(canvas)
+        window.newHash(hash, ctx)
+    }
 
+    function placeholder(hash) {
+        const container = document.createElement('div');
+        container.style.background = getColorByHash(hash);
+        container.style.pointerEvents = 'none';
+        document.body.append(container);
+        container.id = hash;
+    }
+
+    (async function (){
+        let keys = Object.keys(hashes)
         for (let i = 0; i < keys.length; i++) {
-            const container = document.querySelector('#' + keys[i])
-            if (isSafari) {
-                const hash = hashes[keys[i]];
-                const iframe = document.createElement('iframe');
-                iframe.style.background = getColorByHash(hash);
-                container.append(iframe);
-                iframe.src = "slice.html?=" + hash;
-            } else {
-                window.tokenData = {hash: hashes[keys[i]]};
-                await setExternalScript("index.js");
-                document.body.onload();
-                container.append(document.querySelector('body>canvas'))
-            }
+            placeholder(hashes[keys[i]]);
         }
-    })();
+        for (let i = 0; i < keys.length; i++) {
+            image(hashes[keys[i]]);
+            await new Promise((resolve) => setTimeout(resolve, 1))
+        }
+    })()
+
 
     function setExternalScript(src) {
         return new Promise((resolve, reject) => {
