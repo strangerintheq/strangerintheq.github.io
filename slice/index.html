@@ -28,43 +28,49 @@
             --h: calc(var(--s) * 1.618);
             margin-left: calc(50vw - calc(0.5 * var(--base-size)));
         }
-        canvas {
-            width: 100%;
-            height: 100%;
-            /*pointer-events: none;*/
-            /*border: none;*/
+
+        .separator {height: calc(var(--base-size) * 0.015);}
+        .text-large {font-size: calc(var(--base-size) * 0.07);}
+        .text-medium {font-size: calc(var(--base-size) * 0.025);}
+        .text {font-size: calc(var(--base-size) * 0.018);text-align: left;}
+        .ico {max-width: calc(var(--base-size) * 0.1)}
+        .ico-4 {max-width: calc(var(--base-size) * 0.04)}
+
+        section {
+            padding: calc(var(--base-size) * 0.015) calc(var(--base-size) * 0.03);
         }
-        body > canvas {
-            display: none;
+
+        .hidden {display: none!important;}
+        .enlarge {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
         .grid {
             display: grid;
             grid-template-columns: repeat(10, var(--w));
             grid-template-rows: repeat(26, var(--h));
         }
-        div {
+        .grid div {
             overflow: hidden;
             line-height: normal;
         }
-        .separator {height: calc(var(--base-size) * 0.015);}
-        .text-large {font-size: calc(var(--base-size) * 0.07);}
-        .text-medium {
-            font-size: calc(var(--base-size) * 0.025);
-            margin-bottom: calc(var(--base-size) * 0.005);
+        .grid canvas {
+            width: 100%;
+            height: 100%;
         }
-        .text {font-size: calc(var(--base-size) * 0.018);text-align: left;}
-        .ico {max-width: calc(var(--base-size) * 0.1)}
-        .ico-4 {max-width: calc(var(--base-size) * 0.04)}
-        * {
-            /*background: #00000007;*/
+        @media (max-aspect-ratio: 1000/1618) {
+            .enlarge {background: linear-gradient(to bottom, #fff5 0%, #fff 25%, #fff 75%, #fff5 100%);}
+            .enlarge canvas {width: 100%;}
         }
-        section {
-            padding: calc(var(--base-size) * 0.015) calc(var(--base-size) * 0.03);
-        }
-        .enlarge {
-            position: fixed;
-            top: 0;
-            height: 100vh;
+        @media (min-aspect-ratio: 1000/1618) {
+            .enlarge {background: linear-gradient(to left, #fff5 0%, #fff 25%, #fff 75%, #fff5 100%);}
+            .enlarge canvas{height: 100%;}
         }
     </style>
 </head>
@@ -278,97 +284,97 @@
     delete hashes["x199"]
 </script>
 <div class="grid">
-<section style="grid-column: 4/8; grid-row: 2/4;">
-    <div class="text-large">S L / C E</div>
-    <div class="text-medium">by Stranger in the Q</div>
-    <img class="ico" src="https://www.artblocks.io/squigWhiteCircle.png" >
-    <div class="text">
-        Long-form generative artwork released by <a href="">artblocks.io</a>
-        and hosted immutably on Ethereum blockchain.
-    </div>
-</section>
-<section style="grid-column: 3/7; grid-row: 5/7;">
-    <div class="text-medium">About</div>
-    <div class="text">
-        This artwork explores Suprematism and generative composition, attempts to fill some gap between generated and constructed artworks.
+    <section style="grid-column: 4/8; grid-row: 2/4;">
+        <div class="text-large">S L / C E</div>
+        <div class="text-medium">by Stranger in the Q</div>
+        <img class="ico" src="https://www.artblocks.io/squigWhiteCircle.png" >
+        <div class="text">
+            Long-form generative artwork released by <a href="">artblocks.io</a>
+            and hosted immutably on Ethereum blockchain.
+        </div>
+    </section>
+    <section style="grid-column: 3/7; grid-row: 5/7;">
+        <div class="text-medium">About</div>
+        <div class="text">
+            This artwork explores Suprematism and generative composition, attempts to fill some gap between generated and constructed artworks.
+            <div class="separator"></div>
+            It achieves composition by slicing simple shapes into pieces by some rules and testing them against a "bad composition detector", then carefully selecting colors for shapes.
+            <div class="separator"></div>
+            You can see 200 random outputs here.
+        </div>
+    </section>
+    <section style="grid-column: 6/9; grid-row: 8/11;">
+        <div class="text-medium">Mint #0</div>
+        <img src="https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000000.png"
+            style="width: 100%" >
+    </section>
+    <section style="grid-column: 3/9; grid-row: 12/14;">
+        <div class="text-medium">Algorithm</div>
+        <div class="text">
+            Each iteration starts with selecting the simplest figure (circle, ring, square, rectangle, trapezoid, triangle).
+            then it is placed on the canvas according to specific rules, cut along one or more "slice lines", after which the parts can be shifted or removed.
+            The process is repeated several times for several starting figures, after which the resulting composition is obtained.
+            Then an "Bad composition detector" function comes into play, and if the composition is considered "bad", the pseudo-random composition process is repeated with partially different inputs until a "good composition" is obtained, according to this evaluation function.
+        </div>
+    </section>
+    <section style="grid-column: 5/9; grid-row: 15/17;">
+        <div class="text-medium">Bad composition detector</div>
+        <div class="text">
+            Function that takes into account and evaluates the size of the figures individually, the total area occupied by the figures,  distribution of the figures on the canvas, the balance of emptiness and fullness.
+            <div class="separator"></div>
+            All of these parameters are used to find those outcomes that seem to me to work poorly. It turns out there is a piece of me in this code.
+        </div>
+    </section>
+    <section style="grid-column: 3/8; grid-row: 18/19;">
+        <div class="text-medium">Result</div>
+        <div class="text">
+            Looking at images, you can often see something in them, this effect is close to pareidolia, sometimes images works well as profiles pictures, and I am very pleased that I was able to achieve this.
+        </div>
+    </section>
+    <section style="grid-column: 5/9; grid-row: 20/22;">
+        <div class="text-medium">Extra</div>
+        <div class="text">
+            Each iteration is a unique generator with partially fixed parameters.
+            <div class="separator"></div>
+            Click or tap at the bottom half of image to get a new image.
+            <div class="separator"></div>
+            Click or tap at the top half of image to toggle autoplay mode.
+        </div>
         <div class="separator"></div>
-        It achieves composition by slicing simple shapes into pieces by some rules and testing them against a "bad composition detector", then carefully selecting colors for shapes.
         <div class="separator"></div>
-        You can see 200 random outputs here.
-    </div>
-</section>
-<section style="grid-column: 6/9; grid-row: 8/11;">
-    <div class="text-medium">Mint #0</div>
-    <img src="https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000000.png"
-        style="width: 100%" >
-</section>
-<section style="grid-column: 3/9; grid-row: 12/14;">
-    <div class="text-medium">Algorithm</div>
-    <div class="text">
-        Each iteration starts with selecting the simplest figure (circle, ring, square, rectangle, trapezoid, triangle).
-        then it is placed on the canvas according to specific rules, cut along one or more "slice lines", after which the parts can be shifted or removed.
-        The process is repeated several times for several starting figures, after which the resulting composition is obtained.
-        Then an "Bad composition detector" function comes into play, and if the composition is considered "bad", the pseudo-random composition process is repeated with partially different inputs until a "good composition" is obtained, according to this evaluation function.
-    </div>
-</section>
-<section style="grid-column: 5/9; grid-row: 15/17;">
-    <div class="text-medium">Bad composition detector</div>
-    <div class="text">
-        Function that takes into account and evaluates the size of the figures individually, the total area occupied by the figures,  distribution of the figures on the canvas, the balance of emptiness and fullness.
         <div class="separator"></div>
-        All of these parameters are used to find those outcomes that seem to me to work poorly. It turns out there is a piece of me in this code.
-    </div>
-</section>
-<section style="grid-column: 3/8; grid-row: 18/19;">
-    <div class="text-medium">Result</div>
-    <div class="text">
-        Looking at images, you can often see something in them, this effect is close to pareidolia, sometimes images works well as profiles pictures, and I am very pleased that I was able to achieve this.
-    </div>
-</section>
-<section style="grid-column: 5/9; grid-row: 20/22;">
-    <div class="text-medium">Extra</div>
-    <div class="text">
-        Each iteration is a unique generator with partially fixed parameters.
-        <div class="separator"></div>
-        Click or tap at the bottom half of image to get a new image.
-        <div class="separator"></div>
-        Click or tap at the top half of image to toggle autoplay mode.
-    </div>
-    <div class="separator"></div>
-    <div class="separator"></div>
-    <div class="separator"></div>
-    <div class="text-medium">
-        PLEASE ENJOY!
-    </div>
-</section>
-<section style="grid-column: 3/9; grid-row: 24/25">
-    <div class="text-medium" style="margin-bottom: 1vw">
-        Stranger in the Q // 2022-2023
-    </div>
-    <script>
-        document.write([
-            ['twitter.svg','Twitter','https://twitter.com/stranger_intheq',2],
-            ['discord.svg','Discord','https://discord.gg/S92neTmQ3v',2],
-            ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 2.1],
-        ].map(([image, text, link, marginLeft]) => `<a style="margin-left: ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" ><img src="../resources/${image}" class="ico-4"></a>`).join(''))
-    </script>
-    <div class="text-medium">
-        <a href="https://strangerintheq.github.io">strangerintheq.github.io</a>
-    </div>
-</section>
+        <div class="text-medium">
+            PLEASE ENJOY!
+        </div>
+    </section>
+    <section style="grid-column: 3/9; grid-row: 24/25">
+        <div class="text-medium" style="margin-bottom: 1vw">
+            Stranger in the Q // 2022-2023
+        </div>
+        <script>
+            document.write([
+                ['twitter.svg','Twitter','https://twitter.com/stranger_intheq',2],
+                ['discord.svg','Discord','https://discord.gg/S92neTmQ3v',2],
+                ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 2.1],
+            ].map(([image, text, link, marginLeft]) => `<a style="margin-left: ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" ><img src="../resources/${image}" class="ico-4"></a>`).join(''))
+        </script>
+        <div class="text-medium">
+            <a href="https://strangerintheq.github.io">strangerintheq.github.io</a>
+        </div>
+    </section>
 </div>
-<div class="enlarge"></div>
+<div class="enlarge hidden"></div>
 <script src="index.js"></script>
 <script>
 
-    function enlarge(hash){
-        console.log("enlarge", hash)
-        let {canvas, ctx} = createCanvas(1000)
-        window.newHash(hash, ctx)
-        canvas.onclick = () => canvas.remove();
-        canvas.style.margin = "0 auto";
-        [...document.querySelectorAll(".enlarge canvas")].forEach(el => el.remove())
-        document.querySelector(".enlarge").append(canvas)
+    let {ctx: enlargeCtx} = createCanvas(innerHeight)
+    let enlargeContainer = document.querySelector(".enlarge");
+    enlargeContainer.append(enlargeCtx.canvas);
+    enlargeContainer.onclick = () => enlargeContainer.classList.add("hidden")
+
+    function enlargeImage(hash){
+        window.newHash(hash, enlargeCtx)
+        enlargeContainer.classList.remove("hidden")
     }
 
     function createCanvas(w) {
@@ -383,7 +389,7 @@
 
     function image(hash) {
         let {canvas, ctx} = createCanvas(innerWidth/10 | 0);
-        canvas.onclick = () => enlarge(hash);
+        canvas.onclick = () => enlargeImage(hash);
         document.getElementById(hash).append(canvas)
         window.newHash(hash, ctx)
     }
