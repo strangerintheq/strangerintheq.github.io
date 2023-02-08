@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>SL/CE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
     <style>
+        /* hide scrollbars*/
         * {
-            --base-size: min( 1100px , 100vw);
-            --s: calc(0.1 * var(--base-size));
-            --w: var(--s);
-            --h: calc(var(--s) * 1.618);
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        /* */
+        * {
             margin: 0;
             font-family: "Inter", sans-serif;
             line-height: 0;
             overflow: scroll;
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
         }
         body {
+            --base-size: min( 1100px , 100vw);
+            --s: calc(0.1 * var(--base-size));
+            --w: var(--s);
+            --h: calc(var(--s) * 1.618);
             margin-left: calc(50vw - calc(0.5 * var(--base-size)));
-        }
-        *::-webkit-scrollbar {
-            display: none;
         }
         canvas, iframe {
             width: var(--w) !important;
@@ -368,12 +373,10 @@
     }
 
     (async function (){
-        let keys = Object.keys(hashes)
-        for (let i = 0; i < keys.length; i++) {
-            placeholder(hashes[keys[i]]);
-        }
-        for (let i = 0; i < keys.length; i++) {
-            image(hashes[keys[i]]);
+        let hashesList = Object.values(hashes)
+        hashesList.forEach(placeholder)
+        for (let i = 0; i < hashesList.length; i++) {
+            image(hashesList[i]);
             await new Promise((resolve) => setTimeout(resolve, 1))
         }
     })()
