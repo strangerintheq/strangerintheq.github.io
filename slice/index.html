@@ -28,16 +28,16 @@
             --h: calc(var(--s) * 1.618);
             margin-left: calc(50vw - calc(0.5 * var(--base-size)));
         }
-        canvas, iframe {
-            width: var(--w) !important;
-            height: var(--h) !important;
-            pointer-events: none;
-            border: none;
+        canvas {
+            width: 100%;
+            height: 100%;
+            /*pointer-events: none;*/
+            /*border: none;*/
         }
         body > canvas {
             display: none;
         }
-        body {
+        .grid {
             display: grid;
             grid-template-columns: repeat(10, var(--w));
             grid-template-rows: repeat(26, var(--h));
@@ -60,6 +60,11 @@
         }
         section {
             padding: calc(var(--base-size) * 0.015) calc(var(--base-size) * 0.03);
+        }
+        .enlarge {
+            position: fixed;
+            top: 0;
+            height: 100vh;
         }
     </style>
 </head>
@@ -272,6 +277,7 @@
     delete hashes["x198"]
     delete hashes["x199"]
 </script>
+<div class="grid">
 <section style="grid-column: 4/8; grid-row: 2/4;">
     <div class="text-large">S L / C E</div>
     <div class="text-medium">by Stranger in the Q</div>
@@ -350,16 +356,34 @@
         <a href="https://strangerintheq.github.io">strangerintheq.github.io</a>
     </div>
 </section>
+</div>
+<div class="enlarge"></div>
 <script src="index.js"></script>
 <script>
 
-    function image(hash) {
+    function enlarge(hash){
+        console.log("enlarge", hash)
+        let {canvas, ctx} = createCanvas(1000)
+        window.newHash(hash, ctx)
+        canvas.onclick = () => canvas.remove();
+        canvas.style.margin = "0 auto";
+        [...document.querySelectorAll(".enlarge canvas")].forEach(el => el.remove())
+        document.querySelector(".enlarge").append(canvas)
+    }
+
+    function createCanvas(w) {
         let canvas = document.createElement("canvas")
-        let w = canvas.width = 222
+        canvas.width = w
         let h = canvas.height = 1.618 * w | 0
         let ctx = canvas.getContext("2d")
         ctx.translate(w / 2, h / 2)
         ctx.scale(w, w)
+        return {canvas, ctx};
+    }
+
+    function image(hash) {
+        let {canvas, ctx} = createCanvas(innerWidth/10 | 0);
+        canvas.onclick = () => enlarge(hash);
         document.getElementById(hash).append(canvas)
         window.newHash(hash, ctx)
     }
@@ -367,8 +391,7 @@
     function placeholder(hash) {
         const container = document.createElement('div');
         container.style.background = getColorByHash(hash);
-        container.style.pointerEvents = 'none';
-        document.body.append(container);
+        document.querySelector(".grid").append(container);
         container.id = hash;
     }
 
