@@ -11,7 +11,7 @@ export function GeneratorPage() {
     const [code, setCode] = useState();
 
     useEffect(() => {
-        let url = sitePath + '/generative/' + id + '/index.html';
+        let url = sitePath + '/v2/generators/' + id + '/index.html';
         fetchCode(url).then(setCode)
     }, [id])
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- saved from url=(0139)https://gateway.fxhash2.xyz/ipfs/QmfPz6ggkFY9N7ugpTMdCdVGn6y29Ys2HMHjjVtyFEVmpU/?fxhash=oo2WuxbvWm77MLimMCfrt54zXRHhe8HcFqPVPfGxF53Be85Rnhe -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>Mayan carpet</title>
+    <script id="fxhash-snippet">
+      let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+      var fxhash = new URLSearchParams(window.location.search).get('fxhash')
+      let b58dec = str=>[...str].reduce((p,c)=>p*alphabet.length+alphabet.indexOf(c)|0, 0)
+      let fxhashTrunc = fxhash.slice(2)
+      let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')
+      let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+      let sfc32 = (a, b, c, d) => {
+        return () => {
+          a |= 0; b |= 0; c |= 0; d |= 0
+          var t = (a + b | 0) + d | 0
+          d = d + 1 | 0
+          a = b ^ b >>> 9
+          b = c + (c << 3) | 0
+          c = c << 21 | c >>> 11
+          c = c + t | 0
+          return (t >>> 0) / 4294967296
+        }
+      }
+      var fxrand = sfc32(...hashes)
+      // used to get features during token mint
+      window.addEventListener("message", (event) => {
+        if (event.data === "fxhash_getFeatures") {
+          parent.postMessage({
+            id: "fxhash_getFeatures",
+            data: window.$fxhashFeatures
+          }, "*")
+        }
+      })
+      var isFxpreview = new URLSearchParams(window.location.search).get('preview') === "1"
+      function fxpreview() {
+        window.dispatchEvent(new Event("fxhash-preview"))
+        setTimeout(() => fxpreview(), 500)
+      }
+</script>
+</head>
+<body style="margin: 0;overflow: hidden">
+<script>
+    const{PI:e,sin:f,cos:c}=Math,t=2*e,a=(e=1,f=0)=>f+fxrand()*e,n=(e,f=0)=>f+a(e)|0,d=(e=1)=>a(e)-e/2,o=e=>e[n(e.length)],r=(e,f)=>[...Array(0|e)].map((e,c)=>f(c));let l=a()*t,i=o([11]);const b=document.createElement("canvas"),s=innerWidth,h=innerHeight,x=s/h,g=s/h<x,p=b.style;b.width=g?s:h*x,b.height=g?s/x:h,p.width=s+"px",p.height=h+"px",b.width*=2,b.height*=2,document.body.append(b);const v=b.getContext("webgl2"),R=v.createProgram(),D=(e,f)=>{const c=v.createShader(f),t=(f,c)=>e=e.split(f).map((e,f,t)=>e+(f+1<t.length?c():"")).join("");var n;t("RND2",(n=2,()=>`vec${n}(${r(n,()=>a())})`)),t("RNDS",d),t("RND",a),v.shaderSource(c,"#version 300 es\nprecision highp float;\n"+e),v.compileShader(c),console.log(v.getShaderInfoLog(c)),v.attachShader(R,c)},F="F2F1DFF2BD1DD94711591812181212#e8d5b9c07a38df3146f5b3490e2430#f3efeff7b32b0c6291b80c09091e05#f1faeee63946a8ccdc457b9d1d3557#dff3e4bca2cd7d73c6684da2171738#dccfa39f8f6544443bc6110f12130b#fff7f4ffc6c6ff2f4ec60a5f820a5f#faf1dcff871fb8000041764b29293d#ccc9a1f0ffcea53f2b60290e280004#ecf39e90a9554f772d31572c132a13#fdf0d5669bbcc1121f780000003049#e0fbfc98c1d9ee6c4d3d5a80293241#fbfffe96031a1b1b1e6d676efaa916#fffcf2ccc5b9503d39252422eb5e28#8ecae6219ebc023047ffb703fb8500#000000FFFFFFdddddd444444888888#25232370798cf5f1eddad2bca99985#ffffff375ba9000000d6d6d6fca311#f4ca55284862d6644a3a8acafffeef#C20F002374C6FFDD22ffffff000000#e4e1dbD96B0BBF13048C13084465A6#f4ebc5F29F05233479569cc7F20505#001427708d81f4d58dbf06038d0801#8c1c13bf4342e7d7c1a78a7f735751".split("#").map(e=>e.match(/.{6}/g).map(e=>"#"+e));D("in vec2 p;void main(){gl_Position=vec4(p+1.,0,1);}",v.VERTEX_SHADER),D(`\n    ${((e,f=e.length,c=((e,f)=>(parseInt(e.substr(f,2),16)/255).toFixed(4)),t=(e=>`vec3(${c(e,1)},${c(e,3)},${c(e,5)});`))=>`vec3 color(float x){x=mod(x,${f}.);${r(f,f=>`if (x < ${f+1}.)return ${t(e[f])}`).join("")}}vec3 palette(float x){return mix(color(x),color(x+1.),fract(x));}`)(((e,f=e.length)=>{for(;--f>0;){let c=n(f+1);[e[c],e[f]]=[e[f],e[c]]}return e})(F[n(24)]))}\nvec2 r = vec2(${[b.width,b.height]});\nfloat t = RND*100.;\nout vec4 c;\nvoid main() {\nvec2 uv = gl_FragCoord.xy / r.xy - 0.45;\nuv.x *= r.x / r.y;\nvec2 UV = uv* mat2(${[c(l),f(l),-f(l),c(l)]});;\nfloat d;\nfloat xx = (\n    length(UV*.5-RND2)*RND+\n    length(UV*1.5-RND2)*RND+\n    length(UV*2.5-RND2)*RND\n);\n${r(i,()=>`\nuv = abs(uv-RND2*.12) ;\n${o(["d += log(abs(uv.x)+abs(uv.y));","d += log(length(uv));"])}\n`).join("")}\nd*=1.5+UV.x*0.1+UV.y*0.1;\nd*=1.+xx*0.1;\nfloat pd = (RND*3.+3.);\nfloat fd = mod(abs(floor(d)),5.);\nUV = UV * mat2(cos(fd),sin(fd),-sin(fd),cos(fd));\nd += pd*smoothstep(0.3,0.32+RND*0.2, length(UV+xx*0.2));\nd -= pd*smoothstep(0.3,0.32+RND*0.2, UV.y+xx);\nd -= pd*smoothstep(0.3,0.32+RND*0.2, UV.x+xx);\n\nvec3 color = palette(d/${i/2}+UV.x-UV.y);\nc = vec4( clamp(color, 0.,1.), 1.0 );\n}\n\n`,v.FRAGMENT_SHADER),v.linkProgram(R),v.useProgram(R);const m=v.createBuffer();v.bindBuffer(v.ARRAY_BUFFER,m);const u=v.getAttribLocation(R,"p");v.enableVertexAttribArray(u),v.bufferData(v.ARRAY_BUFFER,new Float32Array([-2,2,-2,-2,2,-2]),v.STATIC_DRAW),v.vertexAttribPointer(u,2,v.FLOAT,!1,0,0),v.drawArrays(v.TRIANGLES,0,3)
+</script><canvas width="2212" height="1878" style="width: 1106px; height: 939px;"></canvas>
+
+</body></html>

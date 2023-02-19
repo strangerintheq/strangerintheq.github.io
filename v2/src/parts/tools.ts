@@ -20,8 +20,8 @@ export function randomAbHash() {
 
 export function prepareFxHash(html, hash) {
     return html.split("\n").map(str => {
-        if (str.includes("var fxhash = "))
-            return "var fxhash = " + hash + ";"
+        if (str.includes("var fxhash ="))
+            return "var fxhash = \"" + hash + "\";"
         return str
     }).join("\n");
 }
