@@ -1,5 +1,3 @@
-//@ts-ignore
-
 import {getPts} from "./getPts";
 import {createField} from "./createField";
 import {tick} from "./tick";

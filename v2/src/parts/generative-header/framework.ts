@@ -2,33 +2,13 @@ import {many} from "../tools";
 
 type C2d = CanvasRenderingContext2D;
 type Color = string;
-type Palette = string[]
-
-export const MATH = Math;
 
 export const {
-    PI,
-    sqrt,
-    abs,
-    sin,
-    cos,
-    pow,
-    max,
-    min,
-    atan2,
-    sign,
-    round,
-    floor,
-    ceil,
-    hypot,
-    asin
-} = MATH
+    PI, sqrt, abs, sin, cos, pow, max, min, atan2,
+    sign, round, floor, ceil, hypot, asin
+} = Math
 
 const TAU = PI*2;
-
-export const mod = (a, b) => ((a % b) + b) % b;
-export const clamp = (v,a,b) => min(b, max(v, a))
-export const clamp01 = (v) => clamp(v, 0,1)
 
 export const randomHash = (randomFunc = Math.random) => {
     return "0x" + many(64, () => ((randomFunc()*16)|0).toString(16)).join("")
@@ -59,7 +39,6 @@ export const prng2x = (
 ) => {
     return (_?) => ++i % 2 ? a() : b();
 }
-
 
 let random;
 
@@ -107,20 +86,6 @@ export const pick = <T>(from: T[]): T => {
     return from[rndi(from.length)];
 };
 
-export const rndSlices = (x, n, f) => {
-    n = many(n, rnd)
-    let s = n.reduce((a, b) => a + b)
-    return n.map(a => f(a / s * x))
-}
-
-export const pickWithChances = (random, arrayWithChances, acc=0) : any => {
-    return many(arrayWithChances.length/2, i => [
-        acc += arrayWithChances[i*2],
-        arrayWithChances[i*2 + 1],
-    ]).find(v => random < v[0])[1];
-}
-
-
 export const setFillStyle = (ctx: C2d, color: Color) => {
     return ctx.fillStyle = color;
 };
@@ -133,29 +98,10 @@ export const setLineWidth = (ctx: C2d, width:number) => {
     return ctx.lineWidth = width;
 };
 
-export const strokeRect = (ctx: C2d, color: Color, x, y, w, h) => {
-    setStrokeStyle(ctx, color)
-    ctx.strokeRect(x, y, w, h)
-};
 
 export const fillRect = (ctx: C2d, color: Color, x, y, w, h) => {
     setFillStyle(ctx, color)
     ctx.fillRect(x, y, w, h)
-};
-
-export const fillCircle = (ctx: C2d, color: Color, x, y, r) => {
-    setFillStyle(ctx, color)
-    ctx.beginPath()
-    ctx.arc(x, y, r, 0, TAU);
-    ctx.fill()
-};
-
-export const pickFillStyle = (ctx: C2d, palette: Palette) => {
-    return setFillStyle(ctx, pick(palette))
-};
-
-export const pickStrokeStyle = (ctx: C2d, palette: Palette) => {
-    return setStrokeStyle(ctx, pick(palette))
 };
 
 export const clearCanvas = (ctx: C2d, color?: Color) => {
@@ -163,8 +109,6 @@ export const clearCanvas = (ctx: C2d, color?: Color) => {
         setFillStyle(ctx, color)
     ctx[color ? 'fillRect' : 'clearRect'](-1e5, -1e5, 2e5, 2e5)
 };
-
-
 
 export const getCanvas = ctx => ctx.canvas;
 export const getCanvasWidth = ctx => getCanvas(ctx).width;
@@ -182,26 +126,6 @@ export const scaleAndCenterContext = (ctx:C2d) => {
     normalizeCanvasScale(ctx)
 };
 
-export const globalCompositeOperation = (ctx: C2d, op: string) => {
-    return ctx.globalCompositeOperation = op
-};
-
-export const sourceOver = (ctx: C2d) => {
-    return globalCompositeOperation(ctx, 'source-over')
-};
-
-export const destinationOut = (ctx: C2d) => {
-    return globalCompositeOperation(ctx, 'destination-out')
-};
-
-export const sourceAtop = (ctx: C2d) => {
-    return globalCompositeOperation(ctx, 'source-atop')
-};
-
-export const getPixelColor = (ctx: C2d, x, y) => {
-    return `rgba(${ctx.getImageData(x | 0, y | 0, 1, 1).data})`
-};
-
 export const drawLine = (ctx: C2d, x, y, x1, y1) => {
     ctx.beginPath()
     ctx.moveTo(x, y)
@@ -217,19 +141,6 @@ export const drawCircle = (ctx, x, y, r) => {
     ctx.beginPath()
     ctx.arc(x, y, r, 0, 2 * Math.PI)
     ctx.fill()
-};
-export const strokeCircle = (ctx, x, y, r) => {
-    ctx.beginPath()
-    ctx.arc(x, y, r, 0, 2 * Math.PI)
-    ctx.stroke()
-};
-
-export const saveContext = (ctx:C2d) => {
-    return ctx.save()
-};
-
-export const restoreContext = (ctx:C2d) => {
-    return ctx.restore()
 };
 
 export const poissonDiscSampler = (width, height, radius) => {
@@ -302,32 +213,9 @@ export const poissonDiscSampler = (width, height, radius) => {
     }
 };
 
-// const canvases = new Map<string, CanvasRenderingContext2D>();
-
-const d = document
-
-export const get2dCanvasContext = (name: string) => {
-    // if (!canvases.has(name)) {
-    let context = document.createElement('canvas')
-        .getContext('2d');
-    // canvases.set(name, context)
-    // }
-    // return canvases.get(name)
-    return context
-};
-
-export const copySize = (
-    to: CanvasRenderingContext2D,
-    from: CanvasRenderingContext2D
-) => {
-    to.canvas.width = from.canvas.width
-    to.canvas.height = from.canvas.height
-};
-
 export const appendCanvas = (canvas) => {
     return window.onload = () => document.body.append(canvas)
 };
-
 
 export const createCanvas = (
     ratio: number = 1,
@@ -352,15 +240,3 @@ export const createCanvas2D = (
 ) => {
     return  createCanvas(ratio, scale).getContext('2d');
 }
-
-export const createCanvasWebGL = (
-    ratio: number = 1,
-    scale: number = 1
-) => {
-    const canvas = createCanvas(ratio, scale);
-    const gl: WebGLRenderingContext = canvas.getContext('webgl')
-    return {gl, canvas, ratio, w:canvas.width, h:canvas.height}
-}
-
-
-

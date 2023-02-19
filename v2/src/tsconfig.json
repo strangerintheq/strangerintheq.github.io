@@ -3,7 +3,8 @@
     "module": "commonjs",
     "target": "esnext",
     "sourceMap": true,
-    "jsx": "react"
+    "jsx": "react",
+    "noEmit": true
   },
   "exclude": [
     "node_modules"
