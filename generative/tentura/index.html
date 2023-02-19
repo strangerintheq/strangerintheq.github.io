@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tentura</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+        <style type="text/css">html {
+            height: 100%;
+        }
+        body {
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            padding: 0;
+            margin: auto;
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }</style>
+    </head>
+    <body style='margin:0 auto;overflow:hidden'>
+        <script>
+            window.tokenData = {hash: "0x87468723648726348726738462738462783468276348726348726347826387462873468726843"}
+        </script>
+        <script>eval('tx="i_dianov piterpasma shvembldr jeffgdavis sross",onpointerdown=e=>!e.button&&(tx=!tx);§e,a=Math,f=a.PI,r=f/2,n=(e,t)=>a.hypot(e,t),i=(e=tokenData.hash,S=new Uint32Array([1,s=t=2,3,4].map(a=>parseInt(e.substr(8*a,8),16))),e=>(t=S[3],S[3]=S[2],S[2]=S[1],S[1]=s=S[0],t^=t<<11,S[0]^=t^t>>>8^s>>>19,S[0]/2**32)),l=(e=1,a=0)=>i()*e+a,d=(e=2,a=0)=>a+l(0|e)|0,o=(e=.5)=>l()>e,b=(e=1)=>l(e)-e/2,c=e=>d(4)*f/2,p=e=>l(2*f),u=(e,t)=>[...Array(0|e)].map((e,a)=>t(a)),h=(e,a)=>{try{@e()}catch(e){a&&a()}},y=2*a.min(innerWidth,innerHeight),m=y/2;u(d(99),l);§$,g,v,x=1e3,w=500,W=o(.8)?1:d(6)||33,D=1==W,A=d(),P=o(.8)?1:0,k=P*b(250),I=P*b(250),O=d(),j=o(),C=d()+2,Q=(o(.15),o(.8)),R=o(.99),q=d(15),B=o(.95),E=o(.2),F=o(.85),G=o(D?.5:.1),M=d(2),U=o(.9),H=l(.2,.8),J=l(.0025,.0025),L=l(1/x,1/x),T=l(),_=l(.03,.03),z=o(),K=l(),N=l(1/x,1/x),V=()=>l(.5,.99<l()?1:0),X=V(),Y=V(),Z=o(.3),ee=d(3),te=l(.8,.01),ae=l(r),fe=o(.8)?[0,0]:[b(.7),b(.7)],re=l(),ne=ee||o()?0:.5*re+.2,se=d(7),ie=d(3),le=o(.7)&&1<se?1:0,de=99,oe=document,be=()=>g=$.getImageData(0,0,y,y),ce=()=>$.putImageData(g,0,0),pe=(e=d(5))=>"#"+"f5e0d3ffd0b3ffb88cde62624d3b3bd95b43c02942ecd07853777a542437f1d4afece5cec5e0dce08e79774f389cc4e4e9f2f9f26c4f3a89c91b325ff0b49ef7e4beb3818473626e413e4aa7c5bde5ddcbeb7b59cf4647524656ff847ce84a5ffecea899b8982a363bfad089ff9c5bf5634aed303c60382ee2f7cee8bf56e4844a91204d452632f2d694f0d8a886b8b1fa2a003d1c00fff7bdf2f26fff823af041558b3619f4ebc3f0e2a4c5ceaebca297ab526bf8edd1c5cfc6d88a8a9d9d934748438eb2c5f9bf76e5625cd1313d61537573c8a9dee1b6e1b866bd5532373b44".substr(6*(5*q+e),6),ue=(e,a)=>(v||(v=new p5).noiseSeed(1e6*l()),v.noise(e,a)),he=l(70,370),ye=l(30,420),Se=l(50,200),me=(e,t)=>{t=201*(ue(t/de,1e4)-.5);@(e=a.abs(e)+t)>he?o((ye-e)/(ye-he)):o()&&Se<e},$e=l(1/x,1/x),ge=(t,r)=>!D&&(me(t,r+t)||me(r,t-r))||D&&(()=>{§e=ue(t*$e+1e3,r*$e+2e3),e=a.abs(e-.5);@e<.1&&o(.9)||e<.01})(),ve=(e,t)=>1/a.cos(2/e*a.asin(a.sin(e/2*t))),xe=2==ie?133:1==ie?de:l(33,55),we=e=>w+(o(.3)?b(x*(1==se?.3:.7)):0),We=x=>{let d=l(150,150),o=p(),s=we(),i=we(),b=l(33,66),y=(m=Ie,(s,i,b,y,c)=>{if(e){let o=a.atan2(i-e[1],s-e[0]);u(2*b,d=>u(2*b,e=>{§t=s-b+d|0,f=i-b+e|0,l=n(t-s,f-i),e=a.atan2(f-c,t-y);l<b&&(m[t][f]=(f=o,e=e,[!se&&1-le?e+r:f,Y,x]))}))}e=[s,i]});§m,e;u(xe,l=>h(e=>{§t=(2==ie?2:0)*l+150*(ue(l/66+k,I)-.5)*le+d,r=l/de*2*f,t=ve(se||de,r)*t;y(a.cos(r+o)*t+s,a.sin(r+o)*t+i,b,s,i)}))},De=2*d(2),Ae=o(),Pe=a.sign(b()),ke=a.sign(b()),Ie=((r,f)=>u(r,t=>u(f,e=>((t,r)=>{let f=0;if(ne){let e=Ae?t:r;f+=e<-.2?Pe*ne:e>.2?ke*ne:0}let e=ae+De;@ee&&(f+=a.atan2(r-fe[1],t-fe[0]),e*=n(t-fe[0],r-fe[1])),f+=ue(t*te,r*te)*e,[f,X,0]})(t/r-.5,e/f-.5))))(x,x);Z&&We(2),We(1);§Oe=(o(.7)?c:p)(),je=l(de,250),Ce=l(de,75),Qe=e=>(200*ue(e[0]/de+2e4,e[1]/de+2e4)-de)*O,Re=e=>{if(D)@1;§t=ve(W,Oe+a.atan2(...e)),r=e[0]+k+Qe(e),e=e[1]+I+Qe(e),e=n(r,e);@e<je*t&&(!A||Ce*t<e)},qe=H*de+150,Be=10+20*T|0,Ee=(a,e,t,r)=>e.forEach(e=>a.stroke(new Path2D("M"+e.s.join("L")),a.lineWidth=r||e.w+t)),Fe=f=>{let n,s,i,p,m,v,$=0,S=0,g=o(.8)&&0<Be--?y*_:l(y*J,y*L),D=[],e=K/2+(ee?.1:.2),W=l(e)?c():0,P=l(e),U=d(qe/2,qe/2),k=o(),A=(e,a,t)=>e.p.push([a+=w,t+=w])+e.s.push([a/x*y,t/x*y]),I=e=>{e={s:[],p:[],w:e};A(e,...n),D.push(e)},t=e=>{s=1==e,S=v=m=0,n=(e=>{for(;;)if(Re(e=[b(x),b(x)]))@e})(),I(g),u(e,R)},H=e=>o()?r:-r,O=H(),Q=[H,e=>O][M],R=e=>h(e=>{§t=((e,a,t,r)=>e[a+t|0][a+r|0])(Ie,w,...n);if(i||(i=pe(2==t[2]?4:(j?!t[2]:t[2])?d(2):d(C,2)),p=pe(2==t[2]&&Z?k?d(2,3):d(3,2):4)),m){if(1<a.abs(m[0]-t[0])){if(v)@s=0;v=1}if(m[2]!=t[2]&&l()>ue(x-n[0]/400+d(1e3),x-n[1]/400+d(1e3))-.5)@s=0}m=t,S++,$++,S>U&&(s=0),(4<f||9<$)&&o(1-P)&&o(t[1])&&(W+=Q($=0)),z&&o(.9)&&I(l(g)),G&&ge(...n)||(t=t[0]+W,n[0]+=a.cos(t)*f,n[1]+=a.sin(t)*f,A(D[D.length-1],...n))},e=>s=0);@t(U),[e=>{e.strokeStyle=p,Ee(e,D,y*N),e.strokeStyle=i,Ee(e,D,0)},R,e=>!s&&h(e=>{D[0].s.shift(),D[0].p.shift(),D[0].p[0]||D.shift()},()=>t(1))]},Ge=(e,a)=>{let r="RGBA".split(""),f=e=>r.map(e).join(";"),t=(e,a,t)=>new Function("S,D,r,s",`let ${r},x,y,o,p,P,d,Q=r<<2,W=s<<2,O=W*r;for(x=0;x<s;x++){R=G=B=A=0;o=x${e};for(y=0;y<r;y++){p=o+(${a});d=y+1;${f((e,a)=>e+`+=S[p+${a}];D[p+${a}]=(${e}/d)|0`)};}for(;y<s;y++){p=o+(${a});P=p+${t};${f((e,a)=>`D[p+${a}]=(${e}/r)|0;${e}+=S[p+${a}]-S[P+${a}]`)}}}`),l=be().data,d=new Uint8Array(y*y*4);t("*W","y<<2","-Q")(l,d,a,y),t("<<2","y*W","-O")(d,l,a,y),t("*W","(s-y-1)<<2","Q")(l,d,a,y),t("<<2","(s-y-1)*W","O")(d,l,a,y),ce()},Me=(e=>{let a=oe.createElement("canvas");@a.width=a.height=e,setTimeout(e=>oe.body.prepend(a)),a.style.height=e/2+"px",a.style.background="#fff",$=a.getContext("2d")})(y);if(Me.lineJoin=U?"round":"miter",Me.lineCap=U?"round":"square",Me~B?"#000":"#fff",Me.fillRect(0,0,y,y),!B){let a=e=>Me.translate(e,e),e=e=>a(m)+Me.rotate(e)+a(-m),t=(e,a)=>(Me~pe(d(4))+25)+u(e,e=>Me.beginPath()+Me.ellipse(l(y),a(),l(m),l(m),0,0,2*f)+Me.fill()),r=e=>Me.globalCompositeOperation=e;Q||r("xor");let o=p();e(o),t(55,e=>l(y)),t(22,e=>y+b(.1*y)),t(22,e=>b(.1*y)),e(-o),r("source-over"),Ge(0,55)}§Ue=(e,a,t)=>{let r=d(6,4),f=u(e,e=>h(e=>Fe(t?l(3,1):r)));@f.map(e=>e[0](Me)),a&&E&&Ge(0,0|a),e=>f.flat().map(e=>e(Me))},He=3*x/(D?1:5);Ue(He/5,.02*y),Ue(He/5,.01*y),Ue(He/5,.005*y),Ue(He,0);§Je=e=>a.abs(e-m)>.45*y;if(F||R){be();let t=g.data;u(y,a=>u(y,e=>{(F&&(Je(a)||Je(e))||R)&&(e=e*y+a<<2,t[e]=t[1+e]=t[2+e]=.3*t[e]+.6*t[1+e]+.1*t[2+e])})),ce()}§Le=l(.5,.5),Te=Ue(He/(D?100:20)*Le,0,1);be();§_e=e=>(!tx&&e||Te(ce()),requestAnimationFrame(_e));_e()'.replaceAll('~','.fillStyle= ').replaceAll('@','return ').replaceAll('§','var '))</script>
+
+    </body>
+</html>

@@ -8,17 +8,17 @@ import {GeneratorPage} from "./pages/GeneratorPage";
 
 const routes = [{
     path: "/tentura",
-    element: <TenturaPage/>,
+    element: <TenturaPage />,
 }, {
-    path: "/generator/:id",
+    path: "/generator/:type/:id/:hash",
     element: <GeneratorPage />,
 }, {
     path: "/slice",
-    element: <SlicePage/>,
+    element: <SlicePage />,
 }, {
     path: "*",
     exact: false,
-    element: <HomePage/>,
+    element: <HomePage />,
 }];
 
 const router = createBrowserRouter(routes);

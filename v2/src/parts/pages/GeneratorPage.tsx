@@ -1,47 +1,55 @@
 import React, {useEffect, useState} from "react";
-import {PageHeader} from "../components/PageHeader";
 import {useParams} from "react-router";
+import {useSearchParams} from "react-router-dom";
 import {sitePath} from "../Crutch";
+import {fetchCode, prepareArtBlocks, prepareFxHash, randomFxHash} from "../tools";
 
 export function GeneratorPage() {
-    const { id, hash } = useParams();
 
+    const { id, hash, type } = useParams();
     const [html, setHtml] = useState();
+    const [code, setCode] = useState();
 
     useEffect(() => {
-        fetchCode(sitePath + '/generative/' + id + '/index.html').then(setHtml)
-        // const html = makeHtml(code, hash || randomHash());
-    }, [])
+        let url = sitePath + '/generative/' + id + '/index.html';
+        fetchCode(url).then(setCode)
+    }, [id])
 
-    return html ? <iframe
-        src={"data:text/html," + encodeURIComponent(html)}
-        style={{
-            border: 0,
-            width: '100vw',
-            height: '100vh'
-        }}
-    /> : null
+    useEffect(() => {
+        if (!code)
+            return
+        let newHtml = type === "artblocks" ?
+            prepareArtBlocks(code, hash) :
+            prepareFxHash(code, hash);
+        setHtml(newHtml)
+    }, [code, hash, type])
+
+    return <>
+
+        <button
+            style={{
+                fontSize: 30,
+                position: 'fixed',
+                left: 0,
+                top: 0
+            }}
+            onClick={() => {
+                let h = randomFxHash();
+
+        }}>NEW</button>
+
+        {html ? <iframe
+            src={"data:text/html," + encodeURIComponent(html)}
+            style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                zIndex: -1,
+                border: 0,
+                width: '100vw',
+                height: '100vh'
+            }}
+        /> : null}
+    </>
 }
 
-async function fetchCode(url) {
-    return await (await fetch(url)).text();
-}
-
-function randomHash() {
-    return ""
-}
-
-function makeHtml(code, hash){
-    return "data:text/html," + encodeURIComponent(`<!DOCTYPE html>
-<html lang="en">
-<head>
-<style>
-    html {height: 100%;}
-    body {min-height: 100%;margin: 0;padding: 0;}
-    canvas {padding: 0;margin: auto;display: block;position: absolute;top: 0;bottom: 0;left: 0;right: 0;}
-</style>
-<script>window.tokenData = ${JSON.stringify({hash})}</script>
-<script>${code}</script>
-</head>
-</html>`);
-}

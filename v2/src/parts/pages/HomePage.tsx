@@ -2,6 +2,7 @@ import React from "react";
 import {ProjectThumbnail} from "../components/ProjectThumbnail";
 import {PageWrapper} from "../components/PageWrapper";
 import {sitePath} from "../Crutch";
+import {Button} from "../parts/Button";
 
 export function HomePage() {
     return <PageWrapper>
@@ -25,15 +26,19 @@ export function HomePage() {
             </div>
 
             <ProjectThumbnail
-                ratio={3/4}
+                hash={"0x61464f239e4a9706c864eaf3d8ccc966fe3ec89089752d803ee51adbea37e82c"}
+                ratio={0.618}
+                type={"artblocks"}
                 name={"SL/CE"}
-                img={"/slice/bg.jpg"}
+                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_3840,q_auto/https://artblocks-mainnet.s3.amazonaws.com/419000000.png"}
                 generator={'slice'}
             />
             <ProjectThumbnail
+                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                type={"artblocks"}
                 name={"Tentura"}
-                img={"/tentura/img/bg.png"}
-                generator={'grvc'}
+                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://artblocks-mainnet.s3.amazonaws.com/265000000.png"}
+                generator={'tentura'}
             />
             <div className={"fs02"} style={{gridColumn:'1/4'}}>
                 Fx(Hash)
