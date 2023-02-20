@@ -23,10 +23,11 @@ export function tick(field, p, w, h,
 
             if (restrict(p.x, p.y)){
                 p.stoped = true;
-                drawCircle(c,p.x, p.y, rnd(2) + 1)
-                if (rnd() > 0.7) {
-                    c.fill()
-                }
+                p.reset()
+                // drawCircle(c,p.x, p.y, rnd(2) + 1)
+                // if (rnd() > 0.7) {
+                //     c.fill()
+                // }
                 return;
             }
 
@@ -39,7 +40,7 @@ export function tick(field, p, w, h,
             let fixiy = fix[iy];
             if (!fixiy)
                 return
-            const a = fixiy[0];
+            const a = fixiy[0] + p.dir;
             const type = fixiy[1];
             setLineWidth(c, p.width)
             setStrokeStyle(c, p.colors[type])
@@ -57,15 +58,15 @@ export function tick(field, p, w, h,
 function start(p, type, c:CanvasRenderingContext2D) {
     if (p.started)
         return
-    setFillStyle(c, p.colors[type])
-    if (type === 2) {
-        drawCircle(c,p.x, p.y, rnd(2) + 1)
-        if (rnd() > 0.7) {
-            c.fill()
-        }
-    }
-    if (type === 0) {
-        cell(c, p.x, p.y, rnd(5) + 1)
-    }
+    // setFillStyle(c, p.colors[type])
+    // if (type === 2) {
+    //     drawCircle(c,p.x, p.y, rnd(2) + 1)
+    //     if (rnd() > 0.7) {
+    //         c.fill()
+    //     }
+    // }
+    // if (type === 0) {
+    //     cell(c, p.x, p.y, rnd(5) + 1)
+    // }
     p.started = true;
 }

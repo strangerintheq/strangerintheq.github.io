@@ -1,4 +1,4 @@
-import {poissonDiscSampler} from "./framework";
+import {PI, poissonDiscSampler, rndb, rndr45} from "./framework";
 import {many, pick} from "../tools";
 import {rnd} from "./framework";
 import {NeuralInterfaceSettings} from "./newSettings";
@@ -23,18 +23,19 @@ export function getPts(settings:NeuralInterfaceSettings, w,h) {
         let x = pt ? pt[0] : rnd(w);
         let y = pt ? pt[1] : rnd(h);
 
-
+        let dir = rndb() ?0:PI
 
         return {
             i, x, y,
+            dir,
             stopped: false,
-            width: rnd(1) + 0.5,
+            width: 0.1,
             started: false,
             colors: getColors(settings),
             reset() {
                 this.started = false;
-                this.x = x;
-                this.y = y;
+                this.x = rnd(w);
+                this.y = rnd(h);
             }
         }
     });

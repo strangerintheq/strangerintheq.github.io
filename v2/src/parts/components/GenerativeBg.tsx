@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useRef, useState} from "react";
 import {
     fillRect,
     prng2x,
-    randomHash, rnd,
+    randomHash, rnd, setLineWidth,
     setRandomGenerator, strokeRect
 } from "../generative-header/framework";
 import {NeuralInterfaceSettings, newSettings} from "../generative-header/newSettings";
@@ -37,13 +37,14 @@ export function GenerativeBg() {
             s.w = canvas.width = document.body.clientWidth;
             s.h = canvas.height = document.body.clientHeight;
             s.ctx = canvas.getContext("2d")
+            setLineWidth(s.ctx,0.1)
 
             let hash = randomHash()
             setRandomGenerator(prng2x(hash))
 
             const noise = new SimplexNoise();
 
-            let pal = ["#000", "#111", "#222", "#333", "#444"]
+            let pal = ["#000", "#000", "#000", "#000", "#000"]
             s.settings = newSettings(pal, s.w, s.h);
 
             s.restrictions = [...document.querySelectorAll(".mask .project-thumbnail, h2 span")].map((mask:any) => {
