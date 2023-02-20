@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <title>Stranger in the Q</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
-
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/6.8.1/react-router.production.min.js"
+            integrity="sha512-cHjzKyFLiViU4HbovTu14NMZXWJeO2MHOmvBp0rajRTeyADKm/ZatMB/19Y8HTHnfUC9o+hbYp+JjxCs/S8uAw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/6.8.1/react-router-dom.production.min.js"
+            integrity="sha512-VcZ/MeXop0l8q7+6f72DCz8s/TIiV/Aph/z3Ue0c1n4lK7lQWn7bjKuGAonvkLVQ4s5MC65iM2yE330PJ8lzlw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
 
         * {
@@ -43,6 +50,7 @@
             background-position: center center;
             display: flex;
             box-shadow: 0 0 5px 0 #9c9898;
+            /*opacity: 0.4;*/
         }
         .project-thumbnail:hover .project-info {
             opacity: 0.7;
@@ -75,49 +83,15 @@
             padding-bottom: calc(var(--base-size) * 0.025);
         }
 
-        @keyframes rotate {
-            0% {
-                transform: rotate(-30deg)
-            }
-            50% {
-                transform: rotate(-8deg)
-            }
-            100% {
-                transform: rotate(-30deg)
-            }
-        }
 
-        .header-img-wrapper {
-            width: 100vw;
-            height: 30vw;
-            overflow: hidden;
-            margin-bottom: -10vw;
-        }
 
-        .header-img {
-            animation: rotate 200s infinite;
-            width: 100vw;
-            height: 100vw;
-            margin-top: -75vw;
-            background: url("img/bg.png") no-repeat bottom center;
-            background-size: 100% 100%;
-        }
 
-        .footer-img {
-            width: 100vw;
-            height: 100vw;
-            background-size: contain;
-            background: radial-gradient(circle at 50% -170%, #ffffffff 65%, #ffffff00 72%),
-            url("img/bg.png") no-repeat 50% 50%;
-            background-size: 100% 100%;
-        }
 
-        .footer-img-wrapper {
-            margin-top: -15vw;
-            width: 100vw;
-            height: 30vw;
-            overflow: hidden;
-        }
+
+
+
+
+
 
         .separator {
             height: calc(100vw * 0.025);

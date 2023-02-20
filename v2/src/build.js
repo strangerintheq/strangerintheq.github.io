@@ -1,8 +1,9 @@
 (async function () {
+    const { externalGlobalPlugin } = require("esbuild-plugin-external-global");
     await require("esbuild").build({
         entryPoints: [`./index.tsx`],
         bundle: true,
-        minify: false,
+        minify: true,
         treeShaking: true,
         target: 'ESNext',
         loader: {
@@ -10,7 +11,20 @@
         },
         outfile: "../index.js",
         sourcemap: false,
-        // external: ["react", "react-dom", "react-router", "react-router-dom"]
+        plugins: [
+            externalGlobalPlugin({
+                'react': 'window.React',
+                 // 'react-router': 'window.ReactRouter',
+                'react-dom': 'window.ReactDOM',
+                // 'react-router-dom': 'window.ReactRouterDOM',
+            })
+        ]
+        // external: [
+        //     "react",
+        //     "react-dom",
+            // "react-router",
+            // "react-router-dom"
+        // ]
     });
 
 })();

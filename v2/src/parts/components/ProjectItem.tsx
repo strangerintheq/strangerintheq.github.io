@@ -25,7 +25,7 @@ export function ProjectItem(
             "/" + (hash || makeHash(type))
     const gridColumn = c
     const gridRow = r
-    return <div style={{ gridColumn,gridRow, lineHeight:0}}>
+    return <div className={"mask"} style={{ gridColumn,gridRow, lineHeight:0}}>
         <Link to={to}>
             <div
                 className={"project-thumbnail"}

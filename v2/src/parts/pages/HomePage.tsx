@@ -6,7 +6,7 @@ import {Button} from "../parts/Button";
 import {TenturaHomeSection} from "./home/TenturaHomeSection";
 import {SliceHomeSection} from "./home/SliceHomeSection";
 import {FxHashHomeSection} from "./home/FxHashHomeSection";
-import {GenerativeHeader} from "../components/GenerativeHeader";
+import {GenerativeBg} from "../components/GenerativeBg";
 
 export function HomePage() {
     return <PageWrapper>
@@ -19,7 +19,7 @@ export function HomePage() {
             }}
         >
 
-            <img className={"avatar"} src={sitePath + '/resources/avatar.jpg'}/>
+            {/*<img className={"avatar"} src={sitePath + '/resources/avatar.jpg'}/>*/}
 
             {/*<div>*/}
             {/*    Hello there! <br/>*/}

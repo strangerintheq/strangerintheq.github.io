@@ -1,5 +1,5 @@
-export function many(x, f) {
-    return [...Array(x)].map((_,i) => f(i));
+export function many(n, f) {
+    return [...Array(n|0)].map((_,i) => f(i));
 }
 
 export function pick(arr){

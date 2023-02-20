@@ -1,12 +1,16 @@
 import {rnd} from "./framework";
+import {NeuralInterfaceSettings} from "./newSettings";
+import {NeuralInterfaceFlowField} from "./createField";
 
-export function circleOnField(field) {
+export function circleOnField(
+    field: NeuralInterfaceFlowField[][],
+    settings: NeuralInterfaceSettings
+) {
     let
         n = 100,
         r = rnd(4) + 2,
-        cellCount = field.length,
-        cx = rnd(cellCount),
-        cy = rnd(cellCount);
+        cx = rnd(settings.cellCountX),
+        cy = rnd(settings.cellCountY);
 
     for (let i = 0; i < n; i++) {
         // r -= 0.05

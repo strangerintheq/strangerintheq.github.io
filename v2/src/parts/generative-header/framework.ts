@@ -4,7 +4,7 @@ type C2d = CanvasRenderingContext2D;
 type Color = string;
 
 export const {
-    PI, sqrt, abs, sin, cos, pow, max, min, atan2,
+    PI, SQRT1_2, sqrt, abs, sin, cos, pow, max, min, atan2,
     sign, round, floor, ceil, hypot, asin
 } = Math
 
@@ -103,6 +103,10 @@ export const fillRect = (ctx: C2d, color: Color, x, y, w, h) => {
     setFillStyle(ctx, color)
     ctx.fillRect(x, y, w, h)
 };
+export const strokeRect = (ctx: C2d, color: Color, x, y, w, h) => {
+    setStrokeStyle(ctx, color)
+    ctx.strokeRect(x, y, w, h)
+};
 
 export const clearCanvas = (ctx: C2d, color?: Color) => {
     if (color)
@@ -139,7 +143,7 @@ export const drawLineSeg = (ctx: C2d, [{x, y}, {x: x1, y: y1}]) => {
 
 export const drawCircle = (ctx, x, y, r) => {
     ctx.beginPath()
-    ctx.arc(x, y, r, 0, 2 * Math.PI)
+    ctx.arc(x, y, r, 0, 2 * PI)
     ctx.fill()
 };
 
@@ -147,32 +151,34 @@ export const poissonDiscSampler = (width, height, radius) => {
     var k = 30, // maximum number of samples before rejection
         radius2 = radius * radius,
         R = 3 * radius2,
-        cellSize = radius * Math.SQRT1_2,
-        gridWidth = Math.ceil(width / cellSize),
-        gridHeight = Math.ceil(height / cellSize),
-        grid = new Array(gridWidth * gridHeight),
+        cellSize = radius * SQRT1_2,
+        gridWidth = ceil(width / cellSize),
+        gridHeight = ceil(height / cellSize),
+        grid = Array(gridWidth * gridHeight),
         queue = [],
         queueSize = 0,
         sampleSize = 0;
 
     return function() {
-        if (!sampleSize) return sample(Math.random() * width, Math.random() * height);
+        if (!sampleSize)
+            return sample(rnd() * width, rnd()  * height);
 
         // Pick a random existing sample and remove it from the queue.
         while (queueSize) {
-            var i = Math.random() * queueSize | 0,
+            var i = rnd()  * queueSize | 0,
                 s = queue[i];
 
             // Make a new candidate between [radius, 2 * radius] from the existing sample.
             for (var j = 0; j < k; ++j) {
-                var a = 2 * Math.PI * Math.random(),
-                    r = Math.sqrt(Math.random() * R + radius2),
-                    x = s[0] + r * Math.cos(a),
-                    y = s[1] + r * Math.sin(a);
+                var a = 2 * PI * rnd() ,
+                    r = sqrt(rnd()  * R + radius2),
+                    x = s[0] + r * cos(a),
+                    y = s[1] + r * sin(a);
 
                 // Reject candidates that are outside the allowed extent,
                 // or closer than 2 * radius to any existing sample.
-                if (0 <= x && x < width && 0 <= y && y < height && far(x, y)) return sample(x, y);
+                if (0 <= x && x < width && 0 <= y && y < height && far(x, y))
+                    return sample(x, y);
             }
 
             queue[i] = queue[--queueSize];
@@ -183,10 +189,10 @@ export const poissonDiscSampler = (width, height, radius) => {
     function far(x, y) {
         var i = x / cellSize | 0,
             j = y / cellSize | 0,
-            i0 = Math.max(i - 2, 0),
-            j0 = Math.max(j - 2, 0),
-            i1 = Math.min(i + 3, gridWidth),
-            j1 = Math.min(j + 3, gridHeight);
+            i0 = max(i - 2, 0),
+            j0 = max(j - 2, 0),
+            i1 = min(i + 3, gridWidth),
+            j1 = min(j + 3, gridHeight);
 
         for (j = j0; j < j1; ++j) {
             var o = j * gridWidth;
@@ -213,30 +219,3 @@ export const poissonDiscSampler = (width, height, radius) => {
     }
 };
 
-export const appendCanvas = (canvas) => {
-    return window.onload = () => document.body.append(canvas)
-};
-
-export const createCanvas = (
-    ratio: number = 1,
-    scale: number = 1
-) => {
-    const canvas = document.createElement('canvas');
-    let iw = innerWidth;
-    let ih = innerHeight;
-    const fitByHeight = ratio < iw / ih;
-
-    const st = canvas.style
-    st.width = fitByHeight ? `calc(100vh*${ratio})` : '100vw'
-    st.height = fitByHeight ? '100vh' : `calc(100vw/${ratio})`
-    canvas.width = ((fitByHeight ? ih * ratio : iw) | 0) * scale;
-    canvas.height = ((fitByHeight ? ih : iw / ratio) | 0) * scale;
-    return  canvas
-}
-
-export const createCanvas2D = (
-    ratio: number = 1,
-    scale: number = 1
-) => {
-    return  createCanvas(ratio, scale).getContext('2d');
-}

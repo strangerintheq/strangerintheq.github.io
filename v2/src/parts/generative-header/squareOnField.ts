@@ -1,12 +1,21 @@
 import {rnd} from "./framework";
 import {many} from "../tools";
+import {NeuralInterfaceFlowField} from "./createField";
+import {NeuralInterfaceSettings} from "./newSettings";
 
 
-export function squareOnField(field){
+export function squareOnField(
+    field: NeuralInterfaceFlowField[][],
+    settings: NeuralInterfaceSettings
+){
     let w = 5 + rnd(15)|0;
     let h = 5 + rnd(15)|0;
-    let x = rnd(field.length) | 0;
-    let y = rnd(field.length) | 0;
+    let x = rnd(settings.cellCountX) | 0;
+    let y = rnd(settings.cellCountY) | 0;
+    addSquareOnField(x,y,w,h,field)
+}
+
+export function addSquareOnField(x,y,w,h,field: NeuralInterfaceFlowField[][]){
     many(w, i => {
         try {
             field[x+i][y][0] = 0

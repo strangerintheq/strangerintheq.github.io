@@ -4,7 +4,7 @@ import {ProjectItem} from "../../components/ProjectItem";
 
 export function SliceHomeSection(props) {
     return <div style={{marginTop:80, backgroundColor: "white",}}>
-        <h2>SL/CE</h2>
+        <h2><span>SL/CE</span></h2>
         <div style={{
             marginTop: 40,
             display: "grid",

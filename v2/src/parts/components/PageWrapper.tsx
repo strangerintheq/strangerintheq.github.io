@@ -1,9 +1,9 @@
 import React from "react";
-import {GenerativeHeader} from "./GenerativeHeader";
+import {GenerativeBg} from "./GenerativeBg";
 
 export function PageWrapper(props) {
     return <>
-        <GenerativeHeader/>
+        <GenerativeBg/>
         <div
             className={'content-wrapper'}
             // style={{

@@ -4,7 +4,7 @@ import {ProjectItem} from "../../components/ProjectItem";
 
 export function TenturaHomeSection(props) {
     return <div style={{marginTop:80,           backgroundColor: "white",}}>
-        <h2>Tentura</h2>
+        <h2><span>Tentura</span></h2>
         <div style={{
 
             marginTop: 40,

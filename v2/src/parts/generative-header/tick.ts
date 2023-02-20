@@ -10,13 +10,23 @@ import {
 
 import {cos, rnd, sin} from "./framework";
 
-export function tick(field, p, size,
+export function tick(field, p, w, h,
                      settings:NeuralInterfaceSettings,
-                     c:CanvasRenderingContext2D
+                     c:CanvasRenderingContext2D,
+                     restrict
 ){
     try {
-        const ix = (p.x / size * settings.cellCount) | 0;
-        const iy = (p.y / size * settings.cellCount) | 0;
+        if (p.stoped)
+            return;
+
+        if (restrict(p.x, p.y)){
+            p.stoped = true;
+            return;
+        }
+
+
+        const ix = (p.x / w * settings.cellCountX) | 0;
+        const iy = (p.y / h * settings.cellCountY) | 0;
         let fix = field[ix];
         if (!fix)
             return
@@ -27,7 +37,7 @@ export function tick(field, p, size,
         const type = fixiy[1];
         setLineWidth(c, p.width)
         setStrokeStyle(c, p.colors[type])
-        const step = 3;
+        const step = 5;
         const x = p.x + cos(a) * step;
         const y = p.y + sin(a) * step;
         start(p, type, c);
