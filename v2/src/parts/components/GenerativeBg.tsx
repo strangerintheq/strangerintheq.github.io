@@ -46,7 +46,7 @@ export function GenerativeBg() {
             let pal = ["#000", "#111", "#222", "#333", "#444"]
             s.settings = newSettings(pal, s.w, s.h);
 
-            s.restrictions = [...document.querySelectorAll(".mask .project-thumbnail, h2 span")].map((mask) => {
+            s.restrictions = [...document.querySelectorAll(".mask .project-thumbnail, h2 span")].map((mask:any) => {
                 let pad = 5;
                 let rect = {
                     top: mask.offsetTop - pad,
@@ -89,8 +89,7 @@ export function GenerativeBg() {
 
         function loop(t) {
             drawFrame()
-
-                s.rafLoop = requestAnimationFrame(loop)
+            s.rafLoop = requestAnimationFrame(loop)
         }
 
         return () => {

@@ -15,7 +15,7 @@ function getColors(settings){
 export function getPts(settings:NeuralInterfaceSettings, w,h) {
 
 
-    const sampler = poissonDiscSampler(w, h, w/20);
+    const sampler = poissonDiscSampler(w, h, w/5);
 
 
     return many(settings.count, (i) => {
