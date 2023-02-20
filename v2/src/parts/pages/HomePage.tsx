@@ -6,6 +6,7 @@ import {Button} from "../parts/Button";
 import {TenturaHomeSection} from "./home/TenturaHomeSection";
 import {SliceHomeSection} from "./home/SliceHomeSection";
 import {FxHashHomeSection} from "./home/FxHashHomeSection";
+import {GenerativeHeader} from "../components/GenerativeHeader";
 
 export function HomePage() {
     return <PageWrapper>
@@ -17,6 +18,7 @@ export function HomePage() {
                 // gridTemplateColumns: '100%'
             }}
         >
+
             <img className={"avatar"} src={sitePath + '/resources/avatar.jpg'}/>
 
             {/*<div>*/}

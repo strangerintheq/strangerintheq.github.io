@@ -3,9 +3,10 @@ import {ProjectThumbnail} from "../../components/ProjectThumbnail";
 import {ProjectItem} from "../../components/ProjectItem";
 
 export function TenturaHomeSection(props) {
-    return <div style={{marginTop:80}}>
-        <h2>Tentura @ artblocks.io</h2>
+    return <div style={{marginTop:80,           backgroundColor: "white",}}>
+        <h2>Tentura</h2>
         <div style={{
+
             marginTop: 40,
             display: "grid",
             gap: "2%",

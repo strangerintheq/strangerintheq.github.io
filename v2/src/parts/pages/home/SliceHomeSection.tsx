@@ -3,8 +3,8 @@ import {ProjectThumbnail} from "../../components/ProjectThumbnail";
 import {ProjectItem} from "../../components/ProjectItem";
 
 export function SliceHomeSection(props) {
-    return <div style={{marginTop:80}}>
-        <h2>SL/CE @ artblocks.io</h2>
+    return <div style={{marginTop:80, backgroundColor: "white",}}>
+        <h2>SL/CE</h2>
         <div style={{
             marginTop: 40,
             display: "grid",
@@ -17,45 +17,45 @@ export function SliceHomeSection(props) {
                 r={"1/3"}
                 hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
                 type={"artblocks"}
-                name={"Tentura"}
+                name={"SL/CE"}
                 img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_3840,q_auto/https://artblocks-mainnet.s3.amazonaws.com/419000000.png"}
-                generator={'tentura'}
+                generator={'slice'}
             />
             <ProjectItem
                 w={0.25}
                 h={0.25*1.618}
                 hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
                 type={"artblocks"}
-                name={"Tentura"}
-                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_3840,q_auto/https://artblocks-mainnet.s3.amazonaws.com/419000000.png"}
-                generator={'tentura'}
+                name={"SL/CE"}
+                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000189.png"}
+                generator={'slice'}
             />
             <ProjectItem
                 w={0.25}
                 h={0.25*1.618}
                 hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
                 type={"artblocks"}
-                name={"Tentura"}
-                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_3840,q_auto/https://artblocks-mainnet.s3.amazonaws.com/419000000.png"}
-                generator={'tentura'}
+                name={"SL/CE"}
+                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000161.png"}
+                generator={'slice'}
             />
             <ProjectItem
                 w={0.25}
                 h={0.25*1.618}
                 hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
                 type={"artblocks"}
-                name={"Tentura"}
-                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_3840,q_auto/https://artblocks-mainnet.s3.amazonaws.com/419000000.png"}
-                generator={'tentura'}
+                name={"SL/CE"}
+                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000015.png"}
+                generator={'slice'}
             />
             <ProjectItem
                 w={0.25}
                 h={0.25*1.618}
                 hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
                 type={"artblocks"}
-                name={"Tentura"}
-                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_3840,q_auto/https://artblocks-mainnet.s3.amazonaws.com/419000000.png"}
-                generator={'tentura'}
+                name={"SL/CE"}
+                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000055.png"}
+                generator={'slice'}
             />
         </div>
     </div>

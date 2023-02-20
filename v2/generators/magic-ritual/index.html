@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- saved from url=(0139)https://gateway.fxhash2.xyz/ipfs/QmbrBE2MUGXmz9aJYPxwMoMhqEfeQmT4TWjekbsXgk3VG5/?fxhash=ookiXAnGJw28AAv6JVLXiyZceTF9nJSRAxgytsUDV9Gu3na4zeN -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<script id="fxhash-snippet">
+      let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+      var fxhash = new URLSearchParams(window.location.search).get('fxhash')
+      let b58dec = str=>[...str].reduce((p,c)=>p*alphabet.length+alphabet.indexOf(c)|0, 0)
+      let fxhashTrunc = fxhash.slice(2)
+      let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')
+      let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+      let sfc32 = (a, b, c, d) => {
+        return () => {
+          a |= 0; b |= 0; c |= 0; d |= 0
+          var t = (a + b | 0) + d | 0
+          d = d + 1 | 0
+          a = b ^ b >>> 9
+          b = c + (c << 3) | 0
+          c = c << 21 | c >>> 11
+          c = c + t | 0
+          return (t >>> 0) / 4294967296
+        }
+      }
+      var fxrand = sfc32(...hashes)
+      // used to get features during token mint
+      window.addEventListener("message", (event) => {
+        if (event.data === "fxhash_getFeatures") {
+          parent.postMessage({
+            id: "fxhash_getFeatures",
+            data: window.$fxhashFeatures
+          }, "*")
+        }
+      })
+      var isFxpreview = new URLSearchParams(window.location.search).get('preview') === "1"
+      function fxpreview() {
+        window.dispatchEvent(new Event("fxhash-preview"))
+        setTimeout(() => fxpreview(), 500)
+      }
+</script>
+<title>Magic Ritual</title>
+</head>
+<body style="margin: 0;overflow: hidden">
+<script>
+    const{PI:e,sin:n,cos:a,sign:t}=Math,c=(e=1,n=0)=>n+fxrand()*e,o=(e,n=0)=>n+c(e)|0,f=(e=1)=>c(e)-e/2,r=(e=.5)=>c()>e,i=e=>e[o(e.length)],d=(e,n)=>[...Array(0|e)].map((e,a)=>n(a)),s=document.createElement("canvas"),v=innerWidth,l=innerHeight,x=v/l,h=v/l<x,R=s.style;s.width=h?v:l*x,s.height=h?v/x:l,R.width=v+"px",R.height=l+"px",s.width*=2,s.height*=2,document.body.append(s);const b=s.getContext("webgl2"),p=b.createProgram(),D=(e,n)=>{const a=b.createShader(n),t=(n,a)=>e=e.split(n).map((e,n,t)=>e+(n+1<t.length?a():"")).join("");var o;t("RND2",(o=2,()=>`vec${o}(${d(o,()=>c())})`)),t("RNDS",f),t("RND",c),b.shaderSource(a,"#version 300 es\nprecision highp float;\n"+e),b.compileShader(a),b.attachShader(p,a)},u=i([0,f(.5)]),N=i([8,9,10,11]),m=i(["UV.y*UV.y*RND*0.5","UV.x*UV.x*RND*0.5","abs(UV.x)*abs(UV.y+RNDS*0.4)*RND*0.5","(abs(UV.x)+RNDS)*RND*0.5","(RNDS-abs(UV.x))*RND*0.5"]),g=["uv.x = abs(uv.x-RND*0.1     )-0.1*RND  ","uv.y = abs(uv.y-RND*0.1     )-0.1*RND  ","uv   = abs(uv-(RND2-0.5)*0.1)-0.1*RND  "];r()&&g.splice(o(g.length),1),D("in vec2 p;void main(){gl_Position=vec4(p+1.,0,1);}",b.VERTEX_SHADER);let y=i([["#fdf0d5","#669bbc","#c1121f","#780000","#003049"],["#F2F1DF","#F2BD1D","#D94711","#591812","#181212"],["#f0ffce","#ccc9a1","#a53f2b","#60290e","#280004"],["#FFFFFF","#dddddd","#444444","#888888","#000000"],["#fff7f4","#ffc6c6","#ff2f4e","#c60a5f","#820a5f"],["#f1faee","#e63946","#a8ccdc","#457b9d","#1d3557"],["#dff3e4","#bca2cd","#7d73c6","#684da2","#171738"],["#f5f1ed","#dad2bc","#a99985","#252323"],["#e4e1db","#D96B0B","#BF1304","#8C1308","#4465A6"],["#fffcf2","#ccc5b9","#503d39","#252422","#eb5e28"],["#e0fbfc","#98c1d9","#3d5a80","#293241"],["#ecf39e","#90a955","#4f772d","#31572c","#132a13"],["#f4d58d","#bf0603","#8d0801","#662537","#001427"],["#faf1dc","#ff871f","#b80000","#822424","#29293d"],["#fbfffe","#96031a","#1b1b1e","#6d676e","#faa916"],["#fffeef","#f4ca55","#d6644a","#284862"],["#fafaf9","#F29F05","#F20505","#233479"]]),F=r();D(`\n${((e,n=e.length,a=((e,n)=>(parseInt(e.substr(n,2),16)/255).toFixed(4)),t=(e=>`vec3(${a(e,1)},${a(e,3)},${a(e,5)});`))=>`vec3 color(float x){x=mod(x,${n}.);${d(n,n=>`if (x < ${n+1}.)return ${t(e[n])}`).join("")}}vec3 palette(float x){return mix(color(x),color(x+1.),fract(x));}`)(y)}\nuniform float t;\nvec2 r = vec2(${[s.width,s.height]});\nout vec4 o;\nfloat noise(vec2 xx) {\n  vec3 p = vec3(xx, t/2.);\n  vec3 ip=floor(p),s=vec3(7,157,113); p-=ip;\n  vec4 h=vec4(0,s.yz,s.y+s.z)+dot(ip,s);\n  h=mix(fract(sin(h)*43758.5), fract(sin(h+s.x)*43758.5),p.x*float(${i([1,.5,1])}));\n  h.xy=mix(h.xz,h.yw,p.y);\n  return mix(h.x,h.y,p.z);\n}\nfloat fbm ( in vec2 x) {\n    float v, a = .5;vec2 shift = vec2(9.);\n    for (int i = 0; i < 5; ++i) {v += a * noise(x); x = x * 2.0 + shift; a *= 0.5;}\n    return v;\n}\nvoid main() {\n    vec2 uv = gl_FragCoord.xy / r.xy - 0.5;\n    uv.x *= r.x / r.y;\n    uv *=RND+.8;\n    vec2 UV = uv * mat2(${[a(u),n(u),-n(u),a(u)]});;\n    float d, k=1., a;\n    ${d(N,()=>`\n        ${i(g)+"+"+m};\n        uv += vec2(sin(t*RND),cos(t*RND))*0.005;\n\n        ${F?"a = RNDS*0.3;uv = uv * mat2(cos(a),sin(a),-sin(a), cos(a));":""}\n        ${r(.9)?"":i(["d += k*log(abs(uv.x) +abs(uv.y));","d += k*log(length(uv));"])}\n    `).join("")}\n\n\n    float pd, e, r;\n    ${d(i([3]),e=>`\n        pd = 4. * float(${t(e%2-.5)});\n        e = 0.1;\n        r = (RND+1.) * 0.2;\n        d += pd*smoothstep(r, r+e, length(UV - vec2(float(${e-1})*0.3,RNDS*0.5) ));\n    `).join("")}\n\n    d += UV.y*22.;\n    d += fbm(UV*(RND+.1)*25.)*4.;\n\n    vec3 color = palette(4.+d/float(${N/1.2}));\n    color = pow(color, vec3(2.2));\n    // color = mix(color, vec3(0), smoothstep(-0.3,-0.5, UV.y));\n    o = vec4( clamp(color, 0.,1.), 1.0 );\n}\n`,b.FRAGMENT_SHADER),b.linkProgram(p),b.useProgram(p);const $=b.createBuffer();b.bindBuffer(b.ARRAY_BUFFER,$);const A=b.getAttribLocation(p,"p");b.enableVertexAttribArray(A),b.bufferData(b.ARRAY_BUFFER,new Float32Array([-2,2,-2,-2,2,-2]),b.STATIC_DRAW),b.vertexAttribPointer(A,2,b.FLOAT,!1,0,0),b.drawArrays(b.TRIANGLES,0,3)
+</script><canvas width="1410" height="1764" style="width: 705px; height: 882px;"></canvas>
+
+</body></html>
