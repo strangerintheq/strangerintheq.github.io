@@ -62,7 +62,9 @@ export function GenerativeBg() {
 
             s.field = createField(noise, s.settings, rnd(111));
 
-            s.pts = getPts(s.settings, s.w, s.h);
+            s.pts = getPts(s.settings, s.w, s.h).filter(p => {
+                return !s.restrictions.find(box => inside(p.x, p.y, box))
+            });
             setIsInitialized(true)
         }, 111)
         // fillRect(stateRef.current.ctx, 'black', -1e5,-1e5,2e5,2e5)
