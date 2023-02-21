@@ -3630,10 +3630,10 @@
   }
 
   // parts/pages/ProjectsPage.tsx
-  var import_react5 = __toESM(require_react());
+  var import_react4 = __toESM(require_react());
 
   // parts/pages/home/TenturaHomeSection.tsx
-  var import_react4 = __toESM(require_react());
+  var import_react3 = __toESM(require_react());
 
   // parts/components/ProjectItem.tsx
   var import_react = __toESM(require_react());
@@ -3702,29 +3702,14 @@
     return randomFxHash();
   }
 
-  // parts/parts/useMediaQuery.ts
-  var import_react2 = __toESM(require_react());
-  function useMediaQuery(query) {
-    const queryRef = (0, import_react2.useRef)(window.matchMedia(query));
-    const [matches, setMatches] = (0, import_react2.useState)(queryRef.current.matches);
-    (0, import_react2.useEffect)(() => {
-      const listener = (e) => setMatches(e.matches);
-      queryRef.current.addEventListener("change", listener);
-      return () => {
-        queryRef.current.removeEventListener("change", listener);
-      };
-    }, []);
-    return { matches };
-  }
-
   // parts/pages/home/ProjectsGrid.tsx
-  var import_react3 = __toESM(require_react());
+  var import_react2 = __toESM(require_react());
   function ProjectsGrid({ children = null, title, ratio, isMobile, rows }) {
     const gap = isMobile ? 0.02 : 0.01;
     const cellSize = (0.8 - gap * (isMobile ? 1 : 3)) / (isMobile ? 2 : 4);
     const w = fromBaseSize(cellSize);
     const h = fromBaseSize(cellSize * ratio);
-    return /* @__PURE__ */ import_react3.default.createElement("div", { style: { marginTop: 80 } }, /* @__PURE__ */ import_react3.default.createElement("div", { style: { fontSize: "2em" } }, /* @__PURE__ */ import_react3.default.createElement("span", null, title)), /* @__PURE__ */ import_react3.default.createElement("div", { style: {
+    return /* @__PURE__ */ import_react2.default.createElement("div", { style: { marginTop: 80 } }, /* @__PURE__ */ import_react2.default.createElement("div", { style: { fontSize: "2em" } }, /* @__PURE__ */ import_react2.default.createElement("span", null, title)), /* @__PURE__ */ import_react2.default.createElement("div", { style: {
       marginTop: 40,
       display: "grid",
       gap: `calc(var(--base-size) * ${gap})`,
@@ -3737,8 +3722,7 @@
   }
 
   // parts/pages/home/TenturaHomeSection.tsx
-  function TenturaHomeSection(props) {
-    const { matches: isMobile } = useMediaQuery("(max-width: 980px)");
+  function TenturaHomeSection({ isMobile }) {
     const imgSize = 640;
     const img = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://artblocks-mainnet.s3.amazonaws.com/";
     const tentura = {
@@ -3746,7 +3730,7 @@
       name: "Tentura",
       generator: "tentura"
     };
-    return /* @__PURE__ */ import_react4.default.createElement(ProjectsGrid, { title: "Tentura", ratio: 1, isMobile, rows: isMobile ? 4 : 2 }, /* @__PURE__ */ import_react4.default.createElement(
+    return /* @__PURE__ */ import_react3.default.createElement(ProjectsGrid, { title: "Tentura", ratio: 1, isMobile, rows: isMobile ? 4 : 2 }, /* @__PURE__ */ import_react3.default.createElement(
       ProjectItem,
       {
         ...tentura,
@@ -3756,42 +3740,34 @@
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: img + "265000000.png"
       }
-    ), /* @__PURE__ */ import_react4.default.createElement(
+    ), /* @__PURE__ */ import_react3.default.createElement(
       ProjectItem,
       {
         ...tentura,
-        c: 1,
-        r: isMobile ? 3 : 1,
         id: "265000031",
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: img + "265000031.png"
       }
-    ), /* @__PURE__ */ import_react4.default.createElement(
+    ), /* @__PURE__ */ import_react3.default.createElement(
       ProjectItem,
       {
         ...tentura,
-        c: 1,
-        r: isMobile ? 4 : 2,
         id: "265000197",
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: img + "265000197.png"
       }
-    ), /* @__PURE__ */ import_react4.default.createElement(
+    ), /* @__PURE__ */ import_react3.default.createElement(
       ProjectItem,
       {
         ...tentura,
-        c: isMobile ? 2 : 4,
-        r: isMobile ? 3 : 1,
         id: "265000212",
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: img + "265000212.png"
       }
-    ), /* @__PURE__ */ import_react4.default.createElement(
+    ), /* @__PURE__ */ import_react3.default.createElement(
       ProjectItem,
       {
         ...tentura,
-        c: isMobile ? 2 : 4,
-        r: isMobile ? 4 : 2,
         id: "265000269",
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: img + "265000269.png"
@@ -3801,16 +3777,16 @@
 
   // parts/pages/ProjectsPage.tsx
   function ProjectsPage() {
-    return /* @__PURE__ */ import_react5.default.createElement("div", null, /* @__PURE__ */ import_react5.default.createElement(TenturaHomeSection, null));
+    return /* @__PURE__ */ import_react4.default.createElement("div", null, /* @__PURE__ */ import_react4.default.createElement(TenturaHomeSection, null));
   }
 
   // parts/pages/HomePage.tsx
   var import_react9 = __toESM(require_react());
 
   // parts/components/PageWrapper.tsx
-  var import_react6 = __toESM(require_react());
+  var import_react5 = __toESM(require_react());
   function PageWrapper(props) {
-    return /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement(
+    return /* @__PURE__ */ import_react5.default.createElement(import_react5.default.Fragment, null, /* @__PURE__ */ import_react5.default.createElement(
       "div",
       {
         className: "content-wrapper"
@@ -3820,9 +3796,8 @@
   }
 
   // parts/pages/home/SliceHomeSection.tsx
-  var import_react7 = __toESM(require_react());
-  function SliceHomeSection(props) {
-    const { matches: isMobile } = useMediaQuery("(max-width: 980px)");
+  var import_react6 = __toESM(require_react());
+  function SliceHomeSection({ isMobile }) {
     const imgSize = 640;
     const mainNet = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://artblocks-mainnet.s3.amazonaws.com/";
     const staging = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/";
@@ -3831,7 +3806,7 @@
       name: "SL/CE",
       generator: "slice"
     };
-    return /* @__PURE__ */ import_react7.default.createElement(ProjectsGrid, { isMobile, title: "SL/CE", rows: isMobile ? 4 : 2, ratio: 1.618 }, /* @__PURE__ */ import_react7.default.createElement(
+    return /* @__PURE__ */ import_react6.default.createElement(ProjectsGrid, { isMobile, title: "SL/CE", rows: isMobile ? 4 : 2, ratio: 1.618 }, /* @__PURE__ */ import_react6.default.createElement(
       ProjectItem,
       {
         ...slice,
@@ -3840,39 +3815,31 @@
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: mainNet + "419000000.png"
       }
-    ), /* @__PURE__ */ import_react7.default.createElement(
+    ), /* @__PURE__ */ import_react6.default.createElement(
       ProjectItem,
       {
         ...slice,
-        c: 1,
-        r: isMobile ? 3 : 1,
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: staging + "48000189.png"
       }
-    ), /* @__PURE__ */ import_react7.default.createElement(
+    ), /* @__PURE__ */ import_react6.default.createElement(
       ProjectItem,
       {
         ...slice,
-        c: 1,
-        r: isMobile ? 4 : 2,
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: staging + "48000161.png"
       }
-    ), /* @__PURE__ */ import_react7.default.createElement(
+    ), /* @__PURE__ */ import_react6.default.createElement(
       ProjectItem,
       {
         ...slice,
-        c: isMobile ? 2 : 4,
-        r: isMobile ? 3 : 1,
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: staging + "48000015.png"
       }
-    ), /* @__PURE__ */ import_react7.default.createElement(
+    ), /* @__PURE__ */ import_react6.default.createElement(
       ProjectItem,
       {
         ...slice,
-        c: isMobile ? 2 : 4,
-        r: isMobile ? 4 : 2,
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: staging + "48000055.png"
       }
@@ -3880,23 +3847,143 @@
   }
 
   // parts/pages/home/FxHashHomeSection.tsx
+  var import_react7 = __toESM(require_react());
+  function FxHashHomeSection({ isMobile }) {
+    return /* @__PURE__ */ import_react7.default.createElement(ProjectsGrid, { isMobile, ratio: 1, rows: isMobile ? 8 : 4, title: "Fx(hash)" }, /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        hash: "ookiXAnGJw28AAv6JVLXiyZceTF9nJSRAxgytsUDV9Gu3na4zeN",
+        name: "Magic Ritual",
+        img: "https://media.fxhash.xyz/w_768/QmbABZquDop8bhVWb49HcU7t4vFgHU1s9ZFomPxeznmr4J",
+        generator: "magic-ritual"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        hash: "oo2WuxbvWm77MLimMCfrt54zXRHhe8HcFqPVPfGxF53Be85Rnhe",
+        name: "Mayan Carpet",
+        img: "https://gateway.fxhash.xyz/ipfs/QmScLVUE7HzUvSWy1hTVsqA2WCU6icED9BQbgVDHt4xJV2",
+        about: "/mayan-carpet",
+        generator: "mayan-carpet"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        hash: "oo274c4kMq5xbm7CpvJ6rDHatuuZwhEACfgaQ4BXy9XX4eTu4q7",
+        name: "Other side of the Amulet",
+        img: "https://media.fxhash.xyz/w_768/QmWs8VMiyr5FTSSfjvf1g3bprS8JNxM8wzAbXFRvVnR3aG",
+        about: "/slice",
+        generator: "other-side-of-the-amulet"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Hyperspacers",
+        img: "https://media.fxhash.xyz/w_768/QmP67iCt3gayuZGVLafGSYfXUgkJ35hbyiDxgNsGN6LZNQ",
+        generator: "hpsp"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Amulet",
+        img: "https://media.fxhash.xyz/w_768/QmNrMUYWUWMWjMyN6focKCBKMMqGcFofhvxMHBGNmUxYG6",
+        generator: "amlt"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Let it snow",
+        img: "https://media.fxhash.xyz/w_768/QmeawuQK778D1zkaiha7wDDoav9btPaNA5SkkrXYuhDPyZ",
+        generator: "amlt"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Mitosis",
+        img: "https://media.fxhash.xyz/w_768/QmeNYkvW72PY1FA14E3NP2fnHfuNvpQQhowFgJ7cZbGuXf",
+        generator: "amlt"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Cellulae",
+        img: "https://media.fxhash.xyz/w_768/QmTP2YDBnWNohuAD5mtvDsEMdPa6Edf4Tf8rCS5MyhKAzX",
+        generator: "amlt"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Arachna",
+        img: "https://media.fxhash.xyz/w_768/QmXzaZC1CfSQBm9f7CoBjsBAM153HNYermqY8CPoSdkSYB",
+        generator: "amlt"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Gravitzappa",
+        img: "https://media.fxhash.xyz/w_768/Qmd2NxZiw3kxWowXcu3ZBfCT633UVfstYDV3zJSaLAmcJn",
+        generator: "grvc"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Plexus",
+        img: "https://media.fxhash.xyz/w_768/QmY81Ege4BLhYetp4JTH1Z7KMZmvKmy5vZmtjsSyr2YsH2",
+        generator: "amlt"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Squatree",
+        img: "https://media.fxhash.xyz/w_768/QmbBzpLyJAitVDn8hkv6JAF6kZRkk46Eba3UKfNXrTWGc8",
+        generator: "amlt"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Subdivisual",
+        img: "https://media.fxhash.xyz/w_768/QmPboz6imodN7YnaUvMnS2XPGCAeGD9CAVHLXtoXu8uZWX",
+        generator: "amlt"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Hidden Square",
+        img: "https://media.fxhash.xyz/w_768/QmQ8TYQ8qb29BxTp8kASocMirfuGf5nMXpArEohpG9tzuX",
+        generator: "hdsq"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        name: "Generotique",
+        img: "https://media.fxhash.xyz/w_768/QmQiLxQxKNcJaH17kzj27KDMkYYardx1q4o7v3pTvNHJGP",
+        generator: "amlt"
+      }
+    ));
+  }
+
+  // parts/parts/useMediaQuery.ts
   var import_react8 = __toESM(require_react());
-  function FxHashHomeSection(props) {
-    return /* @__PURE__ */ import_react8.default.createElement("div", { style: { marginTop: 80 } }, /* @__PURE__ */ import_react8.default.createElement("h2", null, /* @__PURE__ */ import_react8.default.createElement("span", null, "fx(hash)")), /* @__PURE__ */ import_react8.default.createElement("div", { style: {
-      marginTop: 40,
-      marginBottom: 40,
-      display: "grid",
-      gap: "2%",
-      gridTemplateColumns: "23.5% 23.5% 23.5% 23.5%"
-    } }));
+  function useMediaQuery(query) {
+    const queryRef = (0, import_react8.useRef)(window.matchMedia(query));
+    const [matches, setMatches] = (0, import_react8.useState)(queryRef.current.matches);
+    (0, import_react8.useEffect)(() => {
+      const listener = (e) => setMatches(e.matches);
+      queryRef.current.addEventListener("change", listener);
+      return () => {
+        queryRef.current.removeEventListener("change", listener);
+      };
+    }, []);
+    return { matches };
   }
 
   // parts/pages/HomePage.tsx
   function HomePage() {
+    const { matches: isMobile } = useMediaQuery("(max-width: 980px)");
     const separator = {
       height: 100
     };
-    return /* @__PURE__ */ import_react9.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react9.default.createElement("div", null, /* @__PURE__ */ import_react9.default.createElement(SliceHomeSection, null), /* @__PURE__ */ import_react9.default.createElement(TenturaHomeSection, null), /* @__PURE__ */ import_react9.default.createElement(FxHashHomeSection, null)));
+    return /* @__PURE__ */ import_react9.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react9.default.createElement("div", null, /* @__PURE__ */ import_react9.default.createElement(SliceHomeSection, { isMobile }), /* @__PURE__ */ import_react9.default.createElement(TenturaHomeSection, { isMobile }), /* @__PURE__ */ import_react9.default.createElement(FxHashHomeSection, { isMobile })));
   }
 
   // parts/pages/GeneratorPage.tsx

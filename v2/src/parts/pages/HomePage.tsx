@@ -7,17 +7,19 @@ import {TenturaHomeSection} from "./home/TenturaHomeSection";
 import {SliceHomeSection} from "./home/SliceHomeSection";
 import {FxHashHomeSection} from "./home/FxHashHomeSection";
 import {GenerativeBg} from "../components/GenerativeBg";
+import {useMediaQuery} from "../parts/useMediaQuery";
 
 export function HomePage() {
+    const {matches: isMobile} = useMediaQuery("(max-width: 980px)");
     const separator = {
         height: 100
     }
     return <PageWrapper>
 
         <div>
-            <SliceHomeSection/>
-            <TenturaHomeSection/>
-            <FxHashHomeSection/>
+            <SliceHomeSection isMobile={isMobile}/>
+            <TenturaHomeSection isMobile={isMobile}/>
+            <FxHashHomeSection isMobile={isMobile}/>
             {/*<img className={"avatar"} src={sitePath + '/resources/avatar.jpg'}/>*/}
 
             {/*<div>*/}
