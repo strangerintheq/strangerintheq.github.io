@@ -1,10 +1,15 @@
 import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
-import {ProjectsGrid} from "./ProjectsGrid";
+import {ProjectsGrid} from "../../components/ProjectsGrid";
 
-export function FxHashHomeSection({isMobile}) {
+export function FxHashSection({isMobile}) {
 
-    return <ProjectsGrid isMobile={isMobile} ratio={1} rows={isMobile ? 8 : 4} title={"Fx(hash)"}>
+    return <ProjectsGrid
+        isMobile={isMobile}
+        ratio={1}
+        rows={isMobile ? 8 : 4}
+        title={"Fx(hash)"}
+    >
 
         <ProjectItem
             hash={"ookiXAnGJw28AAv6JVLXiyZceTF9nJSRAxgytsUDV9Gu3na4zeN"}

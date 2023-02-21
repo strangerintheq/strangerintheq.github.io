@@ -1,20 +1,22 @@
 import React from "react";
 import {RouterProvider} from "react-router";
 import {createBrowserRouter} from "react-router-dom";
-import {ProjectsPage} from "./pages/ProjectsPage";
-import {HomePage} from "./pages/HomePage";
+;
 import {GeneratorPage} from "./pages/GeneratorPage";
+import {ProjectsPage} from "./pages/projects/ProjectsPage";
+import {HomePage} from "./pages/HomePage";
+
 
 const routes = [ {
     path: "/generator/:type/:id/:hash",
     element: <GeneratorPage />,
 }, {
     path: "/projects",
-    element: <ProjectsPage />,
+    element: <HomePage />,
 }, {
     path: "*",
     exact: false,
-    element: <HomePage />,
+    element: <ProjectsPage />,
 }];
 
 const router = createBrowserRouter(routes);

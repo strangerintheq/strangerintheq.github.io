@@ -1,8 +1,8 @@
-import {cell} from "./cell";
+
 import {NeuralInterfaceSettings} from "./newSettings";
 import {
     drawCircle,
-    drawLineSeg, PI, rndb, rndr, rndr45, rndr90,
+    drawLineSeg, PI, rndb, rndr, rndr45, rndr90, rnds,
     setFillStyle,
     setLineWidth,
     setStrokeStyle
@@ -16,30 +16,22 @@ export function tick(field, p, w, h,
                      c:CanvasRenderingContext2D,
                      restrict
 ){
-    many(10, ()=> {
+    many(10, () => {
         try {
-
-
-            if (restrict(p.x, p.y)){
-                if (rndb(0.9))
-                p.dir = rndr()
-            } else {
-                p.dir = PI
-            }
-
-
+            // if (restrict(p.x, p.y)){
+            //     if (rndb(0.9))
+            //     p.dir = rndr()
+            // } else {
+            //     p.dir = PI
+            // }
             const ix = (p.x / w * settings.cellCountX) | 0;
             const iy = (p.y / h * settings.cellCountY) | 0;
             let fix = field[ix];
-            if (!fix)
-                return
             let fixiy = fix[iy];
-            if (!fixiy)
-                return
             const a = fixiy[0] + p.dir;
             const type = fixiy[1];
             setLineWidth(c, p.width)
-            setStrokeStyle(c, p.colors[type])
+            setStrokeStyle(c, "#000")
             const step = 1;
             const x = p.x + cos(a) * step;
             const y = p.y + sin(a) * step;
@@ -47,7 +39,10 @@ export function tick(field, p, w, h,
             drawLineSeg(c, [{x,y}, p])
             p.x = x;
             p.y = y;
-        } catch (e) {}
+        } catch (e) {
+            p.x = rnd(w)
+            p.y = rnd(h)
+        }
     })
 }
 

@@ -1,21 +1,19 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {
-    fillRect,
     prng2x,
     randomHash, rnd, setLineWidth,
     setRandomGenerator, strokeRect
-} from "../generative-header/framework";
-import {NeuralInterfaceSettings, newSettings} from "../generative-header/newSettings";
-import {createField, NeuralInterfaceFlowField} from "../generative-header/createField";
-import {getPts} from "../generative-header/getPts";
-import {tick} from "../generative-header/tick";
+} from "./framework";
+import {NeuralInterfaceSettings, newSettings} from "./newSettings";
+import {createField, NeuralInterfaceFlowField} from "./createField";
+import {getPts} from "./getPts";
+import {tick} from "./tick";
 import {SimplexNoise} from "three/examples/jsm/math/SimplexNoise";
 
-export function GenerativeBg() {
+export function GenerativeHeader() {
 
     const canvasRef = useRef<HTMLCanvasElement>();
     const [initialized, setIsInitialized] = useState<boolean>();
-
 
     const stateRef = useRef<{
         ctx: CanvasRenderingContext2D;
@@ -29,16 +27,14 @@ export function GenerativeBg() {
         restrictions: {width, height,right,bottom}[]
     }>({});
 
-
     useEffect(() => {
-
         setTimeout(() => {
             let s = stateRef.current;
             let canvas = canvasRef.current;
 
-            let bg = document.querySelector(".bg")
-            s.w = canvas.width = document.body.clientWidth;
-            s.h = canvas.height = bg.clientHeight;
+            // let header = document.querySelector(".generative-header")
+            s.w = canvas.width = innerWidth;
+            s.h = canvas.height = innerHeight;
             s.ctx = canvas.getContext("2d");
 
             let mask = document.createElement("canvas");
@@ -58,29 +54,29 @@ export function GenerativeBg() {
             let pal = ["#000", "#000", "#000", "#000", "#000"]
             s.settings = newSettings(pal, s.w, s.h);
 
-            s.restrictions = [...document.querySelectorAll("span")].map((mask:any) => {
-                let pad = 5;
-                let rect = {
-                    top: mask.offsetTop - pad,
-                    left: mask.offsetLeft - pad,
-                    right: mask.offsetLeft + mask.offsetWidth + pad,
-                    bottom: mask.offsetTop + mask.offsetHeight + pad
-                };
-                // console.log(rect)
-                strokeRect(s.ctx, "#000", rect.left,  rect.top,  rect.right-rect.left, rect.bottom-rect.top)
-                return rect
-            })
-
+            s.restrictions = [...document.querySelectorAll("span")]
+                .map((mask:any) => {
+                    let pad = 5;
+                    let rect = {
+                        top: mask.offsetTop - pad,
+                        left: mask.offsetLeft - pad,
+                        right: mask.offsetLeft + mask.offsetWidth + pad,
+                        bottom: mask.offsetTop + mask.offsetHeight + pad
+                    };
+                    // console.log(rect)
+                    strokeRect(s.ctx, "#000", rect.left,  rect.top,  rect.right-rect.left, rect.bottom-rect.top)
+                    return rect
+                })
 
             s.field = createField(noise, s.settings, rnd(111));
 
             s.pts = getPts(s.settings, s.w, s.h).filter(p => {
                 return !s.restrictions.find(box => inside(p.x, p.y, box))
             });
-            setIsInitialized(true)
-        }, 111)
-        // fillRect(stateRef.current.ctx, 'black', -1e5,-1e5,2e5,2e5)
 
+            setIsInitialized(true)
+
+        }, 111)
     }, [])
 
 
@@ -117,7 +113,6 @@ export function GenerativeBg() {
     return <div style={{height: 0, overflow: "visible"}}>
         <canvas ref={canvasRef}/>
     </div>
-
 }
 
 function inside(x, y, box: DOMRect) {

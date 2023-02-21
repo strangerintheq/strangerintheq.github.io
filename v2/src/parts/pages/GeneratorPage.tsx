@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
-import {useSearchParams} from "react-router-dom";
 import {sitePath} from "../Crutch";
 import {fetchCode, prepareArtBlocks, prepareFxHash, randomFxHash} from "../tools";
 

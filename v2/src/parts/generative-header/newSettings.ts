@@ -10,7 +10,7 @@ export type NeuralInterfaceSettings = {
     colors: String[][],
 }
 export function newSettings(pal, w, h):NeuralInterfaceSettings {
-    let cellCountX = 444;
+    let cellCountX = 333;
     return {
         cellCountX: cellCountX,
         cellCountY: (cellCountX/w*h)|0,

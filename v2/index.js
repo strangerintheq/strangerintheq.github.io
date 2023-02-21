@@ -71,11 +71,11 @@
   });
 
   // index.tsx
-  var import_react12 = __toESM(require_react());
+  var import_react14 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // parts/Site.tsx
-  var import_react11 = __toESM(require_react());
+  var import_react13 = __toESM(require_react());
 
   // node_modules/@remix-run/router/dist/router.js
   function _extends() {
@@ -3629,13 +3629,7 @@
     }, [callback, capture]);
   }
 
-  // parts/pages/ProjectsPage.tsx
-  var import_react4 = __toESM(require_react());
-
-  // parts/pages/home/TenturaHomeSection.tsx
-  var import_react3 = __toESM(require_react());
-
-  // parts/components/ProjectItem.tsx
+  // parts/pages/GeneratorPage.tsx
   var import_react = __toESM(require_react());
 
   // parts/Crutch.ts
@@ -3672,337 +3666,22 @@
     }).join("\n");
   }
 
-  // parts/components/ProjectItem.tsx
-  function ProjectItem({
-    name,
-    type = "fxhash",
-    hash = null,
-    about = null,
-    img,
-    generator,
-    c = null,
-    r = null,
-    id = null
-  }) {
-    const backgroundImage = `url(${img.startsWith("http") ? img : sitePath + img})`;
-    const to = "/generator/" + type + "/" + generator + "/" + (hash || makeHash(type));
-    const gridColumn = c;
-    const gridRow = r;
-    return /* @__PURE__ */ import_react.default.createElement("div", { className: "mask", style: { gridColumn, gridRow, width: "100%", height: "100%" } }, /* @__PURE__ */ import_react.default.createElement(
-      "div",
-      {
-        className: "project-thumbnail",
-        style: { backgroundImage, width: "100%", height: "100%" }
-      }
-    ));
-  }
-  function makeHash(type) {
-    if (type === "artblocks")
-      return randomAbHash();
-    return randomFxHash();
-  }
-
-  // parts/pages/home/ProjectsGrid.tsx
-  var import_react2 = __toESM(require_react());
-  function ProjectsGrid({ children = null, title, ratio, isMobile, rows }) {
-    const gap = isMobile ? 0.02 : 0.01;
-    const cellSize = (0.8 - gap * (isMobile ? 1 : 3)) / (isMobile ? 2 : 4);
-    const w = fromBaseSize(cellSize);
-    const h = fromBaseSize(cellSize * ratio);
-    return /* @__PURE__ */ import_react2.default.createElement("div", { style: { marginTop: 80 } }, /* @__PURE__ */ import_react2.default.createElement("div", { style: { fontSize: "2em" } }, /* @__PURE__ */ import_react2.default.createElement("span", null, title)), /* @__PURE__ */ import_react2.default.createElement("div", { style: {
-      marginTop: 40,
-      display: "grid",
-      gap: `calc(var(--base-size) * ${gap})`,
-      gridTemplateColumns: isMobile ? `${w} ${w}` : `${w} ${w} ${w} ${w}`,
-      gridTemplateRows: `repeat(${rows}, ${h})`
-    } }, children));
-  }
-  function fromBaseSize(s) {
-    return `calc(var(--base-size) * ${s})`;
-  }
-
-  // parts/pages/home/TenturaHomeSection.tsx
-  function TenturaHomeSection({ isMobile }) {
-    const imgSize = 640;
-    const img = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://artblocks-mainnet.s3.amazonaws.com/";
-    const tentura = {
-      type: "artblocks",
-      name: "Tentura",
-      generator: "tentura"
-    };
-    return /* @__PURE__ */ import_react3.default.createElement(ProjectsGrid, { title: "Tentura", ratio: 1, isMobile, rows: isMobile ? 4 : 2 }, /* @__PURE__ */ import_react3.default.createElement(
-      ProjectItem,
-      {
-        ...tentura,
-        c: isMobile ? "1/3" : "2/4",
-        r: "1/3",
-        id: "265000000",
-        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-        img: img + "265000000.png"
-      }
-    ), /* @__PURE__ */ import_react3.default.createElement(
-      ProjectItem,
-      {
-        ...tentura,
-        id: "265000031",
-        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-        img: img + "265000031.png"
-      }
-    ), /* @__PURE__ */ import_react3.default.createElement(
-      ProjectItem,
-      {
-        ...tentura,
-        id: "265000197",
-        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-        img: img + "265000197.png"
-      }
-    ), /* @__PURE__ */ import_react3.default.createElement(
-      ProjectItem,
-      {
-        ...tentura,
-        id: "265000212",
-        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-        img: img + "265000212.png"
-      }
-    ), /* @__PURE__ */ import_react3.default.createElement(
-      ProjectItem,
-      {
-        ...tentura,
-        id: "265000269",
-        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-        img: img + "265000269.png"
-      }
-    ));
-  }
-
-  // parts/pages/ProjectsPage.tsx
-  function ProjectsPage() {
-    return /* @__PURE__ */ import_react4.default.createElement("div", null, /* @__PURE__ */ import_react4.default.createElement(TenturaHomeSection, null));
-  }
-
-  // parts/pages/HomePage.tsx
-  var import_react9 = __toESM(require_react());
-
-  // parts/components/PageWrapper.tsx
-  var import_react5 = __toESM(require_react());
-  function PageWrapper(props) {
-    return /* @__PURE__ */ import_react5.default.createElement(import_react5.default.Fragment, null, /* @__PURE__ */ import_react5.default.createElement(
-      "div",
-      {
-        className: "content-wrapper"
-      },
-      props.children
-    ));
-  }
-
-  // parts/pages/home/SliceHomeSection.tsx
-  var import_react6 = __toESM(require_react());
-  function SliceHomeSection({ isMobile }) {
-    const imgSize = 640;
-    const mainNet = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://artblocks-mainnet.s3.amazonaws.com/";
-    const staging = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/";
-    const slice = {
-      type: "artblocks",
-      name: "SL/CE",
-      generator: "slice"
-    };
-    return /* @__PURE__ */ import_react6.default.createElement(ProjectsGrid, { isMobile, title: "SL/CE", rows: isMobile ? 4 : 2, ratio: 1.618 }, /* @__PURE__ */ import_react6.default.createElement(
-      ProjectItem,
-      {
-        ...slice,
-        c: isMobile ? "1/3" : "2/4",
-        r: "1/3",
-        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-        img: mainNet + "419000000.png"
-      }
-    ), /* @__PURE__ */ import_react6.default.createElement(
-      ProjectItem,
-      {
-        ...slice,
-        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-        img: staging + "48000189.png"
-      }
-    ), /* @__PURE__ */ import_react6.default.createElement(
-      ProjectItem,
-      {
-        ...slice,
-        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-        img: staging + "48000161.png"
-      }
-    ), /* @__PURE__ */ import_react6.default.createElement(
-      ProjectItem,
-      {
-        ...slice,
-        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-        img: staging + "48000015.png"
-      }
-    ), /* @__PURE__ */ import_react6.default.createElement(
-      ProjectItem,
-      {
-        ...slice,
-        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-        img: staging + "48000055.png"
-      }
-    ));
-  }
-
-  // parts/pages/home/FxHashHomeSection.tsx
-  var import_react7 = __toESM(require_react());
-  function FxHashHomeSection({ isMobile }) {
-    return /* @__PURE__ */ import_react7.default.createElement(ProjectsGrid, { isMobile, ratio: 1, rows: isMobile ? 8 : 4, title: "Fx(hash)" }, /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        hash: "ookiXAnGJw28AAv6JVLXiyZceTF9nJSRAxgytsUDV9Gu3na4zeN",
-        name: "Magic Ritual",
-        img: "https://media.fxhash.xyz/w_768/QmbABZquDop8bhVWb49HcU7t4vFgHU1s9ZFomPxeznmr4J",
-        generator: "magic-ritual"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        hash: "oo2WuxbvWm77MLimMCfrt54zXRHhe8HcFqPVPfGxF53Be85Rnhe",
-        name: "Mayan Carpet",
-        img: "https://gateway.fxhash.xyz/ipfs/QmScLVUE7HzUvSWy1hTVsqA2WCU6icED9BQbgVDHt4xJV2",
-        about: "/mayan-carpet",
-        generator: "mayan-carpet"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        hash: "oo274c4kMq5xbm7CpvJ6rDHatuuZwhEACfgaQ4BXy9XX4eTu4q7",
-        name: "Other side of the Amulet",
-        img: "https://media.fxhash.xyz/w_768/QmWs8VMiyr5FTSSfjvf1g3bprS8JNxM8wzAbXFRvVnR3aG",
-        about: "/slice",
-        generator: "other-side-of-the-amulet"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Hyperspacers",
-        img: "https://media.fxhash.xyz/w_768/QmP67iCt3gayuZGVLafGSYfXUgkJ35hbyiDxgNsGN6LZNQ",
-        generator: "hpsp"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Amulet",
-        img: "https://media.fxhash.xyz/w_768/QmNrMUYWUWMWjMyN6focKCBKMMqGcFofhvxMHBGNmUxYG6",
-        generator: "amlt"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Let it snow",
-        img: "https://media.fxhash.xyz/w_768/QmeawuQK778D1zkaiha7wDDoav9btPaNA5SkkrXYuhDPyZ",
-        generator: "amlt"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Mitosis",
-        img: "https://media.fxhash.xyz/w_768/QmeNYkvW72PY1FA14E3NP2fnHfuNvpQQhowFgJ7cZbGuXf",
-        generator: "amlt"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Cellulae",
-        img: "https://media.fxhash.xyz/w_768/QmTP2YDBnWNohuAD5mtvDsEMdPa6Edf4Tf8rCS5MyhKAzX",
-        generator: "amlt"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Arachna",
-        img: "https://media.fxhash.xyz/w_768/QmXzaZC1CfSQBm9f7CoBjsBAM153HNYermqY8CPoSdkSYB",
-        generator: "amlt"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Gravitzappa",
-        img: "https://media.fxhash.xyz/w_768/Qmd2NxZiw3kxWowXcu3ZBfCT633UVfstYDV3zJSaLAmcJn",
-        generator: "grvc"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Plexus",
-        img: "https://media.fxhash.xyz/w_768/QmY81Ege4BLhYetp4JTH1Z7KMZmvKmy5vZmtjsSyr2YsH2",
-        generator: "amlt"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Squatree",
-        img: "https://media.fxhash.xyz/w_768/QmbBzpLyJAitVDn8hkv6JAF6kZRkk46Eba3UKfNXrTWGc8",
-        generator: "amlt"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Subdivisual",
-        img: "https://media.fxhash.xyz/w_768/QmPboz6imodN7YnaUvMnS2XPGCAeGD9CAVHLXtoXu8uZWX",
-        generator: "amlt"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Hidden Square",
-        img: "https://media.fxhash.xyz/w_768/QmQ8TYQ8qb29BxTp8kASocMirfuGf5nMXpArEohpG9tzuX",
-        generator: "hdsq"
-      }
-    ), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectItem,
-      {
-        name: "Generotique",
-        img: "https://media.fxhash.xyz/w_768/QmQiLxQxKNcJaH17kzj27KDMkYYardx1q4o7v3pTvNHJGP",
-        generator: "amlt"
-      }
-    ));
-  }
-
-  // parts/parts/useMediaQuery.ts
-  var import_react8 = __toESM(require_react());
-  function useMediaQuery(query) {
-    const queryRef = (0, import_react8.useRef)(window.matchMedia(query));
-    const [matches, setMatches] = (0, import_react8.useState)(queryRef.current.matches);
-    (0, import_react8.useEffect)(() => {
-      const listener = (e) => setMatches(e.matches);
-      queryRef.current.addEventListener("change", listener);
-      return () => {
-        queryRef.current.removeEventListener("change", listener);
-      };
-    }, []);
-    return { matches };
-  }
-
-  // parts/pages/HomePage.tsx
-  function HomePage() {
-    const { matches: isMobile } = useMediaQuery("(max-width: 980px)");
-    const separator = {
-      height: 100
-    };
-    return /* @__PURE__ */ import_react9.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react9.default.createElement("div", null, /* @__PURE__ */ import_react9.default.createElement(SliceHomeSection, { isMobile }), /* @__PURE__ */ import_react9.default.createElement(TenturaHomeSection, { isMobile }), /* @__PURE__ */ import_react9.default.createElement(FxHashHomeSection, { isMobile })));
-  }
-
   // parts/pages/GeneratorPage.tsx
-  var import_react10 = __toESM(require_react());
   function GeneratorPage() {
     const { id, hash, type } = useParams();
-    const [html, setHtml] = (0, import_react10.useState)();
-    const [code, setCode] = (0, import_react10.useState)();
-    (0, import_react10.useEffect)(() => {
+    const [html, setHtml] = (0, import_react.useState)();
+    const [code, setCode] = (0, import_react.useState)();
+    (0, import_react.useEffect)(() => {
       let url = sitePath + "/v2/generators/" + id + "/index.html";
       fetchCode(url).then(setCode);
     }, [id]);
-    (0, import_react10.useEffect)(() => {
+    (0, import_react.useEffect)(() => {
       if (!code)
         return;
       let newHtml = type === "artblocks" ? prepareArtBlocks(code, hash) : prepareFxHash(code, hash);
       setHtml(newHtml);
     }, [code, hash, type]);
-    return /* @__PURE__ */ import_react10.default.createElement(import_react10.default.Fragment, null, /* @__PURE__ */ import_react10.default.createElement(
+    return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement(
       "button",
       {
         style: {
@@ -4016,7 +3695,7 @@
         }
       },
       "NEW"
-    ), html ? /* @__PURE__ */ import_react10.default.createElement(
+    ), html ? /* @__PURE__ */ import_react.default.createElement(
       "iframe",
       {
         src: "data:text/html," + encodeURIComponent(html),
@@ -4033,30 +3712,1214 @@
     ) : null);
   }
 
+  // parts/pages/projects/ProjectsPage.tsx
+  var import_react10 = __toESM(require_react());
+
+  // parts/useMediaQuery.ts
+  var import_react2 = __toESM(require_react());
+  function useMediaQuery(query) {
+    const queryRef = (0, import_react2.useRef)(window.matchMedia(query));
+    const [matches, setMatches] = (0, import_react2.useState)(queryRef.current.matches);
+    (0, import_react2.useEffect)(() => {
+      const listener = (e) => setMatches(e.matches);
+      queryRef.current.addEventListener("change", listener);
+      return () => {
+        queryRef.current.removeEventListener("change", listener);
+      };
+    }, []);
+    return { matches };
+  }
+
+  // parts/components/PageWrapper.tsx
+  var import_react3 = __toESM(require_react());
+
+  // parts/vars.ts
+  var sidePadding = 0.1;
+
+  // parts/components/PageWrapper.tsx
+  function PageWrapper(props) {
+    return /* @__PURE__ */ import_react3.default.createElement("div", { style: {
+      width: `var(--base-size)`,
+      margin: `0 calc(50vw - calc(var(--base-size) * 0.5))`,
+      padding: `0 calc(var(--base-size) * ${sidePadding})`,
+      overflow: `visible`,
+      paddingBottom: 100
+    } }, props.children);
+  }
+
+  // parts/pages/projects/SliceSection.tsx
+  var import_react6 = __toESM(require_react());
+
+  // parts/components/ProjectItem.tsx
+  var import_react4 = __toESM(require_react());
+  function ProjectItem({
+    name,
+    type = "fxhash",
+    hash = null,
+    about = null,
+    img,
+    generator,
+    c = null,
+    r = null,
+    id = null
+  }) {
+    const backgroundImage = `url(${img.startsWith("http") ? img : sitePath + img})`;
+    const to = "/generator/" + type + "/" + generator + "/" + (hash || makeHash(type));
+    const gridColumn = c;
+    const gridRow = r;
+    return /* @__PURE__ */ import_react4.default.createElement("div", { className: "mask", style: { gridColumn, gridRow, width: "100%", height: "100%" } }, /* @__PURE__ */ import_react4.default.createElement(
+      "div",
+      {
+        className: "project-thumbnail",
+        style: { backgroundImage, width: "100%", height: "100%" }
+      }
+    ));
+  }
+  function makeHash(type) {
+    if (type === "artblocks")
+      return randomAbHash();
+    return randomFxHash();
+  }
+
+  // parts/components/ProjectsGrid.tsx
+  var import_react5 = __toESM(require_react());
+  function ProjectsGrid({ children = null, title, ratio, isMobile, rows }) {
+    const gap = isMobile ? 0.02 : 0.01;
+    const cellSize = (0.8 - gap * (isMobile ? 1 : 3)) / (isMobile ? 2 : 4);
+    const w = fromBaseSize(cellSize);
+    const h = fromBaseSize(cellSize * ratio);
+    return /* @__PURE__ */ import_react5.default.createElement("div", { style: { marginTop: 80 } }, /* @__PURE__ */ import_react5.default.createElement("div", { style: { fontSize: "2em" } }, /* @__PURE__ */ import_react5.default.createElement("span", null, title)), /* @__PURE__ */ import_react5.default.createElement("div", { style: {
+      marginTop: 40,
+      display: "grid",
+      gap: `calc(var(--base-size) * ${gap})`,
+      gridTemplateColumns: isMobile ? `${w} ${w}` : `${w} ${w} ${w} ${w}`,
+      gridTemplateRows: `repeat(${rows}, ${h})`
+    } }, children));
+  }
+  function fromBaseSize(s) {
+    return `calc(var(--base-size) * ${s})`;
+  }
+
+  // parts/pages/projects/SliceSection.tsx
+  function SliceSection({ isMobile }) {
+    const imgSize = 640;
+    const mainNet = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://artblocks-mainnet.s3.amazonaws.com/";
+    const staging = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/";
+    const slice = {
+      type: "artblocks",
+      name: "SL/CE",
+      generator: "slice"
+    };
+    return /* @__PURE__ */ import_react6.default.createElement(
+      ProjectsGrid,
+      {
+        isMobile,
+        title: "SL/CE",
+        rows: isMobile ? 4 : 2,
+        ratio: 1.618
+      },
+      /* @__PURE__ */ import_react6.default.createElement(
+        ProjectItem,
+        {
+          ...slice,
+          c: isMobile ? "1/3" : "2/4",
+          r: "1/3",
+          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+          img: mainNet + "419000000.png"
+        }
+      ),
+      /* @__PURE__ */ import_react6.default.createElement(
+        ProjectItem,
+        {
+          ...slice,
+          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+          img: staging + "48000189.png"
+        }
+      ),
+      /* @__PURE__ */ import_react6.default.createElement(
+        ProjectItem,
+        {
+          ...slice,
+          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+          img: staging + "48000161.png"
+        }
+      ),
+      /* @__PURE__ */ import_react6.default.createElement(
+        ProjectItem,
+        {
+          ...slice,
+          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+          img: staging + "48000015.png"
+        }
+      ),
+      /* @__PURE__ */ import_react6.default.createElement(
+        ProjectItem,
+        {
+          ...slice,
+          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+          img: staging + "48000055.png"
+        }
+      )
+    );
+  }
+
+  // parts/pages/projects/TenturaSection.tsx
+  var import_react7 = __toESM(require_react());
+  function TenturaSection({ isMobile }) {
+    const imgSize = 640;
+    const img = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://artblocks-mainnet.s3.amazonaws.com/";
+    const tentura = {
+      type: "artblocks",
+      name: "Tentura",
+      generator: "tentura"
+    };
+    return /* @__PURE__ */ import_react7.default.createElement(
+      ProjectsGrid,
+      {
+        title: "Tentura",
+        ratio: 1,
+        isMobile,
+        rows: isMobile ? 4 : 2
+      },
+      /* @__PURE__ */ import_react7.default.createElement(
+        ProjectItem,
+        {
+          ...tentura,
+          c: isMobile ? "1/3" : "2/4",
+          r: "1/3",
+          id: "265000000",
+          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+          img: img + "265000000.png"
+        }
+      ),
+      /* @__PURE__ */ import_react7.default.createElement(
+        ProjectItem,
+        {
+          ...tentura,
+          id: "265000031",
+          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+          img: img + "265000031.png"
+        }
+      ),
+      /* @__PURE__ */ import_react7.default.createElement(
+        ProjectItem,
+        {
+          ...tentura,
+          id: "265000197",
+          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+          img: img + "265000197.png"
+        }
+      ),
+      /* @__PURE__ */ import_react7.default.createElement(
+        ProjectItem,
+        {
+          ...tentura,
+          id: "265000212",
+          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+          img: img + "265000212.png"
+        }
+      ),
+      /* @__PURE__ */ import_react7.default.createElement(
+        ProjectItem,
+        {
+          ...tentura,
+          id: "265000269",
+          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+          img: img + "265000269.png"
+        }
+      )
+    );
+  }
+
+  // parts/pages/projects/FxHashSection.tsx
+  var import_react8 = __toESM(require_react());
+  function FxHashSection({ isMobile }) {
+    return /* @__PURE__ */ import_react8.default.createElement(
+      ProjectsGrid,
+      {
+        isMobile,
+        ratio: 1,
+        rows: isMobile ? 8 : 4,
+        title: "Fx(hash)"
+      },
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          hash: "ookiXAnGJw28AAv6JVLXiyZceTF9nJSRAxgytsUDV9Gu3na4zeN",
+          name: "Magic Ritual",
+          img: "https://media.fxhash.xyz/w_768/QmbABZquDop8bhVWb49HcU7t4vFgHU1s9ZFomPxeznmr4J",
+          generator: "magic-ritual"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          hash: "oo2WuxbvWm77MLimMCfrt54zXRHhe8HcFqPVPfGxF53Be85Rnhe",
+          name: "Mayan Carpet",
+          img: "https://gateway.fxhash.xyz/ipfs/QmScLVUE7HzUvSWy1hTVsqA2WCU6icED9BQbgVDHt4xJV2",
+          about: "/mayan-carpet",
+          generator: "mayan-carpet"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          hash: "oo274c4kMq5xbm7CpvJ6rDHatuuZwhEACfgaQ4BXy9XX4eTu4q7",
+          name: "Other side of the Amulet",
+          img: "https://media.fxhash.xyz/w_768/QmWs8VMiyr5FTSSfjvf1g3bprS8JNxM8wzAbXFRvVnR3aG",
+          about: "/slice",
+          generator: "other-side-of-the-amulet"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Hyperspacers",
+          img: "https://media.fxhash.xyz/w_768/QmP67iCt3gayuZGVLafGSYfXUgkJ35hbyiDxgNsGN6LZNQ",
+          generator: "hpsp"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Amulet",
+          img: "https://media.fxhash.xyz/w_768/QmNrMUYWUWMWjMyN6focKCBKMMqGcFofhvxMHBGNmUxYG6",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Let it snow",
+          img: "https://media.fxhash.xyz/w_768/QmeawuQK778D1zkaiha7wDDoav9btPaNA5SkkrXYuhDPyZ",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Mitosis",
+          img: "https://media.fxhash.xyz/w_768/QmeNYkvW72PY1FA14E3NP2fnHfuNvpQQhowFgJ7cZbGuXf",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Cellulae",
+          img: "https://media.fxhash.xyz/w_768/QmTP2YDBnWNohuAD5mtvDsEMdPa6Edf4Tf8rCS5MyhKAzX",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Arachna",
+          img: "https://media.fxhash.xyz/w_768/QmXzaZC1CfSQBm9f7CoBjsBAM153HNYermqY8CPoSdkSYB",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Gravitzappa",
+          img: "https://media.fxhash.xyz/w_768/Qmd2NxZiw3kxWowXcu3ZBfCT633UVfstYDV3zJSaLAmcJn",
+          generator: "grvc"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Plexus",
+          img: "https://media.fxhash.xyz/w_768/QmY81Ege4BLhYetp4JTH1Z7KMZmvKmy5vZmtjsSyr2YsH2",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Squatree",
+          img: "https://media.fxhash.xyz/w_768/QmbBzpLyJAitVDn8hkv6JAF6kZRkk46Eba3UKfNXrTWGc8",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Subdivisual",
+          img: "https://media.fxhash.xyz/w_768/QmPboz6imodN7YnaUvMnS2XPGCAeGD9CAVHLXtoXu8uZWX",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Hidden Square",
+          img: "https://media.fxhash.xyz/w_768/QmQ8TYQ8qb29BxTp8kASocMirfuGf5nMXpArEohpG9tzuX",
+          generator: "hdsq"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
+          name: "Generotique",
+          img: "https://media.fxhash.xyz/w_768/QmQiLxQxKNcJaH17kzj27KDMkYYardx1q4o7v3pTvNHJGP",
+          generator: "amlt"
+        }
+      )
+    );
+  }
+
+  // parts/pages/projects/HicEtNuncSection.tsx
+  var import_react9 = __toESM(require_react());
+  function HicEtNuncSection({ isMobile }) {
+    return /* @__PURE__ */ import_react9.default.createElement(
+      ProjectsGrid,
+      {
+        isMobile,
+        ratio: 1,
+        rows: isMobile ? 7 : 4,
+        title: "Fx(hash)"
+      },
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Needlework",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/520033/thumb288",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Warp Engine",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/490373/thumb288",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Re-Tiler",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/468682/thumb288",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Neural Interface",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/447479/thumb288",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Artificial eye",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/440706/thumb288",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "The Nest",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/404417/thumb288",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Mozaic Perception",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/393547/thumb288",
+          generator: "mzpc"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Dancing Souls",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/384125/thumb288",
+          generator: "dncs"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Nucle",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/343072/thumb288",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Inner Sight",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/324272/thumb288",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Fractions",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/316447/thumb288",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Neyebula",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/289835/thumb288",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Simplicity",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/279928/thumb288",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react9.default.createElement(
+        ProjectItem,
+        {
+          name: "Steam Cells",
+          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/274293/thumb288",
+          generator: "amlt"
+        }
+      )
+    );
+  }
+
+  // parts/pages/projects/ProjectsPage.tsx
+  function ProjectsPage() {
+    const { matches: isMobile } = useMediaQuery("(max-width: 980px)");
+    return /* @__PURE__ */ import_react10.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react10.default.createElement(SliceSection, { isMobile }), /* @__PURE__ */ import_react10.default.createElement(TenturaSection, { isMobile }), /* @__PURE__ */ import_react10.default.createElement(FxHashSection, { isMobile }), /* @__PURE__ */ import_react10.default.createElement(HicEtNuncSection, { isMobile }));
+  }
+
+  // parts/pages/HomePage.tsx
+  var import_react12 = __toESM(require_react());
+
+  // parts/generative-header/GenerativeHeader.tsx
+  var import_react11 = __toESM(require_react());
+
+  // parts/generative-header/framework.ts
+  var {
+    PI,
+    SQRT1_2,
+    sqrt,
+    abs,
+    sin,
+    cos,
+    pow,
+    max,
+    min,
+    atan2,
+    sign,
+    round,
+    floor,
+    ceil,
+    hypot,
+    asin
+  } = Math;
+  var TAU = PI * 2;
+  var randomHash = (randomFunc = Math.random) => {
+    return "0x" + many(64, () => (randomFunc() * 16 | 0).toString(16)).join("");
+  };
+  var parseHex = (hex, offset, len) => parseInt(hex.substr(offset, len), 16);
+  var PiterPasmaArtBlocksPrng = (hash, S, s, t) => {
+    S = new Uint32Array([0, 1, s = t = 2, 3].map((i) => parseHex(hash, i * 8, 8)));
+    return (_) => (t = S[3], S[3] = S[2], S[2] = S[1], S[1] = s = S[0], t ^= t << 11, S[0] ^= t ^ t >>> 8 ^ s >>> 19, S[0] / 2 ** 32);
+  };
+  var prng2x = (hash, i = 0, a = PiterPasmaArtBlocksPrng(hash.substr(2)), b = PiterPasmaArtBlocksPrng(hash.substr(34))) => {
+    return (_) => ++i % 2 ? a() : b();
+  };
+  var random;
+  var setRandomGenerator = (rg) => {
+    return random = rg;
+  };
+  var rnd = (x = 1, s = 0) => {
+    return random() * x + s;
+  };
+  var setStrokeStyle = (ctx, color) => {
+    return ctx.strokeStyle = color;
+  };
+  var setLineWidth = (ctx, width) => {
+    return ctx.lineWidth = width;
+  };
+  var strokeRect = (ctx, color, x, y, w, h) => {
+    setStrokeStyle(ctx, color);
+    ctx.strokeRect(x, y, w, h);
+  };
+  var drawLine = (ctx, x, y, x1, y1) => {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x1, y1);
+    ctx.stroke();
+  };
+  var drawLineSeg = (ctx, [{ x, y }, { x: x1, y: y1 }]) => {
+    return drawLine(ctx, x, y, x1, y1);
+  };
+
+  // parts/generative-header/newSettings.ts
+  function newSettings(pal, w, h) {
+    let cellCountX = 333;
+    return {
+      cellCountX,
+      cellCountY: cellCountX / w * h | 0,
+      count: w * 0.3 + rnd(w * 2) | 0,
+      noiseSize1: rnd(50, 30),
+      noiseSize2: rnd(50, 30),
+      side: rnd() > 0.5,
+      colors: [
+        [pal[0], pal[1], pal[2]],
+        pal,
+        [pal[2], pal[3], pal[4]]
+      ]
+    };
+  }
+
+  // parts/generative-header/frameOnField.ts
+  function frameOnField(field) {
+    field.forEach((row) => row[1][0] = 0);
+    field.forEach((row) => row[row.length - 2][0] = Math.PI);
+    field[1].forEach((cell) => cell[0] = -Math.PI / 2);
+    field[field.length - 2].forEach((cell) => cell[0] = Math.PI / 2);
+  }
+
+  // parts/generative-header/circleOnField.ts
+  function circleOnField(field, settings) {
+    let n = 100, r = rnd(4) + 2, cx = rnd(settings.cellCountX), cy = rnd(settings.cellCountY);
+    for (let i = 0; i < n; i++) {
+      try {
+        let a = i / n * Math.PI * 2;
+        let x = cx + Math.cos(a) * r | 0;
+        let y = cy + Math.sin(a) * r | 0;
+        field[x][y][0] = rnd() > rnd(7) ? 0.3 : a + Math.PI / 2;
+      } catch (e) {
+      }
+    }
+  }
+
+  // parts/generative-header/squareOnField.ts
+  function squareOnField(field, settings) {
+    let w = 5 + rnd(15) | 0;
+    let h = 5 + rnd(15) | 0;
+    let x = rnd(settings.cellCountX) | 0;
+    let y = rnd(settings.cellCountY) | 0;
+    addSquareOnField(x, y, w, h, field);
+  }
+  function addSquareOnField(x, y, w, h, field) {
+    many(w, (i) => {
+      try {
+        field[x + i][y][0] = 0;
+      } catch (e) {
+      }
+    });
+    many(h, (i) => {
+      try {
+        field[x + w][y + i][0] = -Math.PI / 2;
+      } catch (e) {
+      }
+    });
+    many(w, (i) => {
+      try {
+        field[x + w - i][y + h][0] = Math.PI;
+      } catch (e) {
+      }
+    });
+    many(h, (i) => {
+      try {
+        field[x][y + h - i][0] = Math.PI / 2;
+      } catch (e) {
+      }
+    });
+  }
+
+  // parts/generative-header/createField.ts
+  function createField(noise, settings, seed) {
+    let { cellCountX, cellCountY, noiseSize2, noiseSize1, side } = settings;
+    let field = many(cellCountX, (x) => many(cellCountY, (y) => {
+      if (x > cellCountX / 2) {
+        let a = noise.noise(x / noiseSize1 + seed, y / noiseSize1 + seed);
+        return [Math.round(a * 4) / 4 * Math.PI, 2];
+      } else {
+        let a = noise.noise(x / noiseSize2 + seed, y / noiseSize2 + seed);
+        return [Math.round(a * 4) / 4 * Math.PI, 2];
+      }
+    }));
+    frameOnField(field);
+    many(11, () => circleOnField(field, settings));
+    many(11, () => squareOnField(field, settings));
+    return field;
+  }
+
+  // parts/generative-header/getPts.ts
+  function getPts(settings, w, h) {
+    return many(settings.count, (i) => {
+      return {
+        i,
+        x: rnd(w),
+        y: rnd(h),
+        dir: 0,
+        width: 0.1
+      };
+    });
+  }
+
+  // parts/generative-header/tick.ts
+  function tick(field, p, w, h, settings, c, restrict) {
+    many(10, () => {
+      try {
+        const ix = p.x / w * settings.cellCountX | 0;
+        const iy = p.y / h * settings.cellCountY | 0;
+        let fix = field[ix];
+        let fixiy = fix[iy];
+        const a = fixiy[0] + p.dir;
+        const type = fixiy[1];
+        setLineWidth(c, p.width);
+        setStrokeStyle(c, "#000");
+        const step = 1;
+        const x = p.x + cos(a) * step;
+        const y = p.y + sin(a) * step;
+        start(p, type, c);
+        drawLineSeg(c, [{ x, y }, p]);
+        p.x = x;
+        p.y = y;
+      } catch (e) {
+        p.x = rnd(w);
+        p.y = rnd(h);
+      }
+    });
+  }
+  function start(p, type, c) {
+    if (p.started)
+      return;
+    p.started = true;
+  }
+
+  // node_modules/three/examples/jsm/math/SimplexNoise.js
+  var SimplexNoise = class {
+    constructor(r = Math) {
+      this.grad3 = [
+        [1, 1, 0],
+        [-1, 1, 0],
+        [1, -1, 0],
+        [-1, -1, 0],
+        [1, 0, 1],
+        [-1, 0, 1],
+        [1, 0, -1],
+        [-1, 0, -1],
+        [0, 1, 1],
+        [0, -1, 1],
+        [0, 1, -1],
+        [0, -1, -1]
+      ];
+      this.grad4 = [
+        [0, 1, 1, 1],
+        [0, 1, 1, -1],
+        [0, 1, -1, 1],
+        [0, 1, -1, -1],
+        [0, -1, 1, 1],
+        [0, -1, 1, -1],
+        [0, -1, -1, 1],
+        [0, -1, -1, -1],
+        [1, 0, 1, 1],
+        [1, 0, 1, -1],
+        [1, 0, -1, 1],
+        [1, 0, -1, -1],
+        [-1, 0, 1, 1],
+        [-1, 0, 1, -1],
+        [-1, 0, -1, 1],
+        [-1, 0, -1, -1],
+        [1, 1, 0, 1],
+        [1, 1, 0, -1],
+        [1, -1, 0, 1],
+        [1, -1, 0, -1],
+        [-1, 1, 0, 1],
+        [-1, 1, 0, -1],
+        [-1, -1, 0, 1],
+        [-1, -1, 0, -1],
+        [1, 1, 1, 0],
+        [1, 1, -1, 0],
+        [1, -1, 1, 0],
+        [1, -1, -1, 0],
+        [-1, 1, 1, 0],
+        [-1, 1, -1, 0],
+        [-1, -1, 1, 0],
+        [-1, -1, -1, 0]
+      ];
+      this.p = [];
+      for (let i = 0; i < 256; i++) {
+        this.p[i] = Math.floor(r.random() * 256);
+      }
+      this.perm = [];
+      for (let i = 0; i < 512; i++) {
+        this.perm[i] = this.p[i & 255];
+      }
+      this.simplex = [
+        [0, 1, 2, 3],
+        [0, 1, 3, 2],
+        [0, 0, 0, 0],
+        [0, 2, 3, 1],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [1, 2, 3, 0],
+        [0, 2, 1, 3],
+        [0, 0, 0, 0],
+        [0, 3, 1, 2],
+        [0, 3, 2, 1],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [1, 3, 2, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [1, 2, 0, 3],
+        [0, 0, 0, 0],
+        [1, 3, 0, 2],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [2, 3, 0, 1],
+        [2, 3, 1, 0],
+        [1, 0, 2, 3],
+        [1, 0, 3, 2],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [2, 0, 3, 1],
+        [0, 0, 0, 0],
+        [2, 1, 3, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [2, 0, 1, 3],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [3, 0, 1, 2],
+        [3, 0, 2, 1],
+        [0, 0, 0, 0],
+        [3, 1, 2, 0],
+        [2, 1, 0, 3],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [3, 1, 0, 2],
+        [0, 0, 0, 0],
+        [3, 2, 0, 1],
+        [3, 2, 1, 0]
+      ];
+    }
+    dot(g, x, y) {
+      return g[0] * x + g[1] * y;
+    }
+    dot3(g, x, y, z) {
+      return g[0] * x + g[1] * y + g[2] * z;
+    }
+    dot4(g, x, y, z, w) {
+      return g[0] * x + g[1] * y + g[2] * z + g[3] * w;
+    }
+    noise(xin, yin) {
+      let n0;
+      let n1;
+      let n2;
+      const F2 = 0.5 * (Math.sqrt(3) - 1);
+      const s = (xin + yin) * F2;
+      const i = Math.floor(xin + s);
+      const j = Math.floor(yin + s);
+      const G2 = (3 - Math.sqrt(3)) / 6;
+      const t = (i + j) * G2;
+      const X0 = i - t;
+      const Y0 = j - t;
+      const x0 = xin - X0;
+      const y0 = yin - Y0;
+      let i1;
+      let j1;
+      if (x0 > y0) {
+        i1 = 1;
+        j1 = 0;
+      } else {
+        i1 = 0;
+        j1 = 1;
+      }
+      const x1 = x0 - i1 + G2;
+      const y1 = y0 - j1 + G2;
+      const x2 = x0 - 1 + 2 * G2;
+      const y2 = y0 - 1 + 2 * G2;
+      const ii = i & 255;
+      const jj = j & 255;
+      const gi0 = this.perm[ii + this.perm[jj]] % 12;
+      const gi1 = this.perm[ii + i1 + this.perm[jj + j1]] % 12;
+      const gi2 = this.perm[ii + 1 + this.perm[jj + 1]] % 12;
+      let t0 = 0.5 - x0 * x0 - y0 * y0;
+      if (t0 < 0)
+        n0 = 0;
+      else {
+        t0 *= t0;
+        n0 = t0 * t0 * this.dot(this.grad3[gi0], x0, y0);
+      }
+      let t1 = 0.5 - x1 * x1 - y1 * y1;
+      if (t1 < 0)
+        n1 = 0;
+      else {
+        t1 *= t1;
+        n1 = t1 * t1 * this.dot(this.grad3[gi1], x1, y1);
+      }
+      let t2 = 0.5 - x2 * x2 - y2 * y2;
+      if (t2 < 0)
+        n2 = 0;
+      else {
+        t2 *= t2;
+        n2 = t2 * t2 * this.dot(this.grad3[gi2], x2, y2);
+      }
+      return 70 * (n0 + n1 + n2);
+    }
+    // 3D simplex noise
+    noise3d(xin, yin, zin) {
+      let n0;
+      let n1;
+      let n2;
+      let n3;
+      const F3 = 1 / 3;
+      const s = (xin + yin + zin) * F3;
+      const i = Math.floor(xin + s);
+      const j = Math.floor(yin + s);
+      const k = Math.floor(zin + s);
+      const G3 = 1 / 6;
+      const t = (i + j + k) * G3;
+      const X0 = i - t;
+      const Y0 = j - t;
+      const Z0 = k - t;
+      const x0 = xin - X0;
+      const y0 = yin - Y0;
+      const z0 = zin - Z0;
+      let i1;
+      let j1;
+      let k1;
+      let i2;
+      let j2;
+      let k2;
+      if (x0 >= y0) {
+        if (y0 >= z0) {
+          i1 = 1;
+          j1 = 0;
+          k1 = 0;
+          i2 = 1;
+          j2 = 1;
+          k2 = 0;
+        } else if (x0 >= z0) {
+          i1 = 1;
+          j1 = 0;
+          k1 = 0;
+          i2 = 1;
+          j2 = 0;
+          k2 = 1;
+        } else {
+          i1 = 0;
+          j1 = 0;
+          k1 = 1;
+          i2 = 1;
+          j2 = 0;
+          k2 = 1;
+        }
+      } else {
+        if (y0 < z0) {
+          i1 = 0;
+          j1 = 0;
+          k1 = 1;
+          i2 = 0;
+          j2 = 1;
+          k2 = 1;
+        } else if (x0 < z0) {
+          i1 = 0;
+          j1 = 1;
+          k1 = 0;
+          i2 = 0;
+          j2 = 1;
+          k2 = 1;
+        } else {
+          i1 = 0;
+          j1 = 1;
+          k1 = 0;
+          i2 = 1;
+          j2 = 1;
+          k2 = 0;
+        }
+      }
+      const x1 = x0 - i1 + G3;
+      const y1 = y0 - j1 + G3;
+      const z1 = z0 - k1 + G3;
+      const x2 = x0 - i2 + 2 * G3;
+      const y2 = y0 - j2 + 2 * G3;
+      const z2 = z0 - k2 + 2 * G3;
+      const x3 = x0 - 1 + 3 * G3;
+      const y3 = y0 - 1 + 3 * G3;
+      const z3 = z0 - 1 + 3 * G3;
+      const ii = i & 255;
+      const jj = j & 255;
+      const kk = k & 255;
+      const gi0 = this.perm[ii + this.perm[jj + this.perm[kk]]] % 12;
+      const gi1 = this.perm[ii + i1 + this.perm[jj + j1 + this.perm[kk + k1]]] % 12;
+      const gi2 = this.perm[ii + i2 + this.perm[jj + j2 + this.perm[kk + k2]]] % 12;
+      const gi3 = this.perm[ii + 1 + this.perm[jj + 1 + this.perm[kk + 1]]] % 12;
+      let t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0;
+      if (t0 < 0)
+        n0 = 0;
+      else {
+        t0 *= t0;
+        n0 = t0 * t0 * this.dot3(this.grad3[gi0], x0, y0, z0);
+      }
+      let t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1;
+      if (t1 < 0)
+        n1 = 0;
+      else {
+        t1 *= t1;
+        n1 = t1 * t1 * this.dot3(this.grad3[gi1], x1, y1, z1);
+      }
+      let t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2;
+      if (t2 < 0)
+        n2 = 0;
+      else {
+        t2 *= t2;
+        n2 = t2 * t2 * this.dot3(this.grad3[gi2], x2, y2, z2);
+      }
+      let t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3;
+      if (t3 < 0)
+        n3 = 0;
+      else {
+        t3 *= t3;
+        n3 = t3 * t3 * this.dot3(this.grad3[gi3], x3, y3, z3);
+      }
+      return 32 * (n0 + n1 + n2 + n3);
+    }
+    // 4D simplex noise
+    noise4d(x, y, z, w) {
+      const grad4 = this.grad4;
+      const simplex = this.simplex;
+      const perm = this.perm;
+      const F4 = (Math.sqrt(5) - 1) / 4;
+      const G4 = (5 - Math.sqrt(5)) / 20;
+      let n0;
+      let n1;
+      let n2;
+      let n3;
+      let n4;
+      const s = (x + y + z + w) * F4;
+      const i = Math.floor(x + s);
+      const j = Math.floor(y + s);
+      const k = Math.floor(z + s);
+      const l = Math.floor(w + s);
+      const t = (i + j + k + l) * G4;
+      const X0 = i - t;
+      const Y0 = j - t;
+      const Z0 = k - t;
+      const W0 = l - t;
+      const x0 = x - X0;
+      const y0 = y - Y0;
+      const z0 = z - Z0;
+      const w0 = w - W0;
+      const c1 = x0 > y0 ? 32 : 0;
+      const c2 = x0 > z0 ? 16 : 0;
+      const c3 = y0 > z0 ? 8 : 0;
+      const c4 = x0 > w0 ? 4 : 0;
+      const c5 = y0 > w0 ? 2 : 0;
+      const c6 = z0 > w0 ? 1 : 0;
+      const c = c1 + c2 + c3 + c4 + c5 + c6;
+      const i1 = simplex[c][0] >= 3 ? 1 : 0;
+      const j1 = simplex[c][1] >= 3 ? 1 : 0;
+      const k1 = simplex[c][2] >= 3 ? 1 : 0;
+      const l1 = simplex[c][3] >= 3 ? 1 : 0;
+      const i2 = simplex[c][0] >= 2 ? 1 : 0;
+      const j2 = simplex[c][1] >= 2 ? 1 : 0;
+      const k2 = simplex[c][2] >= 2 ? 1 : 0;
+      const l2 = simplex[c][3] >= 2 ? 1 : 0;
+      const i3 = simplex[c][0] >= 1 ? 1 : 0;
+      const j3 = simplex[c][1] >= 1 ? 1 : 0;
+      const k3 = simplex[c][2] >= 1 ? 1 : 0;
+      const l3 = simplex[c][3] >= 1 ? 1 : 0;
+      const x1 = x0 - i1 + G4;
+      const y1 = y0 - j1 + G4;
+      const z1 = z0 - k1 + G4;
+      const w1 = w0 - l1 + G4;
+      const x2 = x0 - i2 + 2 * G4;
+      const y2 = y0 - j2 + 2 * G4;
+      const z2 = z0 - k2 + 2 * G4;
+      const w2 = w0 - l2 + 2 * G4;
+      const x3 = x0 - i3 + 3 * G4;
+      const y3 = y0 - j3 + 3 * G4;
+      const z3 = z0 - k3 + 3 * G4;
+      const w3 = w0 - l3 + 3 * G4;
+      const x4 = x0 - 1 + 4 * G4;
+      const y4 = y0 - 1 + 4 * G4;
+      const z4 = z0 - 1 + 4 * G4;
+      const w4 = w0 - 1 + 4 * G4;
+      const ii = i & 255;
+      const jj = j & 255;
+      const kk = k & 255;
+      const ll = l & 255;
+      const gi0 = perm[ii + perm[jj + perm[kk + perm[ll]]]] % 32;
+      const gi1 = perm[ii + i1 + perm[jj + j1 + perm[kk + k1 + perm[ll + l1]]]] % 32;
+      const gi2 = perm[ii + i2 + perm[jj + j2 + perm[kk + k2 + perm[ll + l2]]]] % 32;
+      const gi3 = perm[ii + i3 + perm[jj + j3 + perm[kk + k3 + perm[ll + l3]]]] % 32;
+      const gi4 = perm[ii + 1 + perm[jj + 1 + perm[kk + 1 + perm[ll + 1]]]] % 32;
+      let t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0 - w0 * w0;
+      if (t0 < 0)
+        n0 = 0;
+      else {
+        t0 *= t0;
+        n0 = t0 * t0 * this.dot4(grad4[gi0], x0, y0, z0, w0);
+      }
+      let t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1 - w1 * w1;
+      if (t1 < 0)
+        n1 = 0;
+      else {
+        t1 *= t1;
+        n1 = t1 * t1 * this.dot4(grad4[gi1], x1, y1, z1, w1);
+      }
+      let t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2 - w2 * w2;
+      if (t2 < 0)
+        n2 = 0;
+      else {
+        t2 *= t2;
+        n2 = t2 * t2 * this.dot4(grad4[gi2], x2, y2, z2, w2);
+      }
+      let t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3 - w3 * w3;
+      if (t3 < 0)
+        n3 = 0;
+      else {
+        t3 *= t3;
+        n3 = t3 * t3 * this.dot4(grad4[gi3], x3, y3, z3, w3);
+      }
+      let t4 = 0.6 - x4 * x4 - y4 * y4 - z4 * z4 - w4 * w4;
+      if (t4 < 0)
+        n4 = 0;
+      else {
+        t4 *= t4;
+        n4 = t4 * t4 * this.dot4(grad4[gi4], x4, y4, z4, w4);
+      }
+      return 27 * (n0 + n1 + n2 + n3 + n4);
+    }
+  };
+
+  // parts/generative-header/GenerativeHeader.tsx
+  function GenerativeHeader() {
+    const canvasRef = (0, import_react11.useRef)();
+    const [initialized, setIsInitialized] = (0, import_react11.useState)();
+    const stateRef = (0, import_react11.useRef)({});
+    (0, import_react11.useEffect)(() => {
+      setTimeout(() => {
+        let s = stateRef.current;
+        let canvas = canvasRef.current;
+        s.w = canvas.width = innerWidth;
+        s.h = canvas.height = innerHeight;
+        s.ctx = canvas.getContext("2d");
+        let mask = document.createElement("canvas");
+        mask.width = s.w;
+        mask.height = s.h;
+        let maskCtx = mask.getContext("2d");
+        maskCtx.font = "170px Arial, sans-serif";
+        maskCtx.fillText("I'm Stranger in the Q", 50, 200);
+        s.mask = maskCtx.getImageData(0, 0, s.w, s.h);
+        setLineWidth(s.ctx, 0.1);
+        let hash = randomHash();
+        setRandomGenerator(prng2x(hash));
+        const noise = new SimplexNoise();
+        let pal = ["#000", "#000", "#000", "#000", "#000"];
+        s.settings = newSettings(pal, s.w, s.h);
+        s.restrictions = [...document.querySelectorAll("span")].map((mask2) => {
+          let pad = 5;
+          let rect = {
+            top: mask2.offsetTop - pad,
+            left: mask2.offsetLeft - pad,
+            right: mask2.offsetLeft + mask2.offsetWidth + pad,
+            bottom: mask2.offsetTop + mask2.offsetHeight + pad
+          };
+          strokeRect(s.ctx, "#000", rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
+          return rect;
+        });
+        s.field = createField(noise, s.settings, rnd(111));
+        s.pts = getPts(s.settings, s.w, s.h).filter((p) => {
+          return !s.restrictions.find((box) => inside(p.x, p.y, box));
+        });
+        setIsInitialized(true);
+      }, 111);
+    }, []);
+    const drawFrame = (0, import_react11.useCallback)(() => {
+      let s = stateRef.current;
+      s.pts.forEach((p) => {
+        tick(s.field, p, s.w, s.h, s.settings, s.ctx, (x, y) => {
+          let index = (y | 0) * s.w * 4 + (x | 0) * 4;
+          let masked = s.mask.data[index + 3] > 100;
+          return masked;
+        });
+      });
+    });
+    (0, import_react11.useEffect)(() => {
+      let s = stateRef.current;
+      if (initialized)
+        s.rafLoop = requestAnimationFrame(loop);
+      function loop(t) {
+        drawFrame();
+        s.rafLoop = requestAnimationFrame(loop);
+      }
+      return () => {
+        s.rafLoop && cancelAnimationFrame(s.rafLoop);
+      };
+    }, [initialized]);
+    return /* @__PURE__ */ import_react11.default.createElement("div", { style: { height: 0, overflow: "visible" } }, /* @__PURE__ */ import_react11.default.createElement("canvas", { ref: canvasRef }));
+  }
+  function inside(x, y, box) {
+    return x > box.left && x < box.right && y > box.top && y < box.bottom;
+  }
+
+  // parts/pages/HomePage.tsx
+  function HomePage() {
+    return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, /* @__PURE__ */ import_react12.default.createElement(GenerativeHeader, null), /* @__PURE__ */ import_react12.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react12.default.createElement("div", { className: "generative-header" }, /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement("span", null, "1")), /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement("span", null, "2")))));
+  }
+
   // parts/Site.tsx
   var routes = [{
     path: "/generator/:type/:id/:hash",
-    element: /* @__PURE__ */ import_react11.default.createElement(GeneratorPage, null)
+    element: /* @__PURE__ */ import_react13.default.createElement(GeneratorPage, null)
   }, {
     path: "/projects",
-    element: /* @__PURE__ */ import_react11.default.createElement(ProjectsPage, null)
+    element: /* @__PURE__ */ import_react13.default.createElement(HomePage, null)
   }, {
     path: "*",
     exact: false,
-    element: /* @__PURE__ */ import_react11.default.createElement(HomePage, null)
+    element: /* @__PURE__ */ import_react13.default.createElement(ProjectsPage, null)
   }];
   var router = createBrowserRouter(routes);
   function Routes2() {
-    return /* @__PURE__ */ import_react11.default.createElement(RouterProvider, { router });
+    return /* @__PURE__ */ import_react13.default.createElement(RouterProvider, { router });
   }
   function Site() {
-    return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement(Routes2, null));
+    return /* @__PURE__ */ import_react13.default.createElement(import_react13.default.Fragment, null, /* @__PURE__ */ import_react13.default.createElement(Routes2, null));
   }
 
   // index.tsx
   var div = document.createElement("div");
   document.body.append(div);
-  (0, import_client.createRoot)(div).render(/* @__PURE__ */ import_react12.default.createElement(Site, null));
+  (0, import_client.createRoot)(div).render(/* @__PURE__ */ import_react14.default.createElement(Site, null));
 })();
 /*! Bundled license information:
 

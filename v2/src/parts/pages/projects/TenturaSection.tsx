@@ -1,10 +1,8 @@
 import React from "react";
-import {ProjectThumbnail} from "../../components/ProjectThumbnail";
 import {ProjectItem} from "../../components/ProjectItem";
-import {useMediaQuery} from "../../parts/useMediaQuery";
-import {ProjectsGrid} from "./ProjectsGrid";
+import {ProjectsGrid} from "../../components/ProjectsGrid";
 
-export function TenturaHomeSection({isMobile}) {
+export function TenturaSection({isMobile}) {
     const imgSize = 640;
     const img = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/" +
         "https://artblocks-mainnet.s3.amazonaws.com/";
@@ -13,7 +11,12 @@ export function TenturaHomeSection({isMobile}) {
         name: "Tentura",
         generator: 'tentura'
     }
-    return <ProjectsGrid title={"Tentura"} ratio={1} isMobile={isMobile} rows={isMobile ? 4 : 2}>
+    return <ProjectsGrid
+        title={"Tentura"}
+        ratio={1}
+        isMobile={isMobile}
+        rows={isMobile ? 4 : 2}
+    >
         <ProjectItem
             {...tentura}
             c={isMobile ? "1/3" : "2/4"}

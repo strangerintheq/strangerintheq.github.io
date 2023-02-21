@@ -1,0 +1,1 @@
+export const sidePadding = 0.1;
