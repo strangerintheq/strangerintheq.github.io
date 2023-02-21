@@ -23,7 +23,7 @@ export function getPts(settings:NeuralInterfaceSettings, w,h) {
         let x = pt ? pt[0] : rnd(w);
         let y = pt ? pt[1] : rnd(h);
 
-        let dir = rndb() ?0:PI
+        let dir = 0;;//rndb() ?0:PI
 
         return {
             i, x, y,
@@ -33,6 +33,7 @@ export function getPts(settings:NeuralInterfaceSettings, w,h) {
             started: false,
             colors: getColors(settings),
             reset() {
+                this.stopped = false
                 this.started = false;
                 this.x = rnd(w);
                 this.y = rnd(h);

@@ -2,7 +2,7 @@ import {cell} from "./cell";
 import {NeuralInterfaceSettings} from "./newSettings";
 import {
     drawCircle,
-    drawLineSeg,
+    drawLineSeg, PI, rndb, rndr, rndr45, rndr90,
     setFillStyle,
     setLineWidth,
     setStrokeStyle
@@ -18,17 +18,13 @@ export function tick(field, p, w, h,
 ){
     many(10, ()=> {
         try {
-            if (p.stoped)
-                return;
+
 
             if (restrict(p.x, p.y)){
-                p.stoped = true;
-                p.reset()
-                // drawCircle(c,p.x, p.y, rnd(2) + 1)
-                // if (rnd() > 0.7) {
-                //     c.fill()
-                // }
-                return;
+                if (rndb(0.9))
+                p.dir = rndr()
+            } else {
+                p.dir = PI
             }
 
 

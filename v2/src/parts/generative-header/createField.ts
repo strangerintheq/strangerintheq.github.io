@@ -35,10 +35,10 @@ export function createField(
         // }
     }));
 
-    frameOnField(field);
-
-    many(11, () => circleOnField(field, settings));
-    many(11, () => squareOnField(field, settings));
+    // frameOnField(field);
+    //
+    // many(11, () => circleOnField(field, settings));
+    // many(11, () => squareOnField(field, settings));
 
     return field;
 }

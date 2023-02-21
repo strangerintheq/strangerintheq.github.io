@@ -1,20 +1,16 @@
 import React from "react";
 import {RouterProvider} from "react-router";
 import {createBrowserRouter} from "react-router-dom";
-import {TenturaPage} from "./pages/TenturaPage";
-import {SlicePage} from "./pages/SlicePage";
+import {ProjectsPage} from "./pages/ProjectsPage";
 import {HomePage} from "./pages/HomePage";
 import {GeneratorPage} from "./pages/GeneratorPage";
 
-const routes = [{
-    path: "/tentura",
-    element: <TenturaPage />,
-}, {
+const routes = [ {
     path: "/generator/:type/:id/:hash",
     element: <GeneratorPage />,
 }, {
-    path: "/slice",
-    element: <SlicePage />,
+    path: "/projects",
+    element: <ProjectsPage />,
 }, {
     path: "*",
     exact: false,

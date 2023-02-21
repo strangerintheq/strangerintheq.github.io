@@ -25,6 +25,7 @@ export function GenerativeBg() {
         pts;
         h: number;
         w: number;
+        mask:ImageData;
         restrictions: {width, height,right,bottom}[]
     }>({});
 
@@ -34,9 +35,19 @@ export function GenerativeBg() {
         setTimeout(() => {
             let s = stateRef.current;
             let canvas = canvasRef.current;
+
+            let bg = document.querySelector(".bg")
             s.w = canvas.width = document.body.clientWidth;
-            s.h = canvas.height = document.body.clientHeight;
-            s.ctx = canvas.getContext("2d")
+            s.h = canvas.height = bg.clientHeight;
+            s.ctx = canvas.getContext("2d");
+
+            let mask = document.createElement("canvas");
+            mask.width = s.w;
+            mask.height = s.h;
+            let maskCtx = mask.getContext("2d");
+            maskCtx.font = "170px Arial, sans-serif";
+            maskCtx.fillText("I'm Stranger in the Q", 50, 200);
+            s.mask = maskCtx.getImageData(0,0,s.w, s.h);
             setLineWidth(s.ctx,0.1)
 
             let hash = randomHash()
@@ -47,7 +58,7 @@ export function GenerativeBg() {
             let pal = ["#000", "#000", "#000", "#000", "#000"]
             s.settings = newSettings(pal, s.w, s.h);
 
-            s.restrictions = [...document.querySelectorAll(".mask .project-thumbnail, h2 span")].map((mask:any) => {
+            s.restrictions = [...document.querySelectorAll("span")].map((mask:any) => {
                 let pad = 5;
                 let rect = {
                     top: mask.offsetTop - pad,
@@ -78,7 +89,9 @@ export function GenerativeBg() {
 
         s.pts.forEach(p => {
             tick(s.field, p, s.w, s.h, s.settings, s.ctx, (x, y) => {
-                return s.restrictions.find(box => inside(x, y, box))
+                let index = (y|0)*s.w*4 + (x|0)*4
+                let masked = s.mask.data[index+3] > 100;
+                return masked;// || s.restrictions.find(box => inside(x, y, box))
             });
         });
     });
