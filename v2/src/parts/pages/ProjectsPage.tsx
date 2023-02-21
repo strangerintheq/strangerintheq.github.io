@@ -5,9 +5,9 @@ import {FxHashHomeSection} from "./home/FxHashHomeSection";
 
 export function ProjectsPage() {
     return <div>
-        <h1>Projects</h1>
+        {/*<h1>Projects</h1>*/}
         <TenturaHomeSection/>
-        <SliceHomeSection/>
-        <FxHashHomeSection/>
+        {/*<SliceHomeSection/>*/}
+        {/*<FxHashHomeSection/>*/}
     </div>
 }

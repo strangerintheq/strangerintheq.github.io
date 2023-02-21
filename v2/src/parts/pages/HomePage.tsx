@@ -13,27 +13,11 @@ export function HomePage() {
         height: 100
     }
     return <PageWrapper>
-        <div className={"bg"}>
-            {/*<div style={separator}/>*/}
-            {/*<div style={{textAlign: "right"}}>*/}
-            {/*    <h2>*/}
-            {/*        <span>SL/CE</span>*/}
-            {/*        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
-            {/*        <span>TENTURA</span>*/}
-            {/*        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
-            {/*        <span>FXHASH</span>*/}
-            {/*    </h2>*/}
-            {/*</div>*/}
-            <div style={separator}/>
-            {/*<h1><span>I'm Stranger in the Q</span></h1>*/}
-            <div style={separator}/>
-            {/*<h2><span>And I'm making art with code</span></h2>*/}
-            <div style={separator}/>
 
-        </div>
         <div>
             <SliceHomeSection/>
             <TenturaHomeSection/>
+            <FxHashHomeSection/>
             {/*<img className={"avatar"} src={sitePath + '/resources/avatar.jpg'}/>*/}
 
             {/*<div>*/}

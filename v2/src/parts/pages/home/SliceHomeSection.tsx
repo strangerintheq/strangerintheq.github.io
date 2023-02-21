@@ -1,62 +1,62 @@
 import React from "react";
 import {ProjectThumbnail} from "../../components/ProjectThumbnail";
 import {ProjectItem} from "../../components/ProjectItem";
+import {useMediaQuery} from "../../parts/useMediaQuery";
+import {ProjectsGrid} from "./ProjectsGrid";
 
 export function SliceHomeSection(props) {
-    return <div style={{marginTop:80, backgroundColor: "white",}}>
-        <h2><span>SL/CE</span></h2>
-        <div style={{
-            marginTop: 40,
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr 1fr"
-        }}>
+    const {matches: isMobile} = useMediaQuery("(max-width: 980px)");
+
+
+    const imgSize = 640;
+    const mainNet = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/" +
+        "https://artblocks-mainnet.s3.amazonaws.com/";
+
+    const staging = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/" +
+        "https://art-blocks-artist-staging-goerli.s3.amazonaws.com/"
+
+    const slice = {
+        type: "artblocks",
+        name: "SL/CE",
+        generator: 'slice'
+    }
+
+    return <ProjectsGrid isMobile={isMobile} title={"SL/CE"} rows={isMobile?4:2} ratio={1.618}>
+
             <ProjectItem
-                w={0.5}
-                h={0.5*1.618}
-                c={"2/4"}
+                {...slice}
+                c={isMobile ? "1/3" : "2/4"}
                 r={"1/3"}
                 hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-                type={"artblocks"}
-                name={"SL/CE"}
-                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_3840,q_auto/https://artblocks-mainnet.s3.amazonaws.com/419000000.png"}
-                generator={'slice'}
+                img={mainNet+"419000000.png"}
             />
             <ProjectItem
-                w={0.25}
-                h={0.25*1.618}
+                {...slice}
+                c={1}
+                r={isMobile ? 3 : 1}
                 hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-                type={"artblocks"}
-                name={"SL/CE"}
-                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000189.png"}
-                generator={'slice'}
+                img={staging+"48000189.png"}
             />
             <ProjectItem
-                w={0.25}
-                h={0.25*1.618}
+                {...slice}
+                c={1}
+                r={isMobile ? 4 : 2}
                 hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-                type={"artblocks"}
-                name={"SL/CE"}
-                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000161.png"}
-                generator={'slice'}
+                img={staging+"48000161.png"}
             />
             <ProjectItem
-                w={0.25}
-                h={0.25*1.618}
+                {...slice}
+                c={isMobile ? 2 : 4}
+                r={isMobile ? 3 : 1}
                 hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-                type={"artblocks"}
-                name={"SL/CE"}
-                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000015.png"}
-                generator={'slice'}
+                img={staging+"48000015.png"}
             />
             <ProjectItem
-                w={0.25}
-                h={0.25*1.618}
+                {...slice}
+                c={isMobile ? 2 : 4}
+                r={isMobile ? 4 : 2}
                 hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-                type={"artblocks"}
-                name={"SL/CE"}
-                img={"https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000055.png"}
-                generator={'slice'}
+                img={staging+"48000055.png"}
             />
-        </div>
-    </div>
+    </ProjectsGrid>
 }

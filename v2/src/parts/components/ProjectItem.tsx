@@ -11,27 +11,23 @@ export function ProjectItem(
         about=null,
         img,
         generator,
-        w = 1,
-        h = 1,
         c=null,
         r=null,
-        id=null
+        id=null,
     }) {
     const backgroundImage = `url(${img.startsWith("http") ? img: sitePath + img})`
-    const height = `calc(var(--base-size) * ${0.74*h})`;
-    const width = `calc(var(--base-size) * ${0.74*w} )`;
     const to = '/generator/'  + type +
             "/" + generator +
             "/" + (hash || makeHash(type))
     const gridColumn = c
     const gridRow = r
-    return <div className={"mask"} style={{ gridColumn,gridRow, lineHeight:0}}>
-        <Link to={to}>
+    return <div className={"mask"} style={{ gridColumn, gridRow, width:'100%', height:'100%'}}>
+        {/*<Link to={to}>*/}
             <div
                 className={"project-thumbnail"}
-                style={{backgroundImage, height, width}}
+                style={{backgroundImage, width:'100%', height:'100%'}}
             />
-        </Link>
+        {/*</Link>*/}
     </div>
 }
 

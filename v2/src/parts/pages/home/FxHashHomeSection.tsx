@@ -4,7 +4,7 @@ import {ProjectItem} from "../../components/ProjectItem";
 
 export function FxHashHomeSection(props) {
     return <div style={{marginTop:80,  }}>
-        <h2><span>Footer</span></h2>
+        <h2><span>fx(hash)</span></h2>
         <div style={{
             marginTop: 40,
             marginBottom: 40,

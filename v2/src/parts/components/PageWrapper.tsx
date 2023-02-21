@@ -3,7 +3,7 @@ import {GenerativeBg} from "./GenerativeBg";
 
 export function PageWrapper(props) {
     return <>
-        <GenerativeBg/>
+        {/*<GenerativeBg/>*/}
         <div
             className={'content-wrapper'}
             // style={{
