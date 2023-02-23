@@ -3669,6 +3669,7 @@
 
   // parts/pages/GeneratorPage.tsx
   function GeneratorPage() {
+    const navigate = useNavigate();
     const { id, hash, type } = useParams();
     const [html, setHtml] = (0, import_react.useState)();
     const [code, setCode] = (0, import_react.useState)();
@@ -3686,16 +3687,38 @@
       "button",
       {
         style: {
-          fontSize: 30,
           position: "fixed",
           left: 0,
-          top: 0
+          top: 0,
+          lineHeight: 0,
+          padding: 0,
+          margin: 5
         },
         onClick: () => {
-          let h = randomFxHash();
+          let newHash = type === "artblocks" ? randomAbHash() : randomFxHash();
+          navigate("/generator/" + type + "/" + id + "/" + newHash);
         }
       },
-      "NEW"
+      /* @__PURE__ */ import_react.default.createElement(
+        "svg",
+        {
+          xmlns: "http://www.w3.org/2000/svg",
+          className: "icon icon-tabler icon-tabler-wand",
+          width: "48",
+          height: "48",
+          viewBox: "0 0 24 24",
+          strokeWidth: "1.5",
+          stroke: "#000",
+          fill: "none",
+          strokeLinecap: "round",
+          strokeLinejoin: "round"
+        },
+        /* @__PURE__ */ import_react.default.createElement("path", { stroke: "none", d: "M0 0h24v24H0z", fill: "none" }),
+        /* @__PURE__ */ import_react.default.createElement("polyline", { points: "6 21 21 6 18 3 3 18 6 21" }),
+        /* @__PURE__ */ import_react.default.createElement("line", { x1: "15", y1: "6", x2: "18", y2: "9" }),
+        /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" }),
+        /* @__PURE__ */ import_react.default.createElement("path", { d: "M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" })
+      )
     ), html ? /* @__PURE__ */ import_react.default.createElement(
       "iframe",
       {

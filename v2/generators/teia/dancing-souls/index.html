@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dancing Souls</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="thumbnail.png" />
+    <style>
+        body {
+            margin:0;
+            overflow: hidden;
+            background: black;
+
+        }
+        canvas {
+            --s: min(100vw, 100vh);
+            width: var(--s);
+            height: var(--s);
+            margin: calc(50vh - calc(0.5 * var(--s))) auto;
+            display: block;
+        }
+    </style>
+</head>
+<body style="">
+<canvas id=c></canvas>
+<!-- prng.js -->
+<script>
+
+    function Random(seed) {
+        this._seed = seed % 2147483647;
+        if (this._seed <= 0)
+            this._seed += 2147483646;
+    }
+
+    Random.prototype.next = function () {
+        return this._seed = this._seed * 16807 % 2147483647;
+    };
+
+    Random.prototype.nextFloat = function () {
+        return (this.next() - 1) / 2147483646;
+    };
+
+
+    let prng = new Random(0);
+
+    function newPrng(seed) {
+        prng = new Random(seed | (Math.random()*1e7)|0)
+    }
+
+    function rnd (x) {
+        return prng.nextFloat() * (x || 1);
+    }
+
+    function rand(size){
+        let k = 1;
+        k *= (rnd() - 0.5)
+        k *= (rnd() - 0.5)
+        k += (rnd()-0.5)/2.
+        return size * k
+    }
+</script>
+<!-- palette.js -->
+<script>
+    const palette = () => {
+        let all = [["#69d2e7", "#a7dbd8", "#e0e4cc", "#f38630", "#fa6900"], ["#fe4365", "#fc9d9a", "#f9cdad", "#c8c8a9", "#83af9b"], ["#ecd078", "#d95b43", "#c02942", "#542437", "#53777a"], ["#556270", "#4ecdc4", "#c7f464", "#ff6b6b", "#c44d58"], ["#774f38", "#e08e79", "#f1d4af", "#ece5ce", "#c5e0dc"], ["#e8ddcb", "#cdb380", "#036564", "#033649", "#031634"], ["#490a3d", "#bd1550", "#e97f02", "#f8ca00", "#8a9b0f"], ["#594f4f", "#547980", "#45ada8", "#9de0ad", "#e5fcc2"], ["#00a0b0", "#6a4a3c", "#cc333f", "#eb6841", "#edc951"], ["#e94e77", "#d68189", "#c6a49a", "#c6e5d9", "#f4ead5"], ["#3fb8af", "#7fc7af", "#dad8a7", "#ff9e9d", "#ff3d7f"], ["#d9ceb2", "#948c75", "#d5ded9", "#7a6a53", "#99b2b7"], ["#ffffff", "#cbe86b", "#f2e9e1", "#1c140d", "#cbe86b"], ["#efffcd", "#dce9be", "#555152", "#2e2633", "#99173c"], ["#343838", "#005f6b", "#008c9e", "#00b4cc", "#00dffc"], ["#413e4a", "#73626e", "#b38184", "#f0b49e", "#f7e4be"], ["#ff4e50", "#fc913a", "#f9d423", "#ede574", "#e1f5c4"], ["#99b898", "#fecea8", "#ff847c", "#e84a5f", "#2a363b"], ["#655643", "#80bca3", "#f6f7bd", "#e6ac27", "#bf4d28"], ["#00a8c6", "#40c0cb", "#f9f2e7", "#aee239", "#8fbe00"], ["#351330", "#424254", "#64908a", "#e8caa4", "#cc2a41"], ["#554236", "#f77825", "#d3ce3d", "#f1efa5", "#60b99a"], ["#5d4157", "#838689", "#a8caba", "#cad7b2", "#ebe3aa"], ["#8c2318", "#5e8c6a", "#88a65e", "#bfb35a", "#f2c45a"], ["#fad089", "#ff9c5b", "#f5634a", "#ed303c", "#3b8183"], ["#ff4242", "#f4fad2", "#d4ee5e", "#e1edb9", "#f0f2eb"], ["#f8b195", "#f67280", "#c06c84", "#6c5b7b", "#355c7d"], ["#d1e751", "#ffffff", "#000000", "#4dbce9", "#26ade4"], ["#1b676b", "#519548", "#88c425", "#bef202", "#eafde6"], ["#5e412f", "#fcebb6", "#78c0a8", "#f07818", "#f0a830"], ["#bcbdac", "#cfbe27", "#f27435", "#f02475", "#3b2d38"], ["#452632", "#91204d", "#e4844a", "#e8bf56", "#e2f7ce"], ["#eee6ab", "#c5bc8e", "#696758", "#45484b", "#36393b"], ["#f0d8a8", "#3d1c00", "#86b8b1", "#f2d694", "#fa2a00"], ["#2a044a", "#0b2e59", "#0d6759", "#7ab317", "#a0c55f"], ["#f04155", "#ff823a", "#f2f26f", "#fff7bd", "#95cfb7"], ["#b9d7d9", "#668284", "#2a2829", "#493736", "#7b3b3b"], ["#bbbb88", "#ccc68d", "#eedd99", "#eec290", "#eeaa88"], ["#b3cc57", "#ecf081", "#ffbe40", "#ef746f", "#ab3e5b"], ["#a3a948", "#edb92e", "#f85931", "#ce1836", "#009989"], ["#300030", "#480048", "#601848", "#c04848", "#f07241"], ["#67917a", "#170409", "#b8af03", "#ccbf82", "#e33258"], ["#aab3ab", "#c4cbb7", "#ebefc9", "#eee0b7", "#e8caaf"], ["#e8d5b7", "#0e2430", "#fc3a51", "#f5b349", "#e8d5b9"], ["#ab526b", "#bca297", "#c5ceae", "#f0e2a4", "#f4ebc3"], ["#607848", "#789048", "#c0d860", "#f0f0d8", "#604848"], ["#b6d8c0", "#c8d9bf", "#dadabd", "#ecdbbc", "#fedcba"], ["#a8e6ce", "#dcedc2", "#ffd3b5", "#ffaaa6", "#ff8c94"], ["#3e4147", "#fffedf", "#dfba69", "#5a2e2e", "#2a2c31"], ["#fc354c", "#29221f", "#13747d", "#0abfbc", "#fcf7c5"], ["#cc0c39", "#e6781e", "#c8cf02", "#f8fcc1", "#1693a7"], ["#1c2130", "#028f76", "#b3e099", "#ffeaad", "#d14334"], ["#a7c5bd", "#e5ddcb", "#eb7b59", "#cf4647", "#524656"], ["#dad6ca", "#1bb0ce", "#4f8699", "#6a5e72", "#563444"], ["#5c323e", "#a82743", "#e15e32", "#c0d23e", "#e5f04c"], ["#edebe6", "#d6e1c7", "#94c7b6", "#403b33", "#d3643b"], ["#fdf1cc", "#c6d6b8", "#987f69", "#e3ad40", "#fcd036"], ["#230f2b", "#f21d41", "#ebebbc", "#bce3c5", "#82b3ae"], ["#b9d3b0", "#81bda4", "#b28774", "#f88f79", "#f6aa93"], ["#3a111c", "#574951", "#83988e", "#bcdea5", "#e6f9bc"], ["#5e3929", "#cd8c52", "#b7d1a3", "#dee8be", "#fcf7d3"], ["#1c0113", "#6b0103", "#a30006", "#c21a01", "#f03c02"], ["#000000", "#9f111b", "#b11623", "#292c37", "#cccccc"], ["#382f32", "#ffeaf2", "#fcd9e5", "#fbc5d8", "#f1396d"], ["#e3dfba", "#c8d6bf", "#93ccc6", "#6cbdb5", "#1a1f1e"], ["#f6f6f6", "#e8e8e8", "#333333", "#990100", "#b90504"], ["#1b325f", "#9cc4e4", "#e9f2f9", "#3a89c9", "#f26c4f"], ["#a1dbb2", "#fee5ad", "#faca66", "#f7a541", "#f45d4c"], ["#c1b398", "#605951", "#fbeec2", "#61a6ab", "#accec0"], ["#5e9fa3", "#dcd1b4", "#fab87f", "#f87e7b", "#b05574"], ["#951f2b", "#f5f4d7", "#e0dfb1", "#a5a36c", "#535233"], ["#8dccad", "#988864", "#fea6a2", "#f9d6ac", "#ffe9af"], ["#2d2d29", "#215a6d", "#3ca2a2", "#92c7a3", "#dfece6"], ["#413d3d", "#040004", "#c8ff00", "#fa023c", "#4b000f"], ["#eff3cd", "#b2d5ba", "#61ada0", "#248f8d", "#605063"], ["#ffefd3", "#fffee4", "#d0ecea", "#9fd6d2", "#8b7a5e"], ["#cfffdd", "#b4dec1", "#5c5863", "#a85163", "#ff1f4c"], ["#9dc9ac", "#fffec7", "#f56218", "#ff9d2e", "#919167"], ["#4e395d", "#827085", "#8ebe94", "#ccfc8e", "#dc5b3e"], ["#a8a7a7", "#cc527a", "#e8175d", "#474747", "#363636"], ["#f8edd1", "#d88a8a", "#474843", "#9d9d93", "#c5cfc6"], ["#046d8b", "#309292", "#2fb8ac", "#93a42a", "#ecbe13"], ["#f38a8a", "#55443d", "#a0cab5", "#cde9ca", "#f1edd0"], ["#a70267", "#f10c49", "#fb6b41", "#f6d86b", "#339194"], ["#ff003c", "#ff8a00", "#fabe28", "#88c100", "#00c176"], ["#ffedbf", "#f7803c", "#f54828", "#2e0d23", "#f8e4c1"], ["#4e4d4a", "#353432", "#94ba65", "#2790b0", "#2b4e72"], ["#0ca5b0", "#4e3f30", "#fefeeb", "#f8f4e4", "#a5b3aa"], ["#4d3b3b", "#de6262", "#ffb88c", "#ffd0b3", "#f5e0d3"], ["#fffbb7", "#a6f6af", "#66b6ab", "#5b7c8d", "#4f2958"], ["#edf6ee", "#d1c089", "#b3204d", "#412e28", "#151101"], ["#9d7e79", "#ccac95", "#9a947c", "#748b83", "#5b756c"], ["#fcfef5", "#e9ffe1", "#cdcfb7", "#d6e6c3", "#fafbe3"], ["#9cddc8", "#bfd8ad", "#ddd9ab", "#f7af63", "#633d2e"], ["#30261c", "#403831", "#36544f", "#1f5f61", "#0b8185"], ["#aaff00", "#ffaa00", "#ff00aa", "#aa00ff", "#00aaff"], ["#d1313d", "#e5625c", "#f9bf76", "#8eb2c5", "#615375"], ["#ffe181", "#eee9e5", "#fad3b2", "#ffba7f", "#ff9c97"], ["#73c8a9", "#dee1b6", "#e1b866", "#bd5532", "#373b44"], ["#805841", "#dcf7f3", "#fffcdd", "#ffd8d8", "#f5a2a2"]];
+
+        let colors;
+
+        return {
+            w: "#ffffff",
+            b: "#000000",
+            pick() {
+                return colors[rnd(5) | 0]
+            },
+            next() {
+                colors = all[rnd(all.length) | 0]
+            }
+        }
+    };
+
+    function nextLightColor(){
+        let c = p.pick();
+        while (!checkColor(c)) {
+            for (let i=0;i<10;i++) {
+                if (checkColor(c)) {
+                    break
+                } else {
+                    c = p.pick();
+                }
+            }
+            p.next()
+        }
+
+        return c
+
+    }
+
+    function checkColor(c){
+        c = c.substring(1);
+        const rgb = parseInt(c, 16);
+        const r = (rgb >> 16) & 0xff;
+        const g = (rgb >>  8) & 0xff;
+        const b = (rgb >>  0) & 0xff;
+
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b > 200
+    }
+</script>
+<!-- brush.js -->
+<script>
+    function brush() {
+        let points;
+        let max = 1000;
+        let len = 1001;
+        let edg = .99;
+        return {
+            reset() {
+                points = []
+            },
+            randomize(){
+                edg = rnd(0.009) + 0.99;
+                len = 100 + rnd(800);
+                max = 2000 + rnd(4000)
+            },
+            nearest(pt, maxDist) {
+                maxDist = maxDist || max;
+                points.forEach(p => {
+                    let dx = p.x - pt.x;
+                    let dy = p.y - pt.y;
+                    let d = dx ** 2 + dy ** 2;
+                    if (d < maxDist && rnd() > edg) {
+                        line(p, pt);
+                    }
+                });
+
+                points.push(pt);
+
+                if (points.length > len)
+                    points.shift();
+            }
+        }
+    }
+</script>
+<!-- 3d-view.js -->
+<script>
+    const view = () => {
+        let k, a1, a2, far;
+        return {
+            init() {
+                k = 400;
+                a1 = rnd() * 17;
+                a2 = rnd() * 17;
+                far = 4;
+            },
+            project(p) {
+                const x = p.x * cos(a1) + p.z * sin(a1);
+                const z = p.z * cos(a1) - p.x * sin(a1);
+                const y = p.y * cos(a2) + z * sin(a2);
+                const d = z * cos(a2) - p.y * sin(a2) + far;
+                return {
+                    x: (k / d) * x,
+                    y: (k / d) * y
+                }
+            }
+        };
+    };
+</script>
+<!-- canvas-2d.js -->
+<script>
+
+    let ctx = c.getContext("2d");
+
+    let cos = Math.cos,
+        sin = Math.sin;
+
+
+
+
+    function line(p0, p) {
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+    }
+
+    function clear(color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(-1e5, -1e5, 2e5, 2e5);
+    }
+</script>
+<!-- noise.js -->
+<script>function fade(t) {
+    return t * t * t * (t * (t * 6 - 15) + 10);
+}
+
+function lerp(t, a, b) {
+    return a + t * (b - a);
+}
+
+function grad(hash, x, y, z) {
+    // Convert lo 4 bits of hash code into 12 gradient directions.
+    var h = hash & 15,
+        u = h < 8 ? x : y,
+        v = h < 4 ? y : h == 12 || h == 14 ? x : z;
+    return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
+}
+
+function scale(n) {
+    return (1 + n) / 2;
+}
+
+var pm = new Array(512);
+
+var permutation = [
+    151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36, 103, 30, 69, 142, 8, 99,
+    37, 240, 21, 10, 23, 190, 6, 148, 247, 120, 234, 75, 0, 26, 197, 62, 94, 252, 219, 203, 117, 35, 11, 32,
+    57, 177, 33, 88, 237, 149, 56, 87, 174, 20, 125, 136, 171, 168, 68, 175, 74, 165, 71, 134, 139, 48, 27, 166,
+    77, 146, 158, 231, 83, 111, 229, 122, 60, 211, 133, 230, 220, 105, 92, 41, 55, 46, 245, 40, 244, 102, 143,
+    54, 65, 25, 63, 161, 1, 216, 80, 73, 209, 76, 132, 187, 208, 89, 18, 169, 200, 196, 135, 130, 116, 188, 159,
+    86, 164, 100, 109, 198, 173, 186, 3, 64, 52, 217, 226, 250, 124, 123, 5, 202, 38, 147, 118, 126, 255, 82,
+    85, 212, 207, 206, 59, 227, 47, 16, 58, 17, 182, 189, 28, 42, 223, 183, 170, 213, 119, 248, 152, 2, 44,
+    154, 163, 70, 221, 153, 101, 155, 167, 43, 172, 9, 129, 22, 39, 253, 19, 98, 108, 110, 79, 113, 224, 232,
+    178, 185, 112, 104, 218, 246, 97, 228, 251, 34, 242, 193, 238, 210, 144, 12, 191, 179, 162, 241, 81, 51,
+    145, 235, 249, 14, 239, 107, 49, 192, 214, 31, 181, 199, 106, 157, 184, 84, 204, 176, 115, 121, 50, 45,
+    127, 4, 150, 254, 138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180
+];
+
+for (let i = 0; i < 256; i++) {
+    pm[256 + i] = pm[i] = permutation[i];
+}
+
+function noise2d(x, y) {
+    // Find unit square that contains point.
+    var X = Math.floor(x) & 255,
+        Y = Math.floor(y) & 255;
+    // Find relative x,y of point in square.
+    x -= Math.floor(x);
+    y -= Math.floor(y);
+    // Compute fade curves for each of x,y.
+    var u = fade(x),
+        v = fade(y);
+    // Hash coordinates of the corners.
+    var A = pm[X    ] + Y, AA = pm[A], AB = pm[A + 1],
+        B = pm[X + 1] + Y, BA = pm[B], BB = pm[B + 1];
+
+    // Add blended results from the corners.
+    return scale(
+        lerp(
+            v,
+            lerp(
+                u,
+                grad(pm[AA], x, y, 0),
+                grad(pm[BA], x - 1, y, 0)
+            ),
+            lerp(
+                u,
+                grad(pm[AB], x, y - 1, 0),
+                grad(pm[BB], x - 1, y - 1, 0)
+            )
+        )
+    );
+}
+</script>
+<!-- name.js -->
+<script>
+    function name() {
+        let rnd = n => (Math.random()*n) | 0;
+        let many = (m, n) => [...Array(rnd(n) + m)].map((_,i) => i);
+        let choose = a => a.sort(() => rnd(2) - 1).pop()
+        let end = s => s + choose(['ae', 'um', 'us', 'is', 'ei', 'ia']);
+        let char = i => choose((i % 2 ? 'aeiouy' : 'bcdfghjklmnpqrstvwxz').split(''));
+        let root = () => many(2, 6).reverse().map(char).join('');
+        return  many(2, 1).map(root).map(end).join(' ');
+    }
+</script>
+<!-- script.js -->
+<script>
+    let att, col, size;
+
+    const attr = attractor();
+    const br = brush();
+    const p = palette();
+    const v = view();
+
+    newPrng()
+
+    addEventListener('pointerdown', newPainting);
+
+    newPainting();
+
+    function creature(seed){
+        prng._seed = seed
+        newPainting()
+    }
+
+    function newPainting(e) {
+        if (e && e.button !== 0)
+            return
+        init();
+        clear(`hsl(210,44%,${rnd(11)}%)`);
+        rays()
+        ctx.lineWidth = (rnd(0.5)+0.5);
+        dust();
+        bubbles();
+        p.next()
+        let n = 2;
+        if (rnd()>0.95)
+            n--
+        else if (rnd()>0.95)
+            n++
+        for (let j = 0; j <2; j++) {
+            oneCreature()
+        }
+
+        for (let j = 0; j <2; j++){
+            ctx.strokeStyle = p.pick() + '90';
+            ctx.strokeRect(
+                -490 + rnd(8)-4,
+                -490+ rnd(8)-4,
+                980+ rnd(8)-4,
+                980+ rnd(8)-4
+            )
+        }
+
+    }
+
+    function oneCreature(){
+        let start = [rnd(4)-2,rnd(4)-2,rnd(4)-2]
+        const shift= rnd(0.1)
+        for (let n=0; n<444; n++){
+            // ctx.strokeStyle = (baseColor+rnd(10)|0) + '0';
+            br.reset()
+            att = createAttractor()
+            attr.setFunction(att());
+            attr.set(...start)
+            ctx.strokeStyle = p.pick() + "20";
+            if (n%5 === 0) {
+                let pt = v.project(attr.p);
+                bubble(pt.x, pt.y, rnd(33)+21);
+            }
+            let len = rnd(200)+200
+            attr.set(
+                start[0]+shift,
+                start[1]+shift,
+                start[2]+shift,
+            )
+
+            for (let j=0;j<len;j++){
+                attr.tick();
+                let pt = v.project(attr.p);
+                br.nearest(pt);
+            }
+            if (n%50 === 0) {
+                let pt = v.project(attr.p);
+                bubble(pt.x, pt.y, rnd(5)+5);
+            }
+        }
+    }
+
+    function init(){
+        size = 1024
+        c.width = size;
+        c.height = size;
+        ctx.translate(size/2,size/2)
+        p.next()
+        v.init()
+    }
+
+    function rays(){
+        ctx.strokeStyle = p.pick() +'10 '
+
+        let sh = rnd(500)-250
+        let nz = rnd(111)
+        for (let j=0; j < 200000; j ++){
+
+            ctx.lineWidth = Math.max(0.1, noise2d(j/200+nz,nz)-0.5)
+            let x = j/20-500 + sh;
+            if (rnd()>0.99)
+                ctx.strokeStyle = p.pick() +'10'
+            line({
+                x: x,
+                y:-600
+            },{
+                x:x*2+rnd(100)-50,
+                y:  rnd(1000)-500
+            })
+        }
+    }
+
+    function dust(){
+        const shift = rnd(33333)
+        const sc = rnd(500)+300
+
+        for (let i=0;i<2222;i++) {
+            let x = rand(size)
+            let y = rand(size)
+            ctx.fillStyle = nextLightColor();
+            let s = noise2d(x/sc+shift, y/sc+shift)
+            if (rnd() < s)
+                ctx.fillRect(x, y, s*1.4,s*1.4)
+        }
+    }
+
+    function bubbles() {
+        p.next()
+        const circ = 3 + rnd(11) | 0;
+        for (let i = 0; i < circ; i++) {
+            br.reset();
+            ctx.strokeStyle = nextLightColor() + '10';
+            let x = rand(size);
+            let y = rand(size);
+            let r = 11 + rnd(44)
+            bubble(x, y, r)
+        }
+    }
+
+    function bubble(x,y,r){
+        for (let a = 0; a < 7; a += 0.03) {
+            br.nearest({
+                x: x + Math.cos(a) * r+rnd(5),
+                y: y + Math.sin(a) * r+rnd(5)
+            }, rnd() > 0.5 ? null : r * r * (1 + rnd()))
+        }
+        if (rnd() > 0.5)
+            return
+        x += r * 0.4 * (rnd() - 0.5);
+        y -= r * 0.4 * (rnd() - 0.5);
+        r *= rnd(0.4) + 0.2
+        for (let a = 0; a < 7; a += 0.03) {
+            br.nearest({
+                x: x + Math.cos(a) * r,
+                y: y + Math.sin(a) * r
+            })
+        }
+    }
+
+    function attractor() {
+        let fn;
+        const p = {x: 0, y: 0, z: 0}
+        return {
+            setFunction(f) {
+                fn = f;
+            },
+            set(x= 0, y= 0, z= 0) {
+                p.x = x;
+                p.y = y;
+                p.z = z;
+            },
+            tick() {
+                fn(p)
+            },
+
+            p
+        }
+    }
+
+    function createAttractor () {
+
+        const fx = rnd() > 0.5 ? sin : cos;
+        const fy = rnd() > 0.5 ? sin : cos;
+        const fz = rnd() > 0.5 ? sin : cos;
+
+        return () => {
+            const b = rnd(0.15)+0.15
+            const t = rnd()*0.01+0.005;
+            return (p) => {
+                const dx = fx(p.y) - b*p.x;
+                const dy = fy(p.z) - b*p.y;
+                const dz = fz(p.x) - b*p.z;
+
+                p.x += t * dx;
+                p.y += t * dy;
+                p.z += t * dz
+            }
+        }
+    }
+
+</script>
+</body>
+</html>
