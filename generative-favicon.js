@@ -51,7 +51,7 @@ function setFavicon(svg) {
     const generativeFavicon = () => {
         const rnd = x => Math.random() * x;
         let s = 1000;
-        let cells = 3 + rnd(2) | 0;
+        let cells = 3 + rnd(3) | 0;
         let red = rnd(cells ** 2) | 0
         let cs = s / cells;
         setFavicon(`
