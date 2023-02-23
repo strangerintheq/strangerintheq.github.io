@@ -32,21 +32,25 @@ export function SliceSection({isMobile}) {
             />
             <ProjectItem
                 {...slice}
+                link={link + "419000000"}
                 hash={"0x7905f21577209c5fccc82170001218c7281e1991f6c42f7717adb819e2846805"}
                 img={staging + "48000189.png"}
             />
             <ProjectItem
                 {...slice}
+                link={link + "419000000"}
                 hash={"0x0c8313ca762c7c8aa3b4c078435fd0a84aa17fb0872cc152103b8ff6f22f71a3"}
                 img={staging + "48000161.png"}
             />
             <ProjectItem
                 {...slice}
+                link={link + "419000000"}
                 hash={"0xecfcfa98860f8fb143d54065186118cc2f429316982597494dc8cffd7f4e4283"}
                 img={staging + "48000015.png"}
             />
             <ProjectItem
                 {...slice}
+                link={link + "419000000"}
                 hash={"0xfb031983bdfc22fb8e1c8956d6feb654dfef92b5a7f5de4b08e39681b0f68cd3"}
                 img={staging + "48000055.png"}
             />
