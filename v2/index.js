@@ -3632,9 +3632,6 @@
   // parts/pages/GeneratorPage.tsx
   var import_react = __toESM(require_react());
 
-  // parts/Crutch.ts
-  var sitePath = document.location.hostname.includes("localhost") ? "/strangerintheq.github.io" : "";
-
   // parts/tools.ts
   function many(n, f) {
     return [...Array(n | 0)].map((_, i) => f(i));
@@ -3665,6 +3662,10 @@
       return str;
     }).join("\n");
   }
+
+  // parts/vars.ts
+  var sitePath = document.location.hostname.includes("localhost") ? "/strangerintheq.github.io" : "";
+  var sidePadding = 0.1;
 
   // parts/pages/GeneratorPage.tsx
   function GeneratorPage() {
@@ -3713,7 +3714,7 @@
   }
 
   // parts/pages/projects/ProjectsPage.tsx
-  var import_react10 = __toESM(require_react());
+  var import_react11 = __toESM(require_react());
 
   // parts/useMediaQuery.ts
   var import_react2 = __toESM(require_react());
@@ -3732,11 +3733,6 @@
 
   // parts/components/PageWrapper.tsx
   var import_react3 = __toESM(require_react());
-
-  // parts/vars.ts
-  var sidePadding = 0.1;
-
-  // parts/components/PageWrapper.tsx
   function PageWrapper(props) {
     return /* @__PURE__ */ import_react3.default.createElement("div", { style: {
       width: `var(--base-size)`,
@@ -3761,19 +3757,44 @@
     generator,
     c = null,
     r = null,
-    id = null
+    id = null,
+    stopGif = false
   }) {
-    const backgroundImage = `url(${img.startsWith("http") ? img : sitePath + img})`;
     const to = "/generator/" + type + "/" + generator + "/" + (hash || makeHash(type));
-    const gridColumn = c;
-    const gridRow = r;
-    return /* @__PURE__ */ import_react4.default.createElement("div", { className: "mask", style: { gridColumn, gridRow, width: "100%", height: "100%" } }, /* @__PURE__ */ import_react4.default.createElement(
+    return /* @__PURE__ */ import_react4.default.createElement("div", { style: { gridColumn: c, gridRow: r } }, /* @__PURE__ */ import_react4.default.createElement(Link, { to }, stopGif ? /* @__PURE__ */ import_react4.default.createElement(CanvasWithStoppedGif, { img }) : /* @__PURE__ */ import_react4.default.createElement(DivWithBackgroundImage, { img })));
+  }
+  function CanvasWithStoppedGif({ img }) {
+    const ref = (0, import_react4.useRef)();
+    (0, import_react4.useEffect)(() => {
+      const canvas = ref.current;
+      const ctx = canvas.getContext("2d");
+      const background = new Image();
+      background.src = img;
+      background.onload = () => {
+        let s = Math.min(background.naturalWidth, background.naturalHeight);
+        canvas.width = s;
+        canvas.height = s;
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        ctx.drawImage(background, 0, 0);
+      };
+    }, []);
+    return /* @__PURE__ */ import_react4.default.createElement("canvas", { ref });
+  }
+  function DivWithBackgroundImage({ img }) {
+    const backgroundImage = `url(${img.startsWith("http") ? img : sitePath + img})`;
+    return /* @__PURE__ */ import_react4.default.createElement(
       "div",
       {
-        className: "project-thumbnail",
-        style: { backgroundImage, width: "100%", height: "100%" }
+        style: {
+          backgroundImage,
+          height: "100%",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          boxShadow: "0 0 3px 0 #9c9898"
+        }
       }
-    ));
+    );
   }
   function makeHash(type) {
     if (type === "artblocks")
@@ -3783,18 +3804,18 @@
 
   // parts/components/ProjectsGrid.tsx
   var import_react5 = __toESM(require_react());
-  function ProjectsGrid({ children = null, title, ratio, isMobile, rows }) {
+  function ProjectsGrid({ children = null, ratio, isMobile, rows }) {
     const gap = isMobile ? 0.02 : 0.01;
     const cellSize = (0.8 - gap * (isMobile ? 1 : 3)) / (isMobile ? 2 : 4);
     const w = fromBaseSize(cellSize);
     const h = fromBaseSize(cellSize * ratio);
-    return /* @__PURE__ */ import_react5.default.createElement("div", { style: { marginTop: 80 } }, /* @__PURE__ */ import_react5.default.createElement("div", { style: { fontSize: "2em" } }, /* @__PURE__ */ import_react5.default.createElement("span", null, title)), /* @__PURE__ */ import_react5.default.createElement("div", { style: {
+    return /* @__PURE__ */ import_react5.default.createElement("div", { style: {
       marginTop: 40,
       display: "grid",
       gap: `calc(var(--base-size) * ${gap})`,
       gridTemplateColumns: isMobile ? `${w} ${w}` : `${w} ${w} ${w} ${w}`,
       gridTemplateRows: `repeat(${rows}, ${h})`
-    } }, children));
+    } }, children);
   }
   function fromBaseSize(s) {
     return `calc(var(--base-size) * ${s})`;
@@ -3810,11 +3831,10 @@
       name: "SL/CE",
       generator: "slice"
     };
-    return /* @__PURE__ */ import_react6.default.createElement(
+    return /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react6.default.createElement("span", null, "SL/CE @ ArtBlocks 2023"), /* @__PURE__ */ import_react6.default.createElement("a", { style: { float: "right" }, href: sitePath + "/slice" }, "ABOUT")), /* @__PURE__ */ import_react6.default.createElement(
       ProjectsGrid,
       {
         isMobile,
-        title: "SL/CE",
         rows: isMobile ? 4 : 2,
         ratio: 1.618
       },
@@ -3860,7 +3880,7 @@
           img: staging + "48000055.png"
         }
       )
-    );
+    ));
   }
 
   // parts/pages/projects/TenturaSection.tsx
@@ -3873,10 +3893,9 @@
       name: "Tentura",
       generator: "tentura"
     };
-    return /* @__PURE__ */ import_react7.default.createElement(
+    return /* @__PURE__ */ import_react7.default.createElement(import_react7.default.Fragment, null, /* @__PURE__ */ import_react7.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react7.default.createElement("span", null, "Tentura @ ArtBlocks 2022"), /* @__PURE__ */ import_react7.default.createElement("a", { style: { float: "right" }, href: sitePath + "/tentura" }, "ABOUT")), /* @__PURE__ */ import_react7.default.createElement(
       ProjectsGrid,
       {
-        title: "Tentura",
         ratio: 1,
         isMobile,
         rows: isMobile ? 4 : 2
@@ -3928,19 +3947,18 @@
           img: img + "265000269.png"
         }
       )
-    );
+    ));
   }
 
   // parts/pages/projects/FxHashSection.tsx
   var import_react8 = __toESM(require_react());
   function FxHashSection({ isMobile }) {
-    return /* @__PURE__ */ import_react8.default.createElement(
+    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react8.default.createElement("span", null, "fx(hash) 2022-2023")), /* @__PURE__ */ import_react8.default.createElement(
       ProjectsGrid,
       {
         isMobile,
         ratio: 1,
-        rows: isMobile ? 8 : 4,
-        title: "Fx(hash)"
+        rows: isMobile ? 8 : 4
       },
       /* @__PURE__ */ import_react8.default.createElement(
         ProjectItem,
@@ -4038,6 +4056,14 @@
       /* @__PURE__ */ import_react8.default.createElement(
         ProjectItem,
         {
+          name: "Foldoscope",
+          img: "https://media.fxhash.xyz/w_768/QmfEU8T3WvbockzU9rR6hV3uDziqTnu5G8r7t6befJLZM3",
+          generator: "amlt"
+        }
+      ),
+      /* @__PURE__ */ import_react8.default.createElement(
+        ProjectItem,
+        {
           name: "Squatree",
           img: "https://media.fxhash.xyz/w_768/QmbBzpLyJAitVDn8hkv6JAF6kZRkk46Eba3UKfNXrTWGc8",
           generator: "amlt"
@@ -4067,19 +4093,18 @@
           generator: "amlt"
         }
       )
-    );
+    ));
   }
 
   // parts/pages/projects/HicEtNuncSection.tsx
   var import_react9 = __toESM(require_react());
   function HicEtNuncSection({ isMobile }) {
-    return /* @__PURE__ */ import_react9.default.createElement(
+    return /* @__PURE__ */ import_react9.default.createElement(import_react9.default.Fragment, null, /* @__PURE__ */ import_react9.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react9.default.createElement("span", null, "teia.art (ex Hic Et Nunc) 2021")), /* @__PURE__ */ import_react9.default.createElement(
       ProjectsGrid,
       {
         isMobile,
         ratio: 1,
-        rows: isMobile ? 7 : 4,
-        title: "Fx(hash)"
+        rows: isMobile ? 6 : 3
       },
       /* @__PURE__ */ import_react9.default.createElement(
         ProjectItem,
@@ -4148,6 +4173,7 @@
       /* @__PURE__ */ import_react9.default.createElement(
         ProjectItem,
         {
+          stopGif: true,
           name: "Nucle",
           img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/343072/thumb288",
           generator: "amlt"
@@ -4156,6 +4182,7 @@
       /* @__PURE__ */ import_react9.default.createElement(
         ProjectItem,
         {
+          stopGif: true,
           name: "Inner Sight",
           img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/324272/thumb288",
           generator: "amlt"
@@ -4164,22 +4191,7 @@
       /* @__PURE__ */ import_react9.default.createElement(
         ProjectItem,
         {
-          name: "Fractions",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/316447/thumb288",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          name: "Neyebula",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/289835/thumb288",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
+          stopGif: true,
           name: "Simplicity",
           img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/279928/thumb288",
           generator: "amlt"
@@ -4188,712 +4200,31 @@
       /* @__PURE__ */ import_react9.default.createElement(
         ProjectItem,
         {
+          stopGif: true,
           name: "Steam Cells",
           img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/274293/thumb288",
           generator: "amlt"
         }
       )
-    );
+    ));
+  }
+
+  // parts/components/Navigation.tsx
+  var import_react10 = __toESM(require_react());
+  function Navigation() {
+    return /* @__PURE__ */ import_react10.default.createElement(import_react10.default.Fragment, null, /* @__PURE__ */ import_react10.default.createElement(Link, { to: "/" }, /* @__PURE__ */ import_react10.default.createElement("span", null, "home")), /* @__PURE__ */ import_react10.default.createElement(Link, { to: "/projects" }, /* @__PURE__ */ import_react10.default.createElement("span", null, "projects")));
   }
 
   // parts/pages/projects/ProjectsPage.tsx
   function ProjectsPage() {
     const { matches: isMobile } = useMediaQuery("(max-width: 980px)");
-    return /* @__PURE__ */ import_react10.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react10.default.createElement(SliceSection, { isMobile }), /* @__PURE__ */ import_react10.default.createElement(TenturaSection, { isMobile }), /* @__PURE__ */ import_react10.default.createElement(FxHashSection, { isMobile }), /* @__PURE__ */ import_react10.default.createElement(HicEtNuncSection, { isMobile }));
+    return /* @__PURE__ */ import_react11.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react11.default.createElement(Navigation, null), /* @__PURE__ */ import_react11.default.createElement(SliceSection, { isMobile }), /* @__PURE__ */ import_react11.default.createElement(TenturaSection, { isMobile }), /* @__PURE__ */ import_react11.default.createElement(FxHashSection, { isMobile }), /* @__PURE__ */ import_react11.default.createElement(HicEtNuncSection, { isMobile }));
   }
 
   // parts/pages/HomePage.tsx
   var import_react12 = __toESM(require_react());
-
-  // parts/generative-header/GenerativeHeader.tsx
-  var import_react11 = __toESM(require_react());
-
-  // parts/generative-header/framework.ts
-  var {
-    PI,
-    SQRT1_2,
-    sqrt,
-    abs,
-    sin,
-    cos,
-    pow,
-    max,
-    min,
-    atan2,
-    sign,
-    round,
-    floor,
-    ceil,
-    hypot,
-    asin
-  } = Math;
-  var TAU = PI * 2;
-  var randomHash = (randomFunc = Math.random) => {
-    return "0x" + many(64, () => (randomFunc() * 16 | 0).toString(16)).join("");
-  };
-  var parseHex = (hex, offset, len) => parseInt(hex.substr(offset, len), 16);
-  var PiterPasmaArtBlocksPrng = (hash, S, s, t) => {
-    S = new Uint32Array([0, 1, s = t = 2, 3].map((i) => parseHex(hash, i * 8, 8)));
-    return (_) => (t = S[3], S[3] = S[2], S[2] = S[1], S[1] = s = S[0], t ^= t << 11, S[0] ^= t ^ t >>> 8 ^ s >>> 19, S[0] / 2 ** 32);
-  };
-  var prng2x = (hash, i = 0, a = PiterPasmaArtBlocksPrng(hash.substr(2)), b = PiterPasmaArtBlocksPrng(hash.substr(34))) => {
-    return (_) => ++i % 2 ? a() : b();
-  };
-  var random;
-  var setRandomGenerator = (rg) => {
-    return random = rg;
-  };
-  var rnd = (x = 1, s = 0) => {
-    return random() * x + s;
-  };
-  var setStrokeStyle = (ctx, color) => {
-    return ctx.strokeStyle = color;
-  };
-  var setLineWidth = (ctx, width) => {
-    return ctx.lineWidth = width;
-  };
-  var strokeRect = (ctx, color, x, y, w, h) => {
-    setStrokeStyle(ctx, color);
-    ctx.strokeRect(x, y, w, h);
-  };
-  var drawLine = (ctx, x, y, x1, y1) => {
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x1, y1);
-    ctx.stroke();
-  };
-  var drawLineSeg = (ctx, [{ x, y }, { x: x1, y: y1 }]) => {
-    return drawLine(ctx, x, y, x1, y1);
-  };
-
-  // parts/generative-header/newSettings.ts
-  function newSettings(pal, w, h) {
-    let cellCountX = 333;
-    return {
-      cellCountX,
-      cellCountY: cellCountX / w * h | 0,
-      count: w * 0.3 + rnd(w * 2) | 0,
-      noiseSize1: rnd(50, 30),
-      noiseSize2: rnd(50, 30),
-      side: rnd() > 0.5,
-      colors: [
-        [pal[0], pal[1], pal[2]],
-        pal,
-        [pal[2], pal[3], pal[4]]
-      ]
-    };
-  }
-
-  // parts/generative-header/frameOnField.ts
-  function frameOnField(field) {
-    field.forEach((row) => row[1][0] = 0);
-    field.forEach((row) => row[row.length - 2][0] = Math.PI);
-    field[1].forEach((cell) => cell[0] = -Math.PI / 2);
-    field[field.length - 2].forEach((cell) => cell[0] = Math.PI / 2);
-  }
-
-  // parts/generative-header/circleOnField.ts
-  function circleOnField(field, settings) {
-    let n = 100, r = rnd(4) + 2, cx = rnd(settings.cellCountX), cy = rnd(settings.cellCountY);
-    for (let i = 0; i < n; i++) {
-      try {
-        let a = i / n * Math.PI * 2;
-        let x = cx + Math.cos(a) * r | 0;
-        let y = cy + Math.sin(a) * r | 0;
-        field[x][y][0] = rnd() > rnd(7) ? 0.3 : a + Math.PI / 2;
-      } catch (e) {
-      }
-    }
-  }
-
-  // parts/generative-header/squareOnField.ts
-  function squareOnField(field, settings) {
-    let w = 5 + rnd(15) | 0;
-    let h = 5 + rnd(15) | 0;
-    let x = rnd(settings.cellCountX) | 0;
-    let y = rnd(settings.cellCountY) | 0;
-    addSquareOnField(x, y, w, h, field);
-  }
-  function addSquareOnField(x, y, w, h, field) {
-    many(w, (i) => {
-      try {
-        field[x + i][y][0] = 0;
-      } catch (e) {
-      }
-    });
-    many(h, (i) => {
-      try {
-        field[x + w][y + i][0] = -Math.PI / 2;
-      } catch (e) {
-      }
-    });
-    many(w, (i) => {
-      try {
-        field[x + w - i][y + h][0] = Math.PI;
-      } catch (e) {
-      }
-    });
-    many(h, (i) => {
-      try {
-        field[x][y + h - i][0] = Math.PI / 2;
-      } catch (e) {
-      }
-    });
-  }
-
-  // parts/generative-header/createField.ts
-  function createField(noise, settings, seed) {
-    let { cellCountX, cellCountY, noiseSize2, noiseSize1, side } = settings;
-    let field = many(cellCountX, (x) => many(cellCountY, (y) => {
-      if (x > cellCountX / 2) {
-        let a = noise.noise(x / noiseSize1 + seed, y / noiseSize1 + seed);
-        return [Math.round(a * 4) / 4 * Math.PI, 2];
-      } else {
-        let a = noise.noise(x / noiseSize2 + seed, y / noiseSize2 + seed);
-        return [Math.round(a * 4) / 4 * Math.PI, 2];
-      }
-    }));
-    frameOnField(field);
-    many(11, () => circleOnField(field, settings));
-    many(11, () => squareOnField(field, settings));
-    return field;
-  }
-
-  // parts/generative-header/getPts.ts
-  function getPts(settings, w, h) {
-    return many(settings.count, (i) => {
-      return {
-        i,
-        x: rnd(w),
-        y: rnd(h),
-        dir: 0,
-        width: 0.1
-      };
-    });
-  }
-
-  // parts/generative-header/tick.ts
-  function tick(field, p, w, h, settings, c, restrict) {
-    many(10, () => {
-      try {
-        const ix = p.x / w * settings.cellCountX | 0;
-        const iy = p.y / h * settings.cellCountY | 0;
-        let fix = field[ix];
-        let fixiy = fix[iy];
-        const a = fixiy[0] + p.dir;
-        const type = fixiy[1];
-        setLineWidth(c, p.width);
-        setStrokeStyle(c, "#000");
-        const step = 1;
-        const x = p.x + cos(a) * step;
-        const y = p.y + sin(a) * step;
-        start(p, type, c);
-        drawLineSeg(c, [{ x, y }, p]);
-        p.x = x;
-        p.y = y;
-      } catch (e) {
-        p.x = rnd(w);
-        p.y = rnd(h);
-      }
-    });
-  }
-  function start(p, type, c) {
-    if (p.started)
-      return;
-    p.started = true;
-  }
-
-  // node_modules/three/examples/jsm/math/SimplexNoise.js
-  var SimplexNoise = class {
-    constructor(r = Math) {
-      this.grad3 = [
-        [1, 1, 0],
-        [-1, 1, 0],
-        [1, -1, 0],
-        [-1, -1, 0],
-        [1, 0, 1],
-        [-1, 0, 1],
-        [1, 0, -1],
-        [-1, 0, -1],
-        [0, 1, 1],
-        [0, -1, 1],
-        [0, 1, -1],
-        [0, -1, -1]
-      ];
-      this.grad4 = [
-        [0, 1, 1, 1],
-        [0, 1, 1, -1],
-        [0, 1, -1, 1],
-        [0, 1, -1, -1],
-        [0, -1, 1, 1],
-        [0, -1, 1, -1],
-        [0, -1, -1, 1],
-        [0, -1, -1, -1],
-        [1, 0, 1, 1],
-        [1, 0, 1, -1],
-        [1, 0, -1, 1],
-        [1, 0, -1, -1],
-        [-1, 0, 1, 1],
-        [-1, 0, 1, -1],
-        [-1, 0, -1, 1],
-        [-1, 0, -1, -1],
-        [1, 1, 0, 1],
-        [1, 1, 0, -1],
-        [1, -1, 0, 1],
-        [1, -1, 0, -1],
-        [-1, 1, 0, 1],
-        [-1, 1, 0, -1],
-        [-1, -1, 0, 1],
-        [-1, -1, 0, -1],
-        [1, 1, 1, 0],
-        [1, 1, -1, 0],
-        [1, -1, 1, 0],
-        [1, -1, -1, 0],
-        [-1, 1, 1, 0],
-        [-1, 1, -1, 0],
-        [-1, -1, 1, 0],
-        [-1, -1, -1, 0]
-      ];
-      this.p = [];
-      for (let i = 0; i < 256; i++) {
-        this.p[i] = Math.floor(r.random() * 256);
-      }
-      this.perm = [];
-      for (let i = 0; i < 512; i++) {
-        this.perm[i] = this.p[i & 255];
-      }
-      this.simplex = [
-        [0, 1, 2, 3],
-        [0, 1, 3, 2],
-        [0, 0, 0, 0],
-        [0, 2, 3, 1],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [1, 2, 3, 0],
-        [0, 2, 1, 3],
-        [0, 0, 0, 0],
-        [0, 3, 1, 2],
-        [0, 3, 2, 1],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [1, 3, 2, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [1, 2, 0, 3],
-        [0, 0, 0, 0],
-        [1, 3, 0, 2],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [2, 3, 0, 1],
-        [2, 3, 1, 0],
-        [1, 0, 2, 3],
-        [1, 0, 3, 2],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [2, 0, 3, 1],
-        [0, 0, 0, 0],
-        [2, 1, 3, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [2, 0, 1, 3],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [3, 0, 1, 2],
-        [3, 0, 2, 1],
-        [0, 0, 0, 0],
-        [3, 1, 2, 0],
-        [2, 1, 0, 3],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [3, 1, 0, 2],
-        [0, 0, 0, 0],
-        [3, 2, 0, 1],
-        [3, 2, 1, 0]
-      ];
-    }
-    dot(g, x, y) {
-      return g[0] * x + g[1] * y;
-    }
-    dot3(g, x, y, z) {
-      return g[0] * x + g[1] * y + g[2] * z;
-    }
-    dot4(g, x, y, z, w) {
-      return g[0] * x + g[1] * y + g[2] * z + g[3] * w;
-    }
-    noise(xin, yin) {
-      let n0;
-      let n1;
-      let n2;
-      const F2 = 0.5 * (Math.sqrt(3) - 1);
-      const s = (xin + yin) * F2;
-      const i = Math.floor(xin + s);
-      const j = Math.floor(yin + s);
-      const G2 = (3 - Math.sqrt(3)) / 6;
-      const t = (i + j) * G2;
-      const X0 = i - t;
-      const Y0 = j - t;
-      const x0 = xin - X0;
-      const y0 = yin - Y0;
-      let i1;
-      let j1;
-      if (x0 > y0) {
-        i1 = 1;
-        j1 = 0;
-      } else {
-        i1 = 0;
-        j1 = 1;
-      }
-      const x1 = x0 - i1 + G2;
-      const y1 = y0 - j1 + G2;
-      const x2 = x0 - 1 + 2 * G2;
-      const y2 = y0 - 1 + 2 * G2;
-      const ii = i & 255;
-      const jj = j & 255;
-      const gi0 = this.perm[ii + this.perm[jj]] % 12;
-      const gi1 = this.perm[ii + i1 + this.perm[jj + j1]] % 12;
-      const gi2 = this.perm[ii + 1 + this.perm[jj + 1]] % 12;
-      let t0 = 0.5 - x0 * x0 - y0 * y0;
-      if (t0 < 0)
-        n0 = 0;
-      else {
-        t0 *= t0;
-        n0 = t0 * t0 * this.dot(this.grad3[gi0], x0, y0);
-      }
-      let t1 = 0.5 - x1 * x1 - y1 * y1;
-      if (t1 < 0)
-        n1 = 0;
-      else {
-        t1 *= t1;
-        n1 = t1 * t1 * this.dot(this.grad3[gi1], x1, y1);
-      }
-      let t2 = 0.5 - x2 * x2 - y2 * y2;
-      if (t2 < 0)
-        n2 = 0;
-      else {
-        t2 *= t2;
-        n2 = t2 * t2 * this.dot(this.grad3[gi2], x2, y2);
-      }
-      return 70 * (n0 + n1 + n2);
-    }
-    // 3D simplex noise
-    noise3d(xin, yin, zin) {
-      let n0;
-      let n1;
-      let n2;
-      let n3;
-      const F3 = 1 / 3;
-      const s = (xin + yin + zin) * F3;
-      const i = Math.floor(xin + s);
-      const j = Math.floor(yin + s);
-      const k = Math.floor(zin + s);
-      const G3 = 1 / 6;
-      const t = (i + j + k) * G3;
-      const X0 = i - t;
-      const Y0 = j - t;
-      const Z0 = k - t;
-      const x0 = xin - X0;
-      const y0 = yin - Y0;
-      const z0 = zin - Z0;
-      let i1;
-      let j1;
-      let k1;
-      let i2;
-      let j2;
-      let k2;
-      if (x0 >= y0) {
-        if (y0 >= z0) {
-          i1 = 1;
-          j1 = 0;
-          k1 = 0;
-          i2 = 1;
-          j2 = 1;
-          k2 = 0;
-        } else if (x0 >= z0) {
-          i1 = 1;
-          j1 = 0;
-          k1 = 0;
-          i2 = 1;
-          j2 = 0;
-          k2 = 1;
-        } else {
-          i1 = 0;
-          j1 = 0;
-          k1 = 1;
-          i2 = 1;
-          j2 = 0;
-          k2 = 1;
-        }
-      } else {
-        if (y0 < z0) {
-          i1 = 0;
-          j1 = 0;
-          k1 = 1;
-          i2 = 0;
-          j2 = 1;
-          k2 = 1;
-        } else if (x0 < z0) {
-          i1 = 0;
-          j1 = 1;
-          k1 = 0;
-          i2 = 0;
-          j2 = 1;
-          k2 = 1;
-        } else {
-          i1 = 0;
-          j1 = 1;
-          k1 = 0;
-          i2 = 1;
-          j2 = 1;
-          k2 = 0;
-        }
-      }
-      const x1 = x0 - i1 + G3;
-      const y1 = y0 - j1 + G3;
-      const z1 = z0 - k1 + G3;
-      const x2 = x0 - i2 + 2 * G3;
-      const y2 = y0 - j2 + 2 * G3;
-      const z2 = z0 - k2 + 2 * G3;
-      const x3 = x0 - 1 + 3 * G3;
-      const y3 = y0 - 1 + 3 * G3;
-      const z3 = z0 - 1 + 3 * G3;
-      const ii = i & 255;
-      const jj = j & 255;
-      const kk = k & 255;
-      const gi0 = this.perm[ii + this.perm[jj + this.perm[kk]]] % 12;
-      const gi1 = this.perm[ii + i1 + this.perm[jj + j1 + this.perm[kk + k1]]] % 12;
-      const gi2 = this.perm[ii + i2 + this.perm[jj + j2 + this.perm[kk + k2]]] % 12;
-      const gi3 = this.perm[ii + 1 + this.perm[jj + 1 + this.perm[kk + 1]]] % 12;
-      let t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0;
-      if (t0 < 0)
-        n0 = 0;
-      else {
-        t0 *= t0;
-        n0 = t0 * t0 * this.dot3(this.grad3[gi0], x0, y0, z0);
-      }
-      let t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1;
-      if (t1 < 0)
-        n1 = 0;
-      else {
-        t1 *= t1;
-        n1 = t1 * t1 * this.dot3(this.grad3[gi1], x1, y1, z1);
-      }
-      let t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2;
-      if (t2 < 0)
-        n2 = 0;
-      else {
-        t2 *= t2;
-        n2 = t2 * t2 * this.dot3(this.grad3[gi2], x2, y2, z2);
-      }
-      let t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3;
-      if (t3 < 0)
-        n3 = 0;
-      else {
-        t3 *= t3;
-        n3 = t3 * t3 * this.dot3(this.grad3[gi3], x3, y3, z3);
-      }
-      return 32 * (n0 + n1 + n2 + n3);
-    }
-    // 4D simplex noise
-    noise4d(x, y, z, w) {
-      const grad4 = this.grad4;
-      const simplex = this.simplex;
-      const perm = this.perm;
-      const F4 = (Math.sqrt(5) - 1) / 4;
-      const G4 = (5 - Math.sqrt(5)) / 20;
-      let n0;
-      let n1;
-      let n2;
-      let n3;
-      let n4;
-      const s = (x + y + z + w) * F4;
-      const i = Math.floor(x + s);
-      const j = Math.floor(y + s);
-      const k = Math.floor(z + s);
-      const l = Math.floor(w + s);
-      const t = (i + j + k + l) * G4;
-      const X0 = i - t;
-      const Y0 = j - t;
-      const Z0 = k - t;
-      const W0 = l - t;
-      const x0 = x - X0;
-      const y0 = y - Y0;
-      const z0 = z - Z0;
-      const w0 = w - W0;
-      const c1 = x0 > y0 ? 32 : 0;
-      const c2 = x0 > z0 ? 16 : 0;
-      const c3 = y0 > z0 ? 8 : 0;
-      const c4 = x0 > w0 ? 4 : 0;
-      const c5 = y0 > w0 ? 2 : 0;
-      const c6 = z0 > w0 ? 1 : 0;
-      const c = c1 + c2 + c3 + c4 + c5 + c6;
-      const i1 = simplex[c][0] >= 3 ? 1 : 0;
-      const j1 = simplex[c][1] >= 3 ? 1 : 0;
-      const k1 = simplex[c][2] >= 3 ? 1 : 0;
-      const l1 = simplex[c][3] >= 3 ? 1 : 0;
-      const i2 = simplex[c][0] >= 2 ? 1 : 0;
-      const j2 = simplex[c][1] >= 2 ? 1 : 0;
-      const k2 = simplex[c][2] >= 2 ? 1 : 0;
-      const l2 = simplex[c][3] >= 2 ? 1 : 0;
-      const i3 = simplex[c][0] >= 1 ? 1 : 0;
-      const j3 = simplex[c][1] >= 1 ? 1 : 0;
-      const k3 = simplex[c][2] >= 1 ? 1 : 0;
-      const l3 = simplex[c][3] >= 1 ? 1 : 0;
-      const x1 = x0 - i1 + G4;
-      const y1 = y0 - j1 + G4;
-      const z1 = z0 - k1 + G4;
-      const w1 = w0 - l1 + G4;
-      const x2 = x0 - i2 + 2 * G4;
-      const y2 = y0 - j2 + 2 * G4;
-      const z2 = z0 - k2 + 2 * G4;
-      const w2 = w0 - l2 + 2 * G4;
-      const x3 = x0 - i3 + 3 * G4;
-      const y3 = y0 - j3 + 3 * G4;
-      const z3 = z0 - k3 + 3 * G4;
-      const w3 = w0 - l3 + 3 * G4;
-      const x4 = x0 - 1 + 4 * G4;
-      const y4 = y0 - 1 + 4 * G4;
-      const z4 = z0 - 1 + 4 * G4;
-      const w4 = w0 - 1 + 4 * G4;
-      const ii = i & 255;
-      const jj = j & 255;
-      const kk = k & 255;
-      const ll = l & 255;
-      const gi0 = perm[ii + perm[jj + perm[kk + perm[ll]]]] % 32;
-      const gi1 = perm[ii + i1 + perm[jj + j1 + perm[kk + k1 + perm[ll + l1]]]] % 32;
-      const gi2 = perm[ii + i2 + perm[jj + j2 + perm[kk + k2 + perm[ll + l2]]]] % 32;
-      const gi3 = perm[ii + i3 + perm[jj + j3 + perm[kk + k3 + perm[ll + l3]]]] % 32;
-      const gi4 = perm[ii + 1 + perm[jj + 1 + perm[kk + 1 + perm[ll + 1]]]] % 32;
-      let t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0 - w0 * w0;
-      if (t0 < 0)
-        n0 = 0;
-      else {
-        t0 *= t0;
-        n0 = t0 * t0 * this.dot4(grad4[gi0], x0, y0, z0, w0);
-      }
-      let t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1 - w1 * w1;
-      if (t1 < 0)
-        n1 = 0;
-      else {
-        t1 *= t1;
-        n1 = t1 * t1 * this.dot4(grad4[gi1], x1, y1, z1, w1);
-      }
-      let t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2 - w2 * w2;
-      if (t2 < 0)
-        n2 = 0;
-      else {
-        t2 *= t2;
-        n2 = t2 * t2 * this.dot4(grad4[gi2], x2, y2, z2, w2);
-      }
-      let t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3 - w3 * w3;
-      if (t3 < 0)
-        n3 = 0;
-      else {
-        t3 *= t3;
-        n3 = t3 * t3 * this.dot4(grad4[gi3], x3, y3, z3, w3);
-      }
-      let t4 = 0.6 - x4 * x4 - y4 * y4 - z4 * z4 - w4 * w4;
-      if (t4 < 0)
-        n4 = 0;
-      else {
-        t4 *= t4;
-        n4 = t4 * t4 * this.dot4(grad4[gi4], x4, y4, z4, w4);
-      }
-      return 27 * (n0 + n1 + n2 + n3 + n4);
-    }
-  };
-
-  // parts/generative-header/GenerativeHeader.tsx
-  function GenerativeHeader() {
-    const canvasRef = (0, import_react11.useRef)();
-    const [initialized, setIsInitialized] = (0, import_react11.useState)();
-    const stateRef = (0, import_react11.useRef)({});
-    (0, import_react11.useEffect)(() => {
-      setTimeout(() => {
-        let s = stateRef.current;
-        let canvas = canvasRef.current;
-        s.w = canvas.width = innerWidth;
-        s.h = canvas.height = innerHeight;
-        s.ctx = canvas.getContext("2d");
-        let mask = document.createElement("canvas");
-        mask.width = s.w;
-        mask.height = s.h;
-        let maskCtx = mask.getContext("2d");
-        maskCtx.font = "170px Arial, sans-serif";
-        maskCtx.fillText("I'm Stranger in the Q", 50, 200);
-        s.mask = maskCtx.getImageData(0, 0, s.w, s.h);
-        setLineWidth(s.ctx, 0.1);
-        let hash = randomHash();
-        setRandomGenerator(prng2x(hash));
-        const noise = new SimplexNoise();
-        let pal = ["#000", "#000", "#000", "#000", "#000"];
-        s.settings = newSettings(pal, s.w, s.h);
-        s.restrictions = [...document.querySelectorAll("span")].map((mask2) => {
-          let pad = 5;
-          let rect = {
-            top: mask2.offsetTop - pad,
-            left: mask2.offsetLeft - pad,
-            right: mask2.offsetLeft + mask2.offsetWidth + pad,
-            bottom: mask2.offsetTop + mask2.offsetHeight + pad
-          };
-          strokeRect(s.ctx, "#000", rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
-          return rect;
-        });
-        s.field = createField(noise, s.settings, rnd(111));
-        s.pts = getPts(s.settings, s.w, s.h).filter((p) => {
-          return !s.restrictions.find((box) => inside(p.x, p.y, box));
-        });
-        setIsInitialized(true);
-      }, 111);
-    }, []);
-    const drawFrame = (0, import_react11.useCallback)(() => {
-      let s = stateRef.current;
-      s.pts.forEach((p) => {
-        tick(s.field, p, s.w, s.h, s.settings, s.ctx, (x, y) => {
-          let index = (y | 0) * s.w * 4 + (x | 0) * 4;
-          let masked = s.mask.data[index + 3] > 100;
-          return masked;
-        });
-      });
-    });
-    (0, import_react11.useEffect)(() => {
-      let s = stateRef.current;
-      if (initialized)
-        s.rafLoop = requestAnimationFrame(loop);
-      function loop(t) {
-        drawFrame();
-        s.rafLoop = requestAnimationFrame(loop);
-      }
-      return () => {
-        s.rafLoop && cancelAnimationFrame(s.rafLoop);
-      };
-    }, [initialized]);
-    return /* @__PURE__ */ import_react11.default.createElement("div", { style: { height: 0, overflow: "visible" } }, /* @__PURE__ */ import_react11.default.createElement("canvas", { ref: canvasRef }));
-  }
-  function inside(x, y, box) {
-    return x > box.left && x < box.right && y > box.top && y < box.bottom;
-  }
-
-  // parts/pages/HomePage.tsx
   function HomePage() {
-    return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, /* @__PURE__ */ import_react12.default.createElement(GenerativeHeader, null), /* @__PURE__ */ import_react12.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react12.default.createElement("div", { className: "generative-header" }, /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement("span", null, "1")), /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement("span", null, "2")))));
+    return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, /* @__PURE__ */ import_react12.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react12.default.createElement(Navigation, null), /* @__PURE__ */ import_react12.default.createElement("div", null, "Hello there!")));
   }
 
   // parts/Site.tsx
@@ -4902,11 +4233,11 @@
     element: /* @__PURE__ */ import_react13.default.createElement(GeneratorPage, null)
   }, {
     path: "/projects",
-    element: /* @__PURE__ */ import_react13.default.createElement(HomePage, null)
+    element: /* @__PURE__ */ import_react13.default.createElement(ProjectsPage, null)
   }, {
     path: "*",
     exact: false,
-    element: /* @__PURE__ */ import_react13.default.createElement(ProjectsPage, null)
+    element: /* @__PURE__ */ import_react13.default.createElement(HomePage, null)
   }];
   var router = createBrowserRouter(routes);
   function Routes2() {

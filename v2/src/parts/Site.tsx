@@ -12,11 +12,11 @@ const routes = [ {
     element: <GeneratorPage />,
 }, {
     path: "/projects",
-    element: <HomePage />,
+    element: <ProjectsPage />,
 }, {
     path: "*",
     exact: false,
-    element: <ProjectsPage />,
+    element: <HomePage />,
 }];
 
 const router = createBrowserRouter(routes);

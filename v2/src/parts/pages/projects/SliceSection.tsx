@@ -1,6 +1,8 @@
 import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {ProjectsGrid} from "../../components/ProjectsGrid";
+import {Link} from "react-router-dom";
+import {sitePath} from "../../vars";
 
 export function SliceSection({isMobile}) {
     const imgSize = 640;
@@ -13,38 +15,43 @@ export function SliceSection({isMobile}) {
         name: "SL/CE",
         generator: 'slice'
     }
-    return <ProjectsGrid
-        isMobile={isMobile}
-        title={"SL/CE"}
-        rows={isMobile ? 4 : 2}
-        ratio={1.618}
-    >
-        <ProjectItem
-            {...slice}
-            c={isMobile ? "1/3" : "2/4"}
-            r={"1/3"}
-            hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-            img={mainNet + "419000000.png"}
-        />
-        <ProjectItem
-            {...slice}
-            hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-            img={staging + "48000189.png"}
-        />
-        <ProjectItem
-            {...slice}
-            hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-            img={staging + "48000161.png"}
-        />
-        <ProjectItem
-            {...slice}
-            hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-            img={staging + "48000015.png"}
-        />
-        <ProjectItem
-            {...slice}
-            hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-            img={staging + "48000055.png"}
-        />
-    </ProjectsGrid>
+    return <>
+        <div style={{fontSize: '2em', marginTop: '2em'}}>
+            <span>SL/CE @ ArtBlocks 2023</span>
+            <a style={{float:"right"}} href={sitePath + '/slice'}>ABOUT</a>
+        </div>
+
+        <ProjectsGrid
+            isMobile={isMobile}
+            rows={isMobile ? 4 : 2}
+            ratio={1.618}
+        >
+            <ProjectItem
+                {...slice}
+                c={isMobile ? "1/3" : "2/4"}
+                r={"1/3"}
+                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                img={mainNet + "419000000.png"}
+            />
+            <ProjectItem
+                {...slice}
+                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                img={staging + "48000189.png"}
+            />
+            <ProjectItem
+                {...slice}
+                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                img={staging + "48000161.png"}
+            />
+            <ProjectItem
+                {...slice}
+                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                img={staging + "48000015.png"}
+            />
+            <ProjectItem
+                {...slice}
+                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                img={staging + "48000055.png"}
+            />
+        </ProjectsGrid></>
 }

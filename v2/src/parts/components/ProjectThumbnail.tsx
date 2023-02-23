@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {sitePath} from "../Crutch";
 import {randomAbHash, randomFxHash} from "../tools";
+import {sitePath} from "../vars";
 
 export function ProjectThumbnail(
     {
@@ -25,7 +25,11 @@ export function ProjectThumbnail(
         <Link to={to}>
             <div
                 className={"project-thumbnail"}
-                style={{backgroundImage, height, width}}
+                style={{
+                    backgroundImage,
+                    height,
+                    width
+                }}
             >
                 {/*<div className={"project-info"}>*/}
                 {/*    <div className={"fs02"}>{name}</div>*/}

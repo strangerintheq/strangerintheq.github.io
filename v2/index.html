@@ -3,118 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Stranger in the Q</title>
+    <link id="favicon" rel="icon">
+    <script>
+        const generativeFavicon = () => {
+            const rnd = x => Math.random() * x;
+            let s = 1000;
+            let cells = 3 + rnd(2) | 0;
+            let red = rnd(cells**2) | 0
+            let cs = s / cells;
+            const svg = `
+                <svg width="${s}" height="${s}" xmlns="http://www.w3.org/2000/svg">
+                    ${[...Array(cells ** 2)].map((_, i) => {
+                        let row = i % cells;
+                        let col = (i / cells) | 0;
+                        let fill = i === red ? "#e32b2b" : rnd(1) > 0.3 ? "#000" :  "#fff0";
+                        return `<rect
+                            transform="translate(${[row*cs,col*cs]})rotate(${i===red ? 0:0})"
+                            fill="${fill}"
+                            width="${cs}"
+                            height="${cs}"
+                        ></rect>`;
+                    }).join("")}
+                </svg>
+            `;
+            document.getElementById("favicon")
+                .setAttribute("href", `data:image/svg+xml,${encodeURIComponent(svg)}`);
+        }
+        generativeFavicon();
+        setInterval(generativeFavicon, 5000);
+    </script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/6.8.1/react-router.production.min.js"-->
-<!--            integrity="sha512-cHjzKyFLiViU4HbovTu14NMZXWJeO2MHOmvBp0rajRTeyADKm/ZatMB/19Y8HTHnfUC9o+hbYp+JjxCs/S8uAw=="-->
-<!--            crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/6.8.1/react-router-dom.production.min.js"-->
-<!--            integrity="sha512-VcZ/MeXop0l8q7+6f72DCz8s/TIiV/Aph/z3Ue0c1n4lK7lQWn7bjKuGAonvkLVQ4s5MC65iM2yE330PJ8lzlw=="-->
-<!--            crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
     <style>
-
         * {
             margin: 0;
-            padding: 0;
             font-weight: unset;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: "Inter", sans-serif;
-            overscroll-behavior: none;
-            margin: 0;
-            /*text-align: center;*/
             overflow-x: hidden;
-
             --base-size: min(1100px, 100vw);
-        }
-
-        h1, .fs06 { font-size: calc(var(--base-size) * 0.06); }
-        h2, .fs03 { font-size: calc(var(--base-size) * 0.03); }
-        /*h3, .fs02 { font-size: calc(var(--base-size) * 0.02); }*/
-        h4, .fs015 { font-size: calc(var(--base-size) * 0.015); }
-
-        /* */
-
-        .content-wrapper {
-
-        }
-
-        .project-thumbnail {
-            background-size: cover;
-            background-position: center center;
-            display: flex;
-            box-shadow: 0 0 5px 0 #9c9898;
-            /*opacity: 0.4;*/
-        }
-        .project-thumbnail:hover .project-info {
-            opacity: 0.7;
-        }
-        .project-info {
-            width: 100%;
-            height: 20%;
-            align-self: flex-end;
-            opacity: 0;
-            transition: 100ms;
-            background: #eee;
-        }
-
-        .avatar {
-            width: calc(var(--base-size) * 0.25);
-            height: calc(var(--base-size) * 0.25);
-            border-radius: 50%;
-        }
-
-        /* old */
-
-        .text {
-            margin: calc(var(--base-size) * 0.025) calc(var(--base-size) * 0.1);
-            text-align: justify;
-            font-size:  calc(var(--base-size) * 0.02);
-        }
-
-        section {
-            padding-top: calc(var(--base-size) * 0.025);
-            padding-bottom: calc(var(--base-size) * 0.025);
-        }
-
-
-
-
-
-
-
-
-
-
-
-        .separator {
-            height: calc(100vw * 0.025);
-            width: calc(100vw * 0.025);
-        }
-
-        .slider {
-            font-size: 0;
-            overflow-x: scroll;
-            overflow-y: hidden;
-        }
-
-        .ico-6 {
-            max-width: calc(var(--base-size) * 0.06)
-        }
-
-        .ico-4 {
-            max-width: calc(var(--base-size) * 0.04)
-        }
-
-        .dark {
-            background: linear-gradient(180deg,
-            #fff ,
-            #f4f4f4 calc(var(--base-size) * 0.01),
-            #fff calc(var(--base-size) * 0.15)
-            );
         }
     </style>
 </head>

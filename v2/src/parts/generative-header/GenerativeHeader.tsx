@@ -32,7 +32,6 @@ export function GenerativeHeader() {
             let s = stateRef.current;
             let canvas = canvasRef.current;
 
-            // let header = document.querySelector(".generative-header")
             s.w = canvas.width = innerWidth;
             s.h = canvas.height = innerHeight;
             s.ctx = canvas.getContext("2d");

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SL/CE</title>
+    <title>SL/CE - Stranger in the Q</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
     <style>
@@ -285,42 +285,47 @@
 </script>
 <div class="grid">
     <section style="grid-column: 4/8; grid-row: 2/4;">
-        <div class="text-large">S L / C E</div>
+        <div class="separator"></div>
+        <div class="text-large">SL/CE</div>
+        <div class="separator"></div>
         <div class="text-medium">by Stranger in the Q</div>
-        <img class="ico" src="https://www.artblocks.io/squigWhiteCircle.png" >
+        <div class="separator"></div>
+        <div class="text-medium">March, 24, 12CT / 21GMT</div>
+        <div class="separator"></div>
         <div class="text">
-            Long-form generative artwork released by <a href="">artblocks.io</a>
+            Long-form generative artwork released by <a href="https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419">artblocks.io</a>
             and hosted immutably on Ethereum blockchain.
         </div>
     </section>
     <section style="grid-column: 3/7; grid-row: 5/7;">
+        <div class="separator"></div>
         <div class="text-medium">About</div>
         <div class="separator"></div>
         <div class="text">
             This artwork explores Suprematism and generative composition, attempts to fill some gap between generated and constructed artworks.
             <div class="separator"></div>
             It achieves composition by slicing simple shapes into pieces by some rules and testing them against a "bad composition detector", then carefully selecting colors for shapes.
-            <div class="separator"></div>
-            You can see 200 test outputs around.
         </div>
     </section>
     <section style="grid-column: 6/9; grid-row: 8/11;">
         <div class="text-medium">Mint #0</div>
         <div class="separator"></div>
-        <img src="https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_640,q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/48000000.png"
+        <img src="https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_128,q_auto/https://artblocks-mainnet.s3.amazonaws.com/419000000.png"
             style="width: 100%" >
     </section>
     <section style="grid-column: 3/9; grid-row: 12/14;">
+        <div class="separator"></div>
         <div class="text-medium">Algorithm</div>
         <div class="separator"></div>
         <div class="text">
             Each iteration starts with selecting the simplest figure (circle, ring, square, rectangles, trapezoid).
             then it is placed on the canvas according to specific rules, cut along one or more "slice lines", after which the parts can be shifted or removed.
             The process is repeated several times for several starting figures, after which the resulting composition is obtained.
-            Then an "Bad composition detector" function comes into play, and if the composition is considered "bad", the pseudo-random composition process is repeated with partially different inputs until a "good composition" is obtained, according to this evaluation function.
+            Then an "Bad composition detector" function comes into play, and if the composition is considered "bad", the pseudo-random composition process is repeated with partially different inputs until a "good composition" is obtained.
         </div>
     </section>
     <section style="grid-column: 5/9; grid-row: 15/17;">
+        <div class="separator"></div>
         <div class="text-medium">Bad composition detector</div>
         <div class="separator"></div>
         <div class="text">
@@ -330,6 +335,7 @@
         </div>
     </section>
     <section style="grid-column: 3/8; grid-row: 18/19;">
+        <div class="separator"></div>
         <div class="text-medium">Result</div>
         <div class="separator"></div>
         <div class="text">
@@ -337,6 +343,7 @@
         </div>
     </section>
     <section style="grid-column: 5/9; grid-row: 20/22;">
+        <div class="separator"></div>
         <div class="text-medium">Extra</div>
         <div class="separator"></div>
         <div class="text">
@@ -347,26 +354,27 @@
             Click or tap at the top half of image to toggle autoplay mode.
         </div>
         <div class="separator"></div>
-        <div class="separator"></div>
-        <div class="separator"></div>
         <div class="text-medium">
             PLEASE ENJOY!
         </div>
     </section>
     <section style="grid-column: 3/9; grid-row: 24/25">
+        <div class="separator"></div>
+
         <div class="text-medium" style="margin-bottom: 1vw">
-            Stranger in the Q // 2022-2023
+            You can look at my other works by visiting links below
         </div>
         <div class="separator"></div>
-        <script>
-            document.write([
-                ['twitter.svg','Twitter','https://twitter.com/stranger_intheq',2],
-                ['discord.svg','Discord','https://discord.gg/S92neTmQ3v',2],
-                ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 2.1],
-            ].map(([image, text, link, marginLeft]) => `<a style="margin-left: ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" ><img src="../resources/${image}" class="ico-4"></a>`).join(''))
-        </script>
+
         <div class="text-medium">
-            <a href="https://strangerintheq.github.io">strangerintheq.github.io</a>
+            <script>
+                document.write([
+                    ['twitter.svg','Twitter','https://twitter.com/stranger_intheq',2],
+                    ['discord.svg','Discord','https://discord.gg/S92neTmQ3v',2],
+                    ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 2.1],
+                ].map(([image, text, link, marginLeft]) => `<a style="vertical-align:middle;margin-left: ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" ><img src="../resources/${image}" class="ico-4"></a>`).join(''))
+            </script>
+            <a href="https://strangerintheq.art">strangerintheq.art</a>
         </div>
     </section>
 </div>
