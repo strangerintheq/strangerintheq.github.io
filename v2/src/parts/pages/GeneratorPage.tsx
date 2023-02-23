@@ -53,6 +53,12 @@ export function GeneratorPage() {
         {html ? <iframe
             src={"data:text/html," + encodeURIComponent(html)}
             style={{
+                backgroundImage: `url(data:image/svg+xml,${encodeURIComponent(`
+                    <svg viewBox="${[-innerWidth/2,-innerHeight/2, innerWidth, innerHeight]}" 
+                        xmlns="http://www.w3.org/2000/svg">
+                        <text font-family="monospace" font-size="3em" text-anchor="middle" dominant-baseline="central">L O A D I N G</text>
+                    </svg>
+                `)})`,
                 position: "fixed",
                 top: 0,
                 left: 0,

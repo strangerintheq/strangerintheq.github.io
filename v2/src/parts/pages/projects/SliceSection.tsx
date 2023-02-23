@@ -25,27 +25,27 @@ export function SliceSection({isMobile}) {
                 {...slice}
                 c={isMobile ? "1/3" : "2/4"}
                 r={"1/3"}
-                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                hash={"0x61464f239e4a9706c864eaf3d8ccc966fe3ec89089752d803ee51adbea37e82c"}
                 img={mainNet + "419000000.png"}
             />
             <ProjectItem
                 {...slice}
-                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                hash={"0x7905f21577209c5fccc82170001218c7281e1991f6c42f7717adb819e2846805"}
                 img={staging + "48000189.png"}
             />
             <ProjectItem
                 {...slice}
-                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                hash={"0x0c8313ca762c7c8aa3b4c078435fd0a84aa17fb0872cc152103b8ff6f22f71a3"}
                 img={staging + "48000161.png"}
             />
             <ProjectItem
                 {...slice}
-                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                hash={"0xecfcfa98860f8fb143d54065186118cc2f429316982597494dc8cffd7f4e4283"}
                 img={staging + "48000015.png"}
             />
             <ProjectItem
                 {...slice}
-                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                hash={"0xfb031983bdfc22fb8e1c8956d6feb654dfef92b5a7f5de4b08e39681b0f68cd3"}
                 img={staging + "48000055.png"}
             />
         </ProjectsGrid></>
