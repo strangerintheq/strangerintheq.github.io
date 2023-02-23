@@ -292,7 +292,7 @@
         <div class="separator"></div>
         <div class="text-medium">by Stranger in the Q</div>
         <div class="separator"></div>
-        <div class="text-medium">March, 24, 12CT / 21GMT</div>
+        <div class="text-medium">March, 24, 12CT / 20GMT</div>
         <div class="separator"></div>
         <div class="text">
             Long-form generative artwork released by <a href="https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419">artblocks.io</a>
@@ -341,7 +341,7 @@
         <div class="text-medium">Result</div>
         <div class="separator"></div>
         <div class="text">
-            Looking at images, you can often see something in them, this effect is close to pareidolia, sometimes images works well as profiles pictures, and I am very pleased that I was able to achieve this.
+            Looking at images, you can often see something in them, this effect is close to pareidolia, and I am very pleased that I was able to achieve this.
         </div>
     </section>
     <section style="grid-column: 5/9; grid-row: 20/22;">
@@ -360,23 +360,32 @@
             PLEASE ENJOY!
         </div>
     </section>
-    <section style="grid-column: 3/9; grid-row: 24/25">
+    <section style="grid-column: 3/9; grid-row: 24/25; text-align: center!important;" >
         <div class="separator"></div>
 
-        <div class="text-medium" style="margin-bottom: 1vw">
-            You can look at my other works by visiting links below
-        </div>
+<!--        <div class="text" style="margin-bottom: 1vw; text-align: center!important;">-->
+<!--            You can look at my other works by visiting links below-->
+<!--        </div>-->
+        <div class="separator"></div>
         <div class="separator"></div>
 
         <div class="text-medium">
             <script>
-                document.write([
-                    ['twitter.svg','Twitter','https://twitter.com/stranger_intheq',2],
-                    ['discord.svg','Discord','https://discord.gg/S92neTmQ3v',2],
-                    ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 2.1],
-                ].map(([image, text, link, marginLeft]) => `<a style="vertical-align:middle;margin-left: ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" ><img src="../resources/${image}" class="ico-4"></a>`).join(''))
+                function social([image, text, link, marginLeft]){
+                    return `<a style="vertical-align:middle;margin: 0 ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" ><img src="../resources/${image}" class="ico-4"></a>`
+                }
+            </script>
+            <script>
+                document.write(social(
+                    ['twitter.svg','Twitter','https://twitter.com/stranger_intheq',2]
+                ))
             </script>
             <a href="https://strangerintheq.art">strangerintheq.art</a>
+            <script>
+                document.write(social(
+                    ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 2.1],
+                ))
+            </script>
         </div>
     </section>
 </div>
