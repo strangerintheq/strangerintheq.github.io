@@ -1,17 +1,19 @@
-import React, {useEffect, useRef} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import {randomAbHash, randomFxHash} from "../tools";
 import {sitePath} from "../vars";
 
-export function ProjectItem({
-    name,
-    type,
-    hash = null,
-    img,
-    c = null,
-    r = null,
-    id = null,
-}) {
+export function ProjectItem(
+    {
+        name,
+        type,
+        img,
+        hash = null,
+        c = null,
+        r = null,
+        link = null
+    }
+) {
 
     const to = '/generator/' + type +
         "/" + name.toLowerCase().replaceAll(" ", "-") +
@@ -19,7 +21,7 @@ export function ProjectItem({
 
     return <div style={{gridColumn: c, gridRow: r}}>
         <Link to={to}>
-            <DivWithBackgroundImage img={img} />
+            <DivWithBackgroundImage img={img}/>
         </Link>
     </div>
 }

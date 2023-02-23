@@ -9,6 +9,7 @@ export function SliceSection({isMobile}) {
         "https://artblocks-mainnet.s3.amazonaws.com/";
     const staging = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/" +
         "https://art-blocks-artist-staging-goerli.s3.amazonaws.com/"
+    const link = "https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419/tokens/"
     const slice = {
         type: "artblocks",
         name: "Slice",
@@ -25,6 +26,7 @@ export function SliceSection({isMobile}) {
                 {...slice}
                 c={isMobile ? "1/3" : "2/4"}
                 r={"1/3"}
+                link={link + "419000000"}
                 hash={"0x61464f239e4a9706c864eaf3d8ccc966fe3ec89089752d803ee51adbea37e82c"}
                 img={mainNet + "419000000.png"}
             />
