@@ -4,34 +4,7 @@
     <meta charset="UTF-8">
     <title>Stranger in the Q</title>
     <link id="favicon" rel="icon">
-    <script>
-        const generativeFavicon = () => {
-            const rnd = x => Math.random() * x;
-            let s = 1000;
-            let cells = 3 + rnd(2) | 0;
-            let red = rnd(cells**2) | 0
-            let cs = s / cells;
-            const svg = `
-                <svg width="${s}" height="${s}" xmlns="http://www.w3.org/2000/svg">
-                    ${[...Array(cells ** 2)].map((_, i) => {
-                        let row = i % cells;
-                        let col = (i / cells) | 0;
-                        let fill = i === red ? "#e32b2b" : rnd(1) > 0.3 ? "#000" :  "#fff0";
-                        return `<rect
-                            transform="translate(${[row*cs,col*cs]})rotate(${i===red ? 0:0})"
-                            fill="${fill}"
-                            width="${cs}"
-                            height="${cs}"
-                        ></rect>`;
-                    }).join("")}
-                </svg>
-            `;
-            document.getElementById("favicon")
-                .setAttribute("href", `data:image/svg+xml,${encodeURIComponent(svg)}`);
-        }
-        generativeFavicon();
-        setInterval(generativeFavicon, 5000);
-    </script>
+    <script src="../generative-favicon.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>

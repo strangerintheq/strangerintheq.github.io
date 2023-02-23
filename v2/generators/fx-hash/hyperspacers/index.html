@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!-- saved from url=(0139)https://gateway.fxhash2.xyz/ipfs/QmWDZ5MowdTfsiNqGmbo2f26rdmAuprherF6yK7QW4zgSk/?fxhash=ooXtaB52GRHraEgQEnT7k9oJzWYPbYbiycXFGmUqNa34bwV53ZX -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>Hyperspacers</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script id="fxhash-snippet">
+      let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+      var fxhash = new URLSearchParams(window.location.search).get('fxhash')
+      let b58dec = str=>[...str].reduce((p,c)=>p*alphabet.length+alphabet.indexOf(c)|0, 0)
+      let fxhashTrunc = fxhash.slice(2)
+      let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')
+      let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+      let sfc32 = (a, b, c, d) => {
+        return () => {
+          a |= 0; b |= 0; c |= 0; d |= 0
+          var t = (a + b | 0) + d | 0
+          d = d + 1 | 0
+          a = b ^ b >>> 9
+          b = c + (c << 3) | 0
+          c = c << 21 | c >>> 11
+          c = c + t | 0
+          return (t >>> 0) / 4294967296
+        }
+      }
+      var fxrand = sfc32(...hashes)
+      // used to get features during token mint
+      window.addEventListener("message", (event) => {
+        if (event.data === "fxhash_getFeatures") {
+          parent.postMessage({
+            id: "fxhash_getFeatures",
+            data: window.$fxhashFeatures
+          }, "*")
+        }
+      })
+      var isFxpreview = new URLSearchParams(window.location.search).get('preview') === "1"
+      function fxpreview() {
+        window.dispatchEvent(new Event("fxhash-preview"))
+        setTimeout(() => fxpreview(), 500)
+      }
+</script>
+        <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+        <script>(() => {    
+    
+    const l = window.location;
+    const p = new URLSearchParams(l.search.substring(1));
+    const h = p.get('hash');
+    const hash = h || ('0x' + [...Array(64)].map(_ => (((window.fxrand||Math.random)() * 16)|0).toString(16)).join(''))
+    !h && p.append('hash', hash)  
+    console.log('\n', hash)
+    console.log('\n' + l.origin + l.pathname + "?" + p.toString() ) ;
+    window.tokenData = {hash}
+    try {
+        window.tokenData.debug = p.get('debug')
+    } catch (e){}
+     try {
+        window.tokenData.palette = JSON.parse(atob(p.get('palette')))
+    } catch (e){}
+})()</script>
+
+    </head>
+    <body>
+    <script>var fe=(t=1,e=1,o=!0)=>{let n=document.createElement("canvas");o&&setTimeout(()=>document.body.append(n),10);let c=t<innerWidth/innerHeight,a=((c?innerHeight*t:innerWidth)|0)*e,r=((c?innerHeight:innerWidth/t)|0)*e,l=n.style;return l.width=c?`calc(100wh * ${t})`:"100vw",l.height=c?"100vh":`calc(100ww / ${t})`,n.width=a,n.height=r,{canvas:n,w:a,h:r}},q0=(t=1,e=1,o=!0)=>{let{canvas:n,w:c,h:a}=fe(t,e,o);return{ctx:n.getContext("2d"),canvas:n,w:c,h:a,ratio:t}};var ae=Math,{PI:b0,abs:Ae,sin:m0,cos:H0,pow:He,max:Ie,min:We,atan2:I0,sign:De,round:le,floor:Ee,ceil:Ge,hypot:h0,asin:Ne}=ae,ze=b0/2,_=2*b0;var y=(t,e)=>[...Array(t|0)].map((o,n)=>e(n));var L0=(t,e,o)=>parseInt(t.substr(e,o),16);var ie=(t,e,o,n)=>(e=new Uint32Array([1,3,o=n=2,4].map(c=>L0(t,c*8,8))),c=>(n=e[3],e[3]=e[2],e[2]=e[1],e[1]=o=e[0],n^=n<<11,e[0]^=n^n>>>8^o>>>19,e[0]/2**32)),W0=ie(tokenData.hash),s=(t=1,e=0)=>W0()*t+e,G=(t=2,e=0)=>e+s(t|0)|0,S=(t=.5)=>s()>t,w=(t=1)=>s(t)-t/2,D0=t=>G(4)*b0/2,u0=t=>s(_),I=t=>t[G(t.length)];var U0=(t,e,o)=>y(t,n=>y(e,c=>o(n/t-.5,c/e-.5)));var de=S(.7),be=s(33,11),X0=s(.003,.003);function Y0(t,e,o){t.save();let n=s(500,500),c=s(),a=s(),r=1e3,l=D(r,r),A=i=>(i+.5)*r|0,d=(i,m)=>l[A(i)][A(m)],P=W();y(100,()=>{P.forEach(j)}),P.forEach(i=>i[4]="#00000020"),y(s(11,11),()=>{P.forEach(j)});function W(){return y(be,()=>{let i=w(),m=w(),h=G(2)*Math.PI,u=[];return y(s(133,133),()=>{try{let b=d(i,m)[0]+h;i+=Math.cos(b)*X0,m+=Math.sin(b)*X0,u.push(C(i,m))}catch{}}),u}).flat()}function D(i,m){let h=s(7,1),u=s(55,33);return y(i,b=>y(m,M=>{let F=b-c*r,k=M-a*r,v=Math.atan2(k,F),p=Math.hypot(F,k),x=v+o.noise(b/u,M/u)*h*p/n,g=.5+.5*Math.sin(v+p/10);return[x,g]}))}function C(i,m){return[i,m,D0(),s(2,1)/1e3,I(e)+G(5)+0,s()/2e3]}function j(i){try{let[m,h,u,b,M,F]=i,[k,v]=d(m,h);s()>(de?v:.2)&&(i[2]=D0()),k+=i[2],t.beginPath(),t.moveTo(m,h),t.lineTo(i[0]+=Math.cos(k)*b,i[1]+=Math.sin(k)*b),t.lineWidth=F,t.strokeStyle=M,t.stroke()}catch{}}function H(i){t.strokeStyle=t.fillStyle=i||""+I(e)+G(5)+0}t.restore()}var E0=class{constructor(e=Math){this.grad3=[[1,1,0],[-1,1,0],[1,-1,0],[-1,-1,0],[1,0,1],[-1,0,1],[1,0,-1],[-1,0,-1],[0,1,1],[0,-1,1],[0,1,-1],[0,-1,-1]],this.grad4=[[0,1,1,1],[0,1,1,-1],[0,1,-1,1],[0,1,-1,-1],[0,-1,1,1],[0,-1,1,-1],[0,-1,-1,1],[0,-1,-1,-1],[1,0,1,1],[1,0,1,-1],[1,0,-1,1],[1,0,-1,-1],[-1,0,1,1],[-1,0,1,-1],[-1,0,-1,1],[-1,0,-1,-1],[1,1,0,1],[1,1,0,-1],[1,-1,0,1],[1,-1,0,-1],[-1,1,0,1],[-1,1,0,-1],[-1,-1,0,1],[-1,-1,0,-1],[1,1,1,0],[1,1,-1,0],[1,-1,1,0],[1,-1,-1,0],[-1,1,1,0],[-1,1,-1,0],[-1,-1,1,0],[-1,-1,-1,0]],this.p=[];for(let o=0;o<256;o++)this.p[o]=Math.floor(e.random()*256);this.perm=[];for(let o=0;o<512;o++)this.perm[o]=this.p[o&255];this.simplex=[[0,1,2,3],[0,1,3,2],[0,0,0,0],[0,2,3,1],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,2,3,0],[0,2,1,3],[0,0,0,0],[0,3,1,2],[0,3,2,1],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,3,2,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,2,0,3],[0,0,0,0],[1,3,0,2],[0,0,0,0],[0,0,0,0],[0,0,0,0],[2,3,0,1],[2,3,1,0],[1,0,2,3],[1,0,3,2],[0,0,0,0],[0,0,0,0],[0,0,0,0],[2,0,3,1],[0,0,0,0],[2,1,3,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[2,0,1,3],[0,0,0,0],[0,0,0,0],[0,0,0,0],[3,0,1,2],[3,0,2,1],[0,0,0,0],[3,1,2,0],[2,1,0,3],[0,0,0,0],[0,0,0,0],[0,0,0,0],[3,1,0,2],[0,0,0,0],[3,2,0,1],[3,2,1,0]]}dot(e,o,n){return e[0]*o+e[1]*n}dot3(e,o,n,c){return e[0]*o+e[1]*n+e[2]*c}dot4(e,o,n,c,a){return e[0]*o+e[1]*n+e[2]*c+e[3]*a}noise(e,o){let n,c,a,r=.5*(Math.sqrt(3)-1),l=(e+o)*r,A=Math.floor(e+l),d=Math.floor(o+l),P=(3-Math.sqrt(3))/6,W=(A+d)*P,D=A-W,C=d-W,j=e-D,H=o-C,i,m;j>H?(i=1,m=0):(i=0,m=1);let h=j-i+P,u=H-m+P,b=j-1+2*P,M=H-1+2*P,F=A&255,k=d&255,v=this.perm[F+this.perm[k]]%12,p=this.perm[F+i+this.perm[k+m]]%12,x=this.perm[F+1+this.perm[k+1]]%12,g=.5-j*j-H*H;g<0?n=0:(g*=g,n=g*g*this.dot(this.grad3[v],j,H));let T=.5-h*h-u*u;T<0?c=0:(T*=T,c=T*T*this.dot(this.grad3[p],h,u));let E=.5-b*b-M*M;return E<0?a=0:(E*=E,a=E*E*this.dot(this.grad3[x],b,M)),70*(n+c+a)}noise3d(e,o,n){let c,a,r,l,A=1/3,d=(e+o+n)*A,P=Math.floor(e+d),W=Math.floor(o+d),D=Math.floor(n+d),C=1/6,j=(P+W+D)*C,H=P-j,i=W-j,m=D-j,h=e-H,u=o-i,b=n-m,M,F,k,v,p,x;h>=u?u>=b?(M=1,F=0,k=0,v=1,p=1,x=0):h>=b?(M=1,F=0,k=0,v=1,p=0,x=1):(M=0,F=0,k=1,v=1,p=0,x=1):u<b?(M=0,F=0,k=1,v=0,p=1,x=1):h<b?(M=0,F=1,k=0,v=0,p=1,x=1):(M=0,F=1,k=0,v=1,p=1,x=0);let g=h-M+C,T=u-F+C,E=b-k+C,$=h-v+2*C,J=u-p+2*C,K=b-x+2*C,O=h-1+3*C,Q=u-1+3*C,R=b-1+3*C,X=P&255,Y=W&255,Z=D&255,a0=this.perm[X+this.perm[Y+this.perm[Z]]]%12,l0=this.perm[X+M+this.perm[Y+F+this.perm[Z+k]]]%12,i0=this.perm[X+v+this.perm[Y+p+this.perm[Z+x]]]%12,d0=this.perm[X+1+this.perm[Y+1+this.perm[Z+1]]]%12,z=.6-h*h-u*u-b*b;z<0?c=0:(z*=z,c=z*z*this.dot3(this.grad3[a0],h,u,b));let B=.6-g*g-T*T-E*E;B<0?a=0:(B*=B,a=B*B*this.dot3(this.grad3[l0],g,T,E));let q=.6-$*$-J*J-K*K;q<0?r=0:(q*=q,r=q*q*this.dot3(this.grad3[i0],$,J,K));let L=.6-O*O-Q*Q-R*R;return L<0?l=0:(L*=L,l=L*L*this.dot3(this.grad3[d0],O,Q,R)),32*(c+a+r+l)}noise4d(e,o,n,c){let a=this.grad4,r=this.simplex,l=this.perm,A=(Math.sqrt(5)-1)/4,d=(5-Math.sqrt(5))/20,P,W,D,C,j,H=(e+o+n+c)*A,i=Math.floor(e+H),m=Math.floor(o+H),h=Math.floor(n+H),u=Math.floor(c+H),b=(i+m+h+u)*d,M=i-b,F=m-b,k=h-b,v=u-b,p=e-M,x=o-F,g=n-k,T=c-v,E=p>x?32:0,$=p>g?16:0,J=x>g?8:0,K=p>T?4:0,O=x>T?2:0,Q=g>T?1:0,R=E+$+J+K+O+Q,X=r[R][0]>=3?1:0,Y=r[R][1]>=3?1:0,Z=r[R][2]>=3?1:0,a0=r[R][3]>=3?1:0,l0=r[R][0]>=2?1:0,i0=r[R][1]>=2?1:0,d0=r[R][2]>=2?1:0,z=r[R][3]>=2?1:0,B=r[R][0]>=1?1:0,q=r[R][1]>=1?1:0,L=r[R][2]>=1?1:0,B0=r[R][3]>=1?1:0,p0=p-X+d,x0=x-Y+d,y0=g-Z+d,g0=T-a0+d,k0=p-l0+2*d,w0=x-i0+2*d,T0=g-d0+2*d,M0=T-z+2*d,F0=p-B+3*d,C0=x-q+3*d,P0=g-L+3*d,j0=T-B0+3*d,v0=p-1+4*d,R0=x-1+4*d,S0=g-1+4*d,A0=T-1+4*d,V=i&255,e0=m&255,t0=h&255,o0=u&255,oe=l[V+l[e0+l[t0+l[o0]]]]%32,ne=l[V+X+l[e0+Y+l[t0+Z+l[o0+a0]]]]%32,se=l[V+l0+l[e0+i0+l[t0+d0+l[o0+z]]]]%32,ce=l[V+B+l[e0+q+l[t0+L+l[o0+B0]]]]%32,re=l[V+1+l[e0+1+l[t0+1+l[o0+1]]]]%32,n0=.6-p*p-x*x-g*g-T*T;n0<0?P=0:(n0*=n0,P=n0*n0*this.dot4(a[oe],p,x,g,T));let s0=.6-p0*p0-x0*x0-y0*y0-g0*g0;s0<0?W=0:(s0*=s0,W=s0*s0*this.dot4(a[ne],p0,x0,y0,g0));let c0=.6-k0*k0-w0*w0-T0*T0-M0*M0;c0<0?D=0:(c0*=c0,D=c0*c0*this.dot4(a[se],k0,w0,T0,M0));let r0=.6-F0*F0-C0*C0-P0*P0-j0*j0;r0<0?C=0:(r0*=r0,C=r0*r0*this.dot4(a[ce],F0,C0,P0,j0));let f0=.6-v0*v0-R0*R0-S0*S0-A0*A0;return f0<0?j=0:(f0*=f0,j=f0*f0*this.dot4(a[re],v0,R0,S0,A0)),27*(P+W+D+C+j)}};var Z0=[["#69d2e7","#a7dbd8","#e0e4cc","#f38630","#fa6900"],["#fe4365","#fc9d9a","#f9cdad","#c8c8a9","#83af9b"],["#ecd078","#d95b43","#c02942","#542437","#53777a"],["#556270","#4ecdc4","#c7f464","#ff6b6b","#c44d58"],["#774f38","#e08e79","#f1d4af","#ece5ce","#c5e0dc"],["#e94e77","#d68189","#c6a49a","#c6e5d9","#f4ead5"],["#3fb8af","#7fc7af","#dad8a7","#ff9e9d","#ff3d7f"],["#d9ceb2","#948c75","#d5ded9","#7a6a53","#99b2b7"],["#ffffff","#cbe86b","#f2e9e1","#1c140d","#cbe86b"],["#413e4a","#73626e","#b38184","#f0b49e","#f7e4be"],["#ff4e50","#fc913a","#f9d423","#ede574","#e1f5c4"],["#99b898","#fecea8","#ff847c","#e84a5f","#2a363b"],["#655643","#80bca3","#f6f7bd","#e6ac27","#bf4d28"],["#00a8c6","#40c0cb","#f9f2e7","#aee239","#8fbe00"],["#554236","#f77825","#d3ce3d","#f1efa5","#60b99a"],["#8c2318","#5e8c6a","#88a65e","#bfb35a","#f2c45a"],["#fad089","#ff9c5b","#f5634a","#ed303c","#3b8183"],["#ff4242","#f4fad2","#d4ee5e","#e1edb9","#f0f2eb"],["#d1e751","#ffffff","#000000","#4dbce9","#26ade4"],["#5e412f","#fcebb6","#78c0a8","#f07818","#f0a830"],["#452632","#91204d","#e4844a","#e8bf56","#e2f7ce"],["#f0d8a8","#3d1c00","#86b8b1","#f2d694","#fa2a00"],["#f04155","#ff823a","#f2f26f","#fff7bd","#95cfb7"],["#b3cc57","#ecf081","#ffbe40","#ef746f","#ab3e5b"],["#aab3ab","#c4cbb7","#ebefc9","#eee0b7","#e8caaf"],["#e8d5b7","#0e2430","#fc3a51","#f5b349","#e8d5b9"],["#ab526b","#bca297","#c5ceae","#f0e2a4","#f4ebc3"],["#b6d8c0","#c8d9bf","#dadabd","#ecdbbc","#fedcba"],["#a8e6ce","#dcedc2","#ffd3b5","#ffaaa6","#ff8c94"],["#cc0c39","#e6781e","#c8cf02","#f8fcc1","#1693a7"],["#1c2130","#028f76","#b3e099","#ffeaad","#d14334"],["#a7c5bd","#e5ddcb","#eb7b59","#cf4647","#524656"],["#5c323e","#a82743","#e15e32","#c0d23e","#e5f04c"],["#edebe6","#d6e1c7","#94c7b6","#403b33","#d3643b"],["#fdf1cc","#c6d6b8","#987f69","#e3ad40","#fcd036"],["#230f2b","#f21d41","#ebebbc","#bce3c5","#82b3ae"],["#b9d3b0","#81bda4","#b28774","#f88f79","#f6aa93"],["#5e3929","#cd8c52","#b7d1a3","#dee8be","#fcf7d3"],["#382f32","#ffeaf2","#fcd9e5","#fbc5d8","#f1396d"],["#f6f6f6","#e8e8e8","#333333","#990100","#b90504"],["#1b325f","#9cc4e4","#e9f2f9","#3a89c9","#f26c4f"],["#a1dbb2","#fee5ad","#faca66","#f7a541","#f45d4c"],["#c1b398","#605951","#fbeec2","#61a6ab","#accec0"],["#5e9fa3","#dcd1b4","#fab87f","#f87e7b","#b05574"],["#951f2b","#f5f4d7","#e0dfb1","#a5a36c","#535233"],["#8dccad","#988864","#fea6a2","#f9d6ac","#ffe9af"],["#eff3cd","#b2d5ba","#61ada0","#248f8d","#605063"],["#ffefd3","#fffee4","#d0ecea","#9fd6d2","#8b7a5e"],["#cfffdd","#b4dec1","#5c5863","#a85163","#ff1f4c"],["#9dc9ac","#fffec7","#f56218","#ff9d2e","#919167"],["#4e395d","#827085","#8ebe94","#ccfc8e","#dc5b3e"],["#f38a8a","#55443d","#a0cab5","#cde9ca","#f1edd0"],["#a70267","#f10c49","#fb6b41","#f6d86b","#339194"],["#ffedbf","#f7803c","#f54828","#2e0d23","#f8e4c1"],["#0ca5b0","#4e3f30","#fefeeb","#f8f4e4","#a5b3aa"],["#4d3b3b","#de6262","#ffb88c","#ffd0b3","#f5e0d3"],["#fcfef5","#e9ffe1","#cdcfb7","#d6e6c3","#fafbe3"],["#d1313d","#e5625c","#f9bf76","#8eb2c5","#615375"],["#ffe181","#eee9e5","#fad3b2","#ffba7f","#ff9c97"],["#73c8a9","#dee1b6","#e1b866","#bd5532","#373b44"],["#805841","#dcf7f3","#fffcdd","#ffd8d8","#f5a2a2"]];var _0=new E0({random:W0}),me=S(.5),he=S(),ue=u0(),pe=I([3,4,5,6,7]),$0=s(.55,.25),xe=s(.05,.05),J0=S(.7)?s(.5,1):0,ye=G(5,5),K0=S()?0:s(5,5),O0=s(55,11),Q0=s(.7,.3),ge=w(.5),ke=w(.5),N=I(Z0),{ctx:f,w:we,h:G0,ratio:V0}=q0(3/4,3);f.translate(we/2,G0/2);f.scale(G0,G0);f.fillStyle="black";f.fillRect(-1,-1,2,2);f.lineWidth=.001;var Te=U0(222,222,(t,e)=>{let o=e+ge,n=t+ke,c=h0(o,n),a=I0(o,n)+w(Q0);return O0&&(a+=m0(c*w(Q0)*O0)),K0&&(a+=c*K0),J0&&(a+=_0.noise(t*22,e*22)*J0),a+ue}),N0=je();Me();Pe();Y0(f,N,_0);Fe();S()&&Ce();function Me(){f.save(),y(331,()=>{f.fillStyle=I(N)+"07",f.beginPath();let t=s(.1);f.ellipse(U(2),U(2),t,t,0,0,_),f.fill()}),f.restore()}function Fe(){let t=y(pe,()=>{let e=U(V0*.8),o=U(.8),n=s($0/2,$0/2),c=G(N.length),a=[N[c],N[(c+1)%N.length]];return y(s(55,22),()=>{let r=U(n)+e,l=U(n)+o,A=s(xe,.001);return{x:r,y:l,r:A,possibleColors:a}})}).flat();y(ye,()=>{t.forEach(e=>Re(e.x,e.y,I(e.possibleColors)))}),y(3,()=>{t.forEach(e=>te(e.x,e.y,e.r,I(e.possibleColors)))}),me&&y(1,()=>{t.forEach(e=>te(e.x,e.y,e.r,"#00000055"))})}S(.8)&&ve();function Ce(){let t=S(.7)?.3:0;f.strokeStyle=I(N)+"0a";let e=s(50)-250;for(let o=0;o<2e3;o++){f.lineWidth=s(5e-5);let n=o/2e3-.5;s()>.99&&(f.strokeStyle="#000"),S()?z0({x:n+w(t),y:-2},{x:n+w(t),y:2}):z0({y:n+w(t),x:-2},{y:n+w(t),x:2})}}function Pe(){y(2222,()=>{let t=U(V0),e=U(1);f.fillStyle=I(N);let o=s(.001);f.fillRect(t,e,o,o)})}function je(){let t,e=.06,o=1001,n=.99;return{reset(){t=[]},nearest(c,a=e){t.forEach(r=>{let l=r.x-c.x,A=r.y-c.y;h0(l,A)<a&&s()>n&&z0(r,c)}),t.push(c),t.length>o&&t.shift()}}}function z0(t,e){f.beginPath(),f.moveTo(t.x,t.y),f.lineTo(e.x,e.y),f.stroke()}function ee(t,e,o,n){y(n,()=>{let c=s(5e-4,5e-4),a=s(o*1.5),r=u0();f.fillStyle=I(N)+"25",f.fillRect(t+H0(r)*a,e+m0(r)*a,c,c)})}function te(t,e,o,n){f.strokeStyle=n+"09",N0.reset(),S(.95)&&ee(t,e,o,333);for(let c=0;c<_;c+=.05)N0.nearest({x:t+Math.cos(c)*o+s(.005),y:e+Math.sin(c)*o+s(.005)},s()>.5?null:o*o*(1+s()));if(!(s()>.5)){t+=o*.4*(s()-.5),e-=o*.4*(s()-.5),o*=s(.4)+.2;for(let c=0;c<_;c+=.03)N0.nearest({x:t+Math.cos(c)*o+s(.004),y:e+Math.sin(c)*o+s(.004)})}}function U(t){let e=1;return e*=w(),e*=w(),e+=w(.5),t*e}function ve(){let t=u0();f.rotate(t),y(100,()=>{f.fillStyle=I(N)+"0a",S()?f.fillRect(-s(),w(2),s(2),s(.01)):f.fillRect(w(2),-s(),s(.01),s(2))}),f.fillStyle="#00000007",y(101,()=>{S()?f.fillRect(-s(),w(2),s(2),s(.1)):f.fillRect(w(2),-s(),s(.1),s(2))}),f.rotate(-t)}function Re(t,e,o){f.strokeStyle=o+"10",t+=w(.2),e+=w(.2),f.beginPath(),f.moveTo(t,e);let n=s(.01,.001);y(66,()=>{try{let c=(t+.5)*100|0,a=(e+.5)*100|0,r=Te[c][a];t+=H0(r)*n,e+=m0(r)*n,f.lineTo(t,e),he&&S(.95)&&ee(t,e,s(.005,.005),G(55,55))}catch{}}),f.stroke()}</script>
+
+    
+</body></html>

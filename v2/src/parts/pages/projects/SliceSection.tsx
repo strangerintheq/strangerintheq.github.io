@@ -1,7 +1,6 @@
 import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {ProjectsGrid} from "../../components/ProjectsGrid";
-import {Link} from "react-router-dom";
 import {sitePath} from "../../vars";
 
 export function SliceSection({isMobile}) {
@@ -12,20 +11,16 @@ export function SliceSection({isMobile}) {
         "https://art-blocks-artist-staging-goerli.s3.amazonaws.com/"
     const slice = {
         type: "artblocks",
-        name: "SL/CE",
-        generator: 'slice'
+        name: "Slice",
     }
     return <>
+
         <div style={{fontSize: '2em', marginTop: '2em'}}>
             <span>SL/CE @ ArtBlocks 2023</span>
             <a style={{float:"right"}} href={sitePath + '/slice'}>ABOUT</a>
         </div>
 
-        <ProjectsGrid
-            isMobile={isMobile}
-            rows={isMobile ? 4 : 2}
-            ratio={1.618}
-        >
+        <ProjectsGrid isMobile={isMobile} rows={isMobile ? 4 : 2} ratio={1.618}>
             <ProjectItem
                 {...slice}
                 c={isMobile ? "1/3" : "2/4"}

@@ -10,51 +10,47 @@ export function TenturaSection({isMobile}) {
     const tentura = {
         type: "artblocks",
         name: "Tentura",
-        generator: 'tentura'
     }
     return <>
+
         <div style={{fontSize: '2em', marginTop: '2em'}}>
             <span>Tentura @ ArtBlocks 2022</span>
             <a style={{float:"right"}} href={sitePath + '/tentura'}>ABOUT</a>
         </div>
 
-
-        <ProjectsGrid
-        ratio={1}
-        isMobile={isMobile}
-        rows={isMobile ? 4 : 2}
-    >
-        <ProjectItem
-            {...tentura}
-            c={isMobile ? "1/3" : "2/4"}
-            r={"1/3"}
-            id={"265000000"}
-            hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-            img={img + "265000000.png"}
-        />
-        <ProjectItem
-            {...tentura}
-            id={"265000031"}
-            hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-            img={img + "265000031.png"}
-        />
-        <ProjectItem
-            {...tentura}
-            id={"265000197"}
-            hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-            img={img + "265000197.png"}
-        />
-        <ProjectItem
-            {...tentura}
-            id={"265000212"}
-            hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-            img={img + "265000212.png"}
-        />
-        <ProjectItem
-            {...tentura}
-            id={"265000269"}
-            hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
-            img={img + "265000269.png"}
-        />
-    </ProjectsGrid></>
+        <ProjectsGrid ratio={1} isMobile={isMobile} rows={isMobile ? 4 : 2}>
+            <ProjectItem
+                {...tentura}
+                c={isMobile ? "1/3" : "2/4"}
+                r={"1/3"}
+                id={"265000000"}
+                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                img={img + "265000000.png"}
+            />
+            <ProjectItem
+                {...tentura}
+                id={"265000031"}
+                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                img={img + "265000031.png"}
+            />
+            <ProjectItem
+                {...tentura}
+                id={"265000197"}
+                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                img={img + "265000197.png"}
+            />
+            <ProjectItem
+                {...tentura}
+                id={"265000212"}
+                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                img={img + "265000212.png"}
+            />
+            <ProjectItem
+                {...tentura}
+                id={"265000269"}
+                hash={"0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930"}
+                img={img + "265000269.png"}
+            />
+        </ProjectsGrid>
+    </>
 }

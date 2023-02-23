@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generotique</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script id="fxhash-snippet">
+        let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+        var fxhash = 'ooTFacUMz6JeZMwdGWzf7XkuSYmdcv7QhbZXZhm5JGDt6JJbyh9'
+        let b58dec = (str)=>str.split('').reduce((p,c,i)=>p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length - i - 1)), 0)
+        let fxhashTrunc = fxhash.slice(2)
+        let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}",'g')
+        let hashes = fxhashTrunc.match(regex).map(h=>b58dec(h))
+        let sfc32 = (a,b,c,d)=>{
+            return ()=>{
+                a |= 0;
+                b |= 0;
+                c |= 0;
+                d |= 0
+                var t = (a + b | 0) + d | 0
+                d = d + 1 | 0
+                a = b ^ b >>> 9
+                b = c + (c << 3) | 0
+                c = c << 21 | c >>> 11
+                c = c + t | 0
+                return (t >>> 0) / 4294967296
+            }
+        }
+        var fxrand = sfc32(...hashes)
+    </script>
+</head>
+<body style='margin:0;overflow:hidden'>
+<script>
+    (()=>{
+            var I = Math.PI;
+            var k = (r,n)=>Math.max(r, n)
+                , S = (r,n)=>Math.min(r, n);
+            var H = (...r)=>Math.hypot(...r);
+            function v(r, n) {
+                return [...Array(r)].map((t,e)=>n(e))
+            }
+            function $(r, n) {
+                let t = document.createElement("canvas"), e = t.getContext("2d"), c;
+                function u(d, b) {
+                    t.width = d || innerWidth,
+                        t.height = b || innerHeight,
+                        c = S(t.width, t.height),
+                        e.clearRect(0, 0, t.width, t.height)
+                }
+                return u(r, n),
+                    {
+                        lineWidth(d) {
+                            e.lineWidth = d * c
+                        },
+                        append() {
+                            document.body.append(t)
+                        },
+                        canvas: t,
+                        ctx: e,
+                        resize: u,
+                        image(d) {
+                            e.drawImage(d, 0, 0, t.width, t.height)
+                        },
+                        clear(d) {
+                            if (!d) {
+                                e.clearRect(0, 0, t.width, t.height);
+                                return
+                            }
+                            let b = e.fillStyle;
+                            e.fillStyle = d,
+                                e.fillRect(0, 0, t.width, t.height),
+                                e.fillStyle = b
+                        },
+                        line([d,b], [h,x]) {
+                            e.beginPath(),
+                                e.moveTo(d, b),
+                                e.lineTo(h, x),
+                                e.stroke()
+                        },
+                        fill(d) {
+                            e.fillStyle = d
+                        },
+                        stroke(d, b=1) {
+                            e.strokeStyle = d,
+                                e.lineWidth = b
+                        },
+                        circle(d, b, h) {
+                            e.beginPath(),
+                                e.arc(d, b, h, 0, 2 * Math.PI),
+                                e.stroke()
+                        },
+                        rect(d, b, h) {
+                            e.strokeRect(d - h / 2, b - h / 2, h, h),
+                                e.stroke()
+                        },
+                        msaa3x3() {
+                            let d = e.getImageData(0, 0, t.width, t.height)
+                                , b = e.createImageData(t.width, t.height);
+                            function h(x, g, s) {
+                                return d.data[(g * t.width + x) * 4 + s]
+                            }
+                            v(t.width, x=>v(t.height, g=>{
+                                    let s = 0
+                                        , f = 0
+                                        , a = 0;
+                                    v(3, o=>v(3, i=>{
+                                            s += h(x + o - 1, g + i - 1, 0),
+                                                f += h(x + o - 1, g + i - 1, 1),
+                                                a += h(x + o - 1, g + i - 1, 2)
+                                        }
+                                    ));
+                                    let l = (g * t.width + x) * 4;
+                                    b.data[l] = s / 9,
+                                        b.data[l + 1] = f / 9,
+                                        b.data[l + 2] = a / 9,
+                                        b.data[l + 3] = 255
+                                }
+                            )),
+                                e.putImageData(b, 0, 0)
+                        }
+                    }
+            }
+            var j, U = ()=>window.fxrand ? window.fxrand() : Math.random();
+            function ae() {
+                return Math.random() * 1e9 | 0
+            }
+            var D = 2147483646
+                , L = D + 1
+                , G = class {
+                    constructor(n=ae()) {
+                        this.state = n % L,
+                        this.state <= 0 && (this.state += D)
+                    }
+                    next() {
+                        return this.state = this.state * 16807 % L,
+                        (this.state - 1) / D
+                    }
+                }
+            ;
+            function z(r) {
+                U = (j = r) ? ()=>j.next() : ()=>Math.random()
+            }
+            var w = (r=1,n=0)=>U() * r + n
+                , O = (r=2,n=0)=>n + w(r) | 0
+                , T = (r=.5)=>w() > r;
+            var R = ()=>O(4) * I / 2;
+            function q(r) {
+                var n = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+                r = r.replace(n, function(e, c, u, d) {
+                    return c + c + u + u + d + d
+                });
+                var t = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(r);
+                return [parseInt(t[1], 16), parseInt(t[2], 16), parseInt(t[3], 16)]
+            }
+            function B(r, n, t) {
+                r /= 255,
+                    n /= 255,
+                    t /= 255;
+                var e = Math.max(r, n, t), c = Math.min(r, n, t), u, d, b = (e + c) / 2;
+                if (e == c)
+                    u = d = 0;
+                else {
+                    var h = e - c;
+                    switch (d = b > .5 ? h / (2 - e - c) : h / (e + c),
+                        e) {
+                        case r:
+                            u = (n - t) / h + (n < t ? 6 : 0);
+                            break;
+                        case n:
+                            u = (t - r) / h + 2;
+                            break;
+                        case t:
+                            u = (r - n) / h + 4;
+                            break
+                    }
+                    u /= 6
+                }
+                return [u, d, b]
+            }
+            var re, E = class {
+                    constructor(n, t=[]) {
+                        this.palettes = n;
+                        this.excluded = t;
+                        this.b = "black";
+                        this.w = "white";
+                        this.index = -1
+                    }
+                    nextPalette() {
+                        do
+                            this.index = re ? this.index + 1 : w(this.palettes.length) | 0;
+                        while (this.excluded.indexOf(this.index) !== -1);
+                        this.current = this.palettes[this.index]
+                    }
+                    nextColor() {
+                        let n = this.current;
+                        return n[w(n.length) | 0]
+                    }
+                    sort() {
+                        this.current = this.current.sort((n,t)=>B(...q(n))[2] - B(...q(t))[2])
+                    }
+                }
+            ;
+            var V = '[["#69d2e7","#a7dbd8","#e0e4cc","#f38630","#fa6900"],["#fe4365","#fc9d9a","#f9cdad","#c8c8a9","#83af9b"],["#ecd078","#d95b43","#c02942","#542437","#53777a"],["#556270","#4ecdc4","#c7f464","#ff6b6b","#c44d58"],["#774f38","#e08e79","#f1d4af","#ece5ce","#c5e0dc"],["#e8ddcb","#cdb380","#036564","#033649","#031634"],["#490a3d","#bd1550","#e97f02","#f8ca00","#8a9b0f"],["#594f4f","#547980","#45ada8","#9de0ad","#e5fcc2"],["#00a0b0","#6a4a3c","#cc333f","#eb6841","#edc951"],["#e94e77","#d68189","#c6a49a","#c6e5d9","#f4ead5"],["#3fb8af","#7fc7af","#dad8a7","#ff9e9d","#ff3d7f"],["#d9ceb2","#948c75","#d5ded9","#7a6a53","#99b2b7"],["#ffffff","#cbe86b","#f2e9e1","#1c140d","#cbe86b"],["#efffcd","#dce9be","#555152","#2e2633","#99173c"],["#343838","#005f6b","#008c9e","#00b4cc","#00dffc"],["#413e4a","#73626e","#b38184","#f0b49e","#f7e4be"],["#ff4e50","#fc913a","#f9d423","#ede574","#e1f5c4"],["#99b898","#fecea8","#ff847c","#e84a5f","#2a363b"],["#655643","#80bca3","#f6f7bd","#e6ac27","#bf4d28"],["#00a8c6","#40c0cb","#f9f2e7","#aee239","#8fbe00"],["#351330","#424254","#64908a","#e8caa4","#cc2a41"],["#554236","#f77825","#d3ce3d","#f1efa5","#60b99a"],["#5d4157","#838689","#a8caba","#cad7b2","#ebe3aa"],["#8c2318","#5e8c6a","#88a65e","#bfb35a","#f2c45a"],["#fad089","#ff9c5b","#f5634a","#ed303c","#3b8183"],["#ff4242","#f4fad2","#d4ee5e","#e1edb9","#f0f2eb"],["#f8b195","#f67280","#c06c84","#6c5b7b","#355c7d"],["#d1e751","#ffffff","#000000","#4dbce9","#26ade4"],["#1b676b","#519548","#88c425","#bef202","#eafde6"],["#5e412f","#fcebb6","#78c0a8","#f07818","#f0a830"],["#bcbdac","#cfbe27","#f27435","#f02475","#3b2d38"],["#452632","#91204d","#e4844a","#e8bf56","#e2f7ce"],["#eee6ab","#c5bc8e","#696758","#45484b","#36393b"],["#f0d8a8","#3d1c00","#86b8b1","#f2d694","#fa2a00"],["#2a044a","#0b2e59","#0d6759","#7ab317","#a0c55f"],["#f04155","#ff823a","#f2f26f","#fff7bd","#95cfb7"],["#b9d7d9","#668284","#2a2829","#493736","#7b3b3b"],["#bbbb88","#ccc68d","#eedd99","#eec290","#eeaa88"],["#b3cc57","#ecf081","#ffbe40","#ef746f","#ab3e5b"],["#a3a948","#edb92e","#f85931","#ce1836","#009989"],["#300030","#480048","#601848","#c04848","#f07241"],["#67917a","#170409","#b8af03","#ccbf82","#e33258"],["#aab3ab","#c4cbb7","#ebefc9","#eee0b7","#e8caaf"],["#e8d5b7","#0e2430","#fc3a51","#f5b349","#e8d5b9"],["#ab526b","#bca297","#c5ceae","#f0e2a4","#f4ebc3"],["#607848","#789048","#c0d860","#f0f0d8","#604848"],["#b6d8c0","#c8d9bf","#dadabd","#ecdbbc","#fedcba"],["#a8e6ce","#dcedc2","#ffd3b5","#ffaaa6","#ff8c94"],["#3e4147","#fffedf","#dfba69","#5a2e2e","#2a2c31"],["#fc354c","#29221f","#13747d","#0abfbc","#fcf7c5"],["#cc0c39","#e6781e","#c8cf02","#f8fcc1","#1693a7"],["#1c2130","#028f76","#b3e099","#ffeaad","#d14334"],["#a7c5bd","#e5ddcb","#eb7b59","#cf4647","#524656"],["#dad6ca","#1bb0ce","#4f8699","#6a5e72","#563444"],["#5c323e","#a82743","#e15e32","#c0d23e","#e5f04c"],["#edebe6","#d6e1c7","#94c7b6","#403b33","#d3643b"],["#fdf1cc","#c6d6b8","#987f69","#e3ad40","#fcd036"],["#230f2b","#f21d41","#ebebbc","#bce3c5","#82b3ae"],["#b9d3b0","#81bda4","#b28774","#f88f79","#f6aa93"],["#3a111c","#574951","#83988e","#bcdea5","#e6f9bc"],["#5e3929","#cd8c52","#b7d1a3","#dee8be","#fcf7d3"],["#1c0113","#6b0103","#a30006","#c21a01","#f03c02"],["#000000","#9f111b","#b11623","#292c37","#cccccc"],["#382f32","#ffeaf2","#fcd9e5","#fbc5d8","#f1396d"],["#e3dfba","#c8d6bf","#93ccc6","#6cbdb5","#1a1f1e"],["#f6f6f6","#e8e8e8","#333333","#990100","#b90504"],["#1b325f","#9cc4e4","#e9f2f9","#3a89c9","#f26c4f"],["#a1dbb2","#fee5ad","#faca66","#f7a541","#f45d4c"],["#c1b398","#605951","#fbeec2","#61a6ab","#accec0"],["#5e9fa3","#dcd1b4","#fab87f","#f87e7b","#b05574"],["#951f2b","#f5f4d7","#e0dfb1","#a5a36c","#535233"],["#8dccad","#988864","#fea6a2","#f9d6ac","#ffe9af"],["#2d2d29","#215a6d","#3ca2a2","#92c7a3","#dfece6"],["#413d3d","#040004","#c8ff00","#fa023c","#4b000f"],["#eff3cd","#b2d5ba","#61ada0","#248f8d","#605063"],["#ffefd3","#fffee4","#d0ecea","#9fd6d2","#8b7a5e"],["#cfffdd","#b4dec1","#5c5863","#a85163","#ff1f4c"],["#9dc9ac","#fffec7","#f56218","#ff9d2e","#919167"],["#4e395d","#827085","#8ebe94","#ccfc8e","#dc5b3e"],["#a8a7a7","#cc527a","#e8175d","#474747","#363636"],["#f8edd1","#d88a8a","#474843","#9d9d93","#c5cfc6"],["#046d8b","#309292","#2fb8ac","#93a42a","#ecbe13"],["#f38a8a","#55443d","#a0cab5","#cde9ca","#f1edd0"],["#a70267","#f10c49","#fb6b41","#f6d86b","#339194"],["#ff003c","#ff8a00","#fabe28","#88c100","#00c176"],["#ffedbf","#f7803c","#f54828","#2e0d23","#f8e4c1"],["#4e4d4a","#353432","#94ba65","#2790b0","#2b4e72"],["#0ca5b0","#4e3f30","#fefeeb","#f8f4e4","#a5b3aa"],["#4d3b3b","#de6262","#ffb88c","#ffd0b3","#f5e0d3"],["#fffbb7","#a6f6af","#66b6ab","#5b7c8d","#4f2958"],["#edf6ee","#d1c089","#b3204d","#412e28","#151101"],["#9d7e79","#ccac95","#9a947c","#748b83","#5b756c"],["#fcfef5","#e9ffe1","#cdcfb7","#d6e6c3","#fafbe3"],["#9cddc8","#bfd8ad","#ddd9ab","#f7af63","#633d2e"],["#30261c","#403831","#36544f","#1f5f61","#0b8185"],["#aaff00","#ffaa00","#ff00aa","#aa00ff","#00aaff"],["#d1313d","#e5625c","#f9bf76","#8eb2c5","#615375"],["#ffe181","#eee9e5","#fad3b2","#ffba7f","#ff9c97"],["#73c8a9","#dee1b6","#e1b866","#bd5532","#373b44"],["#805841","#dcf7f3","#fffcdd","#ffd8d8","#f5a2a2"]]';
+            var X = JSON.parse(V);
+            var C = function(r) {
+                var n = {};
+                function t(e) {
+                    if (n[e])
+                        return n[e].exports;
+                    var c = n[e] = {
+                        i: e,
+                        l: !1,
+                        exports: {}
+                    };
+                    return r[e].call(c.exports, c, c.exports, t),
+                        c.l = !0,
+                        c.exports
+                }
+                return t.m = r,
+                    t.c = n,
+                    t.d = function(e, c, u) {
+                        t.o(e, c) || Object.defineProperty(e, c, {
+                            enumerable: !0,
+                            get: u
+                        })
+                    }
+                    ,
+                    t.r = function(e) {
+                        typeof Symbol != "undefined" && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
+                            value: "Module"
+                        }),
+                            Object.defineProperty(e, "__esModule", {
+                                value: !0
+                            })
+                    }
+                    ,
+                    t.t = function(e, c) {
+                        if (c & 1 && (e = t(e)),
+                        c & 8 || c & 4 && typeof e == "object" && e && e.__esModule)
+                            return e;
+                        var u = Object.create(null);
+                        if (t.r(u),
+                            Object.defineProperty(u, "default", {
+                                enumerable: !0,
+                                value: e
+                            }),
+                        c & 2 && typeof e != "string")
+                            for (var d in e)
+                                t.d(u, d, function(b) {
+                                    return e[b]
+                                }
+                                    .bind(null, d));
+                        return u
+                    }
+                    ,
+                    t.n = function(e) {
+                        var c = e && e.__esModule ? function() {
+                                return e.default
+                            }
+                            : function() {
+                                return e
+                            }
+                        ;
+                        return t.d(c, "a", c),
+                            c
+                    }
+                    ,
+                    t.o = function(e, c) {
+                        return Object.prototype.hasOwnProperty.call(e, c)
+                    }
+                    ,
+                    t.p = "",
+                    t(t.s = 0)
+            }([function(r, n, t) {
+                "use strict";
+                t.r(n),
+                    t.d(n, "isSameColor", function() {
+                        return u
+                    }),
+                    t.d(n, "setColorAtPixel", function() {
+                        return c
+                    }),
+                    t.d(n, "getColorAtPixel", function() {
+                        return e
+                    }),
+                    t.d(n, "colorToRGBA", function() {
+                        return b
+                    }),
+                    t.d(n, "hex2RGBA", function() {
+                        return d
+                    });
+                function e(s, f, a) {
+                    var l = s.width
+                        , o = s.data
+                        , i = 4 * (a * l + f);
+                    if (o[i + 3] === void 0)
+                        throw new Error("Invalid pixel coordinates: x=" + f + "; y=" + a);
+                    return {
+                        r: o[i],
+                        g: o[i + 1],
+                        b: o[i + 2],
+                        a: o[i + 3]
+                    }
+                }
+                function c(s, f, a, l) {
+                    var o = s.width
+                        , i = s.data
+                        , p = 4 * (l * o + a);
+                    if (i[p + 3] === void 0)
+                        throw new Error("Invalid pixel coordinates. Cannot set color at: x=" + a + "; y=" + l);
+                    i[p + 0] = f.r & 255,
+                        i[p + 1] = f.g & 255,
+                        i[p + 2] = f.b & 255,
+                        i[p + 3] = f.a & 255
+                }
+                function u(s, f, a) {
+                    return a === void 0 && (a = 0),
+                        !(Math.abs(s.r - f.r) > a || Math.abs(s.g - f.g) > a || Math.abs(s.b - f.b) > a || Math.abs(s.a - f.a) > a)
+                }
+                function d(s, f) {
+                    f === void 0 && (f = 255);
+                    var a = s;
+                    if (s.indexOf("#") === 0 && (a = s.slice(1)),
+                    a.length === 3 && (a = a[0] + a[0] + a[1] + a[1] + a[2] + a[2]),
+                    a.length !== 6)
+                        throw new Error("Invalid HEX color " + a + ".");
+                    var l = parseInt(a.slice(0, 2), 16)
+                        , o = parseInt(a.slice(2, 4), 16)
+                        , i = parseInt(a.slice(4, 6), 16);
+                    return {
+                        r: l,
+                        g: o,
+                        b: i,
+                        a: f
+                    }
+                }
+                function b(s) {
+                    if (s.indexOf("rgba") !== -1) {
+                        var f = /rgba\(.*?([0-9]{1,3}).*?([0-9]{1,3}).*?([0-9]{1,3}).*?([0-9\.]{1,})/g.exec(s)
+                            , a = f[0]
+                            , l = f[1]
+                            , o = f[2]
+                            , i = f[3]
+                            , p = f[4];
+                        return {
+                            r: parseInt(l),
+                            g: parseInt(o),
+                            b: parseInt(i),
+                            a: Math.ceil(parseFloat(p) * 255)
+                        }
+                    } else if (s.indexOf("rgb") !== -1) {
+                        var P = /rgb\(.*?([0-9]{1,3}).*?([0-9]{1,3}).*?([0-9]{1,3})/g.exec(s)
+                            , a = P[0]
+                            , l = P[1]
+                            , o = P[2]
+                            , i = P[3];
+                        return {
+                            r: parseInt(l),
+                            g: parseInt(o),
+                            b: parseInt(i),
+                            a: 255
+                        }
+                    } else {
+                        if (s.indexOf("#") !== -1)
+                            return d(s);
+                        throw new Error("Unsupported color format. Please use CSS rgba, rgb, or HEX!")
+                    }
+                }
+                var h = function() {
+                    function s(f) {
+                        this.collectModifiedPixels = !1,
+                            this.modifiedPixelsCount = 0,
+                            this.modifiedPixels = new Set,
+                            this._tolerance = 0,
+                            this._queue = [],
+                            this.imageData = f,
+                            this.isSameColor = u,
+                            this.setColorAtPixel = c,
+                            this.getColorAtPixel = e,
+                            this.colorToRGBA = b
+                    }
+                    return s.prototype.fill = function(f, a, l, o) {
+                        this._newColor = this.colorToRGBA(f),
+                            this._replacedColor = this.getColorAtPixel(this.imageData, a, l),
+                            this._tolerance = o,
+                        !this.isSameColor(this._replacedColor, this._newColor, this._tolerance) && (this.addToQueue([a, a, l, -1]),
+                            this.fillQueue())
+                    }
+                        ,
+                        s.prototype.addToQueue = function(f) {
+                            this._queue.push(f)
+                        }
+                        ,
+                        s.prototype.popFromQueue = function() {
+                            return this._queue.length ? this._queue.pop() : null
+                        }
+                        ,
+                        s.prototype.isValidTarget = function(f) {
+                            if (f !== null) {
+                                var a = this.getColorAtPixel(this.imageData, f.x, f.y);
+                                return this.isSameColor(this._replacedColor, a, this._tolerance)
+                            }
+                        }
+                        ,
+                        s.prototype.fillLineAt = function(f, a) {
+                            if (!this.isValidTarget({
+                                x: f,
+                                y: a
+                            }))
+                                return [-1, -1];
+                            this.setPixelColor(this._newColor, {
+                                x: f,
+                                y: a
+                            });
+                            for (var l = f, o = f, i = this.getPixelNeighbour("left", l, a); i && this.isValidTarget(i); )
+                                this.setPixelColor(this._newColor, i),
+                                    l = i.x,
+                                    i = this.getPixelNeighbour("left", l, a);
+                            for (i = this.getPixelNeighbour("right", o, a); i && this.isValidTarget(i); )
+                                this.setPixelColor(this._newColor, i),
+                                    o = i.x,
+                                    i = this.getPixelNeighbour("right", o, a);
+                            return [l, o]
+                        }
+                        ,
+                        s.prototype.fillQueue = function() {
+                            for (var f = this.popFromQueue(); f; ) {
+                                for (var a = f[0], l = f[1], o = f[2], i = f[3], p = a; p !== -1 && p <= l; ) {
+                                    var P = this.fillLineAt(p, o)
+                                        , M = P[0]
+                                        , y = P[1];
+                                    M !== -1 && (M >= a && y <= l && i !== -1 ? (i < o && o + 1 < this.imageData.height && this.addToQueue([M, y, o + 1, o]),
+                                    i > o && o > 0 && this.addToQueue([M, y, o - 1, o])) : (o > 0 && this.addToQueue([M, y, o - 1, o]),
+                                    o + 1 < this.imageData.height && this.addToQueue([M, y, o + 1, o]))),
+                                        y === -1 && p <= l ? p += 1 : p = y + 1
+                                }
+                                f = this.popFromQueue()
+                            }
+                        }
+                        ,
+                        s.prototype.setPixelColor = function(f, a) {
+                            this.setColorAtPixel(this.imageData, f, a.x, a.y),
+                                this.modifiedPixelsCount++,
+                            this.collectModifiedPixels && this.modifiedPixels.add(a.x + "|" + a.y)
+                        }
+                        ,
+                        s.prototype.getPixelNeighbour = function(f, a, l) {
+                            a = a | 0,
+                                l = l | 0;
+                            var o;
+                            switch (f) {
+                                case "right":
+                                    o = {
+                                        x: a + 1 | 0,
+                                        y: l
+                                    };
+                                    break;
+                                case "left":
+                                    o = {
+                                        x: a - 1 | 0,
+                                        y: l
+                                    };
+                                    break
+                            }
+                            return o.x >= 0 && o.x < this.imageData.width ? o : null
+                        }
+                        ,
+                        s
+                }()
+                    , x = h
+                    , g = n.default = x
+            }
+            ]);
+            C === void 0 && console.error("esm-webpack-plugin: nothing exported!");
+            var J = C.default
+                , Ce = C.isSameColor
+                , Me = C.setColorAtPixel
+                , Ie = C.getColorAtPixel
+                , Te = C.colorToRGBA
+                , _e = C.hex2RGBA;
+            function Y(r, n, t) {
+                let e;
+                return function() {
+                    let u = this
+                        , d = arguments
+                        , b = function() {
+                        e = null,
+                        t || r.apply(u, d)
+                    }
+                        , h = t && !e;
+                    clearTimeout(e),
+                        e = setTimeout(b, n),
+                    h && r.apply(u, d)
+                }
+            }
+            var Q = new URLSearchParams(window.location.search);
+            function Z(r, n) {
+                n === void 0 ? Q.delete(r) : Q.set(r, n);
+                let t = "?" + Q.toString();
+                window.history.replaceState(void 0, "", t)
+            }
+            var K, _, ee = {
+                strokeWidth: .004,
+                arcMode: T()
+            }, A = new E(X,[62, 27, 97, 46, 92, 73, 37, 0, 95, 84, 9, 16, 19]), m = $();
+            m.append();
+            addEventListener("resize", Y(()=>te(K), 100, !1));
+            te(K = (window.fxrand ? window.fxrand : Math.random)() * 1e9 | 0);
+            function fe(r, n, t) {
+                let e = m.ctx.getImageData(0, 0, m.canvas.width, m.canvas.height)
+                    , c = new J(e);
+                c.fill(t, r | 0, n | 0, 0),
+                    m.ctx.putImageData(c.imageData, 0, 0)
+            }
+            function te(r) {
+                z(new G(r)),
+                    Z("seed", r),
+                    A.nextPalette(),
+                    ee.arcMode = T(),
+                    A.sort();
+                let n = innerWidth / innerHeight;
+                m.resize(k(1e3 * n, innerWidth), k(1e3, innerHeight));
+                let t = m.canvas.width / 2
+                    , e = m.canvas.height / 2;
+                m.canvas.style.width = "100vw",
+                    m.canvas.style.height = "100vh";
+                let c = S(t, e) * 2;
+                _ = [],
+                    m.clear(A.current[0]),
+                    m.stroke("black"),
+                    m.ctx.lineWidth = 1,
+                    W(c, t, e, c / 2.3, 0),
+                    _.forEach(([u,d,b,h])=>{
+                            m.stroke(A.current[0], c * ee.strokeWidth),
+                                N(m.ctx, u, d, b, h)
+                        }
+                    )
+            }
+            function W(r, n, t, e, c) {
+                let u = .5
+                    , d = [];
+                v(2, b=>{
+                        v(2, h=>{
+                                let x = n + (b - .5) * e
+                                    , g = t + (h - .5) * e
+                                    , s = Math.cos(c)
+                                    , f = Math.sin(c)
+                                    , a = s * (x - n) + f * (g - t) + n
+                                    , l = s * (g - t) - f * (x - n) + t
+                                    , o = e / 2;
+                                if (o > r / 20 && T()) {
+                                    if (W(r, a, l, o / 1.21, c + I / 4),
+                                    o < r / 10) {
+                                        let i = e / 2.39;
+                                        F(a, l - i, e, r),
+                                            F(a, l + i, e, r),
+                                            F(a - i, l, e, r),
+                                            F(a + i, l, e, r)
+                                    }
+                                } else {
+                                    u -= .25;
+                                    let i = R() + c;
+                                    _.push([a, l, o, i]),
+                                        N(m.ctx, a, l, o, i),
+                                        d.push([a, l])
+                                }
+                            }
+                        )
+                    }
+                ),
+                    fe(n, t, A.current[1 + O(4)]),
+                    d.forEach(([b,h])=>{
+                            e > r / 5 && ce(b, h) ? W(r, b, h, e / 3, w(0)) : T(.4) && _.push([b, h, e / w(2, 6), R()])
+                        }
+                    )
+            }
+            function ce(r, n) {
+                let t = m.ctx.getImageData(0, 0, 1, 1).data
+                    , e = m.ctx.getImageData(r, n, 1, 1).data;
+                return t[0] === e[0] && t[1] === e[1] && t[2] === e[2]
+            }
+            function F(r, n, t, e) {
+                let c = r - m.canvas.width / 2
+                    , u = n - m.canvas.height / 2
+                    , d = H(c, u);
+                if (d < e / 5 || d > e / 4)
+                    return;
+                let b = t / 12
+                    , h = R();
+                _.push([r, n, b, h]),
+                    N(m.ctx, r, n, b, h)
+            }
+            function N(r, n, t, e, c) {
+                r.beginPath(),
+                    r.arc(n, t, e, c, c + I * 2 - I / 4),
+                    r.stroke()
+            }
+        }
+    )();
+</script>
+</body>
+</html>

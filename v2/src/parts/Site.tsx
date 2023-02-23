@@ -11,10 +11,10 @@ const routes = [ {
     path: "/generator/:type/:id/:hash",
     element: <GeneratorPage />,
 }, {
-    path: "/projects",
+    path: "/*",
     element: <ProjectsPage />,
 }, {
-    path: "*",
+    path: "/1",
     exact: false,
     element: <HomePage />,
 }];

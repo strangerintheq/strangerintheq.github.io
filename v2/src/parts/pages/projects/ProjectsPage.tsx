@@ -4,7 +4,7 @@ import {PageWrapper} from "../../components/PageWrapper";
 import {SliceSection} from "./SliceSection";
 import {TenturaSection} from "./TenturaSection";
 import {FxHashSection} from "./FxHashSection";
-import {HicEtNuncSection} from "./HicEtNuncSection";
+import {TeiaSection} from "./TeiaSection";
 import {Navigation} from "../../components/Navigation";
 
 export function ProjectsPage() {
@@ -14,6 +14,6 @@ export function ProjectsPage() {
         <SliceSection isMobile={isMobile}/>
         <TenturaSection isMobile={isMobile}/>
         <FxHashSection isMobile={isMobile}/>
-        <HicEtNuncSection isMobile={isMobile}/>
+        <TeiaSection isMobile={isMobile}/>
     </PageWrapper>
 }

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gravitzappa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script id="fxhash-snippet">
+        let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+        var fxhash = 'oo1WHxm95PJeziDbtPvqtZsEHyufnKZSiY8nJMMDCMxoTVEcLRk'
+        let b58dec = (str)=>str.split('').reduce((p,c,i)=>p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length - i - 1)), 0)
+        let fxhashTrunc = fxhash.slice(2)
+        let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}",'g')
+        let hashes = fxhashTrunc.match(regex).map(h=>b58dec(h))
+        let sfc32 = (a,b,c,d)=>{
+            return ()=>{
+                a |= 0;
+                b |= 0;
+                c |= 0;
+                d |= 0
+                var t = (a + b | 0) + d | 0
+                d = d + 1 | 0
+                a = b ^ b >>> 9
+                b = c + (c << 3) | 0
+                c = c << 21 | c >>> 11
+                c = c + t | 0
+                return (t >>> 0) / 4294967296
+            }
+        }
+        var fxrand = sfc32(...hashes)
+    </script>
+</head>
+<body style='margin:0;overflow:hidden'>
+<script>
+    (()=>{
+            var N = Math.PI
+                , me = 2 * N;
+            var he = c=>Math.sin(c)
+                , B = c=>Math.cos(c);
+            var pe = (c,t)=>Math.min(c, t)
+                , Ee = (c,t)=>Math.atan2(c, t);
+            var je = c=>Math.round(c)
+                , Ue = (...c)=>Math.hypot(...c);
+            function R(c, t) {
+                return [...Array(c | 0)].map((e,a)=>t(a))
+            }
+            function Xe(c, t) {
+                let e = document.createElement("canvas"), a = e.getContext("2d"), r;
+                function o(f, n) {
+                    e.width = f || innerWidth,
+                        e.height = n || innerHeight,
+                        r = pe(e.width, e.height),
+                        a.clearRect(0, 0, e.width, e.height)
+                }
+                return o(c, t),
+                    {
+                        lineWidth(f) {
+                            a.lineWidth = f * r
+                        },
+                        append() {
+                            document.body.append(e)
+                        },
+                        canvas: e,
+                        ctx: a,
+                        resize: o,
+                        image(f) {
+                            a.drawImage(f, 0, 0, e.width, e.height)
+                        },
+                        clear(f) {
+                            if (!f) {
+                                a.clearRect(0, 0, e.width, e.height);
+                                return
+                            }
+                            let n = a.fillStyle;
+                            a.fillStyle = f,
+                                a.fillRect(0, 0, e.width, e.height),
+                                a.fillStyle = n
+                        },
+                        line([f,n], [i,s]) {
+                            a.beginPath(),
+                                a.moveTo(f, n),
+                                a.lineTo(i, s),
+                                a.stroke()
+                        },
+                        fill(f) {
+                            a.fillStyle = f
+                        },
+                        stroke(f, n=1) {
+                            a.strokeStyle = f,
+                                a.lineWidth = n
+                        },
+                        circle(f, n, i) {
+                            a.beginPath(),
+                                a.arc(f, n, i, 0, 2 * Math.PI),
+                                a.stroke()
+                        },
+                        rect(f, n, i) {
+                            a.strokeRect(f - i / 2, n - i / 2, i, i),
+                                a.stroke()
+                        },
+                        msaa3x3() {
+                            let f = a.getImageData(0, 0, e.width, e.height)
+                                , n = a.createImageData(e.width, e.height);
+                            function i(s, x, C) {
+                                return f.data[(x * e.width + s) * 4 + C]
+                            }
+                            R(e.width, s=>R(e.height, x=>{
+                                    let C = 0
+                                        , D = 0
+                                        , w = 0;
+                                    R(3, b=>R(3, m=>{
+                                            C += i(s + b - 1, x + m - 1, 0),
+                                                D += i(s + b - 1, x + m - 1, 1),
+                                                w += i(s + b - 1, x + m - 1, 2)
+                                        }
+                                    ));
+                                    let d = (x * e.width + s) * 4;
+                                    n.data[d] = C / 9,
+                                        n.data[d + 1] = D / 9,
+                                        n.data[d + 2] = w / 9,
+                                        n.data[d + 3] = 255
+                                }
+                            )),
+                                a.putImageData(n, 0, 0)
+                        }
+                    }
+            }
+            var Ye, $e = ()=>window.fxrand ? window.fxrand() : Math.random();
+            function l0() {
+                return Math.random() * 1e9 | 0
+            }
+            var Oe = 2147483646
+                , Be = Oe + 1
+                , Ae = class {
+                    constructor(t=l0()) {
+                        this.state = t % Be,
+                        this.state <= 0 && (this.state += Oe)
+                    }
+                    next() {
+                        return this.state = this.state * 16807 % Be,
+                        (this.state - 1) / Oe
+                    }
+                }
+            ;
+            function Je(c) {
+                $e = (Ye = c) ? ()=>Ye.next() : ()=>Math.random()
+            }
+            var l = (c=1,t=0)=>$e() * c + t
+                , W = (c=2,t=0)=>t + l(c) | 0
+                , F = (c=.5)=>l() > c;
+            var Ge = ()=>W(4) * N / 2
+                , Ke = ()=>l(N * 2);
+            function Ne(c) {
+                var t = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+                c = c.replace(t, function(a, r, o, f) {
+                    return r + r + o + o + f + f
+                });
+                var e = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(c);
+                try {
+                    return [parseInt(e[1], 16), parseInt(e[2], 16), parseInt(e[3], 16)]
+                } catch (a) {
+                    debugger
+                }
+            }
+            function We(c, t, e) {
+                c /= 255,
+                    t /= 255,
+                    e /= 255;
+                var a = Math.max(c, t, e), r = Math.min(c, t, e), o, f, n = (a + r) / 2;
+                if (a == r)
+                    o = f = 0;
+                else {
+                    var i = a - r;
+                    switch (f = n > .5 ? i / (2 - a - r) : i / (a + r),
+                        a) {
+                        case c:
+                            o = (t - e) / i + (t < e ? 6 : 0);
+                            break;
+                        case t:
+                            o = (e - c) / i + 2;
+                            break;
+                        case e:
+                            o = (c - t) / i + 4;
+                            break
+                    }
+                    o /= 6
+                }
+                return [o, f, n]
+            }
+            var m0, Ze = class {
+                    constructor(t, e=[]) {
+                        this.palettes = t;
+                        this.excluded = e;
+                        this.b = "black";
+                        this.w = "white";
+                        this.index = -1
+                    }
+                    nextPalette() {
+                        do
+                            this.index = m0 ? this.index + 1 : l(this.palettes.length) | 0;
+                        while (this.excluded.indexOf(this.index) !== -1);
+                        this.current = this.palettes[this.index]
+                    }
+                    nextColor() {
+                        let t = this.current;
+                        return t[l(t.length) | 0]
+                    }
+                    sort() {
+                        this.current = this.current.sort((t,e)=>We(...Ne(t))[2] - We(...Ne(e))[2])
+                    }
+                }
+            ;
+            var Qe = '[["#69d2e7","#a7dbd8","#e0e4cc","#f38630","#fa6900"],["#fe4365","#fc9d9a","#f9cdad","#c8c8a9","#83af9b"],["#ecd078","#d95b43","#c02942","#542437","#53777a"],["#556270","#4ecdc4","#c7f464","#ff6b6b","#c44d58"],["#774f38","#e08e79","#f1d4af","#ece5ce","#c5e0dc"],["#e8ddcb","#cdb380","#036564","#033649","#031634"],["#490a3d","#bd1550","#e97f02","#f8ca00","#8a9b0f"],["#594f4f","#547980","#45ada8","#9de0ad","#e5fcc2"],["#00a0b0","#6a4a3c","#cc333f","#eb6841","#edc951"],["#e94e77","#d68189","#c6a49a","#c6e5d9","#f4ead5"],["#3fb8af","#7fc7af","#dad8a7","#ff9e9d","#ff3d7f"],["#d9ceb2","#948c75","#d5ded9","#7a6a53","#99b2b7"],["#ffffff","#cbe86b","#f2e9e1","#1c140d","#cbe86b"],["#efffcd","#dce9be","#555152","#2e2633","#99173c"],["#343838","#005f6b","#008c9e","#00b4cc","#00dffc"],["#413e4a","#73626e","#b38184","#f0b49e","#f7e4be"],["#ff4e50","#fc913a","#f9d423","#ede574","#e1f5c4"],["#99b898","#fecea8","#ff847c","#e84a5f","#2a363b"],["#655643","#80bca3","#f6f7bd","#e6ac27","#bf4d28"],["#00a8c6","#40c0cb","#f9f2e7","#aee239","#8fbe00"],["#351330","#424254","#64908a","#e8caa4","#cc2a41"],["#554236","#f77825","#d3ce3d","#f1efa5","#60b99a"],["#5d4157","#838689","#a8caba","#cad7b2","#ebe3aa"],["#8c2318","#5e8c6a","#88a65e","#bfb35a","#f2c45a"],["#fad089","#ff9c5b","#f5634a","#ed303c","#3b8183"],["#ff4242","#f4fad2","#d4ee5e","#e1edb9","#f0f2eb"],["#f8b195","#f67280","#c06c84","#6c5b7b","#355c7d"],["#d1e751","#ffffff","#000000","#4dbce9","#26ade4"],["#1b676b","#519548","#88c425","#bef202","#eafde6"],["#5e412f","#fcebb6","#78c0a8","#f07818","#f0a830"],["#bcbdac","#cfbe27","#f27435","#f02475","#3b2d38"],["#452632","#91204d","#e4844a","#e8bf56","#e2f7ce"],["#eee6ab","#c5bc8e","#696758","#45484b","#36393b"],["#f0d8a8","#3d1c00","#86b8b1","#f2d694","#fa2a00"],["#2a044a","#0b2e59","#0d6759","#7ab317","#a0c55f"],["#f04155","#ff823a","#f2f26f","#fff7bd","#95cfb7"],["#b9d7d9","#668284","#2a2829","#493736","#7b3b3b"],["#bbbb88","#ccc68d","#eedd99","#eec290","#eeaa88"],["#b3cc57","#ecf081","#ffbe40","#ef746f","#ab3e5b"],["#a3a948","#edb92e","#f85931","#ce1836","#009989"],["#300030","#480048","#601848","#c04848","#f07241"],["#67917a","#170409","#b8af03","#ccbf82","#e33258"],["#aab3ab","#c4cbb7","#ebefc9","#eee0b7","#e8caaf"],["#e8d5b7","#0e2430","#fc3a51","#f5b349","#e8d5b9"],["#ab526b","#bca297","#c5ceae","#f0e2a4","#f4ebc3"],["#607848","#789048","#c0d860","#f0f0d8","#604848"],["#b6d8c0","#c8d9bf","#dadabd","#ecdbbc","#fedcba"],["#a8e6ce","#dcedc2","#ffd3b5","#ffaaa6","#ff8c94"],["#3e4147","#fffedf","#dfba69","#5a2e2e","#2a2c31"],["#fc354c","#29221f","#13747d","#0abfbc","#fcf7c5"],["#cc0c39","#e6781e","#c8cf02","#f8fcc1","#1693a7"],["#1c2130","#028f76","#b3e099","#ffeaad","#d14334"],["#a7c5bd","#e5ddcb","#eb7b59","#cf4647","#524656"],["#dad6ca","#1bb0ce","#4f8699","#6a5e72","#563444"],["#5c323e","#a82743","#e15e32","#c0d23e","#e5f04c"],["#edebe6","#d6e1c7","#94c7b6","#403b33","#d3643b"],["#fdf1cc","#c6d6b8","#987f69","#e3ad40","#fcd036"],["#230f2b","#f21d41","#ebebbc","#bce3c5","#82b3ae"],["#b9d3b0","#81bda4","#b28774","#f88f79","#f6aa93"],["#3a111c","#574951","#83988e","#bcdea5","#e6f9bc"],["#5e3929","#cd8c52","#b7d1a3","#dee8be","#fcf7d3"],["#1c0113","#6b0103","#a30006","#c21a01","#f03c02"],["#000000","#9f111b","#b11623","#292c37","#cccccc"],["#382f32","#ffeaf2","#fcd9e5","#fbc5d8","#f1396d"],["#e3dfba","#c8d6bf","#93ccc6","#6cbdb5","#1a1f1e"],["#f6f6f6","#e8e8e8","#333333","#990100","#b90504"],["#1b325f","#9cc4e4","#e9f2f9","#3a89c9","#f26c4f"],["#a1dbb2","#fee5ad","#faca66","#f7a541","#f45d4c"],["#c1b398","#605951","#fbeec2","#61a6ab","#accec0"],["#5e9fa3","#dcd1b4","#fab87f","#f87e7b","#b05574"],["#951f2b","#f5f4d7","#e0dfb1","#a5a36c","#535233"],["#8dccad","#988864","#fea6a2","#f9d6ac","#ffe9af"],["#2d2d29","#215a6d","#3ca2a2","#92c7a3","#dfece6"],["#413d3d","#040004","#c8ff00","#fa023c","#4b000f"],["#eff3cd","#b2d5ba","#61ada0","#248f8d","#605063"],["#ffefd3","#fffee4","#d0ecea","#9fd6d2","#8b7a5e"],["#cfffdd","#b4dec1","#5c5863","#a85163","#ff1f4c"],["#9dc9ac","#fffec7","#f56218","#ff9d2e","#919167"],["#4e395d","#827085","#8ebe94","#ccfc8e","#dc5b3e"],["#a8a7a7","#cc527a","#e8175d","#474747","#363636"],["#f8edd1","#d88a8a","#474843","#9d9d93","#c5cfc6"],["#046d8b","#309292","#2fb8ac","#93a42a","#ecbe13"],["#f38a8a","#55443d","#a0cab5","#cde9ca","#f1edd0"],["#a70267","#f10c49","#fb6b41","#f6d86b","#339194"],["#ff003c","#ff8a00","#fabe28","#88c100","#00c176"],["#ffedbf","#f7803c","#f54828","#2e0d23","#f8e4c1"],["#4e4d4a","#353432","#94ba65","#2790b0","#2b4e72"],["#0ca5b0","#4e3f30","#fefeeb","#f8f4e4","#a5b3aa"],["#4d3b3b","#de6262","#ffb88c","#ffd0b3","#f5e0d3"],["#fffbb7","#a6f6af","#66b6ab","#5b7c8d","#4f2958"],["#edf6ee","#d1c089","#b3204d","#412e28","#151101"],["#9d7e79","#ccac95","#9a947c","#748b83","#5b756c"],["#fcfef5","#e9ffe1","#cdcfb7","#d6e6c3","#fafbe3"],["#9cddc8","#bfd8ad","#ddd9ab","#f7af63","#633d2e"],["#30261c","#403831","#36544f","#1f5f61","#0b8185"],["#aaff00","#ffaa00","#ff00aa","#aa00ff","#00aaff"],["#d1313d","#e5625c","#f9bf76","#8eb2c5","#615375"],["#ffe181","#eee9e5","#fad3b2","#ffba7f","#ff9c97"],["#73c8a9","#dee1b6","#e1b866","#bd5532","#373b44"],["#805841","#dcf7f3","#fffcdd","#ffd8d8","#f5a2a2"],["#379f7a","#78ae62","#bbb749","#e0fbac","#1f1c0d"],["#caff42","#ebf7f8","#d0e0eb","#88abc2","#49708a"],["#c2412d","#d1aa34","#a7a844","#a46583","#5a1e4a"],["#75616b","#bfcff7","#dce4f7","#f8f3bf","#d34017"],["#111625","#341931","#571b3c","#7a1e48","#9d2053"],["#82837e","#94b053","#bdeb07","#bffa37","#e0e0e0"],["#7e5686","#a5aad9","#e8f9a2","#f8a13f","#ba3c3d"],["#312736","#d4838f","#d6abb1","#d9d9d9","#c4ffeb"],["#395a4f","#432330","#853c43","#f25c5e","#ffa566"],["#fde6bd","#a1c5ab","#f4dd51","#d11e48","#632f53"],["#84b295","#eccf8d","#bb8138","#ac2005","#2c1507"],["#058789","#503d2e","#d54b1a","#e3a72f","#f0ecc9"],["#6da67a","#77b885","#86c28b","#859987","#4a4857"],["#bed6c7","#adc0b4","#8a7e66","#a79b83","#bbb2a1"],["#261c21","#6e1e62","#b0254f","#de4126","#eb9605"],["#efd9b4","#d6a692","#a39081","#4d6160","#292522"],["#e21b5a","#9e0c39","#333333","#fbffe3","#83a300"],["#f2e3c6","#ffc6a5","#e6324b","#2b2b2b","#353634"],["#c75233","#c78933","#d6ceaa","#79b5ac","#5e2f46"],["#793a57","#4d3339","#8c873e","#d1c5a5","#a38a5f"],["#512b52","#635274","#7bb0a8","#a7dbab","#e4f5b1"],["#11644d","#a0b046","#f2c94e","#f78145","#f24e4e"],["#59b390","#f0ddaa","#e47c5d","#e32d40","#152b3c"],["#fdffd9","#fff0b8","#ffd6a3","#faad8e","#142f30"],["#b5ac01","#ecba09","#e86e1c","#d41e45","#1b1521"],["#c7fcd7","#d9d5a7","#d9ab91","#e6867a","#ed4a6a"],["#11766d","#410936","#a40b54","#e46f0a","#f0b300"],["#595643","#4e6b66","#ed834e","#ebcc6e","#ebe1c5"],["#f1396d","#fd6081","#f3ffeb","#acc95f","#8f9924"],["#331327","#991766","#d90f5a","#f34739","#ff6e27"],["#efeecc","#fe8b05","#fe0557","#400403","#0aabba"],["#bf496a","#b39c82","#b8c99d","#f0d399","#595151"],["#b7cbbf","#8c886f","#f9a799","#f4bfad","#f5dabd"],["#ffb884","#f5df98","#fff8d4","#c0d1c2","#2e4347"],["#e5eaa4","#a8c4a2","#69a5a4","#616382","#66245b"],["#e0eff1","#7db4b5","#ffffff","#680148","#000000"],["#b1e6d1","#77b1a9","#3d7b80","#270a33","#451a3e"],["#e4ded0","#abccbd","#7dbeb8","#181619","#e32f21"],["#e9e0d1","#91a398","#33605a","#070001","#68462b"],["#fc284f","#ff824a","#fea887","#f6e7f7","#d1d0d7"],["#ffab07","#e9d558","#72ad75","#0e8d94","#434d53"],["#6da67a","#99a66d","#a9bd68","#b5cc6a","#c0de5d"],["#311d39","#67434f","#9b8e7e","#c3ccaf","#a51a41"],["#cfb590","#9e9a41","#758918","#564334","#49281f"],["#5cacc4","#8cd19d","#cee879","#fcb653","#ff5254"],["#44749d","#c6d4e1","#ffffff","#ebe7e0","#bdb8ad"],["#807462","#a69785","#b8faff","#e8fdff","#665c49"],["#e7edea","#ffc52c","#fb0c06","#030d4f","#ceecef"],["#ccf390","#e0e05a","#f7c41f","#fc930a","#ff003d"],["#2b222c","#5e4352","#965d62","#c7956d","#f2d974"],["#cc5d4c","#fffec6","#c7d1af","#96b49c","#5b5847"],["#e4e4c5","#b9d48b","#8d2036","#ce0a31","#d3e4c5"],["#e3e8cd","#bcd8bf","#d3b9a3","#ee9c92","#fe857e"],["#360745","#d61c59","#e7d84b","#efeac5","#1b8798"],["#ec4401","#cc9b25","#13cd4a","#7b6ed6","#5e525c"],["#eb9c4d","#f2d680","#f3ffcf","#bac9a9","#697060"],["#f2e8c4","#98d9b6","#3ec9a7","#2b879e","#616668"],["#f5dd9d","#bcc499","#92a68a","#7b8f8a","#506266"],["#fff3db","#e7e4d5","#d3c8b4","#c84648","#703e3b"],["#041122","#259073","#7fda89","#c8e98e","#e6f99d"],["#8d7966","#a8a39d","#d8c8b8","#e2ddd9","#f8f1e9"],["#c6cca5","#8ab8a8","#6b9997","#54787d","#615145"],["#1d1313","#24b694","#d22042","#a3b808","#30c4c9"],["#4b1139","#3b4058","#2a6e78","#7a907c","#c9b180"],["#2d1b33","#f36a71","#ee887a","#e4e391","#9abc8a"],["#f0ffc9","#a9da88","#62997a","#72243d","#3b0819"],["#429398","#6b5d4d","#b0a18f","#dfcdb4","#fbeed3"],["#9d9e94","#c99e93","#f59d92","#e5b8ad","#d5d2c8"],["#95a131","#c8cd3b","#f6f1de","#f5b9ae","#ee0b5b"],["#322938","#89a194","#cfc89a","#cc883a","#a14016"],["#540045","#c60052","#ff714b","#eaff87","#acffe9"],["#79254a","#795c64","#79927d","#aeb18e","#e3cf9e"],["#452e3c","#ff3d5a","#ffb969","#eaf27e","#3b8c88"],["#2b2726","#0a516d","#018790","#7dad93","#bacca4"],["#027b7f","#ffa588","#d62957","#bf1e62","#572e4f"],["#fa6a64","#7a4e48","#4a4031","#f6e2bb","#9ec6b8"],["#fb6900","#f63700","#004853","#007e80","#00b9bd"],["#f06d61","#da825f","#c4975c","#a8ab7b","#8cbf99"],["#23192d","#fd0a54","#f57576","#febf97","#f5ecb7"],["#f6d76b","#ff9036","#d6254d","#ff5475","#fdeba9"],["#a3c68c","#879676","#6e6662","#4f364a","#340735"],["#a32c28","#1c090b","#384030","#7b8055","#bca875"],["#80a8a8","#909d9e","#a88c8c","#ff0d51","#7a8c89"],["#6d9788","#1e2528","#7e1c13","#bf0a0d","#e6e1c2"],["#373737","#8db986","#acce91","#badb73","#efeae4"],["#e6b39a","#e6cba5","#ede3b4","#8b9e9b","#6d7578"],["#280904","#680e34","#9a151a","#c21b12","#fc4b2a"],["#4b3e4d","#1e8c93","#dbd8a2","#c4ac30","#d74f33"],["#161616","#c94d65","#e7c049","#92b35a","#1f6764"],["#234d20","#36802d","#77ab59","#c9df8a","#f0f7da"],["#a69e80","#e0ba9b","#e7a97e","#d28574","#3b1922"],["#641f5e","#676077","#65ac92","#c2c092","#edd48e"],["#e6eba9","#abbb9f","#6f8b94","#706482","#703d6f"],["#26251c","#eb0a44","#f2643d","#f2a73d","#a0e8b7"],["#fdcfbf","#feb89f","#e23d75","#5f0d3b","#742365"],["#ff7474","#f59b71","#c7c77f","#e0e0a8","#f1f1c1"],["#4f364c","#5e405f","#6b6b6b","#8f9e6f","#b1cf72"],["#230b00","#a29d7f","#d4cfa5","#f8ecd4","#aabe9b"],["#d4f7dc","#dbe7b4","#dbc092","#e0846d","#f51441"],["#62a07b","#4f8b89","#536c8d","#5c4f79","#613860"]]';
+            var Ve = JSON.parse(Qe);
+            function _e(c, t, e) {
+                let a = R(c, r=>R(t, o=>e(r / c, o / t)));
+                return {
+                    brush(r) {
+                        let o;
+                        return (f,n,i)=>{
+                            if (!o) {
+                                o = [f, n];
+                                return
+                            }
+                            let s = Math.atan2(n - o[1], f - o[0]);
+                            x(f, n),
+                                o = [f, n];
+                            function x(C, D) {
+                                R(i + i, w=>{
+                                        R(i + i, d=>{
+                                                let b = C - i + w | 0
+                                                    , m = D - i + d | 0;
+                                                Ue(b - C, m - D) < i && (a[b][m] = r ? r(s) : s)
+                                            }
+                                        )
+                                    }
+                                )
+                            }
+                        }
+                    },
+                    floor(r, o) {
+                        return a[r | 0][o | 0]
+                    },
+                    nearest(r, o) {
+                        return a[je(r)][je(o)]
+                    }
+                }
+            }
+            var qe = class {
+                    constructor(t=Math) {
+                        this.grad3 = [[1, 1, 0], [-1, 1, 0], [1, -1, 0], [-1, -1, 0], [1, 0, 1], [-1, 0, 1], [1, 0, -1], [-1, 0, -1], [0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1]],
+                            this.grad4 = [[0, 1, 1, 1], [0, 1, 1, -1], [0, 1, -1, 1], [0, 1, -1, -1], [0, -1, 1, 1], [0, -1, 1, -1], [0, -1, -1, 1], [0, -1, -1, -1], [1, 0, 1, 1], [1, 0, 1, -1], [1, 0, -1, 1], [1, 0, -1, -1], [-1, 0, 1, 1], [-1, 0, 1, -1], [-1, 0, -1, 1], [-1, 0, -1, -1], [1, 1, 0, 1], [1, 1, 0, -1], [1, -1, 0, 1], [1, -1, 0, -1], [-1, 1, 0, 1], [-1, 1, 0, -1], [-1, -1, 0, 1], [-1, -1, 0, -1], [1, 1, 1, 0], [1, 1, -1, 0], [1, -1, 1, 0], [1, -1, -1, 0], [-1, 1, 1, 0], [-1, 1, -1, 0], [-1, -1, 1, 0], [-1, -1, -1, 0]],
+                            this.p = [];
+                        for (let e = 0; e < 256; e++)
+                            this.p[e] = Math.floor(t.random() * 256);
+                        this.perm = [];
+                        for (let e = 0; e < 512; e++)
+                            this.perm[e] = this.p[e & 255];
+                        this.simplex = [[0, 1, 2, 3], [0, 1, 3, 2], [0, 0, 0, 0], [0, 2, 3, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [1, 2, 3, 0], [0, 2, 1, 3], [0, 0, 0, 0], [0, 3, 1, 2], [0, 3, 2, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [1, 3, 2, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [1, 2, 0, 3], [0, 0, 0, 0], [1, 3, 0, 2], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [2, 3, 0, 1], [2, 3, 1, 0], [1, 0, 2, 3], [1, 0, 3, 2], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [2, 0, 3, 1], [0, 0, 0, 0], [2, 1, 3, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [2, 0, 1, 3], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [3, 0, 1, 2], [3, 0, 2, 1], [0, 0, 0, 0], [3, 1, 2, 0], [2, 1, 0, 3], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [3, 1, 0, 2], [0, 0, 0, 0], [3, 2, 0, 1], [3, 2, 1, 0]]
+                    }
+                    dot(t, e, a) {
+                        return t[0] * e + t[1] * a
+                    }
+                    dot3(t, e, a, r) {
+                        return t[0] * e + t[1] * a + t[2] * r
+                    }
+                    dot4(t, e, a, r, o) {
+                        return t[0] * e + t[1] * a + t[2] * r + t[3] * o
+                    }
+                    noise(t, e) {
+                        let a, r, o, f = .5 * (Math.sqrt(3) - 1), n = (t + e) * f, i = Math.floor(t + n), s = Math.floor(e + n), x = (3 - Math.sqrt(3)) / 6, C = (i + s) * x, D = i - C, w = s - C, d = t - D, b = e - w, m, g;
+                        d > b ? (m = 1,
+                            g = 0) : (m = 0,
+                            g = 1);
+                        let h = d - m + x
+                            , p = b - g + x
+                            , u = d - 1 + 2 * x
+                            , y = b - 1 + 2 * x
+                            , v = i & 255
+                            , z = s & 255
+                            , j = this.perm[v + this.perm[z]] % 12
+                            , k = this.perm[v + m + this.perm[z + g]] % 12
+                            , M = this.perm[v + 1 + this.perm[z + 1]] % 12
+                            , T = .5 - d * d - b * b;
+                        T < 0 ? a = 0 : (T *= T,
+                            a = T * T * this.dot(this.grad3[j], d, b));
+                        let P = .5 - h * h - p * p;
+                        P < 0 ? r = 0 : (P *= P,
+                            r = P * P * this.dot(this.grad3[k], h, p));
+                        let A = .5 - u * u - y * y;
+                        return A < 0 ? o = 0 : (A *= A,
+                            o = A * A * this.dot(this.grad3[M], u, y)),
+                        70 * (a + r + o)
+                    }
+                    noise3d(t, e, a) {
+                        let r, o, f, n, i = 1 / 3, s = (t + e + a) * i, x = Math.floor(t + s), C = Math.floor(e + s), D = Math.floor(a + s), w = 1 / 6, d = (x + C + D) * w, b = x - d, m = C - d, g = D - d, h = t - b, p = e - m, u = a - g, y, v, z, j, k, M;
+                        h >= p ? p >= u ? (y = 1,
+                            v = 0,
+                            z = 0,
+                            j = 1,
+                            k = 1,
+                            M = 0) : h >= u ? (y = 1,
+                            v = 0,
+                            z = 0,
+                            j = 1,
+                            k = 0,
+                            M = 1) : (y = 0,
+                            v = 0,
+                            z = 1,
+                            j = 1,
+                            k = 0,
+                            M = 1) : p < u ? (y = 0,
+                            v = 0,
+                            z = 1,
+                            j = 0,
+                            k = 1,
+                            M = 1) : h < u ? (y = 0,
+                            v = 1,
+                            z = 0,
+                            j = 0,
+                            k = 1,
+                            M = 1) : (y = 0,
+                            v = 1,
+                            z = 0,
+                            j = 1,
+                            k = 1,
+                            M = 0);
+                        let T = h - y + w
+                            , P = p - v + w
+                            , A = u - z + w
+                            , J = h - j + 2 * w
+                            , K = p - k + 2 * w
+                            , Q = u - M + 2 * w
+                            , V = h - 1 + 3 * w
+                            , _ = p - 1 + 3 * w
+                            , I = u - 1 + 3 * w
+                            , U = x & 255
+                            , X = C & 255
+                            , Y = D & 255
+                            , re = this.perm[U + this.perm[X + this.perm[Y]]] % 12
+                            , se = this.perm[U + y + this.perm[X + v + this.perm[Y + z]]] % 12
+                            , ie = this.perm[U + j + this.perm[X + k + this.perm[Y + M]]] % 12
+                            , le = this.perm[U + 1 + this.perm[X + 1 + this.perm[Y + 1]]] % 12
+                            , q = .6 - h * h - p * p - u * u;
+                        q < 0 ? r = 0 : (q *= q,
+                            r = q * q * this.dot3(this.grad3[re], h, p, u));
+                        let L = .6 - T * T - P * P - A * A;
+                        L < 0 ? o = 0 : (L *= L,
+                            o = L * L * this.dot3(this.grad3[se], T, P, A));
+                        let H = .6 - J * J - K * K - Q * Q;
+                        H < 0 ? f = 0 : (H *= H,
+                            f = H * H * this.dot3(this.grad3[ie], J, K, Q));
+                        let E = .6 - V * V - _ * _ - I * I;
+                        return E < 0 ? n = 0 : (E *= E,
+                            n = E * E * this.dot3(this.grad3[le], V, _, I)),
+                        32 * (r + o + f + n)
+                    }
+                    noise4d(t, e, a, r) {
+                        let o = this.grad4, f = this.simplex, n = this.perm, i = (Math.sqrt(5) - 1) / 4, s = (5 - Math.sqrt(5)) / 20, x, C, D, w, d, b = (t + e + a + r) * i, m = Math.floor(t + b), g = Math.floor(e + b), h = Math.floor(a + b), p = Math.floor(r + b), u = (m + g + h + p) * s, y = m - u, v = g - u, z = h - u, j = p - u, k = t - y, M = e - v, T = a - z, P = r - j, A = k > M ? 32 : 0, J = k > T ? 16 : 0, K = M > T ? 8 : 0, Q = k > P ? 4 : 0, V = M > P ? 2 : 0, _ = T > P ? 1 : 0, I = A + J + K + Q + V + _, U = f[I][0] >= 3 ? 1 : 0, X = f[I][1] >= 3 ? 1 : 0, Y = f[I][2] >= 3 ? 1 : 0, re = f[I][3] >= 3 ? 1 : 0, se = f[I][0] >= 2 ? 1 : 0, ie = f[I][1] >= 2 ? 1 : 0, le = f[I][2] >= 2 ? 1 : 0, q = f[I][3] >= 2 ? 1 : 0, L = f[I][0] >= 1 ? 1 : 0, H = f[I][1] >= 1 ? 1 : 0, E = f[I][2] >= 1 ? 1 : 0, He = f[I][3] >= 1 ? 1 : 0, xe = k - U + s, ge = M - X + s, ye = T - Y + s, we = P - re + s, ve = k - se + 2 * s, ke = M - ie + 2 * s, Me = T - le + 2 * s, Ce = P - q + 2 * s, Te = k - L + 3 * s, Pe = M - H + 3 * s, Se = T - E + 3 * s, De = P - He + 3 * s, ze = k - 1 + 4 * s, Fe = M - 1 + 4 * s, Ie = T - 1 + 4 * s, Re = P - 1 + 4 * s, ee = m & 255, te = g & 255, ce = h & 255, ae = p & 255, o0 = n[ee + n[te + n[ce + n[ae]]]] % 32, b0 = n[ee + U + n[te + X + n[ce + Y + n[ae + re]]]] % 32, r0 = n[ee + se + n[te + ie + n[ce + le + n[ae + q]]]] % 32, s0 = n[ee + L + n[te + H + n[ce + E + n[ae + He]]]] % 32, i0 = n[ee + 1 + n[te + 1 + n[ce + 1 + n[ae + 1]]]] % 32, fe = .6 - k * k - M * M - T * T - P * P;
+                        fe < 0 ? x = 0 : (fe *= fe,
+                            x = fe * fe * this.dot4(o[o0], k, M, T, P));
+                        let ne = .6 - xe * xe - ge * ge - ye * ye - we * we;
+                        ne < 0 ? C = 0 : (ne *= ne,
+                            C = ne * ne * this.dot4(o[b0], xe, ge, ye, we));
+                        let de = .6 - ve * ve - ke * ke - Me * Me - Ce * Ce;
+                        de < 0 ? D = 0 : (de *= de,
+                            D = de * de * this.dot4(o[r0], ve, ke, Me, Ce));
+                        let oe = .6 - Te * Te - Pe * Pe - Se * Se - De * De;
+                        oe < 0 ? w = 0 : (oe *= oe,
+                            w = oe * oe * this.dot4(o[s0], Te, Pe, Se, De));
+                        let be = .6 - ze * ze - Fe * Fe - Ie * Ie - Re * Re;
+                        return be < 0 ? d = 0 : (be *= be,
+                            d = be * be * this.dot4(o[i0], ze, Fe, Ie, Re)),
+                        27 * (x + C + D + w + d)
+                    }
+                }
+            ;
+            function Z(c) {
+                try {
+                    return c[W(c.length)]
+                } catch (t) {
+                    debugger
+                }
+            }
+            function e0(c) {
+                window.$fxhashFeatures = c
+            }
+            function t0() {
+                let c = window.fxrand;
+                return (c ? c() : Math.random()) * 1e8
+            }
+            function c0(c) {
+                let t = 2111
+                    , e = 3222
+                    , a = 3
+                    , r = 1
+                    , o = {
+                    extraDirsInFlow: F(.8),
+                    canChangeDir: F(.8),
+                    bgOpacity: F() ? "22" : "66",
+                    canStopOnZoneChange: F(.3),
+                    noiseScale: l(a, r),
+                    linesCount: W(t, e),
+                    differentThickness: F()
+                };
+                try {
+                    e0({
+                        Palette: c.index,
+                        Isolated: o.canStopOnZoneChange,
+                        "Noise scale": a0(["Low", "Medium", "High"], o.noiseScale, r, a),
+                        "Lines count": a0(["Less", "Normal", "More"], o.linesCount, e, t),
+                        "Many directions": o.extraDirsInFlow,
+                        "Can turn": o.canChangeDir,
+                        "Dark background": o.canStopOnZoneChange,
+                        "Different widths": o.differentThickness
+                    })
+                } catch (f) {}
+                return o
+            }
+            function a0(c, t, e, a) {
+                return c[(t - e) / a * c.length | 0]
+            }
+            var $, p0 = t0(), O = new Ze(Ve), S = y0();
+            Je(new Ae(p0));
+            O.nextPalette();
+            O.sort();
+            var u0 = new qe({
+                random: l
+            })
+                , G = c0(O)
+                , ue = G.bgOpacity
+                , f0 = {
+                bg: [O.current[0] + ue, O.current[1] + ue, O.current[2] + ue, "#000000" + ue],
+                zone1: [O.current[1], O.current[2]],
+                zone2: [O.current[3], O.current[4]]
+            }
+                , Le = [[0, N], [0, N, N / 2, -N / 2]]
+                , n0 = {
+                bg: Z(Le),
+                zone1: Z(Le),
+                zone2: Z(Le)
+            }
+                , x0 = {
+                bg: [.5, 1, G.differentThickness ? l(3) : 1],
+                zone1: [.5, 1, G.differentThickness ? l(3) : 1],
+                zone2: [.5, 1, G.differentThickness ? l(3) : 1]
+            };
+            g0();
+            function g0() {
+                S.resize(),
+                    S.clear("black");
+                let c = 1024
+                    , t = 1024
+                    , e = pe(c, t);
+                S.resize(c, t);
+                let a = d0(c, t)
+                    , r = d0(c, t)
+                    , o = R(G.linesCount, n);
+                s(),
+                    D(),
+                    w(),
+                    $ = requestAnimationFrame(f),
+                    addEventListener("pointerdown", d=>{
+                            d.button === 0 && ($ ? (cancelAnimationFrame($),
+                                $ = void 0) : $ = requestAnimationFrame(f))
+                        }
+                    );
+                function f() {
+                    o.forEach(d=>d()),
+                        i(),
+                    $ && ($ = requestAnimationFrame(f))
+                }
+                function n() {
+                    let d = l(c)
+                        , b = l(t)
+                        , m = r.floor(d, b)
+                        , g = l(5)
+                        , h = !1
+                        , p = Z(n0[m.type])
+                        , u = Z(f0[m.type])
+                        , y = F(.99) ? l(11) : Z(x0[m.type]);
+                    return ()=>{
+                        if (!h) {
+                            S.ctx.beginPath(),
+                                S.ctx.moveTo(d, b);
+                            try {
+                                let v = r.floor(d, b);
+                                m.type !== v.type && (m = v,
+                                    u = Z(f0[m.type]),
+                                    p = Z(n0[m.type]),
+                                F(.97) && (u = O.nextColor()),
+                                F(.99) && (p = Ke()),
+                                G.canStopOnZoneChange && (h = F())),
+                                    d += B(v.dir + p) * g,
+                                    b += he(v.dir + p) * g,
+                                    S.ctx.lineTo(d, b),
+                                    S.ctx.lineWidth = y,
+                                    S.ctx.strokeStyle = u,
+                                y > 5 && (S.ctx.strokeStyle = u + "90"),
+                                    S.ctx.stroke()
+                            } catch (v) {
+                                h = !0
+                            }
+                        }
+                    }
+                }
+                function i() {
+                    S.ctx.fillStyle = "#00000007";
+                    let d = 10
+                        , b = d * 2;
+                    S.ctx.fillRect(-l(d), -l(d), e / b, e + b),
+                        S.ctx.fillRect(e + l(d) - e / b, -l(d), e / b, e + b),
+                        S.ctx.fillRect(-l(d), -l(d), e + b, e / b),
+                        S.ctx.fillRect(-l(d), e + l(d) - e / b, e + b, e / b)
+                }
+                function s() {
+                    S.clear("black"),
+                        R(33, ()=>{
+                                S.fill("#ffffff07"),
+                                F(.9) && S.fill(O.nextColor() + "20"),
+                                    x(S, l(c), l(t), l(e * .5), !1)
+                            }
+                        )
+                }
+                function x(d, b, m, g, h) {
+                    d.ctx.beginPath(),
+                        d.ctx.ellipse(b, m, g, g, 0, 0, 2 * Math.PI),
+                        C(d, h)
+                }
+                function C(d, b) {
+                    b && F() ? d.ctx.stroke() : d.ctx.fill()
+                }
+                function D() {
+                    let d = l(5) + 5;
+                    d *= e / 1e3,
+                        R(33, ()=>{
+                                let b = r.brush(p=>({
+                                    type: "zone1",
+                                    dir: p
+                                }))
+                                    , m = l(c)
+                                    , g = l(t)
+                                    , h = G.extraDirsInFlow ? Ge() : 0;
+                                R(113, ()=>{
+                                        G.canChangeDir && F(.9) && (h = Ge());
+                                        try {
+                                            let p = a.floor(m, g).dir + h;
+                                            m += B(p) * d,
+                                                g += he(p) * d,
+                                                b(m, g, F(.99) ? d * 2 : d)
+                                        } catch (p) {}
+                                    }
+                                )
+                            }
+                        )
+                }
+                function w() {
+                    let d = e / 30
+                        , b = e / W(2, 5)
+                        , m = W(b, b)
+                        , g = W(b, b)
+                        , h = l(11111)
+                        , p = r.brush(y=>({
+                        type: "zone2",
+                        dir: y
+                    }))
+                        , u = l(500, 500);
+                    R(u, y=>{
+                            if (F(.8))
+                                return;
+                            let v = m * B(h + y / g)
+                                , z = g * B(h + y / m);
+                            try {
+                                let j = B(h + y / v * me) * z + c / 2
+                                    , k = he(h + y / z * me) * v + t / 2;
+                                p(j, k, F(.99) ? d * 1.3 : d)
+                            } catch (j) {}
+                        }
+                    )
+                }
+            }
+            function d0(c, t) {
+                let e = l()
+                    , a = l()
+                    , r = l(me);
+                return _e(c, t, (o,f)=>{
+                        let n = Ee(o - e, f - a)
+                            , i = u0.noise(o * G.noiseScale, f * G.noiseScale);
+                        return {
+                            type: "bg",
+                            dir: n + r + i
+                        }
+                    }
+                )
+            }
+            function y0() {
+                let c = Xe();
+                return c.append(),
+                    c.canvas.style.height = "min(100vh, 100vw)",
+                    c.canvas.style.width = "min(100vh, 100vw)",
+                    c.canvas.style.marginTop = "calc(50vh - min(50vh, 50vw))",
+                    c.canvas.style.marginLeft = "calc(50vw - min(50vh, 50vw))",
+                    document.body.style.background = "black",
+                    c
+            }
+        }
+    )();
+</script>
+</body>
+</html>

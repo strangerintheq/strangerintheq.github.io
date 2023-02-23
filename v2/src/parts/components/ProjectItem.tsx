@@ -3,51 +3,25 @@ import {Link} from "react-router-dom";
 import {randomAbHash, randomFxHash} from "../tools";
 import {sitePath} from "../vars";
 
-export function ProjectItem(
-    {
-        name,
-        type = "fxhash",
-        hash = null,
-        about = null,
-        img,
-        generator,
-        c = null,
-        r = null,
-        id = null,
-        stopGif = false
-    }) {
+export function ProjectItem({
+    name,
+    type,
+    hash = null,
+    img,
+    c = null,
+    r = null,
+    id = null,
+}) {
 
     const to = '/generator/' + type +
-        "/" + generator +
+        "/" + name.toLowerCase().replaceAll(" ", "-") +
         "/" + (hash || makeHash(type))
 
     return <div style={{gridColumn: c, gridRow: r}}>
         <Link to={to}>
-            {stopGif ?
-                <CanvasWithStoppedGif img={img}/> :
-                <DivWithBackgroundImage img={img} />
-            }
+            <DivWithBackgroundImage img={img} />
         </Link>
     </div>
-}
-
-function CanvasWithStoppedGif({img}) {
-    const ref = useRef<HTMLCanvasElement>()
-    useEffect(() => {
-        const canvas = ref.current;
-        const ctx = canvas.getContext("2d");
-        const background = new Image();
-        background.src = img;
-        background.onload = () => {
-            let s = Math.min(background.naturalWidth, background.naturalHeight)
-            canvas.width = s
-            canvas.height = s
-            canvas.style.width = "100%"
-            canvas.style.height = "100%"
-            ctx.drawImage(background, 0, 0);
-        };
-    }, []);
-    return <canvas ref={ref} />
 }
 
 function DivWithBackgroundImage({img}) {

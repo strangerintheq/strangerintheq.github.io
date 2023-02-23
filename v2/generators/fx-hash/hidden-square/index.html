@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hidden Square</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script id="fxhash-snippet">
+        let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+        var fxhash = 'ooJgyLKPdBbW1YbNk8cXbHpDdWV9886cJyx934pKwoNUru3RNKD'
+        let b58dec = (str)=>str.split('').reduce((p,c,i)=>p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length - i - 1)), 0)
+        let fxhashTrunc = fxhash.slice(2)
+        let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}",'g')
+        let hashes = fxhashTrunc.match(regex).map(h=>b58dec(h))
+        let sfc32 = (a,b,c,d)=>{
+            return ()=>{
+                a |= 0;
+                b |= 0;
+                c |= 0;
+                d |= 0
+                var t = (a + b | 0) + d | 0
+                d = d + 1 | 0
+                a = b ^ b >>> 9
+                b = c + (c << 3) | 0
+                c = c << 21 | c >>> 11
+                c = c + t | 0
+                return (t >>> 0) / 4294967296
+            }
+        }
+        var fxrand = sfc32(...hashes)
+    </script>
+</head>
+<body style='margin:0;overflow:hidden'>
+<script>
+    (()=>{
+            var ve = Object.defineProperty
+                , Pe = Object.defineProperties;
+            var Ce = Object.getOwnPropertyDescriptors;
+            var U = Object.getOwnPropertySymbols;
+            var we = Object.prototype.hasOwnProperty
+                , Ie = Object.prototype.propertyIsEnumerable;
+            var Y = (e,t,a)=>t in e ? ve(e, t, {
+                enumerable: !0,
+                configurable: !0,
+                writable: !0,
+                value: a
+            }) : e[t] = a
+                , Z = (e,t)=>{
+                for (var a in t || (t = {}))
+                    we.call(t, a) && Y(e, a, t[a]);
+                if (U)
+                    for (var a of U(t))
+                        Ie.call(t, a) && Y(e, a, t[a]);
+                return e
+            }
+                , B = (e,t)=>Pe(e, Ce(t));
+            var L = e=>Math.abs(e)
+                , h = e=>Math.sin(e)
+                , g = e=>Math.cos(e);
+            var K = (e,t)=>Math.max(e, t)
+                , H = (e,t)=>Math.min(e, t);
+            function M(e, t) {
+                let a = document.createElement("canvas"), n = a.getContext("2d"), o;
+                function f(c, r) {
+                    a.width = c || innerWidth,
+                        a.height = r || innerHeight,
+                        o = H(a.width, a.height),
+                        n.clearRect(0, 0, a.width, a.height)
+                }
+                return f(e, t),
+                    {
+                        lineWidth(c) {
+                            n.lineWidth = c * o
+                        },
+                        append() {
+                            document.body.append(a)
+                        },
+                        canvas: a,
+                        ctx: n,
+                        resize: f,
+                        image(c) {
+                            n.drawImage(c, 0, 0, a.width, a.height)
+                        },
+                        clear(c) {
+                            if (!c) {
+                                n.clearRect(0, 0, a.width, a.height);
+                                return
+                            }
+                            let r = n.fillStyle;
+                            n.fillStyle = c,
+                                n.fillRect(0, 0, a.width, a.height),
+                                n.fillStyle = r
+                        },
+                        line([c,r], [i,u]) {
+                            n.beginPath(),
+                                n.moveTo(c, r),
+                                n.lineTo(i, u),
+                                n.stroke()
+                        },
+                        fill(c) {
+                            n.fillStyle = c
+                        },
+                        stroke(c, r=1) {
+                            n.strokeStyle = c,
+                                n.lineWidth = r
+                        },
+                        circle(c, r, i) {
+                            n.beginPath(),
+                                n.arc(c, r, i, 0, 2 * Math.PI),
+                                n.stroke()
+                        },
+                        rect(c, r, i) {
+                            n.strokeRect(c - i / 2, r - i / 2, i, i),
+                                n.stroke()
+                        }
+                    }
+            }
+            var Q, V = ()=>Math.random();
+            function N() {
+                return Math.random() * 1e9 | 0
+            }
+            var O = 2147483646
+                , _ = O + 1
+                , G = class {
+                    constructor(t=N()) {
+                        this.state = t % _,
+                        this.state <= 0 && (this.state += O)
+                    }
+                    next() {
+                        return this.state = this.state * 16807 % _,
+                        (this.state - 1) / O
+                    }
+                }
+            ;
+            function ee(e) {
+                V = (Q = e) ? ()=>Q.next() : ()=>Math.random()
+            }
+            var b = (e=1,t=0)=>V() * e + t
+                , x = (e=2,t=0)=>t + b(e) | 0
+                , m = (e=.5)=>b() > e
+                , D = (e=1)=>b(e) - e / 2;
+            function j(e) {
+                var t = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+                e = e.replace(t, function(n, o, f, c) {
+                    return o + o + f + f + c + c
+                });
+                var a = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(e);
+                return [parseInt(a[1], 16), parseInt(a[2], 16), parseInt(a[3], 16)]
+            }
+            function X(e, t, a) {
+                e /= 255,
+                    t /= 255,
+                    a /= 255;
+                var n = Math.max(e, t, a), o = Math.min(e, t, a), f, c, r = (n + o) / 2;
+                if (n == o)
+                    f = c = 0;
+                else {
+                    var i = n - o;
+                    switch (c = r > .5 ? i / (2 - n - o) : i / (n + o),
+                        n) {
+                        case e:
+                            f = (t - a) / i + (t < a ? 6 : 0);
+                            break;
+                        case t:
+                            f = (a - e) / i + 2;
+                            break;
+                        case a:
+                            f = (e - t) / i + 4;
+                            break
+                    }
+                    f /= 6
+                }
+                return [f, c, r]
+            }
+            var Me, q = class {
+                    constructor(t, a=[]) {
+                        this.palettes = t;
+                        this.excluded = a;
+                        this.b = "black";
+                        this.w = "white";
+                        this.index = -1
+                    }
+                    nextPalette() {
+                        do
+                            this.index = Me ? this.index + 1 : b(this.palettes.length) | 0;
+                        while (this.excluded.indexOf(this.index) !== -1);
+                        this.current = this.palettes[this.index]
+                    }
+                    nextColor() {
+                        let t = this.current;
+                        return t[b(t.length) | 0]
+                    }
+                    sort() {
+                        this.current = this.current.sort((t,a)=>X(...j(t))[2] - X(...j(a))[2])
+                    }
+                }
+            ;
+            var te = '[["#69d2e7","#a7dbd8","#e0e4cc","#f38630","#fa6900"],["#fe4365","#fc9d9a","#f9cdad","#c8c8a9","#83af9b"],["#ecd078","#d95b43","#c02942","#542437","#53777a"],["#556270","#4ecdc4","#c7f464","#ff6b6b","#c44d58"],["#774f38","#e08e79","#f1d4af","#ece5ce","#c5e0dc"],["#e8ddcb","#cdb380","#036564","#033649","#031634"],["#490a3d","#bd1550","#e97f02","#f8ca00","#8a9b0f"],["#594f4f","#547980","#45ada8","#9de0ad","#e5fcc2"],["#00a0b0","#6a4a3c","#cc333f","#eb6841","#edc951"],["#e94e77","#d68189","#c6a49a","#c6e5d9","#f4ead5"],["#3fb8af","#7fc7af","#dad8a7","#ff9e9d","#ff3d7f"],["#d9ceb2","#948c75","#d5ded9","#7a6a53","#99b2b7"],["#ffffff","#cbe86b","#f2e9e1","#1c140d","#cbe86b"],["#efffcd","#dce9be","#555152","#2e2633","#99173c"],["#343838","#005f6b","#008c9e","#00b4cc","#00dffc"],["#413e4a","#73626e","#b38184","#f0b49e","#f7e4be"],["#ff4e50","#fc913a","#f9d423","#ede574","#e1f5c4"],["#99b898","#fecea8","#ff847c","#e84a5f","#2a363b"],["#655643","#80bca3","#f6f7bd","#e6ac27","#bf4d28"],["#00a8c6","#40c0cb","#f9f2e7","#aee239","#8fbe00"],["#351330","#424254","#64908a","#e8caa4","#cc2a41"],["#554236","#f77825","#d3ce3d","#f1efa5","#60b99a"],["#5d4157","#838689","#a8caba","#cad7b2","#ebe3aa"],["#8c2318","#5e8c6a","#88a65e","#bfb35a","#f2c45a"],["#fad089","#ff9c5b","#f5634a","#ed303c","#3b8183"],["#ff4242","#f4fad2","#d4ee5e","#e1edb9","#f0f2eb"],["#f8b195","#f67280","#c06c84","#6c5b7b","#355c7d"],["#d1e751","#ffffff","#000000","#4dbce9","#26ade4"],["#1b676b","#519548","#88c425","#bef202","#eafde6"],["#5e412f","#fcebb6","#78c0a8","#f07818","#f0a830"],["#bcbdac","#cfbe27","#f27435","#f02475","#3b2d38"],["#452632","#91204d","#e4844a","#e8bf56","#e2f7ce"],["#eee6ab","#c5bc8e","#696758","#45484b","#36393b"],["#f0d8a8","#3d1c00","#86b8b1","#f2d694","#fa2a00"],["#2a044a","#0b2e59","#0d6759","#7ab317","#a0c55f"],["#f04155","#ff823a","#f2f26f","#fff7bd","#95cfb7"],["#b9d7d9","#668284","#2a2829","#493736","#7b3b3b"],["#bbbb88","#ccc68d","#eedd99","#eec290","#eeaa88"],["#b3cc57","#ecf081","#ffbe40","#ef746f","#ab3e5b"],["#a3a948","#edb92e","#f85931","#ce1836","#009989"],["#300030","#480048","#601848","#c04848","#f07241"],["#67917a","#170409","#b8af03","#ccbf82","#e33258"],["#aab3ab","#c4cbb7","#ebefc9","#eee0b7","#e8caaf"],["#e8d5b7","#0e2430","#fc3a51","#f5b349","#e8d5b9"],["#ab526b","#bca297","#c5ceae","#f0e2a4","#f4ebc3"],["#607848","#789048","#c0d860","#f0f0d8","#604848"],["#b6d8c0","#c8d9bf","#dadabd","#ecdbbc","#fedcba"],["#a8e6ce","#dcedc2","#ffd3b5","#ffaaa6","#ff8c94"],["#3e4147","#fffedf","#dfba69","#5a2e2e","#2a2c31"],["#fc354c","#29221f","#13747d","#0abfbc","#fcf7c5"],["#cc0c39","#e6781e","#c8cf02","#f8fcc1","#1693a7"],["#1c2130","#028f76","#b3e099","#ffeaad","#d14334"],["#a7c5bd","#e5ddcb","#eb7b59","#cf4647","#524656"],["#dad6ca","#1bb0ce","#4f8699","#6a5e72","#563444"],["#5c323e","#a82743","#e15e32","#c0d23e","#e5f04c"],["#edebe6","#d6e1c7","#94c7b6","#403b33","#d3643b"],["#fdf1cc","#c6d6b8","#987f69","#e3ad40","#fcd036"],["#230f2b","#f21d41","#ebebbc","#bce3c5","#82b3ae"],["#b9d3b0","#81bda4","#b28774","#f88f79","#f6aa93"],["#3a111c","#574951","#83988e","#bcdea5","#e6f9bc"],["#5e3929","#cd8c52","#b7d1a3","#dee8be","#fcf7d3"],["#1c0113","#6b0103","#a30006","#c21a01","#f03c02"],["#000000","#9f111b","#b11623","#292c37","#cccccc"],["#382f32","#ffeaf2","#fcd9e5","#fbc5d8","#f1396d"],["#e3dfba","#c8d6bf","#93ccc6","#6cbdb5","#1a1f1e"],["#f6f6f6","#e8e8e8","#333333","#990100","#b90504"],["#1b325f","#9cc4e4","#e9f2f9","#3a89c9","#f26c4f"],["#a1dbb2","#fee5ad","#faca66","#f7a541","#f45d4c"],["#c1b398","#605951","#fbeec2","#61a6ab","#accec0"],["#5e9fa3","#dcd1b4","#fab87f","#f87e7b","#b05574"],["#951f2b","#f5f4d7","#e0dfb1","#a5a36c","#535233"],["#8dccad","#988864","#fea6a2","#f9d6ac","#ffe9af"],["#2d2d29","#215a6d","#3ca2a2","#92c7a3","#dfece6"],["#413d3d","#040004","#c8ff00","#fa023c","#4b000f"],["#eff3cd","#b2d5ba","#61ada0","#248f8d","#605063"],["#ffefd3","#fffee4","#d0ecea","#9fd6d2","#8b7a5e"],["#cfffdd","#b4dec1","#5c5863","#a85163","#ff1f4c"],["#9dc9ac","#fffec7","#f56218","#ff9d2e","#919167"],["#4e395d","#827085","#8ebe94","#ccfc8e","#dc5b3e"],["#a8a7a7","#cc527a","#e8175d","#474747","#363636"],["#f8edd1","#d88a8a","#474843","#9d9d93","#c5cfc6"],["#046d8b","#309292","#2fb8ac","#93a42a","#ecbe13"],["#f38a8a","#55443d","#a0cab5","#cde9ca","#f1edd0"],["#a70267","#f10c49","#fb6b41","#f6d86b","#339194"],["#ff003c","#ff8a00","#fabe28","#88c100","#00c176"],["#ffedbf","#f7803c","#f54828","#2e0d23","#f8e4c1"],["#4e4d4a","#353432","#94ba65","#2790b0","#2b4e72"],["#0ca5b0","#4e3f30","#fefeeb","#f8f4e4","#a5b3aa"],["#4d3b3b","#de6262","#ffb88c","#ffd0b3","#f5e0d3"],["#fffbb7","#a6f6af","#66b6ab","#5b7c8d","#4f2958"],["#edf6ee","#d1c089","#b3204d","#412e28","#151101"],["#9d7e79","#ccac95","#9a947c","#748b83","#5b756c"],["#fcfef5","#e9ffe1","#cdcfb7","#d6e6c3","#fafbe3"],["#9cddc8","#bfd8ad","#ddd9ab","#f7af63","#633d2e"],["#30261c","#403831","#36544f","#1f5f61","#0b8185"],["#aaff00","#ffaa00","#ff00aa","#aa00ff","#00aaff"],["#d1313d","#e5625c","#f9bf76","#8eb2c5","#615375"],["#ffe181","#eee9e5","#fad3b2","#ffba7f","#ff9c97"],["#73c8a9","#dee1b6","#e1b866","#bd5532","#373b44"],["#805841","#dcf7f3","#fffcdd","#ffd8d8","#f5a2a2"]]';
+            var ae = JSON.parse(te);
+            function ne() {
+                let e = H(innerWidth, innerHeight)
+                    , t = x(2) + 4;
+                return {
+                    size: e,
+                    sideElementsCount: t,
+                    mainAreaSize: e * .5,
+                    symmetry: m(),
+                    canStroke: m(),
+                    maxCircles: x(t * 2) + t,
+                    circleChance: b(.5) + .2,
+                    pointsCount: x(2e3),
+                    smallCirclesChance: b(),
+                    square: {
+                        x: void 0,
+                        y: void 0
+                    }
+                }
+            }
+            function s(e, t) {
+                return [...Array(e)].map((a,n)=>t(n))
+            }
+            function re(e, t, a, n, o) {
+                s(a, f=>{
+                        let c = (a - f) * 137.5 / 180 * Math.PI
+                            , r = Math.sqrt(a - f) * n;
+                        o(g(c) * r + e, h(c) * r + t, f, c % (Math.PI * 2))
+                    }
+                )
+            }
+            function $(e, t, a, n, o, f, c) {
+                let r = n
+                    , i = a
+                    , u = r / 2
+                    , w = r / (i - 1)
+                    , k = s(i, l=>s(i, I=>({
+                    x: e - u + I * w,
+                    y: t - u + l * w,
+                    empty: m(o)
+                })));
+                f && k.forEach(l=>{
+                        s(a / 2 | 0, I=>{
+                                l[a - I - 1].empty = l[I].empty
+                            }
+                        )
+                    }
+                );
+                let P = k.flat().sort(()=>D());
+                if (c) {
+                    let l = 0;
+                    P.forEach(I=>{
+                            I.empty || (l++,
+                            l > c && (I.empty = !0))
+                        }
+                    ),
+                    l < 5 && s(5 - l, ()=>{
+                            P[x(a * a)].empty = !1
+                        }
+                    )
+                }
+                return P
+            }
+            function ce(e="0") {
+                let t = parseInt(e.toLowerCase(), 36);
+                for (; t > 1e9; ) {
+                    let a = t % 1e9
+                        , n = t / 1e9;
+                    t = a + (n | 0)
+                }
+                return t | 0
+            }
+            var fe = !0;
+            function ie() {
+                let e;
+                if (fe) {
+                    let t = new URLSearchParams(window.location.search)
+                        , a = t.get("viewer");
+                    a && a !== "false" && (e = ce(a));
+                    let n = t.get("seed");
+                    !e && n && (e = +n),
+                        fe = !1
+                }
+                return e || (e = N()),
+                    console.log(document.location.href.split("?").shift() + "?seed=" + e),
+                    e
+            }
+            function oe(e, t, a) {
+                let n;
+                return function() {
+                    let f = this
+                        , c = arguments
+                        , r = function() {
+                        n = null,
+                        a || e.apply(f, c)
+                    }
+                        , i = a && !n;
+                    clearTimeout(n),
+                        n = setTimeout(r, t),
+                    i && e.apply(f, c)
+                }
+            }
+            var z = M()
+                , p = z.ctx;
+            function J(e, t, a, n, o) {
+                z.resize();
+                let f = e.map(r=>B(Z({}, r), {
+                    empty: r.empty || m(.5),
+                    r: t.size * (n + b(.01))
+                }));
+                z.fill(o);
+                let c = t.size * .003;
+                return f.forEach(r=>{
+                        if (r.empty)
+                            return;
+                        p.beginPath();
+                        let i = r.r + c;
+                        p.ellipse(r.x, r.y, i, i, 0, 0, Math.PI * 2),
+                            p.fill()
+                    }
+                ),
+                    p.globalCompositeOperation = "destination-out",
+                    f.forEach(r=>{
+                            if (r.empty)
+                                return;
+                            p.beginPath();
+                            let i = r.r;
+                            p.ellipse(r.x, r.y, i, i, 0, 0, Math.PI * 2),
+                                p.fill()
+                        }
+                    ),
+                    e.forEach(r=>{
+                            if (r.empty)
+                                return;
+                            p.beginPath();
+                            let i = t.size * .1;
+                            p.ellipse(r.x, r.y, i, i, 0, 0, Math.PI * 2),
+                                p.fill()
+                        }
+                    ),
+                    p.globalCompositeOperation = "source-over",
+                    z
+            }
+            function E(e) {
+                return 1 / K(L(g(e)), L(h(e)))
+            }
+            function de(e, t, a, n, o) {
+                let f = a * a
+                    , c = f * f
+                    , r = f * n
+                    , i = c * n
+                    , u = 1e3
+                    , w = s(u, k=>{
+                        let P = k / u * Math.PI * 2 + o * 100
+                            , l = E(P) * (h(P * o) < 0 ? r : i);
+                        return [e + g(P) * l, t + h(P) * l]
+                    }
+                );
+                return new Path2D("M" + w.join("L ") + "Z")
+            }
+            var be = window.fxrand
+                , me = (be ? be() : Math.random()) * 1e8
+                , C = new q(ae)
+                , A = new q([])
+                , y = M(0, 0)
+                , R = M(0, 0)
+                , T = M(0, 0)
+                , v = M(0, 0);
+            y.append();
+            var We, se, le;
+            var F, d;
+            ue();
+            addEventListener("pointerdown", e=>!We && Se(e));
+            addEventListener("resize", oe(ue, 100, !1));
+            function ue() {
+                T.resize(innerWidth, innerHeight),
+                    v.resize(innerWidth, innerHeight),
+                    he(R),
+                    y.resize(innerWidth, innerHeight),
+                    y.ctx.drawImage(R.canvas, 0, 0, innerWidth, innerHeight)
+            }
+            function Se(e) {
+                e && e.button === 2 || (se = b(4) + 3,
+                    R.ctx.drawImage(T.canvas, 0, 0, innerWidth, innerHeight),
+                    me = ie(),
+                    he(T),
+                e && e.clientX && (d.square.x = e.clientX,
+                    d.square.y = e.clientY),
+                    le = Date.now(),
+                F && cancelAnimationFrame(F),
+                    F = requestAnimationFrame(pe))
+            }
+            function pe() {
+                let e = Date.now() - le;
+                e = e / 500,
+                    y.ctx.drawImage(R.canvas, 0, 0, innerWidth, innerHeight),
+                    y.ctx.save(),
+                    y.ctx.beginPath();
+                let t = d.square.x || innerWidth / 2
+                    , a = d.square.y || innerHeight / 2
+                    , n = d.size * 1.5;
+                y.ctx.clip(de(t, a, e, n, se)),
+                    y.ctx.drawImage(T.canvas, 0, 0, innerWidth, innerHeight),
+                    y.ctx.restore(),
+                e <= 1 && (F = requestAnimationFrame(pe))
+            }
+            function he(e) {
+                ee(new G(me)),
+                    d = ne(),
+                    C.nextPalette();
+                let t = $(innerWidth / 2, innerHeight / 2, d.sideElementsCount, d.mainAreaSize, 1 - d.circleChance, d.symmetry, d.maxCircles);
+                v.ctx.clearRect(0, 0, innerWidth, innerHeight);
+                let a = C.current[4];
+                v.ctx.drawImage(J(t, d, C, .1, a).canvas, 0, 0, innerWidth, innerHeight),
+                    v.ctx.drawImage(J(t, d, C, .11, a).canvas, 0, 0, innerWidth, innerHeight),
+                    t.filter(n=>!n.empty).forEach(n=>qe(v, n.x, n.y)),
+                    t.filter(n=>n.empty).forEach(n=>He(v, n.x, n.y)),
+                    W(v),
+                    s(x(3) + 2, n=>{
+                            let o = innerWidth / 2 + d.mainAreaSize * .966 - n * d.size * .02
+                                , f = innerHeight / 2 + d.mainAreaSize * .966
+                                , c = d.mainAreaSize * .05;
+                            ge(v, o, f, c)
+                        }
+                    ),
+                    e.resize(innerWidth, innerHeight),
+                    Ee(e),
+                    e.ctx.drawImage(v.canvas, 0, 0, innerWidth, innerHeight),
+                    ze(e)
+            }
+            function He(e, t, a) {
+                if (m())
+                    return;
+                ye();
+                let n = ()=>(.06 + b(.025)) * d.size;
+                $(t, a, x(2) + 4, n(), b(.3), !0).forEach(o=>{
+                        m() && ge(e, o.x, o.y, d.size * .03)
+                    }
+                )
+            }
+            function xe(e, t) {
+                t && m() ? e.ctx.stroke() : e.ctx.fill()
+            }
+            function W(e) {
+                e.fill(A.nextColor()),
+                    e.stroke(A.nextColor(), 1)
+            }
+            function De(e, t, a, n) {
+                return [...n.ctx.getImageData(e - a * .5, t - a * .5, a, a).data].filter(f=>f).length
+            }
+            function ge(e, t, a, n) {
+                if (!De(t, a, n, e))
+                    if (W(e),
+                        n = b(n * .2) + n * .1,
+                    m(.7) && !d.square.x)
+                        d.square.x = t,
+                            d.square.y = a,
+                            e.ctx.beginPath(),
+                            e.ctx.rect(t - n, a - n, n * 2, n * 2),
+                            xe(e, !0);
+                    else {
+                        if (S(e, t, a, n, !0),
+                            m())
+                            return;
+                        W(e),
+                            S(e, t, a, n * (b(.3) + .2), !0)
+                    }
+            }
+            function S(e, t, a, n, o) {
+                e.ctx.beginPath(),
+                    e.ctx.ellipse(t, a, n, n, 0, 0, 2 * Math.PI),
+                    xe(e, o)
+            }
+            function ye() {
+                let e = [...C.current].sort(()=>D());
+                e.pop(),
+                    e.pop(),
+                    A.current = e
+            }
+            function qe(e, t, a) {
+                let n = x(d.pointsCount) + 2e3
+                    , o = d.canStroke && m()
+                    , f = o && m()
+                    , c = d.mainAreaSize;
+                re(t, a, n, c * .003, (r,i,u,w)=>{
+                        m(.99) && (f = o && m(),
+                            ye(),
+                            W(e)),
+                            S(e, r, i, c * .002 + (n - u) / n * c * .004, f)
+                    }
+                )
+            }
+            function ze(e) {
+                let t = 7e3;
+                A.current = C.current;
+                let a = b(11)
+                    , n = b(3) + 2
+                    , o = b(3) + 2
+                    , f = .43 + b(.03);
+                s(t, c=>{
+                        if (m(.3))
+                            return;
+                        let r = c / t * Math.PI * 4;
+                        if (h(r * n + a) + g(r * o - a) < 0)
+                            return;
+                        m(.99) && W(e);
+                        let i = d.size * f + r * d.size * .002;
+                        i *= E(r);
+                        let u = g(r) * i + innerWidth / 2
+                            , w = h(r) * i + innerHeight / 2
+                            , k = d.size * (5e-4 + b(5e-4));
+                        S(e, u, w, k, !0)
+                    }
+                )
+            }
+            function Ee(e) {
+                e.clear(C.b),
+                    e.clear(C.current[0] + "90"),
+                    s(255, ()=>{
+                            e.fill("#ffffff02"),
+                                S(e, b(innerWidth), b(innerHeight), b(d.size * .5), !1)
+                        }
+                    )
+            }
+        }
+    )();
+</script>
+</body>
+</html>

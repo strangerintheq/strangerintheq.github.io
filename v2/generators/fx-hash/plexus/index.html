@@ -1,0 +1,849 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plexus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <script id="fxhash-snippet">
+        let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+        var fxhash = 'oopWDMeU2jwUksfUee8yjfU8EqN3Sh4osBbdymLya5xTmiGhoVg'
+        let b58dec = (str) => str.split('').reduce((p,c,i) => p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length-i-1)), 0)
+        let fxhashTrunc = fxhash.slice(2)
+        let regex = new RegExp(".{" + ((fxhash.length/4)|0) + "}", 'g')
+        let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+        let sfc32 = (a, b, c, d) => {
+            return () => {
+                a |= 0; b |= 0; c |= 0; d |= 0
+                var t = (a + b | 0) + d | 0
+                d = d + 1 | 0
+                a = b ^ b >>> 9
+                b = c + (c << 3) | 0
+                c = c << 21 | c >>> 11
+                c = c + t | 0
+                return (t >>> 0) / 4294967296
+            }
+        }
+        var fxrand = sfc32(...hashes)
+    </script>
+</head>
+<body style='margin:0;overflow:hidden'>
+<script>(() => {
+    // lib/common/math.ts
+    var PI = Math.PI;
+    var TAU = 2 * PI;
+    var abs = (x) => Math.abs(x);
+    var sin = (x) => Math.sin(x);
+    var max = (x, y) => Math.max(x, y);
+    var min = (x, y) => Math.min(x, y);
+    var len = (...values) => Math.hypot(...values);
+    var lerp = (a, b, x) => a + (b - a) * x;
+
+    // lib/common/many.ts
+    function many(n2, fn) {
+        return [...Array(n2 | 0)].map((e, i2) => fn(i2));
+    }
+
+    // lib/canvas2d/createCanvas.ts
+    function createCanvas(w, h) {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        let s;
+        function resize(width, height) {
+            canvas.width = width || innerWidth;
+            canvas.height = height || innerHeight;
+            s = min(canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        resize(w, h);
+        return {
+            lineWidth(width) {
+                ctx.lineWidth = width * s;
+            },
+            append() {
+                document.body.append(canvas);
+            },
+            canvas,
+            ctx,
+            resize,
+            image(img) {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            },
+            clear(fill) {
+                if (!fill) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    return;
+                }
+                const tmp = ctx.fillStyle;
+                ctx.fillStyle = fill;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = tmp;
+            },
+            line([x, y], [x1, y1]) {
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x1, y1);
+                ctx.stroke();
+            },
+            fill(fill) {
+                ctx.fillStyle = fill;
+            },
+            stroke(stroke, lineWidth = 1) {
+                ctx.strokeStyle = stroke;
+                ctx.lineWidth = lineWidth;
+            },
+            circle(x, y, r) {
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, 2 * Math.PI);
+                ctx.stroke();
+            },
+            rect(x, y, s2) {
+                ctx.strokeRect(x - s2 / 2, y - s2 / 2, s2, s2);
+                ctx.stroke();
+            },
+            msaa3x3() {
+                let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                let aliasedData = ctx.createImageData(canvas.width, canvas.height);
+                function sample(x, y, channel) {
+                    return imgData.data[(y * canvas.width + x) * 4 + channel];
+                }
+                many(canvas.width, (x) => many(canvas.height, (y) => {
+                    let r = 0, g = 0, b = 0;
+                    many(3, (i2) => many(3, (j) => {
+                        r += sample(x + i2 - 1, y + j - 1, 0);
+                        g += sample(x + i2 - 1, y + j - 1, 1);
+                        b += sample(x + i2 - 1, y + j - 1, 2);
+                    }));
+                    let offset = (y * canvas.width + x) * 4;
+                    aliasedData.data[offset] = r / 9;
+                    aliasedData.data[offset + 1] = g / 9;
+                    aliasedData.data[offset + 2] = b / 9;
+                    aliasedData.data[offset + 3] = 255;
+                }));
+                ctx.putImageData(aliasedData, 0, 0);
+            }
+        };
+    }
+
+    // lib/common/prng.ts
+    var prng;
+    var random = () => window.fxrand ? window.fxrand() : Math.random();
+    function randomSeed() {
+        return Math.random() * 1e9 | 0;
+    }
+    var i = 2147483646;
+    var i1 = i + 1;
+    var PRNG = class {
+        constructor(seed2 = randomSeed()) {
+            this.state = seed2 % i1;
+            if (this.state <= 0)
+                this.state += i;
+        }
+        next() {
+            this.state = this.state * 16807 % i1;
+            return (this.state - 1) / i;
+        }
+    };
+    function setPrng(generator) {
+        random = (prng = generator) ? () => prng.next() : () => Math.random();
+    }
+    var rnd = (x = 1, s = 0) => random() * x + s;
+    var rndi = (x = 2, s = 0) => s + rnd(x) | 0;
+    var rndb = (x = 0.5) => rnd() > x;
+
+    // lib/common/debounce.ts
+    function debounce(func, wait, immediate) {
+        let timeout;
+        return function executedFunction() {
+            const context = this;
+            const args = arguments;
+            const later = function() {
+                timeout = null;
+                if (!immediate)
+                    func.apply(context, args);
+            };
+            const callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow)
+                func.apply(context, args);
+        };
+    }
+
+    // lib/common/colors/hex2rgb.ts
+    function hexToRgb(hex) {
+        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+            return r + r + g + g + b + b;
+        });
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        try {
+            return [
+                parseInt(result[1], 16),
+                parseInt(result[2], 16),
+                parseInt(result[3], 16)
+            ];
+        } catch (e) {
+            debugger;
+        }
+    }
+
+    // lib/common/colors/rgb2hsl.ts
+    function rgbToHsl(r, g, b) {
+        r /= 255, g /= 255, b /= 255;
+        var max2 = Math.max(r, g, b), min2 = Math.min(r, g, b);
+        var h, s, l = (max2 + min2) / 2;
+        if (max2 == min2) {
+            h = s = 0;
+        } else {
+            var d = max2 - min2;
+            s = l > 0.5 ? d / (2 - max2 - min2) : d / (max2 + min2);
+            switch (max2) {
+                case r:
+                    h = (g - b) / d + (g < b ? 6 : 0);
+                    break;
+                case g:
+                    h = (b - r) / d + 2;
+                    break;
+                case b:
+                    h = (r - g) / d + 4;
+                    break;
+            }
+            h /= 6;
+        }
+        return [h, s, l];
+    }
+
+    // lib/common/colors/palette.ts
+    var noRandom;
+    var Palette = class {
+        constructor(palettes, excluded = []) {
+            this.palettes = palettes;
+            this.excluded = excluded;
+            this.b = "black";
+            this.w = "white";
+            this.index = -1;
+        }
+        nextPalette() {
+            do {
+                this.index = noRandom ? this.index + 1 : rnd(this.palettes.length) | 0;
+            } while (this.excluded.indexOf(this.index) !== -1);
+            this.current = this.palettes[this.index];
+        }
+        nextColor() {
+            const p2 = this.current;
+            return p2[rnd(p2.length) | 0];
+        }
+        sort() {
+            this.current = this.current.sort((c1, c2) => {
+                return rgbToHsl(...hexToRgb(c1))[2] - rgbToHsl(...hexToRgb(c2))[2];
+            });
+        }
+    };
+
+    // node_modules/nice-color-palettes/100.json
+    var __default = '[["#69d2e7","#a7dbd8","#e0e4cc","#f38630","#fa6900"],["#fe4365","#fc9d9a","#f9cdad","#c8c8a9","#83af9b"],["#ecd078","#d95b43","#c02942","#542437","#53777a"],["#556270","#4ecdc4","#c7f464","#ff6b6b","#c44d58"],["#774f38","#e08e79","#f1d4af","#ece5ce","#c5e0dc"],["#e8ddcb","#cdb380","#036564","#033649","#031634"],["#490a3d","#bd1550","#e97f02","#f8ca00","#8a9b0f"],["#594f4f","#547980","#45ada8","#9de0ad","#e5fcc2"],["#00a0b0","#6a4a3c","#cc333f","#eb6841","#edc951"],["#e94e77","#d68189","#c6a49a","#c6e5d9","#f4ead5"],["#3fb8af","#7fc7af","#dad8a7","#ff9e9d","#ff3d7f"],["#d9ceb2","#948c75","#d5ded9","#7a6a53","#99b2b7"],["#ffffff","#cbe86b","#f2e9e1","#1c140d","#cbe86b"],["#efffcd","#dce9be","#555152","#2e2633","#99173c"],["#343838","#005f6b","#008c9e","#00b4cc","#00dffc"],["#413e4a","#73626e","#b38184","#f0b49e","#f7e4be"],["#ff4e50","#fc913a","#f9d423","#ede574","#e1f5c4"],["#99b898","#fecea8","#ff847c","#e84a5f","#2a363b"],["#655643","#80bca3","#f6f7bd","#e6ac27","#bf4d28"],["#00a8c6","#40c0cb","#f9f2e7","#aee239","#8fbe00"],["#351330","#424254","#64908a","#e8caa4","#cc2a41"],["#554236","#f77825","#d3ce3d","#f1efa5","#60b99a"],["#5d4157","#838689","#a8caba","#cad7b2","#ebe3aa"],["#8c2318","#5e8c6a","#88a65e","#bfb35a","#f2c45a"],["#fad089","#ff9c5b","#f5634a","#ed303c","#3b8183"],["#ff4242","#f4fad2","#d4ee5e","#e1edb9","#f0f2eb"],["#f8b195","#f67280","#c06c84","#6c5b7b","#355c7d"],["#d1e751","#ffffff","#000000","#4dbce9","#26ade4"],["#1b676b","#519548","#88c425","#bef202","#eafde6"],["#5e412f","#fcebb6","#78c0a8","#f07818","#f0a830"],["#bcbdac","#cfbe27","#f27435","#f02475","#3b2d38"],["#452632","#91204d","#e4844a","#e8bf56","#e2f7ce"],["#eee6ab","#c5bc8e","#696758","#45484b","#36393b"],["#f0d8a8","#3d1c00","#86b8b1","#f2d694","#fa2a00"],["#2a044a","#0b2e59","#0d6759","#7ab317","#a0c55f"],["#f04155","#ff823a","#f2f26f","#fff7bd","#95cfb7"],["#b9d7d9","#668284","#2a2829","#493736","#7b3b3b"],["#bbbb88","#ccc68d","#eedd99","#eec290","#eeaa88"],["#b3cc57","#ecf081","#ffbe40","#ef746f","#ab3e5b"],["#a3a948","#edb92e","#f85931","#ce1836","#009989"],["#300030","#480048","#601848","#c04848","#f07241"],["#67917a","#170409","#b8af03","#ccbf82","#e33258"],["#aab3ab","#c4cbb7","#ebefc9","#eee0b7","#e8caaf"],["#e8d5b7","#0e2430","#fc3a51","#f5b349","#e8d5b9"],["#ab526b","#bca297","#c5ceae","#f0e2a4","#f4ebc3"],["#607848","#789048","#c0d860","#f0f0d8","#604848"],["#b6d8c0","#c8d9bf","#dadabd","#ecdbbc","#fedcba"],["#a8e6ce","#dcedc2","#ffd3b5","#ffaaa6","#ff8c94"],["#3e4147","#fffedf","#dfba69","#5a2e2e","#2a2c31"],["#fc354c","#29221f","#13747d","#0abfbc","#fcf7c5"],["#cc0c39","#e6781e","#c8cf02","#f8fcc1","#1693a7"],["#1c2130","#028f76","#b3e099","#ffeaad","#d14334"],["#a7c5bd","#e5ddcb","#eb7b59","#cf4647","#524656"],["#dad6ca","#1bb0ce","#4f8699","#6a5e72","#563444"],["#5c323e","#a82743","#e15e32","#c0d23e","#e5f04c"],["#edebe6","#d6e1c7","#94c7b6","#403b33","#d3643b"],["#fdf1cc","#c6d6b8","#987f69","#e3ad40","#fcd036"],["#230f2b","#f21d41","#ebebbc","#bce3c5","#82b3ae"],["#b9d3b0","#81bda4","#b28774","#f88f79","#f6aa93"],["#3a111c","#574951","#83988e","#bcdea5","#e6f9bc"],["#5e3929","#cd8c52","#b7d1a3","#dee8be","#fcf7d3"],["#1c0113","#6b0103","#a30006","#c21a01","#f03c02"],["#000000","#9f111b","#b11623","#292c37","#cccccc"],["#382f32","#ffeaf2","#fcd9e5","#fbc5d8","#f1396d"],["#e3dfba","#c8d6bf","#93ccc6","#6cbdb5","#1a1f1e"],["#f6f6f6","#e8e8e8","#333333","#990100","#b90504"],["#1b325f","#9cc4e4","#e9f2f9","#3a89c9","#f26c4f"],["#a1dbb2","#fee5ad","#faca66","#f7a541","#f45d4c"],["#c1b398","#605951","#fbeec2","#61a6ab","#accec0"],["#5e9fa3","#dcd1b4","#fab87f","#f87e7b","#b05574"],["#951f2b","#f5f4d7","#e0dfb1","#a5a36c","#535233"],["#8dccad","#988864","#fea6a2","#f9d6ac","#ffe9af"],["#2d2d29","#215a6d","#3ca2a2","#92c7a3","#dfece6"],["#413d3d","#040004","#c8ff00","#fa023c","#4b000f"],["#eff3cd","#b2d5ba","#61ada0","#248f8d","#605063"],["#ffefd3","#fffee4","#d0ecea","#9fd6d2","#8b7a5e"],["#cfffdd","#b4dec1","#5c5863","#a85163","#ff1f4c"],["#9dc9ac","#fffec7","#f56218","#ff9d2e","#919167"],["#4e395d","#827085","#8ebe94","#ccfc8e","#dc5b3e"],["#a8a7a7","#cc527a","#e8175d","#474747","#363636"],["#f8edd1","#d88a8a","#474843","#9d9d93","#c5cfc6"],["#046d8b","#309292","#2fb8ac","#93a42a","#ecbe13"],["#f38a8a","#55443d","#a0cab5","#cde9ca","#f1edd0"],["#a70267","#f10c49","#fb6b41","#f6d86b","#339194"],["#ff003c","#ff8a00","#fabe28","#88c100","#00c176"],["#ffedbf","#f7803c","#f54828","#2e0d23","#f8e4c1"],["#4e4d4a","#353432","#94ba65","#2790b0","#2b4e72"],["#0ca5b0","#4e3f30","#fefeeb","#f8f4e4","#a5b3aa"],["#4d3b3b","#de6262","#ffb88c","#ffd0b3","#f5e0d3"],["#fffbb7","#a6f6af","#66b6ab","#5b7c8d","#4f2958"],["#edf6ee","#d1c089","#b3204d","#412e28","#151101"],["#9d7e79","#ccac95","#9a947c","#748b83","#5b756c"],["#fcfef5","#e9ffe1","#cdcfb7","#d6e6c3","#fafbe3"],["#9cddc8","#bfd8ad","#ddd9ab","#f7af63","#633d2e"],["#30261c","#403831","#36544f","#1f5f61","#0b8185"],["#aaff00","#ffaa00","#ff00aa","#aa00ff","#00aaff"],["#d1313d","#e5625c","#f9bf76","#8eb2c5","#615375"],["#ffe181","#eee9e5","#fad3b2","#ffba7f","#ff9c97"],["#73c8a9","#dee1b6","#e1b866","#bd5532","#373b44"],["#805841","#dcf7f3","#fffcdd","#ffd8d8","#f5a2a2"]]';
+
+    // lib/common/colors/palettes100.ts
+    var palettes100 = JSON.parse(__default);
+
+    // node_modules/three/examples/jsm/math/SimplexNoise.js
+    var SimplexNoise = class {
+        constructor(r = Math) {
+            this.grad3 = [
+                [1, 1, 0],
+                [-1, 1, 0],
+                [1, -1, 0],
+                [-1, -1, 0],
+                [1, 0, 1],
+                [-1, 0, 1],
+                [1, 0, -1],
+                [-1, 0, -1],
+                [0, 1, 1],
+                [0, -1, 1],
+                [0, 1, -1],
+                [0, -1, -1]
+            ];
+            this.grad4 = [
+                [0, 1, 1, 1],
+                [0, 1, 1, -1],
+                [0, 1, -1, 1],
+                [0, 1, -1, -1],
+                [0, -1, 1, 1],
+                [0, -1, 1, -1],
+                [0, -1, -1, 1],
+                [0, -1, -1, -1],
+                [1, 0, 1, 1],
+                [1, 0, 1, -1],
+                [1, 0, -1, 1],
+                [1, 0, -1, -1],
+                [-1, 0, 1, 1],
+                [-1, 0, 1, -1],
+                [-1, 0, -1, 1],
+                [-1, 0, -1, -1],
+                [1, 1, 0, 1],
+                [1, 1, 0, -1],
+                [1, -1, 0, 1],
+                [1, -1, 0, -1],
+                [-1, 1, 0, 1],
+                [-1, 1, 0, -1],
+                [-1, -1, 0, 1],
+                [-1, -1, 0, -1],
+                [1, 1, 1, 0],
+                [1, 1, -1, 0],
+                [1, -1, 1, 0],
+                [1, -1, -1, 0],
+                [-1, 1, 1, 0],
+                [-1, 1, -1, 0],
+                [-1, -1, 1, 0],
+                [-1, -1, -1, 0]
+            ];
+            this.p = [];
+            for (let i2 = 0; i2 < 256; i2++) {
+                this.p[i2] = Math.floor(r.random() * 256);
+            }
+            this.perm = [];
+            for (let i2 = 0; i2 < 512; i2++) {
+                this.perm[i2] = this.p[i2 & 255];
+            }
+            this.simplex = [
+                [0, 1, 2, 3],
+                [0, 1, 3, 2],
+                [0, 0, 0, 0],
+                [0, 2, 3, 1],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [1, 2, 3, 0],
+                [0, 2, 1, 3],
+                [0, 0, 0, 0],
+                [0, 3, 1, 2],
+                [0, 3, 2, 1],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [1, 3, 2, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [1, 2, 0, 3],
+                [0, 0, 0, 0],
+                [1, 3, 0, 2],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [2, 3, 0, 1],
+                [2, 3, 1, 0],
+                [1, 0, 2, 3],
+                [1, 0, 3, 2],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [2, 0, 3, 1],
+                [0, 0, 0, 0],
+                [2, 1, 3, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [2, 0, 1, 3],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [3, 0, 1, 2],
+                [3, 0, 2, 1],
+                [0, 0, 0, 0],
+                [3, 1, 2, 0],
+                [2, 1, 0, 3],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [3, 1, 0, 2],
+                [0, 0, 0, 0],
+                [3, 2, 0, 1],
+                [3, 2, 1, 0]
+            ];
+        }
+        dot(g, x, y) {
+            return g[0] * x + g[1] * y;
+        }
+        dot3(g, x, y, z) {
+            return g[0] * x + g[1] * y + g[2] * z;
+        }
+        dot4(g, x, y, z, w) {
+            return g[0] * x + g[1] * y + g[2] * z + g[3] * w;
+        }
+        noise(xin, yin) {
+            let n0;
+            let n1;
+            let n2;
+            const F2 = 0.5 * (Math.sqrt(3) - 1);
+            const s = (xin + yin) * F2;
+            const i2 = Math.floor(xin + s);
+            const j = Math.floor(yin + s);
+            const G2 = (3 - Math.sqrt(3)) / 6;
+            const t = (i2 + j) * G2;
+            const X0 = i2 - t;
+            const Y0 = j - t;
+            const x0 = xin - X0;
+            const y0 = yin - Y0;
+            let i12;
+            let j1;
+            if (x0 > y0) {
+                i12 = 1;
+                j1 = 0;
+            } else {
+                i12 = 0;
+                j1 = 1;
+            }
+            const x1 = x0 - i12 + G2;
+            const y1 = y0 - j1 + G2;
+            const x2 = x0 - 1 + 2 * G2;
+            const y2 = y0 - 1 + 2 * G2;
+            const ii = i2 & 255;
+            const jj = j & 255;
+            const gi0 = this.perm[ii + this.perm[jj]] % 12;
+            const gi1 = this.perm[ii + i12 + this.perm[jj + j1]] % 12;
+            const gi2 = this.perm[ii + 1 + this.perm[jj + 1]] % 12;
+            let t0 = 0.5 - x0 * x0 - y0 * y0;
+            if (t0 < 0)
+                n0 = 0;
+            else {
+                t0 *= t0;
+                n0 = t0 * t0 * this.dot(this.grad3[gi0], x0, y0);
+            }
+            let t1 = 0.5 - x1 * x1 - y1 * y1;
+            if (t1 < 0)
+                n1 = 0;
+            else {
+                t1 *= t1;
+                n1 = t1 * t1 * this.dot(this.grad3[gi1], x1, y1);
+            }
+            let t2 = 0.5 - x2 * x2 - y2 * y2;
+            if (t2 < 0)
+                n2 = 0;
+            else {
+                t2 *= t2;
+                n2 = t2 * t2 * this.dot(this.grad3[gi2], x2, y2);
+            }
+            return 70 * (n0 + n1 + n2);
+        }
+        noise3d(xin, yin, zin) {
+            let n0;
+            let n1;
+            let n2;
+            let n3;
+            const F3 = 1 / 3;
+            const s = (xin + yin + zin) * F3;
+            const i2 = Math.floor(xin + s);
+            const j = Math.floor(yin + s);
+            const k = Math.floor(zin + s);
+            const G3 = 1 / 6;
+            const t = (i2 + j + k) * G3;
+            const X0 = i2 - t;
+            const Y0 = j - t;
+            const Z0 = k - t;
+            const x0 = xin - X0;
+            const y0 = yin - Y0;
+            const z0 = zin - Z0;
+            let i12;
+            let j1;
+            let k12;
+            let i22;
+            let j2;
+            let k22;
+            if (x0 >= y0) {
+                if (y0 >= z0) {
+                    i12 = 1;
+                    j1 = 0;
+                    k12 = 0;
+                    i22 = 1;
+                    j2 = 1;
+                    k22 = 0;
+                } else if (x0 >= z0) {
+                    i12 = 1;
+                    j1 = 0;
+                    k12 = 0;
+                    i22 = 1;
+                    j2 = 0;
+                    k22 = 1;
+                } else {
+                    i12 = 0;
+                    j1 = 0;
+                    k12 = 1;
+                    i22 = 1;
+                    j2 = 0;
+                    k22 = 1;
+                }
+            } else {
+                if (y0 < z0) {
+                    i12 = 0;
+                    j1 = 0;
+                    k12 = 1;
+                    i22 = 0;
+                    j2 = 1;
+                    k22 = 1;
+                } else if (x0 < z0) {
+                    i12 = 0;
+                    j1 = 1;
+                    k12 = 0;
+                    i22 = 0;
+                    j2 = 1;
+                    k22 = 1;
+                } else {
+                    i12 = 0;
+                    j1 = 1;
+                    k12 = 0;
+                    i22 = 1;
+                    j2 = 1;
+                    k22 = 0;
+                }
+            }
+            const x1 = x0 - i12 + G3;
+            const y1 = y0 - j1 + G3;
+            const z1 = z0 - k12 + G3;
+            const x2 = x0 - i22 + 2 * G3;
+            const y2 = y0 - j2 + 2 * G3;
+            const z2 = z0 - k22 + 2 * G3;
+            const x3 = x0 - 1 + 3 * G3;
+            const y3 = y0 - 1 + 3 * G3;
+            const z3 = z0 - 1 + 3 * G3;
+            const ii = i2 & 255;
+            const jj = j & 255;
+            const kk = k & 255;
+            const gi0 = this.perm[ii + this.perm[jj + this.perm[kk]]] % 12;
+            const gi1 = this.perm[ii + i12 + this.perm[jj + j1 + this.perm[kk + k12]]] % 12;
+            const gi2 = this.perm[ii + i22 + this.perm[jj + j2 + this.perm[kk + k22]]] % 12;
+            const gi3 = this.perm[ii + 1 + this.perm[jj + 1 + this.perm[kk + 1]]] % 12;
+            let t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0;
+            if (t0 < 0)
+                n0 = 0;
+            else {
+                t0 *= t0;
+                n0 = t0 * t0 * this.dot3(this.grad3[gi0], x0, y0, z0);
+            }
+            let t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1;
+            if (t1 < 0)
+                n1 = 0;
+            else {
+                t1 *= t1;
+                n1 = t1 * t1 * this.dot3(this.grad3[gi1], x1, y1, z1);
+            }
+            let t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2;
+            if (t2 < 0)
+                n2 = 0;
+            else {
+                t2 *= t2;
+                n2 = t2 * t2 * this.dot3(this.grad3[gi2], x2, y2, z2);
+            }
+            let t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3;
+            if (t3 < 0)
+                n3 = 0;
+            else {
+                t3 *= t3;
+                n3 = t3 * t3 * this.dot3(this.grad3[gi3], x3, y3, z3);
+            }
+            return 32 * (n0 + n1 + n2 + n3);
+        }
+        noise4d(x, y, z, w) {
+            const grad4 = this.grad4;
+            const simplex = this.simplex;
+            const perm = this.perm;
+            const F4 = (Math.sqrt(5) - 1) / 4;
+            const G4 = (5 - Math.sqrt(5)) / 20;
+            let n0;
+            let n1;
+            let n2;
+            let n3;
+            let n4;
+            const s = (x + y + z + w) * F4;
+            const i2 = Math.floor(x + s);
+            const j = Math.floor(y + s);
+            const k = Math.floor(z + s);
+            const l = Math.floor(w + s);
+            const t = (i2 + j + k + l) * G4;
+            const X0 = i2 - t;
+            const Y0 = j - t;
+            const Z0 = k - t;
+            const W0 = l - t;
+            const x0 = x - X0;
+            const y0 = y - Y0;
+            const z0 = z - Z0;
+            const w0 = w - W0;
+            const c1 = x0 > y0 ? 32 : 0;
+            const c2 = x0 > z0 ? 16 : 0;
+            const c3 = y0 > z0 ? 8 : 0;
+            const c4 = x0 > w0 ? 4 : 0;
+            const c5 = y0 > w0 ? 2 : 0;
+            const c6 = z0 > w0 ? 1 : 0;
+            const c7 = c1 + c2 + c3 + c4 + c5 + c6;
+            const i12 = simplex[c7][0] >= 3 ? 1 : 0;
+            const j1 = simplex[c7][1] >= 3 ? 1 : 0;
+            const k12 = simplex[c7][2] >= 3 ? 1 : 0;
+            const l1 = simplex[c7][3] >= 3 ? 1 : 0;
+            const i22 = simplex[c7][0] >= 2 ? 1 : 0;
+            const j2 = simplex[c7][1] >= 2 ? 1 : 0;
+            const k22 = simplex[c7][2] >= 2 ? 1 : 0;
+            const l2 = simplex[c7][3] >= 2 ? 1 : 0;
+            const i3 = simplex[c7][0] >= 1 ? 1 : 0;
+            const j3 = simplex[c7][1] >= 1 ? 1 : 0;
+            const k3 = simplex[c7][2] >= 1 ? 1 : 0;
+            const l3 = simplex[c7][3] >= 1 ? 1 : 0;
+            const x1 = x0 - i12 + G4;
+            const y1 = y0 - j1 + G4;
+            const z1 = z0 - k12 + G4;
+            const w1 = w0 - l1 + G4;
+            const x2 = x0 - i22 + 2 * G4;
+            const y2 = y0 - j2 + 2 * G4;
+            const z2 = z0 - k22 + 2 * G4;
+            const w2 = w0 - l2 + 2 * G4;
+            const x3 = x0 - i3 + 3 * G4;
+            const y3 = y0 - j3 + 3 * G4;
+            const z3 = z0 - k3 + 3 * G4;
+            const w3 = w0 - l3 + 3 * G4;
+            const x4 = x0 - 1 + 4 * G4;
+            const y4 = y0 - 1 + 4 * G4;
+            const z4 = z0 - 1 + 4 * G4;
+            const w4 = w0 - 1 + 4 * G4;
+            const ii = i2 & 255;
+            const jj = j & 255;
+            const kk = k & 255;
+            const ll = l & 255;
+            const gi0 = perm[ii + perm[jj + perm[kk + perm[ll]]]] % 32;
+            const gi1 = perm[ii + i12 + perm[jj + j1 + perm[kk + k12 + perm[ll + l1]]]] % 32;
+            const gi2 = perm[ii + i22 + perm[jj + j2 + perm[kk + k22 + perm[ll + l2]]]] % 32;
+            const gi3 = perm[ii + i3 + perm[jj + j3 + perm[kk + k3 + perm[ll + l3]]]] % 32;
+            const gi4 = perm[ii + 1 + perm[jj + 1 + perm[kk + 1 + perm[ll + 1]]]] % 32;
+            let t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0 - w0 * w0;
+            if (t0 < 0)
+                n0 = 0;
+            else {
+                t0 *= t0;
+                n0 = t0 * t0 * this.dot4(grad4[gi0], x0, y0, z0, w0);
+            }
+            let t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1 - w1 * w1;
+            if (t1 < 0)
+                n1 = 0;
+            else {
+                t1 *= t1;
+                n1 = t1 * t1 * this.dot4(grad4[gi1], x1, y1, z1, w1);
+            }
+            let t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2 - w2 * w2;
+            if (t2 < 0)
+                n2 = 0;
+            else {
+                t2 *= t2;
+                n2 = t2 * t2 * this.dot4(grad4[gi2], x2, y2, z2, w2);
+            }
+            let t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3 - w3 * w3;
+            if (t3 < 0)
+                n3 = 0;
+            else {
+                t3 *= t3;
+                n3 = t3 * t3 * this.dot4(grad4[gi3], x3, y3, z3, w3);
+            }
+            let t4 = 0.6 - x4 * x4 - y4 * y4 - z4 * z4 - w4 * w4;
+            if (t4 < 0)
+                n4 = 0;
+            else {
+                t4 *= t4;
+                n4 = t4 * t4 * this.dot4(grad4[gi4], x4, y4, z4, w4);
+            }
+            return 27 * (n0 + n1 + n2 + n3 + n4);
+        }
+    };
+
+    // projects/canvas2d/tissue/shapes.ts
+    var k1 = rnd();
+    var k2 = rnd();
+    var shapesFn = {
+        "Circle": circleFunction,
+        "Rhombus": rhombusFunction,
+        "Line": rndb() ? lineFunction2 : lineFunction1
+    };
+    function circleFunction(x, y, cx, cy, r1, r2) {
+        const number = len(cx - x, cy - y);
+        return number < r2 && number > r1;
+    }
+    function rhombusFunction(x, y, cx, cy, r1, r2) {
+        const number = abs(cx - x) + abs(cy - y);
+        return number < r2 && number > r1;
+    }
+    function lineFunction1(x, y, cx, cy, r1, r2) {
+        const number = abs((cx - x) * k2 + (cy - y) * k1);
+        return number < r2 && number > r1;
+    }
+    function lineFunction2(x, y, cx, cy, r1, r2) {
+        const number = abs((cx - x) * k2 + (cy - y) * k1);
+        return number < r2 && number > r1;
+    }
+
+    // lib/common/colors/rgb2hex.ts
+    function rgb2hex(r, g, b) {
+        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+
+    // lib/common/colors/lerpHexColorViaRgb.ts
+    function lerpHexColorViaRgb(a, b, x) {
+        a = hexToRgb(a);
+        b = hexToRgb(b);
+        return rgb2hex(lerp(a[0], b[0], x) | 0, lerp(a[1], b[1], x) | 0, lerp(a[2], b[2], x) | 0);
+    }
+
+    // projects/canvas2d/tissue/index.ts
+    var f = window.fxrand;
+    var seed = (f ? f() : Math.random()) * 1e7;
+    setPrng(new PRNG(seed));
+    var nz = new SimplexNoise({ random: rnd });
+    var p = new Palette(palettes100, []);
+    var c = createCanvas();
+    c.append();
+    var shapesTypes = Object.keys(shapesFn);
+    var baseCount = 50;
+    var spreadCount = 70;
+    var params = {
+        startingState: rndb(),
+        noiseScale: rnd(50) + 50,
+        noiseEdge: rnd(0.5, 0.1),
+        n: baseCount + rndi(spreadCount),
+        staticLineWidth: rnd(0.4) + 0.4,
+        lineMaxWidth: rnd(0.4) + 0.4,
+        shape: shapesTypes[rndi(shapesTypes.length)],
+        frameSize: rnd(0.1) + 0.35,
+        shapesCount: rndi(6),
+        frameType: false,
+        invertColor: rndb(0.8)
+    };
+    var n = params.n;
+    addEventListener("resize", debounce(redraw, 100, false));
+    redraw();
+    function redraw() {
+        setPrng(new PRNG(seed));
+        p.nextPalette();
+        p.sort();
+        let strings = ["Very Low", "Low", "Medium", "High", "Very High"];
+        window["$fxhashFeatures"] = {
+            "Shapes": params.shapesCount ? params.shape : "None",
+            "Palette": p.index,
+            "Invert Colors": params.invertColor,
+            "Count": strings[(params.n - baseCount) / spreadCount * strings.length | 0]
+        };
+        c.resize();
+        c.clear("black");
+        drawBg();
+    }
+    function drawBg() {
+        let w = innerWidth;
+        let h = innerHeight;
+        let cx = w / 2;
+        let cy = h / 2;
+        let size = min(w, h);
+        let cellSize = size / n;
+        let startX = cx - size / 2;
+        let startY = cy - size / 2;
+        let k = cellSize * params.lineMaxWidth / 2;
+        let verticalPossibleColors = [p.current[0], p.current[1], p.current[2]];
+        let horizontalPossibleColors = [p.current[3], p.current[4]];
+        let gray1 = randomGray(128, 128);
+        let gray2 = randomGray(0, 128);
+        let vertical = many(n, () => ({
+            size: cellSize * params.staticLineWidth || rnd(k) + k,
+            color1: pick(verticalPossibleColors),
+            color2: pick(verticalPossibleColors),
+            color0: gray1
+        }));
+        let horizontal = many(n, () => ({
+            size: cellSize * params.staticLineWidth || rnd(k) + k,
+            color1: pick(horizontalPossibleColors),
+            color2: pick(horizontalPossibleColors),
+            color0: gray2
+        }));
+        let shapes = many(rndi(5), () => ({
+            cx: rnd(n),
+            cy: rnd(n),
+            r: rnd(n / 5) + n / 10,
+            s: rnd(n / 5),
+            random: rndb(0.7)
+        }));
+        let drawHorizontal = (x, y, shadow) => {
+            const lineData = horizontal[y];
+            if (shadow) {
+                c.fill("#000");
+                c.ctx.fillRect(-cellSize / 2, -lineData.size / 2 * 0.8, cellSize, lineData.size);
+            }
+            c.fill(getColor(lineData, x, y));
+            c.ctx.fillRect(-cellSize / 2 - 1, -lineData.size / 2, cellSize + 2, lineData.size);
+        };
+        let drawVertical = (x, y, shadow) => {
+            const lineData = vertical[x];
+            if (shadow) {
+                c.fill("#000");
+                c.ctx.fillRect(-lineData.size / 2 * 0.8, -cellSize / 2, lineData.size, cellSize);
+            }
+            c.fill(getColor(lineData, y, x));
+            c.ctx.fillRect(-lineData.size / 2, -cellSize / 2 - 1, lineData.size, cellSize + 2);
+        };
+        let ns1 = rnd(100);
+        let ns2 = rnd(100);
+        let ns3 = rnd(100);
+        let ns4 = rnd(100);
+        many(n, (x) => many(n, (y) => cell(x, y)));
+        function cell(x, y) {
+            c.ctx.save();
+            c.ctx.translate(startX + cellSize * x + cellSize / 2, startY + cellSize * y + cellSize / 2);
+            let type = params.startingState;
+            type = noise(x + ns1, y + ns2, 1) ? rndb(0.98) ? rndb() : !type : type;
+            type = noise(x + ns3, y + ns4, 2) ? rndb(0.98) ? rndb() : !type : type;
+            shapes.forEach((c2) => {
+                type = shapesFn[params.shape](x, y, c2.cx, c2.cy, c2.r, c2.r + c2.s) ? c2.random ? rndb() : type : rndb(0.98) ? rndb() : !type;
+            });
+            type && drawHorizontal(x, y, false);
+            drawVertical(x, y, type);
+            !type && drawHorizontal(x, y, !type);
+            c.ctx.restore();
+        }
+    }
+    function getColor(lineData, x, y) {
+        x = x / params.n;
+        y = y / params.n;
+        let mainColor = lerpHexColorViaRgb(lineData.color1, lineData.color2, x);
+        let secondaryColor = lineData.color0;
+        if (params.invertColor) {
+            secondaryColor = mainColor;
+            mainColor = lineData.color0;
+        }
+        const absx = abs(x - 0.5);
+        const absy = abs(y - 0.5);
+        const edge = params.frameSize;
+        if (absx > edge || absy > edge) {
+            x = max(absy, absx) - edge;
+            x /= 0.5 - edge;
+            return lerpHexColorViaRgb(mainColor, secondaryColor, params.frameType ? x : 1 - x);
+        }
+        return mainColor;
+    }
+    function pick(fromArray) {
+        return fromArray[rndi(fromArray.length)];
+    }
+    function noise(x, y, octave) {
+        const ns = params.noiseScale * octave;
+        return sin(3 * nz.noise(x / ns, y / ns)) > rnd(params.noiseEdge);
+    }
+    function randomGray(shift, spread) {
+        let c2 = rndi(spread, shift).toString(16);
+        return "#" + c2 + c2 + c2;
+    }
+})();
+</script>
+</body>
+</html>
+    

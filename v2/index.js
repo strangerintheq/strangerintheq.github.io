@@ -3673,7 +3673,7 @@
     const [html, setHtml] = (0, import_react.useState)();
     const [code, setCode] = (0, import_react.useState)();
     (0, import_react.useEffect)(() => {
-      let url = sitePath + "/v2/generators/" + id + "/index.html";
+      let url = sitePath + "/v2/generators/" + type + "/" + id + "/index.html";
       fetchCode(url).then(setCode);
     }, [id]);
     (0, import_react.useEffect)(() => {
@@ -3750,36 +3750,15 @@
   var import_react4 = __toESM(require_react());
   function ProjectItem({
     name,
-    type = "fxhash",
+    type,
     hash = null,
-    about = null,
     img,
-    generator,
     c = null,
     r = null,
-    id = null,
-    stopGif = false
+    id = null
   }) {
-    const to = "/generator/" + type + "/" + generator + "/" + (hash || makeHash(type));
-    return /* @__PURE__ */ import_react4.default.createElement("div", { style: { gridColumn: c, gridRow: r } }, /* @__PURE__ */ import_react4.default.createElement(Link, { to }, stopGif ? /* @__PURE__ */ import_react4.default.createElement(CanvasWithStoppedGif, { img }) : /* @__PURE__ */ import_react4.default.createElement(DivWithBackgroundImage, { img })));
-  }
-  function CanvasWithStoppedGif({ img }) {
-    const ref = (0, import_react4.useRef)();
-    (0, import_react4.useEffect)(() => {
-      const canvas = ref.current;
-      const ctx = canvas.getContext("2d");
-      const background = new Image();
-      background.src = img;
-      background.onload = () => {
-        let s = Math.min(background.naturalWidth, background.naturalHeight);
-        canvas.width = s;
-        canvas.height = s;
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        ctx.drawImage(background, 0, 0);
-      };
-    }, []);
-    return /* @__PURE__ */ import_react4.default.createElement("canvas", { ref });
+    const to = "/generator/" + type + "/" + name.toLowerCase().replaceAll(" ", "-") + "/" + (hash || makeHash(type));
+    return /* @__PURE__ */ import_react4.default.createElement("div", { style: { gridColumn: c, gridRow: r } }, /* @__PURE__ */ import_react4.default.createElement(Link, { to }, /* @__PURE__ */ import_react4.default.createElement(DivWithBackgroundImage, { img })));
   }
   function DivWithBackgroundImage({ img }) {
     const backgroundImage = `url(${img.startsWith("http") ? img : sitePath + img})`;
@@ -3828,59 +3807,46 @@
     const staging = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/";
     const slice = {
       type: "artblocks",
-      name: "SL/CE",
-      generator: "slice"
+      name: "Slice"
     };
-    return /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react6.default.createElement("span", null, "SL/CE @ ArtBlocks 2023"), /* @__PURE__ */ import_react6.default.createElement("a", { style: { float: "right" }, href: sitePath + "/slice" }, "ABOUT")), /* @__PURE__ */ import_react6.default.createElement(
-      ProjectsGrid,
+    return /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react6.default.createElement("span", null, "SL/CE @ ArtBlocks 2023"), /* @__PURE__ */ import_react6.default.createElement("a", { style: { float: "right" }, href: sitePath + "/slice" }, "ABOUT")), /* @__PURE__ */ import_react6.default.createElement(ProjectsGrid, { isMobile, rows: isMobile ? 4 : 2, ratio: 1.618 }, /* @__PURE__ */ import_react6.default.createElement(
+      ProjectItem,
       {
-        isMobile,
-        rows: isMobile ? 4 : 2,
-        ratio: 1.618
-      },
-      /* @__PURE__ */ import_react6.default.createElement(
-        ProjectItem,
-        {
-          ...slice,
-          c: isMobile ? "1/3" : "2/4",
-          r: "1/3",
-          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-          img: mainNet + "419000000.png"
-        }
-      ),
-      /* @__PURE__ */ import_react6.default.createElement(
-        ProjectItem,
-        {
-          ...slice,
-          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-          img: staging + "48000189.png"
-        }
-      ),
-      /* @__PURE__ */ import_react6.default.createElement(
-        ProjectItem,
-        {
-          ...slice,
-          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-          img: staging + "48000161.png"
-        }
-      ),
-      /* @__PURE__ */ import_react6.default.createElement(
-        ProjectItem,
-        {
-          ...slice,
-          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-          img: staging + "48000015.png"
-        }
-      ),
-      /* @__PURE__ */ import_react6.default.createElement(
-        ProjectItem,
-        {
-          ...slice,
-          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-          img: staging + "48000055.png"
-        }
-      )
-    ));
+        ...slice,
+        c: isMobile ? "1/3" : "2/4",
+        r: "1/3",
+        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+        img: mainNet + "419000000.png"
+      }
+    ), /* @__PURE__ */ import_react6.default.createElement(
+      ProjectItem,
+      {
+        ...slice,
+        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+        img: staging + "48000189.png"
+      }
+    ), /* @__PURE__ */ import_react6.default.createElement(
+      ProjectItem,
+      {
+        ...slice,
+        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+        img: staging + "48000161.png"
+      }
+    ), /* @__PURE__ */ import_react6.default.createElement(
+      ProjectItem,
+      {
+        ...slice,
+        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+        img: staging + "48000015.png"
+      }
+    ), /* @__PURE__ */ import_react6.default.createElement(
+      ProjectItem,
+      {
+        ...slice,
+        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+        img: staging + "48000055.png"
+      }
+    )));
   }
 
   // parts/pages/projects/TenturaSection.tsx
@@ -3890,323 +3856,276 @@
     const img = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://artblocks-mainnet.s3.amazonaws.com/";
     const tentura = {
       type: "artblocks",
-      name: "Tentura",
-      generator: "tentura"
+      name: "Tentura"
     };
-    return /* @__PURE__ */ import_react7.default.createElement(import_react7.default.Fragment, null, /* @__PURE__ */ import_react7.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react7.default.createElement("span", null, "Tentura @ ArtBlocks 2022"), /* @__PURE__ */ import_react7.default.createElement("a", { style: { float: "right" }, href: sitePath + "/tentura" }, "ABOUT")), /* @__PURE__ */ import_react7.default.createElement(
-      ProjectsGrid,
+    return /* @__PURE__ */ import_react7.default.createElement(import_react7.default.Fragment, null, /* @__PURE__ */ import_react7.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react7.default.createElement("span", null, "Tentura @ ArtBlocks 2022"), /* @__PURE__ */ import_react7.default.createElement("a", { style: { float: "right" }, href: sitePath + "/tentura" }, "ABOUT")), /* @__PURE__ */ import_react7.default.createElement(ProjectsGrid, { ratio: 1, isMobile, rows: isMobile ? 4 : 2 }, /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
       {
-        ratio: 1,
-        isMobile,
-        rows: isMobile ? 4 : 2
-      },
-      /* @__PURE__ */ import_react7.default.createElement(
-        ProjectItem,
-        {
-          ...tentura,
-          c: isMobile ? "1/3" : "2/4",
-          r: "1/3",
-          id: "265000000",
-          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-          img: img + "265000000.png"
-        }
-      ),
-      /* @__PURE__ */ import_react7.default.createElement(
-        ProjectItem,
-        {
-          ...tentura,
-          id: "265000031",
-          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-          img: img + "265000031.png"
-        }
-      ),
-      /* @__PURE__ */ import_react7.default.createElement(
-        ProjectItem,
-        {
-          ...tentura,
-          id: "265000197",
-          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-          img: img + "265000197.png"
-        }
-      ),
-      /* @__PURE__ */ import_react7.default.createElement(
-        ProjectItem,
-        {
-          ...tentura,
-          id: "265000212",
-          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-          img: img + "265000212.png"
-        }
-      ),
-      /* @__PURE__ */ import_react7.default.createElement(
-        ProjectItem,
-        {
-          ...tentura,
-          id: "265000269",
-          hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
-          img: img + "265000269.png"
-        }
-      )
-    ));
+        ...tentura,
+        c: isMobile ? "1/3" : "2/4",
+        r: "1/3",
+        id: "265000000",
+        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+        img: img + "265000000.png"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        ...tentura,
+        id: "265000031",
+        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+        img: img + "265000031.png"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        ...tentura,
+        id: "265000197",
+        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+        img: img + "265000197.png"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        ...tentura,
+        id: "265000212",
+        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+        img: img + "265000212.png"
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      ProjectItem,
+      {
+        ...tentura,
+        id: "265000269",
+        hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
+        img: img + "265000269.png"
+      }
+    )));
   }
 
   // parts/pages/projects/FxHashSection.tsx
   var import_react8 = __toESM(require_react());
   function FxHashSection({ isMobile }) {
-    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react8.default.createElement("span", null, "fx(hash) 2022-2023")), /* @__PURE__ */ import_react8.default.createElement(
-      ProjectsGrid,
+    let img = "https://media.fxhash.xyz/w_768/";
+    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react8.default.createElement("span", null, "fx(hash) 2022-2023")), /* @__PURE__ */ import_react8.default.createElement(ProjectsGrid, { isMobile, ratio: 1, rows: isMobile ? 8 : 4 }, /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
       {
-        isMobile,
-        ratio: 1,
-        rows: isMobile ? 8 : 4
-      },
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          hash: "ookiXAnGJw28AAv6JVLXiyZceTF9nJSRAxgytsUDV9Gu3na4zeN",
-          name: "Magic Ritual",
-          img: "https://media.fxhash.xyz/w_768/QmbABZquDop8bhVWb49HcU7t4vFgHU1s9ZFomPxeznmr4J",
-          generator: "magic-ritual"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          hash: "oo2WuxbvWm77MLimMCfrt54zXRHhe8HcFqPVPfGxF53Be85Rnhe",
-          name: "Mayan Carpet",
-          img: "https://gateway.fxhash.xyz/ipfs/QmScLVUE7HzUvSWy1hTVsqA2WCU6icED9BQbgVDHt4xJV2",
-          about: "/mayan-carpet",
-          generator: "mayan-carpet"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          hash: "oo274c4kMq5xbm7CpvJ6rDHatuuZwhEACfgaQ4BXy9XX4eTu4q7",
-          name: "Other side of the Amulet",
-          img: "https://media.fxhash.xyz/w_768/QmWs8VMiyr5FTSSfjvf1g3bprS8JNxM8wzAbXFRvVnR3aG",
-          about: "/slice",
-          generator: "other-side-of-the-amulet"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Hyperspacers",
-          img: "https://media.fxhash.xyz/w_768/QmP67iCt3gayuZGVLafGSYfXUgkJ35hbyiDxgNsGN6LZNQ",
-          generator: "hpsp"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Amulet",
-          img: "https://media.fxhash.xyz/w_768/QmNrMUYWUWMWjMyN6focKCBKMMqGcFofhvxMHBGNmUxYG6",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Let it snow",
-          img: "https://media.fxhash.xyz/w_768/QmeawuQK778D1zkaiha7wDDoav9btPaNA5SkkrXYuhDPyZ",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Mitosis",
-          img: "https://media.fxhash.xyz/w_768/QmeNYkvW72PY1FA14E3NP2fnHfuNvpQQhowFgJ7cZbGuXf",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Cellulae",
-          img: "https://media.fxhash.xyz/w_768/QmTP2YDBnWNohuAD5mtvDsEMdPa6Edf4Tf8rCS5MyhKAzX",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Arachna",
-          img: "https://media.fxhash.xyz/w_768/QmXzaZC1CfSQBm9f7CoBjsBAM153HNYermqY8CPoSdkSYB",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Gravitzappa",
-          img: "https://media.fxhash.xyz/w_768/Qmd2NxZiw3kxWowXcu3ZBfCT633UVfstYDV3zJSaLAmcJn",
-          generator: "grvc"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Plexus",
-          img: "https://media.fxhash.xyz/w_768/QmY81Ege4BLhYetp4JTH1Z7KMZmvKmy5vZmtjsSyr2YsH2",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Foldoscope",
-          img: "https://media.fxhash.xyz/w_768/QmfEU8T3WvbockzU9rR6hV3uDziqTnu5G8r7t6befJLZM3",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Squatree",
-          img: "https://media.fxhash.xyz/w_768/QmbBzpLyJAitVDn8hkv6JAF6kZRkk46Eba3UKfNXrTWGc8",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Subdivisual",
-          img: "https://media.fxhash.xyz/w_768/QmPboz6imodN7YnaUvMnS2XPGCAeGD9CAVHLXtoXu8uZWX",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Hidden Square",
-          img: "https://media.fxhash.xyz/w_768/QmQ8TYQ8qb29BxTp8kASocMirfuGf5nMXpArEohpG9tzuX",
-          generator: "hdsq"
-        }
-      ),
-      /* @__PURE__ */ import_react8.default.createElement(
-        ProjectItem,
-        {
-          name: "Generotique",
-          img: "https://media.fxhash.xyz/w_768/QmQiLxQxKNcJaH17kzj27KDMkYYardx1q4o7v3pTvNHJGP",
-          generator: "amlt"
-        }
-      )
-    ));
+        type: "fx-hash",
+        name: "Magic Ritual",
+        hash: "ookiXAnGJw28AAv6JVLXiyZceTF9nJSRAxgytsUDV9Gu3na4zeN",
+        img: img + "QmbABZquDop8bhVWb49HcU7t4vFgHU1s9ZFomPxeznmr4J"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Mayan Carpet",
+        hash: "oo2WuxbvWm77MLimMCfrt54zXRHhe8HcFqPVPfGxF53Be85Rnhe",
+        img: img + "QmScLVUE7HzUvSWy1hTVsqA2WCU6icED9BQbgVDHt4xJV2"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Other side of the Amulet",
+        hash: "oo274c4kMq5xbm7CpvJ6rDHatuuZwhEACfgaQ4BXy9XX4eTu4q7",
+        img: img + "QmWs8VMiyr5FTSSfjvf1g3bprS8JNxM8wzAbXFRvVnR3aG"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Hyperspacers",
+        hash: "ooXtaB52GRHraEgQEnT7k9oJzWYPbYbiycXFGmUqNa34bwV53ZX",
+        img: img + "QmP67iCt3gayuZGVLafGSYfXUgkJ35hbyiDxgNsGN6LZNQ"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Amulet",
+        hash: "ooognYT3x6SRXbUCKcu34Z7ffDJDrR1KmZE4G4NMo15fZ3pMyuf",
+        img: img + "QmNrMUYWUWMWjMyN6focKCBKMMqGcFofhvxMHBGNmUxYG6"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Let it snow",
+        hash: "ooe9gGh3qVwc1SD69uhN9YUfo2uGf2Rh91qrx1pVwQpPoPpMgvi",
+        img: img + "QmeawuQK778D1zkaiha7wDDoav9btPaNA5SkkrXYuhDPyZ"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Mitosis",
+        hash: "ooFeDgPwQRjiVXkupQn7wUBdbUjBQaAvFBPDpMN6iGqc5Wgv9N3",
+        img: img + "QmeNYkvW72PY1FA14E3NP2fnHfuNvpQQhowFgJ7cZbGuXf"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Cellulae",
+        hash: "oohTtY7QKgRpUDnvbrPdAgUgxgd7p1BpyKZK3BKZqfNmWGv5qrL",
+        img: img + "QmTP2YDBnWNohuAD5mtvDsEMdPa6Edf4Tf8rCS5MyhKAzX"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Arachna",
+        hash: "ooZxg5naW6KQxijqjDQfFLtGDSBgG2HsMGPtymKfq7PxgRvRdB6",
+        img: img + "QmXzaZC1CfSQBm9f7CoBjsBAM153HNYermqY8CPoSdkSYB"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Gravitzappa",
+        hash: "oo1WHxm95PJeziDbtPvqtZsEHyufnKZSiY8nJMMDCMxoTVEcLRk",
+        img: img + "Qmd2NxZiw3kxWowXcu3ZBfCT633UVfstYDV3zJSaLAmcJn"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Plexus",
+        hash: "oopWDMeU2jwUksfUee8yjfU8EqN3Sh4osBbdymLya5xTmiGhoVg",
+        img: img + "QmY81Ege4BLhYetp4JTH1Z7KMZmvKmy5vZmtjsSyr2YsH2"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Foldoscope",
+        hash: "oos6MYkmvWjTSXNtKoGSeBqnC3fyzEcnknUwAnaYFre6zFoTKuE",
+        img: img + "QmfEU8T3WvbockzU9rR6hV3uDziqTnu5G8r7t6befJLZM3"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Squatree",
+        hash: "oo1M8TxFJQ7T1vSHoUgMCA3zAxLHeNcjHQ45RoomKyCdc57ModH",
+        img: img + "QmbBzpLyJAitVDn8hkv6JAF6kZRkk46Eba3UKfNXrTWGc8"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Subdivisual",
+        hash: "ooqpqHpF9zEh7YDUFPeWYN3YWNsEb7cq1X756s8TJQq7T1iq7Mw",
+        img: img + "QmPboz6imodN7YnaUvMnS2XPGCAeGD9CAVHLXtoXu8uZWX"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Hidden Square",
+        hash: "ooJgyLKPdBbW1YbNk8cXbHpDdWV9886cJyx934pKwoNUru3RNKD",
+        img: img + "QmQ8TYQ8qb29BxTp8kASocMirfuGf5nMXpArEohpG9tzuX"
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement(
+      ProjectItem,
+      {
+        type: "fx-hash",
+        name: "Generotique",
+        hash: "ooTFacUMz6JeZMwdGWzf7XkuSYmdcv7QhbZXZhm5JGDt6JJbyh9",
+        img: img + "QmQiLxQxKNcJaH17kzj27KDMkYYardx1q4o7v3pTvNHJGP"
+      }
+    )));
   }
 
-  // parts/pages/projects/HicEtNuncSection.tsx
+  // parts/pages/projects/TeiaSection.tsx
   var import_react9 = __toESM(require_react());
-  function HicEtNuncSection({ isMobile }) {
-    return /* @__PURE__ */ import_react9.default.createElement(import_react9.default.Fragment, null, /* @__PURE__ */ import_react9.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react9.default.createElement("span", null, "teia.art (ex Hic Et Nunc) 2021")), /* @__PURE__ */ import_react9.default.createElement(
-      ProjectsGrid,
+  function TeiaSection({ isMobile }) {
+    return /* @__PURE__ */ import_react9.default.createElement(import_react9.default.Fragment, null, /* @__PURE__ */ import_react9.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react9.default.createElement("span", null, "teia.art (ex Hic Et Nunc) 2021")), /* @__PURE__ */ import_react9.default.createElement(ProjectsGrid, { isMobile, ratio: 1, rows: isMobile ? 6 : 3 }, /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
       {
-        isMobile,
-        ratio: 1,
-        rows: isMobile ? 6 : 3
-      },
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          name: "Needlework",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/520033/thumb288",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          name: "Warp Engine",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/490373/thumb288",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          name: "Re-Tiler",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/468682/thumb288",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          name: "Neural Interface",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/447479/thumb288",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          name: "Artificial eye",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/440706/thumb288",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          name: "The Nest",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/404417/thumb288",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          name: "Mozaic Perception",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/393547/thumb288",
-          generator: "mzpc"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          name: "Dancing Souls",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/384125/thumb288",
-          generator: "dncs"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          stopGif: true,
-          name: "Nucle",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/343072/thumb288",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          stopGif: true,
-          name: "Inner Sight",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/324272/thumb288",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          stopGif: true,
-          name: "Simplicity",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/279928/thumb288",
-          generator: "amlt"
-        }
-      ),
-      /* @__PURE__ */ import_react9.default.createElement(
-        ProjectItem,
-        {
-          stopGif: true,
-          name: "Steam Cells",
-          img: "https://assets.objkt.media/file/assets-003/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/274293/thumb288",
-          generator: "amlt"
-        }
-      )
-    ));
+        type: "teia",
+        name: "Needlework",
+        img: "/v2/generators/teia/needlework/preview.jpeg"
+      }
+    ), /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
+      {
+        type: "teia",
+        name: "Warp Engine",
+        img: "/v2/generators/teia/warp-engine/preview.jpeg"
+      }
+    ), /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
+      {
+        type: "teia",
+        name: "Re-Tiler",
+        img: "/v2/generators/teia/re-tiler/preview.jpeg"
+      }
+    ), /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
+      {
+        type: "teia",
+        name: "Neural Interface",
+        img: "/v2/generators/teia/neural-interface/preview.jpeg"
+      }
+    ), /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
+      {
+        type: "teia",
+        name: "Artificial eye",
+        img: "/v2/generators/teia/artificial-eye/preview.jpeg"
+      }
+    ), /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
+      {
+        type: "teia",
+        name: "The Nest",
+        img: "/v2/generators/teia/the-nest/preview.jpeg"
+      }
+    ), /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
+      {
+        type: "teia",
+        name: "Mozaic Perception",
+        img: "/v2/generators/teia/mozaic-perception/preview.jpeg"
+      }
+    ), /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
+      {
+        type: "teia",
+        name: "Dancing Souls",
+        img: "/v2/generators/teia/dancing-souls/preview.jpeg"
+      }
+    ), /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
+      {
+        type: "teia",
+        name: "Nucle",
+        img: "/v2/generators/teia/nucle/preview.png"
+      }
+    ), /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
+      {
+        type: "teia",
+        name: "Inner Sight",
+        img: "/v2/generators/teia/inner-sight/preview.png"
+      }
+    ), /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
+      {
+        type: "teia",
+        name: "Simplicity",
+        img: "/v2/generators/teia/simplicity/preview.png"
+      }
+    ), /* @__PURE__ */ import_react9.default.createElement(
+      ProjectItem,
+      {
+        type: "teia",
+        name: "Steam Cells",
+        img: "/v2/generators/teia/steam-cells/preview.png"
+      }
+    )));
   }
 
   // parts/components/Navigation.tsx
@@ -4218,7 +4137,7 @@
   // parts/pages/projects/ProjectsPage.tsx
   function ProjectsPage() {
     const { matches: isMobile } = useMediaQuery("(max-width: 980px)");
-    return /* @__PURE__ */ import_react11.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react11.default.createElement(Navigation, null), /* @__PURE__ */ import_react11.default.createElement(SliceSection, { isMobile }), /* @__PURE__ */ import_react11.default.createElement(TenturaSection, { isMobile }), /* @__PURE__ */ import_react11.default.createElement(FxHashSection, { isMobile }), /* @__PURE__ */ import_react11.default.createElement(HicEtNuncSection, { isMobile }));
+    return /* @__PURE__ */ import_react11.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react11.default.createElement(Navigation, null), /* @__PURE__ */ import_react11.default.createElement(SliceSection, { isMobile }), /* @__PURE__ */ import_react11.default.createElement(TenturaSection, { isMobile }), /* @__PURE__ */ import_react11.default.createElement(FxHashSection, { isMobile }), /* @__PURE__ */ import_react11.default.createElement(TeiaSection, { isMobile }));
   }
 
   // parts/pages/HomePage.tsx
@@ -4232,10 +4151,10 @@
     path: "/generator/:type/:id/:hash",
     element: /* @__PURE__ */ import_react13.default.createElement(GeneratorPage, null)
   }, {
-    path: "/projects",
+    path: "/*",
     element: /* @__PURE__ */ import_react13.default.createElement(ProjectsPage, null)
   }, {
-    path: "*",
+    path: "/1",
     exact: false,
     element: /* @__PURE__ */ import_react13.default.createElement(HomePage, null)
   }];

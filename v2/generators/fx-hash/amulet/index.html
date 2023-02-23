@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!-- saved from url=(0139)https://gateway.fxhash2.xyz/ipfs/QmR7rt1gzvWGTFYn6zsGgWErDJnNy5zPDc6qyoqHDJZ86j/?fxhash=ooognYT3x6SRXbUCKcu34Z7ffDJDrR1KmZE4G4NMo15fZ3pMyuf -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>Amulet</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script id="fxhash-snippet">
+      let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+      var fxhash = new URLSearchParams(window.location.search).get('fxhash')
+      let b58dec = str=>[...str].reduce((p,c)=>p*alphabet.length+alphabet.indexOf(c)|0, 0)
+      let fxhashTrunc = fxhash.slice(2)
+      let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')
+      let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+      let sfc32 = (a, b, c, d) => {
+        return () => {
+          a |= 0; b |= 0; c |= 0; d |= 0
+          var t = (a + b | 0) + d | 0
+          d = d + 1 | 0
+          a = b ^ b >>> 9
+          b = c + (c << 3) | 0
+          c = c << 21 | c >>> 11
+          c = c + t | 0
+          return (t >>> 0) / 4294967296
+        }
+      }
+      var fxrand = sfc32(...hashes)
+      // used to get features during token mint
+      window.addEventListener("message", (event) => {
+        if (event.data === "fxhash_getFeatures") {
+          parent.postMessage({
+            id: "fxhash_getFeatures",
+            data: window.$fxhashFeatures
+          }, "*")
+        }
+      })
+      var isFxpreview = new URLSearchParams(window.location.search).get('preview') === "1"
+      function fxpreview() {
+        window.dispatchEvent(new Event("fxhash-preview"))
+        setTimeout(() => fxpreview(), 500)
+      }
+</script>
+        <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+        <script>(() => {    
+    
+    const l = window.location;
+    const p = new URLSearchParams(l.search.substring(1));
+    const h = p.get('hash');
+    const hash = h || ('0x' + [...Array(64)].map(_ => ((fxrand() * 16)|0).toString(16)).join(''))
+    !h && p.append('hash', hash)  
+    console.log('\n', hash)
+    console.log('\n' + l.origin + l.pathname + "?" + p.toString() ) ;
+    window.tokenData = {hash}
+    try {
+        window.tokenData.debug = p.get('debug')
+    } catch (e){}
+     try {
+        window.tokenData.palette = JSON.parse(atob(p.get('palette')))
+    } catch (e){}
+})()</script>
+        <script>var L=Math.pow;var xe=Math,$=xe.PI,Be=$/2,W=2*$;var H=(e,r,n)=>parseInt(e.substr(r,n),16);var N=(e,r,n,i)=>(r=new Uint32Array([1,3,n=i=2,4].map(f=>H(e,f*8,8))),f=>(i=r[3],r[3]=r[2],r[2]=r[1],r[1]=n=r[0],i^=i<<11,r[0]^=i^i>>>8^n>>>19,r[0]/L(2,32)));var _e=N(tokenData.hash);var t=(e=1,r=0)=>_e()*e+r,v=(e=2,r=0)=>r+t(e|0)|0,o=(e=.5)=>t()>e,g=(e=1)=>t(e)-e/2;var T=e=>t($*2),M=e=>e[v(e.length)],y=(e,r)=>[...Array(e|0)].map((n,i)=>r(i));var E=e=>"vec3 PM(vec3 x){return mod(((x*34.)+1.)*x,289.);}F noise2d(vec2 v){vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);vec2 i1=(x0.x>x0.y)?vec2(1,0):vec2(0,1);vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod(i,289.);vec3 p=PM(PM(i.y+vec3(0,i1.y,1))+i.x+vec3(0,i1.x,1.0));vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);m=m*m*m*m;vec3 x=2.*fract(p*C.www)-1.;vec3 h=abs(x)-.5;vec3 ox=floor(x+.5);vec3 a0=x-ox;m*=1.79284291400159-.85373472095314*(a0*a0+h*h);vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.*dot(m,g);}";function x(e=1,r=e,n=-e/2,i=n){return`vec2(${t(e)+n},${t(r)+i})`}function R(){return"mat2 rot(F a){F s=sin(a),c=cos(a);return mat2(c,s,-s,c);}"}var d=t(.03,.3),I=t(.15,-.075),B=`vec2(0, ${I})`,$e=`length(oUV + ${B}) > ${d}`,Qe=`min(length(oUV + ${x(.5)}),length(oUV + ${x(.5)})) > ${d/2}`,ve=`sqrt(length((oUV + ${B})*(oUV + ${B}))) > ${d}`,ge=`abs(oUV.x) > ${d} || abs(oUV.y+${I}) > ${d}`,ye=`abs(oUV.y - ${t(.1,.1)}) < ${d/10}
+               || abs(oUV.y + ${t(.1,.1)}) < ${d/10} `,Ze=M([`abs(oUV.x) > ${d}`,`abs(oUV.y) > ${d}`]),et=`abs(oUV.x ${o()?"+":"-"} oUV.y) > ${d*1.7}`,tt=M([`oUV.y > ${d}`,`oUV.y < ${-d}`,`oUV.x > ${d}`,`oUV.x < ${-d}`]);function G(){return`sin(
+        ${t(W)} + ${t(3,2)}*atan(sabs(oUV.x), oUV.y+${I})
+    )`}var he=`length(oUV) - 
+    (${t(.02,.02)} + ${t(.02)}*(${G()}+${G()})) * ${G()}> 0.28 `,Te=`abs(oUV.x+${g(.2)}) < ${d/2} && abs(oUV.y+${g(.2)}) < ${d/4*3}`,X=[$e,Te,ye,ve,ge,he];function S(e){return`
+    if (noise2d(fract(UV)
+        // +vec2(0,${t(.1)})
+    ) < -${t()}) {
+        uv *= ${e};
+        id += floor(uv);
+        uv = fract(uv);
+    }
+
+    `}var O=`
+
+F grid(vec2 uv){
+
+    vec2 UV = uv;
+    uv *= ${3+t(3)};
+    vec2 id = floor(uv);
+    uv = fract(uv);
+ 
+    ${S(t(2,1))}
+    ${S(t(2,1))}
+    ${S(t(2,1))}
+ 
+    return abs(noise2d(id/${t(11)+11}+${t(111)})*5.);
+}
+
+`;var Y=o()?"op":"p",q=[`sin(${t(33,11)}*(length(${Y}-${x(0,.2)}) + noise2d(op)*0.1)) > ${t(.5,.5)}`,`length(${Y}) < 0.1`,`sin(${o()?"p.x":"p.y"}*${t(44,22)}) > 0.`];var j="fe4365fc9d9af9cdadc8c8a983af9becd078d95b43c0294254243753777a5562704ecdc4c7f464ff6b6bc44d58774f38e08e79f1d4afece5cec5e0dce8ddcbcdb38003656403364903163400a0b06a4a3ccc333feb6841edc951d9ceb2948c75d5ded97a6a5399b2b7413e4a73626eb38184f0b49ef7e4beff4e50fc913af9d423ede574e1f5c465564380bca3f6f7bde6ac27bf4d288c23185e8c6a88a65ebfb35af2c45afad089ff9c5bf5634aed303c3b8183f8b195f67280c06c846c5b7b355c7dd1e751ffffff0000004dbce926ade45e412ffcebb678c0a8f07818f0a830eee6abc5bc8e69675845484b36393bf0d8a83d1c0086b8b1f2d694fa2a00b9d7d96682842a28294937367b3b3be8d5b70e2430fc3a51f5b349e8d5b93e4147fffedfdfba695a2e2e2a2c31fc354c29221f13747d0abfbcfcf7c5cc0c39e6781ec8cf02f8fcc11693a7a7c5bde5ddcbeb7b59cf4647524656edebe6d6e1c794c7b6403b33d3643b230f2bf21d41ebebbcbce3c582b3ae0000009f111bb11623292c37ccccccf6f6f6e8e8e8333333990100b905041b325f9cc4e4e9f2f93a89c9f26c4fa1dbb2fee5adfaca66f7a541f45d4c5e9fa3dcd1b4fab87ff87e7bb05574951f2bf5f4d7e0dfb1a5a36c5352338dccad988864fea6a2f9d6acffe9afffefd3fffee4d0ecea9fd6d28b7a5ecfffddb4dec15c5863a85163ff1f4cf8edd1d88a8a4748439d9d93c5cfc6046d8b3092922fb8ac93a42aecbe13f38a8a55443da0cab5cde9caf1edd0a70267f10c49fb6b41f6d86b3391940ca5b04e3f30fefeebf8f4e4a5b3aa4d3b3bde6262ffb88cffd0b3f5e0d3edf6eed1c089b3204d412e28151101d1313de5625cf9bf768eb2c561537573c8a9dee1b6e1b866bd5532373b44",J=43;var m={palette:v(J),mask_shape:v(6),mask_cut:v(3),pattern:v(2),noise:o(.7),asymmetry:o(.2)?1e-5:t(.1,.05),shadowMode:o()};var Fe=`vec2(${t(.05,.15)},${t(.05,.15)})`,K=`
+
+   ${o(.1)?`p.y += ${g(.8)};`:""}
+  F r = ${o()?g($/6):"0.0"};
+  p = p*rot(r);
+  ${y(o()?4:2,()=>`
+    p=sabs(p*${t(2,2)})/dot(p,p)-${Fe};
+  `).join("")}
+  p = p*rot(-r);
+  
+`;var we=o(0),Ee=o(.9),Q=[`
+  ${o(.9)?`id += nz(p, ${t(99)});`:""}
+  
+  
+  ${o()?`id += nz(op, ${t(99)})*${m.asymmetry};`:`id *= ${m.asymmetry}*nz(op*${t(1,.5)}, ${t(100)});`}   
+  
+  
+  ${o(.8)?`id *= nz(p + ${t(111)}, 6.);`:""}  
+  // id *= ${t(2,.5)};
+  gr = fract(id);
+  id = floor(id);  
+  if (abs(gr - 0.5) > 0.4) {
+     float k = id < 1.0 ? -1.0 : 1.0;
+     id += k;
+  } 
+  id += grid(p*${t(1,2)} ${we?`*(0.7+0.3*noise2d(p+${t(111)}))`:""})*${t(2,1)};
+  ${Ee?"id += grid(op);":""}
+   `,o()?`id += p.x * ${t(5,5)} + fract(p.y  *${t(5,1)});`:`id += p.y * ${t(5,5)} + fract(p.x  *${t(5,1)});`];var Z=m.noise?`F z = abs(mod(id,5.));  
+if(z<1.15&&z>.85)id+=
+ nz(${t(99)} + op*0.1,   ${t(99)}) * 0.5
+*nz(${t(250,250)}*op, ${t(99)}) * 0.5;`:"";var ee=`
+#define sabs(p) sqrt((p)*(p)+0.0005)
+${R()}
+${E()}
+F nz(vec2 p, F k){return noise2d(p+k+${x(200)});}
+${O}
+vec3 getId(vec2 p) {
+  vec2 oUV = p;
+  vec2 op = p*${t(.5,1)};
+  F id, gr;
+  ${K}
+  ${Q[o(.03)?0:1]}
+  ${Z}
+  gr = fract(id);
+  F c = abs(oUV.x) > 0.33 || abs(oUV.y) > 0.45 ? 1.0 : 0.0;
+  if (mod(id, 2.5) > .5 && (${X[m.mask_shape]}))c=1.;
+  if (mod(id, 1.5) < .5 && ${q[m.mask_cut]})c=1.;
+  return vec3(fract(floor(id)/4.),c,gr);
+}
+void main(){vec2 uv=gl_FragCoord.xy/R-.5; uv.x*=R.x/R.y;gl_FragColor=vec4(getId(uv),1);}`;function Re(e){let r=parseInt(e.substring(1),16);return[r>>16,r>>8,r].map(n=>n&255)}function Ae(e){return e.map(r=>(r/255).toFixed(8))}function Ue(e){return`vec3( ${e[0]}, ${e[1]}, ${e[2]} )`}function te(e,r=5){let n=e.map(Re).map(Ae).map(Ue);return`
+vec3 getColor(float i) {
+    i = abs(mod(i, ${r}.));
+    if (i < 1.) return ${n[0]};
+    if (i < 2.) return ${n[1]};
+    if (i < 3.) return ${n[2]};
+    if (i < 4.) return ${n[3]};
+    return ${n[4]};
+}
+`}var re=y(5,e=>"#"+j.substr(m.palette*30+e*6,6));function A(e){return`
+F dir = ${t(2)+.5};
+vec2 shift = vec2(cos(dir),sin(dir))*(1.5+noise2d(p));
+
+${y(8,r=>`
+if (texture2D(idTexture, p+(0.009-${r}.*0.001)*shift).g == ${e}.)
+    col -= 0.07;
+`).join("")}
+
+    `}var oe=`
+
+F id1 = mod(id, 4.0);
+col = getColor(id1);
+
+F id2 = mod(gradient < 0.5 ? id - 1.0 : id + 1.0, 4.);
+col = mix(col, getColor(id2), gradient);
+col = mix(col, vec3(1), facture(p,1.,id)*noise2d(id+p));
+
+${m.shadowMode?"":A(1)}
+
+`;var ne=`
+
+col = mix(getColor(4.1), vec3(1), facture(p, ${T()}, id)*0.1);
+
+${m.shadowMode?A(0):""}
+
+`;function F(e=1,r=T()){return`vec2(cos(${r}),sin(${r}))*${t(e)}`}var ae=`F facture(vec2 p, F n, float id) {
+
+    p -= 0.5;
+    p = p*rot(${T()}+n+ id);
+    
+
+     
+    // if (mod(id, 2.) > 1.) {
+        n = noise2d(${F(111)} + atan(p.y,p.x)*p*200.*${t(2,2)});
+        n = noise2d(${F(111)} + p*20.*${t(2,2)} + atan(p.y,p.x)*${F()}*n);
+        n = noise2d(${F(111)} + p*${t(2,2)} + (atan(p.y,p.x))*${F()}*n);
+    // } else {
+        n *= sin(p.x*2000.)*0.5+0.5;
+        // if (sin(id*33.)>0.){
+        //     n*=sin(p.y*(${t(1e3)}+1000.))*0.5+0.5;
+        // }
+        // ${o(),""}
+    // }
+    return n;
+}`;var ie=`
+uniform sampler2D idTexture;
+${R()}
+${te(re)}
+${E()}
+${ae}
+vec3 img(vec2 p) {
+    vec3 d = texture2D(idTexture, p).rgb;
+    F id = d.r * 4.0;
+    F cutout = d.g;
+    F gradient = fract(d.b*2.0);
+    ${Ce()};
+    vec3 col;
+    if (cutout == 1.0) {
+        ${ne}
+    } else {
+        ${oe}
+    }
+    return col;
+}
+void main(){gl_FragColor=vec4(img(gl_FragCoord.xy/R),1);}`;function Ce(){let e=window.tokenData.debug;return e?`return vec3(${e})`:""}var Pe=(e=1,r=1,n=!0)=>{let i=document.createElement("canvas");n&&setTimeout(()=>document.body.append(i),10);let f=e<innerWidth/innerHeight,_=((f?innerHeight*e:innerWidth)|0)*r,h=((f?innerHeight:innerWidth/e)|0)*r,w=i.style;return w.width=f?`calc(100wh * ${e})`:"100vw",w.height=f?"100vh":`calc(100ww / ${e})`,i.width=_,i.height=h,{canvas:i,w:_,h}};var ce=(e=1,r=1,n=!0)=>{let{canvas:i,w:f,h:_}=Pe(e,r,n);return{gl:i.getContext("webgl"),canvas:i,w:f,h:_,ratio:e}};function se(e){function r(c,s,a,p){e.viewport(c,s,a,p)}function n(c){e.bindFramebuffer(e.FRAMEBUFFER,c)}function i(c,s=0){e.activeTexture(e.TEXTURE0+s),e.bindTexture(e.TEXTURE_2D,c)}function f(c,s){let a=e.createShader(s);e.shaderSource(a,c),e.compileShader(a);let p=e.getShaderInfoLog(a);if(p.length>0)throw console.log(c.split(`
+`).map((u,l)=>(""+(1+l)).padStart(4,"0")+": "+u).join(`
+`)),p;return a}function _(c,s){let a=e.createProgram();e.attachShader(a,f(c,e.VERTEX_SHADER)),e.attachShader(a,f(s,e.FRAGMENT_SHADER)),e.linkProgram(a);let p=()=>e.useProgram(a),u={};return{uniforms:u,use:p,uniform(l,b){let D=e.getUniformLocation(a,b);u[b]=z=>e["uniform"+l](D,z)},attribute(l){let b=e.getAttribLocation(a,l);e.vertexAttribPointer(b,2,e.FLOAT,!1,0,0),e.enableVertexAttribArray(b)},draw(l){e.drawArrays(e.TRIANGLES,0,l)}}}function h(c){let s=e.createBuffer();e.bindBuffer(e.ARRAY_BUFFER,s),e.bufferData(e.ARRAY_BUFFER,new Float32Array(c),e.STATIC_DRAW)}function w(c,s=c){let a=e.createTexture();e.bindTexture(e.TEXTURE_2D,a);{let p=0,u=e.RGBA,l=0,b=e.RGBA,D=e.UNSIGNED_BYTE,z=null;e.texImage2D(e.TEXTURE_2D,p,u,c,s,l,b,D,z),e.texParameteri(e.TEXTURE_2D,e.TEXTURE_MIN_FILTER,e.NEAREST),e.texParameteri(e.TEXTURE_2D,e.TEXTURE_MAG_FILTER,e.NEAREST),e.texParameteri(e.TEXTURE_2D,e.TEXTURE_WRAP_S,e.CLAMP_TO_EDGE),e.texParameteri(e.TEXTURE_2D,e.TEXTURE_WRAP_T,e.CLAMP_TO_EDGE)}return a}function le(c){let s=e.createFramebuffer();e.bindFramebuffer(e.FRAMEBUFFER,s);let a=e.COLOR_ATTACHMENT0,p=0;return e.framebufferTexture2D(e.FRAMEBUFFER,a,e.TEXTURE_2D,c,p),s}function be(c,s,a){a=`precision highp float;
+#define F float 
+const vec2 R=vec2(${[c,s]});${a}`;let u=_("attribute vec2 P;void main(){gl_Position=vec4(P,0,1);}",a);return u.attribute("P"),u}return{program:be,buffer:h,frameBuffer:le,framebufferTexture:w,bindFramebuffer:n,bindTexture:i,viewport:r}}var{gl:Ve,w:U,h:C}=ce(3/4,2),{buffer:ke,program:de,framebufferTexture:De,frameBuffer:ze,bindFramebuffer:me,bindTexture:fe,viewport:Le}=se(Ve);ke([-1,3,-1,-1,3,-1]);var P=de(U,C,ee);P.uniform("1f","time");var V=de(U,C,ie);V.uniform("1f","debug");var pe=De(U,C),Me=ze(pe);Le(0,0,U,C);function ue(e){P.use(),me(Me),fe(null),P.uniforms.time(e/1e3),P.draw(3),V.use(),me(null),fe(pe),V.draw(3)}ue(0);var k=0;addEventListener("click",()=>{k=k===3?0:k+1,V.uniforms.debug(k),ue(0)});</script>
+        
+    </head>
+    <body>
+</body></html>
