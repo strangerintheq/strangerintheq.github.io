@@ -8,8 +8,8 @@ let rotation1 = [rndAngle()];
 let rotation2 = [rndAngle()];
 let translate1 = [rndPos(), rndPos()];
 let translate2 = [rndPos(), rndPos()];
-let absX = [rndInt(2)];
-let absY = [rndInt(2)];
+let absX = [rndInt(0)];
+let absY = [rndInt(0)];
 let transitionValue = [0]
 let xy = [0.5, 0.5];
 
