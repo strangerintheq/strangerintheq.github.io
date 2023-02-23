@@ -1,3 +1,9 @@
+function setFavicon(svg) {
+    document.getElementById("favicon")
+        .setAttribute("href",
+            `data:image/svg+xml,${encodeURIComponent(svg)}`);
+}
+
 (function (){
     const rnd = (x=1) => Math.random()*x
 
@@ -36,14 +42,35 @@
         ></rect>`;
     }
 
-    const generativeFavicon = () => {
-        const svg = `<svg width="${s}" height="${s}" xmlns="http://www.w3.org/2000/svg">
+    const generativeFavicon2 = () => {
+        setFavicon(`<svg width="${s}" height="${s}" xmlns="http://www.w3.org/2000/svg">
             ${[...Array(cells ** 2)].map((_,i) => cell(i)).join("")}
-        </svg>`;
-        document.getElementById("favicon")
-            .setAttribute("href",
-                `data:image/svg+xml,${encodeURIComponent(svg)}`);
+        </svg>`)
     }
+
+    const generativeFavicon = () => {
+        const rnd = x => Math.random() * x;
+        let s = 1000;
+        let cells = 3 + rnd(2) | 0;
+        let red = rnd(cells ** 2) | 0
+        let cs = s / cells;
+        setFavicon(`
+                <svg width="${s}" height="${s}" xmlns="http://www.w3.org/2000/svg">
+                    ${[...Array(cells ** 2)].map((_, i) => {
+            let row = i % cells;
+            let col = (i / cells) | 0;
+            let fill = i === red ? "#e32b2b" : rnd(1) > 0.3 ? "#000" : "#fff0";
+            return `<rect
+                            transform="translate(${[row * cs, col * cs]})rotate(${i === red ? 0 : 0})"
+                            fill="${fill}"
+                            width="${cs}"
+                            height="${cs}"
+                        ></rect>`;
+        }).join("")}
+                </svg>
+            `);
+    }
+
     generativeFavicon();
     // setInterval(generativeFavicon, 1000);
 })();
