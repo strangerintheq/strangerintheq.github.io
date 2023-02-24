@@ -1,24 +1,34 @@
 (function () {
-    const size = 1e3;
 
     const rnd = (x = 1) => Math.random() * x;
+
     const many = (n, fn = i => i) => [...Array(n|0)].map((_, i) => fn(i));
-    const asNodeParams = o => Object.entries(o).map(([key, value]) => ` ${key}="${value}" `).join("\n");
-    const node = (name, attrs, body= "") => `<${name}\n${asNodeParams(attrs)}\n>${body}</${name}>`;
-    const rect = (attrs) => node("rect", attrs);
+
+    const asNodeParams = o => Object.entries(o)
+        .map(([key, value]) => ` ${key}="${value}" `).join("\n");
+
+    const node = (name, attrs, body= "") =>
+        `<${name}\n${asNodeParams(attrs)}\n>${body}</${name}>`;
+
+    const rect = (attrs) => node("rect", {...attrs, width: 1, height: 1});
+
     const mapToUv = (i, cellCount, cellFn) => {
         let x = i % cellCount, y = (i / cellCount) | 0;
         let u = x / cellCount - 0.5, v = y / cellCount - 0.5;
         return cellFn(x, y, u, v);
     };
+
     const svg = (cellCount, cellFn) => node("svg", {
-        width: size, height: size, xmlns: "http://www.w3.org/2000/svg"
+        width: cellCount, height: cellCount, xmlns: "http://www.w3.org/2000/svg"
     }, many(cellCount**2, i => mapToUv(i, cellCount, cellFn)).join("\n"));
+
+    const svgFavicon = svg => document.head.innerHTML +=
+        `<link rel="icon" href="data:image/svg+xml,${encodeURIComponent(svg)}">`;
 
     function generativeFavicon2() {
 
         const cells = 50;
-        const cs = size / cells;
+
         let x1 = rnd(0.5)
         let y1 = rnd(0.5)
         let x2 = rnd(0.5)
@@ -41,39 +51,33 @@
             ) * sc;
             return rect({
                 fill: palette[d % 3 | 0],
-                width: cs,
-                height:cs,
-                transform: `translate(${[x * cs, y * cs]})`
+                transform: `translate(${[x, y]})`
             })
         }
 
         svgFavicon(svg(cells, cell))
     }
 
-    function generativeFavicon() {
-        const rnd = x => Math.random() * x;
-        const cells = 3 + rnd(3) | 0;
+    function generativeFavicon(darkTheme) {
+        const cells = 4;
         const red = rnd(cells ** 2) | 0
-        const cs = size / cells;
-        svgFavicon(svg(cells, (x,y,u,v) => {
-            let fill = y*cells+x === red ? "#e32b2b" : rnd(1) > 0.3 ? "#000" : "#fff0"
-            return rect({
-                fill,
-                width: cs,
-                height: cs,
-                transform: `translate(${[x * cs, y * cs]})`
-            })
-        }))
+        svgFavicon(svg(4, (x,y,u,v) => rect({
+            fill: y*cells+x === red ? "#e32b2b" : rnd(1) > 0.3 ? (darkTheme? "#fff":"#000") : "#fff0",
+            transform: `translate(${[x, y]})`
+        })))
     }
 
-    generativeFavicon();
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+    generativeFavicon(mediaQuery.matches);
+
+
+    mediaQuery.addEventListener('change', ({matches: darkTheme}) => {
+        generativeFavicon(darkTheme);
+    })
 
     // setInterval(generativeFavicon, 1000);
 
 
-    function svgFavicon(svg) {
-        document.head.innerHTML += `
-            <link rel="icon" href="data:image/svg+xml,${encodeURIComponent(svg)}">
-        `;
-    }
+
 })();
