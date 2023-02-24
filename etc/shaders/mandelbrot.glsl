@@ -1,4 +1,4 @@
-#pragma import old/shaders/lib/2triangles.vertex.glsl
+#pragma import etc/shaders/lib/2triangles.vertex.glsl
 
 precision highp float;
 
