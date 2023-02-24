@@ -3780,11 +3780,11 @@
   function ProjectItem({
     name,
     type,
-    hash = null,
     img,
+    hash = null,
     c = null,
     r = null,
-    id = null
+    link = null
   }) {
     const to = "/generator/" + type + "/" + name.toLowerCase().replaceAll(" ", "-") + "/" + (hash || makeHash(type));
     return /* @__PURE__ */ import_react4.default.createElement("div", { style: { gridColumn: c, gridRow: r } }, /* @__PURE__ */ import_react4.default.createElement(Link, { to }, /* @__PURE__ */ import_react4.default.createElement(DivWithBackgroundImage, { img })));
@@ -3834,6 +3834,7 @@
     const imgSize = 640;
     const mainNet = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://artblocks-mainnet.s3.amazonaws.com/";
     const staging = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://art-blocks-artist-staging-goerli.s3.amazonaws.com/";
+    const link = "https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419/tokens/";
     const slice = {
       type: "artblocks",
       name: "Slice"
@@ -3844,6 +3845,7 @@
         ...slice,
         c: isMobile ? "1/3" : "2/4",
         r: "1/3",
+        link: link + "419000000",
         hash: "0x61464f239e4a9706c864eaf3d8ccc966fe3ec89089752d803ee51adbea37e82c",
         img: mainNet + "419000000.png"
       }
@@ -3851,6 +3853,7 @@
       ProjectItem,
       {
         ...slice,
+        link: link + "419000000",
         hash: "0x7905f21577209c5fccc82170001218c7281e1991f6c42f7717adb819e2846805",
         img: staging + "48000189.png"
       }
@@ -3858,6 +3861,7 @@
       ProjectItem,
       {
         ...slice,
+        link: link + "419000000",
         hash: "0x0c8313ca762c7c8aa3b4c078435fd0a84aa17fb0872cc152103b8ff6f22f71a3",
         img: staging + "48000161.png"
       }
@@ -3865,6 +3869,7 @@
       ProjectItem,
       {
         ...slice,
+        link: link + "419000000",
         hash: "0xecfcfa98860f8fb143d54065186118cc2f429316982597494dc8cffd7f4e4283",
         img: staging + "48000015.png"
       }
@@ -3872,6 +3877,7 @@
       ProjectItem,
       {
         ...slice,
+        link: link + "419000000",
         hash: "0xfb031983bdfc22fb8e1c8956d6feb654dfef92b5a7f5de4b08e39681b0f68cd3",
         img: staging + "48000055.png"
       }
@@ -3883,6 +3889,7 @@
   function TenturaSection({ isMobile }) {
     const imgSize = 640;
     const img = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://artblocks-mainnet.s3.amazonaws.com/";
+    const link = "https://www.artblocks.io/collections/presents/projects/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/265/tokens/";
     const tentura = {
       type: "artblocks",
       name: "Tentura"
@@ -3893,7 +3900,7 @@
         ...tentura,
         c: isMobile ? "1/3" : "2/4",
         r: "1/3",
-        id: "265000000",
+        link: link + "265000000",
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: img + "265000000.png"
       }
@@ -3901,7 +3908,7 @@
       ProjectItem,
       {
         ...tentura,
-        id: "265000031",
+        link: link + "265000031",
         hash: "0x8cf4266960518b81ae27bd417c0b68e4141a2d531dfc44460708e00b98dfb7f4",
         img: img + "265000031.png"
       }
@@ -3909,7 +3916,7 @@
       ProjectItem,
       {
         ...tentura,
-        id: "265000197",
+        link: link + "265000197",
         hash: "0xe359ebb5e9a5cc2f24b964fc2f33b4e3635b56c08cc77d4cc0290f28ef1656da",
         img: img + "265000197.png"
       }
@@ -3917,7 +3924,7 @@
       ProjectItem,
       {
         ...tentura,
-        id: "265000212",
+        link: link + "265000212",
         hash: "0xa23afc7294ee196ec119d6a55820b507c227821d4608899f8f1a7ddc06b7af4e",
         img: img + "265000212.png"
       }
@@ -3925,7 +3932,7 @@
       ProjectItem,
       {
         ...tentura,
-        id: "265000269",
+        link: link + "265000269",
         hash: "0xa7ececac02b48d8f78121349382d77a6134f5d0a6d6f8e7df7afca27d6369a52",
         img: img + "265000269.png"
       }
@@ -3935,12 +3942,14 @@
   // parts/pages/projects/FxHashSection.tsx
   var import_react8 = __toESM(require_react());
   function FxHashSection({ isMobile }) {
+    let link = "https://www.fxhash.xyz/generative/";
     let img = "https://media.fxhash.xyz/w_768/";
     return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react8.default.createElement("span", null, "fx(hash) 2022-2023")), /* @__PURE__ */ import_react8.default.createElement(ProjectsGrid, { isMobile, ratio: 1, rows: isMobile ? 8 : 4 }, /* @__PURE__ */ import_react8.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
         name: "Magic Ritual",
+        link: link + "24704",
         hash: "ookiXAnGJw28AAv6JVLXiyZceTF9nJSRAxgytsUDV9Gu3na4zeN",
         img: img + "QmbABZquDop8bhVWb49HcU7t4vFgHU1s9ZFomPxeznmr4J"
       }
@@ -3949,6 +3958,7 @@
       {
         type: "fx-hash",
         name: "Mayan Carpet",
+        link: link + "24611",
         hash: "oo2WuxbvWm77MLimMCfrt54zXRHhe8HcFqPVPfGxF53Be85Rnhe",
         img: img + "QmScLVUE7HzUvSWy1hTVsqA2WCU6icED9BQbgVDHt4xJV2"
       }
@@ -3957,6 +3967,7 @@
       {
         type: "fx-hash",
         name: "Other side of the Amulet",
+        link: link + "15301",
         hash: "oo274c4kMq5xbm7CpvJ6rDHatuuZwhEACfgaQ4BXy9XX4eTu4q7",
         img: img + "QmWs8VMiyr5FTSSfjvf1g3bprS8JNxM8wzAbXFRvVnR3aG"
       }
@@ -3965,6 +3976,7 @@
       {
         type: "fx-hash",
         name: "Hyperspacers",
+        link: link + "14107",
         hash: "ooXtaB52GRHraEgQEnT7k9oJzWYPbYbiycXFGmUqNa34bwV53ZX",
         img: img + "QmP67iCt3gayuZGVLafGSYfXUgkJ35hbyiDxgNsGN6LZNQ"
       }
@@ -3973,6 +3985,7 @@
       {
         type: "fx-hash",
         name: "Amulet",
+        link: link + "13115",
         hash: "ooognYT3x6SRXbUCKcu34Z7ffDJDrR1KmZE4G4NMo15fZ3pMyuf",
         img: img + "QmNrMUYWUWMWjMyN6focKCBKMMqGcFofhvxMHBGNmUxYG6"
       }
@@ -3981,6 +3994,7 @@
       {
         type: "fx-hash",
         name: "Let it snow",
+        link: link + "5484",
         hash: "ooe9gGh3qVwc1SD69uhN9YUfo2uGf2Rh91qrx1pVwQpPoPpMgvi",
         img: img + "QmeawuQK778D1zkaiha7wDDoav9btPaNA5SkkrXYuhDPyZ"
       }
@@ -3989,6 +4003,7 @@
       {
         type: "fx-hash",
         name: "Mitosis",
+        link: link + "4058",
         hash: "ooFeDgPwQRjiVXkupQn7wUBdbUjBQaAvFBPDpMN6iGqc5Wgv9N3",
         img: img + "QmeNYkvW72PY1FA14E3NP2fnHfuNvpQQhowFgJ7cZbGuXf"
       }
@@ -3997,6 +4012,7 @@
       {
         type: "fx-hash",
         name: "Cellulae",
+        link: link + "1393",
         hash: "oohTtY7QKgRpUDnvbrPdAgUgxgd7p1BpyKZK3BKZqfNmWGv5qrL",
         img: img + "QmTP2YDBnWNohuAD5mtvDsEMdPa6Edf4Tf8rCS5MyhKAzX"
       }
@@ -4005,6 +4021,7 @@
       {
         type: "fx-hash",
         name: "Arachna",
+        link: link + "959",
         hash: "ooZxg5naW6KQxijqjDQfFLtGDSBgG2HsMGPtymKfq7PxgRvRdB6",
         img: img + "QmXzaZC1CfSQBm9f7CoBjsBAM153HNYermqY8CPoSdkSYB"
       }
@@ -4013,6 +4030,7 @@
       {
         type: "fx-hash",
         name: "Gravitzappa",
+        link: link + "430",
         hash: "oo1WHxm95PJeziDbtPvqtZsEHyufnKZSiY8nJMMDCMxoTVEcLRk",
         img: img + "Qmd2NxZiw3kxWowXcu3ZBfCT633UVfstYDV3zJSaLAmcJn"
       }
@@ -4021,6 +4039,7 @@
       {
         type: "fx-hash",
         name: "Plexus",
+        link: link + "206",
         hash: "oopWDMeU2jwUksfUee8yjfU8EqN3Sh4osBbdymLya5xTmiGhoVg",
         img: img + "QmY81Ege4BLhYetp4JTH1Z7KMZmvKmy5vZmtjsSyr2YsH2"
       }
@@ -4029,6 +4048,7 @@
       {
         type: "fx-hash",
         name: "Foldoscope",
+        link: link + "120",
         hash: "oos6MYkmvWjTSXNtKoGSeBqnC3fyzEcnknUwAnaYFre6zFoTKuE",
         img: img + "QmfEU8T3WvbockzU9rR6hV3uDziqTnu5G8r7t6befJLZM3"
       }
@@ -4037,6 +4057,7 @@
       {
         type: "fx-hash",
         name: "Squatree",
+        link: link + "45",
         hash: "oo1M8TxFJQ7T1vSHoUgMCA3zAxLHeNcjHQ45RoomKyCdc57ModH",
         img: img + "QmbBzpLyJAitVDn8hkv6JAF6kZRkk46Eba3UKfNXrTWGc8"
       }
@@ -4045,6 +4066,7 @@
       {
         type: "fx-hash",
         name: "Subdivisual",
+        link: link + "23",
         hash: "ooqpqHpF9zEh7YDUFPeWYN3YWNsEb7cq1X756s8TJQq7T1iq7Mw",
         img: img + "QmPboz6imodN7YnaUvMnS2XPGCAeGD9CAVHLXtoXu8uZWX"
       }
@@ -4053,6 +4075,7 @@
       {
         type: "fx-hash",
         name: "Hidden Square",
+        link: link + "19",
         hash: "ooJgyLKPdBbW1YbNk8cXbHpDdWV9886cJyx934pKwoNUru3RNKD",
         img: img + "QmQ8TYQ8qb29BxTp8kASocMirfuGf5nMXpArEohpG9tzuX"
       }
@@ -4061,6 +4084,7 @@
       {
         type: "fx-hash",
         name: "Generotique",
+        link: link + "11",
         hash: "ooTFacUMz6JeZMwdGWzf7XkuSYmdcv7QhbZXZhm5JGDt6JJbyh9",
         img: img + "QmQiLxQxKNcJaH17kzj27KDMkYYardx1q4o7v3pTvNHJGP"
       }
@@ -4070,11 +4094,13 @@
   // parts/pages/projects/TeiaSection.tsx
   var import_react9 = __toESM(require_react());
   function TeiaSection({ isMobile }) {
+    const link = "https://objkt.com/asset/hicetnunc/";
     return /* @__PURE__ */ import_react9.default.createElement(import_react9.default.Fragment, null, /* @__PURE__ */ import_react9.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react9.default.createElement("span", null, "teia.art (ex Hic Et Nunc) 2021")), /* @__PURE__ */ import_react9.default.createElement(ProjectsGrid, { isMobile, ratio: 1, rows: isMobile ? 6 : 3 }, /* @__PURE__ */ import_react9.default.createElement(
       ProjectItem,
       {
         type: "teia",
         name: "Needlework",
+        link: link + "520033",
         img: "/v2/generators/teia/needlework/preview.jpeg"
       }
     ), /* @__PURE__ */ import_react9.default.createElement(
@@ -4082,6 +4108,7 @@
       {
         type: "teia",
         name: "Warp Engine",
+        link: link + "490373",
         img: "/v2/generators/teia/warp-engine/preview.jpeg"
       }
     ), /* @__PURE__ */ import_react9.default.createElement(
@@ -4089,6 +4116,7 @@
       {
         type: "teia",
         name: "Re-Tiler",
+        link: link + "468682",
         img: "/v2/generators/teia/re-tiler/preview.jpeg"
       }
     ), /* @__PURE__ */ import_react9.default.createElement(
@@ -4096,13 +4124,15 @@
       {
         type: "teia",
         name: "Neural Interface",
+        link: link + "447479",
         img: "/v2/generators/teia/neural-interface/preview.jpeg"
       }
     ), /* @__PURE__ */ import_react9.default.createElement(
       ProjectItem,
       {
         type: "teia",
-        name: "Artificial eye",
+        name: "Artificial Eye",
+        link: link + "440706",
         img: "/v2/generators/teia/artificial-eye/preview.jpeg"
       }
     ), /* @__PURE__ */ import_react9.default.createElement(
@@ -4110,6 +4140,7 @@
       {
         type: "teia",
         name: "The Nest",
+        link: link + "404417",
         img: "/v2/generators/teia/the-nest/preview.jpeg"
       }
     ), /* @__PURE__ */ import_react9.default.createElement(
@@ -4117,6 +4148,7 @@
       {
         type: "teia",
         name: "Mozaic Perception",
+        link: link + "393547",
         img: "/v2/generators/teia/mozaic-perception/preview.jpeg"
       }
     ), /* @__PURE__ */ import_react9.default.createElement(
@@ -4124,6 +4156,7 @@
       {
         type: "teia",
         name: "Dancing Souls",
+        link: link + "384125",
         img: "/v2/generators/teia/dancing-souls/preview.jpeg"
       }
     ), /* @__PURE__ */ import_react9.default.createElement(
@@ -4131,6 +4164,7 @@
       {
         type: "teia",
         name: "Nucle",
+        link: link + "343072",
         img: "/v2/generators/teia/nucle/preview.png"
       }
     ), /* @__PURE__ */ import_react9.default.createElement(
@@ -4138,6 +4172,7 @@
       {
         type: "teia",
         name: "Inner Sight",
+        link: link + "324272",
         img: "/v2/generators/teia/inner-sight/preview.png"
       }
     ), /* @__PURE__ */ import_react9.default.createElement(
@@ -4145,6 +4180,7 @@
       {
         type: "teia",
         name: "Simplicity",
+        link: link + "279928",
         img: "/v2/generators/teia/simplicity/preview.png"
       }
     ), /* @__PURE__ */ import_react9.default.createElement(
@@ -4152,6 +4188,7 @@
       {
         type: "teia",
         name: "Steam Cells",
+        link: link + "274293",
         img: "/v2/generators/teia/steam-cells/preview.png"
       }
     )));
