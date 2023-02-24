@@ -1,17 +1,18 @@
 import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {ProjectsGrid} from "../../components/ProjectsGrid";
+import {ProjectSectionHeader} from "../../components/ProjectSectionHeader";
 
 export function FxHashSection({isMobile}) {
     let link = "https://www.fxhash.xyz/generative/"
     let img = "https://media.fxhash.xyz/w_768/";
     return <>
 
-        <div style={{fontSize: '2em', marginTop: '2em'}}>
+        <ProjectSectionHeader>
             <span>fx(hash) 2022-2023</span>
-        </div>
+        </ProjectSectionHeader>
 
-        <ProjectsGrid isMobile={isMobile} ratio={1} rows={isMobile ? 8 : 4}>
+        <ProjectsGrid isMobile={isMobile} ratio={1} rows={isMobile ? 6 : 3}>
             <ProjectItem
                 type={"fx-hash"}
                 name={"Magic Ritual"}
@@ -47,13 +48,13 @@ export function FxHashSection({isMobile}) {
                 hash={"ooognYT3x6SRXbUCKcu34Z7ffDJDrR1KmZE4G4NMo15fZ3pMyuf"}
                 img={img + "QmNrMUYWUWMWjMyN6focKCBKMMqGcFofhvxMHBGNmUxYG6"}
             />
-            <ProjectItem
-                type={"fx-hash"}
-                name={"Let it snow"}
-                link={link + "5484"}
-                hash={"ooe9gGh3qVwc1SD69uhN9YUfo2uGf2Rh91qrx1pVwQpPoPpMgvi"}
-                img={img + "QmeawuQK778D1zkaiha7wDDoav9btPaNA5SkkrXYuhDPyZ"}
-            />
+            {/*<ProjectItem*/}
+            {/*    type={"fx-hash"}*/}
+            {/*    name={"Let it snow"}*/}
+            {/*    link={link + "5484"}*/}
+            {/*    hash={"ooe9gGh3qVwc1SD69uhN9YUfo2uGf2Rh91qrx1pVwQpPoPpMgvi"}*/}
+            {/*    img={img + "QmeawuQK778D1zkaiha7wDDoav9btPaNA5SkkrXYuhDPyZ"}*/}
+            {/*/>*/}
             <ProjectItem
                 type={"fx-hash"}
                 name={"Mitosis"}
@@ -89,13 +90,13 @@ export function FxHashSection({isMobile}) {
                 hash={"oopWDMeU2jwUksfUee8yjfU8EqN3Sh4osBbdymLya5xTmiGhoVg"}
                 img={img + "QmY81Ege4BLhYetp4JTH1Z7KMZmvKmy5vZmtjsSyr2YsH2"}
             />
-            <ProjectItem
-                type={"fx-hash"}
-                name={"Foldoscope"}
-                link={link + "120"}
-                hash={"oos6MYkmvWjTSXNtKoGSeBqnC3fyzEcnknUwAnaYFre6zFoTKuE"}
-                img={img + "QmfEU8T3WvbockzU9rR6hV3uDziqTnu5G8r7t6befJLZM3"}
-            />
+            {/*<ProjectItem*/}
+            {/*    type={"fx-hash"}*/}
+            {/*    name={"Foldoscope"}*/}
+            {/*    link={link + "120"}*/}
+            {/*    hash={"oos6MYkmvWjTSXNtKoGSeBqnC3fyzEcnknUwAnaYFre6zFoTKuE"}*/}
+            {/*    img={img + "QmfEU8T3WvbockzU9rR6hV3uDziqTnu5G8r7t6befJLZM3"}*/}
+            {/*/>*/}
             <ProjectItem
                 type={"fx-hash"}
                 name={"Squatree"}
@@ -103,13 +104,13 @@ export function FxHashSection({isMobile}) {
                 hash={"oo1M8TxFJQ7T1vSHoUgMCA3zAxLHeNcjHQ45RoomKyCdc57ModH"}
                 img={img + "QmbBzpLyJAitVDn8hkv6JAF6kZRkk46Eba3UKfNXrTWGc8"}
             />
-            <ProjectItem
-                type={"fx-hash"}
-                name={"Subdivisual"}
-                link={link + "23"}
-                hash={"ooqpqHpF9zEh7YDUFPeWYN3YWNsEb7cq1X756s8TJQq7T1iq7Mw"}
-                img={img + "QmPboz6imodN7YnaUvMnS2XPGCAeGD9CAVHLXtoXu8uZWX"}
-            />
+            {/*<ProjectItem*/}
+            {/*    type={"fx-hash"}*/}
+            {/*    name={"Subdivisual"}*/}
+            {/*    link={link + "23"}*/}
+            {/*    hash={"ooqpqHpF9zEh7YDUFPeWYN3YWNsEb7cq1X756s8TJQq7T1iq7Mw"}*/}
+            {/*    img={img + "QmPboz6imodN7YnaUvMnS2XPGCAeGD9CAVHLXtoXu8uZWX"}*/}
+            {/*/>*/}
             <ProjectItem
                 type={"fx-hash"}
                 name={"Hidden Square"}
@@ -117,13 +118,13 @@ export function FxHashSection({isMobile}) {
                 hash={"ooJgyLKPdBbW1YbNk8cXbHpDdWV9886cJyx934pKwoNUru3RNKD"}
                 img={img + "QmQ8TYQ8qb29BxTp8kASocMirfuGf5nMXpArEohpG9tzuX"}
             />
-            <ProjectItem
-                type={"fx-hash"}
-                name={"Generotique"}
-                link={link + "11"}
-                hash={"ooTFacUMz6JeZMwdGWzf7XkuSYmdcv7QhbZXZhm5JGDt6JJbyh9"}
-                img={img + "QmQiLxQxKNcJaH17kzj27KDMkYYardx1q4o7v3pTvNHJGP"}
-            />
+            {/*<ProjectItem*/}
+            {/*    type={"fx-hash"}*/}
+            {/*    name={"Generotique"}*/}
+            {/*    link={link + "11"}*/}
+            {/*    hash={"ooTFacUMz6JeZMwdGWzf7XkuSYmdcv7QhbZXZhm5JGDt6JJbyh9"}*/}
+            {/*    img={img + "QmQiLxQxKNcJaH17kzj27KDMkYYardx1q4o7v3pTvNHJGP"}*/}
+            {/*/>*/}
         </ProjectsGrid>
     </>
 }

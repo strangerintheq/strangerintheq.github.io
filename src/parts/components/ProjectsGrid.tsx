@@ -8,7 +8,7 @@ export function ProjectsGrid({children = null, ratio, isMobile, rows}) {
     const h = fromBaseSize(cellSize * ratio);//`calc(var(--base-size) * ${cellSize*ratio})`;
 
     return <div style={{
-        marginTop: 40,
+        margin: '2rem 0 6rem 0',
         display: "grid",
         gap: `calc(var(--base-size) * ${gap})`,
         gridTemplateColumns: isMobile ? `${w} ${w}` : `${w} ${w} ${w} ${w}`,

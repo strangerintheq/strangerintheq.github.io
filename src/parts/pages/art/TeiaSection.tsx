@@ -2,14 +2,15 @@ import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {ProjectsGrid} from "../../components/ProjectsGrid";
 import {sitePath} from "../../vars";
+import {ProjectSectionHeader} from "../../components/ProjectSectionHeader";
 
 export function TeiaSection({isMobile}) {
     const link = "https://objkt.com/asset/hicetnunc/"
     return <>
 
-        <div style={{fontSize: '2em', marginTop: '2em'}}>
+        <ProjectSectionHeader>
             <span>teia.art (ex Hic Et Nunc) 2021</span>
-        </div>
+        </ProjectSectionHeader>
 
         <ProjectsGrid isMobile={isMobile} ratio={1} rows={isMobile ? 6 : 3}>
             <ProjectItem

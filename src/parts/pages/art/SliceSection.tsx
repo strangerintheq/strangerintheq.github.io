@@ -2,6 +2,7 @@ import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {ProjectsGrid} from "../../components/ProjectsGrid";
 import {sitePath} from "../../vars";
+import {ProjectSectionHeader} from "../../components/ProjectSectionHeader";
 
 export function SliceSection({isMobile}) {
     const imgSize = 640;
@@ -15,11 +16,10 @@ export function SliceSection({isMobile}) {
         name: "Slice",
     }
     return <>
-
-        <div style={{fontSize: '2em', marginTop: '2em'}}>
-            <span>SL/CE @ ArtBlocks 2023</span>
-            <a style={{float:"right"}} href={sitePath + '/slice'}>ABOUT</a>
-        </div>
+        <ProjectSectionHeader>
+            <a href={"https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419"}>SL/CE @ ArtBlocks 2023</a>
+            {/*<a style={{float:"right"}} href={sitePath + '/slice'}>ABOUT</a>*/}
+        </ProjectSectionHeader>
 
         <ProjectsGrid isMobile={isMobile} rows={isMobile ? 4 : 2} ratio={1.618}>
             <ProjectItem

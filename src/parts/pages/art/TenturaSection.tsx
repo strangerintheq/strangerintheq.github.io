@@ -1,7 +1,7 @@
 import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {ProjectsGrid} from "../../components/ProjectsGrid";
-import {sitePath} from "../../vars";
+import {ProjectSectionHeader} from "../../components/ProjectSectionHeader";
 
 export function TenturaSection({isMobile}) {
     const imgSize = 640;
@@ -13,11 +13,10 @@ export function TenturaSection({isMobile}) {
         name: "Tentura",
     }
     return <>
-
-        <div style={{fontSize: '2em', marginTop: '2em'}}>
-            <span>Tentura @ ArtBlocks 2022</span>
-            <a style={{float:"right"}} href={sitePath + '/tentura'}>ABOUT</a>
-        </div>
+        <ProjectSectionHeader>
+            <a href={"https://www.artblocks.io/collections/presents/projects/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/265"}>Tentura @ ArtBlocks 2022</a>
+            {/*<a style={{float:"right"}} href={sitePath + '/tentura'}>ABOUT</a>*/}
+        </ProjectSectionHeader>
 
         <ProjectsGrid ratio={1} isMobile={isMobile} rows={isMobile ? 4 : 2}>
             <ProjectItem

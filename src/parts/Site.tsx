@@ -2,11 +2,11 @@ import React from "react";
 import {RouterProvider} from "react-router";
 import {createBrowserRouter} from "react-router-dom";
 import {GeneratorPage} from "./pages/GeneratorPage";
-import {ArtworksPage} from "./pages/projects/ArtworksPage";
+import {ArtPage} from "./pages/art/ArtPage";
 import {HomePage} from "./pages/HomePage";
 import {sitePath} from "./vars";
 import {AboutPage} from "./pages/AboutPage";
-import {CodePage} from "./pages/Code";
+import {CodePage} from "./pages/CodePage";
 
 const routes = [
     {
@@ -14,8 +14,8 @@ const routes = [
         element: <GeneratorPage/>,
     },
     {
-        path: sitePath + "/artworks",
-        element: <ArtworksPage/>,
+        path: sitePath + "/art",
+        element: <ArtPage/>,
     },
     {
         path: sitePath + "/about",
@@ -41,7 +41,7 @@ const globalStyle = `<style>
         box-sizing: border-box;
         font-family: "Inter", sans-serif;
         overflow-x: hidden;
-        --base-size: min(1100px, 100vw);
+        --base-size: min(1600px, 100vw);
     }
 </style>`;
 

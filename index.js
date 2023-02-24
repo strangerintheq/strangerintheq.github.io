@@ -71,11 +71,11 @@
   });
 
   // index.tsx
-  var import_react17 = __toESM(require_react());
+  var import_react19 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // parts/Site.tsx
-  var import_react16 = __toESM(require_react());
+  var import_react18 = __toESM(require_react());
 
   // node_modules/@remix-run/router/dist/router.js
   function _extends() {
@@ -3719,25 +3719,21 @@
   // parts/components/Navigation.tsx
   var import_react2 = __toESM(require_react());
   function Navigation({ dark = false }) {
-    return /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, dark && /* @__PURE__ */ import_react2.default.createElement("div", { dangerouslySetInnerHTML: {
+    return /* @__PURE__ */ import_react2.default.createElement("div", { style: { margin: "0 -1rem" } }, dark && /* @__PURE__ */ import_react2.default.createElement("div", { dangerouslySetInnerHTML: {
       __html: `<style>a, a:visited {color: white}</style>`
     } }), /* @__PURE__ */ import_react2.default.createElement(
       "div",
       {
         style: {
+          padding: "0.5rem 1rem",
           backgroundColor: dark ? "#0004" : "unset",
           fontSize: "2rem",
-          marginTop: "2rem",
+          marginTop: "1rem",
           textAlign: "right"
         }
       },
-      /* @__PURE__ */ import_react2.default.createElement(Link, { to: sitePath + "/" }, /* @__PURE__ */ import_react2.default.createElement("span", null, "Home")),
-      "\xA0",
-      /* @__PURE__ */ import_react2.default.createElement(Link, { to: sitePath + "/about" }, /* @__PURE__ */ import_react2.default.createElement("span", null, "About")),
-      "\xA0",
-      /* @__PURE__ */ import_react2.default.createElement(Link, { to: sitePath + "/code" }, /* @__PURE__ */ import_react2.default.createElement("span", null, "Code")),
-      "\xA0",
-      /* @__PURE__ */ import_react2.default.createElement(Link, { to: sitePath + "/artworks" }, /* @__PURE__ */ import_react2.default.createElement("span", null, "Artworks"))
+      /* @__PURE__ */ import_react2.default.createElement(Link, { to: sitePath + "/art" }, /* @__PURE__ */ import_react2.default.createElement("span", null, "art")),
+      /* @__PURE__ */ import_react2.default.createElement("span", { style: { float: "left", color: dark ? "#fff" : "unset" } }, /* @__PURE__ */ import_react2.default.createElement(Link, { to: sitePath + "/" }, /* @__PURE__ */ import_react2.default.createElement("span", null, "Q")))
     ));
   }
 
@@ -3791,8 +3787,8 @@
     ));
   }
 
-  // parts/pages/projects/ArtworksPage.tsx
-  var import_react12 = __toESM(require_react());
+  // parts/pages/art/ArtPage.tsx
+  var import_react14 = __toESM(require_react());
 
   // parts/useMediaQuery.ts
   var import_react4 = __toESM(require_react());
@@ -3821,8 +3817,8 @@
     } }, props.children);
   }
 
-  // parts/pages/projects/SliceSection.tsx
-  var import_react8 = __toESM(require_react());
+  // parts/pages/art/SliceSection.tsx
+  var import_react9 = __toESM(require_react());
 
   // parts/components/ProjectItem.tsx
   var import_react6 = __toESM(require_react());
@@ -3867,7 +3863,7 @@
     const w = fromBaseSize(cellSize);
     const h = fromBaseSize(cellSize * ratio);
     return /* @__PURE__ */ import_react7.default.createElement("div", { style: {
-      marginTop: 40,
+      margin: "2rem 0 6rem 0",
       display: "grid",
       gap: `calc(var(--base-size) * ${gap})`,
       gridTemplateColumns: isMobile ? `${w} ${w}` : `${w} ${w} ${w} ${w}`,
@@ -3878,7 +3874,13 @@
     return `calc(var(--base-size) * ${s})`;
   }
 
-  // parts/pages/projects/SliceSection.tsx
+  // parts/components/ProjectSectionHeader.tsx
+  var import_react8 = __toESM(require_react());
+  function ProjectSectionHeader({ children = null }) {
+    return /* @__PURE__ */ import_react8.default.createElement("div", { style: { fontSize: "2rem", marginTop: "2rem" } }, children);
+  }
+
+  // parts/pages/art/SliceSection.tsx
   function SliceSection({ isMobile }) {
     const imgSize = 640;
     const mainNet = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://artblocks-mainnet.s3.amazonaws.com/";
@@ -3888,7 +3890,7 @@
       type: "artblocks",
       name: "Slice"
     };
-    return /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react8.default.createElement("span", null, "SL/CE @ ArtBlocks 2023"), /* @__PURE__ */ import_react8.default.createElement("a", { style: { float: "right" }, href: sitePath + "/slice" }, "ABOUT")), /* @__PURE__ */ import_react8.default.createElement(ProjectsGrid, { isMobile, rows: isMobile ? 4 : 2, ratio: 1.618 }, /* @__PURE__ */ import_react8.default.createElement(
+    return /* @__PURE__ */ import_react9.default.createElement(import_react9.default.Fragment, null, /* @__PURE__ */ import_react9.default.createElement(ProjectSectionHeader, null, /* @__PURE__ */ import_react9.default.createElement("a", { href: "https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419" }, "SL/CE @ ArtBlocks 2023")), /* @__PURE__ */ import_react9.default.createElement(ProjectsGrid, { isMobile, rows: isMobile ? 4 : 2, ratio: 1.618 }, /* @__PURE__ */ import_react9.default.createElement(
       ProjectItem,
       {
         ...slice,
@@ -3898,7 +3900,7 @@
         hash: "0x61464f239e4a9706c864eaf3d8ccc966fe3ec89089752d803ee51adbea37e82c",
         img: mainNet + "419000000.png"
       }
-    ), /* @__PURE__ */ import_react8.default.createElement(
+    ), /* @__PURE__ */ import_react9.default.createElement(
       ProjectItem,
       {
         ...slice,
@@ -3906,7 +3908,7 @@
         hash: "0x7905f21577209c5fccc82170001218c7281e1991f6c42f7717adb819e2846805",
         img: staging + "48000189.png"
       }
-    ), /* @__PURE__ */ import_react8.default.createElement(
+    ), /* @__PURE__ */ import_react9.default.createElement(
       ProjectItem,
       {
         ...slice,
@@ -3914,7 +3916,7 @@
         hash: "0x0c8313ca762c7c8aa3b4c078435fd0a84aa17fb0872cc152103b8ff6f22f71a3",
         img: staging + "48000161.png"
       }
-    ), /* @__PURE__ */ import_react8.default.createElement(
+    ), /* @__PURE__ */ import_react9.default.createElement(
       ProjectItem,
       {
         ...slice,
@@ -3922,7 +3924,7 @@
         hash: "0xecfcfa98860f8fb143d54065186118cc2f429316982597494dc8cffd7f4e4283",
         img: staging + "48000015.png"
       }
-    ), /* @__PURE__ */ import_react8.default.createElement(
+    ), /* @__PURE__ */ import_react9.default.createElement(
       ProjectItem,
       {
         ...slice,
@@ -3933,8 +3935,8 @@
     )));
   }
 
-  // parts/pages/projects/TenturaSection.tsx
-  var import_react9 = __toESM(require_react());
+  // parts/pages/art/TenturaSection.tsx
+  var import_react10 = __toESM(require_react());
   function TenturaSection({ isMobile }) {
     const imgSize = 640;
     const img = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/https://artblocks-mainnet.s3.amazonaws.com/";
@@ -3943,7 +3945,7 @@
       type: "artblocks",
       name: "Tentura"
     };
-    return /* @__PURE__ */ import_react9.default.createElement(import_react9.default.Fragment, null, /* @__PURE__ */ import_react9.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react9.default.createElement("span", null, "Tentura @ ArtBlocks 2022"), /* @__PURE__ */ import_react9.default.createElement("a", { style: { float: "right" }, href: sitePath + "/tentura" }, "ABOUT")), /* @__PURE__ */ import_react9.default.createElement(ProjectsGrid, { ratio: 1, isMobile, rows: isMobile ? 4 : 2 }, /* @__PURE__ */ import_react9.default.createElement(
+    return /* @__PURE__ */ import_react10.default.createElement(import_react10.default.Fragment, null, /* @__PURE__ */ import_react10.default.createElement(ProjectSectionHeader, null, /* @__PURE__ */ import_react10.default.createElement("a", { href: "https://www.artblocks.io/collections/presents/projects/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/265" }, "Tentura @ ArtBlocks 2022")), /* @__PURE__ */ import_react10.default.createElement(ProjectsGrid, { ratio: 1, isMobile, rows: isMobile ? 4 : 2 }, /* @__PURE__ */ import_react10.default.createElement(
       ProjectItem,
       {
         ...tentura,
@@ -3953,7 +3955,7 @@
         hash: "0xc769de01c92fdf68c8415137f67e0b34869f42e7ae170f3eb81a192a67f8c930",
         img: img + "265000000.png"
       }
-    ), /* @__PURE__ */ import_react9.default.createElement(
+    ), /* @__PURE__ */ import_react10.default.createElement(
       ProjectItem,
       {
         ...tentura,
@@ -3961,7 +3963,7 @@
         hash: "0x8cf4266960518b81ae27bd417c0b68e4141a2d531dfc44460708e00b98dfb7f4",
         img: img + "265000031.png"
       }
-    ), /* @__PURE__ */ import_react9.default.createElement(
+    ), /* @__PURE__ */ import_react10.default.createElement(
       ProjectItem,
       {
         ...tentura,
@@ -3969,7 +3971,7 @@
         hash: "0xe359ebb5e9a5cc2f24b964fc2f33b4e3635b56c08cc77d4cc0290f28ef1656da",
         img: img + "265000197.png"
       }
-    ), /* @__PURE__ */ import_react9.default.createElement(
+    ), /* @__PURE__ */ import_react10.default.createElement(
       ProjectItem,
       {
         ...tentura,
@@ -3977,7 +3979,7 @@
         hash: "0xa23afc7294ee196ec119d6a55820b507c227821d4608899f8f1a7ddc06b7af4e",
         img: img + "265000212.png"
       }
-    ), /* @__PURE__ */ import_react9.default.createElement(
+    ), /* @__PURE__ */ import_react10.default.createElement(
       ProjectItem,
       {
         ...tentura,
@@ -3988,12 +3990,12 @@
     )));
   }
 
-  // parts/pages/projects/FxHashSection.tsx
-  var import_react10 = __toESM(require_react());
+  // parts/pages/art/FxHashSection.tsx
+  var import_react11 = __toESM(require_react());
   function FxHashSection({ isMobile }) {
     let link = "https://www.fxhash.xyz/generative/";
     let img = "https://media.fxhash.xyz/w_768/";
-    return /* @__PURE__ */ import_react10.default.createElement(import_react10.default.Fragment, null, /* @__PURE__ */ import_react10.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react10.default.createElement("span", null, "fx(hash) 2022-2023")), /* @__PURE__ */ import_react10.default.createElement(ProjectsGrid, { isMobile, ratio: 1, rows: isMobile ? 8 : 4 }, /* @__PURE__ */ import_react10.default.createElement(
+    return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement(ProjectSectionHeader, null, /* @__PURE__ */ import_react11.default.createElement("span", null, "fx(hash) 2022-2023")), /* @__PURE__ */ import_react11.default.createElement(ProjectsGrid, { isMobile, ratio: 1, rows: isMobile ? 6 : 3 }, /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4002,7 +4004,7 @@
         hash: "ookiXAnGJw28AAv6JVLXiyZceTF9nJSRAxgytsUDV9Gu3na4zeN",
         img: img + "QmbABZquDop8bhVWb49HcU7t4vFgHU1s9ZFomPxeznmr4J"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
+    ), /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4011,7 +4013,7 @@
         hash: "oo2WuxbvWm77MLimMCfrt54zXRHhe8HcFqPVPfGxF53Be85Rnhe",
         img: img + "QmScLVUE7HzUvSWy1hTVsqA2WCU6icED9BQbgVDHt4xJV2"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
+    ), /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4020,7 +4022,7 @@
         hash: "oo274c4kMq5xbm7CpvJ6rDHatuuZwhEACfgaQ4BXy9XX4eTu4q7",
         img: img + "QmWs8VMiyr5FTSSfjvf1g3bprS8JNxM8wzAbXFRvVnR3aG"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
+    ), /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4029,7 +4031,7 @@
         hash: "ooXtaB52GRHraEgQEnT7k9oJzWYPbYbiycXFGmUqNa34bwV53ZX",
         img: img + "QmP67iCt3gayuZGVLafGSYfXUgkJ35hbyiDxgNsGN6LZNQ"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
+    ), /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4038,16 +4040,7 @@
         hash: "ooognYT3x6SRXbUCKcu34Z7ffDJDrR1KmZE4G4NMo15fZ3pMyuf",
         img: img + "QmNrMUYWUWMWjMyN6focKCBKMMqGcFofhvxMHBGNmUxYG6"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
-      ProjectItem,
-      {
-        type: "fx-hash",
-        name: "Let it snow",
-        link: link + "5484",
-        hash: "ooe9gGh3qVwc1SD69uhN9YUfo2uGf2Rh91qrx1pVwQpPoPpMgvi",
-        img: img + "QmeawuQK778D1zkaiha7wDDoav9btPaNA5SkkrXYuhDPyZ"
-      }
-    ), /* @__PURE__ */ import_react10.default.createElement(
+    ), /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4056,7 +4049,7 @@
         hash: "ooFeDgPwQRjiVXkupQn7wUBdbUjBQaAvFBPDpMN6iGqc5Wgv9N3",
         img: img + "QmeNYkvW72PY1FA14E3NP2fnHfuNvpQQhowFgJ7cZbGuXf"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
+    ), /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4065,7 +4058,7 @@
         hash: "oohTtY7QKgRpUDnvbrPdAgUgxgd7p1BpyKZK3BKZqfNmWGv5qrL",
         img: img + "QmTP2YDBnWNohuAD5mtvDsEMdPa6Edf4Tf8rCS5MyhKAzX"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
+    ), /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4074,7 +4067,7 @@
         hash: "ooZxg5naW6KQxijqjDQfFLtGDSBgG2HsMGPtymKfq7PxgRvRdB6",
         img: img + "QmXzaZC1CfSQBm9f7CoBjsBAM153HNYermqY8CPoSdkSYB"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
+    ), /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4083,7 +4076,7 @@
         hash: "oo1WHxm95PJeziDbtPvqtZsEHyufnKZSiY8nJMMDCMxoTVEcLRk",
         img: img + "Qmd2NxZiw3kxWowXcu3ZBfCT633UVfstYDV3zJSaLAmcJn"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
+    ), /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4092,16 +4085,7 @@
         hash: "oopWDMeU2jwUksfUee8yjfU8EqN3Sh4osBbdymLya5xTmiGhoVg",
         img: img + "QmY81Ege4BLhYetp4JTH1Z7KMZmvKmy5vZmtjsSyr2YsH2"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
-      ProjectItem,
-      {
-        type: "fx-hash",
-        name: "Foldoscope",
-        link: link + "120",
-        hash: "oos6MYkmvWjTSXNtKoGSeBqnC3fyzEcnknUwAnaYFre6zFoTKuE",
-        img: img + "QmfEU8T3WvbockzU9rR6hV3uDziqTnu5G8r7t6befJLZM3"
-      }
-    ), /* @__PURE__ */ import_react10.default.createElement(
+    ), /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4110,16 +4094,7 @@
         hash: "oo1M8TxFJQ7T1vSHoUgMCA3zAxLHeNcjHQ45RoomKyCdc57ModH",
         img: img + "QmbBzpLyJAitVDn8hkv6JAF6kZRkk46Eba3UKfNXrTWGc8"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
-      ProjectItem,
-      {
-        type: "fx-hash",
-        name: "Subdivisual",
-        link: link + "23",
-        hash: "ooqpqHpF9zEh7YDUFPeWYN3YWNsEb7cq1X756s8TJQq7T1iq7Mw",
-        img: img + "QmPboz6imodN7YnaUvMnS2XPGCAeGD9CAVHLXtoXu8uZWX"
-      }
-    ), /* @__PURE__ */ import_react10.default.createElement(
+    ), /* @__PURE__ */ import_react11.default.createElement(
       ProjectItem,
       {
         type: "fx-hash",
@@ -4128,23 +4103,14 @@
         hash: "ooJgyLKPdBbW1YbNk8cXbHpDdWV9886cJyx934pKwoNUru3RNKD",
         img: img + "QmQ8TYQ8qb29BxTp8kASocMirfuGf5nMXpArEohpG9tzuX"
       }
-    ), /* @__PURE__ */ import_react10.default.createElement(
-      ProjectItem,
-      {
-        type: "fx-hash",
-        name: "Generotique",
-        link: link + "11",
-        hash: "ooTFacUMz6JeZMwdGWzf7XkuSYmdcv7QhbZXZhm5JGDt6JJbyh9",
-        img: img + "QmQiLxQxKNcJaH17kzj27KDMkYYardx1q4o7v3pTvNHJGP"
-      }
     )));
   }
 
-  // parts/pages/projects/TeiaSection.tsx
-  var import_react11 = __toESM(require_react());
+  // parts/pages/art/TeiaSection.tsx
+  var import_react12 = __toESM(require_react());
   function TeiaSection({ isMobile }) {
     const link = "https://objkt.com/asset/hicetnunc/";
-    return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement("div", { style: { fontSize: "2em", marginTop: "2em" } }, /* @__PURE__ */ import_react11.default.createElement("span", null, "teia.art (ex Hic Et Nunc) 2021")), /* @__PURE__ */ import_react11.default.createElement(ProjectsGrid, { isMobile, ratio: 1, rows: isMobile ? 6 : 3 }, /* @__PURE__ */ import_react11.default.createElement(
+    return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, /* @__PURE__ */ import_react12.default.createElement(ProjectSectionHeader, null, /* @__PURE__ */ import_react12.default.createElement("span", null, "teia.art (ex Hic Et Nunc) 2021")), /* @__PURE__ */ import_react12.default.createElement(ProjectsGrid, { isMobile, ratio: 1, rows: isMobile ? 6 : 3 }, /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4152,7 +4118,7 @@
         link: link + "520033",
         img: "/generator/teia/needlework/preview.jpeg"
       }
-    ), /* @__PURE__ */ import_react11.default.createElement(
+    ), /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4160,7 +4126,7 @@
         link: link + "490373",
         img: "/generator/teia/warp-engine/preview.jpeg"
       }
-    ), /* @__PURE__ */ import_react11.default.createElement(
+    ), /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4168,7 +4134,7 @@
         link: link + "468682",
         img: "/generator/teia/re-tiler/preview.jpeg"
       }
-    ), /* @__PURE__ */ import_react11.default.createElement(
+    ), /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4176,7 +4142,7 @@
         link: link + "447479",
         img: "/generator/teia/neural-interface/preview.jpeg"
       }
-    ), /* @__PURE__ */ import_react11.default.createElement(
+    ), /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4184,7 +4150,7 @@
         link: link + "440706",
         img: "/generator/teia/artificial-eye/preview.jpeg"
       }
-    ), /* @__PURE__ */ import_react11.default.createElement(
+    ), /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4192,7 +4158,7 @@
         link: link + "404417",
         img: "/generator/teia/the-nest/preview.jpeg"
       }
-    ), /* @__PURE__ */ import_react11.default.createElement(
+    ), /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4200,7 +4166,7 @@
         link: link + "393547",
         img: "/generator/teia/mozaic-perception/preview.jpeg"
       }
-    ), /* @__PURE__ */ import_react11.default.createElement(
+    ), /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4208,7 +4174,7 @@
         link: link + "384125",
         img: "/generator/teia/dancing-souls/preview.jpeg"
       }
-    ), /* @__PURE__ */ import_react11.default.createElement(
+    ), /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4216,7 +4182,7 @@
         link: link + "343072",
         img: "/generator/teia/nucle/preview.png"
       }
-    ), /* @__PURE__ */ import_react11.default.createElement(
+    ), /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4224,7 +4190,7 @@
         link: link + "324272",
         img: "/generator/teia/inner-sight/preview.png"
       }
-    ), /* @__PURE__ */ import_react11.default.createElement(
+    ), /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4232,7 +4198,7 @@
         link: link + "279928",
         img: "/generator/teia/simplicity/preview.png"
       }
-    ), /* @__PURE__ */ import_react11.default.createElement(
+    ), /* @__PURE__ */ import_react12.default.createElement(
       ProjectItem,
       {
         type: "teia",
@@ -4243,17 +4209,23 @@
     )));
   }
 
-  // parts/pages/projects/ArtworksPage.tsx
-  function ArtworksPage() {
+  // parts/components/PageHeader.tsx
+  var import_react13 = __toESM(require_react());
+  function PageHeader({ children = null }) {
+    return /* @__PURE__ */ import_react13.default.createElement("div", { style: { fontSize: "5rem", marginTop: "2rem" } }, children);
+  }
+
+  // parts/pages/art/ArtPage.tsx
+  function ArtPage() {
     const { matches: isMobile } = useMediaQuery("(max-width: 980px)");
-    return /* @__PURE__ */ import_react12.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react12.default.createElement(Navigation, null), /* @__PURE__ */ import_react12.default.createElement(SliceSection, { isMobile }), /* @__PURE__ */ import_react12.default.createElement(TenturaSection, { isMobile }), /* @__PURE__ */ import_react12.default.createElement(FxHashSection, { isMobile }), /* @__PURE__ */ import_react12.default.createElement(TeiaSection, { isMobile }));
+    return /* @__PURE__ */ import_react14.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react14.default.createElement(Navigation, null), /* @__PURE__ */ import_react14.default.createElement(PageHeader, null, "Art"), /* @__PURE__ */ import_react14.default.createElement(SliceSection, { isMobile }), /* @__PURE__ */ import_react14.default.createElement(TenturaSection, { isMobile }), /* @__PURE__ */ import_react14.default.createElement(FxHashSection, { isMobile }), /* @__PURE__ */ import_react14.default.createElement(TeiaSection, { isMobile }));
   }
 
   // parts/pages/HomePage.tsx
-  var import_react13 = __toESM(require_react());
+  var import_react15 = __toESM(require_react());
   function HomePage() {
     const navigate = useNavigate();
-    (0, import_react13.useEffect)(() => {
+    (0, import_react15.useEffect)(() => {
       const path = document.location.href;
       if (path.includes("?route=")) {
         navigate(sitePath + "/" + path.split("?route=")[1]);
@@ -4261,7 +4233,7 @@
     }, []);
     let generators = [
       ["fx-hash", "mayan-carpet"],
-      ["fx-hash", "generotique"],
+      // ["fx-hash", "generotique"],
       ["fx-hash", "amulet"],
       ["fx-hash", "cellulae"],
       ["fx-hash", "gravitzappa"],
@@ -4282,43 +4254,43 @@
       ["teia", "warp-engine"]
     ];
     let [type, id] = generators[Math.random() * generators.length | 0];
-    return /* @__PURE__ */ import_react13.default.createElement(import_react13.default.Fragment, null, /* @__PURE__ */ import_react13.default.createElement(GeneratorAsBackground, { type, id }), /* @__PURE__ */ import_react13.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react13.default.createElement(Navigation, { dark: true })));
+    return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, /* @__PURE__ */ import_react15.default.createElement(GeneratorAsBackground, { type, id }), /* @__PURE__ */ import_react15.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react15.default.createElement(Navigation, { dark: true })));
   }
 
   // parts/pages/AboutPage.tsx
-  var import_react14 = __toESM(require_react());
+  var import_react16 = __toESM(require_react());
   function AboutPage() {
-    return /* @__PURE__ */ import_react14.default.createElement(import_react14.default.Fragment, null, /* @__PURE__ */ import_react14.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react14.default.createElement(Navigation, { dark: false }), /* @__PURE__ */ import_react14.default.createElement("div", { style: { fontSize: "1.5rem", marginTop: "2rem" } }, "Hello there! I'm Stranger in the Q and i'm making art with code."), /* @__PURE__ */ import_react14.default.createElement("div", { style: { fontSize: "1.2rem", marginTop: "2rem" } }, "I have been a software developer for about 2 decades now. I develop different user interfaces and other things related to computer graphics. At some point I started creating images with code to teach myself math and algorithms. As time went on I learned more about it and became more interested in it. That's how I realized that it's an art, a\xA0", /* @__PURE__ */ import_react14.default.createElement("span", { style: { fontWeight: "bold" } }, "Generative Art"), ".")));
+    return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react16.default.createElement(Navigation, { dark: false }), /* @__PURE__ */ import_react16.default.createElement("div", { style: { fontSize: "1.5rem", marginTop: "2rem" } }, "Hello there! I'm Stranger in the Q and i'm making art with code."), /* @__PURE__ */ import_react16.default.createElement("div", { style: { fontSize: "1.2rem", marginTop: "2rem" } }, "I have been a software developer for about 2 decades now. I develop different user interfaces and other things related to computer graphics. At some point I started creating images with code to teach myself math and algorithms. As time went on I learned more about it and became more interested in it. That's how I realized that it's an art, a\xA0", /* @__PURE__ */ import_react16.default.createElement("span", { style: { fontWeight: "bold" } }, "Generative Art"), ".")));
   }
 
-  // parts/pages/Code.tsx
-  var import_react15 = __toESM(require_react());
+  // parts/pages/CodePage.tsx
+  var import_react17 = __toESM(require_react());
   function CodePage() {
-    return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, /* @__PURE__ */ import_react15.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react15.default.createElement(Navigation, { dark: false }), /* @__PURE__ */ import_react15.default.createElement("div", { style: { fontSize: "1.5rem", marginTop: "2rem" } }, "I like to create stuff for myself, so there are several"), /* @__PURE__ */ import_react15.default.createElement("div", { style: { fontSize: "1.2rem", marginTop: "2rem" } })));
+    return /* @__PURE__ */ import_react17.default.createElement(import_react17.default.Fragment, null, /* @__PURE__ */ import_react17.default.createElement(PageWrapper, null, /* @__PURE__ */ import_react17.default.createElement(Navigation, { dark: false }), /* @__PURE__ */ import_react17.default.createElement("div", { style: { fontSize: "1.5rem", marginTop: "2rem" } }, "I like to create stuff for myself, so there are several"), /* @__PURE__ */ import_react17.default.createElement("div", { style: { fontSize: "1.2rem", marginTop: "2rem" } })));
   }
 
   // parts/Site.tsx
   var routes = [
     {
       path: sitePath + "/generator/:type/:id/:hash",
-      element: /* @__PURE__ */ import_react16.default.createElement(GeneratorPage, null)
+      element: /* @__PURE__ */ import_react18.default.createElement(GeneratorPage, null)
     },
     {
-      path: sitePath + "/artworks",
-      element: /* @__PURE__ */ import_react16.default.createElement(ArtworksPage, null)
+      path: sitePath + "/art",
+      element: /* @__PURE__ */ import_react18.default.createElement(ArtPage, null)
     },
     {
       path: sitePath + "/about",
-      element: /* @__PURE__ */ import_react16.default.createElement(AboutPage, null)
+      element: /* @__PURE__ */ import_react18.default.createElement(AboutPage, null)
     },
     {
       path: sitePath + "/code",
-      element: /* @__PURE__ */ import_react16.default.createElement(CodePage, null)
+      element: /* @__PURE__ */ import_react18.default.createElement(CodePage, null)
     },
     {
       path: sitePath + "/*",
       exact: false,
-      element: /* @__PURE__ */ import_react16.default.createElement(HomePage, null)
+      element: /* @__PURE__ */ import_react18.default.createElement(HomePage, null)
     }
   ];
   var router = createBrowserRouter(routes);
@@ -4329,17 +4301,17 @@
         box-sizing: border-box;
         font-family: "Inter", sans-serif;
         overflow-x: hidden;
-        --base-size: min(1100px, 100vw);
+        --base-size: min(1600px, 100vw);
     }
 </style>`;
   function Site() {
-    return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement("div", { dangerouslySetInnerHTML: { __html: globalStyle } }), /* @__PURE__ */ import_react16.default.createElement(RouterProvider, { router }));
+    return /* @__PURE__ */ import_react18.default.createElement(import_react18.default.Fragment, null, /* @__PURE__ */ import_react18.default.createElement("div", { dangerouslySetInnerHTML: { __html: globalStyle } }), /* @__PURE__ */ import_react18.default.createElement(RouterProvider, { router }));
   }
 
   // index.tsx
   var div = document.createElement("div");
   document.body.append(div);
-  (0, import_client.createRoot)(div).render(/* @__PURE__ */ import_react17.default.createElement(Site, null));
+  (0, import_client.createRoot)(div).render(/* @__PURE__ */ import_react19.default.createElement(Site, null));
 })();
 /*! Bundled license information:
 

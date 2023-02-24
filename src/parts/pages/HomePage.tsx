@@ -19,7 +19,7 @@ export function HomePage() {
 
     let generators = [
         ["fx-hash", "mayan-carpet"],
-        ["fx-hash", "generotique"],
+        // ["fx-hash", "generotique"],
         ["fx-hash", "amulet"],
         ["fx-hash", "cellulae"],
         ["fx-hash", "gravitzappa"],
