@@ -10,8 +10,8 @@ export function Navigation({dark= false}) {
         <div>
             <NavLink to={"page=about"}>about</NavLink>
             &nbsp;
-            <NavLink to={"page=code"}>code</NavLink>
-            &nbsp;
+            {/*<NavLink to={"page=code"}>code</NavLink>*/}
+            {/*&nbsp;*/}
             <NavLink to={"page=art"}>art</NavLink>
         </div>
     </NavigationBody>

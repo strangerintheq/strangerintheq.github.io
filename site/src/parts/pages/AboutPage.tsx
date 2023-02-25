@@ -21,6 +21,18 @@ export function AboutPage() {
                 That's how I realized it was an art, a&nbsp;
                 <span style={{fontWeight: "bold"}}>Generative Art</span>.
             </PageText>
+            <PageSubHeader>
+                Links
+            </PageSubHeader>
+            <PageText>
+                <div style={{display: 'flex', flexDirection:"column", gap:'1em'}}>
+                    <a href={"https://twitter.com/stranger_intheq"}>Twitter</a>
+                    <a href={"https://t.me/s/mathimages"}>Telegram</a>
+                    <a href={"https://codepen.io/strangerintheq"}>Codepen</a>
+                    <a href={"https://github.com/strangerintheq/"}>Github</a>
+                </div>
+
+            </PageText>
         </PageWrapper>
     </>
 }

@@ -14,13 +14,20 @@ const globalStyle = `<style>
     font-family: "Source Code Pro", monospace;
     overflow-x: hidden;
     --base-size: min(1600px, 100vw);
+  
 }
 .codepen {
     height: 100%;
     width: 100%;
 }
-body {
+html {
     pointer-events: none;
+
+}
+@media (max-width: 980px) {
+    html {
+        font-size: 1.5em;
+    }
 }
 a, a:visited, iframe {
     pointer-events: all;

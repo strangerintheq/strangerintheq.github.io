@@ -12,7 +12,7 @@ export function TeiaSection() {
 
         <PageSubHeader>
             <a href={"https://objkt.com/profile/tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A/created?faContracts=KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton"}>
-                teia.art (ex Hic Et Nunc) 2021
+                teia.art (nicetnunc) 2021
             </a>
         </PageSubHeader>
 
