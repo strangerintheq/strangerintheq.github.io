@@ -1,13 +1,14 @@
 import React from "react";
 import {makeLink, NavLink} from "./NavLink";
 import {DivWithBackgroundImage} from "./DivWithBackgroundImage";
+import {randomHash} from "../tools";
 
 export function ProjectItem(
     {
         name,
         type,
         img,
-        hash = null,
+        hash = randomHash(type),
         c = null,
         r = null,
         link = null

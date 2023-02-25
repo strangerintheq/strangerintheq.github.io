@@ -6,6 +6,22 @@
 </head>
 <body>
 <script>
+    window.tokenData = {hash: "0x" + Array(64).fill(0).map(() => ((Math.random()*16)|0).toString(16)).join("")}
+    // console.log(tokenData.hash)
+    ;
+    (function () {
+        const parseHex = (hex, offset, len) => parseInt(hex.substr(offset, len), 16)
+        const prng = (hash, S, s, t) => {
+            S = new Uint32Array([0, 1, s = t = 2, 3].map(i => parseHex(hash, i * 8, 8)));
+            return (_) => (t = S[3], S[3] = S[2], S[2] = S[1], S[1] = s = S[0],
+                t ^= (t << 11), S[0] ^= t ^ t >>> 8 ^ s >>> 19, S[0] / 2 ** 32);
+        };
+        const prng2x = (hash, i = 0, a = prng(hash.substr(2)),
+                        b = prng(hash.substr(34))) => (_) => ++i % 2 ? a() : b();
+        Math.random = prng2x(tokenData.hash);
+    })();
+</script>
+<script>
     const colors = [
         ["#69d2e7", "#a7dbd8", "#e0e4cc", "#f38630", "#fa6900"],
         ["#fe4365", "#fc9d9a", "#f9cdad", "#c8c8a9", "#83af9b"],
