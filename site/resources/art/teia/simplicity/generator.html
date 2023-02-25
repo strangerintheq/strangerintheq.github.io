@@ -2,7 +2,6 @@
     <meta charset="UTF-8">
     <title>Simplicity</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:image" content="thumbnail.gif">
 </head>
 <body>
 <script>
@@ -207,6 +206,7 @@
 
         let w, h;
         function resize(){
+            console.log(innerWidth, innerHeight)
             if (innerWidth === w && innerHeight === h)
                 return
             w = canvas.width = innerWidth;
@@ -218,6 +218,7 @@
         function draw(){
             resize();
             gl.drawArrays(gl.TRIANGLES,0,3)
+            console.log('draw')
         }
 
         return {uf1, uf2, uf3, resize, draw}
@@ -460,7 +461,7 @@ void main() {
     }
 
     // addEventListener('pointerdown', e => (!e || e.button === 0) && newArt());
-    // addEventListener('resize', e => prog.draw());
+    addEventListener('resize', e => prog.draw());
     newArt();
 </script>
 
