@@ -14,8 +14,8 @@ export function GeneratorAsBackground({type, id, hash = null}) {
 
     useEffect(() => {
         code && setHtml(type === "fx-hash" ?
-            prepareFxHash(code, hash || randomAbHash()) :
-            prepareArtBlocks(code, hash || randomFxHash())
+            prepareFxHash(code, hash || randomFxHash()) :
+            prepareArtBlocks(code, hash || randomAbHash())
         );
     }, [code, hash, type]);
 

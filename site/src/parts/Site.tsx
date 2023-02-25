@@ -16,7 +16,8 @@ const globalStyle = `<style>
     --base-size: min(1600px, 100vw);
 }
 a, a:visited {
-    color: black
+    pointer-events: all;
+    color: black;
 }
 .text-shadow {
     text-shadow: 

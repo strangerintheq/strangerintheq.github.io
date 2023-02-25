@@ -5,7 +5,8 @@ export function PageWrapper(props) {
         width: `var(--base-size)`,
         margin: `0 calc(50vw - calc(var(--base-size) * 0.5))`,
         padding: `0 calc(var(--base-size) * 0.1)`,
-        overflow: `visible`
+        overflow: `visible`,
+        pointerEvents: "none",
     }}>
         {props.children}
     </div>

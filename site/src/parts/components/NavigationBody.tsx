@@ -11,7 +11,6 @@ export function NavigationBody({children=null}){
                 fontSize: "2.5rem",
                 marginTop: '1rem',
                 display: "flex",
-                pointerEvents: "all",
                 justifyContent: "space-between",
         }}>
             {children}

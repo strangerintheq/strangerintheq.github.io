@@ -11,7 +11,6 @@ export function FooterBody({children=null}){
                 fontSize: "2.5rem",
                 margin: '1rem 0',
                 display: "flex",
-                pointerEvents: "all",
                 justifyContent: "center",
         }}>
             {children}
