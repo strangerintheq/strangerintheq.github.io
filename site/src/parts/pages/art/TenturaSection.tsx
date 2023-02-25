@@ -1,6 +1,6 @@
 import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
-import {ProjectsGrid} from "../../components/ProjectsGrid";
+import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
 
 export function TenturaSection({isMobile}) {
@@ -18,7 +18,7 @@ export function TenturaSection({isMobile}) {
             {/*<a style={{float:"right"}} href={sitePath + '/tentura'}>ABOUT</a>*/}
         </PageSubHeader>
 
-        <ProjectsGrid ratio={1} isMobile={isMobile} rows={isMobile ? 4 : 2}>
+        <Grid ratio={1} isMobile={isMobile} rows={isMobile ? 4 : 2}>
             <ProjectItem
                 {...tentura}
                 c={isMobile ? "1/3" : "2/4"}
@@ -51,6 +51,6 @@ export function TenturaSection({isMobile}) {
                 hash={"0xa7ececac02b48d8f78121349382d77a6134f5d0a6d6f8e7df7afca27d6369a52"}
                 img={img + "265000269.png"}
             />
-        </ProjectsGrid>
+        </Grid>
     </>
 }

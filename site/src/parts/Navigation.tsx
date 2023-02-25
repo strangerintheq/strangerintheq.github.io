@@ -5,7 +5,7 @@ import {NavLink} from "./components/NavLink";
 export function Navigation({dark= false}) {
     return <NavigationBody>
         <div>
-            <NavLink to={""}>Q</NavLink>
+            <NavLink>Q</NavLink>
         </div>
         <div>
             <NavLink to={"page=about"}>about</NavLink>

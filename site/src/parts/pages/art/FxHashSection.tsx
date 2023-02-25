@@ -1,6 +1,6 @@
 import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
-import {ProjectsGrid} from "../../components/ProjectsGrid";
+import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
 
 export function FxHashSection({isMobile}) {
@@ -14,7 +14,7 @@ export function FxHashSection({isMobile}) {
             </a>
         </PageSubHeader>
 
-        <ProjectsGrid isMobile={isMobile} ratio={1} rows={isMobile ? 6 : 3}>
+        <Grid isMobile={isMobile} ratio={1} rows={isMobile ? 6 : 3}>
             <ProjectItem
                 type={"fx-hash"}
                 name={"Magic Ritual"}
@@ -127,6 +127,6 @@ export function FxHashSection({isMobile}) {
             {/*    hash={"ooTFacUMz6JeZMwdGWzf7XkuSYmdcv7QhbZXZhm5JGDt6JJbyh9"}*/}
             {/*    img={img + "QmQiLxQxKNcJaH17kzj27KDMkYYardx1q4o7v3pTvNHJGP"}*/}
             {/*/>*/}
-        </ProjectsGrid>
+        </Grid>
     </>
 }

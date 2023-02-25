@@ -1,10 +1,10 @@
 import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
-import {ProjectsGrid} from "../../components/ProjectsGrid";
+import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
 
 export function TeiaSection({isMobile}) {
-    const img = "/site/art/teia/"
+    const img = "site/art/teia/"
     const link = "https://objkt.com/asset/hicetnunc/"
     return <>
 
@@ -14,7 +14,7 @@ export function TeiaSection({isMobile}) {
             </a>
         </PageSubHeader>
 
-        <ProjectsGrid isMobile={isMobile} ratio={1} rows={isMobile ? 6 : 3}>
+        <Grid isMobile={isMobile} ratio={1} rows={isMobile ? 6 : 3}>
             <ProjectItem
                 type={"teia"}
                 name={"Needlework"}
@@ -87,6 +87,6 @@ export function TeiaSection({isMobile}) {
                 link={link + "274293"}
                 img={img + "steam-cells/preview.png"}
             />
-        </ProjectsGrid>
+        </Grid>
     </>
 }

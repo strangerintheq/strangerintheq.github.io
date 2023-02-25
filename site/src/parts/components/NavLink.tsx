@@ -1,10 +1,10 @@
 import React from "react";
 
-export function NavLink({to, children = null}) {
+export function NavLink({to = "", children = null}) {
     return <span style={{
         textDecoration: "underline",
         cursor: "pointer"
-    }} onClick={() => {
+    }} onPointerDown={() => {
         document.location.search = to;
     }}>{children}</span>
 }

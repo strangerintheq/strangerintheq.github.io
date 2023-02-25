@@ -1,6 +1,6 @@
 import React from "react";
-import {randomHash, sitePath} from "../tools";
-import {NavLink} from "./NavLink";
+import {makeLink, NavLink} from "./NavLink";
+import {DivWithBackgroundImage} from "./DivWithBackgroundImage";
 
 export function ProjectItem(
     {
@@ -15,27 +15,11 @@ export function ProjectItem(
 ) {
 
     const generator = name.toLowerCase().replaceAll(" ", "-");
-    const to = 'type=' + type +
-        "&generator" + generator +
-        "&hash=" + (hash || randomHash(type))
 
     return <div style={{gridColumn: c, gridRow: r}}>
-        <NavLink to={to}>
+        <NavLink to={makeLink({type, id: generator, hash, page: "generator"})}>
             <DivWithBackgroundImage img={img}/>
         </NavLink>
     </div>
-}
-
-function DivWithBackgroundImage({img}) {
-    const backgroundImage = `url(${img.startsWith("http") ? img : sitePath + img})`
-    return <div
-        style={{
-            backgroundImage,
-            height: '100%',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center center',
-            boxShadow: '0 0 3px 0 #9c9898'
-        }}
-    />
 }
 

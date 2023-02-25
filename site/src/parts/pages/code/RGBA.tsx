@@ -1,7 +1,7 @@
 import React from "react";
 import {PageSubHeader} from "../../components/PageSubHeader";
 import {PageText} from "../../components/PageText";
-import {ProjectsGrid} from "../../components/ProjectsGrid";
+import {Grid} from "../../components/Grid";
 
 export function RgbaSection() {
     return <>
@@ -15,13 +15,13 @@ export function RgbaSection() {
             Firstly created for using in my&nbsp;
             <a href={"https://codepen.io/collection/AWEWzK"}>codepen experiments</a>.
         </PageText>
-        <ProjectsGrid ratio={1} isMobile={false} rows={1}>
+        <Grid ratio={1} isMobile={false} rows={1}>
             <div style={{
             }} />
             <div style={{
             }}/>
             <div style={{
             }}/>
-        </ProjectsGrid>
+        </Grid>
     </>
 }

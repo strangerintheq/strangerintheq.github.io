@@ -19,7 +19,7 @@ export function GeneratorPage() {
     const hash = params.get("hash") || elseHash(type);
     const id = params.get("id");
 
-    const next = makeLink({type, id, hash: randomHash(type)});
+    const next = makeLink({type, id, page: "generator", hash: randomHash(type)});
 
     return <>
         <PageWrapper>

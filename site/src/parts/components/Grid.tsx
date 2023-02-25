@@ -1,6 +1,6 @@
 import React from "react";
 
-export function ProjectsGrid({children = null, ratio, isMobile, rows}) {
+export function Grid({children = null, ratio, isMobile, rows}) {
 
     const gap = isMobile ? 0.02 : 0.01;
     const cellSize = (0.8 - gap * (isMobile ? 1 : 3)) / (isMobile ? 2 : 4);

@@ -1,6 +1,6 @@
 import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
-import {ProjectsGrid} from "../../components/ProjectsGrid";
+import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
 
 export function SliceSection({isMobile}) {
@@ -20,7 +20,7 @@ export function SliceSection({isMobile}) {
             {/*<a style={{float:"right"}} href={sitePath + '/slice'}>ABOUT</a>*/}
         </PageSubHeader>
 
-        <ProjectsGrid isMobile={isMobile} rows={isMobile ? 4 : 2} ratio={1.618}>
+        <Grid isMobile={isMobile} rows={isMobile ? 4 : 2} ratio={1.618}>
             <ProjectItem
                 {...slice}
                 c={isMobile ? "1/3" : "2/4"}
@@ -53,5 +53,5 @@ export function SliceSection({isMobile}) {
                 hash={"0xfb031983bdfc22fb8e1c8956d6feb654dfef92b5a7f5de4b08e39681b0f68cd3"}
                 img={staging + "48000055.png"}
             />
-        </ProjectsGrid></>
+        </Grid></>
 }
