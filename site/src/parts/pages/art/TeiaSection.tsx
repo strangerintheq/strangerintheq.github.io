@@ -4,7 +4,7 @@ import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
 
 export function TeiaSection({isMobile}) {
-    const img = "site/art/teia/"
+    const img = "site/resources/art/teia/"
     const link = "https://objkt.com/asset/hicetnunc/"
     return <>
 

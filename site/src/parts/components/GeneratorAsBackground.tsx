@@ -7,7 +7,7 @@ export function GeneratorAsBackground({type, id, hash = null}) {
     const [code, setCode] = useState();
 
     useEffect(() => {
-        let url = 'site/art/' + type + '/' + id + '/generator.html';
+        let url = 'site/resources/art/' + type + '/' + id + '/generator.html';
         fetchCode(url).then(setCode);
         console.log(url)
     }, [id]);
