@@ -7,12 +7,12 @@ import {TenturaSection} from "./art/TenturaSection";
 import {FxHashSection} from "./art/FxHashSection";
 import {TeiaSection} from "./art/TeiaSection";
 import {PageWrapper} from "../components/PageWrapper";
-import {useMediaQuery} from "../hooks/useMediaQuery";
+import {MAX_WIDTH_980, useMediaQuery} from "../hooks/useMediaQuery";
 import {PageText} from "../components/PageText";
 
 
 export function ArtPage() {
-    const {matches: isMobile} = useMediaQuery("(max-width: 980px)");
+
     return <PageWrapper>
         <Navigation/>
         <PageHeader>Art</PageHeader>
@@ -25,9 +25,9 @@ export function ArtPage() {
             <br/><br/>
             Please enjoy!
         </PageText>
-        <SliceSection isMobile={isMobile}/>
-        <TenturaSection isMobile={isMobile}/>
-        <FxHashSection isMobile={isMobile}/>
-        <TeiaSection isMobile={isMobile}/>
+        <SliceSection />
+        <TenturaSection/>
+        <FxHashSection/>
+        <TeiaSection />
     </PageWrapper>
 }

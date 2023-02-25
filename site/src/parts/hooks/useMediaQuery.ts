@@ -1,5 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 
+export const MAX_WIDTH_980 = "(max-width: 980px)"
+
 export function useMediaQuery(query) {
     const queryRef = useRef(window.matchMedia(query))
     const [matches, setMatches] = useState(queryRef.current.matches)

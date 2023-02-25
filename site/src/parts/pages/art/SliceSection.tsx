@@ -2,8 +2,10 @@ import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
+import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
 
-export function SliceSection({isMobile}) {
+export function SliceSection() {
+    const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);
     const imgSize = 640;
     const mainNet = "https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_" + imgSize + ",q_auto/" +
         "https://artblocks-mainnet.s3.amazonaws.com/";

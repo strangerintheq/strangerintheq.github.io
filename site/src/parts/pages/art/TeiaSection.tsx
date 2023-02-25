@@ -2,8 +2,10 @@ import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
+import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
 
-export function TeiaSection({isMobile}) {
+export function TeiaSection() {
+    const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);
     const img = "site/resources/art/teia/"
     const link = "https://objkt.com/asset/hicetnunc/"
     return <>

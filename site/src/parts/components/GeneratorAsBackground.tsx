@@ -23,6 +23,7 @@ export function GeneratorAsBackground({type, id, hash = null}) {
         {html ? <iframe
             src={"data:text/html," + encodeURIComponent(html)}
             style={{
+                pointerEvents: "all",
                 backgroundImage: `url(data:image/svg+xml,${encodeURIComponent(`
                     <svg 
                         viewBox="${[-innerWidth/2,-innerHeight/2, innerWidth, innerHeight]}" 

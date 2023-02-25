@@ -15,11 +15,20 @@ const globalStyle = `<style>
     overflow-x: hidden;
     --base-size: min(1600px, 100vw);
 }
-a, a:visited {
+.codepen {
+    height: 100%;
+    width: 100%;
+}
+body {
+    pointer-events: none;
+}
+a, a:visited, iframe {
     pointer-events: all;
+}
+a, a:visited {
     color: black;
 }
-.text-shadow {
+.text-outline {
     text-shadow: 
         -1px -1px 0 #fff, 
         +1px -1px 0 #fff, 

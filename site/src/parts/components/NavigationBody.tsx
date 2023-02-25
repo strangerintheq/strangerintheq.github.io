@@ -5,7 +5,7 @@ export function NavigationBody({children=null}){
         margin: '0 -1rem'
     }}>
         <div
-            className={"text-shadow"}
+            className={"text-outline"}
             style={{
                 padding: "0.5rem 1rem",
                 fontSize: "2.5rem",

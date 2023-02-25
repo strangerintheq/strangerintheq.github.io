@@ -2,8 +2,10 @@ import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
+import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
 
-export function FxHashSection({isMobile}) {
+export function FxHashSection() {
+    const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);
     let link = "https://www.fxhash.xyz/generative/"
     let img = "https://media.fxhash.xyz/w_768/";
     return <>
