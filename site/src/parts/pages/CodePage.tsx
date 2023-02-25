@@ -1,18 +1,17 @@
 import React from "react";
 import {PageWrapper} from "../components/PageWrapper";
-import {Navigation} from "../components/Navigation";
-import {GeneratorAsBackground} from "../components/GeneratorAsBackground";
+import {Navigation} from "../Navigation";
+import {PageHeader} from "../components/PageHeader";
+import {RgbaSection} from "./code/RGBA";
+import {HareAndCarrotsSection} from "./code/HareAndCarrotsSection";
 
 export function CodePage() {
     return <>
         <PageWrapper>
             <Navigation dark={false}/>
-            <div style={{fontSize: '1.5rem', marginTop: "2rem"}}>
-                I like to create stuff for myself, so there are several
-            </div>
-            <div style={{fontSize: '1.2rem', marginTop: "2rem"}}>
-
-            </div>
+            <PageHeader>Code</PageHeader>
+            <RgbaSection/>
+            <HareAndCarrotsSection/>
         </PageWrapper>
     </>
 }

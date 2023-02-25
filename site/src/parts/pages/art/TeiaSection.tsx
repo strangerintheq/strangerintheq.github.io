@@ -1,19 +1,18 @@
 import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {ProjectsGrid} from "../../components/ProjectsGrid";
-import {sitePath} from "../../vars";
-import {ProjectSectionHeader} from "../../components/ProjectSectionHeader";
+import {PageSubHeader} from "../../components/PageSubHeader";
 
 export function TeiaSection({isMobile}) {
     const img = "/site/art/teia/"
     const link = "https://objkt.com/asset/hicetnunc/"
     return <>
 
-        <ProjectSectionHeader>
+        <PageSubHeader>
             <a href={"https://objkt.com/profile/tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A/created?faContracts=KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton"}>
                 teia.art (ex Hic Et Nunc) 2021
             </a>
-        </ProjectSectionHeader>
+        </PageSubHeader>
 
         <ProjectsGrid isMobile={isMobile} ratio={1} rows={isMobile ? 6 : 3}>
             <ProjectItem

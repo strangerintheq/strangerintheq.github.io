@@ -1,18 +1,18 @@
 import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {ProjectsGrid} from "../../components/ProjectsGrid";
-import {ProjectSectionHeader} from "../../components/ProjectSectionHeader";
+import {PageSubHeader} from "../../components/PageSubHeader";
 
 export function FxHashSection({isMobile}) {
     let link = "https://www.fxhash.xyz/generative/"
     let img = "https://media.fxhash.xyz/w_768/";
     return <>
 
-        <ProjectSectionHeader>
+        <PageSubHeader>
             <a href={"https://www.fxhash.xyz/u/StrangerintheQ"}>
                 fx(hash) 2022-2023
             </a>
-        </ProjectSectionHeader>
+        </PageSubHeader>
 
         <ProjectsGrid isMobile={isMobile} ratio={1} rows={isMobile ? 6 : 3}>
             <ProjectItem

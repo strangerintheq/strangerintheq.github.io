@@ -1,4 +1,4 @@
-import {many} from "../tools";
+import {many} from "../../tools";
 import {rnd} from "./framework";
 import {NeuralInterfaceSettings} from "./newSettings";
 

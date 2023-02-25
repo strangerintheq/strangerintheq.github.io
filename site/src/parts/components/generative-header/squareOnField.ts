@@ -1,5 +1,5 @@
 import {rnd} from "./framework";
-import {many} from "../tools";
+import {many} from "../../tools";
 import {NeuralInterfaceFlowField} from "./createField";
 import {NeuralInterfaceSettings} from "./newSettings";
 

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {fetchCode, prepareArtBlocks, prepareFxHash, randomAbHash, randomFxHash} from "../tools";
-import {sitePath} from "../vars";
+import {fetchCode, prepareArtBlocks, prepareFxHash, randomAbHash, randomFxHash, sitePath} from "../tools";
 
 export function GeneratorAsBackground({type, id, hash = null}) {
 
@@ -8,15 +7,15 @@ export function GeneratorAsBackground({type, id, hash = null}) {
     const [code, setCode] = useState();
 
     useEffect(() => {
-        let url = sitePath + '/site/art/' + type + '/' + id + '/generator.html';
+        let url = 'site/art/' + type + '/' + id + '/generator.html';
         fetchCode(url).then(setCode);
         console.log(url)
     }, [id]);
 
     useEffect(() => {
-        code && setHtml(type === "artblocks" ?
-            prepareArtBlocks(code, hash || randomAbHash()) :
-            prepareFxHash(code, hash || randomFxHash())
+        code && setHtml(type === "fx-hash" ?
+            prepareFxHash(code, hash || randomAbHash()) :
+            prepareArtBlocks(code, hash || randomFxHash())
         );
     }, [code, hash, type]);
 

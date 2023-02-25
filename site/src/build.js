@@ -3,7 +3,7 @@
     await require("esbuild").build({
         entryPoints: [`./index.tsx`],
         bundle: true,
-        minify: false,
+        minify: true,
         treeShaking: true,
         target: 'ESNext',
         outfile: "../bundle.js",

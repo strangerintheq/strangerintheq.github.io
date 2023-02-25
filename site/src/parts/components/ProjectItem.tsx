@@ -1,7 +1,6 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import {randomAbHash, randomFxHash} from "../tools";
-import {sitePath} from "../vars";
+import {randomHash, sitePath} from "../tools";
+import {NavLink} from "./NavLink";
 
 export function ProjectItem(
     {
@@ -15,14 +14,15 @@ export function ProjectItem(
     }
 ) {
 
-    const to = sitePath + '/site/art/' + type +
-        "/" + name.toLowerCase().replaceAll(" ", "-") +
-        "/" + (hash || makeHash(type))
+    const generator = name.toLowerCase().replaceAll(" ", "-");
+    const to = 'type=' + type +
+        "&generator" + generator +
+        "&hash=" + (hash || randomHash(type))
 
     return <div style={{gridColumn: c, gridRow: r}}>
-        <Link to={to}>
+        <NavLink to={to}>
             <DivWithBackgroundImage img={img}/>
-        </Link>
+        </NavLink>
     </div>
 }
 
@@ -39,8 +39,3 @@ function DivWithBackgroundImage({img}) {
     />
 }
 
-function makeHash(type) {
-    if (type === "artblocks")
-        return randomAbHash()
-    return randomFxHash()
-}

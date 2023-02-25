@@ -9,7 +9,7 @@ import {
 } from "./framework";
 
 import {cos, rnd, sin} from "./framework";
-import {many} from "../tools";
+import {many} from "../../tools";
 
 export function tick(field, p, w, h,
                      settings:NeuralInterfaceSettings,

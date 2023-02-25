@@ -1,4 +1,4 @@
-import {many} from "../tools";
+import {many} from "../../tools";
 
 type C2d = CanvasRenderingContext2D;
 type Color = string;
@@ -9,10 +9,6 @@ export const {
 } = Math
 
 const TAU = PI*2;
-
-export const randomHash = (randomFunc = Math.random) => {
-    return "0x" + many(64, () => ((randomFunc()*16)|0).toString(16)).join("")
-}
 
 export const parseHex = (hex, offset, len) =>
     parseInt(hex.substr(offset, len), 16)

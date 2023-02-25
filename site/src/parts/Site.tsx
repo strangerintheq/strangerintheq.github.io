@@ -1,53 +1,53 @@
-import React from "react";
-import {RouterProvider} from "react-router";
-import {createBrowserRouter} from "react-router-dom";
+import React, {useEffect, useState} from "react";
 import {GeneratorPage} from "./pages/GeneratorPage";
-import {ArtPage} from "./pages/art/ArtPage";
+import {ArtPage} from "./pages/ArtPage";
 import {HomePage} from "./pages/HomePage";
-import {sitePath} from "./vars";
 import {AboutPage} from "./pages/AboutPage";
 import {CodePage} from "./pages/CodePage";
 
-const routes = [
-    {
-        path: sitePath + "/site/art/:type/:id/:hash",
-        element: <GeneratorPage/>,
-    },
-    {
-        path: sitePath + "/site/art",
-        element: <ArtPage/>,
-    },
-    {
-        path: sitePath + "/site/about",
-        element: <AboutPage/>,
-    },
-    {
-        path: sitePath + "/site/code",
-        element: <CodePage/>,
-    },
-    {
-        path: sitePath + "/*",
-        exact: false,
-        element: <HomePage/>,
-    }
-];
-
-const router = createBrowserRouter(routes);
-
 const globalStyle = `<style>
-    * {
-        margin: 0;
-        font-weight: unset;
-        box-sizing: border-box;
-        font-family: "Inter", sans-serif;
-        overflow-x: hidden;
-        --base-size: min(1600px, 100vw);
-    }
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
+* {
+    margin: 0;
+    font-weight: unset;
+    box-sizing: border-box;
+    font-family: "Source Code Pro", monospace;
+    overflow-x: hidden;
+    --base-size: min(1600px, 100vw);
+}
+a, a:visited {
+    color: black
+}
+.text-shadow {
+    text-shadow: 
+        -1px -1px 0 #fff, 
+        +1px -1px 0 #fff, 
+        -1px +1px 0 #fff, 
+        +1px +1px 0 #fff
+}
 </style>`;
 
 export function Site() {
     return <>
         <div dangerouslySetInnerHTML={{__html: globalStyle}}/>
-        <RouterProvider router={router}/>
+        <Router />
     </>
+}
+
+function Router() {
+
+    const [page, setPage] = useState();
+
+    useEffect(() => {
+        let urlSearchParams = new URLSearchParams(document.location.search);
+        setPage(urlSearchParams.get("page"));
+    }, [document.location.search]);
+
+    if (page === "art") return <ArtPage />
+    if (page === "about") return <AboutPage />
+    if (page === "generator") return <GeneratorPage />
+    if (page === "art") return <ArtPage />
+    if (page === "code") return <CodePage />
+
+    return <HomePage/>;
 }

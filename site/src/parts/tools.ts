@@ -1,3 +1,7 @@
+export const sitePath =
+    document.location.href.includes('localhost') ?
+        "strangerintheq.github.io/" : "";
+
 export function many(n, f) {
     return [...Array(n|0)].map((_,i) => f(i));
 }
@@ -18,6 +22,10 @@ export function randomAbHash() {
     return "0x" + many(64, () => pick("0123456789abcdef")).join("")
 }
 
+export function randomHash(type) {
+    return type === "fx-hash" ? randomFxHash() : randomAbHash();
+}
+
 export function prepareFxHash(html, hash) {
     return html.split("\n").map(str => {
         if (str.includes("var fxhash ="))
@@ -34,17 +42,3 @@ export function prepareArtBlocks(html, hash) {
     }).join("\n");
 }
 
-export function makeHtml(code, hash){
-    return "data:text/html," + encodeURIComponent(`<!DOCTYPE html>
-<html lang="en">
-<head>
-<style>
-    html {height: 100%;}
-    body {min-height: 100%;margin: 0;padding: 0;}
-    canvas {padding: 0;margin: auto;display: block;position: absolute;top: 0;bottom: 0;left: 0;right: 0;}
-</style>
-<script>window.tokenData = ${JSON.stringify({hash})}</script>
-<script>${code}</script>
-</head>
-</html>`);
-}

@@ -2,7 +2,7 @@ import {frameOnField} from "./frameOnField";
 import {circleOnField} from "./circleOnField";
 import {addSquareOnField, squareOnField} from "./squareOnField";
 import {cos, fillRect, rnd, sin} from "./framework";
-import {many} from "../tools";
+import {many} from "../../tools";
 import {NeuralInterfaceSettings} from "./newSettings";
 
 
