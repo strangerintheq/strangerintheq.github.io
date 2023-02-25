@@ -3,6 +3,7 @@ import {ProjectItem} from "../../components/ProjectItem";
 import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
 import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
+import {GenerativeIcon} from "../../components/GenerativeIcon";
 
 export function TeiaSection() {
     const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);
@@ -12,7 +13,7 @@ export function TeiaSection() {
 
         <PageSubHeader>
             <a href={"https://objkt.com/profile/tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A/created?faContracts=KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton"}>
-                teia.art (nicetnunc) 2021
+                teia (nicetnunc) 2021
             </a>
         </PageSubHeader>
 

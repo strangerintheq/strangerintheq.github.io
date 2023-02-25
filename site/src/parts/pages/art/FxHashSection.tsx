@@ -3,6 +3,7 @@ import {ProjectItem} from "../../components/ProjectItem";
 import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
 import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
+import {GenerativeIcon} from "../../components/GenerativeIcon";
 
 export function FxHashSection() {
     const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);

@@ -2,6 +2,7 @@ import React from "react";
 import {PageSubHeader} from "../../components/PageSubHeader";
 import {PageText} from "../../components/PageText";
 import {PageWrapper} from "../../components/PageWrapper";
+import {GenerativeIcon} from "../../components/GenerativeIcon";
 
 export function CollectTheDotsSection() {
     return <>

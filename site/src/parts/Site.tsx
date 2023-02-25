@@ -12,9 +12,10 @@ const globalStyle = `<style>
     font-weight: unset;
     box-sizing: border-box;
     font-family: "Source Code Pro", monospace;
-    overflow-x: hidden;
     --base-size: min(1600px, 100vw);
-  
+}
+body {
+    overflow-x: hidden;
 }
 .codepen {
     height: 100%;

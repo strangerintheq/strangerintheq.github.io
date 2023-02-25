@@ -3,6 +3,7 @@ import {PageSubHeader} from "../../components/PageSubHeader";
 import {PageText} from "../../components/PageText";
 import {Grid} from "../../components/Grid";
 import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
+import {GenerativeIcon} from "../../components/GenerativeIcon";
 
 export function JustLibSection() {
     const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);
@@ -14,7 +15,9 @@ export function JustLibSection() {
             Collection of javascript functions to faster create an generative artworks.
             Created to participate in&nbsp;
             <a href={"https://genuary.art/"}>genuary</a>
-            &nbsp;2023 event
+            &nbsp;2023 event.
+            Gives ability to use normalized cartesian coordinates both in shaders and 2d canvas.
+            Simplifies using of shader uniforms and providing random numbers in compile-time into shaders.
         </PageText>
         <Grid ratio={0.75} isMobile={isMobile} rows={isMobile ? 4 : 2}>
             <iframe className={"codepen"}
