@@ -114,10 +114,10 @@ function hexToRgbArray(hex) {
 function randomPalette() {
     let index;
     do {
-        generator = Math.floor(Math.random() * colors.length);
-    } while ([84, 95].indexOf(generator) > -1);
+        index = Math.floor(Math.random() * colors.length);
+    } while ([84, 95].indexOf(index) > -1);
     // console.log('palette', index)
-    return colors[generator];
+    return colors[index];
 }
 
 function normalizeColorArray(c) {

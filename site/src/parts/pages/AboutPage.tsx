@@ -14,11 +14,11 @@ export function AboutPage() {
                 Hello there! I'm Stranger in the Q and i'm making art with code.
             </PageSubHeader>
             <PageText>
-                I have been a software developer for about 2 decades now.
-                I develop different user interfaces and other things related to computer graphics.
-                At some point I started creating images with code to teach myself math and algorithms.
-                As time went on I learned more about it and became more interested in it.
-                That's how I realized that it's an art, a&nbsp;
+                I have been working as a software developer for about 2 decades now.
+                I develop various user interfaces and other things related to computer graphics.
+                At one point I started creating images using code to teach myself math and algorithms.
+                Over time, I learned more about it and became very interested in it.
+                That's how I realized it was an art, a&nbsp;
                 <span style={{fontWeight: "bold"}}>Generative Art</span>.
             </PageText>
         </PageWrapper>
