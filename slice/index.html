@@ -63,20 +63,20 @@
             .separator {height: calc(var(--base-size) * 0.03);}
             .text-large {font-size: calc(var(--base-size) * 0.1);}
             .text-medium {font-size: calc(var(--base-size) * 0.045);}
-            .text {font-size: calc(var(--base-size) * 0.035);}
+            .text {font-size: calc(var(--base-size) * 0.037);}
             .ico-4 {max-width: calc(var(--base-size) * 0.06)}
             .grid {
                 grid-template-columns: repeat(6, var(--w));
-                grid-template-rows: repeat(35, var(--h));
+                grid-template-rows: repeat(36, var(--h));
             }
             .section-1 {grid-column: 2/6; grid-row: 2/5;}
             .section-2 {grid-column: 2/6; grid-row: 6/10;}
             .section-3 {grid-column: 2/6; grid-row: 11/15;}
-            .section-4 {grid-column: 2/6; grid-row: 16/21;}
-            .section-5 {grid-column: 2/6; grid-row: 22/26;}
-            .section-6 {grid-column: 2/6; grid-row: 27/29;}
-            .section-7 {grid-column: 2/6; grid-row: 30/33;}
-            .section-8 {grid-column: 2/6; grid-row: 34/35;}
+            .section-4 {grid-column: 2/6; grid-row: 16/22;}
+            .section-5 {grid-column: 2/6; grid-row: 23/27;}
+            .section-6 {grid-column: 2/6; grid-row: 28/30;}
+            .section-7 {grid-column: 2/6; grid-row: 31/34;}
+            .section-8 {grid-column: 2/6; grid-row: 35/36;}
         }
 
         /* */
@@ -396,7 +396,6 @@
     </section>
     <section class="section-8" style="text-align: center!important;" >
         <div class="separator"></div>
-        <div class="separator"></div>
 
         <div class="text-medium">
             <a href="https://strangerintheq.art">strangerintheq.art</a>
@@ -458,7 +457,7 @@
     }
 
     (async function (){
-        const count = innerWidth > 980 ? 175 : 106;
+        const count = innerWidth > 980 ? 175 : 108;
         let hashesList = Object.values(hashes)
         hashesList = [...Array(count)].map(() => "0x" + [...Array(64)].map(() => ((Math.random()*16)|0).toString(16)));
         hashesList.forEach(placeholder)
