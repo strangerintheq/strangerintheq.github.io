@@ -6,15 +6,7 @@ import {AboutPage} from "./pages/AboutPage";
 import {CodePage} from "./pages/CodePage";
 
 const globalStyle = `<style>
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
-* {
-  
-    margin: 0;
-    font-weight: unset;
-    box-sizing: border-box;
-    font-family: "Source Code Pro", monospace;
-    --base-size: min(1600px, 100vw);
-}
+
 body {
     overflow-x: hidden;
     overscroll-behavior: none;
