@@ -27,21 +27,21 @@ const generators = [
     ["teia", "warp-engine"],
 ];
 
-export function HomePage() {
+export function HomePage({route=null}) {
     // console.log('render home page')
     const [generator, setGenerator] = useState<{ type; id }>()
 
     useEffect(() => {
         const [type, id] = generators[(Math.random() * generators.length) | 0];
         setGenerator({type, id});
-    }, [])
+    }, [route])
 
-    return <Stack>
+    return <>
         {generator && <GeneratorFrame id={generator.id} />}
         <LoaderMask/>
         <PageWrapper>
             <Navigation dark={true}/>
         </PageWrapper>
-    </Stack>
+    </>
 
 }

@@ -14,7 +14,7 @@ const globalStyle = `<style>
 }
 body {
     overflow-x: hidden;
-    overscroll-behavior: none;
+    /*overscroll-behavior: none;*/
 }
 .separator {
     height: 1rem;
@@ -51,6 +51,11 @@ a, a:visited {
     background: black;
     transition: 200ms;
     display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
 }
 .loaded .backdrop {
     background: transparent;
@@ -95,5 +100,5 @@ function Router() {
         return <ArtPage />
     if (route.startsWith("?code"))
         return <CodePage />
-    return <HomePage />;
+    return <HomePage route={route}/>;
 }

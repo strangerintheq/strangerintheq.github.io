@@ -14,7 +14,7 @@ export function GeneratorPage({route}) {
     const [,id,hash] = route.split("/")
     const next = "art/" + id + "/" + randomHash(ProjectsTypes[id]);
 
-    return <Stack>
+    return <>
         <GeneratorFrame id={id} hash={hash}/>
         <LoaderMask/>
         <PageWrapper>
@@ -31,7 +31,7 @@ export function GeneratorPage({route}) {
                 </FooterBody>
             </div>
         </PageWrapper>
-    </Stack>
+    </>
 }
 
 

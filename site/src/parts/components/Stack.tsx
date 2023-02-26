@@ -2,11 +2,13 @@
 import React from "react";
 
 export function Stack({children = null}) {
-    return <div style={{display: "grid", lineHeight: 0}}>
+    let style = {display: "absolute", top:0, left: 0,
+        lineHeight: 0, width:"100vw", height:'100vh'};
+    return <>
         {children && [...children].map(node => {
-            return <div style={{gridColumn: 1, gridRow: 1}}>
+            return <div style={style}>
                 {node}
             </div>
         })}
-    </div>
+    </>
 }

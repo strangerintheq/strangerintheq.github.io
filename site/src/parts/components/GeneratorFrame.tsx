@@ -29,22 +29,26 @@ export function GeneratorFrame({id, hash = null}) {
         }, 200)
     }, [code, hash, type]);
 
-    return <>
-        {html ? <iframe
-            onLoad={() => document.body.classList.add("loaded")}
-            src={"data:text/html," + encodeURIComponent(html)}
-            style={{
-                backgroundColor: "black",
-                pointerEvents: "all",
-                // backgroundImage: `url(data:image/svg+xml,${encodeURIComponent(svgLoadingText())})`,
-                zIndex: -2,
-                border: 0,
-                width: '100vw',
-                height: '100vh',
-                display: "block"
-            }}
-        /> : null}
-    </>
+    if (!html)
+        return null
+
+    return <iframe
+        onLoad={() => document.body.classList.add("loaded")}
+        src={"data:text/html," + encodeURIComponent(html)}
+        style={{
+            backgroundColor: "black",
+            pointerEvents: "all",
+            // backgroundImage: `url(data:image/svg+xml,${encodeURIComponent(svgLoadingText())})`,
+            zIndex: -2,
+            border: 0,
+            width: '100vw',
+            height: '100vh',
+            display: "block",
+            position: "fixed",
+            top: 0,
+            left: 0
+        }}
+    />
 }
 
 function svgLoadingText() {

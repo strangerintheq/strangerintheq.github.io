@@ -5,7 +5,7 @@ import {GenerativeIcon} from "./components/GenerativeIcon";
 
 export function Navigation({dark= false}) {
     return <NavigationBody>
-        <div style={{marginLeft:"0rem"}}>
+        <div style={{marginLeft:"0rem", userSelect: 'none'}}>
             <NavLink>
                 <GenerativeIcon size={"2.5rem"}/>
             </NavLink>
