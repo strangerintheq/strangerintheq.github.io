@@ -37,10 +37,11 @@ export function GeneratorFrame({id, hash = null}) {
                 backgroundColor: "black",
                 pointerEvents: "all",
                 // backgroundImage: `url(data:image/svg+xml,${encodeURIComponent(svgLoadingText())})`,
-                zIndex: -1,
+                zIndex: -2,
                 border: 0,
                 width: '100vw',
-                height: '100vh'
+                height: '100vh',
+                display: "block"
             }}
         /> : null}
     </>

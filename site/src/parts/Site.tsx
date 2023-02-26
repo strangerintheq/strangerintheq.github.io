@@ -46,10 +46,11 @@ a, a:visited {
         +1px +1px 0 #fff
 }
 .backdrop {
-    /*z-index: 1;*/
+    z-index: -1;
     pointer-events: none;
     background: black;
     transition: 200ms;
+    display: block;
 }
 .loaded .backdrop {
     background: transparent;
