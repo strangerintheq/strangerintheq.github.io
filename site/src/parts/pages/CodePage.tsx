@@ -19,9 +19,10 @@ export function CodePage() {
             </PageText>
             <JustLibSection/>
             <HareAndCarrotsSection/>
-            <CollectTheDotsSection/>
-            <ComplexplorerSection/>
             <RgbaSection/>
+            <ComplexplorerSection/>
+            <CollectTheDotsSection/>
+            <PageText>&nbsp;</PageText>
         </PageWrapper>
     </>
 }

@@ -18,8 +18,13 @@ export function RgbaSection() {
             <ExternalLink href={"https://codepen.io/collection/AWEWzK"}>codepen experiments</ExternalLink>
         </PageText>
         <Grid>
-            <DivWithBackgroundImage/>
-            <DivWithBackgroundImage/>
+            <a href="https://codepen.io/strangerintheq/pen/xxRpowV">
+                <DivWithBackgroundImage img={"site/resources/code/rgba-cat-spiral.jpg"}/>
+            </a>
+            <a href="https://codepen.io/strangerintheq/pen/dyOvmvo">
+                <DivWithBackgroundImage img={"site/resources/code/superformula.jpg"}/>
+            </a>
+
             <DivWithBackgroundImage/>
             <DivWithBackgroundImage/>
         </Grid>

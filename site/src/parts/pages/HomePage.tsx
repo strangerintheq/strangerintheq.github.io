@@ -34,6 +34,7 @@ export function HomePage({route=null}) {
     useEffect(() => {
         const [type, id] = generators[(Math.random() * generators.length) | 0];
         setGenerator({type, id});
+        document.title = "Q - " + id
     }, [route])
 
     return <>

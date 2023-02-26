@@ -27,6 +27,7 @@ export function GeneratorFrame({id, hash = null}) {
                 prepareArtBlocks(code, hash || randomAbHash())
             );
         }, 200)
+        document.title = "Q - " + id
     }, [code, hash, type]);
 
     if (!html)
