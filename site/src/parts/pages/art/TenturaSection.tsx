@@ -3,7 +3,7 @@ import {ProjectItem} from "../../components/ProjectItem";
 import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
 import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
-import {GenerativeIcon} from "../../components/GenerativeIcon";
+import {ExternalLink} from "../../components/ExternalLink";
 
 export function TenturaSection() {
     const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);
@@ -17,8 +17,9 @@ export function TenturaSection() {
     }
     return <>
         <PageSubHeader>
-            <a href={"https://www.artblocks.io/collections/presents/projects/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/265"}>Tentura @ ArtBlocks 2022</a>
-            {/*<a style={{float:"right"}} href={sitePath + '/tentura'}>ABOUT</a>*/}
+            <ExternalLink
+                href={"https://www.artblocks.io/collections/presents/projects/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/265"}>Tentura
+                @ ArtBlocks 2022</ExternalLink>
         </PageSubHeader>
 
         <Grid ratio={1} rows={isMobile ? 4 : 2}>

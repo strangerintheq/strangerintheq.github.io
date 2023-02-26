@@ -2,6 +2,7 @@ import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
+import { ExternalLink } from "../../components/ExternalLink";
 
 export function FxHashSection() {
     let link = "https://www.fxhash.xyz/generative/"
@@ -9,9 +10,9 @@ export function FxHashSection() {
     return <>
 
         <PageSubHeader>
-            <a href={"https://www.fxhash.xyz/u/StrangerintheQ"}>
+            <ExternalLink href={"https://www.fxhash.xyz/u/StrangerintheQ"}>
                 fx(hash) 2022-2023
-            </a>
+            </ExternalLink>
         </PageSubHeader>
 
         <Grid>

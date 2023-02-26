@@ -7,7 +7,6 @@ import {TenturaSection} from "./art/TenturaSection";
 import {FxHashSection} from "./art/FxHashSection";
 import {TeiaSection} from "./art/TeiaSection";
 import {PageWrapper} from "../components/PageWrapper";
-import {MAX_WIDTH_980, useMediaQuery} from "../hooks/useMediaQuery";
 import {PageText} from "../components/PageText";
 
 

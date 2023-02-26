@@ -4,6 +4,7 @@ import {Navigation} from "../Navigation";
 import {PageHeader} from "../components/PageHeader";
 import {PageText} from "../components/PageText";
 import {PageSubHeader} from "../components/PageSubHeader";
+import {ExternalLink} from "../components/ExternalLink";
 
 export function AboutPage() {
     return <>
@@ -25,13 +26,14 @@ export function AboutPage() {
                 Links
             </PageSubHeader>
             <PageText>
-                <div style={{display: 'flex', flexDirection:"column", gap:'1em'}}>
-                    <a href={"https://twitter.com/stranger_intheq"}>Twitter</a>
-                    <a href={"https://www.artblocks.io/user/0xe0324d6981ccb5b62bdd235366dee6172e0ef116"}>Art Blocks</a>
-                    <a href={"https://www.fxhash.xyz/u/StrangerintheQ"}>Fx(hash)</a>
-                    <a href={"https://t.me/s/mathimages"}>Telegram</a>
-                    <a href={"https://codepen.io/strangerintheq"}>Codepen</a>
-                    <a href={"https://github.com/strangerintheq/"}>Github</a>
+                <div style={{display: 'flex', flexDirection: "column", gap: '1em'}}>
+                    <ExternalLink href={"https://twitter.com/stranger_intheq"}>Twitter</ExternalLink>
+                    <ExternalLink href={"https://www.artblocks.io/user/0xe0324d6981ccb5b62bdd235366dee6172e0ef116"}>Art
+                        Blocks</ExternalLink>
+                    <ExternalLink href={"https://www.fxhash.xyz/u/StrangerintheQ"}>Fx(hash)</ExternalLink>
+                    <ExternalLink href={"https://t.me/s/mathimages"}>Telegram</ExternalLink>
+                    <ExternalLink href={"https://codepen.io/strangerintheq"}>Codepen</ExternalLink>
+                    <ExternalLink href={"https://github.com/strangerintheq/"}>Github</ExternalLink>
                 </div>
 
             </PageText>

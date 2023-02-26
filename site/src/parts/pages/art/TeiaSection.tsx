@@ -2,6 +2,7 @@ import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
+import {ExternalLink} from "../../components/ExternalLink";
 
 export function TeiaSection() {
     const img = "site/resources/art/teia/"
@@ -9,9 +10,9 @@ export function TeiaSection() {
     return <>
 
         <PageSubHeader>
-            <a href={"https://objkt.com/profile/tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A/created?faContracts=KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton"}>
+            <ExternalLink href={"https://objkt.com/profile/tz2MHcnM7fEVtExELMPBZb5njDweqMGvbn8A/created?faContracts=KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton"}>
                 teia (nicetnunc) 2021
-            </a>
+            </ExternalLink>
         </PageSubHeader>
 
         <Grid>

@@ -3,6 +3,7 @@ import {ProjectItem} from "../../components/ProjectItem";
 import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
 import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
+import {ExternalLink} from "../../components/ExternalLink";
 
 export function SliceSection() {
     const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);
@@ -18,8 +19,7 @@ export function SliceSection() {
     }
     return <>
         <PageSubHeader>
-            <a href={"https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419"}>SL/CE @ ArtBlocks 2023</a>
-            {/*<a style={{float:"right"}} href={sitePath + '/slice'}>ABOUT</a>*/}
+            <ExternalLink href={"https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419"}>SL/CE @ ArtBlocks 2023</ExternalLink>
         </PageSubHeader>
 
         <Grid rows={isMobile ? 4 : 2} ratio={1.618}>

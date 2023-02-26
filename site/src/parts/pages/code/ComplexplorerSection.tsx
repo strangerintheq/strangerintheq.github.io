@@ -1,17 +1,16 @@
 import React from "react";
 import {PageSubHeader} from "../../components/PageSubHeader";
 import {PageText} from "../../components/PageText";
-import {PageWrapper} from "../../components/PageWrapper";
-import {GenerativeIcon} from "../../components/GenerativeIcon";
 import {Grid} from "../../components/Grid";
 import {DivWithBackgroundImage} from "../../components/DivWithBackgroundImage";
-import {NavLink} from "../../components/NavLink";
+import {ExternalLink} from "../../components/ExternalLink";
 
 export function ComplexplorerSection() {
 
     return <>
         <PageSubHeader>
-            <a href={"https://strangerintheq.art/mandelbrot.html"}>compleXplorer 0</a>
+            <ExternalLink href={"https://strangerintheq.art/mandelbrot.html"}>compleXplorer 0</ExternalLink>
+
         </PageSubHeader>
         <PageText>
             Tool for exploring mandelbrot-like complex fractals. Yo can write a formula using
@@ -19,7 +18,7 @@ export function ComplexplorerSection() {
             subtraction, multiplication, division etc. While you exploring - you can copy a
             permanent link for the current view.
             Coloring taken from&nbsp;
-            <a href={"https://iquilezles.org/articles/msetsmooth/"}>Inigo Quilez article</a>.
+            <ExternalLink href={"https://iquilezles.org/articles/msetsmooth/"}>Inigo Quilez article</ExternalLink>.
         </PageText>
         <Grid>
             <a href={"https://bit.ly/3cINX73"}>
