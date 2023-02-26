@@ -4,6 +4,7 @@ import {PageText} from "../../components/PageText";
 import {Grid} from "../../components/Grid";
 import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
 import {ExternalLink} from "../../components/ExternalLink";
+import {DivWithBackgroundImage} from "../../components/DivWithBackgroundImage";
 
 export function JustLibSection() {
     const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);
@@ -19,31 +20,31 @@ export function JustLibSection() {
             Gives ability to use normalized cartesian coordinates both in shaders and 2d canvas.
             Simplifies using of shader uniforms and providing random numbers in compile-time into shaders.
         </PageText>
-        <Grid ratio={0.75} rows={isMobile ? 4 : 2}>
-            <iframe className={"codepen"}
-                    style={{gridColumn: '1/3', gridRow: '1/3'}}
-                    scrolling="no" title="Genuary 4 - Intersections"
-                    src="https://codepen.io/strangerintheq/embed/vYaXVwL?default-tab=result&editable=true"
-                    frameBorder="no" loading="lazy" allowTransparency="true" allowFullScreen="true">
-                See the Pen <a href="https://codepen.io/strangerintheq/pen/vYaXVwL">
-                Genuary 4 - Intersections</a> by Stranger in the Q (<a
-                href="https://codepen.io/strangerintheq">@strangerintheq</a>)
-                on <a href="https://codepen.io">CodePen</a>.
-            </iframe>
-            <iframe className={"codepen"}
-                    style={{
-                        gridColumn: !isMobile ? '3/5' : '1/3',
-                        gridRow: isMobile ? '3/5' : '1/3'
-                    }}
-                    scrolling="no" title="Genuary 18 - Definitely not a grid"
-                    src="https://codepen.io/strangerintheq/embed/NWBaeVj?default-tab=result&editable=true"
-                    frameBorder="no" loading="lazy" allowTransparency="true" allowFullScreen="true">
-                See the Pen <a href="https://codepen.io/strangerintheq/pen/NWBaeVj">
-                Genuary 18 - Definitely not a grid</a> by Stranger in the Q (<a
-                href="https://codepen.io/strangerintheq">@strangerintheq</a>)
-                on <a href="https://codepen.io">CodePen</a>.
-            </iframe>
-
+        <Grid ratio={1} rows={isMobile ? 4 : 2}>
+            <a href="https://codepen.io/strangerintheq/pen/jOpyYaR">
+                <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-8.jpg"}/>
+            </a>
+            <a href="https://codepen.io/strangerintheq/pen/qByrdxY">
+                <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-9.jpg"}/>
+            </a>
+            <a href="https://codepen.io/strangerintheq/pen/vYaXVwL">
+                <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-4.jpg"}/>
+            </a>
+            <a href="https://codepen.io/strangerintheq/pen/yLqbjeE">
+                <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-11.jpg"}/>
+            </a>
+            <a href="https://codepen.io/strangerintheq/pen/NWBaeVj">
+                <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-18.jpg"}/>
+            </a>
+            <a href="">
+                <DivWithBackgroundImage img={"site/resources/code/justlib-.jpg"}/>
+            </a>
+            <a href="">
+                <DivWithBackgroundImage img={"site/resources/code/justlib-.jpg"}/>
+            </a>
+            <a href="https://codepen.io/strangerintheq/pen/MWBmqRd">
+                <DivWithBackgroundImage img={"site/resources/code/justlib-truchet.jpg"}/>
+            </a>
         </Grid>
 
     </>

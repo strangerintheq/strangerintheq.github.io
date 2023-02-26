@@ -22,11 +22,26 @@ export function RgbaSection() {
                 <DivWithBackgroundImage img={"site/resources/code/rgba-cat-spiral.jpg"}/>
             </a>
             <a href="https://codepen.io/strangerintheq/pen/dyOvmvo">
-                <DivWithBackgroundImage img={"site/resources/code/superformula.jpg"}/>
+                <DivWithBackgroundImage img={"site/resources/code/rgba-superformula.jpg"}/>
             </a>
-
-            <DivWithBackgroundImage/>
-            <DivWithBackgroundImage/>
+            <a href="https://codepen.io/strangerintheq/pen/xxEJygK">
+                <DivWithBackgroundImage img={"site/resources/code/rgba-chlandi.jpg"}/>
+            </a>
+            <a href="https://codepen.io/strangerintheq/pen/QWKbRgV">
+                <DivWithBackgroundImage img={"site/resources/code/rgba-core.jpg"}/>
+            </a>
+            <a href="https://codepen.io/strangerintheq/pen/abNvxrz">
+                <DivWithBackgroundImage img={"site/resources/code/rgba-colorburst.jpg"}/>
+            </a>
+            <a href="https://codepen.io/strangerintheq/pen/MWexRBr">
+                <DivWithBackgroundImage img={"site/resources/code/rgba-chlandi-fbm.jpg"}/>
+            </a>
+            <a href="https://codepen.io/strangerintheq/pen/ExWWxoO">
+                <DivWithBackgroundImage img={"site/resources/code/rgba-photo-filter.jpg"}/>
+            </a>
+            <a href="https://codepen.io/strangerintheq/pen/VwmYLpR">
+                <DivWithBackgroundImage img={"site/resources/code/rgba-chlandi-2.jpg"}/>
+            </a>
         </Grid>
     </>
 }
