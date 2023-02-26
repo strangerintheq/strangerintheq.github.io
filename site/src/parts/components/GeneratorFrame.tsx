@@ -26,7 +26,7 @@ export function GeneratorFrame({id, hash = null}) {
                 prepareFxHash(code, hash || randomFxHash()) :
                 prepareArtBlocks(code, hash || randomAbHash())
             );
-        }, 100)
+        }, 200)
     }, [code, hash, type]);
 
     return <>

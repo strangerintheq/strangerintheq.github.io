@@ -6,7 +6,12 @@ import {AboutPage} from "./pages/AboutPage";
 import {CodePage} from "./pages/CodePage";
 
 const globalStyle = `<style>
-
+* {
+    margin: 0;
+    font-weight: unset;
+    box-sizing: border-box;
+    --base-size: min(1600px, 100vw);
+}
 body {
     overflow-x: hidden;
     overscroll-behavior: none;
@@ -44,7 +49,7 @@ a, a:visited {
     /*z-index: 1;*/
     pointer-events: none;
     background: black;
-    transition: 300ms;
+    transition: 200ms;
 }
 .loaded .backdrop {
     background: transparent;
