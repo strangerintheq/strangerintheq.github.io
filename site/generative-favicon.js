@@ -2,7 +2,8 @@
 
     const rnd = (x = 1) => Math.random() * x;
 
-    const many = (n, fn = i => i) => [...Array(n|0)].map((_, i) => fn(i));
+    const many = (n, fn = i => i) => [...Array(n|0)]
+        .map((_, i) => fn(i));
 
     const asNodeParams = o => Object.entries(o)
         .map(([key, value]) => ` ${key}="${value}" `).join("\n");

@@ -32,13 +32,13 @@
         }
         .text {text-align: left;}
         .grid {display: grid;}
+        .ico-4 {vertical-align:middle;}
         @media (min-width: 980px) {
             body {--s: calc(0.1 * var(--base-size));}
             .separator {height: calc(var(--base-size) * 0.015);}
             .text-large {font-size: calc(var(--base-size) * 0.07);}
             .text-medium {font-size: calc(var(--base-size) * 0.025);}
             .text {font-size: calc(var(--base-size) * 0.018);}
-            .ico {max-width: calc(var(--base-size) * 0.1)}
             .ico-4 {max-width: calc(var(--base-size) * 0.04)}
             .grid {
                 grid-template-columns: repeat(10, var(--w));
@@ -51,19 +51,18 @@
             .section-5 {grid-column: 5/9; grid-row: 15/17;}
             .section-6 {grid-column: 3/8; grid-row: 18/19;}
             .section-7 {grid-column: 5/9; grid-row: 20/22;}
-            .section-8 {grid-column: 3/9; grid-row: 24/25;}
+            .section-8 {grid-column: 3/8; grid-row: 24/25;}
         }
         @media (max-width: 980px) {
             body {--s: calc(0.2 * var(--base-size));}
-            .separator {height: calc(var(--base-size) * 0.015);}
+            .separator {height: calc(var(--base-size) * 0.03);}
             .text-large {font-size: calc(var(--base-size) * 0.12);}
             .text-medium {font-size: calc(var(--base-size) * 0.04);}
             .text {font-size: calc(var(--base-size) * 0.033);}
-            .ico {max-width: calc(var(--base-size) * 0.2)}
-            .ico-4 {max-width: calc(var(--base-size) * 0.08)}
+            .ico-4 {max-width: calc(var(--base-size) * 0.06)}
             .grid {
-                grid-template-columns: repeat(6, var(--w));
-                grid-template-rows: repeat(26, var(--h));
+                grid-template-columns: repeat(5, var(--w));
+                grid-template-rows: repeat(25, var(--h));
             }
             .section-1 {grid-column: 2/5; grid-row: 2/4;}
             .section-2 {grid-column: 2/5; grid-row: 5/7;}
@@ -315,10 +314,6 @@
         "x198": "0x1bc7499bb7cb9a8da88340b3aae51e739777fd591cec227d18509ce0581e77d0",
         "x199": "0x0bb519fd88e2a30dd70bdaddf0e180b7602aef07ce1c556ab721b7d7ffe55ef5"
     }
-    delete hashes["x196"]
-    delete hashes["x197"]
-    delete hashes["x198"]
-    delete hashes["x199"]
 </script>
 <div class="grid">
     <section class="section-1">
@@ -345,9 +340,11 @@
         </div>
     </section>
     <section class="section-3" >
+        <a href="https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419/tokens/419000000">
         <div class="text-medium">Mint #0</div>
-        <img src="https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_128,q_auto/https://artblocks-mainnet.s3.amazonaws.com/419000000.png"
+        <img src="https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_648,q_auto/https://artblocks-mainnet.s3.amazonaws.com/419000000.png"
             style="width: 100%" >
+        </a>
     </section>
     <section class="section-4" >
         <div class="separator"></div>
@@ -396,29 +393,26 @@
     </section>
     <section class="section-8" style="text-align: center!important;" >
         <div class="separator"></div>
-
-<!--        <div class="text" style="margin-bottom: 1vw; text-align: center!important;">-->
-<!--            You can look at my other works by visiting links below-->
-<!--        </div>-->
-        <div class="separator"></div>
         <div class="separator"></div>
 
         <div class="text-medium">
-            <script>
-                function social([image, text, link, marginLeft]){
-                    return `<a style="vertical-align:middle;margin: 0 ${marginLeft || 0}vw" title="${text}" href="${link}" target="_blank" ><img src="../site/resources/social/${image}" class="ico-4"></a>`
-                }
-            </script>
-            <script>
-                document.write(social(
-                    ['twitter.svg','Twitter','https://twitter.com/stranger_intheq',2]
-                ))
-            </script>
             <a href="https://strangerintheq.art">strangerintheq.art</a>
+        </div>
+        <div class="separator"></div>
+        <div>
             <script>
-                document.write(social(
-                    ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/', 2.1],
-                ))
+                (function (){
+                    function social([image, text, link]){
+                        return `<a title="${text}" href="${link}" target="_blank" >
+                        <img src="../site/resources/social/${image}" class="ico-4">
+                    </a>`
+                    }
+                    document.write(social(
+                        ['twitter.svg','Twitter','https://twitter.com/stranger_intheq']
+                    ) + social(
+                        ['insta.svg','Instagram','https://www.instagram.com/stranger_in_the_q/'],
+                    ))
+                })();
             </script>
         </div>
     </section>
@@ -462,9 +456,12 @@
     }
 
     (async function (){
+        const count = innerWidth > 980 ? 197 : 77;
         let hashesList = Object.values(hashes)
+        hashesList = [...Array(count)].map(() => "0x" + [...Array(64)].map(() => ((Math.random()*16)|0).toString(16)));
         hashesList.forEach(placeholder)
-        for (let i = 0; i < hashesList.length; i++) {
+
+        for (let i = 0; i < count; i++) {
             image(hashesList[i]);
             await new Promise((resolve) => setTimeout(resolve, 1))
         }

@@ -6,8 +6,17 @@ export function many(n, f) {
     return [...Array(n|0)].map((_,i) => f(i));
 }
 
+export function rnd(x=1){
+    return Math.random() * x;
+}
+
+
 export function pick(arr){
-    return arr[(Math.random()*arr.length)|0];
+    return arr[rnd(arr.length)|0];
+}
+
+export function rndb(x = 0.5){
+    return rnd() > x
 }
 
 export async function fetchCode(url) {
