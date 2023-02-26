@@ -20,7 +20,7 @@ export function JustLibSection() {
             Gives ability to use normalized cartesian coordinates both in shaders and 2d canvas.
             Simplifies using of shader uniforms and providing random numbers in compile-time into shaders.
         </PageText>
-        <Grid ratio={1} rows={isMobile ? 4 : 2}>
+        <Grid>
             <a href="https://codepen.io/strangerintheq/pen/jOpyYaR">
                 <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-8.jpg"}/>
             </a>
@@ -36,12 +36,12 @@ export function JustLibSection() {
             <a href="https://codepen.io/strangerintheq/pen/NWBaeVj">
                 <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-18.jpg"}/>
             </a>
-            <a href="">
-                <DivWithBackgroundImage img={"site/resources/code/justlib-.jpg"}/>
-            </a>
-            <a href="">
-                <DivWithBackgroundImage img={"site/resources/code/justlib-.jpg"}/>
-            </a>
+            {/*<a href="">*/}
+            {/*    <DivWithBackgroundImage img={"site/resources/code/justlib-.jpg"}/>*/}
+            {/*</a>*/}
+            {/*<a href="">*/}
+            {/*    <DivWithBackgroundImage img={"site/resources/code/justlib-.jpg"}/>*/}
+            {/*</a>*/}
             <a href="https://codepen.io/strangerintheq/pen/MWBmqRd">
                 <DivWithBackgroundImage img={"site/resources/code/justlib-truchet.jpg"}/>
             </a>
