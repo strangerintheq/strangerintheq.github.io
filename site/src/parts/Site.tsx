@@ -85,7 +85,7 @@ function Router() {
         }
     }, []);
     if (!route)
-        return <HomePage ts={Date.now()}/>
+        return <HomePage />
     if (route.startsWith("?about"))
         return <AboutPage />
     if (route.startsWith("?art/"))
