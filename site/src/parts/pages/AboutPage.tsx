@@ -33,7 +33,12 @@ export function AboutPage() {
                     <a href={"https://codepen.io/strangerintheq"}>Codepen</a>
                     <a href={"https://github.com/strangerintheq/"}>Github</a>
                 </div>
+
             </PageText>
+            <div className={"separator"}/>
+            <div className={"separator"}/>
+            <div className={"separator"}/>
+            <div className={"separator"}/>
         </PageWrapper>
     </>
 }

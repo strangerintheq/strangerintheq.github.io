@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {
     prng2x,
-    randomHash, rnd, setLineWidth,
+    rnd, setLineWidth,
     setRandomGenerator, strokeRect
 } from "./framework";
 import {NeuralInterfaceSettings, newSettings} from "./newSettings";
@@ -9,6 +9,7 @@ import {createField, NeuralInterfaceFlowField} from "./createField";
 import {getPts} from "./getPts";
 import {tick} from "./tick";
 import {SimplexNoise} from "three/examples/jsm/math/SimplexNoise";
+import {randomHash} from "../../tools";
 
 export function GenerativeHeader() {
 
@@ -45,7 +46,7 @@ export function GenerativeHeader() {
             s.mask = maskCtx.getImageData(0,0,s.w, s.h);
             setLineWidth(s.ctx,0.1)
 
-            let hash = randomHash()
+            let hash = randomHash("")
             setRandomGenerator(prng2x(hash))
 
             const noise = new SimplexNoise();

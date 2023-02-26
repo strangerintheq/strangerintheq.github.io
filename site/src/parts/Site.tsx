@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {GeneratorPage} from "./pages/GeneratorPage";
 import {ArtPage} from "./pages/ArtPage";
 import {HomePage} from "./pages/HomePage";
@@ -8,6 +8,7 @@ import {CodePage} from "./pages/CodePage";
 const globalStyle = `<style>
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
 * {
+  
     margin: 0;
     font-weight: unset;
     box-sizing: border-box;
@@ -16,6 +17,10 @@ const globalStyle = `<style>
 }
 body {
     overflow-x: hidden;
+    overscroll-behavior: none;
+}
+.separator {
+    height: 1rem;
 }
 .codepen {
     height: 100%;
@@ -43,6 +48,15 @@ a, a:visited {
         -1px +1px 0 #fff, 
         +1px +1px 0 #fff
 }
+.backdrop {
+    /*z-index: 1;*/
+    pointer-events: none;
+    background: black;
+    transition: 300ms;
+}
+.loaded .backdrop {
+    background: transparent;
+}
 </style>`;
 
 export function Site() {
@@ -53,19 +67,35 @@ export function Site() {
 }
 
 function Router() {
-
-    const [page, setPage] = useState();
-
+    const [route, setRoute] = useState(document.location.search);
+    const stateRef = useRef({
+        searchString: document.location.search,
+        rafLoop: 0
+    });
     useEffect(() => {
-        let urlSearchParams = new URLSearchParams(document.location.search);
-        setPage(urlSearchParams.get("page"));
-    }, [document.location.search]);
-
-    if (page === "art") return <ArtPage />
-    if (page === "about") return <AboutPage />
-    if (page === "generator") return <GeneratorPage />
-    if (page === "art") return <ArtPage />
-    if (page === "code") return <CodePage />
-
-    return <HomePage/>;
+        let s = stateRef.current;
+        s.rafLoop = requestAnimationFrame(loop);
+        function loop() {
+            if (s.searchString !== document.location.search) {
+                s.searchString = document.location.search;
+                // let urlSearchParams = new URLSearchParams(document.location.search);
+                setRoute(s.searchString);
+            }
+            s.rafLoop = requestAnimationFrame(loop)
+        }
+        return () => {
+             cancelAnimationFrame(s.rafLoop);
+        }
+    }, []);
+    if (!route)
+        return <HomePage ts={Date.now()}/>
+    if (route.startsWith("?about"))
+        return <AboutPage />
+    if (route.startsWith("?art/"))
+        return <GeneratorPage route={route}/>
+    if (route.startsWith("?art"))
+        return <ArtPage />
+    if (route.startsWith("?code"))
+        return <CodePage />
+    return <HomePage />;
 }

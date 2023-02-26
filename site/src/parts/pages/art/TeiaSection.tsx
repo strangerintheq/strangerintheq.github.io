@@ -2,11 +2,8 @@ import React from "react";
 import {ProjectItem} from "../../components/ProjectItem";
 import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
-import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
-import {GenerativeIcon} from "../../components/GenerativeIcon";
 
 export function TeiaSection() {
-    const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);
     const img = "site/resources/art/teia/"
     const link = "https://objkt.com/asset/hicetnunc/"
     return <>
@@ -17,7 +14,7 @@ export function TeiaSection() {
             </a>
         </PageSubHeader>
 
-        <Grid isMobile={isMobile} ratio={1} rows={isMobile ? 6 : 3}>
+        <Grid>
             <ProjectItem
                 type={"teia"}
                 name={"Needlework"}

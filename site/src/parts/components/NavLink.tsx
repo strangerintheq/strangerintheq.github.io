@@ -6,12 +6,7 @@ export function NavLink({to = "", children = null}) {
         cursor: "pointer",
         pointerEvents: "all",
     }} onClick={() => {
-        document.location.search = to;
+        history.pushState({}, "", '?' + to)
     }}>{children}</span>
 }
 
-export function makeLink(o) {
-    return Object.entries(o)
-        .map(([key, value]) => key + "=" + value)
-        .join("&");
-}

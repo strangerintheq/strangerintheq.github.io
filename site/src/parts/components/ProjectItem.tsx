@@ -1,5 +1,5 @@
 import React from "react";
-import {makeLink, NavLink} from "./NavLink";
+import {NavLink} from "./NavLink";
 import {DivWithBackgroundImage} from "./DivWithBackgroundImage";
 import {randomHash} from "../tools";
 
@@ -15,10 +15,10 @@ export function ProjectItem(
     }
 ) {
 
-    const generator = name.toLowerCase().replaceAll(" ", "-");
+    const projectId = name.toLowerCase().replaceAll(" ", "-");
 
     return <div style={{gridColumn: c, gridRow: r}}>
-        <NavLink to={makeLink({type, id: generator, hash, page: "generator"})}>
+        <NavLink to={"art/" + projectId + "/" + hash}>
             <DivWithBackgroundImage img={img}/>
         </NavLink>
     </div>

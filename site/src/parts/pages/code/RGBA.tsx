@@ -3,6 +3,7 @@ import {PageSubHeader} from "../../components/PageSubHeader";
 import {PageText} from "../../components/PageText";
 import {Grid} from "../../components/Grid";
 import {GenerativeIcon} from "../../components/GenerativeIcon";
+import {DivWithBackgroundImage} from "../../components/DivWithBackgroundImage";
 
 export function RgbaSection() {
     return <>
@@ -16,8 +17,11 @@ export function RgbaSection() {
             Firstly created for using in my&nbsp;
             <a href={"https://codepen.io/collection/AWEWzK"}>codepen experiments</a>.
         </PageText>
-        <Grid ratio={1} isMobile={false} rows={1}>
-
+        <Grid>
+            <DivWithBackgroundImage />
+            <DivWithBackgroundImage />
+            <DivWithBackgroundImage />
+            <DivWithBackgroundImage />
         </Grid>
     </>
 }

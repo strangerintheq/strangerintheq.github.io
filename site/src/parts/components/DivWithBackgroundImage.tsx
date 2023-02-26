@@ -1,9 +1,11 @@
 import React  from "react";
 
-export function DivWithBackgroundImage({img}) {
+const placeholder = ``
+
+export function DivWithBackgroundImage({img = null}) {
     return <div
         style={{
-            backgroundImage: `url(${img})`,
+            backgroundImage: `url(${img || placeholder})`,
             height: '100%',
             backgroundSize: 'cover',
             backgroundPosition: 'center center',

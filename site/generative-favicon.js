@@ -1,84 +1,64 @@
 (function () {
 
     const rnd = (x = 1) => Math.random() * x;
-
-    const many = (n, fn = i => i) => [...Array(n|0)]
+    const rndb = (x = 0.5) => rnd() > x;
+    const many = (n, fn = i => i) => [...Array(n | 0)]
         .map((_, i) => fn(i));
-
     const asNodeParams = o => Object.entries(o)
         .map(([key, value]) => ` ${key}="${value}" `).join("\n");
-
-    const node = (name, attrs, body= "") =>
+    const node = (name, attrs, body = "") =>
         `<${name}\n${asNodeParams(attrs)}\n>${body}</${name}>`;
-
-    const rect = (attrs) => node("rect", {...attrs, width: 1, height: 1});
-
-    const mapToUv = (i, cellCount, cellFn) => {
-        let x = i % cellCount, y = (i / cellCount) | 0;
-        let u = x / cellCount - 0.5, v = y / cellCount - 0.5;
-        return cellFn(x, y, u, v);
-    };
-
-    const svg = (cellCount, cellFn) => node("svg", {
-        width: cellCount, height: cellCount, xmlns: "http://www.w3.org/2000/svg"
-    }, many(cellCount**2, i => mapToUv(i, cellCount, cellFn)).join("\n"));
-
     const svgFavicon = svg => document.head.innerHTML +=
         `<link rel="icon" href="data:image/svg+xml,${encodeURIComponent(svg)}">`;
 
-    function generativeFavicon2() {
+    svgFavicon(generativeSvgIcon())
 
-        const cells = 50;
+    function generativeSvgIcon() {
+        const s = 4;
+        const pad = 0.7;
+        const rx = rndb() ? 1 : rndb() ? 0.2 : 0.1;
+        const red = (Math.random() * 4 ** 2) | 0;
+        const rot = rnd(360);
+        const pos = (ind, scl = 1, rot = 0) => `translate(${[
+            ind % s - s / 2 + 0.5,
+            ((ind / s) | 0) - s / 2 + 0.5
+        ]}) rotate(${rot}) scale(${scl})`;
 
-        let x1 = rnd(0.5)
-        let y1 = rnd(0.5)
-        let x2 = rnd(0.5)
-        let y2 = rnd(0.5)
+        const elements = many(s ** 2, i => i)
+            .filter(() => Math.random() > 0.5);
 
-        let palettes = [
-            ['#fff', '#000'],
-            ['#ffffff', '#ff0000'],
-            ['#000', '#ffee00'],
-        ]
-        let sc = rnd(10) + 5
-        let palette = palettes[rnd(palettes.length) | 0]
+        const rect = (rx,fill) => ({width: 1, height: 1, x: -0.5, y: -0.5, rx, fill});
 
-        function cell(x,y,u,v) {
-            u = Math.abs(u)
-            // v = Math.abs(v)
-            let d = Math.min(
-                Math.hypot(u - x1, v - y1),
-                Math.hypot(u - x2, v - y2)
-            ) * sc;
-            return rect({
-                fill: palette[d % 3 | 0],
-                transform: `translate(${[x, y]})`
-            })
-        }
+        let content = "";
 
-        svgFavicon(svg(cells, cell))
+        content += elements.map(i => {
+            return node('g', {
+                transform: pos(i, 1.3)
+            }, node("rect", rect(0.2,'#fff')))
+        }).join("");
+
+        content += elements.map(i => {
+            return node('g', {
+                transform: pos(i, 1.1)
+            }, node("rect", rect(0.1,'#000')))
+        }).join("");
+
+        content += many(1, i => {
+            return node("g", {
+                transform: pos(red, rnd(0.5) + 1.5 - 0.08 * i, rot + i * 4)
+            }, node("rect", rect(rx, `#${"fedcba9876543210"[i]}00`)))
+        }).join("")
+
+        return node("svg", {
+            xmlns: "http://www.w3.org/2000/svg",
+            viewBox: [-s / 2 - pad, -s / 2 - pad, s + pad * 2, s + pad * 2],
+            overflow: "visible"
+        }, content);
     }
-
-    function generativeFavicon(darkTheme) {
-        const cells = 4;
-        const red = rnd(cells ** 2) | 0
-        svgFavicon(svg(4, (x,y,u,v) => rect({
-            fill: y*cells+x === red ? "#e32b2b" : rnd(1) > 0.3 ? (darkTheme? "#fff":"#000") : "#fff0",
-            transform: `translate(${[x, y]})`
-        })))
-    }
-
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-
-    generativeFavicon(mediaQuery.matches);
-
-
-    mediaQuery.addEventListener('change', ({matches: darkTheme}) => {
-        generativeFavicon(darkTheme);
-    })
-
-    // setInterval(generativeFavicon, 1000);
 
 
 
 })();
+
+
+

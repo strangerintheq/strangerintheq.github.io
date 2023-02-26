@@ -1,27 +1,22 @@
 import React from "react";
-import {GeneratorAsBackground} from "../components/GeneratorAsBackground";
+import {GeneratorFrame} from "../components/GeneratorFrame";
 import {randomHash} from "../tools";
 import {Navigation} from "../Navigation";
 import {PageWrapper} from "../components/PageWrapper";
 import {FooterBody} from "../components/FooterBody";
-import {makeLink, NavLink} from "../components/NavLink";
+import {NavLink} from "../components/NavLink";
+import {ProjectsTypes} from "./art/ProjectsTypes";
+import {Stack} from "../components/Stack";
+import {LoaderMask} from "../components/LoaderMask";
 
-function elseHash(type) {
-    let hash = randomHash(type);
-    document.location.search += "&hash=" + hash;
-    return hash;
-}
+export function GeneratorPage({route}) {
+    // console.log("GeneratorPage",route)
+    const [,id,hash] = route.split("/")
+    const next = "art/" + id + "/" + randomHash(ProjectsTypes[id]);
 
-export function GeneratorPage() {
-
-    const params = new URLSearchParams(document.location.search);
-    const type = params.get("type");
-    const hash = params.get("hash") || elseHash(type);
-    const id = params.get("id");
-
-    const next = makeLink({type, id, page: "generator", hash: randomHash(type)});
-
-    return <>
+    return <Stack>
+        <GeneratorFrame id={id} hash={hash}/>
+        <LoaderMask/>
         <PageWrapper>
             <div style={{
                 display: "flex",
@@ -36,13 +31,7 @@ export function GeneratorPage() {
                 </FooterBody>
             </div>
         </PageWrapper>
-
-        <GeneratorAsBackground
-            id={id}
-            type={type}
-            hash={hash}
-        />
-    </>
+    </Stack>
 }
 
 

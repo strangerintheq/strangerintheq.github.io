@@ -3,7 +3,6 @@ import {ProjectItem} from "../../components/ProjectItem";
 import {Grid} from "../../components/Grid";
 import {PageSubHeader} from "../../components/PageSubHeader";
 import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
-import {GenerativeIcon} from "../../components/GenerativeIcon";
 
 export function SliceSection() {
     const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);
@@ -23,7 +22,7 @@ export function SliceSection() {
             {/*<a style={{float:"right"}} href={sitePath + '/slice'}>ABOUT</a>*/}
         </PageSubHeader>
 
-        <Grid isMobile={isMobile} rows={isMobile ? 4 : 2} ratio={1.618}>
+        <Grid rows={isMobile ? 4 : 2} ratio={1.618}>
             <ProjectItem
                 {...slice}
                 c={isMobile ? "1/3" : "2/4"}

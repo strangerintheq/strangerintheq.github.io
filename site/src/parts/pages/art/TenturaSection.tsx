@@ -21,7 +21,7 @@ export function TenturaSection() {
             {/*<a style={{float:"right"}} href={sitePath + '/tentura'}>ABOUT</a>*/}
         </PageSubHeader>
 
-        <Grid ratio={1} isMobile={isMobile} rows={isMobile ? 4 : 2}>
+        <Grid ratio={1} rows={isMobile ? 4 : 2}>
             <ProjectItem
                 {...tentura}
                 c={isMobile ? "1/3" : "2/4"}

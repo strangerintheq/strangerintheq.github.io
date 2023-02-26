@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {PageWrapper} from "../components/PageWrapper";
 import {Navigation} from "../Navigation";
-import {GeneratorAsBackground} from "../components/GeneratorAsBackground";
+import {GeneratorFrame} from "../components/GeneratorFrame";
+import {Stack} from "../components/Stack";
+import {LoaderMask} from "../components/LoaderMask";
 
 const generators = [
     ["fx-hash", "mayan-carpet"],
@@ -26,7 +28,7 @@ const generators = [
 ];
 
 export function HomePage() {
-
+    // console.log('render home page')
     const [generator, setGenerator] = useState<{ type; id }>()
 
     useEffect(() => {
@@ -34,10 +36,12 @@ export function HomePage() {
         setGenerator({type, id});
     }, [])
 
-    return <>
-        {generator && <GeneratorAsBackground type={generator.type} id={generator.id}/>}
+    return <Stack>
+        {generator && <GeneratorFrame id={generator.id} />}
+        <LoaderMask/>
         <PageWrapper>
             <Navigation dark={true}/>
         </PageWrapper>
-    </>
+    </Stack>
+
 }
