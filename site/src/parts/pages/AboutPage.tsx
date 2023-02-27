@@ -12,7 +12,7 @@ export function AboutPage() {
             <Navigation dark={false}/>
             <PageHeader>About</PageHeader>
             <PageSubHeader>
-                I'm Stranger in the Q and i'm making art with code.
+                I'm Stranger in the Q and i'm making art with code
             </PageSubHeader>
             <PageText>
                 I have been working as a software developer for about 2 decades now.

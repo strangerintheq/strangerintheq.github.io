@@ -2,12 +2,19 @@ import React from "react";
 import {PageSubHeader} from "../../components/PageSubHeader";
 import {PageText} from "../../components/PageText";
 import {Grid} from "../../components/Grid";
-import {MAX_WIDTH_980, useMediaQuery} from "../../hooks/useMediaQuery";
 import {ExternalLink} from "../../components/ExternalLink";
 import {DivWithBackgroundImage} from "../../components/DivWithBackgroundImage";
 
+const jusLibData = [
+    ["jOpyYaR", "justlib-genuary-8.jpg"],
+    ["qByrdxY", "justlib-genuary-9.jpg"],
+    ["vYaXVwL", "justlib-genuary-4.jpg"],
+    ["yLqbjeE", "justlib-genuary-11.jpg"],
+    ["NWBaeVj", "justlib-genuary-18.jpg"],
+    ["MWBmqRd", "justlib-truchet.jpg"],
+];
+
 export function JustLibSection() {
-    const {matches: isMobile} = useMediaQuery(MAX_WIDTH_980);
     return <>
         <PageSubHeader>
             <ExternalLink href={"https://github.com/strangerintheq/justlib"}>just-lib</ExternalLink>
@@ -21,31 +28,9 @@ export function JustLibSection() {
             Simplifies using of shader uniforms and providing random numbers in compile-time into shaders.
         </PageText>
         <Grid>
-            <a href="https://codepen.io/strangerintheq/pen/jOpyYaR">
-                <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-8.jpg"}/>
-            </a>
-            <a href="https://codepen.io/strangerintheq/pen/qByrdxY">
-                <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-9.jpg"}/>
-            </a>
-            <a href="https://codepen.io/strangerintheq/pen/vYaXVwL">
-                <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-4.jpg"}/>
-            </a>
-            <a href="https://codepen.io/strangerintheq/pen/yLqbjeE">
-                <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-11.jpg"}/>
-            </a>
-            <a href="https://codepen.io/strangerintheq/pen/NWBaeVj">
-                <DivWithBackgroundImage img={"site/resources/code/justlib-genuary-18.jpg"}/>
-            </a>
-            {/*<a href="">*/}
-            {/*    <DivWithBackgroundImage img={"site/resources/code/justlib-.jpg"}/>*/}
-            {/*</a>*/}
-            {/*<a href="">*/}
-            {/*    <DivWithBackgroundImage img={"site/resources/code/justlib-.jpg"}/>*/}
-            {/*</a>*/}
-            <a href="https://codepen.io/strangerintheq/pen/MWBmqRd">
-                <DivWithBackgroundImage img={"site/resources/code/justlib-truchet.jpg"}/>
-            </a>
+            {jusLibData.map(el => <a href={"https://codepen.io/strangerintheq/pen/" + el[0]}>
+                <DivWithBackgroundImage img={"site/resources/code/" + el[1]}/>
+            </a>)}
         </Grid>
-
     </>
 }

@@ -8,9 +8,9 @@ import {DivWithBackgroundImage} from "../../components/DivWithBackgroundImage";
 export function HareAndCarrotsSection() {
     return <>
         <PageSubHeader>
-            <ExternalLink
-                href={"https://rawcdn.githack.com/strangerintheq/hare-and-carrots/c5da3e8e16e666f697ccd176f705464dc7b86eec/build/index.html"}>Hare
-                and Carrots</ExternalLink>
+            <ExternalLink href={"https://rawcdn.githack.com/strangerintheq/hare-and-carrots/c5da3e8e16e666f697ccd176f705464dc7b86eec/build/index.html"}>
+                Hare and Carrots
+            </ExternalLink>
         </PageSubHeader>
         <PageText>
             Funny experiment to create a game about small hare written in typescript.
