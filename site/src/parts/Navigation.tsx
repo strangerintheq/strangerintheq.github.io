@@ -11,11 +11,11 @@ export function Navigation({dark= false}) {
             </NavLink>
         </div>
         <div>
-            <NavLink to={"about"}>about</NavLink>
+            <NavLink to={"art"}>art</NavLink>
             &nbsp;
             <NavLink to={"code"}>code</NavLink>
             &nbsp;
-            <NavLink to={"art"}>art</NavLink>
+            <NavLink to={"about"}>about</NavLink>
         </div>
     </NavigationBody>
 }

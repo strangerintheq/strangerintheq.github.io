@@ -2,12 +2,15 @@ import React from "react";
 import {PageSubHeader} from "../../components/PageSubHeader";
 import {PageText} from "../../components/PageText";
 import {ExternalLink} from "../../components/ExternalLink";
+import {Grid} from "../../components/Grid";
+import {DivWithBackgroundImage} from "../../components/DivWithBackgroundImage";
 
 export function CollectTheDotsSection() {
     return <>
         <PageSubHeader>
-            <ExternalLink href={"https://raw.githack.com/strangerintheq/collect-the-dots/master/index.html"}>Collect the
-                Dots</ExternalLink>
+            <ExternalLink href={"https://raw.githack.com/strangerintheq/collect-the-dots/master/index.html"}>
+                Collect the Dots
+            </ExternalLink>
         </PageSubHeader>
         <PageText>
             Experiment to create a simple cell based game building framework.
@@ -17,6 +20,10 @@ export function CollectTheDotsSection() {
             playable.
             <div className={"separator"}/>
             <ExternalLink href={"https://github.com/strangerintheq/collect-the-dots"}>Source code</ExternalLink>
+            <Grid>
+                <DivWithBackgroundImage img={"site/resources/code/dots-0.jpg"}/>
+                <DivWithBackgroundImage img={"site/resources/code/dots-1.jpg"}/>
+            </Grid>
         </PageText>
     </>
 }

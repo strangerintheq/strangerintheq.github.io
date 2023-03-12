@@ -10,7 +10,6 @@ export function ComplexplorerSection() {
     return <>
         <PageSubHeader>
             <ExternalLink href={"https://strangerintheq.art/mandelbrot.html"}>compleXplorer 0</ExternalLink>
-
         </PageSubHeader>
         <PageText>
             Tool for exploring mandelbrot-like complex fractals. Yo can write a formula using
