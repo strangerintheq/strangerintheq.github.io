@@ -27,10 +27,10 @@ export function AboutPage() {
             </PageSubHeader>
             <PageText>
                 <div style={{display: 'flex', flexDirection: "column", gap: '1em'}}>
-                    <ExternalLink href={"https://twitter.com/stranger_intheq"}>Twitter</ExternalLink>
-                    <ExternalLink href={"https://www.artblocks.io/user/0xe0324d6981ccb5b62bdd235366dee6172e0ef116"}>Art
-                        Blocks</ExternalLink>
+                    <ExternalLink href={"https://www.artblocks.io/user/0xe0324d6981ccb5b62bdd235366dee6172e0ef116"}>Art Blocks</ExternalLink>
                     <ExternalLink href={"https://www.fxhash.xyz/u/StrangerintheQ"}>Fx(hash)</ExternalLink>
+                    <ExternalLink href={"https://twitter.com/stranger_intheq"}>Twitter</ExternalLink>
+                    <ExternalLink href={"https://www.instagram.com/stranger_in_the_q/"}>Instagram</ExternalLink>
                     <ExternalLink href={"https://t.me/s/mathimages"}>Telegram</ExternalLink>
                     <ExternalLink href={"https://codepen.io/strangerintheq"}>Codepen</ExternalLink>
                     <ExternalLink href={"https://github.com/strangerintheq/"}>Github</ExternalLink>
