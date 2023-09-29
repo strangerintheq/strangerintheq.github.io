@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body style="font: 40px Arial">
+<script>
+    let dirs = `
+        1-mineral
+        2-simple
+        3-organic
+        4-darked
+        5-eyed-1
+        6-eyed-2
+        7-whitepaper-1
+        8-whitepaper-2
+        9-whitepaper-3
+        10-framed
+    `;
+    document.write(
+        dirs.trim()
+            .split("\n")
+            .map(el => `<a href="variants/${el.trim()}/index.html">${el}</a>`)
+            .join("<br>")
+    )
+</script>
+</body>
+</html>

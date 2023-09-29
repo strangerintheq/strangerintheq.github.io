@@ -323,11 +323,11 @@ function noise2d(x, y) {
             n--
         else if (rnd()>0.95)
             n++
-        for (let j = 0; j <2; j++) {
+        for (let j = 0; j <n; j++) {
             oneCreature()
         }
 
-        for (let j = 0; j <2; j++){
+        for (let j = 0; j <0; j++){
             ctx.strokeStyle = p.pick() + '90';
             ctx.strokeRect(
                 -490 + rnd(8)-4,
