@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name=”viewport” content=”width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;”/>
+    <meta charset="UTF-8">
+    <script src="math.js"></script>
+    <script src="svgmap.js"></script>
+</head>
+<body>
+example<br>
+<div id="map1" style="width: 500px; height: 500px;display: inline-block"></div>
+<div id="map2" style="width: 500px; height: 500px;display: inline-block"></div>
+<script>
+    let map = svgMap(map1);
+    map.setCenter(60, 30.2, 10);
+
+    map.add(`<polyline data-points='[[60,30.2],[60.03,30.25],[60,30.3],[59.97,30.25]]'
+                fill='none' stroke-width='10' stroke='red'></polyline>`)
+    map.add("<circle data-point='[60,30.2]' r='15'></circle>")
+
+    map = svgMap(map2);
+    map.setCenter(60, 60.2, 3);
+    map.add(`<polyline data-points='[[60,30.2],[60,130.2]]'
+                fill='none' stroke-width='2' stroke='red'></polyline>`)
+
+</script>
+</body>
+</html>
