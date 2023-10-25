@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>SL/CE - Stranger in the Q</title>
-    <link rel="stylesheet" href="../font.css">
-    <script src="../site/generative-favicon.js"></script>
+    <link rel="stylesheet" href="../../font.css">
+    <script src="../../site/generative-favicon.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         /* hide scrollbars*/
@@ -325,26 +325,25 @@
         <div class="separator"></div>
         <div class="text-medium">by Stranger in the Q</div>
         <div class="separator"></div>
-        <div class="text">April, 3, 12CT / 17GMT</div>
-        <div class="separator"></div>
         <div class="text">
-            Long-form generative artwork released by <a href="https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419">artblocks.io</a>
-            and hosted immutably on Ethereum blockchain.
+            Генеративнная работа вышедшая на <a href="https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419">artblocks.io</a>
+            и хранящаяся неизменной в блокчейне Ethereum.<br><br>
+            Разработано при помощи Javascript.
         </div>
     </section>
     <section class="section-2" >
         <div class="separator"></div>
-        <div class="text-medium">About</div>
+        <div class="text-medium">О работе</div>
         <div class="separator"></div>
         <div class="text">
-            This artwork explores Suprematism and generative composition, attempts to fill some gap between generated and constructed artworks.
+            Этот проект - исследование Супрематизма и генеративной композиции, попытка занять место между полностью сгенерированной и созданной вручную работой.
             <div class="separator"></div>
-            It achieves composition by slicing simple shapes into pieces by some rules and testing them against a "bad composition detector", then carefully selecting colors for shapes.
+            Композиция создается при помощи рассечения простых форм на части по запрограммированным правилам и затем проверки результата при помощи "детектора плохих композиций".
         </div>
     </section>
     <section class="section-3" >
         <a href="https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419/tokens/419000000">
-            <div class="text-medium">Mint #0</div>
+            <div class="text-medium">Минт #0</div>
             <div class="separator"></div>
             <img src="https://res.cloudinary.com/art-blocks/image/fetch/f_auto,c_limit,w_648,q_auto/https://artblocks-mainnet.s3.amazonaws.com/419000000.png"
             style="width: 100%" >
@@ -352,31 +351,35 @@
     </section>
     <section class="section-4" >
         <div class="separator"></div>
-        <div class="text-medium">Algorithm</div>
+        <div class="text-medium">Алгоритм</div>
         <div class="separator"></div>
         <div class="text">
-            Each iteration starts with selecting the simplest figure (circle, square, rectangles, trapezoid).
-            then it is placed on the canvas according to specific rules, cut along one or more "slice lines", after which the parts can be shifted or removed.
-            The process is repeated several times for several starting figures, after which the resulting composition is obtained.
-            Then an "Bad composition detector" function comes into play, and if the composition is considered "bad", the pseudo-random composition process is repeated with partially different inputs until a "good composition" is obtained.
+            Каждая итерация начинается с выбора простейшей фигуры (круг, квадрат, прямоугольник, трапеция).
+            Затем фигура помещается на холст и разрезается вдоль одной или нескольких "линий разреза", после чего получившиеся части могут быть сдвинуты или удалены.
+            Рассечение повторяется несколько раз до получения финального расположения элементов на холсте.
+            После этого в игру вступает "Детектор плохих композиций", если ему что-то не понравится - псевдо-случайный процесс повторяется до получения хорошей композиции.
+<!--            Each iteration starts with selecting the simplest figure (circle, ring, square, rectangles, trapezoid).-->
+<!--            then it is placed on the canvas according to specific rules, cut along one or more "slice lines", after which the parts can be shifted or removed.-->
+<!--            The process is repeated several times for several starting figures, after which the resulting composition is obtained.-->
+<!--            Then an "Bad composition detector" function comes into play, and if the composition is considered "bad", the pseudo-random composition process is repeated with partially different inputs until a "good composition" is obtained.-->
         </div>
     </section>
     <section class="section-5" >
         <div class="separator"></div>
-        <div class="text-medium">Bad composition detector</div>
+        <div class="text-medium">Детектор плохих композиций</div>
         <div class="separator"></div>
         <div class="text">
-            Function that takes into account and evaluates the size of the figures individually, the total area occupied by the figures,  distribution of the figures on the canvas, the balance of emptiness and fullness.
+            Функция, которая берет в расчет размер и положение фигур по отдельности и в комплексе, общую площаль занимаемую фигурами и их распределение на холсте, баланс пустоты и заполненности.
             <div class="separator"></div>
-            All of these parameters are used to find those outcomes that seem to me to work poorly. It turns out there is a piece of me in this code.
+            Все эти параметры используются для принятия решения о том плохая ли это композиция. Получается что это встроенный куратор.
         </div>
     </section>
     <section class="section-6" >
         <div class="separator"></div>
-        <div class="text-medium">Result</div>
+        <div class="text-medium">Результат</div>
         <div class="separator"></div>
         <div class="text">
-            Looking at images, you can often see something in them, this effect is close to pareidolia, and I am very pleased that I was able to achieve this.
+            Глядя на изображения Вы можете что-либо в них разглядеть, и это будет уже невозможно развидеть, этот эффект близок к парейдолии. Прекрасно что удалось добиться этого эффекта.
         </div>
     </section>
     <section class="section-7" >
@@ -384,7 +387,7 @@
         <div class="text-medium">Extra</div>
         <div class="separator"></div>
         <div class="text">
-            Each iteration is a unique generator with partially locked parameters.
+
             <div class="separator"></div>
             Click or tap at the bottom half of image to get a new image.
             Click or tap at the top half of image to toggle autoplay mode.
@@ -406,7 +409,7 @@
                 (function (){
                     function social([image, text, link]){
                         return `<a title="${text}" href="${link}" target="_blank" ><img
-                                    src="../site/resources/social/${image}" class="ico-4"></a>`
+                                    src="../../site/resources/social/${image}" class="ico-4"></a>`
                     }
                     document.write(social(
                         ['twitter.svg','Twitter','https://twitter.com/stranger_intheq']
@@ -419,7 +422,7 @@
     </section>
 </div>
 <div class="enlarge hidden"></div>
-<script src="index.js"></script>
+<script src="../index.js"></script>
 <script>
 
     let {ctx: enlargeCtx} = createCanvas(innerHeight)

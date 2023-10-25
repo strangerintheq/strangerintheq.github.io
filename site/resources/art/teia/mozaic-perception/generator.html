@@ -109,8 +109,8 @@ function program(canvas, fragmentShader) {
     function resize(){
         if (innerWidth === w && innerHeight === h)
             return
-        w = canvas.width = innerWidth;
-        h = canvas.height = innerHeight;
+        w = canvas.width = innerWidth*devicePixelRatio;
+        h = canvas.height = innerHeight*devicePixelRatio;
         gl.viewport(0, 0, w, h);
         gl.uniform2f(resolution, w, h);
     }
@@ -143,17 +143,6 @@ function normalizeColorArray(c) {
 
 function colorArrayAsVec3(c) {
     return `vec3( ${c[0]}, ${c[1]}, ${c[2]} )`;
-}
-
-function glslVignetteFunction(){
-    return `
-float vignette(float power) {
-    vec2 uv = gl_FragCoord.xy / resolution;
-    uv *= 1.0 - uv.yx;
-    float vig = uv.x*uv.y * 15.0;
-    return pow(vig, power );
-}
-`;
 }
 
 function glslGetColorFunction(){
@@ -211,14 +200,6 @@ float noise2d(vec2 v){
     `
 }
 
-function rndVec2fromPolar(r, a = rnd(Math.PI*2)) {
-    return `vec2(cos(${a})*${r}, sin(${a})*${r})`;
-}
-
-function rndVec2(x,y,dx=0,dy=dx){
-    return `vec2(${rnd(x)+dx},${rnd(y)+dy})`
-}
-
 function rnd(x) {
     return Math.random() * x;
 }
@@ -256,6 +237,11 @@ function recreateCanvas(){
         -webkit-font-smoothing: antialiased;
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
+    }
+
+    canvas {
+        width:100vw;
+        height:100vh;
     }
 `;
     document.body.append(style)
@@ -312,13 +298,9 @@ void main() {
     
     if (colorId < 0.)
       x += nzid*0.2;
-    
- 
-    
-    
+
     vec3 color = mix(color1, color2, x);
-    
-    
+
     float t = 1.-abs(time - 0.5)*2.;
     t -= noise2d(UV+${rnd(111111)})*0.2+0.2;
     t -= noise2d(id+${rnd(111111)})*0.2+0.2; 
@@ -358,9 +340,6 @@ requestAnimationFrame(function animate(t){
     prog && prog.draw();
     requestAnimationFrame(animate)
 })
-
-
-
 
 addEventListener('pointerdown', ev => {
     if(ev && ev.button === 2)
