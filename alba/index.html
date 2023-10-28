@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+    }
+</style>
+<script src="https://www.alba.art/js/alba.min.js" crossorigin="anonymous"></script>
+<script>
+
+    // let seed = "0x5d58761265f41c40974c8d8bfbc86939aad4b488a10e5d7cc8617717fbce0526" // tiger
+    // let seed = "0x2f019c31c49ffedbf82ea0145084e1e45d72a1a3d7c4fbb92ab4fd9be7bd9350" // ocean
+    // let seed = "0xf91809d85d8df2dfec1f63f3ae5b2a2f23ff6bf354b2fe348db2e1d7b5b2f000" // ocean
+    // let seed = "0x3aaeb00b8277590d7d6e39c275e31f913f4d52a7e91e49e5fd7aebbebe076c4e" // ocean
+    // let seed = "0xaa34fae5e347bf9871524359f103bfdc5afbfa4d5b32979f874d085b2934c018" // jamaica
+    let seed = window.alba._testSeed()
+    window.alba.setMetadata = m => console.log(JSON.stringify(m, null, 2));
+    window.alba.params = Object.assign(window.alba.params, {
+        seed,
+        width: innerWidth
+    })
+    console.log(window.alba.params.seed)
+</script>
+<script src="index.js"></script>
+
+</body>
+</html>
