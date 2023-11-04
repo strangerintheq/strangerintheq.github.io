@@ -52,11 +52,13 @@ function placeholder(hash) {
     let hashesList = Object.values(hashes)
     hashesList = [...Array(count)].map(() => "0x" + [...Array(64)].map(() => ((Math.random()*16)|0).toString(16)).join(""));
     hashesList.forEach(placeholder)
-
+    let progress = document.querySelector(".loading-progress");
     for (let i = 0; i < count; i++) {
         image(hashesList[i]);
         await new Promise((resolve) => setTimeout(resolve, 1))
+        progress && (progress.style.left = "-" + 100 * (1-i/(count-1)) + "%")
     }
+    progress && (progress.style.display = "none")
 })()
 
 

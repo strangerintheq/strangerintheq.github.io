@@ -111,3 +111,12 @@ body {
     color: white;
     mix-blend-mode: difference;
 }
+
+.loading-progress {
+    height: 5px;
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    background: #3491ea;
+}
