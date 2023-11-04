@@ -1,19 +1,26 @@
 
 let {ctx: enlargeCtx} = createCanvas(innerHeight)
 let enlargeContainer = document.querySelector(".enlarge");
+let gridContainer = document.querySelector(".grid");
 enlargeContainer.append(enlargeCtx.canvas);
 let link = document.createElement("a");
 link.classList.add("link")
 link.innerText = "link"
 link.setAttribute("target", "_blank")
 enlargeContainer.append(link);
-enlargeCtx.canvas.onclick = () => enlargeContainer.classList.add("hidden")
+enlargeContainer.onclick = () => {
+    let mobile = window.innerWidth < 800
+    enlargeContainer.classList.add("hidden");
+    mobile && gridContainer.classList.remove("hidden")
+}
 
 function enlargeImage(hash) {
+    let mobile = window.innerWidth < 800
     window.newHash(hash, enlargeCtx)
     let url = "https://strangerintheq.art/?art/slice/" + hash;
     link.setAttribute("href", url)
     enlargeContainer.classList.remove("hidden")
+    mobile && gridContainer.classList.add("hidden")
 }
 
 function createCanvas(w) {
