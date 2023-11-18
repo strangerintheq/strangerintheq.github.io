@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clock</title>
+</head>
+<body>
+<style>
+    body {
+        background: black;
+        margin: 0;
+    }
+
+    canvas {
+        margin: calc(50vh - min(50vw, 50vh)) calc(50vw - min(50vw, 50vh));
+    }
+</style>
+<canvas id="clock"></canvas>
+<script>
+    const {PI, sin, cos, atan2, sign, hypot, min, sqrt} = Math, TAU = PI * 2;
+    const size = min(innerHeight, innerWidth);
+
+    let r, bgs, nn, p = vec2(0.001, 0);
+
+    let bgF, aF
+
+
+    makeClock(
+        document.querySelector("#clock"),
+        (Math.random() * 90) | 0,
+        (Math.random() * 90) | 0
+    );
+
+    function makeClock(canvas, seed1, seed2) {
+        initRandom(seed1, seed2)
+
+
+        const agentsCount = rndi(1000, 100);
+        bgs = rndi(50, 1) * 0.01
+        nn = rndi(5, 2)
+        console.log("bgs:", bgs);
+        bgF = pick([
+            x => sqrt(x) + 0.0001,
+            x => sqrt(x) + 0.001,
+            x => x + 0.001,
+        ]);
+
+        let a = pick([TAU/2, TAU/4])
+
+        aF = pick([
+            (i,n) => ((i * n) | 0) * a,
+            (i,n) => ((i + n) | 0) * a,
+            (i,n) => ((i / n) | 0) * a
+        ])
+
+        canvas.width = canvas.height = size;
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "black"
+        ctx.fillRect(0, 0, size, size);
+
+        let agents = many(agentsCount, makeAgent)
+
+
+        requestAnimationFrame(function frame(t) {
+            t /= 1000;
+            ctx.fillStyle = "#00000008"
+            ctx.fillRect(0, 0, size, size);
+            ctx.fillStyle = "white";
+            bg(t, ctx);
+            agents.forEach(a => a.tick(t, ctx));
+            requestAnimationFrame(frame);
+        })
+    }
+
+    function bg(t, ctx) {
+        let n = rndi(9, 3)
+
+
+        for (let i = 0; i < 5000; i++) {
+            let angle = aF(i,n)
+            let target = vec2(angle + t, bgs)
+            let dir = copy(target);
+            sub(dir, p);
+            normalize(dir)
+            mult(dir, bgF(len(p)));
+            add(p, dir);
+            if (len(p) + calcR(t, atan2(p[1], p[0])) < 0.4)
+                circ(ctx, p[1], p[0], 0.001);
+        }
+    }
+
+    function circ(ctx, x, y, r) {
+        ctx.beginPath();
+        let rr = r * size;
+        ctx.ellipse(x * size + size / 2, y * size + size / 2, rr, rr, 0, 0, TAU)
+        ctx.fill()
+    }
+
+    function calcR(t, at) {
+        return smoothstep(smoothstep((sin(-t * 2 + at * nn) + cos(-t + at * nn)) * .5 + .5)) * 0.1;
+    }
+
+    function makeAgent() {
+        const a = rndr();
+        const r = rnd(0.1, 0.35);
+
+        let x = cos(a) * r;
+        let y = sin(a) * r;
+        let da = rndi(4) * PI / 2;
+        let step = rnd(0.002, 0.001)
+        let rr = rnd(0.001, 0.0005)
+        return {
+            tick(t, ctx) {
+                if (rndb(0.95))
+                    da += sign(rnds()) * PI / 2;
+
+                let at = atan2(y, x)
+                let d = hypot(x, y) + calcR(t, at)
+
+                if (d < 0.35) {
+                    da = 0
+                }
+
+                if (d > 0.4) {
+                    da = PI
+                }
+
+                let dir = at + da;
+
+                let x1 = step * smoothstep(smoothstep(t % 1));
+                x += cos(dir) * x1
+                y += sin(dir) * x1
+
+                circ(ctx, x, y, rr);
+            }
+        }
+    }
+
+    //// math
+
+    function rnd(x = 1, y = 0) {
+        return r() * x + y;
+    }
+
+    function rndb(x = 0.5) {
+        return rnd() > x
+    }
+
+    function rnds(x = 1) {
+        return rnd(x) - x / 2;
+    }
+
+    function rndi(x, y = 0) {
+        return rnd(x, y) | 0;
+    }
+
+    function rndr() {
+        return rnd(TAU);
+    }
+
+    function many(x, f) {
+        return [...Array(x | 0)].map((_, i) => f(i))
+    }
+
+    function prng(hash) {
+        // console.log(hash)
+        let t, x = new Uint32Array([1, 2, 3, 4].map(i =>
+            parseInt(hash.substr(i * 8, 8), 16)));
+        return () => {
+            t = x[3], x[3] = x[2], x[2] = x[1], x[1] = x[0],
+                t ^= t << 11, t ^= t >>> 8, x[0] = t ^ x[0] ^ x[0] >>> 19;
+            return x[0] / 0x100000000;
+        }
+    }
+
+    function initRandom(a, b) {
+        let s = (999 + (a ** 9) + (b ** 9) + (a ** 11) + (b ** 11) + a * b + a + b).toString(16);
+        r = prng(many(22, () => s).join(""));
+        r = prng(many(32, () => rndi(16).toString(16)).join(""))
+    }
+
+    function vec2(a, r) {
+        return [cos(a) * r, sin(a * r)];
+    }
+
+    function copy(v) {
+        return [...v];
+    }
+
+    function sub(v1, v2) {
+        v1[0] -= v2[0];
+        v1[1] -= v2[1];
+    }
+
+    function add(v1, v2) {
+        v1[0] += v2[0];
+        v1[1] += v2[1];
+    }
+
+    function normalize(v) {
+        mult(v, 1 / len(v));
+    }
+
+    function len(v) {
+        return hypot(...v);
+    }
+
+    function mult(v, k) {
+        v[0] *= k;
+        v[1] *= k;
+    }
+
+    function smoothstep(x) {
+        return 3 * x * x - 2 * x * x * x;
+    }
+
+    function pick(arr) {
+        return arr[rndi(arr.length)];
+    }
+</script>
+</body>
+</html>
