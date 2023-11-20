@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>clock</title>
+</head>
+<body>
+<style>
+    body {
+        background: black;
+        margin: 0;
+    }
+
+    canvas {
+        /*margin: calc(50vh - min(50vw, 50vh)) calc(50vw - min(50vw, 50vh));*/
+    }
+</style>
+<canvas id="clock"></canvas>
+<script src="math.js"></script>
+<script>
+
+    // author - Stranger in the Q
+    // twitter @stranger_intheq
+    // https://strangerintheq.art/
+
+    (function () {
+
+        const p = vec2(0.01, 0.01);
+
+        let settings;
+
+        const canvas = document.querySelector("#clock");
+        const seed1 = (Math.random() * 90) | 0;
+        const seed2 = (Math.random() * 90) | 0;
+
+        makeClockGl(canvas, seed1, seed2)
+
+        function makeClockGl(canvas, seed1, seed2) {
+
+            initRandom(seed1, seed2)
+            settings = initSettings()
+
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+
+            const gl = canvas.getContext("webgl", {preserveDrawingBuffer: true});
+            window.fullScreenTriangle = new Float32Array([-1, 3, -1, -1, 3, -1])
+            const bufferSize = settings.outerAgentsCount * 9 + settings.innerAgentsCount * 9
+            window.points = new Float32Array(many(bufferSize, () => 0))
+            const outerRingAgents = many(settings.outerAgentsCount, makeOuterRingAgent)
+
+            const clearPass = program(gl, `
+attribute vec2 pt = () => fullScreenTriangle;
+void main() {
+    gl_Position = vec4(pt.x, pt.y, 0.0, 1.0);
+}`, `
+void main() {
+    gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);
+}`);
+
+            const particles = program(gl, `
+attribute vec3 pt = () => points;
+varying vec3 color;
+void main() {
+    if (pt.z>2.) {
+        color = vec3(1,0,0);
+    } else if (pt.z > 1.) {
+        color = vec3(0,1,0);
+    } else {
+        color = vec3(0,0,1);
+    }
+    gl_Position = vec4(2.*pt.x/${innerWidth / innerHeight}, pt.y*2.,0.0, 1.0);
+    gl_PointSize = 2.0;
+}`, `
+varying vec3 color;
+void main() {
+    gl_FragColor = vec4(color, 0);
+}`);
+
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            gl.enable(gl.BLEND);
+
+            requestAnimationFrame(function draw(t) {
+                t /= 1000;
+                // window. t = t;
+                outerRingAgents.forEach((a, i) => {
+                    a.tick(t);
+                    a.addToBuffer(points, i,t)
+                });
+                bg(t, points)
+                gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+                clearPass(3, gl.TRIANGLES);
+
+                // addittive blending
+                gl.blendFunc(gl.ONE, gl.ONE);
+                particles(points.length / 3, gl.POINTS);
+
+                requestAnimationFrame(draw);
+            });
+
+            function program(gl, vs, fs) {
+                const uniforms = [];
+                const attributes = [];
+                const pid = gl.createProgram();
+                shader(vs, gl.VERTEX_SHADER)
+                shader(fs, gl.FRAGMENT_SHADER)
+                gl.linkProgram(pid);
+                gl.useProgram(pid);
+
+                return (count, type) => {
+                    gl.useProgram(pid);
+                    uniforms.forEach(uf => uf());
+                    attributes.forEach(attr => attr());
+                    gl.drawArrays(type, 0, count);
+                };
+
+                function shader(src, type) {
+                    const id = gl.createShader(type);
+                    src = prepare(src);
+                    console.log(src)
+                    gl.shaderSource(id, 'precision highp float;\n' + src);
+                    gl.compileShader(id);
+                    const message = gl.getShaderInfoLog(id);
+                    if (message.length > 0) {
+                        console.log(src.split('\n').map((str, i) =>
+                            ("" + (1 + i)).padStart(4, "0") + ": " + str).join('\n'));
+                        throw message;
+                    }
+                    gl.attachShader(pid, id);
+                }
+
+                function prepare(src) {
+                    return src.split('\n').map(line => {
+                        if (~line.indexOf('attribute'))
+                            line = attr(line);
+                        else if (~line.indexOf('uniform'))
+                            line = uf(line);
+                        return line;
+                    }).join('\n');
+                }
+
+                function uf(line) {
+                    const l = line.split(/\s+/);
+                    const size = +l[1].split('vec')[1] || 1;
+                    const f = gl[`uniform${size}f`];
+                    const code = 'return () =' + line.split('=')[2];
+                    const uniformValue = (new Function('', code))();
+                    let loc;
+                    uniforms.push(() => {
+                        if (!loc)
+                            loc = gl.getUniformLocation(pid, l[2]);
+                        const v = uniformValue();
+                        f.call(gl, loc, ...v)
+                    });
+                    return line.split('=')[0].trim() + ';';
+                }
+
+                function attr(line) {
+                    const l = line.split(/\s+/)
+                    const size = +l[1].split('vec')[1] || 1;
+                    const bufferId = gl.createBuffer();
+                    const code = 'return () =' + line.split('=')[2];
+                    const arrtibuteValue = (new Function('', code))();
+                    let type, loc;
+                    attributes.push(() => {
+                        gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
+                        if (!loc) {
+                            loc = gl.getAttribLocation(pid, l[2]);
+                            gl.enableVertexAttribArray(loc);
+                        }
+                        type = type ? gl.STATIC_DRAW : gl.DYNAMIC_DRAW;
+                        const data = arrtibuteValue();
+                        gl.bufferData(gl.ARRAY_BUFFER, data, type);
+                        gl.vertexAttribPointer(loc, size, gl.FLOAT, false, 0, 0);
+                    })
+                    return line.split('=')[0].trim() + ';'
+                }
+            }
+        }
+
+        function initSettings() {
+            const outerAgentsCount = 5000;
+            const innerAgentsCount = 4000;
+
+            const bgs = rndi(50, 1) * 0.01
+            const nn = rndi(5, 2)
+            const bgF = pick([
+                (x,m) => x/2+0.1,
+                // (x,m) => x%m ,
+                (x,y) => x%(y/40)+.04,
+            ]);
+
+            let a = pick([TAU / 2, TAU / 4])
+
+            const aF = pick([
+                (i, n) => ((i * n) | 0) * a,
+                (i, n) => ((i + n) | 0) * a,
+                (i, n) => ((i / n) | 0) * a
+            ])
+            let n = pick([rndi(4,3)])
+            let seed = rnd(999999)
+            return {outerAgentsCount, innerAgentsCount, bgs, nn, bgF, aF, n, seed}
+        }
+
+        function hash(x) {
+            x = sin(x) + sin(x*3) + sin(x/3) + sin(x*11.1) + sin(x*17.1);
+            x *= 999;
+            x |= 0;
+            return abs(x) % 10 + 3
+        }
+
+        function bg(t, pts) {
+            let n = settings.n;
+            let m0 = hash((t)|0+ settings.seed);
+            let m1 = hash((t+1)|0+ settings.seed);
+            let st = smoothstep(smoothstep(t%1));
+            let m = lerp(m0,m1, st)
+            let offset = settings.outerAgentsCount * 6;
+            for (let i = 0; i < settings.innerAgentsCount; i++) {
+                let angle = floor(rnd()*n)/n*TAU;
+                let target = vec2(((t|0)+st)/4+angle , 0.2);
+                let dir = copy(target);
+                sub(dir, p);
+                normalize(dir);
+                mult(dir, settings.bgF(len(p),m));
+                add(p, dir);
+
+
+                // if (len(p) + calcR(t, atan2(p[1], p[0])) < 0.4) {
+                    let ii = offset + i * 9;
+                    pts[ii] = p[1];
+                    pts[ii + 1] = p[0]+0.003
+                    pts[ii + 2] = .1;
+                    pts[ii+3] = p[1];
+                    pts[ii + 4] = p[0]-0.003
+                    pts[ii + 5] = 1.1;
+                    pts[ii+6] = p[1];
+                    pts[ii + 7] = p[0];
+                    pts[ii + 8] = 2.1;
+                    // debugger
+                // }
+            }
+        }
+
+        function calcR(t, at) {
+            let ss = sin(-t * 2 + at * settings.nn)
+                // + cos(-t + at * settings.nn)
+                + sin(-t/2 + at * settings.nn)
+            ;
+            return smoothstep(smoothstep(ss * .5 + .5)) * 0.1;
+        }
+
+        function makeOuterRingAgent() {
+            let x, y, x1, y1, x2, y2;
+
+            function init() {
+                let a = rndr()
+                let d = 0.3 + rnd(0.05, calcR(0, a));
+                x1 = x2 = x = cos(a)*d
+                y1 = y2 = y = sin(a)*d
+            }
+
+            init()
+
+            let da = rndi(4) * PI / 2;
+            let step = rnd(0.002, 0.001)
+
+            return {
+
+                addToBuffer(pts, i,t) {
+                    let a = atan2(y,x)+t;
+                    let k = (t/10)%1 > 0.99 ? 0.1:0.005;
+                    let dx = cos(a)*sin(t+a*5)*k
+                    let dy = sin(a)*sin(t+a*4)*k
+                    pts[i * 9 + 0] = x;
+                    pts[i * 9 + 1] = y;
+                    pts[i * 9 + 2] = 0.1;
+
+                    pts[i * 9 + 3] = x1+dx;
+                    pts[i * 9 + 4] = y1+dy;
+                    pts[i * 9 + 5] = 1.1;
+
+                    pts[i * 9 + 6] = x2-dx;
+                    pts[i * 9 + 7] = y2-dy;
+                    pts[i * 9 + 8] = 2.1;
+                },
+
+                tick(t) {
+                    // if (rndb(0.999)) init();
+
+                    x2 = x1;
+                    y2 = y1;
+                    x1 = x;
+                    y1 = y;
+
+                    if (rndb(0.95)) da += sign(rnds()) * PI / 2;
+                    let at = atan2(y, x);
+                    let d = hypot(x, y) + calcR(t, at);
+                    if (d < 0.35) da = 0;
+                    if (d > 0.4) da = PI;
+                    let dir = at + da;
+                    let tt = t;
+                    tt = sin(t*PI*2)*.5+.5
+
+                    tt = smoothstep(tt);
+                    tt = smoothstep(tt);
+                    tt = smoothstep(tt);
+                    let st = step * tt;
+                    x += cos(dir) * st;
+                    y += sin(dir) * st;
+                }
+            }
+        }
+
+    })();
+</script>
+</body>
+</html>
