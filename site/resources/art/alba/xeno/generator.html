@@ -7,7 +7,20 @@
 </head>
 <body>
 <script>
-    let seed = "0xb999a645e67af23fc39cd6f4e7703e7cac12fdc5422ca966d57b3161d1fd2995"
+    let seeds = [
+        "0xb999a645e67af23fc39cd6f4e7703e7cac12fdc5422ca966d57b3161d1fd2995",
+        "0x542aa27d1b88128358b617f6c197cbe826b105f55d5db3c61cd396c64979b16d",
+        "0x819cd42a3189cc0ed7b551374f537e7f43b6ce86964ce8e7124158416dd99b21",
+        "0x29cd0fd6e12d94ebd1da9d534db02d81ce8bff626ff01458be2e339530f0f9e5",
+        "0x922749ca3733729357aedd40fc574a8042d93b210bdc5905a90c377fbe1de2d0",
+        "0xe3ed40613ec24a99311241740b2e716f5c056827ba86140bde39be343865c9b0",
+        "0xd9594d6190808cd66ca072d9c1afc886888bbf6a278de1eea0a2cbd2123ff2c0",
+        "0x3d1c6824796bc1f1cb424122a7e6c02540595ecdf15d9828faac8a193abd6130",
+        "0xd3f07c8320e5f12fe8742233d8f52cc4a650cb30a039c52dca2365d1fab50560",
+        "0x4f976cdf628891846d4f0c8cacf2c65a896b25bc90374ed577860065b9ac4c90",
+    ]
+    let seed = seeds[Math.random()*seeds.length|0]
+    // seed = window.alba._testSeed()
     window.alba.setMetadata = m => console.log(JSON.stringify(m, null, 2));
     window.alba.params = Object.assign(window.alba.params, {seed})
     console.log(window.alba.params.seed)
