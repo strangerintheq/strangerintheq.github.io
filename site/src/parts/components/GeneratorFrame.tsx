@@ -13,7 +13,7 @@ export function GeneratorFrame({id, hash = null}) {
     useEffect(() => {
         let url = 'site/resources/art/' + type + '/' + id + '/generator.html';
         fetchCode(url).then(setCode);
-        console.log(url)
+        // console.log(url)
     }, [id]);
 
     useEffect(() => {

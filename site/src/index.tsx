@@ -5,7 +5,7 @@ const div = document.createElement('div');
 document.body.append(div);
 createRoot(div).render(<Site />);
 window['art'] = () => {
-    console.log("XXXXX")
+    // console.log("XXXXX")
     // console.log("XX XX")
     // console.log("XXXXX")
 }

@@ -37,8 +37,12 @@
     "warp-engine"
 ]
 
+const alba = [
+    "xeno"
+]
 
 export const ProjectsTypes = {}
 artBlocks.forEach(project => Object.assign(ProjectsTypes, {[project]: "artblocks"}))
 fxHash.forEach(project => Object.assign(ProjectsTypes, {[project]: "fx-hash"}))
 teia.forEach(project => Object.assign(ProjectsTypes, {[project]: "teia"}))
+alba.forEach(project => Object.assign(ProjectsTypes, {[project]: "alba"}))
