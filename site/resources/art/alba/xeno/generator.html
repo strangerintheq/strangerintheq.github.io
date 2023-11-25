@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style type="text/css">body {margin: 0;overflow: hidden;}canvas{margin-left: calc(50vw - calc(50vh * calc(5 / 7)));}</style>
+<style type="text/css">
+    body {
+        margin: 0;
+        overflow: hidden;
+    }
+</style>
 <script src="https://www.alba.art/js/alba.min.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
 <script>
+
+
     let seeds = [
         "0xb999a645e67af23fc39cd6f4e7703e7cac12fdc5422ca966d57b3161d1fd2995",
         "0x542aa27d1b88128358b617f6c197cbe826b105f55d5db3c61cd396c64979b16d",
@@ -33,7 +40,11 @@ void main(){gl_Position=vec4(p,0,1);}`,fe=(e,t,r=Ae)=>{let n=(a,s)=>{let[i,o,d,v
 `+a,a},I=a=>{let s=a.trim().split(/\s+/),i=+s[1].split("vec")[1]||1,o="return () =>"+a.split("=")[1],d=new Function("",o)();return[s[2],i,d,a.split("=")[0].trim()+";"]},q=(a,s)=>{let i=e.createShader(s);a=S(a),e.shaderSource(i,a),e.compileShader(i),e.attachShader(b,i)},L=[],b=e.createProgram();return q(r,e.VERTEX_SHADER),q(t,e.FRAGMENT_SHADER),e.linkProgram(b),e.useProgram(b),(a=3,s=!1)=>{e.useProgram(b),L.forEach(i=>i()),e.drawArrays(s?e.POINTS:e.TRIANGLES,0,a)}},ce=e=>{let t=e,r=t.length,n=(f,S)=>(parseInt(f.substr(S,2),16)/255).toFixed(4),h=f=>`vec3(${n(f,1)},${n(f,3)},${n(f,5)});`;return`vec3 cL(float x){x=mod(x,${r}.);${R(r,f=>`if (x<${f+1}.)return ${h(t[f])}`).join("")}}`};var xe=(e,t,r)=>{let n=innerWidth,h=innerHeight,f=n/h<t,S=e.style;e.width=f?n:h*t,e.height=f?n/t:h,S.width=e.width+"px",S.height=e.height+"px",e.width*=r,e.height*=r},M=()=>document.createElement("canvas");var me=e=>{let t=M();t.width=e,t.height=e/y;let r=re(t);return te(r),A("#fff"),l(-1,-1,2,2),A("#000"),r},pe=()=>{let e=me(1e3);g[1](),A("#fff"),e.rotate(ee());let t=V(),r=p(.1,.1);return R(u([0,0,0,0,0,0,1,2,3]),n=>{l(t+n*r,-1,.05,2)}),e};var de=()=>{let e=u([.1,.15,.2]),t=1-e,r=1/y-e,n=me(se);return l(-t/2,-r/2,t,r),A("#fff"),n};var ue=`#define F float\n#define F2 vec2\n#define F3 vec3\n#define F4 vec4\nF3 mixColor(F x){return mix(cL(x),cL(x+1.),fract(x));}F sfract(F x){F w=.1;return min(fract(x)/(1.-(w)),fract(-x)/(w));}F smod(F x,F n){return(sfract((x)/(n))*(n));}F sfloor(F x){F c=5.;F a=fract(x);F b=floor(x);return((pow(a,c)-pow(1.-a,c))/2.)+b;}F3 permute(F3 x){return mod(((x*34.)+1.)*x,289.);}F noise(vec2 v){const F4 C=F4(.211324865405187,.366025403784439,-.577350269189626,.024390243902439);F2 i=floor(v+dot(v,C.yy));F2 x0=v-i+dot(i,C.xx);F2 i1;i1=(x0.x>x0.y)?F2(1,0):F2(0,1);F4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod(i,289.);F3 p=permute(permute(i.y+F3(0,i1.y,1))+i.x+F3(0,i1.x,1));F3 m=max(.5-F3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),.0);m=m*m*m*m;F3 x=2.*fract(p*C.www)-1.;F3 h=abs(x)-.5;F3 ox=floor(x+.5);F3 a0=x-ox;m*=1.79284291400159-.85373472095314*(a0*a0+h*h);F3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.*dot(m,g);}F fbm(F2 x){F v=0.0;F a=0.5;for(int i=0;i<7;++i){v+=a*cos(noise(x+a));x=x*2.+F(i);a*=0.5;}return v;}mat2 rot(F a){F cs=cos(a),sn=sin(a);return mat2(cs,sn,-sn,cs);}F smpl(sampler2D t,F nz){return texture2D(t,gl_FragCoord.xy/r.xy+nz).x;}F lT2(F2 UV,F2 uv){return 0.1*(max(noise(UV*333.+floor(UV.x*3333.)),sin(noise(uv)*55.+UV.x*3333.)));}F lT(F2 UV,F2 uv){F a=lT2(UV,uv);F b=lT2(UV.yx,uv.yx);return a-b;}F sS(F2 UV){if(NS)UV+=noise(UV*11.)*0.01;return SP1;}F sP2(F2 UV){return SP2;}F2 calcFrame(F2 UV,F2 UV1,F2 uv){F frame=smpl(MASK,(Nf?1.:.02)*noise(uv));F offset=0.05;F th=0.01;F edge=UV.y+noise(R*999.+UV+fbm(uv));frame=max(frame,ss(offset+2.*th,offset,abs(edge)));F nf=length(UV1)+abs(fbm(R*999.+UV1*1.)-0.5);frame=MM(frame,nf);return F2(frame,edge);}void main(){vec2 uv=gl_FragCoord.xy/r.xy-0.5;uv/=MS;uv.x*=r.x/r.y;uv*=1.15;F2 UV1=uv;if(S1)uv.x=abs(uv.x);if(S2)uv.y=abs(uv.y);uv=uv*rot(R*7.);F2 UV=uv;uv+=F2(fbm(uv+R*1111.)*(1.1+R*.6)-0.5,fbm(uv+R*1111.)*(1.1+R*.6)-0.5);F lt=LL(UV,uv);uv+=lt*noise(UV)*0.01;F x=sP2(uv);F b=length(uv);F aa=sS(UV);x=mix(x,aa,ss(0.92,0.9,b));F2 frame=calcFrame(UV,UV1,uv);if(frame.y<0.)x=1.-x*0.3;x=smod(x,5.);F zz=(UV.y+0.5)*3.;x=mix(x,x>zz-.5&&x<zz+.5?x/2.:x/5.,frame.x);if(BD)x=mix(x,x*0.2,smpl(OUTLINE,0.0));if(fL)x-=sfract(x);F3 c=mixColor(x+lt);c+=LL(UV*rot(floor(x+UV.x)*17.),uv);if(LT)c+=pow(sfract(x-0.2),9.0)/3.0;if(SD)c-=pow(1.0-sfract(x+0.2),9.0);c=clamp(c,0.,1.);gl_FragColor=F4(pow(c,vec3(1.)),1.0);}`;t1=pe();t2=de();var C=M();xe(C,y,E.params.isRenderer?devicePixelRatio:4);var Le=e=>document.body.append(e);Le(C);var Pe=C.getContext("webgl",{preserveDrawingBuffer:!0}),_e=C.width,De=C.height;fe(Pe,`\n${ie}\nuniform sampler2D MASK = t1;\nuniform sampler2D OUTLINE = t2;\nuniform vec2 r = [${[_e,De]}];\n${ce(Y?$[1]:$[1].reverse())}\n${ue}`)();var z=e=>e?"Yes":"No";
     E.setMetadata({Star:$[0],Pattern:K[0],Stencil:B?"Abstract":g[0],Symmetry:D?j?"Full":"Vertical":"No",Flat:z(O),Light:z(W),Shade:z(X),Texture:H?"Grid":"Lines",Flip:z(Y)});
     E.setComplete(!0);
-
+    let style = document.querySelector("canvas").style;
+    if (innerHeight / innerWidth < 7/5)
+        style.marginLeft = "calc(50vw - calc(50vh * calc(5 / 7)))"
+    else
+        style.marginTop = "calc(50vh - calc(50vw * calc(7 / 5)))"
 </script>
 </body>
 </html>
