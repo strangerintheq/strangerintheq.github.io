@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<body style="margin: 0;overflow: hidden">
+<script src="https://rawcdn.githack.com/strangerintheq/justlib/8bf4eae/lib.js"></script>
+<script src="palettes.js"></script>
+<script src="params.js"></script>
+<script src="shaderLib.js"></script>
+<script>
+    webglProgram(`
+
+${shaderLib}
+uniform vec2 r = [canvas.width, canvas.height];
+out vec4 fragColor;
+
+void main() {
+    vec2 uv = gl_FragCoord.xy / r.xy - .5;
+    uv.x *= r.x / r.y;
+    uv *= 1.2;
+    uv = uv * rot(RND*9.);
+    float d = 0.;
+    for (float i = 0.; i< 5.; i++)
+        d = mix(d, i, ss(0.0, 1.0, sin(uv.x*3. + i*1e3*RND)*.3 + uv.y - i*RND*0.3 + 1.0 + snoise(uv + i*1e3*RND)*0.2));
+
+    d = mod(d, 5.);
+    float shape = ${pick([
+        "ss(0.4, 0.45, length(uv) + snoise(uv+RND*44.)*RND*.1)",
+        "ss(0.18, 0.23, length(uv*uv) + snoise(uv+RND*44.)*RND*.1)",
+    ])};
+    if ( d < 2. || d > 3. )
+        d = mix(d, d*.3, shape);
+    d += RND*9.;
+    fragColor = vec4( palette(floor(d)) + fract(d+0.03)/7.  , 1.0 );
+}
+
+`)();
+</script>
+</body>
+</html>
