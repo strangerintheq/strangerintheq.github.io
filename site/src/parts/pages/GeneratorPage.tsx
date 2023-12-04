@@ -19,7 +19,7 @@ export function GeneratorPage({route}) {
         <LoaderMask/>
         <PageWrapper>
             <div style={{
-                display:route.includes("xeno")?"none": "flex",
+                display: "flex",
                 justifyContent: "space-between",
                 flexDirection: "column",
                 height: "100vh",
