@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<body style="margin: 0;overflow: hidden">
+<script src="https://rawcdn.githack.com/strangerintheq/justlib/8bf4eae/lib.js"></script>
+<script src="../ipa/palettes.js"></script>
+<script src="../ipa/shaderLib.js"></script>
+<script src="../ipa/params.js"></script>
+<script>
+
+const compose = webglProgram(`
+
+${shaderLib}
+
+uniform vec2 r = [canvas.width, canvas.height];
+out vec4 fragColor;
+
+F lT2(F2 UV, F2 uv){
+    return 0.1* (max(snoise(UV*111.+floor(UV.x*1111.)), sin(snoise(uv)*55.+UV.x*1111.)));
+}
+
+F lT(F2 UV, F2 uv){
+    return lT2(UV, uv)-lT2(UV.yx, uv.yx);
+}
+
+void main() {
+    vec2 uv = gl_FragCoord.xy / r.xy - .5;
+    uv.x *= r.x / r.y;
+    vec2 st = vec2(uv.x, uv.y)*1.;
+    uv *= (RND+1.)*10.;
+    uv = fract(uv);
+
+
+
+    float max = 2.+RND*3.;
+    float pic = 0.0;
+
+    // if (RND>.5)
+        pic +=  sin(RND*max * log(length(st-RND2+0.5)));
+    // if (RND>.5)
+        pic +=  sin(RND*max * log(length(st-RND2+0.5)));
+    if (RND>.5)
+        pic +=  sin(RND*max * log(length(st-RND2+0.5)));
+    if (RND>.5)
+        pic +=  sin(RND*max * log(length(st-RND2+0.5)));
+    if (RND>.5)
+        pic += sin(atan(st.y-RND+.5, st.x-RND+.5)*${rndi(5,2)}.-atan(st.y-RND+.5, st.x-RND+.5)*${rndi(5,2)}.);
+
+
+   float lt = lT(st, st);
+
+    pic += lt*.2;
+
+    float d = 0.0;
+    d += floor(pic) + (1.-fract(pic-st.x+fbm(st*1.1)/2.5))*.5;
+    d += sign(RNDS)*st.y;
+    d += sign(RNDS)*st.x;
+
+
+    float sns = snoise(st+RND*999.)*.035;
+    float stencil = ${pick([
+        "smoothstep(0.97, 1.0, length(st*st+sns)*5.1)",
+        "smoothstep(0.98, 1.0, length(st+sns)*2.1)",
+        "smoothstep(0.997, 1.0, length(st+vec2(2)*rot(RND*PI))*.34+ sns) ",
+    ])};
+
+    float gate = RND*.4+2.0;
+    d = mod(d,5.);
+    if ( !( d>gate && d<5.0-gate ) )
+      d = mix(d, d/(RND*5.+5.),  d>4.5 ? floor(fbm(st+RND*111.)):stencil);
+
+   d += RND*11.;
+
+   fragColor = vec4( palette(d) + lt , 1.0 );
+}
+`);
+
+compose();
+
+</script>
+</body>
+</html>
