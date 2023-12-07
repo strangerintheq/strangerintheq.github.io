@@ -181,8 +181,27 @@
 
     let bgF, aF;
 
-    const lightMode = document.location.search.includes("light");
-    document.body.classList.add(lightMode?"light":"dark");
+    const params = new URLSearchParams(document.location.search)
+    const w = params.has("w");
+
+    let bgColor = w ? "#fff" : "#000";
+    let fgColor = w ? "#000" : "#fff";
+
+    if (params.has("c")){
+        const colors = params.get("c").split(/(.{3})/).filter(t=>t)
+        bgColor = "#" + colors[0]
+        fgColor = "#" + colors[1]
+    }
+
+    const style = document.createElement("style");
+    style.innerHTML = `
+        body {
+            --bg-color: ${bgColor};
+            --fg-color: ${fgColor};
+        }
+    `
+    document.body.append(style);
+
 
     const age1Input = document.querySelector("#age1");
     const age2Input = document.querySelector("#age2");
@@ -236,7 +255,7 @@
 
         canvas.width = canvas.height = size;
         const ctx = canvas.getContext("2d");
-        ctx.fillStyle = lightMode ? "white" : "black"
+        ctx.fillStyle = bgColor
         ctx.fillRect(0, 0, size, size);
 
         let agents = many(agentsCount, makeAgent)
@@ -244,10 +263,10 @@
         requestAnimationFrame(function frame(t) {
             t /= 1000;
 
-            ctx.fillStyle = lightMode ? "#ffffff20" : "#00000010"
+            ctx.fillStyle = bgColor + "1"
             ctx.fillRect(0, 0, size, size);
 
-            ctx.fillStyle = lightMode ? "black" : "white";
+            ctx.fillStyle = fgColor;
             bg(t, ctx);
             agents.forEach(a => a.tick(t, ctx));
 
