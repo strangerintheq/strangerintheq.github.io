@@ -6,7 +6,7 @@
 </head>
 <body>
 <style>
-    body {
+    body.dark {
         --bg-color: black;
         --fg-color: white;
     }
@@ -130,7 +130,12 @@
     input[type="number"]:focus {
         -moz-appearance: number-input;
     }
-
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+    }
+    .dark input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
 </style>
 <div class="fullscreen stack">
 
@@ -177,15 +182,13 @@
     let bgF, aF;
 
     const lightMode = document.location.search.includes("light");
-    if (lightMode) {
-        document.body.classList.add("light")
-    }
+    document.body.classList.add(lightMode?"light":"dark");
 
     const age1Input = document.querySelector("#age1");
     const age2Input = document.querySelector("#age2");
     const birthInput = document.querySelector("#birthInput");
 
-    age1Input.oninput =  age2Input.oninput =  birthInput.oninput = validate;
+    age1Input.oninput = age2Input.oninput = birthInput.oninput = validate;
     validate();
 
     // let value2 = (Math.random() * 40 + 40) | 0;
@@ -241,7 +244,7 @@
         requestAnimationFrame(function frame(t) {
             t /= 1000;
 
-            ctx.fillStyle = lightMode ? "#ffffff20" : "#00000008"
+            ctx.fillStyle = lightMode ? "#ffffff20" : "#00000010"
             ctx.fillRect(0, 0, size, size);
 
             ctx.fillStyle = lightMode ? "black" : "white";
