@@ -178,7 +178,8 @@
 
 
     try {
-        const {PI, sin, cos, atan2, sign, hypot, min, sqrt} = Math, TAU = PI * 2;
+        const cos = Math.cos;
+        const {PI, sin, atan2, sign, hypot, min, sqrt} = Math, TAU = PI * 2;
         const size = min(innerHeight, innerWidth);
 
         let r, bgs, nn, p = vec2(0.001, 0);
@@ -460,7 +461,7 @@
 
         console.log("\n made by Stranger in the Q \n\n https://strangerintheq.art \n\n ")
     } catch (e) {
-        document.body.innerHTML = e.stack;
+        document.body.innerHTML = e.toString() + "<br>" + e.stack.join("<br>");
     }
 
 </script>
