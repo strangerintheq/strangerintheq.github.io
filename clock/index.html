@@ -174,6 +174,7 @@
 
 </div>
 <script>
+    "use strict";
 
     try {
         const {PI, sin, cos, atan2, sign, hypot, min, sqrt} = Math, TAU = PI * 2;
@@ -383,7 +384,7 @@
         }
 
         function vec2(a, r) {
-            return [Math.cos(a) * r, Math.sin(a * r)];
+            return [cos(a) * r, sin(a * r)];
         }
 
         function copy(v) {
@@ -457,9 +458,8 @@
         })();
 
         console.log("\n made by Stranger in the Q \n\n https://strangerintheq.art \n\n ")
-        // throw new Error("xx")
     } catch (e) {
-        document.body.innerHTML = e.toString() + "<br>" + e.stack;
+        document.body.innerHTML = e.toString() + "<br>" + e.stack.join("<br>");
     }
 
 </script>
