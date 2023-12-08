@@ -386,7 +386,7 @@
         }
 
         function vec2(a, r) {
-            return [cos(a) * r, sin(a * r)];
+            return [Math.cos(a) * r, sin(a * r)];
         }
 
         function copy(v) {
@@ -460,7 +460,7 @@
         })();
 
         console.log("\n made by Stranger in the Q \n\n https://strangerintheq.art \n\n ")
-        throw new Error("xx")
+        // throw new Error("xx")
     } catch (e) {
         document.body.innerHTML = e.toString() + "<br>" + e.stack;
     }
