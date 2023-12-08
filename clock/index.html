@@ -175,11 +175,8 @@
 </div>
 <script>
 
-
-
     try {
-        const cos = Math.cos;
-        const {PI, sin, atan2, sign, hypot, min, sqrt} = Math, TAU = PI * 2;
+        const {PI, sin, cos, atan2, sign, hypot, min, sqrt} = Math, TAU = PI * 2;
         const size = min(innerHeight, innerWidth);
 
         let r, bgs, nn, p = vec2(0.001, 0);
@@ -386,7 +383,7 @@
         }
 
         function vec2(a, r) {
-            return [Math.cos(a) * r, sin(a * r)];
+            return [Math.cos(a) * r, Math.sin(a * r)];
         }
 
         function copy(v) {
