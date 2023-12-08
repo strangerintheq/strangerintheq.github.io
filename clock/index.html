@@ -199,11 +199,11 @@
 
         const style = document.createElement("style");
         style.innerHTML = `
-        body {
-            --bg-color: ${bgColor};
-            --fg-color: ${fgColor};
-        }
-    `
+            body {
+                --bg-color: ${bgColor};
+                --fg-color: ${fgColor};
+            }
+        `;
         document.body.append(style);
 
 
@@ -460,7 +460,7 @@
 
         console.log("\n made by Stranger in the Q \n\n https://strangerintheq.art \n\n ")
     } catch (e) {
-        document.body.innerHTML = e.toString();
+        document.body.innerHTML = e.stack;
     }
 
 </script>
