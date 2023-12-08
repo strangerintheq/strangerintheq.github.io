@@ -460,8 +460,9 @@
         })();
 
         console.log("\n made by Stranger in the Q \n\n https://strangerintheq.art \n\n ")
+        throw new Error("xx")
     } catch (e) {
-        document.body.innerHTML = e.toString() + "<br>" + e.stack.join("<br>");
+        document.body.innerHTML = e.toString() + "<br>" + e.stack;
     }
 
 </script>
