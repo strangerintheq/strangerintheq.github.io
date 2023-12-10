@@ -5,7 +5,8 @@
     <title>I May Die Today</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900"
+          rel="stylesheet">
     <style>
         a, a:visited {
             color: white;
@@ -16,6 +17,8 @@
         }
 
         .page {
+            max-width: 1000px;
+            margin: auto;
             display: none;
             pointer-events: none;
             transition: 1s;
@@ -36,159 +39,469 @@
             grid-template-columns: 100%;
             grid-template-rows: 100%;
         }
+
         ._20_400 {
-            color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word
+            color: white;
+            font-size: 20px;
+            font-family: Inter;
+            font-weight: 400;
+            word-wrap: break-word
         }
+
+        ._20_700 {
+            color: white;
+            font-size: 20px;
+            font-family: Inter;
+            font-weight: 700;
+            word-wrap: break-word
+        }
+
         ._36_200 {
-            color: white; font-size: 36px; font-family: Inter; font-weight: 200; word-wrap: break-word
+            color: white;
+            font-size: 36px;
+            font-family: Inter;
+            font-weight: 200;
+            word-wrap: break-word
         }
+
         ._48_200 {
-            color: white; font-size: 48px; font-family: Inter; font-weight: 200; word-wrap: break-word
+            color: white;
+            font-size: 48px;
+            font-family: Inter;
+            font-weight: 200;
+            word-wrap: break-word
         }
     </style>
 </head>
 <body>
 
 <div class="stack">
-    <div class="cover page">
-        <div>
+    <div class="stack text">
+        <div class="cover page">
             <div>
-
-                <span style="color: white; font-size: 96px; font-family: Inter; font-weight: 200; word-wrap: break-word">I May Die Today<br/></span>
-                <span class="_20_400"><br/>The space between the moment we are alive in right now and the moment of our </span>
-                <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word">death</span>
-                <span class="_20_400"> is constantly shifting. <br/><br/>This project is a joyful experiment with the </span>
-                <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word">Quantum complexities of life expectancy</span>
-                <span class="_20_400">, consisting of a series of experiments attempting to visualize a different perception of time.<br/><br/><br/></span>
-                <span class="_36_200"><br/>Index of experiments:<br/></span>
-                <span class="_48_200">No. 1  — </span>
-                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a href="?page=intro">Quantum Clock →</a><br/></span>
-                <span style="color: white; font-size: 10px; font-family: Inter; font-weight: 200; word-wrap: break-word"></span>
-                <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 400; text-decoration: underline; word-wrap: break-word"><a href="?page=intro">Mapping Space Between The Now and Death<br/></a></span>
-                <span class="_20_400"><br/></span>
-                <span class="_48_200">No. 2 —</span>
-                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 400; word-wrap: break-word"> </span>
-                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word">Writing<br/></span>
-                <span class="_20_400">Collected words on the journey of a thousand deaths<br/><br/></span>
-                <span class="_48_200">No. 3 —</span>
-                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 400; word-wrap: break-word"> </span>
-                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word">VR Space<br/></span>
-                <span class="_20_400">May I not feel fear when presented with an entity so vast, not even thought can form an edge.<br/><br/><br/></span>
+                <div>
+                    <span style="color: white; font-size: 96px; font-family: Inter; font-weight: 200; word-wrap: break-word">I May Die Today<br/></span>
+                    <span class="_20_400"><br/>The space between the moment we are alive in right now and the moment of our </span>
+                    <span class
+                                  ="_20_700">death</span>
+                    <span class="_20_400"> is constantly shifting. <br/><br/>This project is a joyful experiment with the </span>
+                    <span class
+                                  ="_20_700">Quantum complexities of life expectancy</span>
+                    <span class="_20_400">, consisting of a series of experiments attempting to visualize a different perception of time.<br/><br/><br/></span>
+                    <span class="_36_200"><br/>Index of experiments:<br/></span>
+                    <span class="_48_200">No. 1  — </span>
+                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
+                            href="?page=intro">Quantum Clock →</a><br/></span>
+                    <span style="color: white; font-size: 10px; font-family: Inter; font-weight: 200; word-wrap: break-word"></span>
+                    <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 400; text-decoration: underline; word-wrap: break-word"><a
+                            href="?page=intro">Mapping Space Between The Now and Death<br/></a></span>
+                    <span class="_20_400"><br/></span>
+                    <span class="_48_200">No. 2 —</span>
+                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 400; word-wrap: break-word"> </span>
+                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word">Writing<br/></span>
+                    <span class="_20_400">Collected words on the journey of a thousand deaths<br/><br/></span>
+                    <span class="_48_200">No. 3 —</span>
+                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 400; word-wrap: break-word"> </span>
+                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word">VR Space<br/></span>
+                    <span class="_20_400">May I not feel fear when presented with an entity so vast, not even thought can form an edge.<br/><br/><br/></span>
+                </div>
+                <div>
+                    <span class="_36_200">Abstract:<br/></span>
+                    <span class="_20_400"><br/>We use linear time to calculate and count down until our final moment, but time and the different forces that tie us to our present lives shift endlessly. The great Buddhist Scholar, Nagarjuna, writes: <br/><br/>“We maintain our life in the midst of thousands of conditions that threaten death. Our life force is like a candle flame in a breeze, which is easily extinguished by the winds of death that blow from all directions.”<br/><br/>Life expectancy is monetized, algorithm-ized, and quantified to support the Newtonian agenda. This is not reflective of the Quantum state of the universe which reveals that we live in a world of constant change. With the sheer variability we live in, we are teetering on the precipice of life and death. It looks like a continuation of the natural order, but each moment is charged with the infinite possibility of remaining in this world or continuing on to the next one. <br/><br/></span>
+                    <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word">The inspiration and title for this project came from a chapter on Death from the Buddhist Book </span>
+                    <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
+                            href="https://kadampa.org/books/free-ebook-download-howtotyl">How To Transform Your Life</a></span>
+                    <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word"> by Venerable Geshe Kelsang Gyatso Rinpoche. Please click </span>
+                    <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 700; word-wrap: break-word"><a
+                            href="?page=death">here</a></span>
+                    <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word"> to read the excerpt.<br/></span>
+                    <span class="_20_400"><br/><br/><br/><br/><br/>Collaboration between </span>
+                    <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
+                            href="https://namkha.studio/">Katya Danziger</a></span>
+                    <span class="_20_400"> & </span>
+                    <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
+                            href="https://strangerintheq.art">Stranger in the Q</a></span>
+                    <span class="_20_700"> </span>
+                    <span class="_20_400">at Parsons School of Design.</span>
+                </div>
             </div>
+        </div>
+
+        <div class="death page">
+            <div style="width: 489px; height: 71px">
+                <span class="_20_400">Excerpt from the Buddhist Book </span>
+                <span class
+                              ="_20_700">How To Transform Your Life</span>
+                <span class="_20_400"> by Venerable Geshe Kelsang Gyatso Rinpoche. </span>
+                <span style="color: #ADADAD; font-size: 20px; font-family: Inter; font-weight: 400; text-decoration: underline; word-wrap: break-word"><a
+                        href="https://kadampa.org/books/free-ebook-download-howtotyl">Available online as a free ebook.</a></span>
+            </div>
+            <br/>
+            <br/>
+            <br/>
             <div>
-                <span class="_36_200">Abstract:<br/></span>
-                <span class="_20_400"><br/>We use linear time to calculate and count down until our final moment, but time and the different forces that tie us to our present lives shift endlessly. The great Buddhist Scholar, Nagarjuna, writes: <br/><br/>“We maintain our life in the midst of thousands of conditions that threaten death. Our life force is like a candle flame in a breeze, which is easily extinguished by the winds of death that blow from all directions.”<br/><br/>Life expectancy is monetized, algorithm-ized, and quantified to support the Newtonian agenda. This is not reflective of the Quantum state of the universe which reveals that we live in a world of constant change. With the sheer variability we live in, we are teetering on the precipice of life and death. It looks like a continuation of the natural order, but each moment is charged with the infinite possibility of remaining in this world or continuing on to the next one. <br/><br/></span>
-                <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word">The inspiration and title for this project came from a chapter on Death from the Buddhist Book </span>
-                <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a href="https://kadampa.org/books/free-ebook-download-howtotyl">How To Transform Your Life</a></span>
-                <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word"> by Venerable Geshe Kelsang Gyatso Rinpoche. Please click </span>
-                <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 700; word-wrap: break-word"><a
-                        href="?page=death">here</a></span>
-                <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word"> to read the excerpt.<br/></span>
-                <span class="_20_400"><br/><br/><br/><br/><br/>Collaboration between </span>
-                <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a href="https://namkha.studio/">Katya Danziger</a></span>
-                <span class="_20_400"> & </span>
-                <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
-                        href="https://strangerintheq.art">Stranger in the Q</a></span>
-                <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word"> </span>
-                <span class="_20_400">at Parsons School of Design.</span>
+                <span style="color: white; font-size: 96px; font-family: Inter; font-weight: 200; word-wrap: break-word">Death<br/></span>
+                <span class="_20_400"><br/>No one wants to suffer. Day and night, even in our dreams, we instinctively try to avoid even the slightest suffering. This indicates that, although we are not fully aware of it, deep down what we are really seeking is permanent liberation from suffering.<br/><br/>There are times when we are free from physical suffering and mental pain, but these times never last. It is not long before our body again becomes uncomfortable or sick, and our mind is disturbed by worries and unhappiness. Whatever problem we overcome, it is only a matter of time before another arises to take its place. This shows that despite our wish for permanent liberation from suffering we have never managed to attain it. For as long as delusions remain in our mind, we will never be completely free from suffering. We may enjoy moments of respite, but before long our problems will return. The only way finally to end our suffering is by following the spiritual path. Since, in the depths of their hearts, everyone wants complete liberation from suffering, we can see that in reality everyone needs to follow the spiritual path.<br/><br/>However, because our desire for worldly enjoyment is so strong, we have little or no interest in spiritual practice. From a spiritual point of view, this lack of interest in spiritual practice is a type of laziness called ‘the laziness of attachment’. For as long as we have this laziness, the door to liberation will be closed to us, and consequently we will continue to experience misery in this life and endless suffering in life after life. The way to overcome this laziness is to meditate on death.<br/><br/>We need to contemplate and meditate on our death again and again until we gain a deep realization of death. Although on an intellectual level we all know that eventually we are going to die, our awareness of death remains superficial. Since our intellectual knowledge of death does not touch our hearts, each and every day we continue to think, ‘I will not die today, I will not die today.’ Even on the day of our death we are still thinking about what we will do tomorrow or next week. This mind that thinks every day ‘I will not die today’ is deceptive – it leads us in the wrong direction and causes our human life to become empty. On the other hand, through meditating on death we will gradually replace the deceptive thought ‘I will not die today’ with the non-deceptive thought ‘I may die today.’ The mind that spontaneously thinks each and every day ‘I may die today’ is the realization of death. It is this realization that directly eliminates our laziness of attachment and opens the door to the spiritual path.<br/><br/>In general, we may die today or we may not die today – we do not know. However, if we think each day, ‘I may not die today’, this thought will deceive us because it comes from our ignorance; whereas if instead we think each day, ‘I may die today’, this thought will not deceive us because it comes from our wisdom. This beneficial thought will prevent our laziness of attachment, and will encourage us to prepare for the welfare of our countless future lives or to put great effort into entering the path to liberation. In this way, we will make our human life meaningful.<br/><br/>To meditate on death, we contemplate that our death is certain and that the time of our death is uncertain. We then need to understand that at the time of death and after death only spiritual practice can help us.<br/><br/><br/></span>
+                <span class="_48_200">DEATH IS CERTAIN<br/></span>
+                <span class="_20_400"><br/>Death will definitely come and there is nothing that can prevent it. We contemplate:<br/><br/></span>
+                <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">No matter where I am born, whether it is in fortunate or unfortunate states of existence, I will definitely have to die. Whether I am born in the happiest condition of higher rebirth or in the deepest hell, I will have to experience death. However far and wide I travel, I will never find a place where I can hide from death, even if I voyage far into space or tunnel deep underground.<br/>No one alive at the time of the first century remains alive today, and no one alive at the time of the second century and so forth remains alive today. Only their names survive. All those who were alive two hundred years ago have passed away, and all those alive today will be gone in two hundred years’ time.<br/><br/>Contemplating these points we should ask ourself, ‘Could I alone outlive death?’<br/></span>
+                <span class="_20_400"><br/>When our karma to experience this life comes to an end, no one and nothing can prevent our death. When the time of our death arrives, there is no escape. If it were possible to prevent death by using clairvoyance or miracle powers, those who have possessed such powers would have become immortal; but even clairvoyants die. The most powerful monarchs who have ruled in this world have been helpless before the power of death. The king of beasts, the lion, who can kill an elephant, is immediately destroyed when he encounters the Lord of Death. Even billionaires have no way of avoiding death. They cannot distract death with a bribe or buy time, saying, ‘If you postpone my death I will give you wealth beyond your wildest dreams.’<br/>Death is relentless and will not be compromised. It is like the collapse of an immense mountain in all four directions; there is no way to hold back its devastation. This is also true of ageing and sickness. Ageing progresses surreptitiously and undermines our youth, our strength and our beauty. Although we are hardly aware of the process, it is already underway and cannot be reversed. Sickness destroys the comfort, power and strength of our body. If doctors help us to overcome our first illness, others take its place until, eventually, our sickness cannot be cured and we die. We cannot escape from sickness and death by running away from them. We cannot placate them with riches nor use miracle powers to make them vanish. Every single being in this world must suffer ageing, sickness and death.<br/><br/>Our life span cannot be increased, and in fact it is decreasing continuously. From the moment of our conception we head inexorably towards death, just like a racehorse galloping towards its finishing post. Even racehorses occasionally relax their pace, but in our race towards death we never stop, not even for a second. While we are sleeping and while we are awake, our life slips away. Every vehicle stops and breaks its journey from time to time, but our life span never stops running out. One moment after our birth, part of our life span has perished. We live in the very embrace of death. After our birth we have no freedom to remain even for a minute. We head towards the embrace of the Lord of Death like an athlete running. We may think that we are among the living, but our life is the very highway of death.<br/><br/>Suppose our doctor were to break the news to us that we were suffering from an incurable disease and that we had only one week left to live. If our friend were then to offer us a fantastic gift such as a diamond, a new car or a free holiday, we would not get very excited about it. Yet in reality this is our very predicament, for we are all suffering from a mortal disease. How foolish it is to become overly interested in the passing pleasures of this brief life!<br/>If we find it difficult to meditate on death, we can listen to a clock ticking and be aware that every tick marks the end of a moment of our life and draws us closer to death. We can imagine that the Lord of Death lives some distance from us. Then, as we listen to the clock ticking, we can imagine ourself taking steps in death’s direction moment by moment. In this way we will understand that we are travelling towards death without a moment’s rest.<br/><br/>Our world is as impermanent as autumn clouds, with our birth and death being like the entrance and exit of an actor on the stage. Actors frequently change their costumes and their roles, making their entrance in many different disguises. In the same way, living beings take different forms continually and enter new worlds. Sometimes they are human beings, sometimes they are animals, and sometimes they enter hell. We should understand that the lifespan of a living being passes like lightning in the sky, and perishes quickly like water falling from a high mountain.<br/><br/>Death will come regardless of whether or not we have made the time for spiritual practice. Although life is short, it would not be so bad if we had plenty of time for spiritual practice, but most of our time is taken up with sleeping, working, eating, shopping, talking and so on, leaving very little time for pure spiritual practice. Our time is easily consumed by other pursuits until, suddenly, we die.<br/><br/>We keep thinking that we have plenty of time for spiritual practice, but if we closely examine our way of life we will see that the days slip by without our getting down to serious practice. If we do not make the time to engage in spiritual practice purely, we will look back on our life at the time of death and see that it has been of very little benefit. However, if we meditate on death, we will develop such a sincere wish to practise purely that we will naturally begin to modify our daily routine so that it includes at least a little time for practice. Eventually we will find more time for practice than for other things.<br/>If we meditate on death again and again we may feel afraid; but it is not enough just to feel fear. Once we have generated an appropriate fear of dying unprepared, we should search for something that will offer real protection. The paths of future lives are very long and unfamiliar. We have to experience one life after another, and we cannot be sure where we will take rebirth – whether we will have to follow the paths to unhappy states of existence or the paths to happier realms. We have no freedom or independence but must go wherever our karma takes us. Therefore, we need to find something that will show us a safe way to future lives, something that will direct us along correct paths and away from wrong paths. The possessions and enjoyments of this life cannot protect us. Since only spiritual teachings reveal a flawless path that will help and protect us in the future, we must make effort with our body, speech and mind to put spiritual teachings such as those presented in this book into practice. The Yogi Milarepa said:<br/><br/></span>
+                <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">There are more fears in future lives than in this one. Have you prepared anything that will help you? If you have not prepared for your future lives, do so now. The only protection against those fears is the practice of holy spiritual teachings.<br/></span>
+                <span class="_20_400"><br/>If we think about our own life we will see that we have spent many years with no interest in spiritual practice, and that now, even if we have the wish to practise, still, due to laziness, we do not practise purely. A great scholar called Gungtang said:<br/><br/></span>
+                <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">I spent twenty years not wanting to practise spiritual teachings. I spent the next twenty years thinking that I could practise later on. I spent another twenty years engrossed in other activities and regretting the fact that I had not engaged in spiritual practice. This is the story of my empty human life.<br/></span>
+                <span class="_20_400"><br/>This could be our own life story, but if we meditate on death we will avoid wasting our precious human life and we will strive to make it meaningful.<br/>Through contemplating these points, we should deeply think, ‘I will certainly die.’ Considering that at the time of death only our spiritual practice will be of any real assistance to us, we make a firm resolution, ‘I must put spiritual teachings, known as Dharma, into practice.’ When this thought arises strongly and clearly in our mind, we hold it single-pointedly without distraction to become more and more familiar with it, until we never lose it.<br/><br/><br/></span>
+                <span class="_48_200">THE TIME OF OUR DEATH IS UNCERTAIN<br/></span>
+                <span class="_20_400"><br/>Sometimes we fool ourself by thinking, ‘I am young and so I will not die soon’, but we can see how misguided this thought is merely by observing how many young people die before their parents. Sometimes we think, ‘I am healthy and so I will not die soon’, but we can see that people who are healthy and looking after the sick sometimes die before their patients. <br/><br/>People who go to visit their friends in hospital may die sooner in a car crash, for death does not confine itself to those who are aged and unwell. Someone who is alive and well in the morning could be dead by the afternoon, and someone who is well when he falls asleep may die before he wakes up. Some people die while they are eating, and some people die in the middle of a conversation. Some people die as soon as they are born.<br/><br/>Death may not give any warning. This enemy can come at any time and often he strikes quickly, when we least expect it. He may come as we are driving to a party, or switching on our television, or as we are thinking to ourself ‘I will not die today’ and making plans for our summer holidays or our retirement. The Lord of Death can creep up on us as dark clouds creep across the sky. Sometimes when we go indoors the sky is bright and clear, but when we step outside again the sky is overcast. In the same way, death can quickly cast its shadow over our life.<br/><br/>There are many more conditions conducive to death than to survival. Although our death is certain and our life span is indefinite, it would not be so bad if the conditions that lead to death were rare; but there are innumerable external and internal conditions that can bring about our death. The external environment causes deaths by famine, floods, fires, earthquakes, pollution and so on. In a similar way, the four internal bodily elements of earth, water, fire and wind cause death when their harmony is lost and one of them develops in excess. When these internal elements are in harmony they are said to be like four snakes of the same species and strength abiding together peacefully; but when they lose their harmony it is like one snake becoming stronger than the others and consuming them, until finally it dies of hunger itself.<br/><br/>Besides these inanimate causes of death, other living beings such as thieves, hostile soldiers and wild animals can also bring about our death. Even things that we do not consider to be threatening, things that we think of as supporting and protecting our life, such as our house, our car or our best friend, can turn out to be causes of our death. People are sometimes crushed to death by their own house or they fall to their death from their own staircase, and each day many people are killed in their cars. Some people die on holiday, and some are killed by their hobbies and entertainments, such as horse riders who are thrown to their death. The very food we eat to nourish and sustain our life can be a cause of death. Even our friends and lovers can become causes of our death, by mistake or by intention. We read in the news how lovers sometimes kill one another, and how parents sometimes kill their own children. If we investigate carefully, we will not be able to find any worldly enjoyment that is not a potential cause of death and that is solely a cause of remaining alive. The great scholar Nagarjuna said:<br/><br/></span>
+                <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">We maintain our life in the midst of thousands of conditions that threaten death. Our life force is like a candle flame in a breeze, which is easily extinguished by the winds of death that blow from all directions.<br/></span>
+                <span class="_20_400"><br/>Each person has created the karma to remain in this life for a certain period, but since we cannot remember what karma we have created we cannot know the exact duration of our present life. It is possible for us to die an untimely death before completing our life span because we can exhaust our merit, the cause of good fortune, sooner than we exhaust the karma that determines our life span. If this happens we become so ill that doctors cannot help us, or we find that we are unable to obtain food and other necessities to support our life. However, even when we become seriously ill, if our life span has not ended and we still have merit we can find all the conditions necessary for recovery.<br/><br/>The human body is very fragile. Although there are many causes of death it would not be so bad if our body were strong like steel, but it is delicate. It does not take guns and bombs to destroy our body; it can be destroyed by a small needle. As Nagarjuna said:<br/><br/></span>
+                <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">There are many destroyers of our life force.<br/>Our human body is like a water bubble.<br/></span>
+                <span class="_20_400"><br/>Just as a water bubble bursts as soon as it is touched, so a single drop of water in the heart or the slightest scratch from a poisonous thorn can cause our death. Nagarjuna said that at the end of this aeon the entire world system will be consumed by fire and not even its ashes will remain. Since the entire universe will become empty, there is no need to say that this delicate human body will decay most swiftly.<br/><br/>We can contemplate the process of our breathing and how it continues without interruption between inhalation and exhalation. If it were to stop, we would die. Yet even when we are asleep and our mindfulness is no longer functioning, our breathing continues, although in many other respects we resemble a corpse. Nagarjuna said, ‘This is a most wonderful thing!’ When we wake up in the morning we should rejoice, thinking, ‘How amazing it is that my breathing has sustained my life throughout sleep. If it had ceased during the night I would now be dead!’<br/><br/>Contemplating that the time of our death is completely uncertain, and understanding that there is no guarantee that we will not die today, we should think deeply, day and night, ‘I may die today, I may die today.’ Meditating on this feeling, we will then come to a strong determination:<br/>Since I will soon have to depart from this life, there is no sense in my becoming attached to the things of this life. Instead I will take to heart the real essence of my human life by sincerely engaging in pure spiritual practice.<br/><br/>What does ‘engaging in pure spiritual practice’ mean? When we are practising spiritual teachings that are methods to control our delusions such as uncontrolled desire, anger and ignorance, we are engaging in pure spiritual practice. This, in turn, means we are following correct spiritual paths. This pure spiritual practice has three levels: (1) the practice of a person of initial scope, (2) the practice of a person of middling scope, and (3) the practice of a person of great scope. A detailed explanation of these three levels can be found in the books </span>
+                <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">Joyful Path of Good Fortune</span>
+                <span class="_20_400"> and </span>
+                <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">Modern Buddhism</span>
+                <span class="_20_400">.<br/></span>
+            </div>
+        </div>
+
+        <div class="intro page">
+            <div>
+                <div style="margin-top: 200px">
+                    <span class="_20_400">How many years are you expected to live?   <input id="age1" type="number"></span><br><br>
+                    <div>
+                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 200; word-wrap: break-word">(Click </span>
+                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
+                                href="?page=quiz">here</a></span>
+                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 700; word-wrap: break-word"> </span>
+                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 200; word-wrap: break-word">to calculate using our <br/></span>
+                        <span style="color: white; font-size: 13px; font-family: Inter; font-style: italic; font-weight: 500; word-wrap: break-word">Newtonian Life Expectancy Calculator</span>
+                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 200; word-wrap: break-word">) </span>
+                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 700; word-wrap: break-word">→</span>
+                    </div>
+                    <br><br>
+                    <span class="_20_400">How many more years would you like to live?  <input id="age2"  type="number"></span><br><br>
+                    <span class="_20_400">What is your birthdate?   <input  id="birthInput"  type="date"></span>
+                </div>
+                <br><br><br>
+                <div id="enterButton" style="padding: 20px 0px; margin: 20px;border: 1px white solid;  text-align: center; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+                    Let us map the space <br/>between the present moment <br/>and the moment of your death<br/>→
+                </div>
+                <br>
+
+            </div>
+        </div>
+
+        <div class="quiz page">
+            <div>
+                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap:break-word">Newtonian</span>
+                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 400; word-wrap: break-word"> </span>
+                <span class="_48_200">Life Expectancy Calculator</span>
+            </div>
+            <div style=" color: white; font-size: 13px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+                What is your current age? <br/>I am ____ years old<br/><br/>Are you male or female?<br/>◯ Male<br/>◯
+                Female<br/><br/>What is your average daily screen time?<br/>◯ 1 hour<br/>◯ 3 hours<br/>◯ 5 hours<br/>◯ 7
+                hours<br/>◯ 10 hours<br/>◯ 13 hours<br/>◯ 24 hours<br/><br/>Do you have any pre-existing diseases?<br/>◯ Yes<br/>◯
+                No<br/><br/>Do you floss every day?<br/>◯ Yes<br/>◯ No<br/><br/>Do you exercise regularly?<br/>◯ Yes<br/>◯
+                No<br/><br/>What is your marital status?<br/>◯ Single<br/>◯ Partnered<br/>◯ Never dating again<br/>◯ Married<br/>◯
+                Divorced<br/>◯ Widowed<br/><br/>Do you exercise regularly?<br/>◯ Yes<br/>◯ No<br/><br/>What is your highest
+                level of education?<br/>◯ 100<br/>◯ 1,000<br/><br/>Are you at a healthy weight?<br/>◯ Yes<br/>◯ No<br/><br/>Do
+                you smoke cigarettes?<br/>◯ Yes<br/>◯ No<br/>◯ Once in a while<br/><br/>How many unread emails do you
+                have?<br/>◯ < 100<br/>◯ > 1,000<br/>◯ There are too many, I’ve lost count<br/><br/></div>
+            <div>
+                <div>
+                    <span class="_48_200">Your Newtonian measurement of time (in years) left for this life is</span>
+                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word"> ____ years</span>
+                </div>
+                <div style="  color: white; font-size: 24px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word">
+                    → return to the clock <br/>generator & input your result
+                </div>
+            </div>
+            <div style=" color: white; font-size: 13px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+                * The algorithm used to calculate this number is based on the U.S. Social Security Administration’s Life
+                Expectancy Calculator and various research groups studying contributing factors that affect life expectancy.
             </div>
         </div>
     </div>
-
-    <div class="death page">
-        <div style="width: 489px; height: 71px">
-            <span class="_20_400">Excerpt from the Buddhist Book </span>
-            <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word">How To Transform Your Life</span>
-            <span class="_20_400"> by Venerable Geshe Kelsang Gyatso Rinpoche. </span>
-            <span style="color: #ADADAD; font-size: 20px; font-family: Inter; font-weight: 400; text-decoration: underline; word-wrap: break-word"><a
-                    href="https://kadampa.org/books/free-ebook-download-howtotyl">Available online as a free ebook.</a></span>
-        </div>
-        <div>
-            <span style="color: white; font-size: 96px; font-family: Inter; font-weight: 200; word-wrap: break-word">Death<br/></span>
-            <span class="_20_400"><br/>No one wants to suffer. Day and night, even in our dreams, we instinctively try to avoid even the slightest suffering. This indicates that, although we are not fully aware of it, deep down what we are really seeking is permanent liberation from suffering.<br/><br/>There are times when we are free from physical suffering and mental pain, but these times never last. It is not long before our body again becomes uncomfortable or sick, and our mind is disturbed by worries and unhappiness. Whatever problem we overcome, it is only a matter of time before another arises to take its place. This shows that despite our wish for permanent liberation from suffering we have never managed to attain it. For as long as delusions remain in our mind, we will never be completely free from suffering. We may enjoy moments of respite, but before long our problems will return. The only way finally to end our suffering is by following the spiritual path. Since, in the depths of their hearts, everyone wants complete liberation from suffering, we can see that in reality everyone needs to follow the spiritual path.<br/><br/>However, because our desire for worldly enjoyment is so strong, we have little or no interest in spiritual practice. From a spiritual point of view, this lack of interest in spiritual practice is a type of laziness called ‘the laziness of attachment’. For as long as we have this laziness, the door to liberation will be closed to us, and consequently we will continue to experience misery in this life and endless suffering in life after life. The way to overcome this laziness is to meditate on death.<br/><br/>We need to contemplate and meditate on our death again and again until we gain a deep realization of death. Although on an intellectual level we all know that eventually we are going to die, our awareness of death remains superficial. Since our intellectual knowledge of death does not touch our hearts, each and every day we continue to think, ‘I will not die today, I will not die today.’ Even on the day of our death we are still thinking about what we will do tomorrow or next week. This mind that thinks every day ‘I will not die today’ is deceptive – it leads us in the wrong direction and causes our human life to become empty. On the other hand, through meditating on death we will gradually replace the deceptive thought ‘I will not die today’ with the non-deceptive thought ‘I may die today.’ The mind that spontaneously thinks each and every day ‘I may die today’ is the realization of death. It is this realization that directly eliminates our laziness of attachment and opens the door to the spiritual path.<br/><br/>In general, we may die today or we may not die today – we do not know. However, if we think each day, ‘I may not die today’, this thought will deceive us because it comes from our ignorance; whereas if instead we think each day, ‘I may die today’, this thought will not deceive us because it comes from our wisdom. This beneficial thought will prevent our laziness of attachment, and will encourage us to prepare for the welfare of our countless future lives or to put great effort into entering the path to liberation. In this way, we will make our human life meaningful.<br/><br/>To meditate on death, we contemplate that our death is certain and that the time of our death is uncertain. We then need to understand that at the time of death and after death only spiritual practice can help us.<br/><br/><br/></span>
-            <span class="_48_200">DEATH IS CERTAIN<br/></span>
-            <span class="_20_400"><br/>Death will definitely come and there is nothing that can prevent it. We contemplate:<br/><br/></span>
-            <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">No matter where I am born, whether it is in fortunate or unfortunate states of existence, I will definitely have to die. Whether I am born in the happiest condition of higher rebirth or in the deepest hell, I will have to experience death. However far and wide I travel, I will never find a place where I can hide from death, even if I voyage far into space or tunnel deep underground.<br/>No one alive at the time of the first century remains alive today, and no one alive at the time of the second century and so forth remains alive today. Only their names survive. All those who were alive two hundred years ago have passed away, and all those alive today will be gone in two hundred years’ time.<br/><br/>Contemplating these points we should ask ourself, ‘Could I alone outlive death?’<br/></span>
-            <span class="_20_400"><br/>When our karma to experience this life comes to an end, no one and nothing can prevent our death. When the time of our death arrives, there is no escape. If it were possible to prevent death by using clairvoyance or miracle powers, those who have possessed such powers would have become immortal; but even clairvoyants die. The most powerful monarchs who have ruled in this world have been helpless before the power of death. The king of beasts, the lion, who can kill an elephant, is immediately destroyed when he encounters the Lord of Death. Even billionaires have no way of avoiding death. They cannot distract death with a bribe or buy time, saying, ‘If you postpone my death I will give you wealth beyond your wildest dreams.’<br/>Death is relentless and will not be compromised. It is like the collapse of an immense mountain in all four directions; there is no way to hold back its devastation. This is also true of ageing and sickness. Ageing progresses surreptitiously and undermines our youth, our strength and our beauty. Although we are hardly aware of the process, it is already underway and cannot be reversed. Sickness destroys the comfort, power and strength of our body. If doctors help us to overcome our first illness, others take its place until, eventually, our sickness cannot be cured and we die. We cannot escape from sickness and death by running away from them. We cannot placate them with riches nor use miracle powers to make them vanish. Every single being in this world must suffer ageing, sickness and death.<br/><br/>Our life span cannot be increased, and in fact it is decreasing continuously. From the moment of our conception we head inexorably towards death, just like a racehorse galloping towards its finishing post. Even racehorses occasionally relax their pace, but in our race towards death we never stop, not even for a second. While we are sleeping and while we are awake, our life slips away. Every vehicle stops and breaks its journey from time to time, but our life span never stops running out. One moment after our birth, part of our life span has perished. We live in the very embrace of death. After our birth we have no freedom to remain even for a minute. We head towards the embrace of the Lord of Death like an athlete running. We may think that we are among the living, but our life is the very highway of death.<br/><br/>Suppose our doctor were to break the news to us that we were suffering from an incurable disease and that we had only one week left to live. If our friend were then to offer us a fantastic gift such as a diamond, a new car or a free holiday, we would not get very excited about it. Yet in reality this is our very predicament, for we are all suffering from a mortal disease. How foolish it is to become overly interested in the passing pleasures of this brief life!<br/>If we find it difficult to meditate on death, we can listen to a clock ticking and be aware that every tick marks the end of a moment of our life and draws us closer to death. We can imagine that the Lord of Death lives some distance from us. Then, as we listen to the clock ticking, we can imagine ourself taking steps in death’s direction moment by moment. In this way we will understand that we are travelling towards death without a moment’s rest.<br/><br/>Our world is as impermanent as autumn clouds, with our birth and death being like the entrance and exit of an actor on the stage. Actors frequently change their costumes and their roles, making their entrance in many different disguises. In the same way, living beings take different forms continually and enter new worlds. Sometimes they are human beings, sometimes they are animals, and sometimes they enter hell. We should understand that the lifespan of a living being passes like lightning in the sky, and perishes quickly like water falling from a high mountain.<br/><br/>Death will come regardless of whether or not we have made the time for spiritual practice. Although life is short, it would not be so bad if we had plenty of time for spiritual practice, but most of our time is taken up with sleeping, working, eating, shopping, talking and so on, leaving very little time for pure spiritual practice. Our time is easily consumed by other pursuits until, suddenly, we die.<br/><br/>We keep thinking that we have plenty of time for spiritual practice, but if we closely examine our way of life we will see that the days slip by without our getting down to serious practice. If we do not make the time to engage in spiritual practice purely, we will look back on our life at the time of death and see that it has been of very little benefit. However, if we meditate on death, we will develop such a sincere wish to practise purely that we will naturally begin to modify our daily routine so that it includes at least a little time for practice. Eventually we will find more time for practice than for other things.<br/>If we meditate on death again and again we may feel afraid; but it is not enough just to feel fear. Once we have generated an appropriate fear of dying unprepared, we should search for something that will offer real protection. The paths of future lives are very long and unfamiliar. We have to experience one life after another, and we cannot be sure where we will take rebirth – whether we will have to follow the paths to unhappy states of existence or the paths to happier realms. We have no freedom or independence but must go wherever our karma takes us. Therefore, we need to find something that will show us a safe way to future lives, something that will direct us along correct paths and away from wrong paths. The possessions and enjoyments of this life cannot protect us. Since only spiritual teachings reveal a flawless path that will help and protect us in the future, we must make effort with our body, speech and mind to put spiritual teachings such as those presented in this book into practice. The Yogi Milarepa said:<br/><br/></span>
-            <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">There are more fears in future lives than in this one. Have you prepared anything that will help you? If you have not prepared for your future lives, do so now. The only protection against those fears is the practice of holy spiritual teachings.<br/></span>
-            <span class="_20_400"><br/>If we think about our own life we will see that we have spent many years with no interest in spiritual practice, and that now, even if we have the wish to practise, still, due to laziness, we do not practise purely. A great scholar called Gungtang said:<br/><br/></span>
-            <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">I spent twenty years not wanting to practise spiritual teachings. I spent the next twenty years thinking that I could practise later on. I spent another twenty years engrossed in other activities and regretting the fact that I had not engaged in spiritual practice. This is the story of my empty human life.<br/></span>
-            <span class="_20_400"><br/>This could be our own life story, but if we meditate on death we will avoid wasting our precious human life and we will strive to make it meaningful.<br/>Through contemplating these points, we should deeply think, ‘I will certainly die.’ Considering that at the time of death only our spiritual practice will be of any real assistance to us, we make a firm resolution, ‘I must put spiritual teachings, known as Dharma, into practice.’ When this thought arises strongly and clearly in our mind, we hold it single-pointedly without distraction to become more and more familiar with it, until we never lose it.<br/><br/><br/></span>
-            <span class="_48_200">THE TIME OF OUR DEATH IS UNCERTAIN<br/></span>
-            <span class="_20_400"><br/>Sometimes we fool ourself by thinking, ‘I am young and so I will not die soon’, but we can see how misguided this thought is merely by observing how many young people die before their parents. Sometimes we think, ‘I am healthy and so I will not die soon’, but we can see that people who are healthy and looking after the sick sometimes die before their patients. <br/><br/>People who go to visit their friends in hospital may die sooner in a car crash, for death does not confine itself to those who are aged and unwell. Someone who is alive and well in the morning could be dead by the afternoon, and someone who is well when he falls asleep may die before he wakes up. Some people die while they are eating, and some people die in the middle of a conversation. Some people die as soon as they are born.<br/><br/>Death may not give any warning. This enemy can come at any time and often he strikes quickly, when we least expect it. He may come as we are driving to a party, or switching on our television, or as we are thinking to ourself ‘I will not die today’ and making plans for our summer holidays or our retirement. The Lord of Death can creep up on us as dark clouds creep across the sky. Sometimes when we go indoors the sky is bright and clear, but when we step outside again the sky is overcast. In the same way, death can quickly cast its shadow over our life.<br/><br/>There are many more conditions conducive to death than to survival. Although our death is certain and our life span is indefinite, it would not be so bad if the conditions that lead to death were rare; but there are innumerable external and internal conditions that can bring about our death. The external environment causes deaths by famine, floods, fires, earthquakes, pollution and so on. In a similar way, the four internal bodily elements of earth, water, fire and wind cause death when their harmony is lost and one of them develops in excess. When these internal elements are in harmony they are said to be like four snakes of the same species and strength abiding together peacefully; but when they lose their harmony it is like one snake becoming stronger than the others and consuming them, until finally it dies of hunger itself.<br/><br/>Besides these inanimate causes of death, other living beings such as thieves, hostile soldiers and wild animals can also bring about our death. Even things that we do not consider to be threatening, things that we think of as supporting and protecting our life, such as our house, our car or our best friend, can turn out to be causes of our death. People are sometimes crushed to death by their own house or they fall to their death from their own staircase, and each day many people are killed in their cars. Some people die on holiday, and some are killed by their hobbies and entertainments, such as horse riders who are thrown to their death. The very food we eat to nourish and sustain our life can be a cause of death. Even our friends and lovers can become causes of our death, by mistake or by intention. We read in the news how lovers sometimes kill one another, and how parents sometimes kill their own children. If we investigate carefully, we will not be able to find any worldly enjoyment that is not a potential cause of death and that is solely a cause of remaining alive. The great scholar Nagarjuna said:<br/><br/></span>
-            <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">We maintain our life in the midst of thousands of conditions that threaten death. Our life force is like a candle flame in a breeze, which is easily extinguished by the winds of death that blow from all directions.<br/></span>
-            <span class="_20_400"><br/>Each person has created the karma to remain in this life for a certain period, but since we cannot remember what karma we have created we cannot know the exact duration of our present life. It is possible for us to die an untimely death before completing our life span because we can exhaust our merit, the cause of good fortune, sooner than we exhaust the karma that determines our life span. If this happens we become so ill that doctors cannot help us, or we find that we are unable to obtain food and other necessities to support our life. However, even when we become seriously ill, if our life span has not ended and we still have merit we can find all the conditions necessary for recovery.<br/><br/>The human body is very fragile. Although there are many causes of death it would not be so bad if our body were strong like steel, but it is delicate. It does not take guns and bombs to destroy our body; it can be destroyed by a small needle. As Nagarjuna said:<br/><br/></span>
-            <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">There are many destroyers of our life force.<br/>Our human body is like a water bubble.<br/></span>
-            <span class="_20_400"><br/>Just as a water bubble bursts as soon as it is touched, so a single drop of water in the heart or the slightest scratch from a poisonous thorn can cause our death. Nagarjuna said that at the end of this aeon the entire world system will be consumed by fire and not even its ashes will remain. Since the entire universe will become empty, there is no need to say that this delicate human body will decay most swiftly.<br/><br/>We can contemplate the process of our breathing and how it continues without interruption between inhalation and exhalation. If it were to stop, we would die. Yet even when we are asleep and our mindfulness is no longer functioning, our breathing continues, although in many other respects we resemble a corpse. Nagarjuna said, ‘This is a most wonderful thing!’ When we wake up in the morning we should rejoice, thinking, ‘How amazing it is that my breathing has sustained my life throughout sleep. If it had ceased during the night I would now be dead!’<br/><br/>Contemplating that the time of our death is completely uncertain, and understanding that there is no guarantee that we will not die today, we should think deeply, day and night, ‘I may die today, I may die today.’ Meditating on this feeling, we will then come to a strong determination:<br/>Since I will soon have to depart from this life, there is no sense in my becoming attached to the things of this life. Instead I will take to heart the real essence of my human life by sincerely engaging in pure spiritual practice.<br/><br/>What does ‘engaging in pure spiritual practice’ mean? When we are practising spiritual teachings that are methods to control our delusions such as uncontrolled desire, anger and ignorance, we are engaging in pure spiritual practice. This, in turn, means we are following correct spiritual paths. This pure spiritual practice has three levels: (1) the practice of a person of initial scope, (2) the practice of a person of middling scope, and (3) the practice of a person of great scope. A detailed explanation of these three levels can be found in the books </span>
-            <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">Joyful Path of Good Fortune</span>
-            <span class="_20_400"> and </span>
-            <span style="color: white; font-size: 20px; font-family: Inter; font-style: italic; font-weight: 400; word-wrap: break-word">Modern Buddhism</span>
-            <span class="_20_400">.<br/></span>
-        </div>
+    <div class="clock" style="margin: auto">
+        <canvas id="clock" height="0" ></canvas>
     </div>
-
-    <div class="intro page">
-        <div style="width: 287px; height: 109px">
-            <span style="color: white; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">How many years are you expected to live?   ____<br/></span>
-            <span style="color: white; font-size: 10px; font-family: Inter; font-weight: 700; word-wrap: break-word"><br/><br/></span>
-            <span style="color: white; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word"><br/>How many more years would you like to live?   ____<br/> <br/>What is your birthdate?   _________________</span>
-        </div>
-        <div style="width: 247px; height: 88px; border: 1px white solid"></div>
-        <div style="width: 247px; height: 88px; text-align: center; color: white; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">
-            Let us map the space <br/>between the present moment <br/>and the moment of your death<br/>→
-        </div>
-        <div style="width: 190px; height: 30px">
-            <span style="color: white; font-size: 8px; font-family: Inter; font-weight: 200; word-wrap: break-word">(Click </span>
-            <span style="color: white; font-size: 8px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word">here</span>
-            <span style="color: white; font-size: 8px; font-family: Inter; font-weight: 700; word-wrap: break-word"> </span>
-            <span style="color: white; font-size: 8px; font-family: Inter; font-weight: 200; word-wrap: break-word">to calculate using our <br/></span>
-            <span style="color: white; font-size: 8px; font-family: Inter; font-style: italic; font-weight: 500; word-wrap: break-word">Newtonian Life Expectancy Calculator</span>
-            <span style="color: white; font-size: 8px; font-family: Inter; font-weight: 200; word-wrap: break-word">) </span>
-            <span style="color: white; font-size: 8px; font-family: Inter; font-weight: 700; word-wrap: break-word">→</span>
-        </div>
-    </div>
-
-    <div class="clock page">
-
-    </div>
-
-    <div class="quiz page">
-        <div style="width: 518px; height: 144px">
-            <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word">Newtonian</span>
-            <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 400; word-wrap: break-word"> </span>
-            <span class="_48_200">Life Expectancy Calculator</span>
-        </div>
-        <div style="width: 518px; height: 945px; color: white; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">
-            What is your current age? <br/>I am ____ years old<br/><br/>Are you male or female?<br/>◯ Male<br/>◯
-            Female<br/><br/>What is your average daily screen time?<br/>◯ 1 hour<br/>◯ 3 hours<br/>◯ 5 hours<br/>◯ 7
-            hours<br/>◯ 10 hours<br/>◯ 12 hours<br/>◯ 24 hours<br/><br/>Do you have any pre-existing diseases?<br/>◯ Yes<br/>◯
-            No<br/><br/>Do you floss every day?<br/>◯ Yes<br/>◯ No<br/><br/>Do you exercise regularly?<br/>◯ Yes<br/>◯
-            No<br/><br/>What is your marital status?<br/>◯ Single<br/>◯ Partnered<br/>◯ Never dating again<br/>◯ Married<br/>◯
-            Divorced<br/>◯ Widowed<br/><br/>Do you exercise regularly?<br/>◯ Yes<br/>◯ No<br/><br/>What is your highest
-            level of education?<br/>◯ 100<br/>◯ 1,000<br/><br/>Are you at a healthy weight?<br/>◯ Yes<br/>◯ No<br/><br/>Do
-            you smoke cigarettes?<br/>◯ Yes<br/>◯ No<br/>◯ Once in a while<br/><br/>How many unread emails do you
-            have?<br/>◯ < 100<br/>◯ > 1,000<br/>◯ There are too many, I’ve lost count<br/><br/></div>
-        <div style="width: 518px; height: 316px; position: relative">
-            <div style="width: 518px; height: 240px; left: 0px; top: 0px; position: absolute">
-                <span class="_48_200">Your Newtonian measurement of time (in years) left for this life is</span>
-                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word"> ____ years</span>
-            </div>
-            <div style="width: 353px; height: 69px; left: 124px; top: 247px; position: absolute; color: white; font-size: 24px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word">
-                → return to the clock <br/>generator & input your result
-            </div>
-        </div>
-        <div style="width: 518px; height: 64px; color: white; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">
-            * The algorithm used to calculate this number is based on the U.S. Social Security Administration’s Life
-            Expectancy Calculator and various research groups studying contributing factors that affect life expectancy.
-        </div>
-    </div>
-
 </div>
 
 <script>
     const params = new URLSearchParams(document.location.search);
     const page = params.get("page") || "cover";
     document.querySelector("." + page).classList.add("visible")
+</script>
+
+<script>
+    const {PI, sin, cos, atan2, sign, hypot, min, sqrt} = Math, TAU = PI * 2;
+    const size = min(innerHeight, innerWidth);
+
+    let r, bgs, nn, p = vec2(0.001, 0);
+
+    let bgF, aF;
+
+    const age1Input = document.querySelector("#age1");
+    const age2Input = document.querySelector("#age2");
+    const birthInput = document.querySelector("#birthInput");
+
+    age1Input.oninput = age2Input.oninput = birthInput.oninput = validate;
+    validate();
+
+    const w = params.has("w");
+    if (w) {
+        document.body.classList.remove("dark")
+    }
+
+    let bgColor = w ? "#fff" : "#000";
+    let fgColor = w ? "#000" : "#fff";
+
+    // let value2 = (Math.random() * 40 + 40) | 0;
+    // age2Input.value = value2
+    // age1Input.value = (value2 + Math.random() * 40 ) | 0
+
+    function validate() {
+        let invalid = age1Input.value === ""
+            || age2Input.value === ""
+            || birthInput.value === ""
+
+        document.body.classList.toggle("valid", !invalid)
+    }
+
+    document.querySelector("#enterButton").onpointerdown = () => {
+        document.body.classList.add("init")
+        document.querySelector(".text").remove()
+        let canvas = document.querySelector("#clock");
+
+        makeClock(canvas, +age1Input.value, +age2Input.value);
+        // let parts = birthInput.value.split("-");
+        // document.querySelector("#birthText1").innerHTML = parts[1] + "-";
+        // document.querySelector("#birthText2").innerHTML = parts[0].substring(1);
+    }
+
+    function makeClock(canvas, seed1, seed2) {
+        initRandom(seed1, seed2)
+
+        const agentsCount = rndi(1000, 100);
+        bgs = rndi(50, 1) * 0.01
+        nn = rndi(5, 2)
+
+        bgF = pick([
+            x => sqrt(x) + 0.0001,
+            x => sqrt(x) + 0.001,
+            x => x + 0.001,
+        ]);
+
+        let a = pick([TAU / 2, TAU / 4])
+
+        aF = pick([
+            (i, n) => ((i * n) | 0) * a,
+            (i, n) => ((i + n) | 0) * a,
+            (i, n) => ((i / n) | 0) * a
+        ])
+
+        canvas.width = canvas.height = size;
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = bgColor
+        ctx.fillRect(0, 0, size, size);
+
+        let agents = many(agentsCount, makeAgent)
+
+        requestAnimationFrame(function frame(t) {
+            t /= 1000;
+
+            ctx.fillStyle = bgColor + "1"
+            ctx.fillRect(0, 0, size, size);
+
+            ctx.fillStyle = fgColor;
+            bg(t, ctx);
+            agents.forEach(a => a.tick(t, ctx));
+
+            requestAnimationFrame(frame);
+        })
+    }
+
+    function bg(t, ctx) {
+        let n = rndi(9, 3)
+
+        for (let i = 0; i < 5000; i++) {
+            let angle = aF(i, n)
+            let target = vec2(angle + t, bgs)
+            let dir = copy(target);
+            sub(dir, p);
+            normalize(dir)
+            mult(dir, bgF(len(p)));
+            add(p, dir);
+            if (len(p) + calcR(t, atan2(p[1], p[0])) < 0.4)
+                circ(ctx, p[1], p[0], 0.001);
+        }
+    }
+
+    function circ(ctx, x, y, r) {
+        ctx.beginPath();
+        let rr = r * size;
+        ctx.ellipse(x * size + size / 2, y * size + size / 2, rr, rr, 0, 0, TAU)
+        ctx.fill()
+    }
+
+    function calcR(t, at) {
+        return smoothstep(smoothstep((sin(-t * 2 + at * nn) + cos(-t + at * nn)) * .5 + .5)) * 0.1;
+    }
+
+    function makeAgent() {
+        const a = rndr();
+        const r = rnd(0.1, 0.35);
+
+        let x = cos(a) * r;
+        let y = sin(a) * r;
+        let da = rndi(4) * PI / 2;
+        let step = rnd(0.002, 0.001)
+        let rr = rnd(0.001, 0.0005)
+        return {
+            tick(t, ctx) {
+                if (rndb(0.95))
+                    da += sign(rnds()) * PI / 2;
+
+                let at = atan2(y, x)
+                let d = hypot(x, y) + calcR(t, at)
+
+                if (d < 0.35) {
+                    da = 0
+                }
+
+                if (d > 0.4) {
+                    da = PI
+                }
+
+                let dir = at + da;
+
+                let x1 = step * smoothstep(smoothstep(t % 1));
+                x += cos(dir) * x1
+                y += sin(dir) * x1
+
+                circ(ctx, x, y, rr);
+            }
+        }
+    }
+
+    //// math
+
+    function rnd(x = 1, y = 0) {
+        return r() * x + y;
+    }
+
+    function rndb(x = 0.5) {
+        return rnd() > x
+    }
+
+    function rnds(x = 1) {
+        return rnd(x) - x / 2;
+    }
+
+    function rndi(x, y = 0) {
+        return rnd(x, y) | 0;
+    }
+
+    function rndr() {
+        return rnd(TAU);
+    }
+
+    function many(x, f) {
+        return [...Array(x | 0)].map((_, i) => f(i))
+    }
+
+    function prng(hash) {
+        // console.log(hash)
+        let t, x = new Uint32Array([1, 2, 3, 4].map(i =>
+            parseInt(hash.substr(i * 8, 8), 16)));
+        return () => {
+            t = x[3], x[3] = x[2], x[2] = x[1], x[1] = x[0],
+                t ^= t << 11, t ^= t >>> 8, x[0] = t ^ x[0] ^ x[0] >>> 19;
+            return x[0] / 0x100000000;
+        }
+    }
+
+    function initRandom(a, b) {
+        let s = (999 + (a ** 9) + (b ** 9) + (a ** 11) + (b ** 11) + a * b + a + b).toString(16);
+        r = prng(many(22, () => s).join(""));
+        r = prng(many(32, () => rndi(16).toString(16)).join(""))
+    }
+
+    function vec2(a, r) {
+        return [cos(a) * r, sin(a * r)];
+    }
+
+    function copy(v) {
+        return [...v];
+    }
+
+    function sub(v1, v2) {
+        v1[0] -= v2[0];
+        v1[1] -= v2[1];
+    }
+
+    function add(v1, v2) {
+        v1[0] += v2[0];
+        v1[1] += v2[1];
+    }
+
+    function normalize(v) {
+        mult(v, 1 / len(v));
+    }
+
+    function len(v) {
+        return hypot(...v);
+    }
+
+    function mult(v, k) {
+        v[0] *= k;
+        v[1] *= k;
+    }
+
+    function smoothstep(x) {
+        return 3 * x * x - 2 * x * x * x;
+    }
+
+    function pick(arr) {
+        return arr[rndi(arr.length)];
+    }
+
+    (function () {
+
+        const rnd = (x = 1) => Math.random() * x;
+        const rndb = (x = 0.5) => rnd() > x;
+        const rnds = (x = 1) => rnd(x) -x/2;
+        const many = (n, fn = i => i) => [...Array(n | 0)]
+            .map((_, i) => fn(i));
+        const asNodeParams = o => Object.entries(o)
+            .map(([key, value]) => ` ${key}="${value}" `).join("\n");
+        const node = (name, attrs, body = "") =>
+            `<${name}\n${asNodeParams(attrs)}\n>${body}</${name}>`;
+        const svgFavicon = svg => document.head.innerHTML +=
+            `<link rel="icon" href="data:image/svg+xml,${encodeURIComponent(svg)}">`;
+
+        svgFavicon(generativeSvgIcon())
+
+        function generativeSvgIcon() {
+            const s = 4;
+            const pad = 0.7;
+
+            let content = node('circle', {
+                r: 1.5+rnd(), fill:"black"
+            }) + node('circle', {
+                r:.1+rnd(), cx: rnds(), cy: rnds(), fill:"white"
+            })
+
+            return node("svg", {
+                xmlns: "http://www.w3.org/2000/svg",
+                viewBox: [-s / 2 - pad, -s / 2 - pad, s + pad * 2, s + pad * 2],
+                overflow: "visible"
+            }, content);
+        }
+
+    })();
+
+    console.log("\n made by Stranger in the Q \n\n https://strangerintheq.art \n\n ")
+
 </script>
 
 </body>
