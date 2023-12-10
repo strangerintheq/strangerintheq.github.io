@@ -206,74 +206,77 @@
                 I am <input type="number"> years old<br/>
                 <br/>
                 Are you male or female?<br/>
-                <input type="radio" name="q1"> Male<br/>
-                <input type="radio" name="q1"> Female<br/>
+                <input data-value="76" type="radio" name="q1"> Male<br/>
+                <input data-value="79.3" type="radio" name="q1"> Female<br/>
                 <br/>
                 What is your average daily screen time?<br/>
-                <input type="radio" name="q2"> 1 hour<br/>
-                <input type="radio" name="q2"> 3 hours<br/>
-                <input type="radio" name="q2"> 5 hours<br/>
-                <input type="radio" name="q2"> 7 hours<br/>
-                <input type="radio" name="q2"> 10 hours<br/>
-                <input type="radio" name="q2"> 13 hours<br/>
-                <input type="radio" name="q2"> 24 hours<br/>
+                <input data-value="0" type="radio" name="q2"> 1 hour<br/>
+                <input data-value="0" type="radio" name="q2"> 3 hours<br/>
+                <input data-value="-1" type="radio" name="q2"> 5 hours<br/>
+                <input data-value="-1.5" type="radio" name="q2"> 7 hours<br/>
+                <input data-value="-2" type="radio" name="q2"> 10 hours<br/>
+                <input data-value="-2.5" type="radio" name="q2"> 13 hours<br/>
+                <input data-value="-5" type="radio" name="q2"> 24 hours<br/>
                 <br/>
                 Do you have any pre-existing diseases?<br/>
-                <input type="radio" name="q3"> Yes<br/>
-                <input type="radio" name="q3"> No<br/>
+                <input data-value="-10" type="radio" name="q3"> Yes<br/>
+                <input data-value="0" type="radio" name="q3"> No<br/>
                 <br/>
                 Do you floss every day?<br/>
-                <input type="radio" name="q4"> Yes<br/>
-                <input type="radio" name="q4"> No<br/>
+                <input data-value="3" type="radio" name="q4"> Yes<br/>
+                <input data-value="0" type="radio" name="q4"> No<br/>
                 <br/>
                 Do you exercise regularly?<br/>
-                <input type="radio" name="q5"> Yes<br/>
-                <input type="radio" name="q5"> No<br/>
+                <input data-value="4" type="radio" name="q5"> Yes<br/>
+                <input data-value="0" type="radio" name="q5"> No<br/>
                 <br/>
                 What is your marital status?<br/>
-                <input type="radio" name="q6"> Single<br/>
-                <input type="radio" name="q6"> Partnered<br/>
-                <input type="radio" name="q6"> Never dating again<br/>
-                <input type="radio" name="q6"> Married<br/>
-                <input type="radio" name="q6"> Divorced<br/>
-                <input type="radio" name="q6"> Widowed<br/>
+                <input data-value="-1" type="radio" name="q6"> Single<br/>
+                <input data-value="5" type="radio" name="q6"> Partnered<br/>
+                <input data-value="-2" type="radio" name="q6"> Never dating again<br/>
+                <input data-value="5" type="radio" name="q6"> Married<br/>
+                <input data-value="-5" type="radio" name="q6"> Divorced<br/>
+                <input data-value="-5" type="radio" name="q6"> Widowed<br/>
                 <br/>
                 Do you exercise regularly?<br/>
-                <input type="radio" name="q7"> Yes<br/>
-                <input type="radio" name="q7"> No<br/>
+                <input data-value="4" type="radio" name="q7"> Yes<br/>
+                <input data-value="0" type="radio" name="q7"> No<br/>
                 <br/>
                 What is your highest level of education?<br/>
-                <input type="radio" name="q8"> 100<br/>
-                <input type="radio" name="q8"> 1,000<br/>
+                <input data-value="0" type="radio" name="q8"> 100<br/>
+                <input data-value="0" type="radio" name="q8"> 1,000<br/>
                 <br/>
                 Are you at a healthy weight?<br/>
-                <input type="radio" name="q9"> Yes<br/>
-                <input type="radio" name="q9"> No<br/>
+                <input data-value="0" type="radio" name="q9"> Yes<br/>
+                <input data-value="-5" type="radio" name="q9"> No<br/>
                 <br/>
                 Do you smoke cigarettes?<br/>
-                <input type="radio" name="q10"> Yes<br/>
-                <input type="radio" name="q10"> No<br/>
-                <input type="radio" name="q10"> Once in a while<br/>
+                <input data-value="-10" type="radio" name="q10"> Yes<br/>
+                <input data-value="0" type="radio" name="q10"> No<br/>
+                <input data-value="-2" type="radio" name="q10"> Once in a while<br/>
                 <br/>
                 How many unread emails do you have?<br/>
-                <input type="radio" name="q11"> < 100<br/>
-                <input type="radio" name="q11"> > 1,000<br/>
-                <input type="radio" name="q11"> There are too many, I’ve lost count<br/><br/></div>
-            <div>
+                <input data-value="0" type="radio" name="q11"> < 100<br/>
+                <input data-value="-0.5" type="radio" name="q11"> > 1,000<br/>
+                <input data-value="-1" type="radio" name="q11"> There are too many, I’ve lost count<br/><br/>
+            </div>
+            <div id="quiz-result" style="display: none">
                 <div>
                     <span class="_48_200">Your Newtonian measurement of time (in years) left for this life is</span>
-                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word"> ____ years</span>
+                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word"> <span
+                            id="quiz-result-age"></span> years</span>
                 </div>
                 <div style="margin-left: 100px;  color: white; font-size: 24px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word">
                     → return to the clock <br/>generator & input your result
                 </div>
+                <br><br>
+                <div style=" color: white; font-size: 13px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+                    * The algorithm used to calculate this number is based on the U.S. Social Security Administration’s Life
+                    Expectancy Calculator and various research groups studying contributing factors that affect life
+                    expectancy.
+                </div>
             </div>
-            <br><br>
-            <div style=" color: white; font-size: 13px; font-family: Inter; font-weight: 400; word-wrap: break-word">
-                * The algorithm used to calculate this number is based on the U.S. Social Security Administration’s Life
-                Expectancy Calculator and various research groups studying contributing factors that affect life
-                expectancy.
-            </div>
+
         </div>
     </div>
     <div class="clock" style="margin: auto">
@@ -282,6 +285,18 @@
 </div>
 
 <script>
+    document.querySelectorAll('input[type="radio"]').forEach(i => i.oninput = calc)
+
+    function calc() {
+        let quiz = [...document.querySelectorAll('input[type="radio"]:checked')];
+        if (quiz.length<11)
+            return
+        let result = quiz.reduce((acc, el) => acc + (+el.dataset.value), 0)
+        document.querySelector("#quiz-result-age").innerHTML = result
+        document.querySelector("#quiz-result").style.display = "unset"
+
+    }
+
     const params = new URLSearchParams(document.location.search);
     const page = params.get("page") || "cover";
     document.querySelector("." + page).classList.add("visible")
