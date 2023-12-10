@@ -166,7 +166,8 @@
         <div class="intro page">
             <div>
                 <div style="margin-top: 200px">
-                    <span class="_20_400">How many years are you expected to live?   <input id="age1" type="number"></span><br><br>
+                    <span class="_20_400">How many years are you expected to live?   <input id="age1"
+                                                                                            type="number"></span><br><br>
                     <div>
                         <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 200; word-wrap: break-word">(Click </span>
                         <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
@@ -178,11 +179,13 @@
                         <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 700; word-wrap: break-word">→</span>
                     </div>
                     <br><br>
-                    <span class="_20_400">How many more years would you like to live?  <input id="age2"  type="number"></span><br><br>
-                    <span class="_20_400">What is your birthdate?   <input  id="birthInput"  type="date"></span>
+                    <span class="_20_400">How many more years would you like to live?  <input id="age2"
+                                                                                              type="number"></span><br><br>
+                    <span class="_20_400">What is your birthdate?   <input id="birthInput" type="date"></span>
                 </div>
                 <br><br><br>
-                <div id="enterButton" style="padding: 20px 0px; margin: 20px;border: 1px white solid;  text-align: center; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+                <div id="enterButton"
+                     style="padding: 20px 0px; margin: 20px;border: 1px white solid;  text-align: center; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">
                     Let us map the space <br/>between the present moment <br/>and the moment of your death<br/>→
                 </div>
                 <br>
@@ -196,33 +199,85 @@
                 <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 400; word-wrap: break-word"> </span>
                 <span class="_48_200">Life Expectancy Calculator</span>
             </div>
+            <br>
+            <br>
             <div style=" color: white; font-size: 13px; font-family: Inter; font-weight: 400; word-wrap: break-word">
-                What is your current age? <br/>I am ____ years old<br/><br/>Are you male or female?<br/>◯ Male<br/>◯
-                Female<br/><br/>What is your average daily screen time?<br/>◯ 1 hour<br/>◯ 3 hours<br/>◯ 5 hours<br/>◯ 7
-                hours<br/>◯ 10 hours<br/>◯ 13 hours<br/>◯ 24 hours<br/><br/>Do you have any pre-existing diseases?<br/>◯ Yes<br/>◯
-                No<br/><br/>Do you floss every day?<br/>◯ Yes<br/>◯ No<br/><br/>Do you exercise regularly?<br/>◯ Yes<br/>◯
-                No<br/><br/>What is your marital status?<br/>◯ Single<br/>◯ Partnered<br/>◯ Never dating again<br/>◯ Married<br/>◯
-                Divorced<br/>◯ Widowed<br/><br/>Do you exercise regularly?<br/>◯ Yes<br/>◯ No<br/><br/>What is your highest
-                level of education?<br/>◯ 100<br/>◯ 1,000<br/><br/>Are you at a healthy weight?<br/>◯ Yes<br/>◯ No<br/><br/>Do
-                you smoke cigarettes?<br/>◯ Yes<br/>◯ No<br/>◯ Once in a while<br/><br/>How many unread emails do you
-                have?<br/>◯ < 100<br/>◯ > 1,000<br/>◯ There are too many, I’ve lost count<br/><br/></div>
+                What is your current age? <br/>
+                I am <input type="number"> years old<br/>
+                <br/>
+                Are you male or female?<br/>
+                <input type="radio" name="q1"> Male<br/>
+                <input type="radio" name="q1"> Female<br/>
+                <br/>
+                What is your average daily screen time?<br/>
+                <input type="radio" name="q2"> 1 hour<br/>
+                <input type="radio" name="q2"> 3 hours<br/>
+                <input type="radio" name="q2"> 5 hours<br/>
+                <input type="radio" name="q2"> 7 hours<br/>
+                <input type="radio" name="q2"> 10 hours<br/>
+                <input type="radio" name="q2"> 13 hours<br/>
+                <input type="radio" name="q2"> 24 hours<br/>
+                <br/>
+                Do you have any pre-existing diseases?<br/>
+                <input type="radio" name="q3"> Yes<br/>
+                <input type="radio" name="q3"> No<br/>
+                <br/>
+                Do you floss every day?<br/>
+                <input type="radio" name="q4"> Yes<br/>
+                <input type="radio" name="q4"> No<br/>
+                <br/>
+                Do you exercise regularly?<br/>
+                <input type="radio" name="q5"> Yes<br/>
+                <input type="radio" name="q5"> No<br/>
+                <br/>
+                What is your marital status?<br/>
+                <input type="radio" name="q6"> Single<br/>
+                <input type="radio" name="q6"> Partnered<br/>
+                <input type="radio" name="q6"> Never dating again<br/>
+                <input type="radio" name="q6"> Married<br/>
+                <input type="radio" name="q6"> Divorced<br/>
+                <input type="radio" name="q6"> Widowed<br/>
+                <br/>
+                Do you exercise regularly?<br/>
+                <input type="radio" name="q7"> Yes<br/>
+                <input type="radio" name="q7"> No<br/>
+                <br/>
+                What is your highest level of education?<br/>
+                <input type="radio" name="q8"> 100<br/>
+                <input type="radio" name="q8"> 1,000<br/>
+                <br/>
+                Are you at a healthy weight?<br/>
+                <input type="radio" name="q9"> Yes<br/>
+                <input type="radio" name="q9"> No<br/>
+                <br/>
+                Do you smoke cigarettes?<br/>
+                <input type="radio" name="q10"> Yes<br/>
+                <input type="radio" name="q10"> No<br/>
+                <input type="radio" name="q10"> Once in a while<br/>
+                <br/>
+                How many unread emails do you have?<br/>
+                <input type="radio" name="q11"> < 100<br/>
+                <input type="radio" name="q11"> > 1,000<br/>
+                <input type="radio" name="q11"> There are too many, I’ve lost count<br/><br/></div>
             <div>
                 <div>
                     <span class="_48_200">Your Newtonian measurement of time (in years) left for this life is</span>
                     <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word"> ____ years</span>
                 </div>
-                <div style="  color: white; font-size: 24px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word">
+                <div style="margin-left: 100px;  color: white; font-size: 24px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word">
                     → return to the clock <br/>generator & input your result
                 </div>
             </div>
+            <br><br>
             <div style=" color: white; font-size: 13px; font-family: Inter; font-weight: 400; word-wrap: break-word">
                 * The algorithm used to calculate this number is based on the U.S. Social Security Administration’s Life
-                Expectancy Calculator and various research groups studying contributing factors that affect life expectancy.
+                Expectancy Calculator and various research groups studying contributing factors that affect life
+                expectancy.
             </div>
         </div>
     </div>
     <div class="clock" style="margin: auto">
-        <canvas id="clock" height="0" ></canvas>
+        <canvas id="clock" height="0"></canvas>
     </div>
 </div>
 
@@ -230,9 +285,7 @@
     const params = new URLSearchParams(document.location.search);
     const page = params.get("page") || "cover";
     document.querySelector("." + page).classList.add("visible")
-</script>
 
-<script>
     const {PI, sin, cos, atan2, sign, hypot, min, sqrt} = Math, TAU = PI * 2;
     const size = min(innerHeight, innerWidth);
 
@@ -469,7 +522,7 @@
 
         const rnd = (x = 1) => Math.random() * x;
         const rndb = (x = 0.5) => rnd() > x;
-        const rnds = (x = 1) => rnd(x) -x/2;
+        const rnds = (x = 1) => rnd(x) - x / 2;
         const many = (n, fn = i => i) => [...Array(n | 0)]
             .map((_, i) => fn(i));
         const asNodeParams = o => Object.entries(o)
@@ -486,9 +539,9 @@
             const pad = 0.7;
 
             let content = node('circle', {
-                r: 1.5+rnd(), fill:"black"
+                r: 1.5 + rnd(), fill: "black"
             }) + node('circle', {
-                r:.1+rnd(), cx: rnds(), cy: rnds(), fill:"white"
+                r: .1 + rnd(), cx: rnds(), cy: rnds(), fill: "white"
             })
 
             return node("svg", {
