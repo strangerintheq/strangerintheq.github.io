@@ -8,23 +8,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900"
           rel="stylesheet">
     <style>
+        label {
+            cursor: pointer;
+        }
+
         a, a:visited {
             color: white;
         }
 
         body {
             background: black;
+            color: white;
         }
 
         .page {
+            padding: 100px;
             max-width: 1000px;
             margin: auto;
             display: none;
             pointer-events: none;
             transition: 1s;
             scale: 0;
-            grid-column: 1/1;
-            grid-row: 1/1;
+
         }
 
         .visible {
@@ -38,6 +43,11 @@
             display: grid;
             grid-template-columns: 100%;
             grid-template-rows: 100%;
+        }
+
+        .stack > * {
+            grid-column: 1/1;
+            grid-row: 1/1;
         }
 
         ._20_400 {
@@ -72,6 +82,71 @@
             word-wrap: break-word
         }
     </style>
+    <style>
+        input {
+            background: transparent;
+            border: none;
+            color: var(--fg-color);
+            text-align: center;
+            outline: none;
+            font-size: 20px;
+        }
+        input[type=date] {
+            cursor: text;
+            border-bottom: 1px solid white;
+        }
+        /* disable input buttons */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+            border-bottom: 1px solid white;
+            width: 50px;
+
+        }
+        input[type="number"]:hover,
+        input[type="number"]:focus {
+            -moz-appearance: number-input;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+    </style>
+    <style>
+        *::-webkit-scrollbar {
+            width: 5px;
+            background-color: #000; /* or add it to the track */
+        }
+        *::-webkit-scrollbar-thumb {
+            background: #fff;
+            border-radius: 5px;
+        }
+    </style>
+    <style>
+        #enterButton {
+            opacity: 0.2;
+            fill: var(--bg-color);
+            pointer-events: none;
+            transition: 300ms;
+        }
+        .valid #enterButton {
+            fill: transparent;
+            pointer-events: all;
+            opacity: 1;
+        }
+        #enterButton:hover {
+            fill: var(--bg-color);
+            opacity: 0.7;
+            cursor: pointer;
+        }
+        .in
+    </style>
 </head>
 <body>
 
@@ -79,51 +154,49 @@
     <div class="stack text">
         <div class="cover page">
             <div>
-                <div>
-                    <span style="color: white; font-size: 96px; font-family: Inter; font-weight: 200; word-wrap: break-word">I May Die Today<br/></span>
-                    <span class="_20_400"><br/>The space between the moment we are alive in right now and the moment of our </span>
-                    <span class
-                                  ="_20_700">death</span>
-                    <span class="_20_400"> is constantly shifting. <br/><br/>This project is a joyful experiment with the </span>
-                    <span class
-                                  ="_20_700">Quantum complexities of life expectancy</span>
-                    <span class="_20_400">, consisting of a series of experiments attempting to visualize a different perception of time.<br/><br/><br/></span>
-                    <span class="_36_200"><br/>Index of experiments:<br/></span>
-                    <span class="_48_200">No. 1  — </span>
-                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
-                            href="?page=intro">Quantum Clock →</a><br/></span>
-                    <span style="color: white; font-size: 10px; font-family: Inter; font-weight: 200; word-wrap: break-word"></span>
-                    <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 400; text-decoration: underline; word-wrap: break-word"><a
-                            href="?page=intro">Mapping Space Between The Now and Death<br/></a></span>
-                    <span class="_20_400"><br/></span>
-                    <span class="_48_200">No. 2 —</span>
-                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 400; word-wrap: break-word"> </span>
-                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word">Writing<br/></span>
-                    <span class="_20_400">Collected words on the journey of a thousand deaths<br/><br/></span>
-                    <span class="_48_200">No. 3 —</span>
-                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 400; word-wrap: break-word"> </span>
-                    <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word">VR Space<br/></span>
-                    <span class="_20_400">May I not feel fear when presented with an entity so vast, not even thought can form an edge.<br/><br/><br/></span>
-                </div>
-                <div>
-                    <span class="_36_200">Abstract:<br/></span>
-                    <span class="_20_400"><br/>We use linear time to calculate and count down until our final moment, but time and the different forces that tie us to our present lives shift endlessly. The great Buddhist Scholar, Nagarjuna, writes: <br/><br/>“We maintain our life in the midst of thousands of conditions that threaten death. Our life force is like a candle flame in a breeze, which is easily extinguished by the winds of death that blow from all directions.”<br/><br/>Life expectancy is monetized, algorithm-ized, and quantified to support the Newtonian agenda. This is not reflective of the Quantum state of the universe which reveals that we live in a world of constant change. With the sheer variability we live in, we are teetering on the precipice of life and death. It looks like a continuation of the natural order, but each moment is charged with the infinite possibility of remaining in this world or continuing on to the next one. <br/><br/></span>
-                    <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word">The inspiration and title for this project came from a chapter on Death from the Buddhist Book </span>
-                    <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
-                            href="https://kadampa.org/books/free-ebook-download-howtotyl">How To Transform Your Life</a></span>
-                    <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word"> by Venerable Geshe Kelsang Gyatso Rinpoche. Please click </span>
-                    <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 700; word-wrap: break-word"><a
-                            href="?page=death">here</a></span>
-                    <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word"> to read the excerpt.<br/></span>
-                    <span class="_20_400"><br/><br/><br/><br/><br/>Collaboration between </span>
-                    <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
-                            href="https://namkha.studio/">Katya Danziger</a></span>
-                    <span class="_20_400"> & </span>
-                    <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
-                            href="https://strangerintheq.art">Stranger in the Q</a></span>
-                    <span class="_20_700"> </span>
-                    <span class="_20_400">at Parsons School of Design.</span>
-                </div>
+                <span style="color: white; font-size: 96px; font-family: Inter; font-weight: 200; word-wrap: break-word">I May Die Today<br/></span>
+                <span class="_20_400"><br/>The space between the moment we are alive in right now and the moment of our </span>
+                <span class
+                              ="_20_700">death</span>
+                <span class="_20_400"> is constantly shifting. <br/><br/>This project is a joyful experiment with the </span>
+                <span class
+                              ="_20_700">Quantum complexities of life expectancy</span>
+                <span class="_20_400">, consisting of a series of experiments attempting to visualize a different perception of time.<br/><br/><br/></span>
+                <span class="_36_200"><br/>Index of experiments:<br/></span>
+                <span class="_48_200">No. 1  — </span>
+                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
+                        href="?page=intro">Quantum Clock →</a><br/></span>
+                <span style="color: white; font-size: 10px; font-family: Inter; font-weight: 200; word-wrap: break-word"></span>
+                <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 400; text-decoration: underline; word-wrap: break-word"><a
+                        href="?page=intro">Mapping Space Between The Now and Death<br/></a></span>
+                <span class="_20_400"><br/></span>
+                <span class="_48_200">No. 2 —</span>
+                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 400; word-wrap: break-word"> </span>
+                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word">Writing<br/></span>
+                <span class="_20_400">Collected words on the journey of a thousand deaths<br/><br/></span>
+                <span class="_48_200">No. 3 —</span>
+                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 400; word-wrap: break-word"> </span>
+                <span style="color: white; font-size: 48px; font-family: Inter; font-weight: 700; word-wrap: break-word">VR Space<br/></span>
+                <span class="_20_400">May I not feel fear when presented with an entity so vast, not even thought can form an edge.<br/><br/><br/></span>
+            </div>
+            <div>
+                <span class="_36_200">Abstract:<br/></span>
+                <span class="_20_400"><br/>We use linear time to calculate and count down until our final moment, but time and the different forces that tie us to our present lives shift endlessly. The great Buddhist Scholar, Nagarjuna, writes: <br/><br/>“We maintain our life in the midst of thousands of conditions that threaten death. Our life force is like a candle flame in a breeze, which is easily extinguished by the winds of death that blow from all directions.”<br/><br/>Life expectancy is monetized, algorithm-ized, and quantified to support the Newtonian agenda. This is not reflective of the Quantum state of the universe which reveals that we live in a world of constant change. With the sheer variability we live in, we are teetering on the precipice of life and death. It looks like a continuation of the natural order, but each moment is charged with the infinite possibility of remaining in this world or continuing on to the next one. <br/><br/></span>
+                <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word">The inspiration and title for this project came from a chapter on Death from the Buddhist Book </span>
+                <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
+                        href="https://kadampa.org/books/free-ebook-download-howtotyl">How To Transform Your Life</a></span>
+                <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word"> by Venerable Geshe Kelsang Gyatso Rinpoche. Please click </span>
+                <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 700; word-wrap: break-word"><a
+                        href="?page=death">here</a></span>
+                <span style="color: white; font-size: 32px; font-family: Inter; font-weight: 200; word-wrap: break-word"> to read the excerpt.<br/></span>
+                <span class="_20_400"><br/><br/><br/><br/><br/>Collaboration between </span>
+                <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
+                        href="https://namkha.studio/">Katya Danziger</a></span>
+                <span class="_20_400"> & </span>
+                <span style="color: white; font-size: 20px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
+                        href="https://strangerintheq.art/?art">Stranger in the Q</a></span>
+                <span class="_20_700"> </span>
+                <span class="_20_400">at Parsons School of Design.</span>
             </div>
         </div>
 
@@ -164,32 +237,28 @@
         </div>
 
         <div class="intro page">
-            <div>
-                <div style="margin-top: 200px">
+            <div style="margin-top: 100px">
                     <span class="_20_400">How many years are you expected to live?   <input id="age1"
                                                                                             type="number"></span><br><br>
-                    <div>
-                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 200; word-wrap: break-word">(Click </span>
-                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
-                                href="?page=quiz">here</a></span>
-                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 700; word-wrap: break-word"> </span>
-                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 200; word-wrap: break-word">to calculate using our <br/></span>
-                        <span style="color: white; font-size: 13px; font-family: Inter; font-style: italic; font-weight: 500; word-wrap: break-word">Newtonian Life Expectancy Calculator</span>
-                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 200; word-wrap: break-word">) </span>
-                        <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 700; word-wrap: break-word">→</span>
-                    </div>
-                    <br><br>
-                    <span class="_20_400">How many more years would you like to live?  <input id="age2"
-                                                                                              type="number"></span><br><br>
-                    <span class="_20_400">What is your birthdate?   <input id="birthInput" type="date"></span>
+                <div>
+                    <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 200; word-wrap: break-word">(Click </span>
+                    <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word"><a
+                            href="?page=quiz">here</a></span>
+                    <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 700; word-wrap: break-word"> </span>
+                    <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 200; word-wrap: break-word">to calculate using our <br/></span>
+                    <span style="color: white; font-size: 13px; font-family: Inter; font-style: italic; font-weight: 500; word-wrap: break-word">Newtonian Life Expectancy Calculator</span>
+                    <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 200; word-wrap: break-word">) </span>
+                    <span style="color: white; font-size: 13px; font-family: Inter; font-weight: 700; word-wrap: break-word">→</span>
                 </div>
-                <br><br><br>
-                <div id="enterButton"
-                     style="padding: 20px 0px; margin: 20px;border: 1px white solid;  text-align: center; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">
-                    Let us map the space <br/>between the present moment <br/>and the moment of your death<br/>→
-                </div>
-                <br>
-
+                <br><br>
+                <span class="_20_400">How many more years would you like to live?  <input id="age2"
+                                                                                          type="number"></span><br><br>
+                <span class="_20_400">What is your birthdate?   <input id="birthInput" type="date"></span>
+            </div>
+            <br><br><br>
+            <div id="enterButton"
+                 style="padding: 20px 0px; margin: 20px;border: 1px white solid;  text-align: center; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+                Let us map the space <br/>between the present moment <br/>and the moment of your death<br/>→
             </div>
         </div>
 
@@ -201,64 +270,64 @@
             </div>
             <br>
             <br>
-            <div style=" color: white; font-size: 13px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+            <div style=" color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">
                 What is your current age? <br/>
-                I am <input type="number"> years old<br/>
+                I am <input type="number" id="yo"> years old<br/>
                 <br/>
                 Are you male or female?<br/>
-                <input data-value="76" type="radio" name="q1"> Male<br/>
-                <input data-value="79.3" type="radio" name="q1"> Female<br/>
+                <label><input data-value="76" type="radio" name="q1"> Male<br/></label>
+                <label><input data-value="79.3" type="radio" name="q1"> Female<br/></label>
                 <br/>
                 What is your average daily screen time?<br/>
-                <input data-value="0" type="radio" name="q2"> 1 hour<br/>
-                <input data-value="0" type="radio" name="q2"> 3 hours<br/>
-                <input data-value="-1" type="radio" name="q2"> 5 hours<br/>
-                <input data-value="-1.5" type="radio" name="q2"> 7 hours<br/>
-                <input data-value="-2" type="radio" name="q2"> 10 hours<br/>
-                <input data-value="-2.5" type="radio" name="q2"> 13 hours<br/>
-                <input data-value="-5" type="radio" name="q2"> 24 hours<br/>
+                <label><input data-value="0" type="radio" name="q2"> 1 hour<br/></label>
+                <label><input data-value="0" type="radio" name="q2"> 3 hours<br/></label>
+                <label><input data-value="-1" type="radio" name="q2"> 5 hours<br/></label>
+                <label><input data-value="-1.5" type="radio" name="q2"> 7 hours<br/></label>
+                <label><input data-value="-2" type="radio" name="q2"> 10 hours<br/></label>
+                <label><input data-value="-2.5" type="radio" name="q2"> 13 hours<br/></label>
+                <label><input data-value="-5" type="radio" name="q2"> 24 hours<br/></label>
                 <br/>
                 Do you have any pre-existing diseases?<br/>
-                <input data-value="-10" type="radio" name="q3"> Yes<br/>
-                <input data-value="0" type="radio" name="q3"> No<br/>
+                <label><input data-value="-10" type="radio" name="q3"> Yes<br/></label>
+                    <label><input data-value="0" type="radio" name="q3"> No<br/></label>
                 <br/>
                 Do you floss every day?<br/>
-                <input data-value="3" type="radio" name="q4"> Yes<br/>
-                <input data-value="0" type="radio" name="q4"> No<br/>
+                <label><input data-value="3" type="radio" name="q4"> Yes<br/></label>
+                <label><input data-value="0" type="radio" name="q4"> No<br/></label>
                 <br/>
                 Do you exercise regularly?<br/>
-                <input data-value="4" type="radio" name="q5"> Yes<br/>
-                <input data-value="0" type="radio" name="q5"> No<br/>
+                <label><input data-value="4" type="radio" name="q5"> Yes<br/></label>
+                <label><input data-value="0" type="radio" name="q5"> No<br/></label>
                 <br/>
                 What is your marital status?<br/>
-                <input data-value="-1" type="radio" name="q6"> Single<br/>
-                <input data-value="5" type="radio" name="q6"> Partnered<br/>
-                <input data-value="-2" type="radio" name="q6"> Never dating again<br/>
-                <input data-value="5" type="radio" name="q6"> Married<br/>
-                <input data-value="-5" type="radio" name="q6"> Divorced<br/>
-                <input data-value="-5" type="radio" name="q6"> Widowed<br/>
+                <label><input data-value="-1" type="radio" name="q6"> Single<br/></label>
+                <label><input data-value="5" type="radio" name="q6"> Partnered<br/></label>
+                <label><input data-value="-2" type="radio" name="q6"> Never dating again<br/></label>
+                <label><input data-value="5" type="radio" name="q6"> Married<br/></label>
+                <label><input data-value="-5" type="radio" name="q6"> Divorced<br/></label>
+                <label><input data-value="-5" type="radio" name="q6"> Widowed<br/></label>
                 <br/>
                 Do you exercise regularly?<br/>
-                <input data-value="4" type="radio" name="q7"> Yes<br/>
-                <input data-value="0" type="radio" name="q7"> No<br/>
+                <label><input data-value="4" type="radio" name="q7"> Yes<br/></label>
+                <label><input data-value="0" type="radio" name="q7"> No<br/></label>
                 <br/>
                 What is your highest level of education?<br/>
-                <input data-value="0" type="radio" name="q8"> 100<br/>
-                <input data-value="0" type="radio" name="q8"> 1,000<br/>
+                <label><input data-value="0" type="radio" name="q8"> 100<br/></label>
+                <label><input data-value="0" type="radio" name="q8"> 1,000<br/></label>
                 <br/>
                 Are you at a healthy weight?<br/>
-                <input data-value="0" type="radio" name="q9"> Yes<br/>
-                <input data-value="-5" type="radio" name="q9"> No<br/>
+                <label><input data-value="0" type="radio" name="q9"> Yes<br/></label>
+                <label><input data-value="-5" type="radio" name="q9"> No<br/></label>
                 <br/>
                 Do you smoke cigarettes?<br/>
-                <input data-value="-10" type="radio" name="q10"> Yes<br/>
-                <input data-value="0" type="radio" name="q10"> No<br/>
-                <input data-value="-2" type="radio" name="q10"> Once in a while<br/>
+                <label><input data-value="-10" type="radio" name="q10"> Yes<br/></label>
+                <label><input data-value="0" type="radio" name="q10"> No<br/></label>
+                <label><input data-value="-2" type="radio" name="q10"> Once in a while<br/></label>
                 <br/>
                 How many unread emails do you have?<br/>
-                <input data-value="0" type="radio" name="q11"> < 100<br/>
-                <input data-value="-0.5" type="radio" name="q11"> > 1,000<br/>
-                <input data-value="-1" type="radio" name="q11"> There are too many, I’ve lost count<br/><br/>
+                <label><input data-value="0" type="radio" name="q11"> < 100<br/></label>
+                <label><input data-value="-0.5" type="radio" name="q11"> > 1,000<br/></label>
+                <label><input data-value="-1" type="radio" name="q11"> There are too many, I’ve lost count<br/><br/></label>
             </div>
             <div id="quiz-result" style="display: none">
                 <div>
@@ -267,35 +336,34 @@
                             id="quiz-result-age"></span> years</span>
                 </div>
                 <div style="margin-left: 100px;  color: white; font-size: 24px; font-family: Inter; font-weight: 700; text-decoration: underline; word-wrap: break-word">
-                    → return to the clock <br/>generator & input your result
+                    <a id="goToIntro">→ return to the clock <br/>generator & input your result</a>
                 </div>
                 <br><br>
-                <div style=" color: white; font-size: 13px; font-family: Inter; font-weight: 400; word-wrap: break-word">
-                    * The algorithm used to calculate this number is based on the U.S. Social Security Administration’s Life
-                    Expectancy Calculator and various research groups studying contributing factors that affect life
-                    expectancy.
-                </div>
+
+            </div>
+            <div style=" color: white; font-size: 13px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+                * The algorithm used to calculate this number is based on the U.S. Social Security Administration’s
+                Life
+                Expectancy Calculator and various research groups studying contributing factors that affect life
+                expectancy.
             </div>
 
         </div>
     </div>
-    <div class="clock" style="margin: auto">
+
+    <div class="stack clock" style="margin: auto">
         <canvas id="clock" height="0"></canvas>
+        <div style="display: flex; align-items: flex-end; justify-content: flex-end">
+            <div style="padding-bottom: 100px; padding-right: 30px">
+                <div class="_20_400" id="birthText1"></div>
+                <div class="_20_400" id="birthText2"></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-    document.querySelectorAll('input[type="radio"]').forEach(i => i.oninput = calc)
 
-    function calc() {
-        let quiz = [...document.querySelectorAll('input[type="radio"]:checked')];
-        if (quiz.length<11)
-            return
-        let result = quiz.reduce((acc, el) => acc + (+el.dataset.value), 0)
-        document.querySelector("#quiz-result-age").innerHTML = result
-        document.querySelector("#quiz-result").style.display = "unset"
-
-    }
 
     const params = new URLSearchParams(document.location.search);
     const page = params.get("page") || "cover";
@@ -309,11 +377,31 @@
     let bgF, aF;
 
     const age1Input = document.querySelector("#age1");
+    if (params.has("age1")) {
+        age1Input.value = params.get("age1")
+    }
     const age2Input = document.querySelector("#age2");
+    if (params.has("age2")) {
+        age2Input.value = params.get("age2")
+    }
     const birthInput = document.querySelector("#birthInput");
 
     age1Input.oninput = age2Input.oninput = birthInput.oninput = validate;
     validate();
+
+    document.querySelectorAll('input[type="radio"]').forEach(i => i.oninput = calc)
+    document.querySelector("#yo").oninput = calc;
+    function calc() {
+        let age = document.querySelector("#yo").value;
+        let quiz = [...document.querySelectorAll('input[type="radio"]:checked')];
+        if (quiz.length < 11 || !age)
+            return
+        let result = quiz.reduce((acc, el) => acc + (+el.dataset.value), 0)
+        document.querySelector("#quiz-result-age").innerHTML = result
+        document.querySelector("#quiz-result").style.display = "unset"
+        document.querySelector("#goToIntro").setAttribute("href",
+            `?page=intro&age1=${result}&age2=${result-(+age)}`)
+    }
 
     const w = params.has("w");
     if (w) {
@@ -341,9 +429,9 @@
         let canvas = document.querySelector("#clock");
 
         makeClock(canvas, +age1Input.value, +age2Input.value);
-        // let parts = birthInput.value.split("-");
-        // document.querySelector("#birthText1").innerHTML = parts[1] + "-";
-        // document.querySelector("#birthText2").innerHTML = parts[0].substring(1);
+        let parts = birthInput.value.split("-");
+        document.querySelector("#birthText1").innerHTML = parts[1] + "-";
+        document.querySelector("#birthText2").innerHTML = parts[0].substring(1);
     }
 
     function makeClock(canvas, seed1, seed2) {
@@ -568,7 +656,7 @@
 
     })();
 
-    console.log("\n made by Stranger in the Q \n\n https://strangerintheq.art \n\n ")
+    console.log("\n made by Stranger in the Q \n\n https://strangerintheq.art/?art \n\n ")
 
 </script>
 
