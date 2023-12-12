@@ -8,6 +8,7 @@ import {FxHashSection} from "./art/FxHashSection";
 import {TeiaSection} from "./art/TeiaSection";
 import {PageWrapper} from "../components/PageWrapper";
 import {PageText} from "../components/PageText";
+import {XenoSection} from "./art/XenoSection";
 
 
 export function ArtPage() {
@@ -24,6 +25,7 @@ export function ArtPage() {
             <br/><br/>
             Please enjoy!
         </PageText>
+        <XenoSection />
         <SliceSection />
         <TenturaSection/>
         <FxHashSection/>
