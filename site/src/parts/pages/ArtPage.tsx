@@ -25,7 +25,7 @@ export function ArtPage() {
             <br/><br/>
             Please enjoy!
         </PageText>
-        <XenoSection />
+        {/*<XenoSection />*/}
         <SliceSection />
         <TenturaSection/>
         <FxHashSection/>
