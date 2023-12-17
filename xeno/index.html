@@ -9,10 +9,18 @@
             margin: 0;
             font-family: Inter;
             font-weight: 200;
-            background: url("https://i.imgur.com/EPMqKbb.jpg");
-            background-repeat: no-repeat;
-            background-position: center calc(-70vw / calc(5 / 7)) ;
-            background-size: 100vw calc(100vw / calc(5 / 7));
+            background:
+                    url("https://i.imgur.com/EPMqKbb.jpg"),
+                    url("https://i.imgur.com/EPMqKbb.jpg");
+            background-repeat:
+                    no-repeat,
+                    no-repeat;
+            background-position:
+                    center calc(-80vw / calc(5 / 7)),
+                    center calc(80vw / calc(5 / 7) + 100%);
+            background-size:
+                    100vw calc(100vw / calc(5 / 7)),
+                    100vw calc(100vw / calc(5 / 7));
         }
 
         section {
@@ -70,25 +78,19 @@
     </style>
 </head>
 <body>
-<div style="min-height: 29vw"></div>
+<div style="min-height: calc(11vw / calc(5 / 7))"></div>
 <svg viewBox="0 0 800 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(70)">
-        <text transform="translate(0, 60)" font-size="70" fill="black" >
-            XENO
-        </text>
-        <text transform="translate(0, 90)" font-size="20" font-weight="500" fill="black" >
-            by Stranger in the Q
-        </text>
-    </g>
-
-    <g transform="translate(610, 0)">
+    <g transform="translate(70, 30)">
         <g transform="scale(2,2)">
             <path d="M29.0189 10.8169V16H16.7822V15.6394C17.909 15.5493 18.4949 14.9408 18.4949 13.8366V2.16338C18.4949 1.08169 17.909 0.47324 16.7822 0.360564V0H22.9569V0.360564C21.8076 0.47324 21.2442 1.08169 21.2442 2.16338V13.8366C21.2442 14.3775 21.3794 14.7831 21.6724 15.0535C21.9428 15.3239 22.4611 15.4592 23.1822 15.4592H24.4217C24.94 15.4592 25.3907 15.369 25.7512 15.1662C26.1118 14.9859 26.5174 14.5577 26.9681 13.9042C27.4189 13.2507 27.9822 12.2141 28.6808 10.8169H29.0189Z" fill="#111827"/>
             <path d="M32.6771 13.8366V2.16338C32.6771 1.08169 32.0912 0.47324 30.9645 0.360564V0H38.8292C40.2715 0 41.3532 0.338028 42.1194 0.99155C42.8631 1.64507 43.2462 2.52394 43.2462 3.60563C43.2462 4.55211 42.9532 5.38592 42.3898 6.06197C41.8039 6.73803 40.9926 7.18873 39.956 7.39155C41.2631 7.52676 42.2771 7.97747 43.0208 8.7662C43.7419 9.55493 44.125 10.5014 44.125 11.6282C44.125 12.9352 43.7194 13.9944 42.9532 14.8056C42.187 15.6169 41.0152 16 39.4377 16H30.9645V15.6394C32.0912 15.5493 32.6771 14.9408 32.6771 13.8366ZM35.8771 15.0761C36.1701 15.3465 36.6433 15.4592 37.2969 15.4592H38.5138C39.4152 15.4592 40.0912 15.1662 40.5419 14.5803C40.9926 13.9944 41.218 13.0028 41.218 11.6056C41.218 9.03662 40.2715 7.75211 38.4011 7.75211H35.4264V13.8366C35.4264 14.4225 35.5616 14.8282 35.8771 15.0761ZM38.1983 7.21127C39.7307 7.21127 40.4969 6.10704 40.4969 3.87606C40.4969 2.68169 40.2715 1.82535 39.8433 1.30704C39.4152 0.811268 38.7842 0.540845 37.9729 0.540845H36.5307C36.08 0.540845 35.787 0.630986 35.6518 0.766197C35.494 0.923944 35.4264 1.19437 35.4264 1.57746V7.21127H38.1983Z" fill="#111827"/>
             <path d="M1.35211 14.4225C1.82535 13.7915 2.27606 12.8451 2.70423 11.538L6.44507 0H8.58592L12.9352 12.9577C13.2507 13.9042 13.5662 14.5803 13.9042 14.9859C14.2197 15.3915 14.6254 15.5944 15.0761 15.6394V16H8.85634V15.6394C9.46479 15.5944 9.89296 15.4817 10.1634 15.3239C10.4113 15.1662 10.5465 14.8958 10.5465 14.5352C10.5465 14.3099 10.4563 13.9718 10.3211 13.4761L9.05916 9.69014L6.44507 1.80282L3.89859 9.69014L3.15493 11.9887C2.97465 12.5296 2.88451 13.0028 2.88451 13.4085C2.88451 13.8817 3.01972 14.2873 3.33521 14.6479C3.65071 15.0085 4.16902 15.3239 4.91268 15.6394V16H0V15.6394C0.405634 15.4592 0.856339 15.0535 1.35211 14.4225Z" fill="#111827"/>
             <path d="M46.2315 14.4225C46.7048 13.7915 47.1555 12.8451 47.5837 11.538L51.3245 0H53.4653L57.8146 12.9577C58.1301 13.9042 58.4456 14.5803 58.7837 14.9859C59.0992 15.3915 59.5048 15.5944 59.9555 15.6394V16H53.7358V15.6394C54.3442 15.5944 54.7724 15.4817 55.0428 15.3239C55.2907 15.1662 55.4259 14.8958 55.4259 14.5352C55.4259 14.3099 55.3358 13.9718 55.2006 13.4761L53.9386 9.69014L51.3245 1.80282L48.778 9.69014L48.0344 11.9887C47.8541 12.5296 47.7639 13.0028 47.7639 13.4085C47.7639 13.8817 47.8991 14.2873 48.2146 14.6479C48.5301 15.0085 49.0484 15.3239 49.7921 15.6394V16H44.8794V15.6394C45.2851 15.4592 45.7358 15.0535 46.2315 14.4225Z" fill="#111827"/>
         </g>
-        <g transform="translate(-5, 45)">
+    </g>
+
+    <g transform="translate(610, 0)">
+        <g transform="translate(-5, 20)">
             <path d="M9.99473 45.9337H8.1056C8.05172 45.6239 7.95238 45.3494 7.80758 45.1103C7.66278 44.8679 7.48262 44.6625 7.26711 44.4941C7.05159 44.3257 6.80577 44.1994 6.52964 44.1152C6.25687 44.0277 5.96222 43.9839 5.64568 43.9839C5.08332 43.9839 4.58494 44.1253 4.15054 44.4082C3.71614 44.6877 3.37603 45.0986 3.1302 45.6407C2.88438 46.1795 2.76147 46.8379 2.76147 47.6158C2.76147 48.4071 2.88438 49.0739 3.1302 49.6161C3.37939 50.1549 3.71951 50.5623 4.15054 50.8385C4.58494 51.1112 5.08164 51.2476 5.64063 51.2476C5.95044 51.2476 6.24004 51.2072 6.50943 51.1264C6.78219 51.0422 7.02633 50.9193 7.24185 50.7576C7.46073 50.596 7.64426 50.3973 7.79243 50.1616C7.94396 49.9259 8.04835 49.6565 8.1056 49.3534L9.99473 49.3635C9.92402 49.8552 9.7708 50.3165 9.53508 50.7475C9.30272 51.1786 8.99797 51.5591 8.62082 51.8891C8.24366 52.2158 7.80253 52.4717 7.29741 52.6569C6.7923 52.8388 6.23162 52.9297 5.61538 52.9297C4.70617 52.9297 3.89461 52.7192 3.18072 52.2983C2.46682 51.8773 1.90446 51.2695 1.49363 50.4748C1.0828 49.68 0.877386 48.727 0.877386 47.6158C0.877386 46.5011 1.08448 45.5481 1.49868 44.7568C1.91287 43.962 2.47692 43.3542 3.19082 42.9332C3.90472 42.5123 4.7129 42.3018 5.61538 42.3018C6.19121 42.3018 6.72663 42.3827 7.22164 42.5443C7.71666 42.7059 8.15779 42.9434 8.54505 43.2565C8.9323 43.5663 9.25053 43.9469 9.49972 44.3981C9.75228 44.846 9.91728 45.3579 9.99473 45.9337Z" fill="#111827"/>
             <path d="M21.6657 47.6158C21.6657 48.7304 21.4569 49.6851 21.0393 50.4798C20.6252 51.2712 20.0594 51.8773 19.3422 52.2983C18.6283 52.7192 17.8184 52.9297 16.9126 52.9297C16.0067 52.9297 15.1952 52.7192 14.4779 52.2983C13.764 51.874 13.1983 51.2661 12.7807 50.4748C12.3665 49.68 12.1594 48.727 12.1594 47.6158C12.1594 46.5011 12.3665 45.5481 12.7807 44.7568C13.1983 43.962 13.764 43.3542 14.4779 42.9332C15.1952 42.5123 16.0067 42.3018 16.9126 42.3018C17.8184 42.3018 18.6283 42.5123 19.3422 42.9332C20.0594 43.3542 20.6252 43.962 21.0393 44.7568C21.4569 45.5481 21.6657 46.5011 21.6657 47.6158ZM19.7816 47.6158C19.7816 46.8311 19.6587 46.1694 19.4129 45.6306C19.1704 45.0885 18.8337 44.6793 18.4026 44.4032C17.9716 44.1237 17.4749 43.9839 16.9126 43.9839C16.3502 43.9839 15.8535 44.1237 15.4225 44.4032C14.9914 44.6793 14.653 45.0885 14.4072 45.6306C14.1647 46.1694 14.0435 46.8311 14.0435 47.6158C14.0435 48.4004 14.1647 49.0638 14.4072 49.606C14.653 50.1448 14.9914 50.5539 15.4225 50.8334C15.8535 51.1096 16.3502 51.2476 16.9126 51.2476C17.4749 51.2476 17.9716 51.1096 18.4026 50.8334C18.8337 50.5539 19.1704 50.1448 19.4129 49.606C19.6587 49.0638 19.7816 48.4004 19.7816 47.6158Z" fill="#111827"/>
             <path d="M32.6497 42.4433V52.7883H30.9828L26.1084 45.7417H26.0226V52.7883H24.1486V42.4433H25.8256L30.6949 49.4948H30.7858V42.4433H32.6497Z" fill="#111827"/>
@@ -111,14 +113,19 @@
 
 </svg>
 <section>
-
-
+    <div class="separator"></div>
+    <div class="separator"></div>
+    <div class="text-large">Xeno</div>
+    <div class="separator"></div>
+    <div class="text-medium">by Stranger in the Q</div>
+    <div class="separator"></div>
+    <div class="text">December 20, 1pm EDT / 6pm GMT</div>
     <div class="separator"></div>
     <div class="text">
         Long-form generative artwork will be released
         as part of Tiny Geometries,
         the group show by Dawn Contemporary opening on <a href="https://www.alba.art/projects/xeno">alba.art</a>
-        at December 20, 1pm EDT / 6pm GMT. Code is hosted immutably on Ethereum blockchain.
+        Code is hosted immutably on Ethereum blockchain.
     </div>
     <div class="separator"></div>
     <div class="separator"></div>
@@ -142,7 +149,7 @@
     </div>
     <div class="separator"></div>
     <div class="separator"></div>
-    <div class="text-medium">Development</div>
+    <div class="text-medium">First step</div>
     <div class="separator"></div>
     <div class="text">
         This adventure began in early 2023, in January I created a custom library for the Genuary challenge and
@@ -157,6 +164,8 @@
         <img src="https://i.imgur.com/BSvH2wM.jpg"/>
         <img src="https://i.imgur.com/J9h1Xc7.jpg"/>
     </div>
+    <div class="separator"></div>
+    <div class="text-medium">Development</div>
     <div class="separator"></div>
     <div class="text">
         Next steps is started from the not too complex shader sketch on my iphone, here a first outputs obtained at
@@ -174,7 +183,7 @@
     </div>
     <div class="separator"></div>
     <div class="text">
-        First steps of the exploring “Xeno” algorithm gives me a strong organic-look pattern (last image), that became
+        Next steps of the exploring “Xeno” algorithm gives me a strong organic-look pattern (last image), that became
         the main part of the artwork.
 
         Also here the different patterns excluded from final code, looks interesting too, but not too variative as i
@@ -232,6 +241,8 @@
         <img src="https://i.imgur.com/9fvQKqw.jpeg"/>
         <img src="https://i.imgur.com/NxPuLOz.jpeg"/>
     </div>
+    <div class="separator"></div>
+    <div class="text-medium">Polishing</div>
     <div class="separator"></div>
     <div class="text">
         Near the start of september i’ve decided that “Xeno” will be released as long-form generative art project.
@@ -292,7 +303,7 @@
         Please enjoy!
     </div>
     <div class="separator"></div>
-    <div class="separator"></div>
+    <div style="min-height: calc(20vw / calc(5 / 7))"></div>
 </section>
 </body>
 </html>
