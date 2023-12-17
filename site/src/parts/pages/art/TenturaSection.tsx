@@ -21,7 +21,10 @@ export function TenturaSection() {
                 href={"https://www.artblocks.io/collections/presents/projects/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/265"}>Tentura
                 @ ArtBlocks 2022</ExternalLink>
         </PageSubHeader>
-
+        <PageSubHeader>
+            <ExternalLink
+                href={"tentura"}>About project</ExternalLink>
+        </PageSubHeader>
         <Grid ratio={1} rows={isMobile ? 4 : 2}>
             <ProjectItem
                 {...tentura}

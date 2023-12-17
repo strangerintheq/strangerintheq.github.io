@@ -51,3 +51,11 @@ export function prepareArtBlocks(html, hash) {
     }).join("\n");
 }
 
+export function prepareAlba(html, hash) {
+    return html.split("\n").map(str => {
+        if (str.includes("let seed = "))
+            return `let seed = "${hash}";`
+        return str
+    }).join("\n");
+}
+

@@ -9,6 +9,7 @@ import {TeiaSection} from "./art/TeiaSection";
 import {PageWrapper} from "../components/PageWrapper";
 import {PageText} from "../components/PageText";
 import {XenoSection} from "./art/XenoSection";
+import {RayhatcherSection} from "./art/RayhatcherSection";
 
 
 export function ArtPage() {
@@ -24,8 +25,10 @@ export function ArtPage() {
             Every time you visit that link, you get the same result.
             <br/><br/>
             Please enjoy!
+            <br/><br/>
         </PageText>
-        {/*<XenoSection />*/}
+        <XenoSection />
+        {/*<RayhatcherSection />*/}
         <SliceSection />
         <TenturaSection/>
         <FxHashSection/>

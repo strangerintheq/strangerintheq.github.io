@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {fetchCode, prepareArtBlocks, prepareFxHash, randomAbHash, randomFxHash, sitePath} from "../tools";
-import {ProjectsTypes} from "../pages/art/ProjectsTypes";
+import {fetchCode, prepareAlba, prepareArtBlocks, prepareFxHash, randomAbHash, randomFxHash, sitePath} from "../tools";
+import {ProjectsByPlatforms} from "../pages/art/ProjectsByPlatforms";
 
 
 
@@ -8,10 +8,10 @@ export function GeneratorFrame({id, hash = null}) {
 
     const [html, setHtml] = useState();
     const [code, setCode] = useState();
-    const type = ProjectsTypes[id];
+    const platform = ProjectsByPlatforms[id];
 
     useEffect(() => {
-        let url = 'site/resources/art/' + type + '/' + id + '/generator.html';
+        let url = 'site/resources/art/' + platform + '/' + id + '/generator.html';
         fetchCode(url).then(setCode);
         // console.log(url)
     }, [id]);
@@ -22,13 +22,17 @@ export function GeneratorFrame({id, hash = null}) {
 
         document.body.classList.remove("loaded");
         setTimeout(() => {
-            setHtml(type === "fx-hash" ?
-                prepareFxHash(code, hash || randomFxHash()) :
-                prepareArtBlocks(code, hash || randomAbHash())
-            );
+            if (platform === "fx-hash")
+                setHtml(prepareFxHash(code, hash || randomFxHash()))
+            else if (platform === "artblocks")
+                setHtml(prepareArtBlocks(code, hash || randomAbHash()))
+            else if (platform === "teia")
+                setHtml(prepareArtBlocks(code, hash || randomAbHash()))
+            else if (platform === "alba")
+                setHtml(prepareAlba(code, hash || randomAbHash()))
         }, 200)
         document.title = "Q - " + id
-    }, [code, hash, type]);
+    }, [code, hash, platform]);
 
     if (!html)
         return null

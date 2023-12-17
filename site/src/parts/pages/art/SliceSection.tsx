@@ -21,7 +21,10 @@ export function SliceSection() {
         <PageSubHeader>
             <ExternalLink href={"https://www.artblocks.io/collections/presents/projects/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/419"}>SL/CE @ ArtBlocks 2023</ExternalLink>
         </PageSubHeader>
-
+        <PageSubHeader>
+            <ExternalLink
+                href={"slice"}>About project</ExternalLink>
+        </PageSubHeader>
         <Grid rows={isMobile ? 4 : 2} ratio={1.618}>
             <ProjectItem
                 {...slice}
