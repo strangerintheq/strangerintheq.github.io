@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="bg"></div>
+<script>
+    (function () {
+
+        const
+            step = 2,
+            cellSize = 50,
+            h = 1 + innerHeight / cellSize,
+            v = 1 + innerWidth / cellSize,
+            mousePoint = {x: 0, y: 0},
+            many = (n, fn) => [...Array(n | 0)].map((_, i) => fn(i)),
+            ss = (a, b, t) => (t = Math.min(Math.max((t - a) / (b - a), 0), 1), t * t * (3.0 - 2.0 * t)),
+            hor = (i, t) => "M" + many(innerWidth / step, x => calcPoint(x * step, i * cellSize, t)).join("L"),
+            vert = (i, t) => "M" + many(innerHeight / step, y => calcPoint(i * cellSize, y * step, t)).join("L");
+
+        function calcPoint(x, y, t) {
+            const
+                px = x - mousePoint.x,
+                py = y - mousePoint.y,
+                d = Math.hypot(px, py),
+                a = Math.atan2(py, px),
+                st = Math.sin(t),
+                r = -Math.abs(Math.sin(t + a * (10))) * ss(101, 30, Math.abs(d - 120 + st * 20)) * 20,
+                dx = Math.cos(a) * r,
+                dy = Math.sin(a) * r;
+            return [x + dx, y + dy]
+        }
+
+        const container = document.querySelector(".bg");
+        container.innerHTML += `<canvas width="${innerWidth}" height="${innerHeight}"></canvas>`
+        const ctx = container.querySelector("canvas").getContext("2d");
+        ctx.strokeStyle = "white";
+        ctx.fillStyle = "#00000030"
+        requestAnimationFrame(function update(t) {
+            t /= 1000;
+            ctx.fillRect(0, 0, innerWidth, innerHeight)
+            many(h, i => ctx.stroke(new Path2D(hor(i, t))))
+            many(v, i => ctx.stroke(new Path2D(vert(i, t))))
+            requestAnimationFrame(update);
+        });
+
+        addEventListener("pointermove", e => (mousePoint.x = e.clientX, mousePoint.y = e.clientY))
+    })();
+</script>
+</body>
+</html>
