@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
 </head>
-<body>
+<body style="margin: 0;overflow: hidden">
 <div class="bg"></div>
 <script>
     (function () {
 
         const
             step = 2,
-            cellSize = 50,
-            h = 1 + innerHeight / cellSize,
-            v = 1 + innerWidth / cellSize,
+            cellSize = 100,
+            h = 2 + innerHeight / cellSize,
+            v = 2 + innerWidth / cellSize,
             mousePoint = {x: 0, y: 0},
+            effectPoint = {x: 0, y: 0},
+            lerp = (a, b, t) => a + (b - a) * t,
             many = (n, fn) => [...Array(n | 0)].map((_, i) => fn(i)),
             ss = (a, b, t) => (t = Math.min(Math.max((t - a) / (b - a), 0), 1), t * t * (3.0 - 2.0 * t)),
             hor = (i, t) => "M" + many(innerWidth / step, x => calcPoint(x * step, i * cellSize, t)).join("L"),
@@ -21,8 +23,8 @@
 
         function calcPoint(x, y, t) {
             const
-                px = x - mousePoint.x,
-                py = y - mousePoint.y,
+                px = x - effectPoint.x,
+                py = y - effectPoint.y,
                 d = Math.hypot(px, py),
                 a = Math.atan2(py, px),
                 st = Math.sin(t),
@@ -36,12 +38,16 @@
         container.innerHTML += `<canvas width="${innerWidth}" height="${innerHeight}"></canvas>`
         const ctx = container.querySelector("canvas").getContext("2d");
         ctx.strokeStyle = "white";
-        ctx.fillStyle = "#00000030"
+        ctx.fillStyle = "#00000010"
+        ctx.lineWidth = 1.5
         requestAnimationFrame(function update(t) {
+
+            effectPoint.x += 0.1*(mousePoint.x-effectPoint.x)
+            effectPoint.y += 0.1*(mousePoint.y-effectPoint.y)
             t /= 1000;
             ctx.fillRect(0, 0, innerWidth, innerHeight)
-            many(h, i => ctx.stroke(new Path2D(hor(i, t))))
-            many(v, i => ctx.stroke(new Path2D(vert(i, t))))
+            many(h, i => ctx.stroke(new Path2D(hor(0.5+i-effectPoint.y/innerWidth, t))))
+            many(v, i => ctx.stroke(new Path2D(vert(0.5+i-effectPoint.x/innerWidth, t))))
             requestAnimationFrame(update);
         });
 
