@@ -38,7 +38,7 @@
         container.innerHTML += `<canvas width="${innerWidth}" height="${innerHeight}"></canvas>`
         const ctx = container.querySelector("canvas").getContext("2d");
         ctx.strokeStyle = "white";
-        ctx.fillStyle = "#00000010"
+        ctx.fillStyle = "#0000008f"
         ctx.lineWidth = 1.5
         requestAnimationFrame(function update(t) {
 
@@ -46,8 +46,8 @@
             effectPoint.y += 0.1*(mousePoint.y-effectPoint.y)
             t /= 1000;
             ctx.fillRect(0, 0, innerWidth, innerHeight)
-            many(h, i => ctx.stroke(new Path2D(hor(0.5+i-effectPoint.y/innerWidth, t))))
-            many(v, i => ctx.stroke(new Path2D(vert(0.5+i-effectPoint.x/innerWidth, t))))
+            many(h, i => ctx.stroke(new Path2D(hor(0.5+i, t))))
+            many(v, i => ctx.stroke(new Path2D(vert(0.5+i, t))))
             requestAnimationFrame(update);
         });
 
