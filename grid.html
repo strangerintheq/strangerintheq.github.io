@@ -8,14 +8,13 @@
 <script>
     (function () {
 
-        const
-            step = 2,
+        let
+            step = 1,
             cellSize = 100,
             h = 2 + innerHeight / cellSize,
             v = 2 + innerWidth / cellSize,
             mousePoint = {x: 0, y: 0},
             effectPoint = {x: 0, y: 0},
-            lerp = (a, b, t) => a + (b - a) * t,
             many = (n, fn) => [...Array(n | 0)].map((_, i) => fn(i)),
             ss = (a, b, t) => (t = Math.min(Math.max((t - a) / (b - a), 0), 1), t * t * (3.0 - 2.0 * t)),
             hor = (i, t) => "M" + many(innerWidth / step, x => calcPoint(x * step, i * cellSize, t)).join("L"),
@@ -31,27 +30,39 @@
                 r = -Math.abs(Math.sin(t + a * (10))) * ss(101, 30, Math.abs(d - 120 + st * 20)) * 20,
                 dx = Math.cos(a) * r,
                 dy = Math.sin(a) * r;
-            return [x + dx, y + dy]
+            return [x + dx, y + dy];
         }
 
         const container = document.querySelector(".bg");
-        container.innerHTML += `<canvas width="${innerWidth}" height="${innerHeight}"></canvas>`
-        const ctx = container.querySelector("canvas").getContext("2d");
-        ctx.strokeStyle = "white";
-        ctx.fillStyle = "#0000008f"
-        ctx.lineWidth = 1.5
-        requestAnimationFrame(function update(t) {
+        container.innerHTML += `<canvas width="${innerWidth}" height="${innerHeight}"></canvas>`;
+        const canvas = container.querySelector("canvas");
+        const ctx = canvas.getContext("2d");
 
-            effectPoint.x += 0.1*(mousePoint.x-effectPoint.x)
-            effectPoint.y += 0.1*(mousePoint.y-effectPoint.y)
+        requestAnimationFrame(function update(t) {
+            ctx.strokeStyle = "white";
+            ctx.fillStyle = "#0000008f";
+            ctx.lineWidth = 1.5;
+            ctx.lineJoin = "round";
+            effectPoint.x += 0.1 * (mousePoint.x - effectPoint.x)
+            effectPoint.y += 0.1 * (mousePoint.y - effectPoint.y)
             t /= 1000;
-            ctx.fillRect(0, 0, innerWidth, innerHeight)
-            many(h, i => ctx.stroke(new Path2D(hor(0.5+i, t))))
-            many(v, i => ctx.stroke(new Path2D(vert(0.5+i, t))))
+            ctx.fillRect(0, 0, innerWidth, innerHeight);
+            many(h, i => ctx.stroke(new Path2D(hor(0.5 + i, t))));
+            many(v, i => ctx.stroke(new Path2D(vert(0.5 + i, t))));
             requestAnimationFrame(update);
         });
 
-        addEventListener("pointermove", e => (mousePoint.x = e.clientX, mousePoint.y = e.clientY))
+        addEventListener("pointermove", e => {
+            mousePoint.x = e.clientX;
+            mousePoint.y = e.clientY;
+        });
+
+        addEventListener("resize", e => {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            h = 2 + innerHeight / cellSize;
+            v = 2 + innerWidth / cellSize;
+        });
     })();
 </script>
 </body>
