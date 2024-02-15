@@ -26,8 +26,8 @@
                 py = y - effectPoint.y,
                 d = Math.hypot(px, py),
                 a = Math.atan2(py, px),
-                k = d<70?6:12,
-                r = -Math.abs(Math.sin( a * k)) * ss(cellSize*1.5, 0, Math.abs(d - cellSize*1.5 )) * 30,
+                k = d < 70 ? 6 : 12,
+                r = -Math.abs(Math.sin(a * k)) * ss(cellSize * 1.5, 0, Math.abs(d - cellSize * 1.5)) * 30,
                 dx = Math.cos(a) * r,
                 dy = Math.sin(a) * r;
             return [x + dx, y + dy];
@@ -37,6 +37,7 @@
         container.innerHTML += `<canvas width="${innerWidth}" height="${innerHeight}"></canvas>`;
         const canvas = container.querySelector("canvas");
         const ctx = canvas.getContext("2d");
+        const stroke = d => ctx.stroke(new Path2D(d));
 
         requestAnimationFrame(function update(t) {
             ctx.strokeStyle = "white";
@@ -47,8 +48,8 @@
             effectPoint.y += 0.1 * (mousePoint.y - effectPoint.y)
             t /= 1000;
             ctx.fillRect(0, 0, innerWidth, innerHeight);
-            many(h, i => ctx.stroke(new Path2D(hor(0.5 + i, t))));
-            many(v, i => ctx.stroke(new Path2D(vert(0.5 + i, t))));
+            many(h, i => stroke(hor(0.5 + i, t)));
+            many(v, i => stroke(vert(0.5 + i, t)));
             requestAnimationFrame(update);
         });
 
