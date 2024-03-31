@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monitor Cleaning Tool</title>
+</head>
+<body style="background: #000000">
+    <script>
+        addEventListener("pointerdown", () => {
+            if (document.webkitFullscreenElement) {
+                document.webkitCancelFullScreen();
+                document.body.style.cursor = "unset"
+            } else {
+                const el = document.documentElement;
+                el.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                document.body.style.cursor = "none"
+            }
+        })
+    </script>
+</body>
+</html>
