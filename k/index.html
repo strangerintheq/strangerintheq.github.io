@@ -26,18 +26,24 @@
     </script>
 </head>
 <body style="margin: 0; overflow: hidden; display: flex; ">
-<div style="margin: 10px">
+<div style="margin: 10px; z-index: 1">
 
     <label>hash</label>
-    <input  id="hash"  style="width: 430px">
+    <input  id="hash" >
 
     <button id="new">new</button>
 
-    <br/>
+    <div style="margin: 2px"></div>
     <label>ratio</label>
     <input type="number" id="ratio" step="0.01">
-
-    <br/>
+    <div style="margin: 2px"></div>
+    <button onclick="applySize(this)">0.5</button>
+    <button onclick="applySize(this)">9/16</button>
+    <button onclick="applySize(this)">0.618</button>
+    <button onclick="applySize(this)">3/4</button>
+    <button onclick="applySize(this)">4/5</button>
+    <button onclick="applySize(this)">1</button>
+    <div style="margin: 2px"></div>
     <label>color 1</label>
     <input type="color" id="color0" >
 
@@ -61,6 +67,11 @@
     <button id="clear">clear</button>
 
     <script>
+
+        function applySize(e){
+            localStorage.setItem("ratio",eval(e.innerHTML))
+            document.location.reload()
+        }
 
         document.querySelector("#clear").onclick = () => {
             Array(5).fill(0).forEach((_,i) => localStorage.removeItem("color" + i))
@@ -112,9 +123,9 @@
             U = "F2F1DFF2BD1DD94711591812181212#e8d5b9c07a38df3146f5b3490e2430#f3efeff7b32b0c6291b80c09091e05#f1faeee63946a8ccdc457b9d1d3557#dff3e4bca2cd7d73c6684da2171738#dccfa39f8f6544443bc6110f12130b#fff7f4ffc6c6ff2f4ec60a5f820a5f#faf1dcff871fb8000041764b29293d#ccc9a1f0ffcea53f2b60290e280004#ecf39e90a9554f772d31572c132a13#fdf0d5669bbcc1121f780000003049#e0fbfc98c1d9ee6c4d3d5a80293241#fbfffe96031a1b1b1e6d676efaa916#fffcf2ccc5b9503d39252422eb5e28#8ecae6219ebc023047ffb703fb8500#000000FFFFFFdddddd444444888888#25232370798cf5f1eddad2bca99985#ffffff375ba9000000d6d6d6fca311#f4ca55284862d6644a3a8acafffeef#C20F00FFDD22ffffff2374C6000000#e4e1dbD96B0BBF13048C13084465A6#f4ebc5F29F05233479569cc7F20505#001427708d81f4d58dbf06038d0801#8c1c13bf4342e7d7c1a78a7f735751".split("#").map(e => e.match(/.{6}/g).map(e => "#" + e));
 
 
-            if (localStorage.getItem("color0"))
-            U = Array(24).fill(0).map(x => [1,2,3,4,5].map((i) => localStorage.getItem("color"+(i))));
-
+            U = Array(24).fill(0).map((x, j) => [0, 1, 2, 3, 4].map((i) => {
+                return localStorage.getItem("color" + i) || U[j][i];
+            }));
 
             let W = +(localStorage.getItem('ratio')||.618), Y = .5 / W, Z = n => {
                 (t => {
@@ -303,7 +314,8 @@
             }, ke = clearTimeout, Ee = setTimeout;
         newHash = (e, r) => {
             Z(e),
-                x = (e => e.map(e => [e, $()]).sort((e, t) => e[1] - t[1]).map(e => e[0]))(U[t]), $e(r, f)
+                x = (e => e.map(e => [e, $()]).map(e => e[0]))(U[t]), $e(r, f)
+            // debugger
         };
         var Ie, Pe = e => s = Ee(e => Pe($e(je)), 1e3 * u), Se = e => {
             if (!h) {
