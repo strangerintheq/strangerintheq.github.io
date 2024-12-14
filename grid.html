@@ -48,8 +48,10 @@
             effectPoint.y += 0.1 * (mousePoint.y - effectPoint.y)
             t /= 1000;
             ctx.fillRect(0, 0, innerWidth, innerHeight);
-            many(h, i => stroke(hor(0.5 + i, t)));
-            many(v, i => stroke(vert(0.5 + i, t)));
+            let leftPad = (innerWidth%cellSize)/cellSize/2
+            let topPad = (innerHeight%cellSize)/cellSize/2
+            many(h, i => stroke(hor(topPad + i, t)));
+            many(v, i => stroke(vert(leftPad + i, t)));
             requestAnimationFrame(update);
         });
 
