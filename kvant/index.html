@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        document.write("<div style='display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr'>")
+        for (let y = 1970; y < 2025; y++) {
+            for (let m = 1; m < 13; m++) {
+                let month = m < 10 ? "0" + m : m;
+                let yr = ("" + y).substring(2);
+                document.write(`
+                    <img style="width: 20vw" src="https://kvant.mccme.ru/${y}/${month}/gif/${yr}_${month}-ti.gif">
+                `)
+            }
+        }
+        document.write("</div>")
+    </script>
+</body>
+</html>
