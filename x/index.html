@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>need to remove webgl debug code</title>
+</head>
+<body>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+    }
+
+    canvas {
+        margin-left: calc(50vw - calc(50vh * calc(5 / 7)));
+    }
+</style>
+<script src="https://www.alba.art/js/alba.min.js" crossorigin="anonymous"></script>
+<script>
+    window.params = {};
+
+    setTimeout(() => {
+
+        function hash() {
+            let hashValue = localStorage.getItem("hash")
+            return `
+            <button onclick="(() => {
+                localStorage.setItem('hash', window.alba._testSeed());
+                document.location.reload();
+            })();">new</button><br>
+            <input style="width: 470px" value="${hashValue}">
+            `
+        }
+        function enumSelector(name, values) {
+            let id = "select_" + Math.random().toString(36).substring(2);
+            window.params[name] = localStorage.getItem(name);
+            return `<div id="${id}" >
+                <label for="${name}" style="display: inline-block; width: 120px">${name}</label>
+                <select id="${name}" style="width: 120px" onchange='(() => {
+                    localStorage.setItem("${name}", this.selectedIndex);
+                    window.params.${name} = this.selectedIndex;
+                    document.location.reload()
+                })()'>
+                    <option>no selected</option>
+                    ${values.map((value, index) => {
+                        let selected = (index+1) === +localStorage.getItem(name) ?"selected" : "";
+                        return `<option ${selected}>${value}</option>`
+                    })}
+                </select>
+                <div style="display: inline-block">
+                    ${window[name]}
+                </div>
+            </div>
+            `
+        }
+
+        const gui = document.createElement("div")
+        gui.classList.add("gui")
+        gui.innerHTML = `<style>
+            .gui {
+                position: fixed;
+                top: 0;
+                left: 10px;
+            }
+        </style>`
+            + hash()
+            + enumSelector("palette", palettes.map(p => p[0]))
+            + enumSelector("stencil", [
+                "circle",
+                "triangle",
+                "line",
+                "planet",
+
+            ])
+            + enumSelector("secondaryPattern", [
+                "cells",
+                "spiral",
+                "circles",
+                "lines",
+                "rays",
+                "arcs"
+            ])
+            + enumSelector("abstractStencil", [false, true])
+            + enumSelector("flatColor", [false, true])
+            + enumSelector("shade", [false, true])
+            + enumSelector("light", [false, true])
+            + enumSelector("flipPalette", [false, true])
+        ;
+        document.body.append(gui)
+    }, 100)
+
+
+    // let seed = "0xc4f29d8e133a54976c1dab9ca0a149b4408143c98851c114a5309e2fd0838000" // tiger
+    // let seed = "0x87f3195ecbc2954d636aa0b81ab776c889f14f00d035ad1cb34cf01cb431f520" // tiger
+    // let seed = "0x73fdd517b4136a56163e77e995b4c31fa30d287b1e836bfbda4d317428a934d0" // tiger
+    // let seed = "0x9c05ceed694bfd51e2e151d45fb17a2046bca0629be79d348f5adcf5ab0b887c" // tiger
+    // let seed = "0xc0c264a9d13252cfc9cf1c477f50ac2793cae21f80f205c2f98249434323de00" // tiger
+    // let seed = "0x5d747e8849b5c4853c93c78f5f6dc4c363446e3bf1299e31955af0e062e8f4cb" // tiger
+    // let seed = "0x5d58761265f41c40974c8d8bfbc86939aad4b488a10e5d7cc8617717fbce0526" // tiger
+    // let seed = "0x2f019c31c49ffedbf82ea0145084e1e45d72a1a3d7c4fbb92ab4fd9be7bd9350" // ocean
+    // let seed = "0xf91809d85d8df2dfec1f63f3ae5b2a2f23ff6bf354b2fe348db2e1d7b5b2f000" // ocean
+    // let seed = "0x3aaeb00b8277590d7d6e39c275e31f913f4d52a7e91e49e5fd7aebbebe076c4e" // ocean
+    // let seed = "0xce1803e548db872de97a24ba765362ade2b78c7c2efcdee769bd68eb233877a0" // jamaica
+    // let seed = "0x1a48e2259580a867cc81b8039ad2f3004c1768cd224dcaeb5d2320858087835f" // jamaica
+     seed = localStorage.getItem("hash") || "0xced546a165ff05836aaf8d5c331092815ec93235eb1b9e00f68a0a8413ec396b"
+    window.alba.setMetadata = m => console.log(JSON.stringify(m, null, 2));
+    window.alba.params = Object.assign(window.alba.params, {
+        seed,
+        width: innerWidth
+    })
+    console.log(window.alba.params.seed)
+</script>
+<script src="index.js"></script>
+</body>
+</html>
