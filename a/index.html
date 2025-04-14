@@ -3,70 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shendrik Ambient</title>
+  <title>Ambient Generator – Shendrik</title>
   <style>
     body {
       margin: 0;
-      background-color: #111;
-      color: #eee;
-      font-family: sans-serif;
+      background: radial-gradient(ellipse at center, #0d0d0d 0%, #000000 100%);
+      color: white;
+      font-family: 'Helvetica Neue', sans-serif;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100vh;
       flex-direction: column;
-    }
-    .container h1 {
-      font-size: 1.5em;
-      margin-bottom: 20px;
       text-align: center;
     }
-    #startButton {
-      padding: 10px 20px;
-      font-size: 1em;
-      cursor: pointer;
-      background-color: #444;
+    h1 {
+      font-weight: 300;
+      margin-bottom: 0.5em;
+      opacity: 0.8;
+    }
+    button {
+      background: none;
+      border: 2px solid white;
       color: white;
-      border: none;
-      border-radius: 5px;
+      padding: 0.6em 2em;
+      border-radius: 40px;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 1em;
+    }
+    button:hover {
+      background: white;
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Breathe. Release. Awaken.</h1>
-    <button id="startButton">Begin</button>
-  </div>
-  <script>
+<h1>Breathe. Release. Awaken.</h1>
+<button onclick="startAmbient()">Start</button>
+<script>
+  let ctx;
+  function startAmbient() {
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
 
-    let context, oscillator, gainNode;
+    // Drone Layer
+    const droneOsc = ctx.createOscillator();
+    const droneGain = ctx.createGain();
+    droneOsc.type = 'sine';
+    droneOsc.frequency.setValueAtTime(60, ctx.currentTime); // base drone freq
+    droneGain.gain.setValueAtTime(0.06, ctx.currentTime);
+    droneOsc.connect(droneGain).connect(ctx.destination);
+    droneOsc.start();
 
-    document.getElementById("startButton").addEventListener("click", () => {
-      if (!context) {
-        context = new (window.AudioContext || window.webkitAudioContext)();
+    // LFO for subtle modulation of drone
+    const lfo = ctx.createOscillator();
+    const lfoGain = ctx.createGain();
+    lfo.frequency.setValueAtTime(0.01, ctx.currentTime);
+    lfoGain.gain.setValueAtTime(20, ctx.currentTime);
+    lfo.connect(lfoGain);
+    lfoGain.connect(droneOsc.frequency);
+    lfo.start();
 
-        oscillator = context.createOscillator();
-        oscillator.type = "sine";
-        oscillator.frequency.value = 174; // Solfeggio tone for healing
+    function createPad(freq) {
+      const osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
 
-        gainNode = context.createGain();
-        gainNode.gain.setValueAtTime(0.02, context.currentTime); // very soft
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 10);
 
-        oscillator.connect(gainNode).connect(context.destination);
-        oscillator.start();
+      osc.connect(gain).connect(ctx.destination);
+      osc.start();
 
-        // Add slow frequency modulation
-        const lfo = context.createOscillator();
-        const lfoGain = context.createGain();
-        lfo.frequency.value = 0.05;
-        lfoGain.gain.value = 20;
-        lfo.connect(lfoGain).connect(oscillator.frequency);
-        lfo.start();
+      setTimeout(() => {
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 10);
+        osc.stop(ctx.currentTime + 10);
+      }, Math.random() * 3000 + 2000);
+    }
 
-        document.getElementById("startButton").style.display = "none";
-      }
-    });
+    function loop() {
+      const freq = 80 + Math.random() * 120;
+      createPad(freq);
+      setTimeout(loop, Math.random() * 10000 + 5000);
+    }
 
-  </script>
+    loop();
+  }
+</script>
 </body>
 </html>
