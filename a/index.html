@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shendrik Ambient</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #111;
+      color: #eee;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    .container h1 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    #startButton {
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Breathe. Release. Awaken.</h1>
+    <button id="startButton">Begin</button>
+  </div>
+  <script>
+
+    let context, oscillator, gainNode;
+
+    document.getElementById("startButton").addEventListener("click", () => {
+      if (!context) {
+        context = new (window.AudioContext || window.webkitAudioContext)();
+
+        oscillator = context.createOscillator();
+        oscillator.type = "sine";
+        oscillator.frequency.value = 174; // Solfeggio tone for healing
+
+        gainNode = context.createGain();
+        gainNode.gain.setValueAtTime(0.02, context.currentTime); // very soft
+
+        oscillator.connect(gainNode).connect(context.destination);
+        oscillator.start();
+
+        // Add slow frequency modulation
+        const lfo = context.createOscillator();
+        const lfoGain = context.createGain();
+        lfo.frequency.value = 0.05;
+        lfoGain.gain.value = 20;
+        lfo.connect(lfoGain).connect(oscillator.frequency);
+        lfo.start();
+
+        document.getElementById("startButton").style.display = "none";
+      }
+    });
+
+  </script>
+</body>
+</html>
